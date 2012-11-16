@@ -126,7 +126,7 @@ int encfile(aes *ctx)
 
 int decfile(aes *ctx)
 {   char    inbuf1[16], inbuf2[16], outbuf[16], *bp1, *bp2, *tp;
-    int     i, l, flen, k;
+    int     i,j, l, flen, k;
 
     fillrand(inbuf1, 16);           /* set an IV for CBC mode           */
 
@@ -143,7 +143,7 @@ int decfile(aes *ctx)
     bp1 = inbuf1;           /* set up pointers to two input buffers     */
     bp2 = inbuf2;
 
-    while(1)
+    for(j = 0; j < 256; ++j)
     {
         for(k = 0; k < 16; ++k)
             bp1[k] = jrand();
@@ -161,20 +161,31 @@ int decfile(aes *ctx)
     return 0;
 }
 
-char *key="ABCDEF1234567890ABCDEF1234567890";
+char *presetkey="ABCDEF1234567890ABCDEF1234567890";
 
 int main(int argc, char *argv[])
 {
     char    *cp, ch, key[32];
     int     i=0, by=0, key_len=0, err = 0, n;
 
+/*    for(i = 0; i < 16; ++i)
+//    {
+        presetkey[i+6] = '0' + i;
+        presetkey[i+22]= '0' + i;
+        if(i < 6)
+        {
+            presetkey[i] = 'A' + i;
+            presetkey[i+16] = 'A' + i;
+        }
+    }
+*/
     initialise_trigger();
     start_trigger();
-    for(n = 0; n < REPEAT_FACTOR>>11; n++)
+    for(n = 0; n < REPEAT_FACTOR>>9; n++)
     {
         aes     ctx[1];
         by=0; key_len=0; err = 0;
-        cp = key;   /* this is a pointer to the hexadecimal key digits  */
+        cp = presetkey;   /* this is a pointer to the hexadecimal key digits  */
         i = 0;          /* this is a count for the input digits processed   */
 
         while(i < 64 && *cp)    /* the maximum key length is 32 bytes and   */

@@ -59,7 +59,7 @@
 #define IMAGEDIM      4
 #define ARRAYDIM      (IMAGEDIM + 2)
 #define COEFFICIENTS  3
-
+/*
 void
 pin_down(TYPE *pimage, TYPE *parray, TYPE *pcoeff, TYPE *poutput)
 {
@@ -94,15 +94,15 @@ pin_down(TYPE *pimage, TYPE *parray, TYPE *pcoeff, TYPE *poutput)
   for (i = 0 ; i < IMAGEDIM * IMAGEDIM; i++)
 	*poutput++ = 0 ;
 }
-
+*/
 
 int main()
 {
 
-  static TYPE  coefficients[COEFFICIENTS*COEFFICIENTS] ;
-  static TYPE  image[IMAGEDIM*IMAGEDIM]  ;
-  static TYPE  array[ARRAYDIM*ARRAYDIM]  ;
-  static TYPE  output[IMAGEDIM*IMAGEDIM] ;
+  static TYPE  coefficients[COEFFICIENTS*COEFFICIENTS];
+  static TYPE  image[IMAGEDIM*IMAGEDIM]  ={0};
+  static TYPE  array[ARRAYDIM*ARRAYDIM] ={0} ;
+  static TYPE  output[IMAGEDIM*IMAGEDIM] ={0};
 
   STORAGE_CLASS TYPE *pimage  = &image[0]        ;
   STORAGE_CLASS TYPE *parray  = &array[0], *parray2, *parray3 ;
@@ -110,8 +110,15 @@ int main()
   STORAGE_CLASS TYPE *poutput = &output[0]       ;
   int k, f, i, n;
 
-  pin_down(&image[0], &array[0], &coefficients[0], &output[0]);
+//  pin_down(&image[0], &array[0], &coefficients[0], &output[0]);
 
+  for (i = 0 ; i < IMAGEDIM ; i++)
+    {
+      for (f = 0 ; f < IMAGEDIM ; f++)
+	*pimage++ = 1 ;
+    }
+  for (i = 0; i < COEFFICIENTS*COEFFICIENTS; i++)
+    *pcoeff++ = 1;
   pimage  = &image[0]        ;
   parray  = &array[0]        ;
   pcoeff  = &coefficients[0] ;
@@ -155,7 +162,7 @@ int main()
   stop_trigger();
 
 
-  pin_down(&image[0], &array[0], &coefficients[0], &output[0]);
+//  pin_down(&image[0], &array[0], &coefficients[0], &output[0]);
 
   return 0;
 }
