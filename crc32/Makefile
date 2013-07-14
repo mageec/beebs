@@ -1,5 +1,9 @@
-crc: crc_32.c Makefile
-	gcc -static crc_32.c -O3 -o crc 
+include ../common.mk
+
+all: x86
+
+x86:
+	$(CC) $(FLAGS) $(SRC) -static crc_32.c -o x86_crc
 
 clean:
-	rm -rf crc output*
+	rm -f *.o x86_crc

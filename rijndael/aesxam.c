@@ -42,7 +42,13 @@
 
 #include "aes.h"
 
+#ifdef ARM
 #include "platformcode.h"
+#define FLEN flen
+#else
+#define REPEAT_FACTOR (4096)
+#define FLEN flen.__pos
+#endif /* ARM */
 
 /* A Pseudo Random Number Generator (PRNG) used for the     */
 /* Initialisation Vector. The PRNG is George Marsaglia's    */
@@ -102,11 +108,11 @@ int encfile(aes *ctx)
     unsigned long   i=0, l=0, j, k;
 
     fillrand(outbuf, 16);           /* set an IV for CBC mode           */
-    flen = 4096;
+    FLEN = 4096;
     fillrand(inbuf, 1);             /* make top 4 bits of a byte random */
     l = 15;                         /* and store the length of the last */
                                     /* block in the lower 4 bits        */
-    inbuf[0] = ((char)flen & 15) | (inbuf[0] & ~15);
+    inbuf[0] = ((char)FLEN & 15) | (inbuf[0] & ~15);
 
     for(j = 0; j <256; j++)
     {                               /* input 1st 16 bytes to buf[1..16] */
@@ -179,8 +185,11 @@ int main(int argc, char *argv[])
         }
     }
 */
+#ifdef ARM
     initialise_trigger();
     start_trigger();
+#endif /* ARM */
+
     for(n = 0; n < REPEAT_FACTOR>>9; n++)
     {
         aes     ctx[1];
@@ -226,6 +235,9 @@ int main(int argc, char *argv[])
 
     }
 exit:
+#ifdef ARM
     stop_trigger();
+#endif /* ARM */
+
     return err;
 }

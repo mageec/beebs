@@ -52,7 +52,11 @@
  *                      $Revision: 1.3 $
  */
 
+#ifdef ARM
 #include "platformcode.h"
+#else
+#define REPEAT_FACTOR (4096)
+#endif /* ARM */
 
 #define STORAGE_CLASS register
 #define TYPE          float
@@ -117,30 +121,43 @@ int main()
       for (f = 0 ; f < IMAGEDIM ; f++)
 	*pimage++ = 1 ;
     }
+
+  /* Sets coefficient array to all 1s */
   for (i = 0; i < COEFFICIENTS*COEFFICIENTS; i++)
     *pcoeff++ = 1;
   pimage  = &image[0]        ;
+
+  /* Resets all pointers to the start of their arrays */
   parray  = &array[0]        ;
   pcoeff  = &coefficients[0] ;
   poutput = &output[0]       ;
 
+#ifdef ARM
   initialise_trigger();
   start_trigger();
+#endif /* ARM */
 
+  /* for REPEAT_FACTOR/(2^5) times */
   for(n = 0; n < REPEAT_FACTOR>>5; ++n)
   {
+    /* Resets all pointers to the start of their arrays */
     pimage  = &image[0]        ;
     parray  = &array[0]        ;
     pcoeff  = &coefficients[0] ;
     poutput = &output[0]       ;
+
+    /* For every pixel in the image */
     for (k = 0 ; k < IMAGEDIM ; k++)
       {
 
         for (f = 0 ; f < IMAGEDIM ; f++)
   	{
   	  pcoeff = &coefficients[0] ;
+      /* Current pixel */
   	  parray = &array[k*ARRAYDIM + f] ;
+      /* Pixel below current */
   	  parray2 = parray + ARRAYDIM ;
+      /* Two pixels below current */
   	  parray3 = parray + ARRAYDIM + ARRAYDIM ;
 
   	  *poutput = 0 ;
@@ -159,7 +176,9 @@ int main()
       }
   }
 
+#ifdef ARM
   stop_trigger();
+#endif /* ARM */
 
 
 //  pin_down(&image[0], &array[0], &coefficients[0], &output[0]);

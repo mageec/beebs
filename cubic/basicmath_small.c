@@ -1,4 +1,9 @@
+#ifdef ARM
 #include "platformcode.h"
+#else
+#define REPEAT_FACTOR (4096)
+#endif /* ARM */
+
 #include "snipmath.h"
 #include <math.h>
 
@@ -18,11 +23,14 @@ int main(void)
   struct int_sqrt q;
   long n = 0;
 
+#ifdef ARM
   initialise_trigger();
   start_trigger();
+#endif /* ARM */
+
   for(n = 0; n < (REPEAT_FACTOR>>13)+1; ++n)
   {
-    /* solve soem cubic functions */
+    /* solve some cubic functions */
     /* should get 3 solutions: 2, 6 & 2.5   */
     SolveCubic(a1, b1, c1, d1, &solutions, x);
     /* should get 1 solution: 2.5           */
@@ -41,7 +49,9 @@ int main(void)
     }
   }
 
+#ifdef ARM
   stop_trigger();
+#endif /* ARM */
 
   return 0;
 }
