@@ -63,69 +63,36 @@
 #define IMAGEDIM      4
 #define ARRAYDIM      (IMAGEDIM + 2)
 #define COEFFICIENTS  3
-/*
-void
-pin_down(TYPE *pimage, TYPE *parray, TYPE *pcoeff, TYPE *poutput)
-{
-  STORAGE_CLASS TYPE    i,f;
-
-  for (i = 0 ; i < IMAGEDIM ; i++)
-    {
-      for (f = 0 ; f < IMAGEDIM ; f++)
-	*pimage++ = 1 ;
-    }
-
-  pimage = pimage - IMAGEDIM*IMAGEDIM  ;
-
-  for (i = 0; i < COEFFICIENTS*COEFFICIENTS; i++)
-    *pcoeff++ = 1;
-
-  for (i = 0 ; i < ARRAYDIM ; i++)
-    *parray++ = 0 ;
-
-
-  for (f = 0 ; f < IMAGEDIM; f++)
-    {
-      *parray++ = 0 ;
-      for (i = 0 ; i < IMAGEDIM ; i++)
-	*parray++ = *pimage++ ;
-      *parray++ = 0 ;
-    }
-
-  for (i = 0 ; i < ARRAYDIM ; i++)
-    *parray++ = 0 ;
-
-  for (i = 0 ; i < IMAGEDIM * IMAGEDIM; i++)
-	*poutput++ = 0 ;
-}
-*/
 
 int main()
 {
 
   static TYPE  coefficients[COEFFICIENTS*COEFFICIENTS];
-  static TYPE  image[IMAGEDIM*IMAGEDIM]  ={0};
   static TYPE  array[ARRAYDIM*ARRAYDIM] ={0} ;
   static TYPE  output[IMAGEDIM*IMAGEDIM] ={0};
 
-  STORAGE_CLASS TYPE *pimage  = &image[0]        ;
   STORAGE_CLASS TYPE *parray  = &array[0], *parray2, *parray3 ;
   STORAGE_CLASS TYPE *pcoeff  = &coefficients[0] ;
   STORAGE_CLASS TYPE *poutput = &output[0]       ;
   int k, f, i, n;
 
-//  pin_down(&image[0], &array[0], &coefficients[0], &output[0]);
+  /* Start in the second row and second column to surround image with zeros */
+  parray += ARRAYDIM;
+  parray += 1;
 
+  /* For all but the first and last row */
   for (i = 0 ; i < IMAGEDIM ; i++)
     {
       for (f = 0 ; f < IMAGEDIM ; f++)
-	*pimage++ = 1 ;
+        *parray++ = 1;
+
+      /* Ignore the first and last columns */
+      parray += 2;
     }
 
   /* Sets coefficient array to all 1s */
   for (i = 0; i < COEFFICIENTS*COEFFICIENTS; i++)
     *pcoeff++ = 1;
-  pimage  = &image[0]        ;
 
   /* Resets all pointers to the start of their arrays */
   parray  = &array[0]        ;
@@ -137,11 +104,9 @@ int main()
   start_trigger();
 #endif /* ARM */
 
-  /* for REPEAT_FACTOR/(2^5) times */
   for(n = 0; n < REPEAT_FACTOR>>5; ++n)
   {
     /* Resets all pointers to the start of their arrays */
-    pimage  = &image[0]        ;
     parray  = &array[0]        ;
     pcoeff  = &coefficients[0] ;
     poutput = &output[0]       ;
@@ -179,9 +144,6 @@ int main()
 #ifdef ARM
   stop_trigger();
 #endif /* ARM */
-
-
-//  pin_down(&image[0], &array[0], &coefficients[0], &output[0]);
 
   return 0;
 }
