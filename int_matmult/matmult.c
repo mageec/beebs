@@ -26,7 +26,11 @@
 #include <sys/times.h>
 #endif
 
+#ifdef ARM
 #include "platformcode.h"
+#else
+#define REPEAT_FACTOR (4096)
+#endif /* ARM */
 
 /*
  * MATRIX MULTIPLICATION BENCHMARK PROGRAM:
@@ -86,7 +90,7 @@ void Test(matrix A, matrix B, matrix Res)
 #endif
 }
 
-void main()
+int main()
 {
    int n;
    InitSeed();
@@ -96,11 +100,20 @@ void main()
    printf("\n   *** MATRIX MULTIPLICATION BENCHMARK TEST ***\n\n");
    printf("RESULTS OF THE TEST:\n");
 #endif
+
+#ifdef ARM
    initialise_trigger();
    start_trigger();
+#endif /* ARM */
+
    for(n = 0; n < REPEAT_FACTOR>>6; ++n)
       Test(ArrayA, ArrayB, ResultArray);
+
+#ifdef ARM
    stop_trigger();
+#endif /* ARM */
+
+   return 0;
 }
 
 

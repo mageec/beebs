@@ -3,7 +3,12 @@
 
 #include <stdio.h>
 #include "crc.h"
+
+#ifdef ARM
 #include "platformcode.h"
+#else
+#define REPEAT_FACTOR (4096)
+#endif /* ARM */
 
 #ifdef __TURBOC__
  #pragma warn -cln
@@ -141,8 +146,11 @@ DWORD crc32pseudo()
 int main(int argc, char *argv[])
 {
       int n;
+
+#ifdef ARM
       initialise_trigger();
       start_trigger();
+#endif /* ARM */
 
       for(n = 0; n < REPEAT_FACTOR>>5; ++n)
       {
@@ -150,6 +158,9 @@ int main(int argc, char *argv[])
           crc32pseudo();
       }
 
+#ifdef ARM
       stop_trigger();
+#endif /* ARM */
+
       return 0;
 }

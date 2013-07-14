@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+#ifdef ARM
 #include "platformcode.h"
+#else
+#define REPEAT_FACTOR (4096)
+#endif /* ARM */
+
 #include "blowfish.h"
 
 char *ckey= "ABCDEF1234567890";
@@ -16,9 +22,11 @@ int main(int argc, char *argv[])
 	char *cp,ch;
 	int n, n2;
 
+#ifdef ARM
 	initialise_trigger();
-
 	start_trigger();
+#endif /* ARM */
+
 	for(n = 0; n < REPEAT_FACTOR>>11; ++n)
 	{
 		encordec = 1;
@@ -66,7 +74,10 @@ int main(int argc, char *argv[])
 			i=0;
 		}
 	}
+
+#ifdef ARM
 	stop_trigger();
+#endif /* ARM */
 
 	return 0;
 }

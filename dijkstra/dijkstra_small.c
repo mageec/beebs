@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+#ifdef ARM
 #include "platformcode.h"
+#else
+#define REPEAT_FACTOR (4096)
+#endif /* ARM */
 
 #define NUM_NODES                          10
 #define NONE                               9999
@@ -159,8 +164,11 @@ int dijkstra(int chStart, int chEnd)
 int main() {
   int i,j,n;
 
+#ifdef ARM
   initialise_trigger();
   start_trigger();
+#endif /* ARM */
+
   /* finds 10 shortest paths between nodes */
   for(n = 0; n < REPEAT_FACTOR >> 9; ++n) {
   for(j = 0; j < NUM_NODES; ++j)
@@ -168,7 +176,10 @@ int main() {
         dijkstra(i,j);
     }
   }
+
+#ifdef ARM
   stop_trigger();
+#endif /* ARM */
 
   return 0;
 }

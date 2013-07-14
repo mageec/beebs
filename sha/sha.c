@@ -9,7 +9,11 @@
 #include <string.h>
 #include "sha.h"
 
+#ifdef ARM
 #include "platformcode.h"
+#else
+#define REPEAT_FACTOR (4096)
+#endif /* ARM */
 
 /* SHA f()-functions */
 
