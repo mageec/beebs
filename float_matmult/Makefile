@@ -1,11 +1,11 @@
 include ../common.mk
 
-SRC += matmult.c
+SRC = matmult.c
 
-all: x86
-
-x86:
-	$(CC) $(FLAGS) $(SRC) -o x86_float_matmult
+%_:
+	$($(addprefix $@, CC)) $($(addprefix $@, FLAGS)) $($(addprefix $@, SRC)) $(SRC) -o $(addsuffix float_matmult, $@)
 
 clean:
-	rm -f *.o x86_float_matmult
+	rm -f *.o *_float_matmult
+
+# vim: set ts=4 sw=4 noet:

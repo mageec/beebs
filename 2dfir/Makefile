@@ -2,10 +2,10 @@ include ../common.mk
 
 SRC += fir2dim.c
 
-all: x86
-
-x86:
-	$(CC) $(FLAGS) $(SRC) -o x86_2dfir
+%_:
+	$($(addprefix $@, CC)) $($(addprefix $@, FLAGS)) $($(addprefix $@, SRC)) $(SRC) -o $(addsuffix 2dfir, $@)
 
 clean:
-	rm -f *.o x86_2dfir
+	rm -f *.o *_2dfir
+
+# vim: set ts=4 sw=4 noet:

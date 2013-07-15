@@ -1,11 +1,11 @@
 include ../common.mk
 
-SRC += aes.c aesxam.c
+SRC = aes.c aesxam.c
 
-all: x86
-
-x86:
-	$(CC) $(FLAGS) $(SRC) -o x86_rijndael
+%_:
+	$($(addprefix $@, CC)) $($(addprefix $@, FLAGS)) $($(addprefix $@, SRC)) $(SRC) -o $(addsuffix rijndael, $@)
 
 clean:
-	rm -f *.o x86_rijndael
+	rm -f *.o *_rijndael
+
+# vim: set ts=4 sw=4 noet:

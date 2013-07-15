@@ -1,11 +1,11 @@
 include ../common.mk
 
-SRC += bf.c bf_cfb64.c bf_enc.c bf_skey.c
+SRC = bf.c bf_cfb64.c bf_enc.c bf_skey.c
 
-all: x86
-
-x86:
-	$(CC) $(FLAGS) $(SRC) -o x86_blowfish
+%_:
+	$($(addprefix $@, CC)) $($(addprefix $@, FLAGS)) $($(addprefix $@, SRC)) $(SRC) -o $(addsuffix blowfish, $@)
 
 clean:
-	rm -f *.o x86_blowfish
+	rm -f *.o *_blowfish
+
+# vim: set ts=4 sw=4 noet:
