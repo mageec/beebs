@@ -2,6 +2,9 @@
 *.o
 \#*
 .\#*
+results
+
+#Ignore binaries
 2dfir/2dfir
 blowfish/blowfish
 crc32/crc32
@@ -12,4 +15,6 @@ float_matmult/float_matmult
 int_matmult/int_matmult
 rijndael/rijndael
 sha/sha
-results
+
+# Ignore temporary vim files
+*.swp
