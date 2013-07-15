@@ -1,11 +1,11 @@
 include ../common.mk
 
-SRC += sha.c sha_driver.c
+SRC = sha.c sha_driver.c
 
-all: x86
-
-x86:
-	$(CC) $(FLAGS) $(SRC) -o x86_sha
+%_:
+	$($(addprefix $@, CC)) $($(addprefix $@, FLAGS)) $($(addprefix $@, SRC)) $(SRC) -o $(addsuffix sha, $@)
 
 clean:
-	rm -f *.o x86_sha
+	rm -f *.o *_sha
+
+# vim: set ts=4 sw=4 noet:

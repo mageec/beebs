@@ -1,9 +1,11 @@
 include ../common.mk
 
-all: x86
+SRC = -static crc_32.c
 
-x86:
-	$(CC) $(FLAGS) $(SRC) -static crc_32.c -o x86_crc
+%_:
+	$($(addprefix $@, CC)) $($(addprefix $@, FLAGS)) $($(addprefix $@, SRC)) $(SRC) -o $(addsuffix crc32, $@)
 
 clean:
-	rm -f *.o x86_crc
+	rm -f *.o *_crc32
+
+# vim: set ts=4 sw=4 noet:

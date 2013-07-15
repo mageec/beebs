@@ -1,11 +1,11 @@
 include ../common.mk
 
-SRC += dijkstra_small.c
+SRC = dijkstra_small.c
 
-all: x86
-
-x86:
-	$(CC) $(FLAGS) $(SRC) -o x86_dijkstra
+%_:
+	$($(addprefix $@, CC)) $($(addprefix $@, FLAGS)) $($(addprefix $@, SRC)) $(SRC) -o $(addsuffix dijkstra, $@)
 
 clean:
-	rm -f *.o x86_dijkstra
+	rm -f *.o *_dijkstra
+
+# vim: set ts=4 sw=4 noet:
