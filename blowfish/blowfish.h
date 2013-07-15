@@ -94,6 +94,7 @@ void BF_cfb64_encrypt(unsigned char *in, unsigned char *out, long length,
 void BF_ofb64_encrypt(unsigned char *in, unsigned char *out, long length,
 	BF_KEY *schedule, unsigned char *ivec, int *num);
 char *BF_options(void);
+void BF_ENC(BF_LONG LL, BF_LONG R, BF_LONG *S, BF_LONG P);
 
 #else
 

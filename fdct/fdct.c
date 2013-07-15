@@ -233,6 +233,14 @@ void fdct(short int *blk, int lx)
 int main()
 {
   int i, n;
+  short int check_block[64] = {-2480, -665, -689, 44, -350, 26, -272, -535,
+      -628, -2044, -544, 141, 300, -147, -1, 89,
+      -676, -551, -1820, 224, 267, -154, -281, -290,
+      52, 149, 262, -1508, -228, -102, 58, 100,
+      -425, 342, 148, -185, -2485, 802, 227, -750,
+      34, -62, -225, -84, 829, -1495, -172, 319,
+      -171, -14, -367, 67, 323, -127, -1400, 28,
+      -546, 38, -355, 159, -750, 316, -4, -1849};
 
 #ifdef ARM
   initialise_trigger();
@@ -250,5 +258,13 @@ int main()
     for(i=0;i<64;i+=2) printf("block[%2d] -> %8d . block[%2d] -> %8d\n",i,block[i],i+1,block[i+1]);
   #endif
 
-  return 0;
+    int to_return = 0;
+    for (i = 0; i < 64; i++) {
+        if (block[i] != check_block[i]) {
+            to_return = -1;
+            break;
+        }
+    }
+
+  return to_return;
 }

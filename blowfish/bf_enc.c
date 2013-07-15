@@ -64,6 +64,15 @@
  * CAMBRIDGE SECURITY WORKSHOP, CAMBRIDGE, U.K., DECEMBER 9-11, 1993)
  */
 
+void BF_ENC(BF_LONG LL, BF_LONG R, BF_LONG *S, BF_LONG P)
+{
+    LL^=P;
+    LL^=(((  S[        (R>>24L)]       +
+             S[0x0100+((R>>16L)&0xff)])^
+             S[0x0200+((R>> 8L)&0xff)])+
+             S[0x0300+((R     )&0xff)])&0xffffffff;
+}
+
 #if (BF_ROUNDS != 16) && (BF_ROUNDS != 20)
 If you set BF_ROUNDS to some value other than 16 or 20, you will have
 to modify the code.
