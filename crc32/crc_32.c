@@ -8,6 +8,7 @@
 #include "platformcode.h"
 #else
 #define REPEAT_FACTOR (4096)
+#include "jrand.h"
 #endif /* ARM */
 
 #ifdef __TURBOC__
@@ -137,7 +138,7 @@ DWORD crc32pseudo()
 
       for (i = 0 ; i < 1024; ++i)
       {
-            oldcrc32 = UPDC32(rand(), oldcrc32);
+            oldcrc32 = UPDC32(jrand(), oldcrc32);
       }
 
       return ~oldcrc32;
@@ -146,6 +147,16 @@ DWORD crc32pseudo()
 int main(int argc, char *argv[])
 {
       int n;
+      DWORD output;
+
+      /* TODO: Check if this difference is because of uninitialised bits in
+       * memory. If so, initialise it to 0. */
+#ifdef __LP64__
+      DWORD check_output = 18446744069884456117U;
+#else
+      /* Assume 32 bits */
+      DWORD check_output = 469871797;
+#endif
 
 #ifdef ARM
       initialise_trigger();
@@ -154,13 +165,13 @@ int main(int argc, char *argv[])
 
       for(n = 0; n < REPEAT_FACTOR>>5; ++n)
       {
-          srand(0);
-          crc32pseudo();
+          output = crc32pseudo();
       }
 
 #ifdef ARM
       stop_trigger();
 #endif /* ARM */
 
-      return 0;
+      /* Verify that we have the correct result. */
+      return 0 - (output != check_output);
 }

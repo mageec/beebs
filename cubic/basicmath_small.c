@@ -23,6 +23,11 @@ int main(void)
   struct int_sqrt q;
   long n = 0;
 
+  int output[24] = {0};
+  int output_count = 0;
+  int check_output[24] = {-9, 0, 0, -9, 0, 0, -8, 0, 0, -8, 0, 0,
+      -4, 0, 0, -4, 0, 0, -3, 0, -1, -3, 0, -1};
+
 #ifdef ARM
   initialise_trigger();
   start_trigger();
@@ -44,6 +49,11 @@ int main(void)
         	for(d1=-1;d1>-3;d1--) {
         	  SolveCubic(a1, b1, c1, d1, &solutions, x);
         	}
+
+            for (i = 0; i < solutions; i++) {
+                output[output_count] = x[i];
+                output_count++;
+            }
         }
       }
     }
@@ -53,5 +63,14 @@ int main(void)
   stop_trigger();
 #endif /* ARM */
 
-  return 0;
+  /* Verify that we have the correct result. */
+  int to_return = 0;
+  for (i = 0; i < output_count; i++) {
+      if (output[i] != check_output[i]) {
+          to_return = -1;
+          break;
+      }
+  }
+
+  return to_return;
 }

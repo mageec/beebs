@@ -5,6 +5,7 @@
 #include "platformcode.h"
 #else
 #define REPEAT_FACTOR (4096)
+#include "jrand.h"
 #endif /* ARM */
 
 #include "blowfish.h"
@@ -15,7 +16,16 @@ int main(int argc, char *argv[])
 {
 	BF_KEY key;
 	unsigned char ukey[8];
-	unsigned char indata[40],outdata[40],ivec[8];
+
+	unsigned char indata[40],outdata[40],ivec[8] = {0};
+    unsigned char check_outdata[40] = {
+        -11, 25, 13, -69, -45, -32, 31, 46,
+        -77, -34, 57, -26, 1, -125, -65, 119,
+        67, -82, -23, -42, -47, 51, 15, 71,
+        83, 30, 89, -58, 33, 67, -97, 87,
+        -61, -114, -87, -42, -111, -45, 15, 71
+    };
+
 	int num;
 	int by=0,i=0;
 	int encordec=-1;
@@ -65,7 +75,7 @@ int main(int argc, char *argv[])
 		{
 			int j;
 			while(i<40)
-				indata[i++]=rand();
+				indata[i++]=jrand();
 
 			BF_cfb64_encrypt(indata,outdata,i,&key,ivec,&num,encordec);
 			encordec = 1-encordec;
@@ -79,7 +89,16 @@ int main(int argc, char *argv[])
 	stop_trigger();
 #endif /* ARM */
 
-	return 0;
+    /* Verify that we have the correct result. */
+    int to_return = 0;
+    for (i = 0; i < 40; i++) {
+        if (outdata[i] != check_outdata[i]) {
+            to_return = -1;
+            break;
+        }
+    }
+
+	return to_return;
 }
 
 

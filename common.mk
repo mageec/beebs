@@ -1,21 +1,20 @@
 PLATFORMCODE=../../lowpower-framework/platformcode
 
-VERIFY ?= 0
-ifeq ($(VERIFY), 1)
-	FLAGS += -g -DVERIFY
+DEBUG ?= 0
+ifeq ($(DEBUG), 1)
+	FLAGS += -g
 endif
 
-FLAGS += -m32
+FLAGS += -std=c99 -I$(PLATFORMCODE)
 
 x86_CC=gcc
-x86_FLAGS += $(FLAGS) -DX86
+x86_FLAGS += $(FLAGS) -DX86 -m32
 x86_SRC += $(PLATFORMCODE)/jrand.c
 
 arm_CC=arm-none-eabi-gcc
 arm_FLAGS += $(FLAGS) -DARM
 arm_FLAGS += -T$(PLATFORMCODE)/stm32vl_flash.ld
 arm_FLAGS += -mcpu=cortex-m3 -mthumb
-arm_FLAGS += -I$(PLATFORMCODE)
 arm_SRC += $(PLATFORMCODE)/{stm32f100,sbrk,exit}.c
 
 all: x86_ arm_

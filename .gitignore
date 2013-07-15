@@ -18,3 +18,5 @@ sha/sha
 
 # Ignore temporary vim files
 *.swp
+*.tmp
+x86_[^.]*

@@ -48,6 +48,7 @@
 #else
 #define REPEAT_FACTOR (4096)
 #define FLEN flen.__pos
+#include "jrand.h"
 #endif /* ARM */
 
 /* A Pseudo Random Number Generator (PRNG) used for the     */
@@ -102,9 +103,9 @@ void fillrand(char *buf, int len)
     }
 }
 
-int encfile(aes *ctx)
-{   char            inbuf[16], outbuf[16];
-    int             flen;
+int encfile(aes *ctx, char *outbuf)
+{   char            inbuf[16];
+    fpos_t          flen;
     unsigned long   i=0, l=0, j, k;
 
     fillrand(outbuf, 16);           /* set an IV for CBC mode           */
@@ -117,7 +118,7 @@ int encfile(aes *ctx)
     for(j = 0; j <256; j++)
     {                               /* input 1st 16 bytes to buf[1..16] */
         for(k = 0; k < 16; ++k)
-            inbuf[k] = rand();
+            inbuf[k] = jrand();
 
         for(i = 0; i < 16; ++i)         /* xor in previous cipher text  */
             inbuf[i] ^= outbuf[i];
@@ -130,14 +131,14 @@ int encfile(aes *ctx)
     return 0;
 }
 
-int decfile(aes *ctx)
-{   char    inbuf1[16], inbuf2[16], outbuf[16], *bp1, *bp2, *tp;
+int decfile(aes *ctx, char *outbuf)
+{   char    inbuf1[16], inbuf2[16], *bp1, *bp2, *tp;
     int     i,j, l, flen, k;
 
     fillrand(inbuf1, 16);           /* set an IV for CBC mode           */
 
     for(k = 0; k < 16; ++k)
-        inbuf2[k] = rand();
+        inbuf2[k] = jrand();
 
     decrypt(inbuf2, outbuf, ctx);   /* decrypt it                       */
 
@@ -152,7 +153,7 @@ int decfile(aes *ctx)
     for(j = 0; j < 256; ++j)
     {
         for(k = 0; k < 16; ++k)
-            bp1[k] = rand();
+            bp1[k] = jrand();
 
         decrypt(bp1, outbuf, ctx);  /* decrypt the new input block and  */
 
@@ -173,6 +174,23 @@ int main(int argc, char *argv[])
 {
     char    *cp, ch, key[32];
     int     i=0, by=0, key_len=0, err = 0, n;
+    char    encoutbuf[16], decoutbuf[16];
+    int to_return = 0;
+
+    /* TODO: Check if this difference is caused by uninitialised memory,
+     * and if so then initialise it */
+#ifdef __LP64__
+    char check_encoutbuf[16] = {46, 100, 102, -108, 50, -49, 41, -104,
+        36, 73, 123, -53, 14, -8, -40, 120};
+    char check_decoutbuf[16] = {-43, -117, -3, -13, 67, -93, -59, -124,
+        16, 104, -57, 80, 12, 43, 84, 26};
+#else
+    /* Assume 32 bits */
+    char check_encoutbuf[16] = {41, -73, 107, -88, 50, -49, 41, -104,
+        36, 73, 123, -53, 14, -8, -40, 120};
+    char check_decoutbuf[16] = {82, -39, -70, -17, -64, -115, -124, 94,
+        -19, 41, -115, 12, 11, 26, 113, 23};
+#endif
 
 /*    for(i = 0; i < 16; ++i)
 //    {
@@ -227,17 +245,33 @@ int main(int argc, char *argv[])
 
         set_key(key, key_len, enc, ctx);
 
-        err = encfile(ctx);
+        err = encfile(ctx, encoutbuf);
 
         set_key(key, key_len, dec, ctx);
 
-        err = decfile(ctx);
+        err = decfile(ctx, decoutbuf);
 
     }
+
 exit:
 #ifdef ARM
     stop_trigger();
 #endif /* ARM */
 
-    return err;
+
+    /* We can't declare to_return in a label so it's been set above */
+    if (err) {
+        to_return = err;
+    }
+    else {
+        for (i = 0; i < 16; i++) {
+            if ((encoutbuf[i] != check_encoutbuf[i]) ||
+                    (decoutbuf[i] != check_decoutbuf[i])) {
+                to_return = -1;
+                break;
+            }
+        }
+    }
+
+    return to_return;
 }
