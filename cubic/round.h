@@ -1,8 +1,8 @@
 /* +++Date last modified: 05-Jul-1997 */
 
 /*
-** rounding macros by Dave Knapp, Thad Smith, Jon Strayer, & Bob Stout
-*/
+ ** rounding macros by Dave Knapp, Thad Smith, Jon Strayer, & Bob Stout
+ */
 
 #ifndef ROUND__H
 #define ROUND__H
@@ -12,44 +12,46 @@
 #if defined(__cplusplus) && __cplusplus
 
 /*
-** Safe C++ inline versions
-*/
+ ** Safe C++ inline versions
+ */
 
 /* round to integer */
 
 inline int iround(double x)
 {
-      return (int)floor(x + 0.5);
+   return (int)floor(x + 0.5);
 }
 
 /* round number n to d decimal points */
 
 inline double fround(double n, unsigned d)
 {
-      return floor(n * pow(10., d) + .5) / pow(10., d);
+   return floor(n * pow(10., d) + .5) / pow(10., d);
 }
 
 #else
 
 /*
-** NOTE: These C macro versions are unsafe since arguments are referenced
-**       more than once.
-**
-**       Avoid using these with expression arguments to be safe.
-*/
+ ** NOTE: These C macro versions are unsafe since arguments are referenced
+ **       more than once.
+ **
+ **       Avoid using these with expression arguments to be safe.
+ */
 
 /*
-** round to integer
-*/
+ ** round to integer
+ */
 
 #define iround(x) floor((x) + 0.5)
 
 /*
-** round number n to d decimal points
-*/
+ ** round number n to d decimal points
+ */
 
 #define fround(n,d) (floor((n)*pow(10.,(d))+.5)/pow(10.,(d)))
 
 #endif
 
 #endif /* ROUND__H */
+
+/* vim: set ts=3 sw=3 et: */
