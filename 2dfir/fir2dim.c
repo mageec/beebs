@@ -67,98 +67,97 @@
 int main()
 {
 
-  static TYPE  coefficients[COEFFICIENTS*COEFFICIENTS];
-  static TYPE  array[ARRAYDIM*ARRAYDIM] ={0} ;
-  static TYPE  output[IMAGEDIM*IMAGEDIM] ={0};
+   static TYPE  coefficients[COEFFICIENTS*COEFFICIENTS];
+   static TYPE  array[ARRAYDIM*ARRAYDIM] ={0} ;
+   static TYPE  output[IMAGEDIM*IMAGEDIM] ={0};
 
-  static TYPE  check_output[IMAGEDIM*IMAGEDIM] =
-        {4, 6, 6, 4, 6, 9, 9, 6, 6, 9, 9, 6, 4, 6, 6, 4};
+   static TYPE  check_output[IMAGEDIM*IMAGEDIM] =
+   {4, 6, 6, 4, 6, 9, 9, 6, 6, 9, 9, 6, 4, 6, 6, 4};
 
-  STORAGE_CLASS TYPE *parray  = &array[0], *parray2, *parray3 ;
-  STORAGE_CLASS TYPE *pcoeff  = &coefficients[0] ;
-  STORAGE_CLASS TYPE *poutput = &output[0]       ;
-  int k, f, i, n;
+   STORAGE_CLASS TYPE *parray  = &array[0], *parray2, *parray3 ;
+   STORAGE_CLASS TYPE *pcoeff  = &coefficients[0] ;
+   STORAGE_CLASS TYPE *poutput = &output[0]       ;
+   int k, f, i, n;
 
-  /* Start in the second row and second column to surround image with zeros */
-  parray += ARRAYDIM;
-  parray += 1;
+   /* Start in the second row and second column to surround image with zeros */
+   parray += ARRAYDIM;
+   parray += 1;
 
-  /* For all but the first and last row */
-  for (i = 0 ; i < IMAGEDIM ; i++)
-    {
+   /* For all but the first and last row */
+   for (i = 0 ; i < IMAGEDIM ; i++)
+   {
       for (f = 0 ; f < IMAGEDIM ; f++)
-        *parray++ = 1;
+         *parray++ = 1;
 
       /* Ignore the first and last columns */
       parray += 2;
-    }
+   }
 
-  /* Sets coefficient array to all 1s */
-  for (i = 0; i < COEFFICIENTS*COEFFICIENTS; i++)
-    *pcoeff++ = 1;
+   /* Sets coefficient array to all 1s */
+   for (i = 0; i < COEFFICIENTS*COEFFICIENTS; i++)
+      *pcoeff++ = 1;
 
-  /* Resets all pointers to the start of their arrays */
-  parray  = &array[0]        ;
-  pcoeff  = &coefficients[0] ;
-  poutput = &output[0]       ;
+   /* Resets all pointers to the start of their arrays */
+   parray  = &array[0]        ;
+   pcoeff  = &coefficients[0] ;
+   poutput = &output[0]       ;
 
 #ifdef ARM
-  initialise_trigger();
-  start_trigger();
+   initialise_trigger();
+   start_trigger();
 #endif /* ARM */
 
-  for(n = 0; n < REPEAT_FACTOR>>5; ++n)
-  {
-    /* Resets all pointers to the start of their arrays */
-    parray  = &array[0]        ;
-    pcoeff  = &coefficients[0] ;
-    poutput = &output[0]       ;
+   for(n = 0; n < REPEAT_FACTOR>>5; ++n)
+   {
+      /* Resets all pointers to the start of their arrays */
+      parray  = &array[0]        ;
+      pcoeff  = &coefficients[0] ;
+      poutput = &output[0]       ;
 
-    /* For every pixel in the image */
-    for (k = 0 ; k < IMAGEDIM ; k++)
+      /* For every pixel in the image */
+      for (k = 0 ; k < IMAGEDIM ; k++)
       {
 
-        for (f = 0 ; f < IMAGEDIM ; f++)
-  	{
-  	  pcoeff = &coefficients[0] ;
-      /* Current pixel */
-  	  parray = &array[k*ARRAYDIM + f] ;
-      /* Pixel below current */
-  	  parray2 = parray + ARRAYDIM ;
-      /* Two pixels below current */
-  	  parray3 = parray + ARRAYDIM + ARRAYDIM ;
+         for (f = 0 ; f < IMAGEDIM ; f++)
+         {
+            pcoeff = &coefficients[0] ;
+            /* Current pixel */
+            parray = &array[k*ARRAYDIM + f] ;
+            /* Pixel below current */
+            parray2 = parray + ARRAYDIM ;
+            /* Two pixels below current */
+            parray3 = parray + ARRAYDIM + ARRAYDIM ;
 
-  	  *poutput = 0 ;
+            *poutput = 0 ;
 
-        	  for (i = 0 ; i < 3 ; i++)
-  	    *poutput += *pcoeff++ * *parray++ ;
+            for (i = 0 ; i < 3 ; i++)
+               *poutput += *pcoeff++ * *parray++ ;
 
-  	  for (i = 0 ; i < 3 ; i++)
-  	    *poutput += *pcoeff++ * *parray2++ ;
+            for (i = 0 ; i < 3 ; i++)
+               *poutput += *pcoeff++ * *parray2++ ;
 
-  	  for (i = 0 ; i < 3 ; i++)
-  	    *poutput += *pcoeff++ * *parray3++ ;
+            for (i = 0 ; i < 3 ; i++)
+               *poutput += *pcoeff++ * *parray3++ ;
 
-  	  poutput++ ;
-  	}
+            poutput++ ;
+         }
       }
-  }
+   }
 
 #ifdef ARM
-  stop_trigger();
+   stop_trigger();
 #endif /* ARM */
 
-  /* Verify that we have the correct result. */
-  int to_return = 0;
-  for (i = 0; i < IMAGEDIM*IMAGEDIM; i++) {
+   /* Verify that we have the correct result. */
+   int to_return = 0;
+   for (i = 0; i < IMAGEDIM*IMAGEDIM; i++) {
       if (output[i] != check_output[i]) {
-          to_return = -1;
-          break;
+         to_return = -1;
+         break;
       }
-  }
+   }
 
-  return to_return;
+   return to_return;
 }
 
-
-
+/* vim: set ts=3 sw=3 et: */
