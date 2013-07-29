@@ -2,14 +2,9 @@
 /* Crc - 32 BIT ANSI X3.66 CRC checksum files */
 
 #include <stdio.h>
-#include "crc.h"
 
-#ifdef ARM
+#include "crc.h"
 #include "platformcode.h"
-#else
-#define REPEAT_FACTOR (4096)
-#include "jrand.h"
-#endif /* ARM */
 
 #ifdef __TURBOC__
 #pragma warn -cln
@@ -158,19 +153,15 @@ int main(int argc, char *argv[])
    DWORD check_output = 469871797;
 #endif
 
-#ifdef ARM
    initialise_trigger();
    start_trigger();
-#endif /* ARM */
 
    for(n = 0; n < REPEAT_FACTOR>>5; ++n)
    {
       output = crc32pseudo();
    }
 
-#ifdef ARM
    stop_trigger();
-#endif /* ARM */
 
    /* Verify that we have the correct result. */
    return 0 - (output != check_output);

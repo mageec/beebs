@@ -23,11 +23,7 @@
 // *  Number of clock cycles (with these inputs) -> 2132                                                   *
 // *********************************************************************************************************
 
-#ifdef ARM
 #include "platformcode.h"
-#else
-#define REPEAT_FACTOR (4096)
-#endif /* ARM */
 
 #ifdef IO
 #include "libp.c"
@@ -242,17 +238,13 @@ int main()
       -171, -14, -367, 67, 323, -127, -1400, 28,
       -546, 38, -355, 159, -750, 316, -4, -1849};
 
-#ifdef ARM
    initialise_trigger();
    start_trigger();
-#endif /* ARM */
 
    for(n = 0; n < REPEAT_FACTOR; ++n)
       fdct (block, 8);  // 8x8 Blocks, DC precision value = 0, Quantization coefficient (mquant) = 64
 
-#ifdef ARM
    stop_trigger();
-#endif /* ARM */
 
 #ifdef IO
    for(i=0;i<64;i+=2) printf("block[%2d] -> %8d . block[%2d] -> %8d\n",i,block[i],i+1,block[i+1]);

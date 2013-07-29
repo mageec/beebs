@@ -1,11 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#ifdef ARM
 #include "platformcode.h"
-#else
-#define REPEAT_FACTOR (4096)
-#endif /* ARM */
 
 #define NUM_NODES                          10
 #define NONE                               9999
@@ -180,10 +176,8 @@ int main() {
       28, 24, 55, 16,  8, 35, 31, 28,  0, 38,
       23, 19, 41, 16,  8, 35, 15, 28,  0,  0};
 
-#ifdef ARM
    initialise_trigger();
    start_trigger();
-#endif /* ARM */
 
    /* finds 10 shortest paths between nodes */
    for(n = 0; n < REPEAT_FACTOR >> 9; ++n) {
@@ -196,9 +190,7 @@ int main() {
       }
    }
 
-#ifdef ARM
    stop_trigger();
-#endif /* ARM */
 
    int to_return = 0;
    for (i = 0; i < output_count; i++) {

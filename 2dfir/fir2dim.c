@@ -52,11 +52,7 @@
  *                      $Revision: 1.3 $
  */
 
-#ifdef ARM
 #include "platformcode.h"
-#else
-#define REPEAT_FACTOR (4096)
-#endif /* ARM */
 
 #define STORAGE_CLASS register
 #define TYPE          float
@@ -102,10 +98,8 @@ int main()
    pcoeff  = &coefficients[0] ;
    poutput = &output[0]       ;
 
-#ifdef ARM
    initialise_trigger();
    start_trigger();
-#endif /* ARM */
 
    for(n = 0; n < REPEAT_FACTOR>>5; ++n)
    {
@@ -144,9 +138,7 @@ int main()
       }
    }
 
-#ifdef ARM
    stop_trigger();
-#endif /* ARM */
 
    /* Verify that we have the correct result. */
    int to_return = 0;

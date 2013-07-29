@@ -28,11 +28,7 @@
 #include <sys/times.h>
 #endif
 
-#ifdef ARM
 #include "platformcode.h"
-#else
-#define REPEAT_FACTOR (4096)
-#endif /* ARM */
 
 /*
  * MATRIX MULTIPLICATION BENCHMARK PROGRAM:
@@ -91,17 +87,13 @@ int main()
    printf("RESULTS OF THE TEST:\n");
 #endif
 
-#ifdef ARM
    initialise_trigger();
    start_trigger();
-#endif /* ARM */
 
    for(n = 0; n < REPEAT_FACTOR>>7; ++n)
       Test(ArrayA, ArrayB, ResultArray);
 
-#ifdef ARM
    stop_trigger();
-#endif /* ARM */
 
    int to_return = 0, exp;
    float diff;
@@ -113,7 +105,7 @@ int main()
              * operations */
             frexpf(ResultArray[i][j], &exp);
             diff = fabsf(ResultArray[i][j] - check_ResultArray[i][j]);
-            /* TODO: Fix or big endian */
+            /* TODO: Fix for big endian */
             if (diff > (1 << exp)) {
                to_return = -1;
                break;
