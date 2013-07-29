@@ -1,11 +1,7 @@
-#ifdef ARM
-#include "platformcode.h"
-#else
-#define REPEAT_FACTOR (4096)
-#endif /* ARM */
-
-#include "snipmath.h"
 #include <math.h>
+
+#include "platformcode.h"
+#include "snipmath.h"
 
 /* The printf's may be removed to isolate just the math calculations */
 
@@ -28,10 +24,8 @@ int main(void)
    int check_output[24] = {-9, 0, 0, -9, 0, 0, -8, 0, 0, -8, 0, 0,
       -4, 0, 0, -4, 0, 0, -3, 0, -1, -3, 0, -1};
 
-#ifdef ARM
    initialise_trigger();
    start_trigger();
-#endif /* ARM */
 
    for(n = 0; n < (REPEAT_FACTOR>>13)+1; ++n)
    {
@@ -59,9 +53,7 @@ int main(void)
       }
    }
 
-#ifdef ARM
    stop_trigger();
-#endif /* ARM */
 
    /* Verify that we have the correct result. */
    int to_return = 0;

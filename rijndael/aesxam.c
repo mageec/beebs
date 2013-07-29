@@ -41,14 +41,12 @@
 #include <ctype.h>
 
 #include "aes.h"
+#include "platformcode.h"
 
 #ifdef ARM
-#include "platformcode.h"
 #define FLEN flen
 #else
-#define REPEAT_FACTOR (4096)
 #define FLEN flen.__pos
-#include "jrand.h"
 #endif /* ARM */
 
 /* A Pseudo Random Number Generator (PRNG) used for the     */
@@ -203,10 +201,8 @@ int main(int argc, char *argv[])
    }
    }
    */
-#ifdef ARM
    initialise_trigger();
    start_trigger();
-#endif /* ARM */
 
    for(n = 0; n < REPEAT_FACTOR>>9; n++)
    {
@@ -254,9 +250,7 @@ int main(int argc, char *argv[])
    }
 
 exit:
-#ifdef ARM
    stop_trigger();
-#endif /* ARM */
 
 
    /* We can't declare to_return in a label so it's been set above */
