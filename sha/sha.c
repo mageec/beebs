@@ -6,6 +6,7 @@
 /* NIST's proposed modification to SHA of 7/11/94 may be */
 /* activated by defining USE_MODIFIED_SHA */
 
+#include <string.h>
 #include "sha.h"
 
 #include "platformcode.h"
@@ -197,7 +198,7 @@ void sha_stream(SHA_INFO *sha_info)
     for(n = 0; n < 256; ++n)
     {
         for(i = 0; i < BLOCK_SIZE; ++i)
-            data[i] = jrand();
+            data[i] = rand();
 	    sha_update(sha_info, data, BLOCK_SIZE);
     }
     sha_final(sha_info);

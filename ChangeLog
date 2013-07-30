@@ -1,5 +1,13 @@
 2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>
 
+	* blowfish/bf.c (main): Use rand () rather than jrand ().
+	* rijndael/aesxam (encfile): Use rand () rather than jrand () and
+	use int as type of flen.
+	(decfile): Use rand () rather than jrand ().
+	* sha/sha.c: Use rand () rather than jrand ().
+
+2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>
+
 	* .gitignore: Created.
 	* ChangeLog: Created.
 

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "platformcode.h"
 #include "blowfish.h"
 
@@ -56,7 +57,7 @@ int main(int argc, char *argv[])
 		{
 			int j;
 			while(i<40)
-				indata[i++]=jrand();
+				indata[i++]=rand();
 
 			BF_cfb64_encrypt(indata,outdata,i,&key,ivec,&num,encordec);
 			encordec = 1-encordec;
