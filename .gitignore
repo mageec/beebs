@@ -12,3 +12,4 @@ float_matmult/float_matmult
 int_matmult/int_matmult
 rijndael/rijndael
 sha/sha
+results
