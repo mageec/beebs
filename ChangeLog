@@ -1,0 +1,46 @@
+2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>
+
+	* .gitignore: Created.
+	* ChangeLog: Created.
+
+2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>
+
+	Inherited baseline material
+
+	* 2dfir/fir2dim.c: Created.
+	* blowfish/bf.c: Likewise.
+	* blowfish/bf_cfb64.c: Likewise.
+	* blowfish/bf_enc.c: Likewise.
+	* blowfish/bf_locl.h: Likewise.
+	* blowfish/bf_locl.org: Likewise.
+	* blowfish/bf_pi.h: Likewise.
+	* blowfish/bf_skey.c: Likewise.
+	* blowfish/blowfish.h: Likewise.
+	* blowfish/COPYRIGHT: Likewise.
+	* blowfish/LICENSE: Likewise.
+	* crc32/crc_32.c: Likewise.
+	* crc32/crc.h: Likewise.
+	* crc32/LICENSE: Likewise.
+	* crc32/Makefile: Likewise.
+	* cubic/basicmath_small.c: Likewise.
+	* cubic/cubic.c: Likewise.
+	* cubic/LICENSE: Likewise.
+	* cubic/pi.h: Likewise.
+	* cubic/round.h: Likewise.
+	* cubic/snipmath.h: Likewise.
+	* cubic/sniptype.h: Likewise.
+	* dijkstra/dijkstra_small.c: Likewise.
+	* dijkstra/LICENSE: Likewise.
+	* fdct/fdct.c: Likewise.
+	* float_matmult/matmult.c: Likewise.
+	* int_matmult/matmult.c: Likewise.
+	* LICENSE.GPL: Likewise.
+	* README.md: Likewise.
+	* rijndael/aes.c: Likewise.
+	* rijndael/aes.h: Likewise.
+	* rijndael/aestab.h: Likewise.
+	* rijndael/aesxam.c: Likewise.
+	* rijndael/LICENSE: Likewise.
+	* sha/sha.c: Likewise.
+	* sha/sha_driver.c: Likewise.
+	* sha/sha.h: Likewise.
