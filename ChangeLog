@@ -1,5 +1,10 @@
 2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>
 
+	* platformcode.c: Created for common code.
+	* platformcode.c: Common header.
+
+2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>
+
 	* blowfish/bf.c: Change mode to non-executable.
 	* blowfish/bf_cfb64.c: Likewise.
 	* blowfish/bf_enc.c: Likewise.
