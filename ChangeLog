@@ -1,5 +1,29 @@
 2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>
 
+	* blowfish/bf.c: Change mode to non-executable.
+	* blowfish/bf_cfb64.c: Likewise.
+	* blowfish/bf_enc.c: Likewise.
+	* blowfish/bf_locl.h: Likewise.
+	* blowfish/bf_pi.h: Likewise.
+	* blowfish/bf_skey.c: Likewise.
+	* blowfish/blowfish.h: Likewise.
+	* cubic/basicmath_small.c: Likewise.
+	* cubic/cubic.c: Likewise.
+	* cubic/pi.h: Likewise.
+	* cubic/round.h: Likewise.
+	* cubic/snipmath.h: Likewise.
+	* cubic/sniptype.h: Likewise.
+	* dijkstra/dijkstra_small.c: Likewise.
+	* rijndael/aes.c: Likewise.
+	* rijndael/aes.h: Likewise.
+	* rijndael/aestab.h: Likewise.
+	* rijndael/aesxam.c: Likewise.
+	* sha/sha.c: Likewise.
+	* sha/sha.h: Likewise.
+	* sha/sha_driver.c: Likewise.
+
+2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>
+
 	* blowfish/bf.c (main): Use rand () rather than jrand ().
 	* rijndael/aesxam (encfile): Use rand () rather than jrand () and
 	use int as type of flen.
