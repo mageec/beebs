@@ -1,5 +1,9 @@
 2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>
 
+	* README.md: Updated with information on running the tests.
+
+2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>
+
 	* run-all.sh: Created.
 	* .gitignore: Add results directory.
 
