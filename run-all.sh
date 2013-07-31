@@ -49,26 +49,24 @@ runone () {
     text=`cut -c 1-7 ${tmpf} | sed -e '2,$s/$/ +/' -e '$s/$/ p/' | dc`
     data=`cut -c 9-15 ${tmpf} | sed -e '2,$s/$/ +/' -e '$s/$/ p/' | dc`
     bss=`cut -c 17-23 ${tmpf} | sed -e '2,$s/$/ +/' -e '$s/$/ p/' | dc`
-
     printf "%-15s %7d %7d %7d" "${d}" ${text} ${data} ${bss} | tee -a ${resf}
 
-    # Now check if we are too big to run.
-    avr-size *.o > ${tmpf}
-    text=`tail -1 ${tmpf} | cut -c 1-7 | sed -e 's/$/ p/' | dc`
-    data=`tail -1 ${tmpf} | cut -c 9-15 | sed -e 's/$/ p/' | dc`
-    bss=`tail -1 ${tmpf} | cut -c 17-23 | sed -e 's/$/ p/' | dc`
-    ro=${text}
-    rw=`echo ${data} ${bss} + p | dc`
+    # Now check if the linked program is too big to run.
+    avr-readelf -l ${d} \
+	| sed -n -e 's/^  LOAD *\(0x[^ ]* *\)\{4\}0x\(.*\) 0x.*$/\2/p' \
+	| tr abcdef ABCDEF > ${tmpf}
+    # ${tmpf} now holds the memsize and flags of all LOAD lines. All read only
+    # lines are assumed to be in the text segment and all read-write lines in
+    # the data segment.
+    textseg=`sed -n -e 's/^\([^ ]*\) R[^W].*$/16 i \1/p' ${tmpf} \
+                 | sed -e '2,$s/$/ +/' -e '2,$s/16 i //' -e '$s/$/ p/' | dc`
+    dataseg=`sed -n -e 's/^\([^ ]*\) RW.*$/16 i \1/p' ${tmpf} \
+                 | sed -e '2,$s/$/ +/' -e '2,$s/16 i //' -e '$s/$/ p/' | dc`
+    printf "   %7d %7d" ${textseg} ${dataseg}
 
-    if [ \( ${ro} -gt ${MAX_ROM} \) -a \( ${rw} -gt ${MAX_RAM} \) ]
+    if [ \( ${textseg} -gt ${MAX_ROM} \) -o \( ${dataseg} -gt ${MAX_RAM} \) ]
     then
-	printf "           - program and data too large\n" | tee -a ${resf}
-    elif [ ${ro} -gt ${MAX_ROM} ]
-    then
-	printf "           - program too large\n" | tee -a ${resf}
-    elif [ ${rw} -gt ${MAX_RAM} ]
-    then
-	printf "           - data too large\n" | tee -a ${resf}
+	printf "           -\n" | tee -a ${resf}
     else
         # Run the test and count the cycles, then do tidy output
 	if ! avr-gdb ${d} \
@@ -109,8 +107,10 @@ runall () {
     echo "$CC built ${builddate}" | tee -a ${resf}
     echo "  CFLAGS  = ${CFLAGS}" | tee -a ${resf}
     echo "  LDFLAGS = ${LDFLAGS}" | tee -a ${resf}
-    echo "benchmark          text    data     bss      cycles" | tee -a ${resf}
-    echo "=========          ====    ====     ===      ======" | tee -a ${resf}
+    echo "benchmark          text    data     bss   textseg dataseg      cycles" \
+	| tee -a ${resf}
+    echo "=========          ====    ====     ===   ======= =======      ======" \
+	| tee -a ${resf}
 
     # The benchmarks
     for d in $*
@@ -142,10 +142,11 @@ cat > ${tmpf} <<EOF
 			 Low power benchmark results
 			 ===========================
 
-The text data and BSS sizes shown for each benchmark are for the compiled
-files of the benchmark only, prior to linking with the library.  The decision
-whether to run is based on the size after linking, which may be considerably
-larger.
+The text, data and BSS sizes shown for each benchmark are for the compiled
+files of the benchmark only, prior to linking with the library. The textseg
+and dataseg are the sizes of the text and data segments of the linked program.
+The decision whether to run is based on the text and data segment size after
+linking.
 
 EOF
 cat ${tmpf}
