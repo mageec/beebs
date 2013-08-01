@@ -37,7 +37,7 @@ runone () {
     done
 
     # Link the test
-    if ! ${CC} -g ${LDFLAGS} -o ${d} *.o ../platformcode.o >> ${logf} 2>&1
+    if ! ${CC} -g ${LDFLAGS} -o ${d} *.o ../platformcode/platformcode.o >> ${logf} 2>&1
     then
 	echo "ERROR: Failed to link ${d}/${d}"
 	exit 1
@@ -96,7 +96,7 @@ runone () {
 runall () {
 
     # The platform support functions.
-    if ! ${CC} -g ${CFLAGS} -c platformcode.c
+    if ! ${CC} -g ${CFLAGS} -c platformcode/platformcode.c
     then
 	echo "ERROR: Failed to compile platform code"
 	exit 1

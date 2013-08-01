@@ -59,113 +59,97 @@
 #define IMAGEDIM      4
 #define ARRAYDIM      (IMAGEDIM + 2)
 #define COEFFICIENTS  3
-/*
-void
-pin_down(TYPE *pimage, TYPE *parray, TYPE *pcoeff, TYPE *poutput)
-{
-  STORAGE_CLASS TYPE    i,f;
-
-  for (i = 0 ; i < IMAGEDIM ; i++)
-    {
-      for (f = 0 ; f < IMAGEDIM ; f++)
-	*pimage++ = 1 ;
-    }
-
-  pimage = pimage - IMAGEDIM*IMAGEDIM  ;
-
-  for (i = 0; i < COEFFICIENTS*COEFFICIENTS; i++)
-    *pcoeff++ = 1;
-
-  for (i = 0 ; i < ARRAYDIM ; i++)
-    *parray++ = 0 ;
-
-
-  for (f = 0 ; f < IMAGEDIM; f++)
-    {
-      *parray++ = 0 ;
-      for (i = 0 ; i < IMAGEDIM ; i++)
-	*parray++ = *pimage++ ;
-      *parray++ = 0 ;
-    }
-
-  for (i = 0 ; i < ARRAYDIM ; i++)
-    *parray++ = 0 ;
-
-  for (i = 0 ; i < IMAGEDIM * IMAGEDIM; i++)
-	*poutput++ = 0 ;
-}
-*/
 
 int main()
 {
 
-  static TYPE  coefficients[COEFFICIENTS*COEFFICIENTS];
-  static TYPE  image[IMAGEDIM*IMAGEDIM]  ={0};
-  static TYPE  array[ARRAYDIM*ARRAYDIM] ={0} ;
-  static TYPE  output[IMAGEDIM*IMAGEDIM] ={0};
+   static TYPE  coefficients[COEFFICIENTS*COEFFICIENTS];
+   static TYPE  array[ARRAYDIM*ARRAYDIM] ={0} ;
+   static TYPE  output[IMAGEDIM*IMAGEDIM] ={0};
 
-  STORAGE_CLASS TYPE *pimage  = &image[0]        ;
-  STORAGE_CLASS TYPE *parray  = &array[0], *parray2, *parray3 ;
-  STORAGE_CLASS TYPE *pcoeff  = &coefficients[0] ;
-  STORAGE_CLASS TYPE *poutput = &output[0]       ;
-  int k, f, i, n;
+   static TYPE  check_output[IMAGEDIM*IMAGEDIM] =
+   {4, 6, 6, 4, 6, 9, 9, 6, 6, 9, 9, 6, 4, 6, 6, 4};
 
-//  pin_down(&image[0], &array[0], &coefficients[0], &output[0]);
+   STORAGE_CLASS TYPE *parray  = &array[0], *parray2, *parray3 ;
+   STORAGE_CLASS TYPE *pcoeff  = &coefficients[0] ;
+   STORAGE_CLASS TYPE *poutput = &output[0]       ;
+   int k, f, i, n;
 
-  for (i = 0 ; i < IMAGEDIM ; i++)
-    {
+   /* Start in the second row and second column to surround image with zeros */
+   parray += ARRAYDIM;
+   parray += 1;
+
+   /* For all but the first and last row */
+   for (i = 0 ; i < IMAGEDIM ; i++)
+   {
       for (f = 0 ; f < IMAGEDIM ; f++)
-	*pimage++ = 1 ;
-    }
-  for (i = 0; i < COEFFICIENTS*COEFFICIENTS; i++)
-    *pcoeff++ = 1;
-  pimage  = &image[0]        ;
-  parray  = &array[0]        ;
-  pcoeff  = &coefficients[0] ;
-  poutput = &output[0]       ;
+         *parray++ = 1;
 
-  initialise_trigger();
-  start_trigger();
+      /* Ignore the first and last columns */
+      parray += 2;
+   }
 
-  for(n = 0; n < REPEAT_FACTOR>>5; ++n)
-  {
-    pimage  = &image[0]        ;
-    parray  = &array[0]        ;
-    pcoeff  = &coefficients[0] ;
-    poutput = &output[0]       ;
-    for (k = 0 ; k < IMAGEDIM ; k++)
+   /* Sets coefficient array to all 1s */
+   for (i = 0; i < COEFFICIENTS*COEFFICIENTS; i++)
+      *pcoeff++ = 1;
+
+   /* Resets all pointers to the start of their arrays */
+   parray  = &array[0]        ;
+   pcoeff  = &coefficients[0] ;
+   poutput = &output[0]       ;
+
+   initialise_trigger();
+   start_trigger();
+
+   for(n = 0; n < REPEAT_FACTOR>>5; ++n)
+   {
+      /* Resets all pointers to the start of their arrays */
+      parray  = &array[0]        ;
+      pcoeff  = &coefficients[0] ;
+      poutput = &output[0]       ;
+
+      /* For every pixel in the image */
+      for (k = 0 ; k < IMAGEDIM ; k++)
       {
 
-        for (f = 0 ; f < IMAGEDIM ; f++)
-  	{
-  	  pcoeff = &coefficients[0] ;
-  	  parray = &array[k*ARRAYDIM + f] ;
-  	  parray2 = parray + ARRAYDIM ;
-  	  parray3 = parray + ARRAYDIM + ARRAYDIM ;
+         for (f = 0 ; f < IMAGEDIM ; f++)
+         {
+            pcoeff = &coefficients[0] ;
+            /* Current pixel */
+            parray = &array[k*ARRAYDIM + f] ;
+            /* Pixel below current */
+            parray2 = parray + ARRAYDIM ;
+            /* Two pixels below current */
+            parray3 = parray + ARRAYDIM + ARRAYDIM ;
 
-  	  *poutput = 0 ;
+            *poutput = 0 ;
 
-        	  for (i = 0 ; i < 3 ; i++)
-  	    *poutput += *pcoeff++ * *parray++ ;
+            for (i = 0 ; i < 3 ; i++)
+               *poutput += *pcoeff++ * *parray++ ;
 
-  	  for (i = 0 ; i < 3 ; i++)
-  	    *poutput += *pcoeff++ * *parray2++ ;
+            for (i = 0 ; i < 3 ; i++)
+               *poutput += *pcoeff++ * *parray2++ ;
 
-  	  for (i = 0 ; i < 3 ; i++)
-  	    *poutput += *pcoeff++ * *parray3++ ;
+            for (i = 0 ; i < 3 ; i++)
+               *poutput += *pcoeff++ * *parray3++ ;
 
-  	  poutput++ ;
-  	}
+            poutput++ ;
+         }
       }
-  }
+   }
 
-  stop_trigger();
+   stop_trigger();
 
+   /* Verify that we have the correct result. */
+   int to_return = 0;
+   for (i = 0; i < IMAGEDIM*IMAGEDIM; i++) {
+      if (output[i] != check_output[i]) {
+         to_return = -1;
+         break;
+      }
+   }
 
-//  pin_down(&image[0], &array[0], &coefficients[0], &output[0]);
-
-  return 0;
+   return to_return;
 }
 
-
-
+/* vim: set ts=3 sw=3 et: */
