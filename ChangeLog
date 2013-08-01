@@ -1,5 +1,9 @@
 2013-07-31  Jeremy Bennett <jeremy.bennett@embecosm.com>
 
+	* run-all.sh: Correct various errors in echoing to results file.
+
+2013-07-31  Jeremy Bennett <jeremy.bennett@embecosm.com>
+
 	* run-all.sh: Use run-time segment size to decide whether to run.
 
 2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>

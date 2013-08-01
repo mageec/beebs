@@ -62,7 +62,7 @@ runone () {
                  | sed -e '2,$s/$/ +/' -e '2,$s/16 i //' -e '$s/$/ p/' | dc`
     dataseg=`sed -n -e 's/^\([^ ]*\) RW.*$/16 i \1/p' ${tmpf} \
                  | sed -e '2,$s/$/ +/' -e '2,$s/16 i //' -e '$s/$/ p/' | dc`
-    printf "   %7d %7d" ${textseg} ${dataseg}
+    printf "   %7d %7d" ${textseg} ${dataseg} | tee -a ${resf}
 
     if [ \( ${textseg} -gt ${MAX_ROM} \) -o \( ${dataseg} -gt ${MAX_RAM} \) ]
     then
@@ -138,7 +138,7 @@ benchmarks="2dfir blowfish crc32 cubic dijkstra fdct float_matmult int_matmult \
            rijndael sha"
 
 # Initial message
-cat > ${tmpf} <<EOF
+cat > ${resf} <<EOF
 			 Low power benchmark results
 			 ===========================
 
@@ -149,25 +149,25 @@ The decision whether to run is based on the text and data segment size after
 linking.
 
 EOF
-cat ${tmpf}
+cat ${resf}
 
 # Baseline benchmarks
 CFLAGS="-O0 -mmcu=atmega128"
 LDFLAGS="-O0 -mmcu=atmega128"
 runall $benchmarks
-echo
+echo | tee -a ${resf}
 
 # Benchmarks with small size
 CFLAGS="-Os -mmcu=atmega128"
 LDFLAGS="-Os -mmcu=atmega128"
 runall $benchmarks
-echo
+echo | tee -a ${resf}
 
 # Benchmarks with optimization
 CFLAGS="-O2 -mmcu=atmega128"
 LDFLAGS="-O2 -mmcu=atmega128"
 runall $benchmarks
-echo
+echo | tee -a ${resf}
 
 # Benchmarks with maximum optimization
 CFLAGS="-O3 -mmcu=atmega128"
