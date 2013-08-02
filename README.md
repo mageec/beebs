@@ -22,6 +22,15 @@ was written to test the models compiled for the Atmel ATmega128 and running on
 a remote target controlled by GDB. It should be modified as required for other
 platforms.
 
+## Versions of the tests
+
+Different versions of the tests carry tags, to allow groups to agree on a
+precise version used.
+
+release-0.1: The version used in "Identifying Compiler Options to Minimise
+Energy Consumption for Embedded Platforms" by James Pallister, Simon Hollis
+and Jeremy Bennett (see http://arxiv.org/abs/1303.6485 for a pre-print).
+
 ## Origin of the tests
 
 All of these benchmarks are derived from other benchmark suites:
