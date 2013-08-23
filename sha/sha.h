@@ -13,9 +13,9 @@ typedef unsigned long LONG;
 #define SHA_DIGESTSIZE		20
 
 typedef struct {
-    LONG digest[5];		/* message digest */
-    LONG count_lo, count_hi;	/* 64-bit bit count */
-    LONG data[16];		/* SHA data buffer */
+   LONG digest[5];		/* message digest */
+   LONG count_lo, count_hi;	/* 64-bit bit count */
+   LONG data[16];		/* SHA data buffer */
 } SHA_INFO;
 
 void sha_init(SHA_INFO *);
@@ -26,3 +26,5 @@ void sha_stream(SHA_INFO *);
 void sha_print(SHA_INFO *);
 
 #endif /* SHA_H */
+
+/* vim: set ts=3 sw=3 et: */
