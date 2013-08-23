@@ -40,17 +40,16 @@ void initialise_trigger()
     GPIOC_CRL = 0x1;
 
     GPIOC_BSRR = 0x00010000;// Clear bit so pin is pulled low
-    GPIOC_BSRR = 0x00000001;// Pull bit high
 }
 
 void start_trigger()
 {
-    GPIOC_BSRR = 0x00010000;// bit low
+    GPIOC_BSRR = 0x00000001;// Pull bit high
 }
 
 void stop_trigger()
 {
-    GPIOC_BSRR = 0x00000001;// Pull bit high
+    GPIOC_BSRR = 0x00010000;// bit low
 }
 
 #else
