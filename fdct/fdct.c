@@ -246,10 +246,6 @@ int main()
 
    stop_trigger();
 
-#ifdef IO
-   for(i=0;i<64;i+=2) printf("block[%2d] -> %8d . block[%2d] -> %8d\n",i,block[i],i+1,block[i+1]);
-#endif
-
    int to_return = 0;
    for (i = 0; i < 64; i++) {
       if (block[i] != check_block[i]) {

@@ -56,10 +56,9 @@
  * [including the GNU Public Licence.]
  */
 
-#include <stdio.h>
 #include <string.h>
+
 #include "blowfish.h"
-#include "bf_locl.h"
 #include "bf_pi.h"
 
 void BF_set_key(key,len,data)

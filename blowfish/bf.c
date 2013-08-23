@@ -64,7 +64,6 @@ int main(int argc, char *argv[])
       i=0;
       for(n2 = 0; n2 < 256; ++n2)
       {
-         int j;
          while(i<40)
             indata[i++]=jrand();
 

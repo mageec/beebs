@@ -49,36 +49,11 @@
 #define FLEN flen.__pos
 #endif /* ARM */
 
-/* A Pseudo Random Number Generator (PRNG) used for the     */
-/* Initialisation Vector. The PRNG is George Marsaglia's    */
-/* Multiply-With-Carry (MWC) PRNG that concatenates two     */
-/* 16-bit MWC generators:                                   */
-/*     x(n)=36969 * x(n-1) + carry mod 2^16                 */
-/*     y(n)=18000 * y(n-1) + carry mod 2^16                 */
-/* to produce a combined PRNG with a period of about 2^60.  */
-/* The Pentium cycle counter is used to initialise it. This */
-/* is crude but the IV does not need to be secret.          */
-
-/* void cycles(unsigned long *rtn)     */
-/* {                           // read the Pentium Time Stamp Counter */
-/*     __asm */
-/*     { */
-/*     _emit   0x0f            // complete pending operations */
-/*     _emit   0xa2 */
-/*     _emit   0x0f            // read time stamp counter */
-/*     _emit   0x31 */
-/*     mov     ebx,rtn */
-/*     mov     [ebx],eax */
-/*     mov     [ebx+4],edx */
-/*     _emit   0x0f            // complete pending operations */
-/*     _emit   0xa2 */
-/*     } */
-/* } */
-
 #define RAND(a,b) (((a = 36969 * (a & 65535) + (a >> 16)) << 16) + (b = 18000 * (b & 65535) + (b >> 16))  )
 
 void fillrand(char *buf, int len)
-{   static unsigned long a[2], mt = 1, count = 4;
+{
+   static unsigned long a[2], mt = 1, count = 4;
    static char          r[4];
    int                  i;
 
@@ -102,7 +77,8 @@ void fillrand(char *buf, int len)
 }
 
 int encfile(aes *ctx, char *outbuf)
-{   char            inbuf[16];
+{
+   char            inbuf[16];
    fpos_t          flen;
    unsigned long   i=0, l=0, j, k;
 
@@ -130,7 +106,8 @@ int encfile(aes *ctx, char *outbuf)
 }
 
 int decfile(aes *ctx, char *outbuf)
-{   char    inbuf1[16], inbuf2[16], *bp1, *bp2, *tp;
+{
+   char    inbuf1[16], inbuf2[16], *bp1, *bp2, *tp;
    int     i,j, l, flen, k;
 
    fillrand(inbuf1, 16);           /* set an IV for CBC mode           */
@@ -190,17 +167,6 @@ int main(int argc, char *argv[])
       -19, 41, -115, 12, 11, 26, 113, 23};
 #endif
 
-   /*    for(i = 0; i < 16; ++i)
-   //    {
-   presetkey[i+6] = '0' + i;
-   presetkey[i+22]= '0' + i;
-   if(i < 6)
-   {
-   presetkey[i] = 'A' + i;
-   presetkey[i+16] = 'A' + i;
-   }
-   }
-   */
    initialise_trigger();
    start_trigger();
 
@@ -251,7 +217,6 @@ int main(int argc, char *argv[])
 
 exit:
    stop_trigger();
-
 
    /* We can't declare to_return in a label so it's been set above */
    if (err) {

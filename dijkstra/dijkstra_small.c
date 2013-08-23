@@ -41,28 +41,11 @@ int ch;
 int iPrev, iNode;
 int i, iCost, iDist;
 
-
-// void print_path (NODE *rgnNodes, int chNode)
-// {
-//   if (rgnNodes[chNode].iPrev != NONE)
-//     {
-//       print_path(rgnNodes, rgnNodes[chNode].iPrev);
-//     }
-//   // printf (" %d", chNode);
-//   // fflush(stdout);
-// }
-
-
 void enqueue (int iNode, int iDist, int iPrev)
 {
    QITEM *qNew = (QITEM *) malloc(sizeof(QITEM));
    QITEM *qLast = qHead;
 
-   // if (!qNew)
-   //   {
-   //     fprintf(stderr, "Out of memory.\n");
-   //     exit(1);
-   //   }
    qNew->iNode = iNode;
    qNew->iDist = iDist;
    qNew->iPrev = iPrev;
@@ -78,7 +61,6 @@ void enqueue (int iNode, int iDist, int iPrev)
       qLast->qNext = qNew;
    }
    g_qCount++;
-   //               ASSERT(g_qCount);
 }
 
 
@@ -88,13 +70,11 @@ QITEM* dequeue (int *piNode, int *piDist, int *piPrev)
 
    if (qHead != 0)
    {
-      //                 ASSERT(g_qCount);
       *piNode = qHead->iNode;
       *piDist = qHead->iDist;
       *piPrev = qHead->iPrev;
       qHead = qHead->qNext;
       g_qCount--;
-      //free(qKill);
       return qKill;
    }
    return 0;
@@ -108,9 +88,6 @@ int qcount (void)
 
 int dijkstra(int chStart, int chEnd)
 {
-
-
-
    for (ch = 0; ch < NUM_NODES; ch++)
    {
       rgnNodes[ch].iDist = NONE;
@@ -148,11 +125,6 @@ int dijkstra(int chStart, int chEnd)
             }
          }
       }
-
-      // printf("Shortest path is %d in cost. ", rgnNodes[chEnd].iDist);
-      // printf("Path is: ");
-      // print_path(rgnNodes, chEnd);
-      // printf("\n");
    }
 
    return rgnNodes[chEnd].iDist;
@@ -182,8 +154,8 @@ int main() {
    /* finds 10 shortest paths between nodes */
    for(n = 0; n < REPEAT_FACTOR >> 9; ++n) {
       output_count = 0;
-      for(j = 0; j < NUM_NODES; ++j) {
-         for (i=0;i<NUM_NODES;i++) {
+      for(j = 0; j < NUM_NODES; j++) {
+         for (i=0; i < NUM_NODES; i++) {
             output[output_count] = dijkstra(i,j);
             output_count++;
          }

@@ -6,7 +6,6 @@
  */
 
 #include <math.h>
-#include <stdlib.h>
 #include "snipmath.h"
 
 void SolveCubic(double  a,
