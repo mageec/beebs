@@ -2,14 +2,20 @@
 *.o
 \#*
 .\#*
-2dfir/2dfir
-blowfish/blowfish
-crc32/crc32
-cubic/cubic
-dijkstra/dijkstra
-fdct/fdct
-float_matmult/float_matmult
-int_matmult/int_matmult
-rijndael/rijndael
-sha/sha
 results
+
+#Ignore binaries
+2dfir/*2dfir
+blowfish/*blowfish
+crc32/*crc32
+cubic/*cubic
+dijkstra/*dijkstra
+fdct/*fdct
+float_matmult/*float_matmult
+int_matmult/*int_matmult
+rijndael/*rijndael
+sha/*sha
+
+# Ignore temporary vim files
+*.swp
+*.tmp

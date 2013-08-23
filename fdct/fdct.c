@@ -49,196 +49,212 @@ int out;
 // Image block to be transformed:
 short int block[64]=
 { 99 ,104 ,109 ,113 ,115 ,115 , 55 , 55,
-  104 ,111 ,113 ,116 ,119 , 56 , 56 , 56,
-  110 ,115 ,120 ,119 ,118 , 56 , 56 , 56,
-  119 ,121 ,122 ,120 ,120 , 59 , 59 , 59,
-  119 ,120 ,121 ,122 ,122 , 55 , 55 , 55,
-  121 ,121 ,121 ,121 , 60 , 57 , 57 , 57,
-  122 ,122 , 61 , 63 , 62 , 57 , 57 , 57,
-  62 , 62 , 61 , 61 , 63 , 58 , 58 , 58,
+   104 ,111 ,113 ,116 ,119 , 56 , 56 , 56,
+   110 ,115 ,120 ,119 ,118 , 56 , 56 , 56,
+   119 ,121 ,122 ,120 ,120 , 59 , 59 , 59,
+   119 ,120 ,121 ,122 ,122 , 55 , 55 , 55,
+   121 ,121 ,121 ,121 , 60 , 57 , 57 , 57,
+   122 ,122 , 61 , 63 , 62 , 57 , 57 , 57,
+   62 , 62 , 61 , 61 , 63 , 58 , 58 , 58,
 };
 
 /* Fast Discrete Cosine Transform */
 
 void fdct(short int *blk, int lx)
 {
-  int tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
-  int tmp10, tmp11, tmp12, tmp13;
-  int z1, z2, z3, z4, z5;
-  int i;
-  short int *block;
+   int tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+   int tmp10, tmp11, tmp12, tmp13;
+   int z1, z2, z3, z4, z5;
+   int i;
+   short int *block;
 
-  int constant;
+   int constant;
 
-  /* Pass 1: process rows. */
-  /* Note results are scaled up by sqrt(8) compared to a true DCT; */
-  /* furthermore, we scale the results by 2**PASS1_BITS. */
+   /* Pass 1: process rows. */
+   /* Note results are scaled up by sqrt(8) compared to a true DCT; */
+   /* furthermore, we scale the results by 2**PASS1_BITS. */
 
-  block=blk;
+   block=blk;
 
-  for (i=0; i<8; i++)
-  {
-    tmp0 = block[0] + block[7];
-    tmp7 = block[0] - block[7];
-    tmp1 = block[1] + block[6];
-    tmp6 = block[1] - block[6];
-    tmp2 = block[2] + block[5];
-    tmp5 = block[2] - block[5];
-    tmp3 = block[3] + block[4];
-    tmp4 = block[3] - block[4];
+   for (i=0; i<8; i++)
+   {
+      tmp0 = block[0] + block[7];
+      tmp7 = block[0] - block[7];
+      tmp1 = block[1] + block[6];
+      tmp6 = block[1] - block[6];
+      tmp2 = block[2] + block[5];
+      tmp5 = block[2] - block[5];
+      tmp3 = block[3] + block[4];
+      tmp4 = block[3] - block[4];
 
-    /* Even part per LL&M figure 1 --- note that published figure is faulty;
-     * rotator "sqrt(2)*c1" should be "sqrt(2)*c6".
-     */
+      /* Even part per LL&M figure 1 --- note that published figure is faulty;
+       * rotator "sqrt(2)*c1" should be "sqrt(2)*c6".
+       */
 
-    tmp10 = tmp0 + tmp3;
-    tmp13 = tmp0 - tmp3;
-    tmp11 = tmp1 + tmp2;
-    tmp12 = tmp1 - tmp2;
+      tmp10 = tmp0 + tmp3;
+      tmp13 = tmp0 - tmp3;
+      tmp11 = tmp1 + tmp2;
+      tmp12 = tmp1 - tmp2;
 
-    block[0] = ((tmp10+tmp11) << PASS1_BITS);
-    block[4] = ((tmp10-tmp11) << PASS1_BITS);
+      block[0] = ((tmp10+tmp11) << PASS1_BITS);
+      block[4] = ((tmp10-tmp11) << PASS1_BITS);
 
-    constant= 4433;
-    z1 = (tmp12 + tmp13) * constant;
-    constant= 6270;
-    block[2] = (z1 + (tmp13 * constant)) >> (CONST_BITS-PASS1_BITS);
-    constant= -15137;
-    block[6] = (z1 + (tmp12 * constant)) >> (CONST_BITS-PASS1_BITS);
+      constant= 4433;
+      z1 = (tmp12 + tmp13) * constant;
+      constant= 6270;
+      block[2] = (z1 + (tmp13 * constant)) >> (CONST_BITS-PASS1_BITS);
+      constant= -15137;
+      block[6] = (z1 + (tmp12 * constant)) >> (CONST_BITS-PASS1_BITS);
 
-    /* Odd part per figure 8 --- note paper omits factor of sqrt(2).
-     * cK represents cos(K*pi/16).
-     * i0..i3 in the paper are tmp4..tmp7 here.
-     */
+      /* Odd part per figure 8 --- note paper omits factor of sqrt(2).
+       * cK represents cos(K*pi/16).
+       * i0..i3 in the paper are tmp4..tmp7 here.
+       */
 
-    z1 = tmp4 + tmp7;
-    z2 = tmp5 + tmp6;
-    z3 = tmp4 + tmp6;
-    z4 = tmp5 + tmp7;
-    constant= 9633;
-    z5 = ((z3 + z4) * constant); /* sqrt(2) * c3 */
+      z1 = tmp4 + tmp7;
+      z2 = tmp5 + tmp6;
+      z3 = tmp4 + tmp6;
+      z4 = tmp5 + tmp7;
+      constant= 9633;
+      z5 = ((z3 + z4) * constant); /* sqrt(2) * c3 */
 
-    constant= 2446;
-    tmp4 = (tmp4 * constant); /* sqrt(2) * (-c1+c3+c5-c7) */
-    constant= 16819;
-    tmp5 = (tmp5 * constant); /* sqrt(2) * ( c1+c3-c5+c7) */
-    constant= 25172;
-    tmp6 = (tmp6 * constant); /* sqrt(2) * ( c1+c3+c5-c7) */
-    constant= 12299;
-    tmp7 = (tmp7 * constant); /* sqrt(2) * ( c1+c3-c5-c7) */
-    constant= -7373;
-    z1 = (z1 * constant); /* sqrt(2) * (c7-c3) */
-    constant= -20995;
-    z2 = (z2 * constant); /* sqrt(2) * (-c1-c3) */
-    constant= -16069;
-    z3 = (z3 * constant); /* sqrt(2) * (-c3-c5) */
-    constant= -3196;
-    z4 = (z4 * constant); /* sqrt(2) * (c5-c3) */
+      constant= 2446;
+      tmp4 = (tmp4 * constant); /* sqrt(2) * (-c1+c3+c5-c7) */
+      constant= 16819;
+      tmp5 = (tmp5 * constant); /* sqrt(2) * ( c1+c3-c5+c7) */
+      constant= 25172;
+      tmp6 = (tmp6 * constant); /* sqrt(2) * ( c1+c3+c5-c7) */
+      constant= 12299;
+      tmp7 = (tmp7 * constant); /* sqrt(2) * ( c1+c3-c5-c7) */
+      constant= -7373;
+      z1 = (z1 * constant); /* sqrt(2) * (c7-c3) */
+      constant= -20995;
+      z2 = (z2 * constant); /* sqrt(2) * (-c1-c3) */
+      constant= -16069;
+      z3 = (z3 * constant); /* sqrt(2) * (-c3-c5) */
+      constant= -3196;
+      z4 = (z4 * constant); /* sqrt(2) * (c5-c3) */
 
-    z3 += z5;
-    z4 += z5;
+      z3 += z5;
+      z4 += z5;
 
-    block[7] = (tmp4 + z1 + z3) >> (CONST_BITS-PASS1_BITS);
-    block[5] = (tmp5 + z2 + z4) >> (CONST_BITS-PASS1_BITS);
-    block[3] = (tmp6 + z2 + z3) >> (CONST_BITS-PASS1_BITS);
-    block[1] = (tmp7 + z1 + z4) >> (CONST_BITS-PASS1_BITS);
+      block[7] = (tmp4 + z1 + z3) >> (CONST_BITS-PASS1_BITS);
+      block[5] = (tmp5 + z2 + z4) >> (CONST_BITS-PASS1_BITS);
+      block[3] = (tmp6 + z2 + z3) >> (CONST_BITS-PASS1_BITS);
+      block[1] = (tmp7 + z1 + z4) >> (CONST_BITS-PASS1_BITS);
 
 
 
-    /* advance to next row */
-   	block += lx;
+      /* advance to next row */
+      block += lx;
 
-  }
+   }
 
-  /* Pass 2: process columns. */
+   /* Pass 2: process columns. */
 
-  block=blk;
+   block=blk;
 
-  for (i = 0; i<8; i++)
- 	{
-    tmp0 = block[0] + block[7*lx];
-    tmp7 = block[0] - block[7*lx];
-    tmp1 = block[lx] + block[6*lx];
-    tmp6 = block[lx]- block[6*lx];
-    tmp2 = block[2*lx] + block[5*lx];
-    tmp5 = block[2*lx] - block[5*lx];
-    tmp3 = block[3*lx] + block[4*lx];
-    tmp4 = block[3*lx] - block[4*lx];
+   for (i = 0; i<8; i++)
+   {
+      tmp0 = block[0] + block[7*lx];
+      tmp7 = block[0] - block[7*lx];
+      tmp1 = block[lx] + block[6*lx];
+      tmp6 = block[lx]- block[6*lx];
+      tmp2 = block[2*lx] + block[5*lx];
+      tmp5 = block[2*lx] - block[5*lx];
+      tmp3 = block[3*lx] + block[4*lx];
+      tmp4 = block[3*lx] - block[4*lx];
 
-    /* Even part per LL&M figure 1 --- note that published figure is faulty;
-     * rotator "sqrt(2)*c1" should be "sqrt(2)*c6".
-     */
+      /* Even part per LL&M figure 1 --- note that published figure is faulty;
+       * rotator "sqrt(2)*c1" should be "sqrt(2)*c6".
+       */
 
-    tmp10 = tmp0 + tmp3;
-    tmp13 = tmp0 - tmp3;
-    tmp11 = tmp1 + tmp2;
-    tmp12 = tmp1 - tmp2;
+      tmp10 = tmp0 + tmp3;
+      tmp13 = tmp0 - tmp3;
+      tmp11 = tmp1 + tmp2;
+      tmp12 = tmp1 - tmp2;
 
-    block[0] = (tmp10 + tmp11) >> (PASS1_BITS+3);
-    block[4*lx] = (tmp10 - tmp11) >> (PASS1_BITS+3);
+      block[0] = (tmp10 + tmp11) >> (PASS1_BITS+3);
+      block[4*lx] = (tmp10 - tmp11) >> (PASS1_BITS+3);
 
-    constant = 4433;
-    z1 = ((tmp12 + tmp13) * constant);
-    constant= 6270;
-    block[2*lx] = (z1 + (tmp13 * constant)) >> (CONST_BITS+PASS1_BITS+3);
-    constant=-15137;
-    block[6*lx] = (z1 + (tmp12 * constant)) >> (CONST_BITS+PASS1_BITS+3);
+      constant = 4433;
+      z1 = ((tmp12 + tmp13) * constant);
+      constant= 6270;
+      block[2*lx] = (z1 + (tmp13 * constant)) >> (CONST_BITS+PASS1_BITS+3);
+      constant=-15137;
+      block[6*lx] = (z1 + (tmp12 * constant)) >> (CONST_BITS+PASS1_BITS+3);
 
-    /* Odd part per figure 8 --- note paper omits factor of sqrt(2).
-     * cK represents cos(K*pi/16).
-     * i0..i3 in the paper are tmp4..tmp7 here.
-     */
+      /* Odd part per figure 8 --- note paper omits factor of sqrt(2).
+       * cK represents cos(K*pi/16).
+       * i0..i3 in the paper are tmp4..tmp7 here.
+       */
 
-    z1 = tmp4 + tmp7;
-    z2 = tmp5 + tmp6;
-    z3 = tmp4 + tmp6;
-    z4 = tmp5 + tmp7;
-    constant=9633;
-    z5 = ((z3 + z4) * constant); /* sqrt(2) * c3 */
+      z1 = tmp4 + tmp7;
+      z2 = tmp5 + tmp6;
+      z3 = tmp4 + tmp6;
+      z4 = tmp5 + tmp7;
+      constant=9633;
+      z5 = ((z3 + z4) * constant); /* sqrt(2) * c3 */
 
-    constant=2446;
-    tmp4 = (tmp4 * constant); /* sqrt(2) * (-c1+c3+c5-c7) */
-    constant=16819;
-    tmp5 = (tmp5 * constant); /* sqrt(2) * ( c1+c3-c5+c7) */
-    constant=25172;
-    tmp6 = (tmp6 * constant); /* sqrt(2) * ( c1+c3+c5-c7) */
-    constant=12299;
-    tmp7 = (tmp7 * constant); /* sqrt(2) * ( c1+c3-c5-c7) */
-    constant=-7373;
-    z1 = (z1 * constant); /* sqrt(2) * (c7-c3) */
-    constant= -20995;
-    z2 = (z2 * constant); /* sqrt(2) * (-c1-c3) */
-    constant=-16069;
-    z3 = (z3 * constant); /* sqrt(2) * (-c3-c5) */
-    constant=-3196;
-    z4 = (z4 * constant); /* sqrt(2) * (c5-c3) */
+      constant=2446;
+      tmp4 = (tmp4 * constant); /* sqrt(2) * (-c1+c3+c5-c7) */
+      constant=16819;
+      tmp5 = (tmp5 * constant); /* sqrt(2) * ( c1+c3-c5+c7) */
+      constant=25172;
+      tmp6 = (tmp6 * constant); /* sqrt(2) * ( c1+c3+c5-c7) */
+      constant=12299;
+      tmp7 = (tmp7 * constant); /* sqrt(2) * ( c1+c3-c5-c7) */
+      constant=-7373;
+      z1 = (z1 * constant); /* sqrt(2) * (c7-c3) */
+      constant= -20995;
+      z2 = (z2 * constant); /* sqrt(2) * (-c1-c3) */
+      constant=-16069;
+      z3 = (z3 * constant); /* sqrt(2) * (-c3-c5) */
+      constant=-3196;
+      z4 = (z4 * constant); /* sqrt(2) * (c5-c3) */
 
-    z3 += z5;
-    z4 += z5;
+      z3 += z5;
+      z4 += z5;
 
-    block[7*lx] = (tmp4 + z1 + z3) >> (CONST_BITS+PASS1_BITS+3);
-    block[5*lx] = (tmp5 + z2 + z4) >> (CONST_BITS+PASS1_BITS+3);
-    block[3*lx] = (tmp6 + z2 + z3) >> (CONST_BITS+PASS1_BITS+3);
-    block[lx] =  (tmp7 + z1 + z4) >> (CONST_BITS+PASS1_BITS+3);
+      block[7*lx] = (tmp4 + z1 + z3) >> (CONST_BITS+PASS1_BITS+3);
+      block[5*lx] = (tmp5 + z2 + z4) >> (CONST_BITS+PASS1_BITS+3);
+      block[3*lx] = (tmp6 + z2 + z3) >> (CONST_BITS+PASS1_BITS+3);
+      block[lx] =  (tmp7 + z1 + z4) >> (CONST_BITS+PASS1_BITS+3);
 
-    /* advance to next column */
-    block++;
-  }
+      /* advance to next column */
+      block++;
+   }
 }
 
 int main()
 {
-  int i, n;
+   int i, n;
+   short int check_block[64] = {-2480, -665, -689, 44, -350, 26, -272, -535,
+      -628, -2044, -544, 141, 300, -147, -1, 89,
+      -676, -551, -1820, 224, 267, -154, -281, -290,
+      52, 149, 262, -1508, -228, -102, 58, 100,
+      -425, 342, 148, -185, -2485, 802, 227, -750,
+      34, -62, -225, -84, 829, -1495, -172, 319,
+      -171, -14, -367, 67, 323, -127, -1400, 28,
+      -546, 38, -355, 159, -750, 316, -4, -1849};
 
-  initialise_trigger();
-  start_trigger();
-  for(n = 0; n < REPEAT_FACTOR; ++n)
-    fdct (block, 8);  // 8x8 Blocks, DC precision value = 0, Quantization coefficient (mquant) = 64
-  stop_trigger();
+   initialise_trigger();
+   start_trigger();
 
-  #ifdef IO
-    for(i=0;i<64;i+=2) printf("block[%2d] -> %8d . block[%2d] -> %8d\n",i,block[i],i+1,block[i+1]);
-  #endif
+   for(n = 0; n < REPEAT_FACTOR; ++n)
+      fdct (block, 8);  // 8x8 Blocks, DC precision value = 0, Quantization coefficient (mquant) = 64
 
-  return 0;
+   stop_trigger();
+
+   int to_return = 0;
+   for (i = 0; i < 64; i++) {
+      if (block[i] != check_block[i]) {
+         to_return = -1;
+         break;
+      }
+   }
+
+   return to_return;
 }
+
+/* vim: set ts=3 sw=3 et: */
