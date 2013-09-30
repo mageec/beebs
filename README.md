@@ -1,8 +1,14 @@
-# Low Power Benchmarks
+# BEEBS: Open Benchmarks for Energy Measurements on Embedded Platforms
 
-These tests are designed to test the performance of deeply embedded system,
-particularly with regard to energy consumed. As such they assume the presence
-of no OS and in particular no output stream.
+This repository contains the Bristol Energy Efficiency Benchmark Suite
+(BEEBS).These benchmarks are designed to test the performance of deeply
+embedded systems, particularly with regard to energy consumed. As such they
+assume the presence of no OS and in particular no output stream.
+
+
+
+For the paper describing the benchmarks and reasoning behind the choice of
+benchmarks see http://arxiv.org/abs/1308.5174.
 
 For an example of their use, see http://arxiv.org/abs/1303.6485.
 
@@ -27,15 +33,22 @@ platforms.
 Different versions of the tests carry tags, to allow groups to agree on a
 precise version used.
 
-release-0.1: The version used in "Identifying Compiler Options to Minimise
-Energy Consumption for Embedded Platforms" by James Pallister, Simon Hollis
-and Jeremy Bennett (see http://arxiv.org/abs/1303.6485 for a pre-print).
+release-0.1: This version of BEEBS is described in Pallister, J., Hollis, S.,
+& Bennett, J. (2013). BEEBS: Open Benchmarks for Energy Measurements on
+Embedded Platforms. Available: http://arxiv.org/abs/1308.5174.
+
+This is also the version used in Pallister, J., Hollis, S., & Bennett J.
+(2013). "Identifying Compiler Options to Minimise Energy Consumption for
+Embedded Platforms". Available http://arxiv.org/abs/1303.6485.
+
+
 
 ## Origin of the tests
 
 All of these benchmarks are derived from other benchmark suites:
  * MiBench
  * WCET set of benchmarks
+ * DSPstone
 
 All are freely available for use, but some lack specific license
 provisions. For the avoidance of doubt, the versions provided here are
