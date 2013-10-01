@@ -1,3 +1,8 @@
+2013-10-01  James Pallister <james.pallister@bristol.ac.uk>
+
+	* fft/fft1.c: Created. First benchmark for the version 2 expanded
+	set.
+
 2013-09-30  James Pallister <james.pallister@bristol.ac.uk>
 
 	* README.md: Reflect the preprint publication on arXiv and minor
