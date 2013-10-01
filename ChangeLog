@@ -1,3 +1,16 @@
+2013-10-01  James Pallister <james.pallister@bristol.ac.uk>
+
+	* .gitignore: Updated to ignore autotools byproducts
+	* AUTHORS: Created
+	* configure.ac: Created
+	* generate.cortex-m3: Created
+	* INSTALL: Created
+	* Makefile.am: Created
+	* NEWS: Created
+	* README: Created to point at README.md
+	* src/2dfir/Makefile.am: Created
+	* src/common.mk.am: Created
+
 2013-09-30  James Pallister <james.pallister@bristol.ac.uk>
 
 	* README.md: Reflect the preprint publication on arXiv and minor

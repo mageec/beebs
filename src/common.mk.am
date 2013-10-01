@@ -1,0 +1,4 @@
+
+AM_CFLAGS = -I ../platformcode
+
+AM_CFLAGS +=  $(LINKERSCRIPT)

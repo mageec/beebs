@@ -5,17 +5,29 @@
 results
 
 #Ignore binaries
-2dfir/*2dfir
-blowfish/*blowfish
-crc32/*crc32
-cubic/*cubic
-dijkstra/*dijkstra
-fdct/*fdct
-float_matmult/*float_matmult
-int_matmult/*int_matmult
-rijndael/*rijndael
-sha/*sha
+src/2dfir/*2dfir
+src/blowfish/*blowfish
+src/crc32/*crc32
+src/cubic/*cubic
+src/dijkstra/*dijkstra
+src/fdct/*fdct
+src/float_matmult/*float_matmult
+src/int_matmult/*int_matmult
+src/rijndael/*rijndael
+src/sha/*sha
 
 # Ignore temporary vim files
 *.swp
 *.tmp
+.deps
+*.in
+Makefile
+config.log
+config.status
+aclocal.m4
+autom4te.cache
+build-aux
+configure
+libtool
+m4
+*.mk

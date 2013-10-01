@@ -1,0 +1,4 @@
+SUBDIRS=src/2dfir
+
+ACLOCAL_AMFLAGS= -I m4
+
