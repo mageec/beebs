@@ -50,5 +50,15 @@ fi
 
 echo $with_linkerscript
 
-AC_CONFIG_FILES([Makefile src/2dfir/Makefile src/common.mk])
+AC_CONFIG_FILES([src/2dfir/Makefile])
+AC_CONFIG_FILES([src/blowfish/Makefile])
+AC_CONFIG_FILES([src/crc32/Makefile])
+AC_CONFIG_FILES([src/cubic/Makefile])
+AC_CONFIG_FILES([src/dijkstra/Makefile])
+AC_CONFIG_FILES([src/fdct/Makefile])
+AC_CONFIG_FILES([src/float_matmult/Makefile])
+AC_CONFIG_FILES([src/int_matmult/Makefile])
+AC_CONFIG_FILES([src/rijndael/Makefile])
+AC_CONFIG_FILES([src/sha/Makefile])
+AC_CONFIG_FILES([Makefile src/common.mk])
 AC_OUTPUT
