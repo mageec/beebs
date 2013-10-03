@@ -1,3 +1,9 @@
+2013-10-03  James Pallister <james.pallister@bristol.ac.uk>
+
+	* configure.ac: Fixed host_alias being set. Use $host_alias instead
+	of $host for cross compilation checks
+	* generate.cortex-m3: Added shebang
+
 2013-10-02  James Pallister <james.pallister@bristol.ac.uk>
 
 	* Makefile.am: Added the rest of the benchmarks

@@ -14,8 +14,6 @@ LT_INIT
 AC_CONFIG_SRCDIR([src/])
 #AC_CONFIG_HEADERS([config.h])
 
-host=arm-none-eabi
-
 if test x$host == x$build ; then
     cross_compiling=no
 else
@@ -26,10 +24,10 @@ AC_PROG_CC_C99
 
 if test x$cross_compiling == xyes ; then
     # Check that the specified cross compiler exists
-    AC_CHECK_PROG(CROSS_COMPILER_CHECK,$host-gcc,yes,no)
+    AC_CHECK_PROG(CROSS_COMPILER_CHECK,$host_alias-gcc,yes,no)
 
     if test x"${CROSS_COMPILER_CHECK}" == x"no" ; then
-        AC_MSG_ERROR([Cannot find $host-gcc])
+        AC_MSG_ERROR([Cannot find $host_alias-gcc])
     fi
 fi
 
