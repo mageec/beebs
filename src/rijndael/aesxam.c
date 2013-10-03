@@ -43,11 +43,7 @@
 #include "aes.h"
 #include "platformcode.h"
 
-#ifdef ARM
 #define FLEN flen
-#else
-#define FLEN flen.__pos
-#endif /* ARM */
 
 #define RAND(a,b) (((a = 36969 * (a & 65535) + (a >> 16)) << 16) + (b = 18000 * (b & 65535) + (b >> 16))  )
 
