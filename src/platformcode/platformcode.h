@@ -10,6 +10,8 @@
 #ifdef ARM
 #include "exit.h"
 #include "sbrk.h"
+#else
+#define jrand rand
 #endif /* ARM */
 
 extern void initialise_trigger();

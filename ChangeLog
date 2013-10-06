@@ -1,3 +1,19 @@
+2013-10-06  James Pallister <james.pallister@bristol.ac.uk>
+
+	* configure.ac: Added options to compile in extra platform code
+	* generate.cortex-m3: Enable platform code
+	* src/2dfir/Makefile.am: Conditionally compile in platform code
+	* src/blowfish/Makefile.am: Likewise
+	* src/crc32/Makefile.am: Likewise
+	* src/cubic/Makefile.am: Likewise
+	* src/dijkstra/Makefile.am: Likewise
+	* src/fdct/Makefile.am: Likewise
+	* src/float_matmult/Makefile.am: Likewise
+	* src/int_matmult/Makefile.am: Likewise
+	* src/rijndael/Makefile.am: Likewise
+	* src/sha/Makefile.am: Likewise
+	* src/platformcode/platformcode.h: Conditionally disable jrand
+
 2013-10-03  James Pallister <james.pallister@bristol.ac.uk>
 
 	* src/cubic/Makefile.am: Added dependency on libm

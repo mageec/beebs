@@ -37,7 +37,6 @@ AC_ARG_WITH([linkerscript],
             [],
             [with_linkerscript=no])
 
-echo $with_linkerscript
 if test x$with_linkerscript == xno ; then
     with_linkerscript=""
 else
@@ -46,7 +45,13 @@ else
     AC_SUBST([LINKERSCRIPT], ["-T ${lk}"])
 fi
 
-echo $with_linkerscript
+AC_ARG_ENABLE([platformsources],
+            [AS_HELP_STRING([--enable-platformsources],
+              [Add platform sources to be compiled in])],
+            [enable_platformsources=yes],
+            [enable_platformsources=no])
+
+AM_CONDITIONAL([PLATFORMSRC], [test x$enable_platformsources != xno])
 
 AC_CONFIG_FILES([src/2dfir/Makefile])
 AC_CONFIG_FILES([src/blowfish/Makefile])
