@@ -1,3 +1,10 @@
+2013-10-08  James Pallister <james.pallister@bristol.ac.uk>
+
+	Added AVR compilation script
+
+	* src/rijndael/aesxam.c: Fix to compile on AVR
+	* generate.avr: Created.
+
 2013-10-06  James Pallister <james.pallister@bristol.ac.uk>
 
 	* configure.ac: Added options to compile in extra platform code

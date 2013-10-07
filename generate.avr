@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+mkdir -p m4
+autoreconf -f -i
+
+./configure --host=avr CFLAGS="-mmcu=atmega328p -std=gnu99"
+
+make clean
+make
