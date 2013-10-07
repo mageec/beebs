@@ -1,0 +1,28 @@
+#!/bin/bash -e
+# Script to collect dynamic instruction statistics of the programs
+
+SIMULATOR="avr-run"
+SIM_FLAGS=" -t"
+BIN_PATH="../src"
+
+runone () {
+    d=$1
+
+    echo Simulating $BIN_PATH/$d/$d
+
+    # Run the simulator, collecting traces
+    $SIMULATOR $SIM_FLAGS $BIN_PATH/$d/$d 2> $d.avr.trace
+}
+
+# Function to run all the tests
+# @param $* benchmarks to run
+runall () {
+    for d in $* ; do
+        runone $d
+    done
+}
+
+benchmarks="2dfir blowfish crc32 cubic dijkstra fdct float_matmult int_matmult \
+           rijndael sha"
+
+runall $benchmarks

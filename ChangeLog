@@ -1,5 +1,10 @@
 2013-10-08  James Pallister <james.pallister@bristol.ac.uk>
 
+	* analysis/simulate.avr: Created
+	* analysis/instruction_stats.py
+
+2013-10-08  James Pallister <james.pallister@bristol.ac.uk>
+
 	Added AVR compilation script
 
 	* src/rijndael/aesxam.c: Fix to compile on AVR
