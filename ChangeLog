@@ -1,5 +1,10 @@
 2013-10-08  James Pallister <james.pallister@bristol.ac.uk>
 
+	* analysis/simulate.avr: Hack to terminate the simulator when in while(1)
+	* analysis/instruction_stats.py: Added quiet flag
+
+2013-10-08  James Pallister <james.pallister@bristol.ac.uk>
+
 	* analysis/simulate.avr: Created
 	* analysis/instruction_stats.py
 

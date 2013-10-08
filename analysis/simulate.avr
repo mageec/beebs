@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 # Script to collect dynamic instruction statistics of the programs
 
 SIMULATOR="avr-run"
@@ -11,7 +11,12 @@ runone () {
     echo Simulating $BIN_PATH/$d/$d
 
     # Run the simulator, collecting traces
-    $SIMULATOR $SIM_FLAGS $BIN_PATH/$d/$d 2> $d.avr.trace
+    ($SIMULATOR $SIM_FLAGS $BIN_PATH/$d/$d 3>&1 1>&2- 2>&3-) | tee trace | grep 'rjmp\s\+.-2' | xargs --max-args=1 -I {} kill -SIGINT `pgrep $SIMULATOR` 2> /dev/null
+
+
+    echo Cleaning trace
+    head --lines=`cat trace | grep -m 1 -n 'rjmp\s\+.-2' | cut -f 1 -d ':'` trace > $d.avr.trace
+    xz --compress $d.avr.trace &
 }
 
 # Function to run all the tests

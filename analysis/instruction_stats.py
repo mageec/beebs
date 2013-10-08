@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/python
 
 """Collect instruction statistics from an instruction trace
 
@@ -10,11 +10,14 @@ Options:
     --help -h                   Show this help message
     --platform -p PLATFORM      The set of regexes to extract instruction details
     --full                      Display the full breakdown
+    --quiet -q                  Only output the values at the end
 
 """
 
 from docopt import docopt
 arguments = docopt(__doc__)
+
+quiet = arguments['--quiet']
 
 import collections
 import re
@@ -60,7 +63,7 @@ def progress(obj, obj_len):
     interval = obj_len / 1000
     s = ""
     for i, o in enumerate(obj):
-        if i%interval == 0:
+        if i%interval == 0 and not quiet:
             sys.stdout.write("\b"*len(s))
             s = "{:0<3.1f}%".format(float(i)/obj_len*100)
             sys.stdout.write(s)
@@ -74,10 +77,12 @@ if arguments['--platform'] not in insn_re_list:
 
 insn_re = re.compile(insn_re_list[arguments['--platform']])
 
-print "Computing trace length..."
+if not quiet:
+    print "Computing trace length..."
 trace_len = int(subprocess.check_output("wc -l "+arguments['TRACEFILE'], shell=True).split()[0])
 
-print "Counting trace instructions... ",
+if not quiet:
+    print "Counting trace instructions... ",
 with open(arguments['TRACEFILE']) as f:
     insn_types = collections.Counter()
 
@@ -85,7 +90,8 @@ with open(arguments['TRACEFILE']) as f:
         m = re.match(insn_re, line)
         if m is not None:
             insn_types[m.group('insn')] += 1
-print ""
+if not quiet:
+    print ""
 
 if arguments['--full']:
     insn_len = max(max(map(len,insn_types.keys())), 4)
@@ -107,9 +113,13 @@ for itype, insns in insn_list[arguments['--platform']].items():
 insn_len = max(max(map(len,large_types.keys())), 4)
 len_len = max(max(map(lambda x: len(str(x)),large_types.values())), 6)
 
-print "\nType{} Number{}".format(" "*(insn_len-4)," "*(len_len-6))
-print "=" * (insn_len + len_len + 1)
+if not quiet:
+    print "\nType{} Number{}".format(" "*(insn_len-4)," "*(len_len-6))
+    print "=" * (insn_len + len_len + 1)
 
-for insn, n in large_types.most_common():
-    print "{2: <{0}} {3: >{1}}".format(insn_len,len_len,insn,n)
-print ""
+    for insn, n in large_types.most_common():
+        print "{2: <{0}} {3: >{1}}".format(insn_len,len_len,insn,n)
+    print ""
+else:
+    for insn, n in sorted(large_types.items()):
+        print n
