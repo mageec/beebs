@@ -1,5 +1,9 @@
 2013-10-08  James Pallister <james.pallister@bristol.ac.uk>
 
+	* src/float_matmult/matmult.c: Execution fix for AVR
+
+2013-10-08  James Pallister <james.pallister@bristol.ac.uk>
+
 	Added AVR compilation script
 
 	* src/rijndael/aesxam.c: Fix to compile on AVR
