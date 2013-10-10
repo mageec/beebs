@@ -21,6 +21,7 @@ else
 fi
 
 AC_PROG_CC_C99
+AM_PROG_AS
 
 if test x$cross_compiling == xyes ; then
     # Check that the specified cross compiler exists

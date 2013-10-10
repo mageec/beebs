@@ -1,4 +1,10 @@
 
+platform_src = ../platformcode/platformcode.c
+
+if PLATFORMSRC
+    platform_src += ../platformcode/exit.c ../platformcode/jrand.c ../platformcode/sbrk.c ../platformcode/startup.S
+endif
+
 AM_CFLAGS = -I ../platformcode
 
 AM_CFLAGS +=  $(LINKERSCRIPT)
