@@ -1,22 +1,28 @@
 #!/bin/bash
 # Script to collect dynamic instruction statistics of the programs
 
-SIMULATOR="avr-run"
-SIM_FLAGS=" -t"
+SIMULATOR="simulavr"
+SIM_FLAGS="-D -d atmega128"
 BIN_PATH="../src"
 
 runone () {
     d=$1
 
-    echo Simulating $BIN_PATH/$d/$d
+    if [ -e $d.avr.trace.xz ]; then
+        echo Skipping $d
+    else
+        echo Simulating $BIN_PATH/$d/$d
 
-    # Run the simulator, collecting traces
-    ($SIMULATOR $SIM_FLAGS $BIN_PATH/$d/$d 3>&1 1>&2- 2>&3-) | tee trace | grep 'rjmp\s\+.-2' | xargs --max-args=1 -I {} kill -SIGINT `pgrep $SIMULATOR` 2> /dev/null
+        # Calculate the address of the symbol "exit"
+        # This can be passed to the simulator, so it stops there
+        exit_sym=`avr-nm $BIN_PATH/$d/$d | grep '\sexit$' | cut -f 1 -d ' '`
+        avr-objcopy -O binary $BIN_PATH/$d/$d tmp
 
+        # Run the simulator, collecting traces
+        $SIMULATOR $SIM_FLAGS tmp -B 0x$exit_sym  2> $d.avr.trace
 
-    echo Cleaning trace
-    head --lines=`cat trace | grep -m 1 -n 'rjmp\s\+.-2' | cut -f 1 -d ':'` trace > $d.avr.trace
-    xz --compress $d.avr.trace &
+        xz --compress $d.avr.trace &
+    fi
 }
 
 # Function to run all the tests
@@ -27,7 +33,7 @@ runall () {
     done
 }
 
-benchmarks="2dfir blowfish crc32 cubic dijkstra fdct float_matmult int_matmult \
-           rijndael sha"
+benchmarks="2dfir crc32 cubic dijkstra fdct float_matmult int_matmult \
+           sha"
 
 runall $benchmarks

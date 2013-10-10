@@ -56,7 +56,7 @@ insn_list = {
 
 insn_re_list = {
     'cortex-m3': r'',
-    'avr': r'(?P<insn>[a-z]+)\s+',
+    'avr': r'.*\s(?P<insn>[A-Z]+)[A-Z_]*$',
     }
 
 def progress(obj, obj_len):
@@ -89,7 +89,7 @@ with open(arguments['TRACEFILE']) as f:
     for line in progress(f.xreadlines(), trace_len):
         m = re.match(insn_re, line)
         if m is not None:
-            insn_types[m.group('insn')] += 1
+            insn_types[m.group('insn').lower()] += 1
 if not quiet:
     print ""
 

@@ -1,5 +1,10 @@
 2013-10-10  James Pallister <james.pallister@bristol.ac.uk>
 
+	* analysis/simulate.avr: Modified to use simulavr
+	* analysis/instruction_stats.py: Modified to use simulavr
+
+2013-10-10  James Pallister <james.pallister@bristol.ac.uk>
+
 	* generate.cortex-m3: Small compilation fixes
 
 2013-10-10  James Pallister <james.pallister@bristol.ac.uk>
