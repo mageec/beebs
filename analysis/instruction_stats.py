@@ -22,6 +22,9 @@ import collections
 import re
 import sys
 import subprocess
+import os
+import os.path
+import itertools
 
 insn_list = {
     'cortex-m0': {
@@ -87,18 +90,31 @@ def count(fname, platform):
     insn_re = re.compile(insn_re_list[platform])
 
     if not quiet:
-        print "Computing trace length..."
-    trace_len = int(subprocess.check_output("wc -l "+fname, shell=True).split()[0])
+        print "Computing trace length...",
+
+    isCompressed = (os.path.splitext(fname)[1]) == ".xz"
+
+    if isCompressed:
+        trace_len = int(subprocess.check_output("xzcat "+fname+" | wc -l", shell=True).split()[0])
+    else:
+        trace_len = int(subprocess.check_output("wc -l "+fname, shell=True).split()[0])
 
     if not quiet:
+        print trace_len
         print "Counting trace instructions... ",
-    with open(arguments['TRACEFILE']) as f:
-        insn_types = collections.Counter()
 
-        for line in progress(f.xreadlines(), trace_len):
-            m = re.match(insn_re, line)
-            if m is not None:
-                insn_types[m.group('insn').lower()] += 1
+    if isCompressed:
+        p = subprocess.Popen("xzcat "+fname, shell=True, stdout=subprocess.PIPE)
+        f = p.stdout
+    else:
+        f = open(arguments['TRACEFILE'])
+
+    insn_types = collections.Counter()
+
+    for line in progress(f.xreadlines(), trace_len):
+        m = re.match(insn_re, line)
+        if m is not None:
+            insn_types[m.group('insn').lower()] += 1
     if not quiet:
         print ""
 
