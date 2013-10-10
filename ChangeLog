@@ -1,5 +1,9 @@
 2013-10-10  James Pallister <james.pallister@bristol.ac.uk>
 
+	* generate.cortex-m3: Small compilation fixes
+
+2013-10-10  James Pallister <james.pallister@bristol.ac.uk>
+
 	* configure.ac: Conditionally compile startup code
 	* generate.cortex-m3: Likewise
 	* src/2dfir/Makefile.am: Likewise

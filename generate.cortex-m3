@@ -3,7 +3,7 @@
 mkdir -p m4
 autoreconf -f -i
 
-./configure --host=arm-none-eabi CFLAGS="-mthumb -mcpu=cortex-m3 -DCORTEX_M0" --with-linkerscript=src/platformcode/stm32vl_flash.ld --enable-platformsources
+./configure --host=arm-none-eabi CFLAGS="-mthumb -mcpu=cortex-m3 -DCORTEX_M3" LDFLAGS="-e startup" --with-linkerscript=src/platformcode/stm32vl_flash.ld --enable-platformsources
 
 make clean
 make
