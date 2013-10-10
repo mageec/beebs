@@ -1,3 +1,31 @@
+2013-10-10  James Pallister <james.pallister@bristol.ac.uk>
+
+	* generate.cortex-m3: Small compilation fixes
+
+2013-10-10  James Pallister <james.pallister@bristol.ac.uk>
+
+	* configure.ac: Conditionally compile startup code
+	* generate.cortex-m3: Likewise
+	* src/2dfir/Makefile.am: Likewise
+	* src/blowfish/Makefile.am: Likewise
+	* src/common.mk.am: Likewise
+	* src/crc32/Makefile.am: Likewise
+	* src/cubic/Makefile.am: Likewise
+	* src/dijkstra/Makefile.am: Likewise
+	* src/fdct/Makefile.am: Likewise
+	* src/float_matmult/Makefile.am: Likewise
+	* src/int_matmult/Makefile.am: Likewise
+	* src/rijndael/Makefile.am: Likewise
+	* src/sha/Makefile.am: Likewise
+
+	* generate.cortex-m0: Created, generate for ARM Cortex-M0
+	* src/platformcode/startup.S: Created, start up code for ARM
+	* src/platformcode/stm32f05_flash.ld: Created, linker script for M0
+
+2013-10-08  James Pallister <james.pallister@bristol.ac.uk>
+
+	* src/float_matmult/matmult.c: Execution fix for AVR
+
 2013-10-08  James Pallister <james.pallister@bristol.ac.uk>
 
 	* analysis/simulate.avr: Hack to terminate the simulator when in while(1)
