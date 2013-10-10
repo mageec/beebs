@@ -15,9 +15,8 @@ Options:
 """
 
 from docopt import docopt
-arguments = docopt(__doc__)
 
-quiet = arguments['--quiet']
+quiet = True
 
 import collections
 import re
@@ -25,6 +24,13 @@ import sys
 import subprocess
 
 insn_list = {
+    'cortex-m0': {
+            'integer': [],
+            'float'  : [],
+            'memory' : [],
+            'branch' : [],
+            'other'  : [],
+            },
     'cortex-m3': {
             'integer': [],
             'float'  : [],
@@ -55,7 +61,8 @@ insn_list = {
     }
 
 insn_re_list = {
-    'cortex-m3': r'',
+    'cortex-m0': r'0x........: 0x.... (?P<insn>[^\s]+)\s',
+    'cortex-m3': r'0x........: 0x.... (?P<insn>[^\s]+)\s',
     'avr': r'.*\s(?P<insn>[A-Z]+)[A-Z_]*$',
     }
 
@@ -72,54 +79,71 @@ def progress(obj, obj_len):
 
 ##########################################################################
 
-if arguments['--platform'] not in insn_re_list:
-    print "Error: Unknown platform. Valid platforms:", insn_re_list.keys()
+def count(fname, platform):
 
-insn_re = re.compile(insn_re_list[arguments['--platform']])
+    if platform not in insn_re_list:
+        print "Error: Unknown platform. Valid platforms:", insn_re_list.keys()
 
-if not quiet:
-    print "Computing trace length..."
-trace_len = int(subprocess.check_output("wc -l "+arguments['TRACEFILE'], shell=True).split()[0])
+    insn_re = re.compile(insn_re_list[platform])
 
-if not quiet:
-    print "Counting trace instructions... ",
-with open(arguments['TRACEFILE']) as f:
-    insn_types = collections.Counter()
+    if not quiet:
+        print "Computing trace length..."
+    trace_len = int(subprocess.check_output("wc -l "+fname, shell=True).split()[0])
 
-    for line in progress(f.xreadlines(), trace_len):
-        m = re.match(insn_re, line)
-        if m is not None:
-            insn_types[m.group('insn').lower()] += 1
-if not quiet:
-    print ""
+    if not quiet:
+        print "Counting trace instructions... ",
+        with open(arguments['TRACEFILE']) as f:
+            insn_types = collections.Counter()
 
-if arguments['--full']:
-    insn_len = max(max(map(len,insn_types.keys())), 4)
-    len_len = max(max(map(lambda x: len(str(x)),insn_types.values())), 6)
+            for line in progress(f.xreadlines(), trace_len):
+                m = re.match(insn_re, line)
+                if m is not None:
+                    insn_types[m.group('insn').lower()] += 1
+    if not quiet:
+        print ""
 
-    print "\nInsn{} Number{}".format(" "*(insn_len-4)," "*(len_len-6))
-    print "=" * (insn_len + len_len + 1)
+    return insn_types
 
-    for insn, n in insn_types.most_common():
-        print "{2: <{0}} {3: >{1}}".format(insn_len,len_len,insn,n)
+def collect(insn_types, platform):
 
-large_types = collections.Counter()
+    large_types = collections.Counter()
+
+    for itype, insns in insn_list[platform].items():
+        for insn in insns:
+            large_types[itype] += insn_types[insn]
+
+    return large_types
 
 
-for itype, insns in insn_list[arguments['--platform']].items():
-    for insn in insns:
-        large_types[itype] += insn_types[insn]
+if __name__ == "__main__":
+    arguments = docopt(__doc__)
+    quiet = arguments['--quiet']
 
-insn_len = max(max(map(len,large_types.keys())), 4)
-len_len = max(max(map(lambda x: len(str(x)),large_types.values())), 6)
+    insn_types = count(arguments['TRACEFILE'], arguments['--platform'])
 
-if not quiet:
-    print "\nType{} Number{}".format(" "*(insn_len-4)," "*(len_len-6))
-    print "=" * (insn_len + len_len + 1)
+    if arguments['--full']:
+        insn_len = max(max(map(len,insn_types.keys())), 4)
+        len_len = max(max(map(lambda x: len(str(x)),insn_types.values())), 6)
 
-    for insn, n in large_types.most_common():
-        print "{2: <{0}} {3: >{1}}".format(insn_len,len_len,insn,n)
-    print ""
-else:
-    for insn, n in sorted(large_types.items()):
-        print n
+        print "\nInsn{} Number{}".format(" "*(insn_len-4)," "*(len_len-6))
+        print "=" * (insn_len + len_len + 1)
+
+        for insn, n in insn_types.most_common():
+            print "{2: <{0}} {3: >{1}}".format(insn_len,len_len,insn,n)
+
+    large_types = collect(insn_types, arguments['--platform'])
+
+    insn_len = max(max(map(len,large_types.keys())), 4)
+    len_len = max(max(map(lambda x: len(str(x)),large_types.values())), 6)
+
+    if not quiet:
+        print "\nType{} Number{}".format(" "*(insn_len-4)," "*(len_len-6))
+        print "=" * (insn_len + len_len + 1)
+
+        for insn, n in large_types.most_common():
+            print "{2: <{0}} {3: >{1}}".format(insn_len,len_len,insn,n)
+        print ""
+    else:
+        for insn, n in sorted(large_types.items()):
+            print n
+

@@ -1,5 +1,8 @@
 2013-10-10  James Pallister <james.pallister@bristol.ac.uk>
 
+	* analysis/instruction_stats.py: Refactored code
+
+2013-10-10  James Pallister <james.pallister@bristol.ac.uk>
 	* analysis/simulate.avr: Modified to use simulavr
 	* analysis/instruction_stats.py: Modified to use simulavr
 
