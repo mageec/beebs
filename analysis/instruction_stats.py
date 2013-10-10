@@ -28,11 +28,20 @@ import itertools
 
 insn_list = {
     'cortex-m0': {
-            'integer': [],
-            'float'  : [],
-            'memory' : [],
-            'branch' : [],
-            'other'  : [],
+            'integer': ["mov", "movs", "add", "adds", "adcs", "adr", "subs",
+                    "sub", "sbcs", "adc", "sbc", "rsbs", "muls", "cmp",
+                    "cmn", "ands", "eors", "orrs", "mvns", "bics", "tst",
+                    "lsls", "lsrs", "asrs", "rors", "sxth", "sxtb", "uxth",
+                    "uxtb", "rev", "rev16", "revsh"],
+            'float'  : [""],
+            'memory' : ["ldr", "ldrh", "ldrsh", "ldrsb", "ldm", "str",
+                    "strh", "strb", "stm", "push", "pop"],
+            'branch' : ["b", "beq", "bne", "bcs", "bcc", "bmi", "bpl",
+                    "bvs", "bvc", "bhi", "bls", "bge", "blt", "bgt",
+                    "ble", "bl", "bx", "blx"],
+            'other'  : ["svc", "cpsid", "cpsie", "mrs", "msr", "bkpt",
+                    "sev", "wfe", "wfi", "yeild", "nop", "isb", "dmb",
+                    "dsb"],
             },
     'cortex-m3': {
             'integer': [],

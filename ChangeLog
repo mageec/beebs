@@ -1,5 +1,9 @@
 2013-10-11  James Pallister <james.pallister@bristol.ac.uk>
 
+	* analysis/instruction_stats.py: Added instructions for cortex-m0
+
+2013-10-11  James Pallister <james.pallister@bristol.ac.uk>
+
 	* analysis/simulate.cortex-m0: Created, simulate on cortex-m0
 	* analysis/instruction_stats.py: xz compressed traces can be analysed
 
