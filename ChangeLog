@@ -1,5 +1,9 @@
 2013-10-10  James Pallister <james.pallister@bristol.ac.uk>
 
+	* analysis/instruction_stats.py: Fix for code not executing when 'quiet'
+
+2013-10-10  James Pallister <james.pallister@bristol.ac.uk>
+
 	* analysis/instruction_stats.py: Refactored code
 
 2013-10-10  James Pallister <james.pallister@bristol.ac.uk>

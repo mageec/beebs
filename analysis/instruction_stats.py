@@ -92,13 +92,13 @@ def count(fname, platform):
 
     if not quiet:
         print "Counting trace instructions... ",
-        with open(arguments['TRACEFILE']) as f:
-            insn_types = collections.Counter()
+    with open(arguments['TRACEFILE']) as f:
+        insn_types = collections.Counter()
 
-            for line in progress(f.xreadlines(), trace_len):
-                m = re.match(insn_re, line)
-                if m is not None:
-                    insn_types[m.group('insn').lower()] += 1
+        for line in progress(f.xreadlines(), trace_len):
+            m = re.match(insn_re, line)
+            if m is not None:
+                insn_types[m.group('insn').lower()] += 1
     if not quiet:
         print ""
 
