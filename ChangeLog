@@ -1,5 +1,10 @@
 2013-10-11  James Pallister <james.pallister@bristol.ac.uk>
 
+	* analysis/all_stats.py: Created, compute stats for all benchmarks
+	and display nicely
+
+2013-10-11  James Pallister <james.pallister@bristol.ac.uk>
+
 	* analysis/instruction_stats.py: Added instructions for cortex-m0
 
 2013-10-11  James Pallister <james.pallister@bristol.ac.uk>
