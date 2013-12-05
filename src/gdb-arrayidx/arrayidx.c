@@ -1,4 +1,4 @@
-/* BEEBS GDB anon test
+/* BEEBS GDB arrayidx test
 
    Copyright (C) 1986-2013 Free Software Foundation, Inc.
    Copyright (C) 2013 Embecosm Limited and University of Bristol
@@ -21,41 +21,14 @@
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
 /* This program is originally part of the GDB regression testsuite (see
-   gdb/testsuite/gdb.base/anon.c in the GDB sources). */
+   gdb/testsuite/gdb.base/arrayidx.c in the GDB sources). */
 
-/* This test will build in one of two versions, either with the official C
-   library, or with the BEEBS subsitute library, depending on the
-   configuration settings. */
+int array[] = {1, 2, 3, 4};
 
-w/* Test of anonymous union in a struct.  */
-
-#include <string.h>
-
-struct outer
+int
+main (void)
 {
-  int one;
-  int two;
+  array[0] = 5;
 
-  struct
-  {
-    union {
-      int three : 3;
-      int four : 4;
-    };
-
-    union {
-      int five : 3;
-      int six : 4;
-    };
-  } data;
-};
-
-int main ()
-{
-  struct outer val;
-
-  memset (&val, 0, sizeof (val));
-  val.data.six = 6;
-
-  return 0;			/* break here */
+  return 0;
 }
