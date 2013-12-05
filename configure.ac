@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.69])
+AC_PREREQ([2.68])
 AC_INIT([beebs], [1.0], [james.pallister@embecosm.com])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
@@ -64,5 +64,7 @@ AC_CONFIG_FILES([src/float_matmult/Makefile])
 AC_CONFIG_FILES([src/int_matmult/Makefile])
 AC_CONFIG_FILES([src/rijndael/Makefile])
 AC_CONFIG_FILES([src/sha/Makefile])
-AC_CONFIG_FILES([Makefile src/common.mk])
+AC_CONFIG_FILES([src/template/Makefile])
+AC_CONFIG_FILES([src/platformcode/Makefile])
+AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
