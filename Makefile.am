@@ -9,6 +9,7 @@ SUBDIRS+=src/gdb-advance
 SUBDIRS+=src/gdb-all-types
 SUBDIRS+=src/gdb-anon
 SUBDIRS+=src/gdb-arrayidx
+SUBDIRS+=src/gdb-async
 SUBDIRS+=src/int_matmult
 SUBDIRS+=src/rijndael
 SUBDIRS+=src/sha

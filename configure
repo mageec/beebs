@@ -11670,6 +11670,8 @@ ac_config_files="$ac_config_files src/gdb-anon/Makefile"
 
 ac_config_files="$ac_config_files src/gdb-arrayidx/Makefile"
 
+ac_config_files="$ac_config_files src/gdb-async/Makefile"
+
 ac_config_files="$ac_config_files src/int_matmult/Makefile"
 
 ac_config_files="$ac_config_files src/rijndael/Makefile"
@@ -12711,6 +12713,7 @@ do
     "src/gdb-all-types/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-all-types/Makefile" ;;
     "src/gdb-anon/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-anon/Makefile" ;;
     "src/gdb-arrayidx/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-arrayidx/Makefile" ;;
+    "src/gdb-async/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-async/Makefile" ;;
     "src/int_matmult/Makefile") CONFIG_FILES="$CONFIG_FILES src/int_matmult/Makefile" ;;
     "src/rijndael/Makefile") CONFIG_FILES="$CONFIG_FILES src/rijndael/Makefile" ;;
     "src/sha/Makefile") CONFIG_FILES="$CONFIG_FILES src/sha/Makefile" ;;
