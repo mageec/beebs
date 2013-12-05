@@ -1,5 +1,10 @@
 2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* src/gdb-anon/Makefile.am: Created.
+	* src/gdb-anon/anon.c: Created.
+
+2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* src/gdb-all-types/Makefile.am: Created.
 	* src/gdb-all-types/all-types.c: Created.
 	* src/gdb-advance/advance.c: Copyright corrected.
