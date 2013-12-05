@@ -11736,7 +11736,6 @@ ac_config_files="$ac_config_files src/rijndael/Makefile"
 
 ac_config_files="$ac_config_files src/sha/Makefile"
 
-#AC_CONFIG_FILES([src/template/Makefile])
 ac_config_files="$ac_config_files Makefile src/common.mk"
 
 cat >confcache <<\_ACEOF
