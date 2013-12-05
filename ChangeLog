@@ -1,5 +1,23 @@
 2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* aclocal.m4: Regenerated.
+	* .gitignore: Remove built files, since these should be out of tree.
+	* Makefile.in: Regenerated from correspondng Makefile.am.
+	* src/2dfir/Makefile.in: Likewise.
+	* src/blowfish/Makefile.in: Likewise.
+	* src/common.mk.in: Likewise.
+	* src/crc32/Makefile.in: Likewise.
+	* src/cubic/Makefile.in: Likewise.
+	* src/dijkstra/Makefile.in: Likewise.
+	* src/fdct/Makefile.in: Likewise.
+	* src/float_matmult/Makefile.in: Likewise.
+	* src/int_matmult/Makefile.in: Likewise.
+	* src/rijndael/Makefile.in: Likewise.
+	* src/sha/Makefile.in: Likewise.
+	* src/template/Makefile.in: Likewise.
+
+2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* src/template/Makefile.am: Minor layout changes.
 	* src/template/template.c: Change to GNU style layout, added license
 	declaration, C-style comments, added emacs style comment.
