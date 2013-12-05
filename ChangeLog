@@ -1,3 +1,10 @@
+2013-12-05  James Pallister  <james.pallister@bristol.ac.uk>
+
+	Small trace fixes
+
+	* analysis/all_stats.py: Updated comments
+	* analysis/simulate.cortex-m0: Existence check for traces
+
 2013-12-05  James Pallister <james.pallister@bristol.ac.uk>
 
 	* src/common.mk.am: Fix to enable out of tree builds

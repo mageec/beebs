@@ -1,6 +1,10 @@
 #!/usr/bin/python
 
-"""Collect instruction statistics from all instruction traces
+"""Collect instruction statistics from all instruction traces.
+
+This program assumes that the trace file have been saved with filename format:
+    benchmark.platform.trace[.xz]
+If .xz is detected, the script will attempt to decompress the trace on the fly
 
 Usage:
     all_stats.py [options] PLATFORM
@@ -26,7 +30,6 @@ if __name__ == "__main__":
 
     files = glob.glob("*.{}.trace*".format(arguments['PLATFORM']))
     files.sort()
-    files = files[:3]
 
     # Compute the benchmark names from the file names
     names = {f: f.split('.')[0] for f in files}
