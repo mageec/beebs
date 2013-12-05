@@ -1,5 +1,12 @@
 2013-12-05  James Pallister <james.pallister@bristol.ac.uk>
 
+	Added compress benchmark
+
+	* src/compress/compress.c: New file
+	* src/compress/Makefile.am: New file
+
+2013-12-05  James Pallister <james.pallister@bristol.ac.uk>
+
 	* src/common.mk.am: Fix to enable out of tree builds
 
 2013-12-05  James Pallister <james.pallister@bristol.ac.uk>

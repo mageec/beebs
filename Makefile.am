@@ -8,6 +8,7 @@ SUBDIRS+=src/float_matmult
 SUBDIRS+=src/int_matmult
 SUBDIRS+=src/rijndael
 SUBDIRS+=src/sha
+SUBDIRS+=src/compress
 SUBDIRS+=src/template
 
 ACLOCAL_AMFLAGS= -I m4
