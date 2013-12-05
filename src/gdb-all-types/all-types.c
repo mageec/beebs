@@ -1,3 +1,4 @@
+/* -*- mode: C++; c-file-style: "gnu-mode" -*- */
 /* BEEBS GDB advance test
 
    Copyright (C) 1986-2013 Free Software Foundation, Inc.
@@ -22,6 +23,13 @@
 
 /* This program is originally part of the GDB regression testsuite (see
    gdb/testsuite/gdb.base/all-types.c in the GDB sources). */
+
+#include "platformcode.h"
+
+/* This scale factor will be changed to equalise the runtime of the
+   benchmarks. */
+#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+
 
 /*
  *	the basic C types.
@@ -50,7 +58,9 @@ unsigned long	v_unsigned_long;
 float		v_float;
 double		v_double;
 
-int main ()
+
+void
+benchmark (void)
 {
     extern void dummy();
     dummy();
@@ -58,7 +68,8 @@ int main ()
     
 }
 
-void dummy()
+void
+dummy (void)
 {
   /* Some linkers (e.g. on AIX) remove unreferenced variables,
      so make sure to reference them. */
@@ -80,4 +91,20 @@ void dummy()
   
   v_float = 100.343434;
   v_double = 200.565656;
+}
+
+
+int
+main (void)
+{
+  int i;
+
+  initialise_trigger ();
+  start_trigger ();
+
+  for (i = 0; i < SCALE_FACTOR; i++)
+    benchmark ();
+
+  stop_trigger ();
+  return 0;
 }

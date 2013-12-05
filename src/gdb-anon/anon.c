@@ -1,3 +1,4 @@
+/* -*- mode: C++; c-file-style: "gnu-mode" -*- */
 /* BEEBS GDB anon test
 
    Copyright (C) 1986-2013 Free Software Foundation, Inc.
@@ -27,6 +28,13 @@
    library, or with the BEEBS subsitute library, depending on the
    configuration settings. */
 
+#include "platformcode.h"
+
+/* This scale factor will be changed to equalise the runtime of the
+   benchmarks. */
+#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+
+
 /* Test of anonymous union in a struct.  */
 
 #include <string.h>
@@ -50,7 +58,9 @@ struct outer
   } data;
 };
 
-int main ()
+
+void
+benchmark (void)
 {
   struct outer val;
 
@@ -58,4 +68,20 @@ int main ()
   val.data.six = 6;
 
   return 0;			/* break here */
+}
+
+
+int
+main (void)
+{
+  int i;
+
+  initialise_trigger ();
+  start_trigger ();
+
+  for (i = 0; i < SCALE_FACTOR; i++)
+    benchmark ();
+
+  stop_trigger ();
+  return 0;
 }

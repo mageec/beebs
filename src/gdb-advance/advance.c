@@ -1,3 +1,4 @@
+/* -*- mode: C++; c-file-style: "gnu-mode" -*- */
 /* BEEBS GDB advance test
 
    Copyright (C) 1986-2013 Free Software Foundation, Inc.
@@ -23,7 +24,15 @@
 /* This program is originally part of the GDB regression testsuite (see
    gdb/testsuite/gdb.base/advance.c in the GDB sources). */
 
+#include "platformcode.h"
+
+/* This scale factor will be changed to equalise the runtime of the
+   benchmarks. */
+#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+
+
 static int x;
+
 
 int foo (int a)
 {
@@ -31,34 +40,38 @@ int foo (int a)
   return b;
 }
 
+
 int bar (int y)
 {
   int z = y + 20;
   return z;
 }
 
+
 void func()
 {
   x = x + 5;
   func2 ();
 }
-
 int func2 ()
 {
   x = 6;
 }
+
 
 int func3 ()
 {
   x = 4;
 }
 
+
 void marker1 ()
 {
 }
 
-int
-main ()
+
+void
+benchmark ()
 {
   int result;
   int b, c;
@@ -70,4 +83,20 @@ main ()
   func3 (); /* break here */
   result = bar (b + foo (c));
   return 0; /* advance malformed */
+}
+
+
+int
+main (void)
+{
+  int i;
+
+  initialise_trigger ();
+  start_trigger ();
+
+  for (i = 0; i < SCALE_FACTOR; i++)
+    benchmark ();
+
+  stop_trigger ();
+  return 0;
 }

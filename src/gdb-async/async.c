@@ -1,3 +1,4 @@
+/* -*- mode: C++; c-file-style: "gnu-mode" -*- */
 /* BEEBS GDB async test
 
    Copyright (C) 1986-2013 Free Software Foundation, Inc.
@@ -23,6 +24,11 @@
 /* This program is originally part of the GDB regression testsuite (see
    gdb/testsuite/gdb.base/async.c in the GDB sources). */
 
+#include "platformcode.h"
+
+/* This scale factor will be changed to equalise the runtime of the
+   benchmarks. */
+#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
 
 int
@@ -37,8 +43,8 @@ foo (void)
 }
 
 
-int
-main (void)
+void
+benchmark (void)
 {
  int y, z;
  
@@ -56,4 +62,20 @@ int
 baz (void)
 { 
   return 5;
+}
+
+
+int
+main (void)
+{
+  int i;
+
+  initialise_trigger ();
+  start_trigger ();
+
+  for (i = 0; i < SCALE_FACTOR; i++)
+    benchmark ();
+
+  stop_trigger ();
+  return 0;
 }
