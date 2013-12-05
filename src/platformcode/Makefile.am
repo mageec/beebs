@@ -1,11 +1,11 @@
-#   Makefile.am for building a BEEBS benchmark
+#   Makefile.am for platform code for BEEBS benchmarks
 #
 #   Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
 #   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark 
 #   Suite.
 #
-#   Contributor: James Pallister <james.pallister@bristol.ac.uk>
+#   Contributor: Jeremy Bennett <jeremy.bennett@embecosm.com>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -21,21 +21,15 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-# Change every instance of template to the name of your benchmark
-
-# To get automake to use this file, add the following to toplevel configure.ac
-#   AC_CONFIG_FILES([src/template/Makefile])
-# and add the following line to toplevel Makefile.am
-#   SUBDIRS+=src/template
-
-
-# Make sure your sources include the headers as well as the C/C++ source
-# files, so they go into the distribution. If there are other files that are
-# needed, they should go in EXTRA_SOURCES.
-
-bin_PROGRAMS=template
-template_SOURCES=template.c
-
-include $(top_srcdir)/src/common.mk.am
-
-template_SOURCES += ${platform_src}
+# Only needed to ensure all the sources are included in the distribution.
+EXTRA_DIST = exit.c \
+             exit.h \
+             jrand.c \
+             jrand.h \
+             platformcode.c \
+             platformcode.h \
+             sbrk.c \
+             sbrk.h \
+             startup.S \
+             stm32f05_flash.ld \
+             stm32vl_flash.ld
