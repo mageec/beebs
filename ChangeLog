@@ -1,5 +1,14 @@
 2013-10-10  James Pallister <james.pallister@bristol.ac.uk>
 
+	Added template files for new benchmarks
+
+	* src/template/Makefile.am: Template files for new benchmarks
+	* src/template/template.c: Template files for new benchmarks
+	* Makefile.am: Template files for new benchmarks
+	* configure.ac: Template files for new benchmarks
+
+2013-10-10  James Pallister <james.pallister@bristol.ac.uk>
+
 	* generate.cortex-m3: Small compilation fixes
 
 2013-10-10  James Pallister <james.pallister@bristol.ac.uk>
