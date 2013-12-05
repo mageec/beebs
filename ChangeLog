@@ -1,5 +1,19 @@
 2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* Makefile.am: Added GDB tests.
+	* aclocal.m4: Regenerated.
+	* configure: Regenerated.
+	* configure.ac: Added GDB tests.
+	* src/gdb-all-types/Makefile.am: Corrected canonical name.
+	* src/gdb-anon/anon.c: Corrected typo.
+
+2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* aclocal.m4: Regenerated.
+	* configure: Regenerated.
+
+2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* src/gdb-arrayidx/Makefile.am: Created.
 	* src/gdb-arrayidx/arrayidx.c: Created.
 

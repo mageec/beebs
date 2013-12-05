@@ -27,7 +27,7 @@
    library, or with the BEEBS subsitute library, depending on the
    configuration settings. */
 
-w/* Test of anonymous union in a struct.  */
+/* Test of anonymous union in a struct.  */
 
 #include <string.h>
 

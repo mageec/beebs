@@ -20,8 +20,8 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 bin_PROGRAMS=all-types
-all-types_SOURCES=all-types.c
+all_types_SOURCES=all-types.c
 
 include $(top_srcdir)/src/common.mk.am
 
-all-types_SOURCES += ${platform_src}
+all_types_SOURCES += ${platform_src}
