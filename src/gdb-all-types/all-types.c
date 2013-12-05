@@ -21,53 +21,63 @@
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
 /* This program is originally part of the GDB regression testsuite (see
-   gdb/testsuite/gdb.base/advance.c in the GDB sources). */
+   gdb/testsuite/gdb.base/all-types.c in the GDB sources). */
 
-static int x;
+/*
+ *	the basic C types.
+ */
 
-int foo (int a)
+#if !defined (__STDC__) && !defined (_AIX)
+#define signed  /**/
+#endif
+
+char		v_char;
+signed char	v_signed_char;
+unsigned char	v_unsigned_char;
+
+short		v_short;
+signed short	v_signed_short;
+unsigned short	v_unsigned_short;
+
+int		v_int;
+signed int	v_signed_int;
+unsigned int	v_unsigned_int;
+
+long		v_long;
+signed long	v_signed_long;
+unsigned long	v_unsigned_long;
+
+float		v_float;
+double		v_double;
+
+int main ()
 {
-  int b = a + 10;
-  return b;
-}
-
-int bar (int y)
-{
-  int z = y + 20;
-  return z;
-}
-
-void func()
-{
-  x = x + 5;
-  func2 ();
-}
-
-int func2 ()
-{
-  x = 6;
-}
-
-int func3 ()
-{
-  x = 4;
-}
-
-void marker1 ()
-{
-}
-
-int
-main ()
-{
-  int result;
-  int b, c;
-  c = 5;
-  b = 3;    /* advance this location */
+    extern void dummy();
+    dummy();
+    return 0;
     
-  func (c); /* stop here after leaving current frame */
-  marker1 (); /* stop here after leaving current frame */
-  func3 (); /* break here */
-  result = bar (b + foo (c));
-  return 0; /* advance malformed */
+}
+
+void dummy()
+{
+  /* Some linkers (e.g. on AIX) remove unreferenced variables,
+     so make sure to reference them. */
+  v_char = 'A';
+  v_signed_char = 'B';
+  v_unsigned_char = 'C';
+
+  v_short = 3;
+  v_signed_short = 4;
+  v_unsigned_short = 5;    
+
+  v_int = 6;
+  v_signed_int = 7;
+  v_unsigned_int = 8;    
+
+  v_long = 9;
+  v_signed_long = 10;
+  v_unsigned_long = 11;    
+  
+  v_float = 100.343434;
+  v_double = 200.565656;
 }
