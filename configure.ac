@@ -65,5 +65,6 @@ AC_CONFIG_FILES([src/int_matmult/Makefile])
 AC_CONFIG_FILES([src/rijndael/Makefile])
 AC_CONFIG_FILES([src/sha/Makefile])
 AC_CONFIG_FILES([src/template/Makefile])
-AC_CONFIG_FILES([Makefile src/common.mk])
+AC_CONFIG_FILES([src/platformcode/Makefile])
+AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

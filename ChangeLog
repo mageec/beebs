@@ -1,5 +1,39 @@
 2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* Makefile.am: Added platformcode.
+	* Makefile.in: Regenerated.
+	* configure: Regenerated.
+	* configure.ac: Added platformcode.
+	* src/2dfir/Makefile.in: Regenerated.
+	* src/blowfish/COPYRIGHT: Made non-executable.
+	* src/blowfish/LICENSE: Made non-executable.
+	* src/blowfish/Makefile.am: Added EXTRA_DIST files.
+	* src/blowfish/Makefile.in: Regenerated.
+	* src/common.mk.am: Updated
+	* src/common.mk.in: Regenerated.
+	* src/crc32/Makefile.am: Added EXTRA_DIST files.
+	* src/crc32/Makefile.in: Regenerated.
+	* src/cubic/LICENSE: Made non-executable.
+	* src/cubic/Makefile.am: Added EXTRA_DIST files.
+	* src/cubic/Makefile.in: Regenerated.
+	* src/dijkstra/LICENSE: Made non-executable.
+	* src/dijkstra/Makefile.am: Added EXTRA_DIST files.
+	* src/dijkstra/Makefile.in: Regenerated.
+	* src/fdct/Makefile.in: Regenerated.
+	* src/float_matmult/Makefile.in: Regenerated.
+	* src/int_matmult/Makefile.in: Regenerated.
+	* src/platformcode/Makefile.am: Created.
+	* src/platformcode/Makefile.in: Generated.
+	* src/rijndael/LICENSE: Made non-executable.
+	* src/rijndael/Makefile.am: Added EXTRA_DIST files.
+	* src/rijndael/Makefile.in: Regenerated.
+	* src/sha/Makefile.am: Added EXTRA_DIST files.
+	* src/sha/Makefile.in: Regenerated.
+	* src/template/Makefile.am: New comments about headers and EXTRA_DIST.
+	* src/template/Makefile.in: Regenerated.
+
+2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* aclocal.m4: Regenerated.
 	* .gitignore: Remove built files, since these should be out of tree.
 	* Makefile.in: Regenerated from correspondng Makefile.am.

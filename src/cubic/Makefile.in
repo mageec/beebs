@@ -15,6 +15,49 @@
 
 @SET_MAKE@
 
+# Makefile.am for BEEBS cubic test
+# 
+# Copyright (C) 2013 Embecosm Limited and University of Bristol
+# 
+# Contributor Jeremy Bennett <jeremy.bennett@embecosm.com>
+# 
+# This file is part of the Bristol/Embecosm Embedded Energy Benchmark Suite.
+# 
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+#   Common makefile.am fragments for building a BEEBS benchmark
+#
+#   Copyright (C) 2013 Embecosm Limited and University of Bristol
+#
+#   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark 
+#   Suite.
+#
+#   Contributor: James Pallister <james.pallister@bristol.ac.uk>
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 VPATH = @srcdir@
 am__make_dryrun = \
   { \
@@ -69,8 +112,8 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am__cubic_SOURCES_DIST = cubic.c basicmath_small.c \
-	$(top_srcdir)/src/platformcode/platformcode.c \
+am__cubic_SOURCES_DIST = cubic.c basicmath_small.c pi.h snipmath.h \
+	sniptype.h $(top_srcdir)/src/platformcode/platformcode.c \
 	$(top_srcdir)/src/platformcode/exit.c ../platformcode/jrand.c \
 	../platformcode/sbrk.c ../platformcode/startup.S
 @PLATFORMSRC_TRUE@am__objects_1 = exit.$(OBJEXT) jrand.$(OBJEXT) \
@@ -233,7 +276,9 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-cubic_SOURCES = cubic.c basicmath_small.c ${platform_src}
+cubic_SOURCES = cubic.c basicmath_small.c pi.h snipmath.h sniptype.h \
+	${platform_src}
+EXTRA_DIST = LICENSE
 cubic_LDFLAGS = "-lm"
 platform_src = $(top_srcdir)/src/platformcode/platformcode.c \
 	$(am__append_1)

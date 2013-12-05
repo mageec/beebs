@@ -11670,7 +11670,9 @@ ac_config_files="$ac_config_files src/sha/Makefile"
 
 ac_config_files="$ac_config_files src/template/Makefile"
 
-ac_config_files="$ac_config_files Makefile src/common.mk"
+ac_config_files="$ac_config_files src/platformcode/Makefile"
+
+ac_config_files="$ac_config_files Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -12703,8 +12705,8 @@ do
     "src/rijndael/Makefile") CONFIG_FILES="$CONFIG_FILES src/rijndael/Makefile" ;;
     "src/sha/Makefile") CONFIG_FILES="$CONFIG_FILES src/sha/Makefile" ;;
     "src/template/Makefile") CONFIG_FILES="$CONFIG_FILES src/template/Makefile" ;;
+    "src/platformcode/Makefile") CONFIG_FILES="$CONFIG_FILES src/platformcode/Makefile" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
-    "src/common.mk") CONFIG_FILES="$CONFIG_FILES src/common.mk" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

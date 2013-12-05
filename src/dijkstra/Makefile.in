@@ -15,6 +15,49 @@
 
 @SET_MAKE@
 
+# Makefile.am for BEEBS Dijkstra test
+# 
+# Copyright (C) 2013 Embecosm Limited and University of Bristol
+# 
+# Contributor Jeremy Bennett <jeremy.bennett@embecosm.com>
+# 
+# This file is part of the Bristol/Embecosm Embedded Energy Benchmark Suite.
+# 
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+#   Common makefile.am fragments for building a BEEBS benchmark
+#
+#   Copyright (C) 2013 Embecosm Limited and University of Bristol
+#
+#   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark 
+#   Suite.
+#
+#   Contributor: James Pallister <james.pallister@bristol.ac.uk>
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 VPATH = @srcdir@
 am__make_dryrun = \
   { \
@@ -230,6 +273,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 dijkstra_SOURCES = dijkstra_small.c ${platform_src}
+EXTRA_DIST = LICENSE
 platform_src = $(top_srcdir)/src/platformcode/platformcode.c \
 	$(am__append_1)
 AM_CFLAGS = -I $(top_srcdir)/src/platformcode $(LINKERSCRIPT)
