@@ -1,3 +1,24 @@
+2013-12-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Modified configure.ac to work with old versions of autotools
+
+	* Makefile.in: Regenerated
+	* aclocal.m4: Regenerated
+	* configure: Regenerated
+	* configure.ac: Older versions of autotools do work
+	* src/2dfir/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.am: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
 2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* Makefile.am: Added platformcode.
