@@ -24,6 +24,8 @@
 
 # To get automake to use this file, add the following to toplevel configure.ac
 #   AC_CONFIG_FILES([src/template/Makefile])
+# and add the following line to toplevel Makefile.am
+#   SUBDIRS+=src/template
 
 
 bin_PROGRAMS=template
