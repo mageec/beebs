@@ -1,4 +1,5 @@
-#   Makefile.am for building the benchmark
+#   Makefile.am for building a BEEBS benchmark
+#
 #   Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
 #   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark 
@@ -34,4 +35,3 @@ template_SOURCES=template.c
 include $(top_srcdir)/src/common.mk.am
 
 template_SOURCES += ${platform_src}
-

@@ -1,5 +1,11 @@
 2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* src/template/Makefile.am: Minor layout changes.
+	* src/template/template.c: Change to GNU style layout, added license
+	declaration, C-style comments, added emacs style comment.
+
+2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* ChangeLog: Regenerated.
 	* Makefile.am: Added gdb-async.
 	* configure: Regenerated.
