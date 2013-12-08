@@ -1,3 +1,11 @@
+2014-08-06  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* configure.ac: Added gdb-auxv.
+	* configure: Regenerated.
+	* src/gdb-auxv/Makefile.am: Created.
+	* src/gdb-auxv/Makefile.in: Generated.
+	* src/gdb-auxv/auxv.c: Created.
+
 2014-08-05  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* src/bsort100/Makefile.am: Deleted.

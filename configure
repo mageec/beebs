@@ -13160,6 +13160,22 @@ N_UNCALIBRATED_BENCHMARKS=0
         fi
     fi
 
+    bmark=gdb-auxv
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/gdb-auxv/Makefile"
+
+        BENCHMARKS+="gdb-auxv "
+        BENCHMARKS_SUBDIRS+="src/gdb-auxv "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
+    fi
+
     bmark=gdb-all-types
     if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
         ac_config_files="$ac_config_files src/gdb-all-types/Makefile"
@@ -15243,6 +15259,7 @@ do
     "src/float_matmult/Makefile") CONFIG_FILES="$CONFIG_FILES src/float_matmult/Makefile" ;;
     "src/frac/Makefile") CONFIG_FILES="$CONFIG_FILES src/frac/Makefile" ;;
     "src/gdb-advance/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-advance/Makefile" ;;
+    "src/gdb-auxv/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-auxv/Makefile" ;;
     "src/gdb-all-types/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-all-types/Makefile" ;;
     "src/gdb-anon/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-anon/Makefile" ;;
     "src/gdb-arrayidx/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-arrayidx/Makefile" ;;

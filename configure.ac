@@ -206,6 +206,7 @@ m4_define([benchmarklist],[dnl
 [float_matmult],
 [frac],
 [gdb-advance],
+[gdb-auxv],
 [gdb-all-types],
 [gdb-anon],
 [gdb-arrayidx],
