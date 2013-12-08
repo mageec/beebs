@@ -1,27 +1,24 @@
 #!/bin/bash
 # Script to collect dynamic instruction statistics of the programs
 
-SIMULATOR="simulavr"
-SIM_FLAGS="-D -d atmega128"
-BIN_PATH="../src"
+SIMULATOR=@avrsimpath
+SIM_FLAGS="--device atmega328 -B stop_trigger"
+
+SCR_DIR="$( cd "$( dirname "$0" )" && pwd )" 
+BIN_PATH=`readlink -f $SCR_DIR/../src`
 
 runone () {
     d=$1
 
-    if [ -e $d.avr.trace.xz ]; then
+    if [ -e $SCR_DIR/$d.avr.trace.xz ]; then
         echo Skipping $d
     else
         echo Simulating $BIN_PATH/$d/$d
 
-        # Calculate the address of the symbol "exit"
-        # This can be passed to the simulator, so it stops there
-        exit_sym=`avr-nm $BIN_PATH/$d/$d | grep '\sexit$' | cut -f 1 -d ' '`
-        avr-objcopy -O binary $BIN_PATH/$d/$d tmp
-
         # Run the simulator, collecting traces
-        $SIMULATOR $SIM_FLAGS tmp -B 0x$exit_sym  2> $d.avr.trace
+        $SIMULATOR $SIM_FLAGS -t $SCR_DIR/$d.trace.tmptrace --file $BIN_PATH/$d/$d 2> /dev/null
 
-        xz --compress $d.avr.trace &
+        cat `ls -t $SCR_DIR/$d.trace*.tmptrace` | xz --compress > $SCR_DIR/$d.avr.trace.xz && rm $SCR_DIR/$d.trace*.tmptrace &
     fi
 }
 

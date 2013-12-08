@@ -1,4 +1,4 @@
-#   Top level Makefile.am for building a BEEBS benchmark
+#   Analysis Makefile.am, to set up simulation and analysis tools
 #
 #   Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
@@ -20,20 +20,14 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-SUBDIRS=src/platformcode
+bin_SCRIPTS=simulate.avr
+CLEANFILES=$(bin_SCRIPTS)
+EXTRA_DIST = simulate.avr.in
 
-SUBDIRS+= src/2dfir
-SUBDIRS+=src/blowfish
-SUBDIRS+=src/crc32
-SUBDIRS+=src/cubic
-SUBDIRS+=src/dijkstra
-SUBDIRS+=src/fdct
-SUBDIRS+=src/float_matmult
-SUBDIRS+=src/int_matmult
-SUBDIRS+=src/rijndael
-SUBDIRS+=src/sha
-SUBDIRS+=src/template
+# TODO, autodetect where simulavr is + check version
+AVRSIMPATH="/home/james/tools/simulavr-1.0.0/src/simulavr"
 
-SUBDIRS+=analysis
+simulate.avr: simulate.avr.in Makefile
+	sed -e 's,[@]avrsimpath,$(AVRSIMPATH),g' < $(srcdir)/simulate.avr.in > simulate.avr
+	chmod +x simulate.avr
 
-ACLOCAL_AMFLAGS= -I m4

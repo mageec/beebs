@@ -1,4 +1,16 @@
 2013-12-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Started adding analysis scripts to autotools
+
+	* Makefile.am: Added analysis makefile
+	* Makefile.in: Regenerated
+	* analysis/Makefile.am: Automatically create simulate.avr
+	* analysis/Makefile.in: Generated
+	* analysis/simulate.avr: Deleted
+	* analysis/simulate.avr.in: Created. Main body of simulate script.
+	* configure: Regenerated
+	* configure.ac: Added analysis makefile
+
+2013-12-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Small trace fixes
 
 	* analysis/all_stats.py: Updated comments
