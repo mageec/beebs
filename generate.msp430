@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+mkdir -p m4
+autoreconf -i -f
+
+./configure --host=msp430 CFLAGS="-mmcu=msp430f5529 -std=gnu99 -Os"
+
+make clean
+make
