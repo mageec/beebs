@@ -2,7 +2,7 @@
 #
 #   Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
-#   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark 
+#   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark
 #   Suite.
 #
 #   Contributor: James Pallister <james.pallister@bristol.ac.uk>
@@ -20,14 +20,17 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_SCRIPTS=simulate.avr
-CLEANFILES=$(bin_SCRIPTS)
 EXTRA_DIST = simulate.avr.in
 
-# TODO, autodetect where simulavr is + check version
+# If creating script for AVR simulator
+if SIMULATE_AVR
+bin_SCRIPTS=simulate.avr
 AVRSIMPATH="/home/james/tools/simulavr-1.0.0/src/simulavr"
 
 simulate.avr: simulate.avr.in Makefile
 	sed -e 's,[@]avrsimpath,$(AVRSIMPATH),g' < $(srcdir)/simulate.avr.in > simulate.avr
 	chmod +x simulate.avr
 
+endif
+
+CLEANFILES=$(bin_SCRIPTS)

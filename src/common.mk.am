@@ -26,6 +26,6 @@ if PLATFORMSRC
     platform_src += $(top_srcdir)/src/platformcode/exit.c ../platformcode/jrand.c ../platformcode/sbrk.c ../platformcode/startup.S
 endif
 
-AM_CFLAGS = -I $(top_srcdir)/src/platformcode
+AM_CFLAGS = -I $(top_srcdir)/src/platformcode -g
 
 AM_CFLAGS +=  $(LINKERSCRIPT)

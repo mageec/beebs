@@ -1,9 +1,8 @@
 #!/bin/bash -e
 
-mkdir -p m4
-autoreconf -f -i
+SCR_DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-./configure --host=avr CFLAGS="-mmcu=atmega328p -std=gnu99"
+$SCR_DIR/configure --host=avr CFLAGS="-mmcu=atmega328p -std=gnu99" --enable-simulate-avr
 
 make clean
 make

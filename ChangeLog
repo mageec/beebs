@@ -1,3 +1,28 @@
+2013-12-16  James Pallister  <james.pallister@bristol.ac.uk>
+	Added detection of AVR simulator
+
+	* Makefile.in: Regenerated
+	* aclocal.m4: Regenerated
+	* analysis/Makefile.am: Create simulate.avr
+	* analysis/Makefile.in: Regenerated
+	* analysis/simulate.avr.in: Base simulate.avr template
+	* configure: Regenerated
+	* configure.ac: Added enable flags for enable avr simulator
+	* generate.avr: Call from other directories
+	* src/2dfir/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/common.mk.am: Added debug flag, needed by simulator
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
 2013-12-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Started adding analysis scripts to autotools
 

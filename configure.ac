@@ -54,6 +54,25 @@ AC_ARG_ENABLE([platformsources],
 
 AM_CONDITIONAL([PLATFORMSRC], [test x$enable_platformsources != xno])
 
+# Check if we want to simulate AVR ###########################################
+AC_ARG_ENABLE([simulate-avr],
+            [AS_HELP_STRING([--enable-simulate-avr],
+                [Enable the simulation for AVR])],
+            [enable_simulate_avr=yes],
+            [enable_simulate_avr=no],
+            )
+
+if test x$enable_simulate_avr == xyes ; then
+    AC_CHECK_PROGS(simulavr_cmd, simulavr)
+    AC_RUN_IFELSE([], [], [],
+        [found_version=`simulavr --version | grep "SimulAVR 1.0.0" -c`])
+    if test x$found_version == x0 ; then
+        AC_MSG_FAILURE([Need version 1.0.0 of simulavr])
+    fi
+fi
+
+AM_CONDITIONAL([SIMULATE_AVR], [test x$enable_simulate_avr != xno])
+
 AC_CONFIG_FILES([src/2dfir/Makefile])
 AC_CONFIG_FILES([src/blowfish/Makefile])
 AC_CONFIG_FILES([src/crc32/Makefile])
