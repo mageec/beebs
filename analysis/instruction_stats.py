@@ -116,7 +116,7 @@ def count(fname, platform):
         p = subprocess.Popen("xzcat "+fname, shell=True, stdout=subprocess.PIPE)
         f = p.stdout
     else:
-        f = open(arguments['TRACEFILE'])
+        f = open(fname)
 
     insn_types = collections.Counter()
 

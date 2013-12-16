@@ -30,7 +30,7 @@ runall () {
     done
 }
 
-benchmarks="2dfir crc32 cubic dijkstra fdct float_matmult int_matmult \
-           sha"
+benchmarks="2dfir blowfish crc32 cubic dijkstra fdct float_matmult \
+            int_matmult rijndael sha"
 
 runall $benchmarks

@@ -20,11 +20,18 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-EXTRA_DIST = simulate.avr.in
+EXTRA_DIST = simulate.avr.in simulator.cortex-m0.in
+
+ANALYSIS=instruction_stats.py all_stats.py
+dist_bin_SCRIPTS= $(ANALYSIS)
+
+$(ANALYSIS): $(srcdir)/$@ Makefile
+	cp $(srcdir)/$@ $@
+	chmod +x $@
 
 # If creating script for AVR simulator
 if SIMULATE_AVR
-bin_SCRIPTS=simulate.avr
+dist_bin_SCRIPTS+=simulate.avr
 AVRSIMPATH="simulavr"
 
 simulate.avr: simulate.avr.in Makefile
@@ -35,7 +42,7 @@ endif
 
 # If creating script for Cortex-M0 simulator
 if SIMULATE_CORTEX_M0
-bin_SCRIPTS=simulate.cortex-m0
+dist_bin_SCRIPTS+=simulate.cortex-m0
 CORTEXM0SIMPATH="thumbulator"
 
 simulate.cortex-m0: simulate.cortex-m0.in Makefile
@@ -44,5 +51,4 @@ simulate.cortex-m0: simulate.cortex-m0.in Makefile
 
 endif
 
-
-CLEANFILES=$(bin_SCRIPTS)
+CLEANFILES=$(dist_bin_SCRIPTS)

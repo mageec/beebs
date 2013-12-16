@@ -1,4 +1,13 @@
 2013-12-16  James Pallister  <james.pallister@bristol.ac.uk>
+	Updated autotools to copy analysis scripts
+
+	* analysis/Makefile.am: Updated autotools to copy analysis scripts
+	* analysis/Makefile.in: Regenerated
+	* analysis/instruction_stats.py: Small arguments fix
+	* analysis/simulate.cortex-m0.in: Updated list of benchmarks to run
+	    the analysis on
+
+2013-12-16  James Pallister  <james.pallister@bristol.ac.uk>
 	Added detection of AVR simulator
 
 	* Makefile.in: Regenerated
