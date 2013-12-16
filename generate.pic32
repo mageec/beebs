@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+mkdir -p m4
+autoreconf -i -f
+
+# Need to make an entry for pic32 in config.sub
+# TODO: is there a better way to do this?
+sed -i 's/powerpcle \\/powerpcle \\\n    | pic32 \\/' build-aux/config.sub
+
+./configure --host=pic32 CFLAGS="-mprocessor=32MX250F128B -mips32r2 -std=gnu99 -O0 -mips16"
+
+make clean
+make
