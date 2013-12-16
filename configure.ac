@@ -54,7 +54,7 @@ AC_ARG_ENABLE([platformsources],
 
 AM_CONDITIONAL([PLATFORMSRC], [test x$enable_platformsources != xno])
 
-# Check if we want to simulate AVR ###########################################
+# Check if we want to simulate AVR #########################################
 AC_ARG_ENABLE([simulate-avr],
             [AS_HELP_STRING([--enable-simulate-avr],
                 [Enable the simulation for AVR])],
@@ -72,6 +72,29 @@ if test x$enable_simulate_avr == xyes ; then
 fi
 
 AM_CONDITIONAL([SIMULATE_AVR], [test x$enable_simulate_avr != xno])
+
+
+# Check if we want to simulate cortex-m0 ###################################
+AC_ARG_ENABLE([simulate-cortex-m0],
+            [AS_HELP_STRING([--enable-simulate-cortex-m0],
+                [Enable the simulation for cortex-m0])],
+            [enable_simulate_cortex_m0=yes],
+            [enable_simulate_cortex_m0=no],
+            )
+
+if test x$enable_simulate_cortex_m0 == xyes ; then
+    AC_CHECK_PROG(simulate_m0_cmd, thumbulator, thumbulator)
+
+    # Check the version supports the --elf flag
+    AC_RUN_IFELSE([], [], [],
+        [thumbulator_version=`thumbulator --version | grep "Version: 1.1.0" -c`])
+    if test x$thumbulator_version == x0 ; then
+        echo $thumbulator_version
+        AC_MSG_FAILURE([Need a version of thumbulator which supports --elf])
+    fi
+fi
+
+AM_CONDITIONAL([SIMULATE_CORTEX_M0], [test x$enable_simulate_cortex_m0 != xno])
 
 AC_CONFIG_FILES([src/2dfir/Makefile])
 AC_CONFIG_FILES([src/blowfish/Makefile])

@@ -1,0 +1,36 @@
+#!/bin/bash -e
+# Script to collect dynamic instruction statistics of the programs
+
+SIMULATOR=@cortexm0simpath
+SIM_FLAGS="--elf"
+
+SCR_DIR="$( cd "$( dirname "$0" )" && pwd )"
+BIN_PATH=`readlink -f $SCR_DIR/../src`
+
+runone () {
+    d=$1
+
+    if [ -e $SCR_DIR/$d.cortex-m0.trace.xz ]; then
+        echo Skipping $d
+    else
+        echo Simulating $BIN_PATH/$d/$d
+
+        # Run the simulator, collecting traces
+        $SIMULATOR $BIN_PATH/$d/$d $SIM_FLAGS 2> $SCR_DIR/$d.cortex-m0.trace
+
+        xz --compress $SCR_DIR/$d.cortex-m0.trace &
+    fi
+}
+
+# Function to run all the tests
+# @param $* benchmarks to run
+runall () {
+    for d in $* ; do
+        runone $d
+    done
+}
+
+benchmarks="2dfir crc32 cubic dijkstra fdct float_matmult int_matmult \
+           sha"
+
+runall $benchmarks

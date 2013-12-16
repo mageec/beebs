@@ -1,7 +1,8 @@
+#!/bin/bash -e
 
-autoreconf -f -i
+SCR_DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-./configure --host=arm-none-eabi CFLAGS="-mthumb -mcpu=cortex-m0 -DCORTEX_M0" LDFLAGS="-e startup" --with-linkerscript=src/platformcode/stm32f05_flash.ld --enable-platformsources
+$SCR_DIR/configure --host=arm-none-eabi CFLAGS="-mthumb -mcpu=cortex-m0 -DCORTEX_M0" LDFLAGS="-e startup" --with-linkerscript=$SCR_DIR/src/platformcode/stm32f05_flash.ld --enable-platformsources --enable-simulate-cortex-m0
 
 make clean
 make

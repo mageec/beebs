@@ -25,12 +25,24 @@ EXTRA_DIST = simulate.avr.in
 # If creating script for AVR simulator
 if SIMULATE_AVR
 bin_SCRIPTS=simulate.avr
-AVRSIMPATH="/home/james/tools/simulavr-1.0.0/src/simulavr"
+AVRSIMPATH="simulavr"
 
 simulate.avr: simulate.avr.in Makefile
 	sed -e 's,[@]avrsimpath,$(AVRSIMPATH),g' < $(srcdir)/simulate.avr.in > simulate.avr
 	chmod +x simulate.avr
 
 endif
+
+# If creating script for Cortex-M0 simulator
+if SIMULATE_CORTEX_M0
+bin_SCRIPTS=simulate.cortex-m0
+CORTEXM0SIMPATH="thumbulator"
+
+simulate.cortex-m0: simulate.cortex-m0.in Makefile
+	sed -e 's,[@]cortexm0simpath,$(CORTEXM0SIMPATH),g' < $(srcdir)/simulate.cortex-m0.in > simulate.cortex-m0
+	chmod +x simulate.cortex-m0
+
+endif
+
 
 CLEANFILES=$(bin_SCRIPTS)

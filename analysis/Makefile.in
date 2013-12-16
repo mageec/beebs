@@ -276,6 +276,7 @@ program_transform_name = @program_transform_name@
 psdir = @psdir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
+simulate_m0_cmd = @simulate_m0_cmd@
 simulavr_cmd = @simulavr_cmd@
 srcdir = @srcdir@
 sysconfdir = @sysconfdir@
@@ -291,7 +292,11 @@ EXTRA_DIST = simulate.avr.in
 
 # If creating script for AVR simulator
 @SIMULATE_AVR_TRUE@bin_SCRIPTS = simulate.avr
-@SIMULATE_AVR_TRUE@AVRSIMPATH = "/home/james/tools/simulavr-1.0.0/src/simulavr"
+
+# If creating script for Cortex-M0 simulator
+@SIMULATE_CORTEX_M0_TRUE@bin_SCRIPTS = simulate.cortex-m0
+@SIMULATE_AVR_TRUE@AVRSIMPATH = "simulavr"
+@SIMULATE_CORTEX_M0_TRUE@CORTEXM0SIMPATH = "thumbulator"
 CLEANFILES = $(bin_SCRIPTS)
 all: all-am
 
@@ -527,6 +532,10 @@ uninstall-am: uninstall-binSCRIPTS
 @SIMULATE_AVR_TRUE@simulate.avr: simulate.avr.in Makefile
 @SIMULATE_AVR_TRUE@	sed -e 's,[@]avrsimpath,$(AVRSIMPATH),g' < $(srcdir)/simulate.avr.in > simulate.avr
 @SIMULATE_AVR_TRUE@	chmod +x simulate.avr
+
+@SIMULATE_CORTEX_M0_TRUE@simulate.cortex-m0: simulate.cortex-m0.in Makefile
+@SIMULATE_CORTEX_M0_TRUE@	sed -e 's,[@]cortexm0simpath,$(CORTEXM0SIMPATH),g' < $(srcdir)/simulate.cortex-m0.in > simulate.cortex-m0
+@SIMULATE_CORTEX_M0_TRUE@	chmod +x simulate.cortex-m0
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

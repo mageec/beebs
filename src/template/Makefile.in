@@ -349,6 +349,7 @@ program_transform_name = @program_transform_name@
 psdir = @psdir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
+simulate_m0_cmd = @simulate_m0_cmd@
 simulavr_cmd = @simulavr_cmd@
 srcdir = @srcdir@
 sysconfdir = @sysconfdir@
