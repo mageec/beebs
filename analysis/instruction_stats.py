@@ -75,7 +75,7 @@ insn_list = {
 insn_re_list = {
     'cortex-m0': r'0x........: 0x.... (?P<insn>[^\s]+)\s',
     'cortex-m3': r'0x........: 0x.... (?P<insn>[^\s]+)\s',
-    'avr': r'.*\s(?P<insn>[A-Z]+)[A-Z_]*$',
+    'avr': r'[^ ]+ 0x....: [^ ]+ +(?P<insn>[^ ]+)(?<!CPU-waitstate)',
     }
 
 def progress(obj, obj_len):

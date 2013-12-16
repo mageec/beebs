@@ -1,4 +1,9 @@
 2013-12-16  James Pallister  <james.pallister@bristol.ac.uk>
+	Fixed regex for AVR simulator
+
+	* analysis/instruction_stats.py: Fixed regex for AVR simulator
+
+2013-12-16  James Pallister  <james.pallister@bristol.ac.uk>
 	Updated autotools to copy analysis scripts
 
 	* analysis/Makefile.am: Updated autotools to copy analysis scripts
