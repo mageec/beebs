@@ -1,3 +1,8 @@
+2013-12-17  James Pallister  <james.pallister@bristol.ac.uk>
+	Remove unnecessary file
+
+	* analysis/simulate.cortex-m0: Remove unnecessary file
+
 2013-12-16  James Pallister  <james.pallister@bristol.ac.uk>
 	Fixed regex for AVR simulator
 
