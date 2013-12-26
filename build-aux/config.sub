@@ -299,6 +299,7 @@ case $basic_machine in
 	| or1k | or32 \
 	| pdp10 | pdp11 | pj | pjl \
 	| powerpc | powerpc64 | powerpc64le | powerpcle \
+    | pic32 \
 	| pyramid \
 	| rl78 | rx \
 	| score \

@@ -1,3 +1,11 @@
+2013-12-26  James Pallister  <james.pallister@bristol.ac.uk>
+	Config.sub changes to support pic32
+
+	* README.md: Description of changes in case they need to be recreated
+	    for a new config.sub
+	* build-aux/config.sub: Added pic32 as a valid cross compilation
+	    target
+
 2013-12-17  James Pallister  <james.pallister@bristol.ac.uk>
 	Remove unnecessary file
 
