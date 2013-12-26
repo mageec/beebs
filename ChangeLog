@@ -1,4 +1,15 @@
 2013-12-26  James Pallister  <james.pallister@bristol.ac.uk>
+	Updated generate files to work out of tree
+
+	* generate.avr: Updated to work out of tree, and accept CFLAGS
+	* generate.cortex-m0: Updated to work out of tree, and accept CFLAGS
+	* generate.cortex-m3: Updated to work out of tree, and accept CFLAGS
+	* generate.fram: Updated to work out of tree, and accept CFLAGS
+	* generate.generic: Updated to work out of tree, and accept CFLAGS
+	* generate.msp430: Updated to work out of tree, and accept CFLAGS
+	* generate.pic32: Updated to work out of tree, and accept CFLAGS
+
+2013-12-26  James Pallister  <james.pallister@bristol.ac.uk>
 	Config.sub changes to support pic32
 
 	* README.md: Description of changes in case they need to be recreated

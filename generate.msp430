@@ -1,9 +1,16 @@
 #!/bin/bash -e
 
-mkdir -p m4
-autoreconf -i -f
+BEEBS_DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-./configure --host=msp430 CFLAGS="-mmcu=msp430f5529 -std=gnu99 -Os"
+if [[ -z "$CFLAGS" ]]; then
+    CFLAGS=" -mmcu=msp430f5529 -std=gnu99 -mcpu=430 "
+else
+    CFLAGS+=" -mmcu=msp430f5529 -std=gnu99 -mcpu=430 "
+fi
+
+export CFLAGS=$CFLAGS
+
+$BEEBS_DIR/configure --host=msp430
 
 make clean
 make

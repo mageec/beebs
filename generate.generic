@@ -1,9 +1,14 @@
 #!/bin/bash -e
 
-mkdir -p m4
-autoreconf -f -i
+BEEBS_DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-./configure
+if [[ -z "$CFLAGS" ]]; then
+    CFLAGS=""
+fi
+
+export CFLAGS=$CFLAGS
+
+$BEEBS_DIR/configure
 
 make clean
 make
