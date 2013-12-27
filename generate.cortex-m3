@@ -1,9 +1,16 @@
 #!/bin/bash -e
 
-mkdir -p m4
-autoreconf -f -i
+BEEBS_DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-./configure --host=arm-none-eabi CFLAGS="-mthumb -mcpu=cortex-m3 -DCORTEX_M3" LDFLAGS="-e startup" --with-linkerscript=src/platformcode/stm32vl_flash.ld --enable-platformsources
+if [[ -z "$CFLAGS" ]]; then
+    CFLAGS=" -mthumb -mcpu=cortex-m3 -DCORTEX_M3 "
+else
+    CFLAGS+=" -mthumb -mcpu=cortex-m3 -DCORTEX_M3 "
+fi
+
+export CFLAGS=$CFLAGS
+
+$BEEBS_DIR/configure --host=arm-none-eabi LDFLAGS="-e startup" --with-linkerscript=$BEEBS_DIR/src/platformcode/stm32vl_flash.ld --enable-platformsources
 
 make clean
 make

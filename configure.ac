@@ -1,10 +1,12 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.69])
+AC_PREREQ([2.68])
 AC_INIT([beebs], [1.0], [james.pallister@embecosm.com])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
+
+AM_MAINTAINER_MODE([disable])
 
 AC_CANONICAL_SYSTEM
 
@@ -54,6 +56,48 @@ AC_ARG_ENABLE([platformsources],
 
 AM_CONDITIONAL([PLATFORMSRC], [test x$enable_platformsources != xno])
 
+# Check if we want to simulate AVR #########################################
+AC_ARG_ENABLE([simulate-avr],
+            [AS_HELP_STRING([--enable-simulate-avr],
+                [Enable the simulation for AVR])],
+            [enable_simulate_avr=yes],
+            [enable_simulate_avr=no],
+            )
+
+if test x$enable_simulate_avr == xyes ; then
+    AC_CHECK_PROGS(simulavr_cmd, simulavr)
+    AC_RUN_IFELSE([], [], [],
+        [found_version=`simulavr --version | grep "SimulAVR 1.0.0" -c`])
+    if test x$found_version == x0 ; then
+        AC_MSG_FAILURE([Need version 1.0.0 of simulavr])
+    fi
+fi
+
+AM_CONDITIONAL([SIMULATE_AVR], [test x$enable_simulate_avr != xno])
+
+
+# Check if we want to simulate cortex-m0 ###################################
+AC_ARG_ENABLE([simulate-cortex-m0],
+            [AS_HELP_STRING([--enable-simulate-cortex-m0],
+                [Enable the simulation for cortex-m0])],
+            [enable_simulate_cortex_m0=yes],
+            [enable_simulate_cortex_m0=no],
+            )
+
+if test x$enable_simulate_cortex_m0 == xyes ; then
+    AC_CHECK_PROG(simulate_m0_cmd, thumbulator, thumbulator)
+
+    # Check the version supports the --elf flag
+    AC_RUN_IFELSE([], [], [],
+        [thumbulator_version=`thumbulator --version | grep "Version: 1.1.0" -c`])
+    if test x$thumbulator_version == x0 ; then
+        echo $thumbulator_version
+        AC_MSG_FAILURE([Need a version of thumbulator which supports --elf])
+    fi
+fi
+
+AM_CONDITIONAL([SIMULATE_CORTEX_M0], [test x$enable_simulate_cortex_m0 != xno])
+
 AC_CONFIG_FILES([src/2dfir/Makefile])
 AC_CONFIG_FILES([src/blowfish/Makefile])
 AC_CONFIG_FILES([src/crc32/Makefile])
@@ -66,5 +110,7 @@ AC_CONFIG_FILES([src/rijndael/Makefile])
 AC_CONFIG_FILES([src/sha/Makefile])
 AC_CONFIG_FILES([src/compress/Makefile])
 AC_CONFIG_FILES([src/template/Makefile])
-AC_CONFIG_FILES([Makefile src/common.mk])
+AC_CONFIG_FILES([src/platformcode/Makefile])
+AC_CONFIG_FILES([analysis/Makefile])
+AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

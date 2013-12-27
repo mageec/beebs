@@ -636,6 +636,12 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
+SIMULATE_CORTEX_M0_FALSE
+SIMULATE_CORTEX_M0_TRUE
+simulate_m0_cmd
+SIMULATE_AVR_FALSE
+SIMULATE_AVR_TRUE
+simulavr_cmd
 PLATFORMSRC_FALSE
 PLATFORMSRC_TRUE
 LINKERSCRIPT
@@ -723,6 +729,9 @@ build_os
 build_vendor
 build_cpu
 build
+MAINT
+MAINTAINER_MODE_FALSE
+MAINTAINER_MODE_TRUE
 target_alias
 host_alias
 build_alias
@@ -764,6 +773,7 @@ SHELL'
 ac_subst_files=''
 ac_user_opts='
 enable_option_checking
+enable_maintainer_mode
 enable_silent_rules
 enable_shared
 enable_static
@@ -775,6 +785,8 @@ with_sysroot
 enable_libtool_lock
 with_linkerscript
 enable_platformsources
+enable_simulate_avr
+enable_simulate_cortex_m0
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1406,6 +1418,9 @@ Optional Features:
   --disable-option-checking  ignore unrecognized --enable/--with options
   --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-maintainer-mode
+                          enable make rules and dependencies not useful (and
+                          sometimes confusing) to the casual installer
   --enable-silent-rules   less verbose build output (undo: "make V=1")
   --disable-silent-rules  verbose build output (undo: "make V=0")
   --enable-shared[=PKGS]  build shared libraries [default=yes]
@@ -1419,6 +1434,9 @@ Optional Features:
   --disable-libtool-lock  avoid locking (might break parallel builds)
   --enable-platformsources
                           Add platform sources to be compiled in
+  --enable-simulate-avr   Enable the simulation for AVR
+  --enable-simulate-cortex-m0
+                          Enable the simulation for cortex-m0
 
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
@@ -2162,6 +2180,30 @@ fi
 ac_config_guess="$SHELL $ac_aux_dir/config.guess"  # Please don't use this var.
 ac_config_sub="$SHELL $ac_aux_dir/config.sub"  # Please don't use this var.
 ac_configure="$SHELL $ac_aux_dir/configure"  # Please don't use this var.
+
+
+
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable maintainer-specific portions of Makefiles" >&5
+$as_echo_n "checking whether to enable maintainer-specific portions of Makefiles... " >&6; }
+    # Check whether --enable-maintainer-mode was given.
+if test "${enable_maintainer_mode+set}" = set; then :
+  enableval=$enable_maintainer_mode; USE_MAINTAINER_MODE=$enableval
+else
+  USE_MAINTAINER_MODE=no
+fi
+
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $USE_MAINTAINER_MODE" >&5
+$as_echo "$USE_MAINTAINER_MODE" >&6; }
+   if test $USE_MAINTAINER_MODE = yes; then
+  MAINTAINER_MODE_TRUE=
+  MAINTAINER_MODE_FALSE='#'
+else
+  MAINTAINER_MODE_TRUE='#'
+  MAINTAINER_MODE_FALSE=
+fi
+
+  MAINT=$MAINTAINER_MODE_TRUE
 
 
 
@@ -11716,6 +11758,163 @@ else
 fi
 
 
+# Check if we want to simulate AVR #########################################
+# Check whether --enable-simulate-avr was given.
+if test "${enable_simulate_avr+set}" = set; then :
+  enableval=$enable_simulate_avr; enable_simulate_avr=yes
+else
+  enable_simulate_avr=no
+fi
+
+
+if test x$enable_simulate_avr == xyes ; then
+    for ac_prog in simulavr
+do
+  # Extract the first word of "$ac_prog", so it can be a program name with args.
+set dummy $ac_prog; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_prog_simulavr_cmd+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  if test -n "$simulavr_cmd"; then
+  ac_cv_prog_simulavr_cmd="$simulavr_cmd" # Let the user override the test.
+else
+as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_prog_simulavr_cmd="$ac_prog"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+fi
+fi
+simulavr_cmd=$ac_cv_prog_simulavr_cmd
+if test -n "$simulavr_cmd"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $simulavr_cmd" >&5
+$as_echo "$simulavr_cmd" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+  test -n "$simulavr_cmd" && break
+done
+
+    if test "$cross_compiling" = yes; then :
+  found_version=`simulavr --version | grep "SimulAVR 1.0.0" -c`
+else
+  if ac_fn_c_try_run "$LINENO"; then :
+
+fi
+rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+  conftest.$ac_objext conftest.beam
+fi
+
+    if test x$found_version == x0 ; then
+        { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
+as_fn_error $? "Need version 1.0.0 of simulavr
+See \`config.log' for more details" "$LINENO" 5; }
+    fi
+fi
+
+ if test x$enable_simulate_avr != xno; then
+  SIMULATE_AVR_TRUE=
+  SIMULATE_AVR_FALSE='#'
+else
+  SIMULATE_AVR_TRUE='#'
+  SIMULATE_AVR_FALSE=
+fi
+
+
+
+# Check if we want to simulate cortex-m0 ###################################
+# Check whether --enable-simulate-cortex-m0 was given.
+if test "${enable_simulate_cortex_m0+set}" = set; then :
+  enableval=$enable_simulate_cortex_m0; enable_simulate_cortex_m0=yes
+else
+  enable_simulate_cortex_m0=no
+fi
+
+
+if test x$enable_simulate_cortex_m0 == xyes ; then
+    # Extract the first word of "thumbulator", so it can be a program name with args.
+set dummy thumbulator; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_prog_simulate_m0_cmd+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  if test -n "$simulate_m0_cmd"; then
+  ac_cv_prog_simulate_m0_cmd="$simulate_m0_cmd" # Let the user override the test.
+else
+as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_prog_simulate_m0_cmd="thumbulator"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+fi
+fi
+simulate_m0_cmd=$ac_cv_prog_simulate_m0_cmd
+if test -n "$simulate_m0_cmd"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $simulate_m0_cmd" >&5
+$as_echo "$simulate_m0_cmd" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+
+    # Check the version supports the --elf flag
+    if test "$cross_compiling" = yes; then :
+  thumbulator_version=`thumbulator --version | grep "Version: 1.1.0" -c`
+else
+  if ac_fn_c_try_run "$LINENO"; then :
+
+fi
+rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+  conftest.$ac_objext conftest.beam
+fi
+
+    if test x$thumbulator_version == x0 ; then
+        echo $thumbulator_version
+        { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
+as_fn_error $? "Need a version of thumbulator which supports --elf
+See \`config.log' for more details" "$LINENO" 5; }
+    fi
+fi
+
+ if test x$enable_simulate_cortex_m0 != xno; then
+  SIMULATE_CORTEX_M0_TRUE=
+  SIMULATE_CORTEX_M0_FALSE='#'
+else
+  SIMULATE_CORTEX_M0_TRUE='#'
+  SIMULATE_CORTEX_M0_FALSE=
+fi
+
+
 ac_config_files="$ac_config_files src/2dfir/Makefile"
 
 ac_config_files="$ac_config_files src/blowfish/Makefile"
@@ -11736,7 +11935,13 @@ ac_config_files="$ac_config_files src/rijndael/Makefile"
 
 ac_config_files="$ac_config_files src/sha/Makefile"
 
-ac_config_files="$ac_config_files Makefile src/common.mk"
+ac_config_files="$ac_config_files src/template/Makefile"
+
+ac_config_files="$ac_config_files src/platformcode/Makefile"
+
+ac_config_files="$ac_config_files analysis/Makefile"
+
+ac_config_files="$ac_config_files Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -11883,6 +12088,10 @@ LIBOBJS=$ac_libobjs
 LTLIBOBJS=$ac_ltlibobjs
 
 
+if test -z "${MAINTAINER_MODE_TRUE}" && test -z "${MAINTAINER_MODE_FALSE}"; then
+  as_fn_error $? "conditional \"MAINTAINER_MODE\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking that generated files are newer than configure" >&5
 $as_echo_n "checking that generated files are newer than configure... " >&6; }
    if test -n "$am_sleep_pid"; then
@@ -11913,6 +12122,14 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${PLATFORMSRC_TRUE}" && test -z "${PLATFORMSRC_FALSE}"; then
   as_fn_error $? "conditional \"PLATFORMSRC\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${SIMULATE_AVR_TRUE}" && test -z "${SIMULATE_AVR_FALSE}"; then
+  as_fn_error $? "conditional \"SIMULATE_AVR\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${SIMULATE_CORTEX_M0_TRUE}" && test -z "${SIMULATE_CORTEX_M0_FALSE}"; then
+  as_fn_error $? "conditional \"SIMULATE_CORTEX_M0\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 
@@ -12776,8 +12993,10 @@ do
     "src/int_matmult/Makefile") CONFIG_FILES="$CONFIG_FILES src/int_matmult/Makefile" ;;
     "src/rijndael/Makefile") CONFIG_FILES="$CONFIG_FILES src/rijndael/Makefile" ;;
     "src/sha/Makefile") CONFIG_FILES="$CONFIG_FILES src/sha/Makefile" ;;
+    "src/template/Makefile") CONFIG_FILES="$CONFIG_FILES src/template/Makefile" ;;
+    "src/platformcode/Makefile") CONFIG_FILES="$CONFIG_FILES src/platformcode/Makefile" ;;
+    "analysis/Makefile") CONFIG_FILES="$CONFIG_FILES analysis/Makefile" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
-    "src/common.mk") CONFIG_FILES="$CONFIG_FILES src/common.mk" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac
