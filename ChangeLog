@@ -1,3 +1,24 @@
+2013-12-27  James Pallister  <james.pallister@bristol.ac.uk>
+	Added a change to minimize the number of autoreconfs needed
+
+	* Makefile.in: Regenerated
+	* aclocal.m4: Regenerated
+	* analysis/Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Disabled maintainer mode
+	* src/2dfir/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
 2013-12-26  James Pallister  <james.pallister@bristol.ac.uk>
 	Updated generate files to work out of tree
 

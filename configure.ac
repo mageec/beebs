@@ -6,6 +6,8 @@ AC_INIT([beebs], [1.0], [james.pallister@embecosm.com])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
 
+AM_MAINTAINER_MODE([disable])
+
 AC_CANONICAL_SYSTEM
 
 AM_INIT_AUTOMAKE
