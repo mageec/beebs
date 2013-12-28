@@ -31,6 +31,6 @@ runall () {
 }
 
 benchmarks="2dfir crc32 cubic dijkstra fdct float_matmult int_matmult \
-           sha"
+           sha compress"
 
 runall $benchmarks

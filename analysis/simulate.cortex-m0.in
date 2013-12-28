@@ -31,6 +31,6 @@ runall () {
 }
 
 benchmarks="2dfir blowfish crc32 cubic dijkstra fdct float_matmult \
-            int_matmult rijndael sha"
+            int_matmult rijndael sha compress"
 
 runall $benchmarks

@@ -1,3 +1,12 @@
+2013-12-28  James Pallister  <james.pallister@bristol.ac.uk>
+	Added compress benchmark to analysis
+
+	* Makefile.in: Regenerated
+	* analysis/simulate.avr.in: Added compress benchmark
+	* analysis/simulate.cortex-m0.in: Added compress benchmark
+	* configure: Regenerated
+	* src/compress/Makefile.in: Generated
+
 2013-12-27  James Pallister  <james.pallister@bristol.ac.uk>
 	Added a change to minimize the number of autoreconfs needed
 

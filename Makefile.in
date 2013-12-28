@@ -349,7 +349,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = src/platformcode src/2dfir src/blowfish src/crc32 src/cubic \
 	src/dijkstra src/fdct src/float_matmult src/int_matmult \
-	src/rijndael src/sha src/template analysis
+	src/rijndael src/sha src/compress src/template analysis
 ACLOCAL_AMFLAGS = -I m4
 all: all-recursive
 
