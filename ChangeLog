@@ -1,4 +1,10 @@
 2014-01-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Added lms to simulation scripts
+
+	* analysis/simulate.avr.in: Added lms to simulation scripts
+	* analysis/simulate.cortex-m0.in: Added lms to simulation scripts
+
+2014-01-04  James Pallister  <james.pallister@bristol.ac.uk>
 	Added lms benchmark
 
 	* Makefile.am: Added lms benchmark
