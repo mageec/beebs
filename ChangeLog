@@ -1,3 +1,14 @@
+2014-01-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Added lms benchmark
+
+	* Makefile.am: Added lms benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added lms benchmark
+	* src/lms/Makefile.am: Automake file for lms
+	* src/lms/Makefile.in: Generated
+	* src/lms/lms.c: Lms benchmark
+
 2013-12-28  James Pallister  <james.pallister@bristol.ac.uk>
 	Added compress benchmark to analysis
 
