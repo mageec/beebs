@@ -1,3 +1,9 @@
+2014-01-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix: distribute simulation scripts
+
+	* analysis/Makefile.am: Fix: distribute simulation scripts
+	* analysis/Makefile.in: Regenerated
+
 2013-12-27  James Pallister  <james.pallister@bristol.ac.uk>
 	Added a change to minimize the number of autoreconfs needed
 
