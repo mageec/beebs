@@ -348,9 +348,10 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = src/platformcode src/2dfir src/blowfish src/crc32 src/cubic \
-	src/dijkstra src/fdct src/float_matmult src/int_matmult \
-	src/rijndael src/sha src/compress src/lms src/fft src/template \
-	analysis
+	src/dijkstra src/fdct src/float_matmult src/gdb-advance \
+	src/gdb-all-types src/gdb-anon src/gdb-arrayidx src/gdb-async \
+	src/int_matmult src/rijndael src/sha src/compress src/lms \
+	src/fft src/template analysis
 ACLOCAL_AMFLAGS = -I m4
 all: all-recursive
 
