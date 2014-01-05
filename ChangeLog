@@ -1,3 +1,15 @@
+2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Updated FFT benchmark for autotools
+
+	* Makefile.am: Added FFT benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added FFT benchmark
+	* fft/fft1.c: Moved
+	* src/fft/Makefile.am: FFT benchmark Makefile.am
+	* src/fft/Makefile.in: Generated
+	* src/fft/fft1.c: FFT benchmark source
+
 2014-01-04  James Pallister  <james.pallister@bristol.ac.uk>
 	Fix: distribute simulation scripts
 

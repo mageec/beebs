@@ -105,28 +105,33 @@ static double cos(double rad)
   return (sin (PI / 2.0 - rad));
 }
 
-
-void main()
+void benchmark()
 {
+    int  i, n = 8, flag, chkerr;
 
-	int  i, n = 8, flag, chkerr, n;
+    /* ar  */
+    for(i = 0; i < n; i++)
+      ar[i] = cos(2*M_PI*i/n);
+
+    /* forward fft */
+    flag = 0;
+    chkerr = fft1(n, flag);
+
+    /* inverse fft */
+    flag = 1;
+    chkerr = fft1(n, flag);
+}
+
+int main()
+{
+    int n;
 
     initialise_trigger();
     start_trigger();
 
     for(n = 0; n < REPEAT_FACTOR >> 2; ++n)
     {
-    	/* ar  */
-    	for(i = 0; i < n; i++)
-    	  ar[i] = cos(2*M_PI*i/n);
-
-    	/* forward fft */
-    	flag = 0;
-    	chkerr = fft1(n, flag);
-
-    	/* inverse fft */
-    	flag = 1;
-    	chkerr = fft1(n, flag);
+        benchmark();
     }
 
     stop_trigger();
@@ -147,7 +152,7 @@ int fft1(int n, int flag)
 	 if(n < 2) return(999);
 	 iter = log((double)n)/log(2.0);
 	 j = 1;
-#ifdef DEBUG 
+#ifdef DEBUG
 	printf("iter=%d\n",iter);
 #endif
 	 for(i = 0; i < iter; i++)
