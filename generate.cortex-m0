@@ -1,0 +1,16 @@
+#!/bin/bash -e
+
+BEEBS_DIR="$( cd "$( dirname "$0" )" && pwd )"
+
+if [[ -z "$CFLAGS" ]]; then
+    CFLAGS=" -mthumb -mcpu=cortex-m0 -DCORTEX_M0 "
+else
+    CFLAGS+=" -mthumb -mcpu=cortex-m0 -DCORTEX_M0 "
+fi
+
+export CFLAGS=$CFLAGS
+
+$BEEBS_DIR/configure --host=arm-none-eabi LDFLAGS="-e startup" --with-linkerscript=$BEEBS_DIR/src/platformcode/stm32f05_flash.ld --enable-platformsources --enable-simulate-cortex-m0
+
+make clean
+make

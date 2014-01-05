@@ -1,0 +1,14 @@
+#!/bin/bash -e
+
+BEEBS_DIR="$( cd "$( dirname "$0" )" && pwd )"
+
+if [[ -z "$CFLAGS" ]]; then
+    CFLAGS=""
+fi
+
+export CFLAGS=$CFLAGS
+
+$BEEBS_DIR/configure
+
+make clean
+make

@@ -53,3 +53,11 @@ All of these benchmarks are derived from other benchmark suites:
 All are freely available for use, but some lack specific license
 provisions. For the avoidance of doubt, the versions provided here are
 explicitly licensed under the GNU General Public License version 3.
+
+
+## Misc Notes
+
+If build-aux/config.sub is regenerated, the following command needs to be run
+to ensure pic32 is recognised as a valid tools prefix.
+
+    sed -i 's/powerpcle \\/powerpcle \\\n    | pic32 \\/' $SCR_DIR/build-aux/config.sub

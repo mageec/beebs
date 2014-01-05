@@ -1,43 +1,413 @@
+2014-01-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix: distribute simulation scripts
+
+	* analysis/Makefile.am: Fix: distribute simulation scripts
+	* analysis/Makefile.in: Regenerated
+
+2013-12-27  James Pallister  <james.pallister@bristol.ac.uk>
+	Added a change to minimize the number of autoreconfs needed
+
+	* Makefile.in: Regenerated
+	* aclocal.m4: Regenerated
+	* analysis/Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Disabled maintainer mode
+	* src/2dfir/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
+2013-12-26  James Pallister  <james.pallister@bristol.ac.uk>
+	Updated generate files to work out of tree
+
+	* generate.avr: Updated to work out of tree, and accept CFLAGS
+	* generate.cortex-m0: Updated to work out of tree, and accept CFLAGS
+	* generate.cortex-m3: Updated to work out of tree, and accept CFLAGS
+	* generate.fram: Updated to work out of tree, and accept CFLAGS
+	* generate.generic: Updated to work out of tree, and accept CFLAGS
+	* generate.msp430: Updated to work out of tree, and accept CFLAGS
+	* generate.pic32: Updated to work out of tree, and accept CFLAGS
+
+2013-12-26  James Pallister  <james.pallister@bristol.ac.uk>
+	Config.sub changes to support pic32
+
+	* README.md: Description of changes in case they need to be recreated
+	    for a new config.sub
+	* build-aux/config.sub: Added pic32 as a valid cross compilation
+	    target
+
+2013-12-17  James Pallister  <james.pallister@bristol.ac.uk>
+	Remove unnecessary file
+
+	* analysis/simulate.cortex-m0: Remove unnecessary file
+
+2013-12-16  James Pallister  <james.pallister@bristol.ac.uk>
+	Fixed regex for AVR simulator
+
+	* analysis/instruction_stats.py: Fixed regex for AVR simulator
+
+2013-12-16  James Pallister  <james.pallister@bristol.ac.uk>
+	Updated autotools to copy analysis scripts
+
+	* analysis/Makefile.am: Updated autotools to copy analysis scripts
+	* analysis/Makefile.in: Regenerated
+	* analysis/instruction_stats.py: Small arguments fix
+	* analysis/simulate.cortex-m0.in: Updated list of benchmarks to run
+	    the analysis on
+
+2013-12-16  James Pallister  <james.pallister@bristol.ac.uk>
+	Added detection of AVR simulator
+
+	* Makefile.in: Regenerated
+	* aclocal.m4: Regenerated
+	* analysis/Makefile.am: Create simulate.avr
+	* analysis/Makefile.in: Regenerated
+	* analysis/simulate.avr.in: Base simulate.avr template
+	* configure: Regenerated
+	* configure.ac: Added enable flags for enable avr simulator
+	* generate.avr: Call from other directories
+	* src/2dfir/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/common.mk.am: Added debug flag, needed by simulator
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
+2013-12-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added template files for new benchmarks
+
+	* src/template/Makefile.am: Template files for new benchmarks
+	* src/template/template.c: Template files for new benchmarks
+	* Makefile.am: Template files for new benchmarks
+	* configure.ac: Template files for new benchmarks
+
+2013-12-14  James Pallister  <james.pallister@bristol.ac.uk>
+	Added generate scripts for multiple platforms
+
+	* generate.fram: Generate binaries for MSP430FR
+	* generate.generic: Generic
+	* generate.msp430: Generate binaries for MSP340F
+	* generate.pic32: Generate binaries for PIC32MX250
+
+2013-12-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Started adding analysis scripts to autotools
+
+	* Makefile.am: Added analysis makefile
+	* Makefile.in: Regenerated
+	* analysis/Makefile.am: Automatically create simulate.avr
+	* analysis/Makefile.in: Generated
+	* analysis/simulate.avr: Deleted
+	* analysis/simulate.avr.in: Created. Main body of simulate script.
+	* configure: Regenerated
+	* configure.ac: Added analysis makefile
+
+2013-12-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Small trace fixes
+
+	* analysis/all_stats.py: Updated comments
+	* analysis/simulate.cortex-m0: Existence check for traces
+
+2013-12-05  James Pallister <james.pallister@bristol.ac.uk>
+
+	* src/common.mk.am: Fix to enable out of tree builds
+
+2013-12-05  James Pallister <james.pallister@bristol.ac.uk>
+
+	* configure: Configure script is needed
+
+2013-12-05  James Pallister <james.pallister@bristol.ac.uk>
+	Modified configure.ac to work with old versions of autotools
+
+	* Makefile.in: Regenerated
+	* aclocal.m4: Regenerated
+	* configure: Regenerated
+	* configure.ac: Older versions of autotools do work
+	* src/2dfir/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.am: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
+2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* Makefile.am: Added platformcode.
+	* Makefile.in: Regenerated.
+	* configure: Regenerated.
+	* configure.ac: Added platformcode.
+	* src/2dfir/Makefile.in: Regenerated.
+	* src/blowfish/COPYRIGHT: Made non-executable.
+	* src/blowfish/LICENSE: Made non-executable.
+	* src/blowfish/Makefile.am: Added EXTRA_DIST files.
+	* src/blowfish/Makefile.in: Regenerated.
+	* src/common.mk.am: Updated
+	* src/common.mk.in: Regenerated.
+	* src/crc32/Makefile.am: Added EXTRA_DIST files.
+	* src/crc32/Makefile.in: Regenerated.
+	* src/cubic/LICENSE: Made non-executable.
+	* src/cubic/Makefile.am: Added EXTRA_DIST files.
+	* src/cubic/Makefile.in: Regenerated.
+	* src/dijkstra/LICENSE: Made non-executable.
+	* src/dijkstra/Makefile.am: Added EXTRA_DIST files.
+	* src/dijkstra/Makefile.in: Regenerated.
+	* src/fdct/Makefile.in: Regenerated.
+	* src/float_matmult/Makefile.in: Regenerated.
+	* src/int_matmult/Makefile.in: Regenerated.
+	* src/platformcode/Makefile.am: Created.
+	* src/platformcode/Makefile.in: Generated.
+	* src/rijndael/LICENSE: Made non-executable.
+	* src/rijndael/Makefile.am: Added EXTRA_DIST files.
+	* src/rijndael/Makefile.in: Regenerated.
+	* src/sha/Makefile.am: Added EXTRA_DIST files.
+	* src/sha/Makefile.in: Regenerated.
+	* src/template/Makefile.am: New comments about headers and EXTRA_DIST.
+	* src/template/Makefile.in: Regenerated.
+
+2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* aclocal.m4: Regenerated.
+	* .gitignore: Remove built files, since these should be out of tree.
+	* Makefile.in: Regenerated from correspondng Makefile.am.
+	* src/2dfir/Makefile.in: Likewise.
+	* src/blowfish/Makefile.in: Likewise.
+	* src/common.mk.in: Likewise.
+	* src/crc32/Makefile.in: Likewise.
+	* src/cubic/Makefile.in: Likewise.
+	* src/dijkstra/Makefile.in: Likewise.
+	* src/fdct/Makefile.in: Likewise.
+	* src/float_matmult/Makefile.in: Likewise.
+	* src/int_matmult/Makefile.in: Likewise.
+	* src/rijndael/Makefile.in: Likewise.
+	* src/sha/Makefile.in: Likewise.
+	* src/template/Makefile.in: Likewise.
+
+2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* src/template/Makefile.am: Minor layout changes.
+	* src/template/template.c: Change to GNU style layout, added license
+	declaration, C-style comments, added emacs style comment.
+
+2013-12-05  James Pallister  <james.pallister@bristol.ac.uk>
+
+	* src/common.mk.am: Fix to enable out of tree builds
+
+2013-12-05  James Pallister  <james.pallister@bristol.ac.uk>
+
+	* configure: Configure script is needed
+
+2013-12-05  James Pallister  <james.pallister@bristol.ac.uk>
+
+	* .gitignore: Unignore autotools files (changing school of thought)
+	* aclocal.m4: Added, generated by autotools
+	* build-aux/config.guess: Added, generated by autotools
+	* build-aux/config.sub: Added, generated by autotools
+	* build-aux/depcomp: Added, generated by autotools
+	* build-aux/install-sh: Added, generated by autotools
+	* build-aux/ltmain.sh: Added, generated by autotools
+	* build-aux/missing: Added, generated by autotools
+	* m4/libtool.m4: Added, generated by autotools
+	* m4/ltoptions.m4: Added, generated by autotools
+	* m4/ltsugar.m4: Added, generated by autotools
+	* m4/ltversion.m4: Added, generated by autotools
+	* m4/lt~obsolete.m4: Added, generated by autotools
+
+2013-10-11  James Pallister <james.pallister@bristol.ac.uk>
+
+	* analysis/all_stats.py: Created, compute stats for all benchmarks
+	and display nicely
+
+2013-10-11  James Pallister <james.pallister@bristol.ac.uk>
+
+	* analysis/instruction_stats.py: Added instructions for cortex-m0
+
+2013-10-11  James Pallister <james.pallister@bristol.ac.uk>
+
+	* analysis/simulate.cortex-m0: Created, simulate on cortex-m0
+	* analysis/instruction_stats.py: xz compressed traces can be analysed
+
+2013-10-10  James Pallister <james.pallister@bristol.ac.uk>
+
+	* analysis/instruction_stats.py: Fix for code not executing when 'quiet'
+
+2013-10-10  James Pallister <james.pallister@bristol.ac.uk>
+
+	* analysis/instruction_stats.py: Refactored code
+
+2013-10-10  James Pallister <james.pallister@bristol.ac.uk>
+	* analysis/simulate.avr: Modified to use simulavr
+	* analysis/instruction_stats.py: Modified to use simulavr
+
+2013-10-10  James Pallister  <james.pallister@bristol.ac.uk>
+
+	* generate.cortex-m3: Small compilation fixes
+
+2013-10-10  James Pallister  <james.pallister@bristol.ac.uk>
+
+	* configure.ac: Conditionally compile startup code
+	* generate.cortex-m3: Likewise
+	* src/2dfir/Makefile.am: Likewise
+	* src/blowfish/Makefile.am: Likewise
+	* src/common.mk.am: Likewise
+	* src/crc32/Makefile.am: Likewise
+	* src/cubic/Makefile.am: Likewise
+	* src/dijkstra/Makefile.am: Likewise
+	* src/fdct/Makefile.am: Likewise
+	* src/float_matmult/Makefile.am: Likewise
+	* src/int_matmult/Makefile.am: Likewise
+	* src/rijndael/Makefile.am: Likewise
+	* src/sha/Makefile.am: Likewise
+
+	* generate.cortex-m0: Created, generate for ARM Cortex-M0
+	* src/platformcode/startup.S: Created, start up code for ARM
+	* src/platformcode/stm32f05_flash.ld: Created, linker script for M0
+
+2013-10-08  James Pallister  <james.pallister@bristol.ac.uk>
+
+	* src/float_matmult/matmult.c: Execution fix for AVR
+
+2013-10-08  James Pallister  <james.pallister@bristol.ac.uk>
+
+	* analysis/simulate.avr: Hack to terminate the simulator when in while(1)
+	* analysis/instruction_stats.py: Added quiet flag
+
+2013-10-08  James Pallister <james.pallister@bristol.ac.uk>
+
+	* analysis/simulate.avr: Created
+	* analysis/instruction_stats.py
+
+2013-10-08  James Pallister <james.pallister@bristol.ac.uk>
+
+	Added AVR compilation script
+
+	* src/rijndael/aesxam.c: Fix to compile on AVR
+	* generate.avr: Created.
+
+2013-10-06  James Pallister  <james.pallister@bristol.ac.uk>
+
+	* configure.ac: Added options to compile in extra platform code
+	* generate.cortex-m3: Enable platform code
+	* src/2dfir/Makefile.am: Conditionally compile in platform code
+	* src/blowfish/Makefile.am: Likewise
+	* src/crc32/Makefile.am: Likewise
+	* src/cubic/Makefile.am: Likewise
+	* src/dijkstra/Makefile.am: Likewise
+	* src/fdct/Makefile.am: Likewise
+	* src/float_matmult/Makefile.am: Likewise
+	* src/int_matmult/Makefile.am: Likewise
+	* src/rijndael/Makefile.am: Likewise
+	* src/sha/Makefile.am: Likewise
+	* src/platformcode/platformcode.h: Conditionally disable jrand
+
+2013-10-03  James Pallister  <james.pallister@bristol.ac.uk>
+
+	* src/cubic/Makefile.am: Added dependency on libm
+	* src/rijndael/aesxam.c: Removed code which conflicted when defining ARM
+
+2013-10-03  James Pallister  <james.pallister@bristol.ac.uk>
+
+	* configure.ac: Fixed host_alias being set. Use $host_alias instead
+	of $host for cross compilation checks
+	* generate.cortex-m3: Added shebang
+
+2013-10-02  James Pallister  <james.pallister@bristol.ac.uk>
+
+	* Makefile.am: Added the rest of the benchmarks
+	* configure.ac: Added the rest of the benchmarks
+	* src/blowfish/Makefile.am: Created
+	* src/crc32/Makefile.am: Created
+	* src/cubic/Makefile.am: Created
+	* src/dijkstra/Makefile.am: Created
+	* src/fdct/Makefile.am: Created
+	* src/float_matmult/Makefile.am: Created
+	* src/int_matmult/Makefile.am: Created
+	* src/rijndael/Makefile.am: Created
+	* src/sha/Makefile.am: Created
+	* src/blowfish/Makefile: Removed - generated by automake
+	* src/crc32/Makefile: Removed - generated by automake
+	* src/cubic/Makefile: Removed - generated by automake
+	* src/dijkstra/Makefile: Removed - generated by automake
+	* src/fdct/Makefile: Removed - generated by automake
+	* src/float_matmult/Makefile: Removed - generated by automake
+	* src/int_matmult/Makefile: Removed - generated by automake
+	* src/rijndael/Makefile: Removed - generated by automake
+	* src/sha/Makefile: Removed - generated by automake
+
+
+2013-10-01  James Pallister  <james.pallister@bristol.ac.uk>
+
+	* .gitignore: Updated to ignore autotools byproducts
+	* AUTHORS: Created
+	* configure.ac: Created
+	* generate.cortex-m3: Created
+	* INSTALL: Created
+	* Makefile.am: Created
+	* NEWS: Created
+	* README: Created to point at README.md
+	* src/2dfir/Makefile.am: Created
+	* src/common.mk.am: Created
+
 2013-10-01  James Pallister <james.pallister@bristol.ac.uk>
 
 	* fft/fft1.c: Created. First benchmark for the version 2 expanded
 	set.
 
-2013-09-30  James Pallister <james.pallister@bristol.ac.uk>
+2013-09-30  James Pallister  <james.pallister@bristol.ac.uk>
 
 	* README.md: Reflect the preprint publication on arXiv and minor
 	corrections.
 
-2013-07-31  Jeremy Bennett <jeremy.bennett@embecosm.com>
+2013-07-31  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* README.md: Note that release-0.1 is the code used in
 	"Identifying Compiler Options to Minimise Energy Consumption for
 	Embedded Platforms" by James Pallister, Simon Hollis and Jeremy
 	Bennett.
 
-2013-07-31  Jeremy Bennett <jeremy.bennett@embecosm.com>
+2013-07-31  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* run-all.sh: Correct various errors in echoing to results file.
 
-2013-07-31  Jeremy Bennett <jeremy.bennett@embecosm.com>
+2013-07-31  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* run-all.sh: Use run-time segment size to decide whether to run.
 
-2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>
+2013-07-30  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* README.md: Updated with information on running the tests.
 
-2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>
+2013-07-30  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* run-all.sh: Created.
 	* .gitignore: Add results directory.
 
-2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>
+2013-07-30  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* platformcode.c: Created for common code.
 	* platformcode.c: Common header.
 
-2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>
+2013-07-30  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* blowfish/bf.c: Change mode to non-executable.
 	* blowfish/bf_cfb64.c: Likewise.

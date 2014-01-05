@@ -1,0 +1,16 @@
+#!/bin/bash -e
+
+BEEBS_DIR="$( cd "$( dirname "$0" )" && pwd )"
+
+if [[ -z "$CFLAGS" ]]; then
+    CFLAGS=" -mprocessor=32MX250F128B -mips32r2 -std=gnu99 -mips16 "
+else
+    CFLAGS+=" -mprocessor=32MX250F128B -mips32r2 -std=gnu99 -mips16 "
+fi
+
+export CFLAGS=$CFLAGS
+
+$BEEBS_DIR/configure --host=pic32
+
+make clean
+make
