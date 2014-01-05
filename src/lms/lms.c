@@ -234,6 +234,7 @@ int main()
     {
         benchmark();
     }
+    stop_trigger();
     return 0;
 }
 

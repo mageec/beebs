@@ -1,4 +1,9 @@
 2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix for lms
+
+	* src/lms/lms.c: Added stop trigger for lms
+
+2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added fft to simulation scripts
 
 	* analysis/simulate.avr.in: Added fft to simulation scripts
