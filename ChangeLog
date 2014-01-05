@@ -16,6 +16,32 @@
 	* analysis/Makefile.am: Fix: distribute simulation scripts
 	* analysis/Makefile.in: Regenerated
 
+2014-01-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Added lms to simulation scripts
+
+	* analysis/simulate.avr.in: Added lms to simulation scripts
+	* analysis/simulate.cortex-m0.in: Added lms to simulation scripts
+
+2014-01-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Added lms benchmark
+
+	* Makefile.am: Added lms benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added lms benchmark
+	* src/lms/Makefile.am: Automake file for lms
+	* src/lms/Makefile.in: Generated
+	* src/lms/lms.c: Lms benchmark
+
+2013-12-28  James Pallister  <james.pallister@bristol.ac.uk>
+	Added compress benchmark to analysis
+
+	* Makefile.in: Regenerated
+	* analysis/simulate.avr.in: Added compress benchmark
+	* analysis/simulate.cortex-m0.in: Added compress benchmark
+	* configure: Regenerated
+	* src/compress/Makefile.in: Generated
+
 2013-12-27  James Pallister  <james.pallister@bristol.ac.uk>
 	Added a change to minimize the number of autoreconfs needed
 
@@ -380,11 +406,6 @@
 	* src/2dfir/Makefile.am: Created
 	* src/common.mk.am: Created
 
-2013-10-01  James Pallister <james.pallister@bristol.ac.uk>
-
-	* fft/fft1.c: Created. First benchmark for the version 2 expanded
-	set.
-
 2013-09-30  James Pallister  <james.pallister@bristol.ac.uk>
 
 	* README.md: Reflect the preprint publication on arXiv and minor
@@ -443,7 +464,7 @@
 	* sha/sha.h: Likewise.
 	* sha/sha_driver.c: Likewise.
 
-2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>
+2013-07-30  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* blowfish/bf.c (main): Use rand () rather than jrand ().
 	* rijndael/aesxam (encfile): Use rand () rather than jrand () and
@@ -451,12 +472,12 @@
 	(decfile): Use rand () rather than jrand ().
 	* sha/sha.c: Use rand () rather than jrand ().
 
-2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>
+2013-07-30  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* .gitignore: Created.
 	* ChangeLog: Created.
 
-2013-07-30  Jeremy Bennett <jeremy.bennett@embecosm.com>
+2013-07-30  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	Inherited baseline material
 

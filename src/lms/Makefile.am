@@ -1,8 +1,8 @@
-#   Top level Makefile.am for building a BEEBS benchmark
+#   Makefile.am for building a BEEBS benchmark
 #
-#   Copyright (C) 2013 Embecosm Limited and University of Bristol
+#   Copyright (C) 2014 Embecosm Limited and University of Bristol
 #
-#   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark 
+#   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark
 #   Suite.
 #
 #   Contributor: James Pallister <james.pallister@bristol.ac.uk>
@@ -20,23 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-SUBDIRS=src/platformcode
+bin_PROGRAMS=lms
+lms_SOURCES=lms.c
 
-SUBDIRS+= src/2dfir
-SUBDIRS+=src/blowfish
-SUBDIRS+=src/crc32
-SUBDIRS+=src/cubic
-SUBDIRS+=src/dijkstra
-SUBDIRS+=src/fdct
-SUBDIRS+=src/float_matmult
-SUBDIRS+=src/int_matmult
-SUBDIRS+=src/rijndael
-SUBDIRS+=src/sha
-SUBDIRS+=src/compress
-SUBDIRS+=src/lms
-SUBDIRS+=src/fft
-SUBDIRS+=src/template
+include $(top_srcdir)/src/common.mk.am
 
-SUBDIRS+=analysis
-
-ACLOCAL_AMFLAGS= -I m4
+lms_SOURCES += ${platform_src}
