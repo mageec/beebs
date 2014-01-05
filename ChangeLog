@@ -1,4 +1,10 @@
 2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added fft to simulation scripts
+
+	* analysis/simulate.avr.in: Added fft to simulation scripts
+	* analysis/simulate.cortex-m0.in: Added fft to simulation scripts
+
+2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Updated FFT benchmark for autotools
 
 	* Makefile.am: Added FFT benchmark
