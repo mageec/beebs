@@ -1,4 +1,9 @@
 2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added scale factor into FFT
+
+	* src/fft/fft1.c: Added scale factor into FFT
+
+2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Fix for lms
 
 	* src/lms/lms.c: Added stop trigger for lms

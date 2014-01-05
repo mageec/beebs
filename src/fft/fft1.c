@@ -46,6 +46,8 @@
 /*************************************************************************/
 #include "platformcode.h"
 
+#define SCALE_FACTOR (REPEAT_FACTOR >> 10)
+
 #define PI 3.14159
 #define M_PI 3.14159
 
@@ -129,7 +131,7 @@ int main()
     initialise_trigger();
     start_trigger();
 
-    for(n = 0; n < REPEAT_FACTOR >> 2; ++n)
+    for(n = 0; n < SCALE_FACTOR; ++n)
     {
         benchmark();
     }
