@@ -10,13 +10,15 @@ BIN_PATH=`readlink -f $SCR_DIR/../src`
 runone () {
     d=$1
 
+    exec_file=`find $BIN_PATH/$d -type f -executable`
+
     if [ -e $SCR_DIR/$d.cortex-m0.trace.xz ]; then
         echo Skipping $d
     else
-        echo Simulating $BIN_PATH/$d/$d
+        echo Simulating $exec_file
 
         # Run the simulator, collecting traces
-        $SIMULATOR $BIN_PATH/$d/$d $SIM_FLAGS 2> $SCR_DIR/$d.cortex-m0.trace
+        $SIMULATOR $exec_file $SIM_FLAGS 2> $SCR_DIR/$d.cortex-m0.trace
 
         xz --compress $SCR_DIR/$d.cortex-m0.trace &
     fi
