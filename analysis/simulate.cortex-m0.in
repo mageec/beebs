@@ -31,6 +31,7 @@ runall () {
 }
 
 benchmarks="2dfir blowfish crc32 cubic dijkstra fdct float_matmult \
-            int_matmult rijndael sha compress lms fft"
+            int_matmult rijndael sha compress lms fft gdb-advance \
+            gdb-all-types gdb-anon gdb-arrayidx gdb-async"
 
 runall $benchmarks

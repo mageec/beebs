@@ -1,4 +1,11 @@
 2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added GDB tests to simulation scripts
+
+	* analysis/simulate.avr.in: Added GDB tests to simulation scripts
+	* analysis/simulate.cortex-m0.in: Added GDB tests to simulation
+	    scripts
+
+2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added scale factor into FFT
 
 	* src/fft/fft1.c: Added scale factor into FFT
