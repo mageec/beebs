@@ -154,6 +154,9 @@ AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
+fft_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+	$(fft_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -352,6 +355,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 fft_SOURCES = fft1.c ${platform_src}
+fft_LDFLAGS = "-lm"
 platform_src = $(top_srcdir)/src/platformcode/platformcode.c \
 	$(am__append_1)
 AM_CFLAGS = -I $(top_srcdir)/src/platformcode -g -O2 $(LINKERSCRIPT)
@@ -442,7 +446,7 @@ clean-binPROGRAMS:
 
 fft$(EXEEXT): $(fft_OBJECTS) $(fft_DEPENDENCIES) $(EXTRA_fft_DEPENDENCIES) 
 	@rm -f fft$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(fft_OBJECTS) $(fft_LDADD) $(LIBS)
+	$(AM_V_CCLD)$(fft_LINK) $(fft_OBJECTS) $(fft_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

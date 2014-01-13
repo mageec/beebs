@@ -1,3 +1,13 @@
+2014-01-13  James Pallister  <james.pallister@bristol.ac.uk>
+	Fixes for FFT and nbody - math library required
+
+	* generate.cortex-m0: When using gcc-arm-embedded, -lc -lrdimon is
+	    needed in LDFLAGS to allow autotools checks to pass
+	* src/fft/Makefile.am: Added -lm to LDFLAGS
+	* src/fft/Makefile.in: Regenerated
+	* src/nbody/Makefile.am: Added -lm to LDFLAGS
+	* src/nbody/Makefile.in: Regenerated
+
 014-01-13  James Pallister  <james.pallister@bristol.ac.uk>
 	Benchmarking loop for nbody benchmark and build files
 
