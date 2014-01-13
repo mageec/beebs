@@ -1,3 +1,27 @@
+2014-01-13  James Pallister  <james.pallister@bristol.ac.uk>
+	Choose O2 optimisation level
+
+	* src/2dfir/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/common.mk.am: Choose O2 optimisation level
+	* src/compress/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
 2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added GDB tests to simulation scripts
 

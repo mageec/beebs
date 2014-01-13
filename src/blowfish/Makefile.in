@@ -41,7 +41,7 @@
 #
 #   Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
-#   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark 
+#   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark
 #   Suite.
 #
 #   Contributor: James Pallister <james.pallister@bristol.ac.uk>
@@ -361,7 +361,7 @@ EXTRA_DIST = COPYRIGHT \
 
 platform_src = $(top_srcdir)/src/platformcode/platformcode.c \
 	$(am__append_1)
-AM_CFLAGS = -I $(top_srcdir)/src/platformcode -g $(LINKERSCRIPT)
+AM_CFLAGS = -I $(top_srcdir)/src/platformcode -g -O2 $(LINKERSCRIPT)
 all: all-am
 
 .SUFFIXES:
