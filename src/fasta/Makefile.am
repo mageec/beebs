@@ -1,4 +1,4 @@
-#   Top level Makefile.am for building a BEEBS benchmark
+#   Makefile.am for building fasta benchmark
 #
 #   Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
@@ -20,30 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-SUBDIRS=src/platformcode
+bin_PROGRAMS=fasta
+fasta_SOURCES=fasta.c
 
-SUBDIRS+= src/2dfir
-SUBDIRS+=src/blowfish
-SUBDIRS+=src/crc32
-SUBDIRS+=src/cubic
-SUBDIRS+=src/dijkstra
-SUBDIRS+=src/fasta
-SUBDIRS+=src/fdct
-SUBDIRS+=src/float_matmult
-SUBDIRS+=src/gdb-advance
-SUBDIRS+=src/gdb-all-types
-SUBDIRS+=src/gdb-anon
-SUBDIRS+=src/gdb-arrayidx
-SUBDIRS+=src/gdb-async
-SUBDIRS+=src/int_matmult
-SUBDIRS+=src/nbody
-SUBDIRS+=src/rijndael
-SUBDIRS+=src/sha
-SUBDIRS+=src/compress
-SUBDIRS+=src/lms
-SUBDIRS+=src/fft
-SUBDIRS+=src/template
+include $(top_srcdir)/src/common.mk.am
 
-SUBDIRS+=analysis
-
-ACLOCAL_AMFLAGS= -I m4
+fasta_SOURCES += ${platform_src}

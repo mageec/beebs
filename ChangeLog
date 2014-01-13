@@ -1,3 +1,25 @@
+014-01-13  James Pallister  <james.pallister@bristol.ac.uk>
+	Benchmarking loop for nbody benchmark and build files
+
+	* Makefile.am: Added nbody benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added nbody benchmark
+	* src/nbody/Makefile.am: Automake file for nbody
+	* src/nbody/Makefile.in: Generated
+	* src/nbody/nbody.c: Added benchmarking loop
+
+2014-01-13  James Pallister  <james.pallister@bristol.ac.uk>
+	Added automake files for fasta, and benchmarking loop
+
+	* Makefile.am: Added fasta benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added fasta benchmark
+	* src/fasta/Makefile.am: Automake file for fasta
+	* src/fasta/Makefile.in: Regenerated
+	* src/fasta/fasta.c: Added benchmarking loop
+
 2014-01-13  James Pallister  <james.pallister@bristol.ac.uk>
 	Choose O2 optimisation level
 
@@ -247,14 +269,6 @@
 
 2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
-	* src/gdb-advance/Makefile.in: Regenerated.
-	* src/gdb-all-types/Makefile.in: Regenerated.
-	* src/gdb-anon/Makefile.in: Regenerated.
-	* src/gdb-arrayidx/Makefile.in: Regenerated.
-	* src/gdb-async/Makefile.in: Regenerated.
-
-2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
-
 	* Makefile.am: Added platformcode.
 	* Makefile.in: Regenerated.
 	* configure: Regenerated.
@@ -310,65 +324,8 @@
 	* src/template/Makefile.am: Minor layout changes.
 	* src/template/template.c: Change to GNU style layout, added license
 	declaration, C-style comments, added emacs style comment.
-2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
-	* src/gdb-advance/advance.c: Add template drirver code.
-	* src/gdb-all-types/all-types.c: Likewise.
-	* src/gdb-anon/anon.c: Likewise.
-	* src/gdb-arrayidx/arrayidx.c: Likewise.
-	* src/gdb-async/async.c: Likewise.
-
-2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
-
-	* src/template/Makefile.am: Minor layout changes.
-	* src/template/template.c: Change to GNU style layout, added license
-	declaration, C-style comments, added emacs style comment.
-
-2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
-
-	* ChangeLog: Regenerated.
-	* Makefile.am: Added gdb-async.
-	* configure: Regenerated.
-	* configure.ac: Likewise.
-	* src/gdb-async/Makefile.am: Created.
-	* src/gdb-async/async.c: Created.
-
-2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
-
-	* Makefile.am: Added GDB tests.
-	* aclocal.m4: Regenerated.
-	* configure: Regenerated.
-	* configure.ac: Added GDB tests.
-	* src/gdb-all-types/Makefile.am: Corrected canonical name.
-	* src/gdb-anon/anon.c: Corrected typo.
-
-2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
-
-	* aclocal.m4: Regenerated.
-	* configure: Regenerated.
-
-2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
-
-	* src/gdb-arrayidx/Makefile.am: Created.
-	* src/gdb-arrayidx/arrayidx.c: Created.
-
-2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
-
-	* src/gdb-anon/Makefile.am: Created.
-	* src/gdb-anon/anon.c: Created.
-
-2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
-
-	* src/gdb-all-types/Makefile.am: Created.
-	* src/gdb-all-types/all-types.c: Created.
-	* src/gdb-advance/advance.c: Copyright corrected.
-
-2013-12-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
-
-	* src/gdb-advance/Makefile.am: Created.
-	* src/gdb-advance/advance.c: Created.
-
-2013-12-05  James Pallister <james.pallister@bristol.ac.uk>
+2013-12-05  James Pallister  <james.pallister@bristol.ac.uk>
 
 	* src/common.mk.am: Fix to enable out of tree builds
 
