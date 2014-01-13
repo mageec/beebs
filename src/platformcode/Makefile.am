@@ -1,11 +1,11 @@
-#   Common makefile.am fragments for building a BEEBS benchmark
+#   Makefile.am for platform code for BEEBS benchmarks
 #
 #   Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
 #   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark 
 #   Suite.
 #
-#   Contributor: James Pallister <james.pallister@bristol.ac.uk>
+#   Contributor: Jeremy Bennett <jeremy.bennett@embecosm.com>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -20,12 +20,16 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-platform_src = $(top_srcdir)/src/platformcode/platformcode.c
 
-if PLATFORMSRC
-    platform_src += $(top_srcdir)/src/platformcode/exit.c ../platformcode/jrand.c ../platformcode/sbrk.c ../platformcode/startup.S
-endif
-
-AM_CFLAGS = -I $(top_srcdir)/src/platformcode -g
-
-AM_CFLAGS +=  $(LINKERSCRIPT)
+# Only needed to ensure all the sources are included in the distribution.
+EXTRA_DIST = exit.c \
+             exit.h \
+             jrand.c \
+             jrand.h \
+             platformcode.c \
+             platformcode.h \
+             sbrk.c \
+             sbrk.h \
+             startup.S \
+             stm32f05_flash.ld \
+             stm32vl_flash.ld

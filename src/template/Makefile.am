@@ -1,4 +1,4 @@
-#   Common makefile.am fragments for building a BEEBS benchmark
+#   Makefile.am for building a BEEBS benchmark
 #
 #   Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
@@ -20,12 +20,22 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-platform_src = $(top_srcdir)/src/platformcode/platformcode.c
 
-if PLATFORMSRC
-    platform_src += $(top_srcdir)/src/platformcode/exit.c ../platformcode/jrand.c ../platformcode/sbrk.c ../platformcode/startup.S
-endif
+# Change every instance of template to the name of your benchmark
 
-AM_CFLAGS = -I $(top_srcdir)/src/platformcode -g
+# To get automake to use this file, add the following to toplevel configure.ac
+#   AC_CONFIG_FILES([src/template/Makefile])
+# and add the following line to toplevel Makefile.am
+#   SUBDIRS+=src/template
 
-AM_CFLAGS +=  $(LINKERSCRIPT)
+
+# Make sure your sources include the headers as well as the C/C++ source
+# files, so they go into the distribution. If there are other files that are
+# needed, they should go in EXTRA_SOURCES.
+
+bin_PROGRAMS=template
+template_SOURCES=template.c
+
+include $(top_srcdir)/src/common.mk.am
+
+template_SOURCES += ${platform_src}

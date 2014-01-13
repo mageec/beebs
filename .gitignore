@@ -1,33 +1,17 @@
+# Build out of tree or binaries will clutter you up.
+
+# Temporaries and backups from emacs
 *~
-*.o
 \#*
 .\#*
-results
 
-#Ignore binaries
-src/2dfir/*2dfir
-src/blowfish/*blowfish
-src/crc32/*crc32
-src/cubic/*cubic
-src/dijkstra/*dijkstra
-src/fdct/*fdct
-src/float_matmult/*float_matmult
-src/int_matmult/*int_matmult
-src/rijndael/*rijndael
-src/sha/*sha
-
-# Ignore temporary vim files
+# Temporary vim files
 *.swp
 *.tmp
-.deps
-*.in
-Makefile
-config.log
-config.status
-aclocal.m4
+
+# Results and build directories
+results
+
+# Autotools things
 autom4te.cache
-build-aux
-configure
-libtool
-m4
-*.mk
+

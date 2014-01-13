@@ -3,14 +3,14 @@
 BEEBS_DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 if [[ -z "$CFLAGS" ]]; then
-    CFLAGS=" -mmcu=atmega328p -std=gnu99 "
+    CFLAGS=" -mmcu=msp430fr5739 -std=gnu99 "
 else
-    CFLAGS+=" -mmcu=atmega328p -std=gnu99 "
+    CFLAGS+=" -mmcu=msp430fr5739 -std=gnu99 "
 fi
 
 export CFLAGS=$CFLAGS
 
-$BEEBS_DIR/configure --host=avr --enable-simulate-avr
+$BEEBS_DIR/configure --host=msp430
 
 make clean
 make
