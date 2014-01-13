@@ -23,6 +23,15 @@
 	* src/template/Makefile.in: Regenerated
 
 2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix for simulation scripts when executable name is different from its
+	directory name
+
+	* analysis/simulate.avr.in: Added a parameter to find the executable
+	    within the given directory
+	* analysis/simulate.cortex-m0.in: Added a parameter to find the
+	    executable within the given directory
+
+2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added GDB tests to simulation scripts
 
 	* analysis/simulate.avr.in: Added GDB tests to simulation scripts
