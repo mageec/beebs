@@ -11933,6 +11933,8 @@ ac_config_files="$ac_config_files src/float_matmult/Makefile"
 
 ac_config_files="$ac_config_files src/int_matmult/Makefile"
 
+ac_config_files="$ac_config_files src/nbody/Makefile"
+
 ac_config_files="$ac_config_files src/rijndael/Makefile"
 
 ac_config_files="$ac_config_files src/sha/Makefile"
@@ -12994,6 +12996,7 @@ do
     "src/fdct/Makefile") CONFIG_FILES="$CONFIG_FILES src/fdct/Makefile" ;;
     "src/float_matmult/Makefile") CONFIG_FILES="$CONFIG_FILES src/float_matmult/Makefile" ;;
     "src/int_matmult/Makefile") CONFIG_FILES="$CONFIG_FILES src/int_matmult/Makefile" ;;
+    "src/nbody/Makefile") CONFIG_FILES="$CONFIG_FILES src/nbody/Makefile" ;;
     "src/rijndael/Makefile") CONFIG_FILES="$CONFIG_FILES src/rijndael/Makefile" ;;
     "src/sha/Makefile") CONFIG_FILES="$CONFIG_FILES src/sha/Makefile" ;;
     "src/template/Makefile") CONFIG_FILES="$CONFIG_FILES src/template/Makefile" ;;

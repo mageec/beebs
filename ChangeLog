@@ -1,4 +1,15 @@
 2014-01-13  James Pallister  <james.pallister@bristol.ac.uk>
+	Benchmarking loop for nbody benchmark and build files
+
+	* Makefile.am: Added nbody benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added nbody benchmark
+	* src/nbody/Makefile.am: Automake file for nbody
+	* src/nbody/Makefile.in: Generated
+	* src/nbody/nbody.c: Added benchmarking loop
+
+2014-01-13  James Pallister  <james.pallister@bristol.ac.uk>
 	Added automake files for fasta, and benchmarking loop
 
 	* Makefile.am: Added fasta benchmark

@@ -2,6 +2,10 @@
 #include <math.h>
 #include <stdlib.h>
 
+#include "platformcode.h"
+
+#define SCALE_FACTOR (REPEAT_FACTOR >> 8)
+
 #define PI 3.141592653589793
 #define SOLAR_MASS ( 4 * PI * PI )
 #define DAYS_PER_YEAR 365.24
@@ -84,7 +88,7 @@ double bodies_energy(struct body *bodies, unsigned int nbodies) {
          for (k = 0; k < 3; ++k)
             dx[k] = bodies[i].x[k] - bodies[j].x[k];
 
-         distance = sqrt(dx[0] * dx[0] + dx[1] * dx[1] 
+         distance = sqrt(dx[0] * dx[0] + dx[1] * dx[1]
             + dx[2] * dx[2]);
          e -= (bodies[i].mass * bodies[j].mass) / distance;
       }
@@ -92,13 +96,26 @@ double bodies_energy(struct body *bodies, unsigned int nbodies) {
    return e;
 }
 
-int main(int argc, char** argv)
+int benchmark(int n)
 {
-   int i, n = atoi(argv[1]);
+   int i;
    offset_momentum(solar_bodies, BODIES_SIZE);
    /*printf("%.9f\n", bodies_energy(solar_bodies, BODIES_SIZE));*/
    for (i = 0; i < n; ++i)
        bodies_energy(solar_bodies, BODIES_SIZE);
    /*printf("%.9f\n", bodies_energy(solar_bodies, BODIES_SIZE));*/
+   return 0;
+}
+
+int main()
+{
+   int n;
+
+   initialise_trigger();
+   start_trigger();
+   for(n = 0; n < SCALE_FACTOR; ++n)
+      benchmark(100);
+   stop_trigger();
+
    return 0;
 }
