@@ -1,6 +1,10 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "platformcode.h"
+
+#define SCALE_FACTOR   (REPEAT_FACTOR>>6)
+
 #define WIDTH 60
 #define MIN(a,b) ((a) <= (b) ? (a) : (b))
 #define NELEMENTS(x) (sizeof (x) / sizeof ((x)[0]))
@@ -10,15 +14,15 @@ typedef struct {
     char c;
 } aminoacid_t;
 
-static inline float myrandom (float max) { 
+static inline float myrandom (float max) {
     unsigned long const IM = 139968;
     unsigned long const IA = 3877;
     unsigned long const IC = 29573;
-    static unsigned long last = 42; 
-    last = (last * IA + IC) % IM; 
+    static unsigned long last = 42;
+    last = (last * IA + IC) % IM;
     /*Integer to float conversions are faster if the integer is signed*/
-    return max * (long) last / IM; 
-} 
+    return max * (long) last / IM;
+}
 
 static inline void accumulate_probabilities (aminoacid_t *genelist, size_t len) {
     float cp = 0.0;
@@ -35,20 +39,20 @@ static inline void accumulate_probabilities (aminoacid_t *genelist, size_t len) 
 /* Between each WIDTH consecutive characters it prints a newline */
 /* This function assumes that WIDTH <= strlen (s) + 1 */
 static void repeat_fasta (char const *s, size_t count) {
-    size_t pos = 0;  
-    size_t len = strlen (s); 
+    size_t pos = 0;
+    size_t len = strlen (s);
     char *s2 = malloc (len + WIDTH);
-    memcpy (s2, s, len); 
-    memcpy (s2 + len, s, WIDTH); 
-    do {   
-     	size_t line = MIN(WIDTH, count); 
-        /*fwrite_unlocked (s2 + pos,1,line,stdout); 
+    memcpy (s2, s, len);
+    memcpy (s2 + len, s, WIDTH);
+    do {
+     	size_t line = MIN(WIDTH, count);
+        /*fwrite_unlocked (s2 + pos,1,line,stdout);
           putchar_unlocked ('\n'); */
-     	pos += line; 
-     	if (pos >= len) pos -= len; 
-     	count -= line;  
-    } while (count); 
-    free (s2); 
+     	pos += line;
+     	if (pos >= len) pos -= len;
+     	count -= line;
+    } while (count);
+    free (s2);
 }
 
 /* This function takes a pointer to the first element of an array */
@@ -61,32 +65,24 @@ static void repeat_fasta (char const *s, size_t count) {
 /* This is done count times. */
 /* Between each WIDTH consecutive characters, the function prints a newline */
 static void random_fasta (aminoacid_t const *genelist, size_t count) {
-    do {    
-	size_t line = MIN(WIDTH, count);    
-	size_t pos = 0;    
-	char buf[WIDTH + 1];    
-	do {    
+    do {
+	size_t line = MIN(WIDTH, count);
+	size_t pos = 0;
+	char buf[WIDTH + 1];
+	do {
 	    float r = myrandom (1.0);
-	    size_t i = 0;   
-	    while (genelist[i].p < r)    
-		++i; /* Linear search */    
-	    buf[pos++] = genelist[i].c;    
-	} while (pos < line);   
+	    size_t i = 0;
+	    while (genelist[i].p < r)
+		++i; /* Linear search */
+	    buf[pos++] = genelist[i].c;
+	} while (pos < line);
 	buf[line] = '\n';
 	/*fwrite_unlocked (buf, 1, line + 1, stdout);    */
-	count -= line;    
-    } while (count);   
+	count -= line;
+    } while (count);
 }
 
-int main (int argc, char **argv) {
-    size_t n;
-    if (argc > 1) { 
-	char const *arg = argv[1];
- 	char *tail; 
- 	n = strtoul (arg, &tail, 0); 
- 	if (tail == arg)  
-	    errx (1, "Could not convert \"%s\" to an unsigned long integer", arg); 
-    } else n = 1000;
+int benchmark (size_t n) {
 
     static aminoacid_t iub[] = {
 	{ 0.27, 'a' },
@@ -111,7 +107,7 @@ int main (int argc, char **argv) {
 	{ 0.1975473066391, 'g' },
 	{ 0.3015094502008, 't' }};
 
-    accumulate_probabilities (iub, NELEMENTS(iub)); 
+    accumulate_probabilities (iub, NELEMENTS(iub));
     accumulate_probabilities (homosapiens, NELEMENTS(homosapiens));
 
     static char const *const alu ="\
@@ -130,4 +126,15 @@ AGCCTGGGCGACAGAGCGAGACTCCGTCTCAAAAA";
     /*fputs_unlocked (">THREE Homo sapiens frequency\n", stdout);*/
     random_fasta (homosapiens, 5 * n);
     return 0;
+}
+
+int main()
+{
+    int n;
+
+    initialise_trigger();
+    start_trigger();
+    for(n = 0; n < SCALE_FACTOR; ++n)
+        benchmark(1000);
+    stop_trigger();
 }

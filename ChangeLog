@@ -1,3 +1,14 @@
+2014-01-13  James Pallister  <james.pallister@bristol.ac.uk>
+	Added automake files for fasta, and benchmarking loop
+
+	* Makefile.am: Added fasta benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added fasta benchmark
+	* src/fasta/Makefile.am: Automake file for fasta
+	* src/fasta/Makefile.in: Regenerated
+	* src/fasta/fasta.c: Added benchmarking loop
+
 2014-01-04  James Pallister  <james.pallister@bristol.ac.uk>
 	Fix: distribute simulation scripts
 

@@ -11925,6 +11925,8 @@ ac_config_files="$ac_config_files src/cubic/Makefile"
 
 ac_config_files="$ac_config_files src/dijkstra/Makefile"
 
+ac_config_files="$ac_config_files src/fasta/Makefile"
+
 ac_config_files="$ac_config_files src/fdct/Makefile"
 
 ac_config_files="$ac_config_files src/float_matmult/Makefile"
@@ -12988,6 +12990,7 @@ do
     "src/crc32/Makefile") CONFIG_FILES="$CONFIG_FILES src/crc32/Makefile" ;;
     "src/cubic/Makefile") CONFIG_FILES="$CONFIG_FILES src/cubic/Makefile" ;;
     "src/dijkstra/Makefile") CONFIG_FILES="$CONFIG_FILES src/dijkstra/Makefile" ;;
+    "src/fasta/Makefile") CONFIG_FILES="$CONFIG_FILES src/fasta/Makefile" ;;
     "src/fdct/Makefile") CONFIG_FILES="$CONFIG_FILES src/fdct/Makefile" ;;
     "src/float_matmult/Makefile") CONFIG_FILES="$CONFIG_FILES src/float_matmult/Makefile" ;;
     "src/int_matmult/Makefile") CONFIG_FILES="$CONFIG_FILES src/int_matmult/Makefile" ;;
