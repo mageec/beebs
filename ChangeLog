@@ -1,4 +1,15 @@
 2014-02-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Added adpcm benchmark
+
+	* Makefile.am: Added adpcm benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added adpcm benchmark
+	* src/adpcm/Makefile.am: Added adpcm benchmark
+	* src/adpcm/Makefile.in: Regenerated
+	* src/adpcm/adpcm.c: Added adpcm benchmark
+
+2014-02-02  James Pallister  <james.pallister@bristol.ac.uk>
 	Changed simulation framework to work with a generic simulation script.
 	Individual commands are included based on the compilation target
 

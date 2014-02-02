@@ -99,6 +99,7 @@ fi
 
 
 AC_CONFIG_FILES([src/2dfir/Makefile])
+AC_CONFIG_FILES([src/adpcm/Makefile])
 AC_CONFIG_FILES([src/blowfish/Makefile])
 AC_CONFIG_FILES([src/crc32/Makefile])
 AC_CONFIG_FILES([src/cubic/Makefile])
