@@ -1,4 +1,10 @@
 2014-02-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix for targets which don't simulate
+
+	* configure: Regenerated
+	* configure.ac: Fix for targets which don't simulate
+
+2014-02-02  James Pallister  <james.pallister@bristol.ac.uk>
 	Changed simulation framework to work with a generic simulation script.
 	Individual commands are included based on the compilation target
 
