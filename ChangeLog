@@ -1,3 +1,42 @@
+2014-02-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Changed simulation framework to work with a generic simulation script.
+	Individual commands are included based on the compilation target
+
+	* Makefile.in: Regenerated
+	* analysis/Makefile.am: Generate new simulate script based on the
+	    target
+	* analysis/Makefile.in: Regenerated
+	* analysis/cmd.arm-none-eabi: Commands to simulate for cortex-m0
+	* analysis/cmd.avr-unknown-none: Commands to simulate for AVR
+	* analysis/simulate.avr.in: Removed
+	* analysis/simulate.cortex-m0.in: Removed
+	* analysis/simulator.in: Generic simulation framework
+	* configure: Regenerated
+	* configure.ac: A single SIMULATE conditional rather than a simulate
+	    conditional for each target
+	* src/2dfir/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/compress/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
 2014-01-13  James Pallister  <james.pallister@bristol.ac.uk>
 	Fixes for FFT and nbody - math library required
 

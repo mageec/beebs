@@ -102,11 +102,8 @@ build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
 
-# If creating script for AVR simulator
-@SIMULATE_AVR_TRUE@am__append_1 = simulate.avr
-
-# If creating script for Cortex-M0 simulator
-@SIMULATE_CORTEX_M0_TRUE@am__append_2 = simulate.cortex-m0
+# If creating script for simulator
+@SIMULATE_TRUE@am__append_1 = simulate
 subdir = analysis
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -235,6 +232,7 @@ RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
+SIMULATORPATH = @SIMULATORPATH@
 STRIP = @STRIP@
 VERSION = @VERSION@
 abs_builddir = @abs_builddir@
@@ -297,9 +295,10 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ANALYSIS = instruction_stats.py all_stats.py
 EXTRA_DIST = $(ANALYSIS) simulate.cortex-m0.in simulate.avr.in
-bin_SCRIPTS = $(am__append_1) $(am__append_2)
-@SIMULATE_AVR_TRUE@AVRSIMPATH = "simulavr"
-@SIMULATE_CORTEX_M0_TRUE@CORTEXM0SIMPATH = "thumbulator"
+bin_SCRIPTS = $(am__append_1)
+do_subst = sed -e '/@simulatorcommands@/{r $(srcdir)/cmd.$(host)'$$'\n''d}' \
+		       -e 's,[@]simulator[@],$(SIMULATORPATH),g'
+
 CLEANFILES = $(bin_SCRIPTS)
 all: all-am
 
@@ -532,13 +531,9 @@ uninstall-am: uninstall-binSCRIPTS
 	uninstall-am uninstall-binSCRIPTS
 
 
-@SIMULATE_AVR_TRUE@simulate.avr: $(srcdir)/simulate.avr.in Makefile
-@SIMULATE_AVR_TRUE@	sed -e 's,[@]avrsimpath,$(AVRSIMPATH),g' < $(srcdir)/simulate.avr.in > simulate.avr
-@SIMULATE_AVR_TRUE@	chmod +x simulate.avr
-
-@SIMULATE_CORTEX_M0_TRUE@simulate.cortex-m0: $(srcdir)/simulate.cortex-m0.in Makefile
-@SIMULATE_CORTEX_M0_TRUE@	sed -e 's,[@]cortexm0simpath,$(CORTEXM0SIMPATH),g' < $(srcdir)/simulate.cortex-m0.in > simulate.cortex-m0
-@SIMULATE_CORTEX_M0_TRUE@	chmod +x simulate.cortex-m0
+@SIMULATE_TRUE@simulate: $(srcdir)/simulator.in $(srcdir)/cmd.$(host) Makefile
+@SIMULATE_TRUE@	$(do_subst) < $(srcdir)/simulator.in > simulate
+@SIMULATE_TRUE@	chmod +x simulate
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

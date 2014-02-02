@@ -636,11 +636,10 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
-SIMULATE_CORTEX_M0_FALSE
-SIMULATE_CORTEX_M0_TRUE
 simulate_m0_cmd
-SIMULATE_AVR_FALSE
-SIMULATE_AVR_TRUE
+SIMULATE_FALSE
+SIMULATE_TRUE
+SIMULATORPATH
 simulavr_cmd
 PLATFORMSRC_FALSE
 PLATFORMSRC_TRUE
@@ -11826,17 +11825,17 @@ $as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
 as_fn_error $? "Need version 1.0.0 of simulavr
 See \`config.log' for more details" "$LINENO" 5; }
     fi
-fi
+    SIMULATORPATH=simulavr
 
- if test x$enable_simulate_avr != xno; then
-  SIMULATE_AVR_TRUE=
-  SIMULATE_AVR_FALSE='#'
+     if test x$enable_simulate_avr != xno; then
+  SIMULATE_TRUE=
+  SIMULATE_FALSE='#'
 else
-  SIMULATE_AVR_TRUE='#'
-  SIMULATE_AVR_FALSE=
+  SIMULATE_TRUE='#'
+  SIMULATE_FALSE=
 fi
 
-
+fi
 
 # Check if we want to simulate cortex-m0 ###################################
 # Check whether --enable-simulate-cortex-m0 was given.
@@ -11904,14 +11903,16 @@ $as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
 as_fn_error $? "Need a version of thumbulator which supports --elf
 See \`config.log' for more details" "$LINENO" 5; }
     fi
+    SIMULATORPATH=thumbulator
+
+     if test x$enable_simulate_cortex_m0 != xno; then
+  SIMULATE_TRUE=
+  SIMULATE_FALSE='#'
+else
+  SIMULATE_TRUE='#'
+  SIMULATE_FALSE=
 fi
 
- if test x$enable_simulate_cortex_m0 != xno; then
-  SIMULATE_CORTEX_M0_TRUE=
-  SIMULATE_CORTEX_M0_FALSE='#'
-else
-  SIMULATE_CORTEX_M0_TRUE='#'
-  SIMULATE_CORTEX_M0_FALSE=
 fi
 
 
@@ -12144,12 +12145,12 @@ if test -z "${PLATFORMSRC_TRUE}" && test -z "${PLATFORMSRC_FALSE}"; then
   as_fn_error $? "conditional \"PLATFORMSRC\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${SIMULATE_AVR_TRUE}" && test -z "${SIMULATE_AVR_FALSE}"; then
-  as_fn_error $? "conditional \"SIMULATE_AVR\" was never defined.
+if test -z "${SIMULATE_TRUE}" && test -z "${SIMULATE_FALSE}"; then
+  as_fn_error $? "conditional \"SIMULATE\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${SIMULATE_CORTEX_M0_TRUE}" && test -z "${SIMULATE_CORTEX_M0_FALSE}"; then
-  as_fn_error $? "conditional \"SIMULATE_CORTEX_M0\" was never defined.
+if test -z "${SIMULATE_TRUE}" && test -z "${SIMULATE_FALSE}"; then
+  as_fn_error $? "conditional \"SIMULATE\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 

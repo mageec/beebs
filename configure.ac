@@ -71,10 +71,9 @@ if test x$enable_simulate_avr == xyes ; then
     if test x$found_version == x0 ; then
         AC_MSG_FAILURE([Need version 1.0.0 of simulavr])
     fi
+    AC_SUBST(SIMULATORPATH, [simulavr])
+    AM_CONDITIONAL([SIMULATE], [test x$enable_simulate_avr != xno])
 fi
-
-AM_CONDITIONAL([SIMULATE_AVR], [test x$enable_simulate_avr != xno])
-
 
 # Check if we want to simulate cortex-m0 ###################################
 AC_ARG_ENABLE([simulate-cortex-m0],
@@ -94,9 +93,10 @@ if test x$enable_simulate_cortex_m0 == xyes ; then
         echo $thumbulator_version
         AC_MSG_FAILURE([Need a version of thumbulator which supports --elf])
     fi
+    AC_SUBST(SIMULATORPATH, [thumbulator])
+    AM_CONDITIONAL([SIMULATE], [test x$enable_simulate_cortex_m0 != xno])
 fi
 
-AM_CONDITIONAL([SIMULATE_CORTEX_M0], [test x$enable_simulate_cortex_m0 != xno])
 
 AC_CONFIG_FILES([src/2dfir/Makefile])
 AC_CONFIG_FILES([src/blowfish/Makefile])

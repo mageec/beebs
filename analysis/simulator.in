@@ -1,9 +1,7 @@
 #!/bin/bash -e
 # Script to collect dynamic instruction statistics of the programs
 
-SIMULATOR=@cortexm0simpath
-SIM_FLAGS="--elf"
-
+SIMULATOR=@simulator@
 SCR_DIR="$( cd "$( dirname "$0" )" && pwd )"
 BIN_PATH=`readlink -f $SCR_DIR/../src`
 
@@ -11,16 +9,15 @@ runone () {
     d=$1
 
     exec_file=`find $BIN_PATH/$d -type f -executable`
+    trace=$SCR_DIR/$d.trace
 
-    if [ -e $SCR_DIR/$d.cortex-m0.trace.xz ]; then
+    if [ -e $trace.xz ]; then
         echo Skipping $d
     else
         echo Simulating $exec_file
 
         # Run the simulator, collecting traces
-        $SIMULATOR $exec_file $SIM_FLAGS 2> $SCR_DIR/$d.cortex-m0.trace
-
-        xz --compress $SCR_DIR/$d.cortex-m0.trace &
+        @simulatorcommands@
     fi
 }
 
@@ -32,8 +29,8 @@ runall () {
     done
 }
 
-benchmarks="2dfir blowfish crc32 cubic dijkstra fdct float_matmult \
-            int_matmult rijndael sha compress lms fft gdb-advance \
-            gdb-all-types gdb-anon gdb-arrayidx gdb-async"
+benchmarks="2dfir crc32 cubic dijkstra fdct float_matmult int_matmult \
+           rijndael sha compress lms fft gdb-advance gdb-all-types gdb-anon \
+           gdb-arrayidx gdb-async"
 
 runall $benchmarks
