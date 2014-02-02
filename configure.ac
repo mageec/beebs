@@ -56,6 +56,8 @@ AC_ARG_ENABLE([platformsources],
 
 AM_CONDITIONAL([PLATFORMSRC], [test x$enable_platformsources != xno])
 
+AM_CONDITIONAL([SIMULATE], [0])
+
 # Check if we want to simulate AVR #########################################
 AC_ARG_ENABLE([simulate-avr],
             [AS_HELP_STRING([--enable-simulate-avr],

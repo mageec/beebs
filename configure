@@ -11757,21 +11757,21 @@ else
 fi
 
 
-# Check if we want to simulate AVR #########################################
-# Check whether --enable-simulate-avr was given.
-if test "${enable_simulate_avr+set}" = set; then :
-  enableval=$enable_simulate_avr; enable_simulate_avr=yes
-else
-  enable_simulate_avr=no
-fi
-
-
  if 0; then
   SIMULATE_TRUE=
   SIMULATE_FALSE='#'
 else
   SIMULATE_TRUE='#'
   SIMULATE_FALSE=
+fi
+
+
+# Check if we want to simulate AVR #########################################
+# Check whether --enable-simulate-avr was given.
+if test "${enable_simulate_avr+set}" = set; then :
+  enableval=$enable_simulate_avr; enable_simulate_avr=yes
+else
+  enable_simulate_avr=no
 fi
 
 
