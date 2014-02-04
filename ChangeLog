@@ -1,4 +1,9 @@
 2014-02-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Added benchmarks to simulation list
+
+	* analysis/simulator.in: Added benchmarks to simulation list
+
+2014-02-04  James Pallister  <james.pallister@bristol.ac.uk>
 	Added binary search benchmark
 
 	* Makefile.am: Added binary search benchmark
