@@ -1,4 +1,16 @@
 2014-02-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Added bubblesort benchmark
+
+	* Makefile.am: Added bubblesort benchmark
+	* Makefile.in: Regenerated
+	* analysis/simulator.in: Added bubblesort benchmark
+	* configure: Regenerated
+	* configure.ac: Added bubblesort benchmark
+	* src/bubblesort/Makefile.am: Automake file for bubblesort
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/bubblesort/bubblesort.c: Source code for bubblesort
+
+2014-02-04  James Pallister  <james.pallister@bristol.ac.uk>
 	Added benchmarks to simulation list
 
 	* analysis/simulator.in: Added benchmarks to simulation list
