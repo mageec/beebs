@@ -1,3 +1,14 @@
+2014-02-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Added binary search benchmark
+
+	* Makefile.am: Added binary search benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added binary search benchmark
+	* src/bs/Makefile.am: Automake file for binary search
+	* src/bs/Makefile.in: Regenerated
+	* src/bs/bs.c: Source for binary search
+
 2014-02-02  James Pallister  <james.pallister@bristol.ac.uk>
 	Added adpcm benchmark
 

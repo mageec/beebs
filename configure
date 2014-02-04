@@ -11931,6 +11931,8 @@ ac_config_files="$ac_config_files src/adpcm/Makefile"
 
 ac_config_files="$ac_config_files src/blowfish/Makefile"
 
+ac_config_files="$ac_config_files src/bs/Makefile"
+
 ac_config_files="$ac_config_files src/crc32/Makefile"
 
 ac_config_files="$ac_config_files src/cubic/Makefile"
@@ -13022,6 +13024,7 @@ do
     "src/2dfir/Makefile") CONFIG_FILES="$CONFIG_FILES src/2dfir/Makefile" ;;
     "src/adpcm/Makefile") CONFIG_FILES="$CONFIG_FILES src/adpcm/Makefile" ;;
     "src/blowfish/Makefile") CONFIG_FILES="$CONFIG_FILES src/blowfish/Makefile" ;;
+    "src/bs/Makefile") CONFIG_FILES="$CONFIG_FILES src/bs/Makefile" ;;
     "src/crc32/Makefile") CONFIG_FILES="$CONFIG_FILES src/crc32/Makefile" ;;
     "src/cubic/Makefile") CONFIG_FILES="$CONFIG_FILES src/cubic/Makefile" ;;
     "src/dijkstra/Makefile") CONFIG_FILES="$CONFIG_FILES src/dijkstra/Makefile" ;;
