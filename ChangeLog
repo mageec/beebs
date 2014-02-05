@@ -1,4 +1,16 @@
 2014-02-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added duff benchmark
+
+	* Makefile.am: Added duff benchmark
+	* Makefile.in: Regenerated
+	* analysis/simulator.in: Added duff benchmark
+	* configure: Regenerated
+	* configure.ac: Added duff benchmark
+	* src/duff/Makefile.am: Automake file for duff
+	* src/duff/Makefile.in: Regenerated
+	* src/duff/duff.c: Source for duff
+
+2014-02-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added cnt benchmark
 
 	* Makefile.am: Added cnt benchmark
