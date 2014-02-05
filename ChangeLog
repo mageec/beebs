@@ -1,3 +1,15 @@
+2014-02-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added cnt benchmark
+
+	* Makefile.am: Added cnt benchmark
+	* Makefile.in: Regenerated
+	* analysis/simulator.in: Added cnt benchmark
+	* configure: Regenerated
+	* configure.ac: Added cnt benchmark
+	* src/cnt/Makefile.am: Automake file for cnt
+	* src/cnt/Makefile.in: Regenerated
+	* src/cnt/cnt.c: Source for cnt
+
 2014-02-04  James Pallister  <james.pallister@bristol.ac.uk>
 	Added bubblesort benchmark
 
