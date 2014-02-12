@@ -1,4 +1,13 @@
 2014-02-12  James Pallister  <james.pallister@bristol.ac.uk>
+	The conditions for --enable and --with currently give incorrect
+	results if --disable is used. Fix this and fix an error in a automake
+	conditional
+
+	* configure.ac: The conditions for --enable and --with currently give
+	    incorrect results if --disable is used. Fix this and fix an error
+	    in a automake conditional
+
+2014-02-12  James Pallister  <james.pallister@bristol.ac.uk>
 	Added edn benchmark
 
 	* Makefile.am: Added edn benchmark

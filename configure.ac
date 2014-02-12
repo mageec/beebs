@@ -38,11 +38,9 @@ AC_ARG_WITH([linkerscript],
             [AS_HELP_STRING([--with-linkerscript],
               [Choose the linker script])],
             [],
-            [with_linkerscript=no])
+            [with_linkerscript=none])
 
-if test x$with_linkerscript == xno ; then
-    with_linkerscript=""
-else
+if test x$with_linkerscript != xnone ; then
     lk=`readlink -m ${with_linkerscript}`
 #    with_linkerscript="-T ${lk}"
     AC_SUBST([LINKERSCRIPT], ["-T ${lk}"])
@@ -51,19 +49,21 @@ fi
 AC_ARG_ENABLE([platformsources],
             [AS_HELP_STRING([--enable-platformsources],
               [Add platform sources to be compiled in])],
-            [enable_platformsources=yes],
-            [enable_platformsources=no])
+            [],
+            [   if [[ -z "$enable_platformsources" ]] ; then
+                    enable_platformsources=no
+                fi ])
 
 AM_CONDITIONAL([PLATFORMSRC], [test x$enable_platformsources != xno])
 
-AM_CONDITIONAL([SIMULATE], [0])
+AM_CONDITIONAL([SIMULATE], [false])
 
 # Check if we want to simulate AVR #########################################
 AC_ARG_ENABLE([simulate-avr],
             [AS_HELP_STRING([--enable-simulate-avr],
                 [Enable the simulation for AVR])],
-            [enable_simulate_avr=yes],
-            [enable_simulate_avr=no],
+            [],
+            [if [[ -z "$enable_simulate_avr" ]] ; then enable_simulate_avr=no; fi],
             )
 
 if test x$enable_simulate_avr == xyes ; then
@@ -81,8 +81,8 @@ fi
 AC_ARG_ENABLE([simulate-cortex-m0],
             [AS_HELP_STRING([--enable-simulate-cortex-m0],
                 [Enable the simulation for cortex-m0])],
-            [enable_simulate_cortex_m0=yes],
-            [enable_simulate_cortex_m0=no],
+            [],
+            [ if [[ -z "$enable_simulate_cortex_m0" ]] ; then enable_simulate_cortex_m0=no; fi ],
             )
 
 if test x$enable_simulate_cortex_m0 == xyes ; then
