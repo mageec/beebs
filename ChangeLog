@@ -1,3 +1,15 @@
+2014-02-12  James Pallister  <james.pallister@bristol.ac.uk>
+	Added edn benchmark
+
+	* Makefile.am: Added edn benchmark
+	* Makefile.in: Regenerated
+	* analysis/simulator.in: Added edn benchmark
+	* configure: Regenerated
+	* configure.ac: Added edn benchmark
+	* src/edn/Makefile.am: Automake file for edn
+	* src/edn/Makefile.in: Regenerated
+	* src/edn/edn.c: Source for edn
+
 2014-02-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added duff benchmark
 

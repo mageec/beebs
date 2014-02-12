@@ -350,7 +350,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = src/platformcode src/2dfir src/adpcm src/blowfish src/bs \
 	src/bubblesort src/crc32 src/cnt src/cubic src/duff \
-	src/dijkstra src/fasta src/fdct src/float_matmult \
+	src/dijkstra src/edn src/fasta src/fdct src/float_matmult \
 	src/gdb-advance src/gdb-all-types src/gdb-anon \
 	src/gdb-arrayidx src/gdb-async src/int_matmult src/nbody \
 	src/rijndael src/sha src/compress src/lms src/fft src/template \
