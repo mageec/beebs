@@ -23,9 +23,11 @@
 platform_src = $(top_srcdir)/src/platformcode/platformcode.c
 
 if PLATFORMSRC
-    platform_src += $(top_srcdir)/src/platformcode/exit.c ../platformcode/jrand.c ../platformcode/sbrk.c ../platformcode/startup.S
+platform_src += $(top_srcdir)/src/platformcode/exit.c $(top_srcdir)/src/platformcode/jrand.c $(top_srcdir)/src/platformcode/sbrk.c $(top_srcdir)/src/platformcode/startup.S
 endif
 
-AM_CFLAGS = -I $(top_srcdir)/src/platformcode -g -O2
+AM_CFLAGS = -I $(top_srcdir)/src/platformcode -g
 
-AM_CFLAGS +=  $(LINKERSCRIPT)
+if STM32F0DISCOVERY
+AM_CFLAGS += -T $(top_srcdir)/src/platformcode/stm32f05_flash.ld
+endif

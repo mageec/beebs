@@ -1,4 +1,43 @@
 2014-02-12  James Pallister  <james.pallister@bristol.ac.uk>
+	Added a --with-platform argument to configure, to allow options to be
+	automatically set. This means the generate scripts are not needed.
+
+	* Makefile.in: Regenerated
+	* aclocal.m4: Regenerated
+	* analysis/Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added --with-platform argument
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Platform dependent linker script selection
+	* src/compress/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
+2014-02-12  James Pallister  <james.pallister@bristol.ac.uk>
 	The conditions for --enable and --with currently give incorrect
 	results if --disable is used. Fix this and fix an error in a automake
 	conditional
