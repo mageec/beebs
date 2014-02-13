@@ -33,10 +33,10 @@ case $with_platform in
         fi
 
         # gcc-arm-embedded requires these libraries for the tests, else they'll fail
-        AC_SUBST([LDFLAGS], ["$LDFLAGS -e startup -lc -lrdimon "])
+        AC_SUBST([LDFLAGS], ["$LDFLAGS -lc -lrdimon -e _mainCRTStartup"])
         AC_SUBST([CFLAGS], ["$CFLAGS  -mthumb -mcpu=cortex-m0 -DCORTEX_M0 "])
 
-        enable_platformsources=yes
+        # enable_platformsources=yes
 
         if test x$enable_simulate == xyes; then
             enable_simulate_cortex_m0=yes
@@ -69,8 +69,6 @@ case $with_platform in
         fi
 
         AM_CONDITIONAL([MSPEXP430F5529], [true])
-        ;;
-
         ;;
 esac
 

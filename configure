@@ -2266,12 +2266,12 @@ case $with_platform in
         fi
 
         # gcc-arm-embedded requires these libraries for the tests, else they'll fail
-        LDFLAGS="$LDFLAGS -e startup -lc -lrdimon "
+        LDFLAGS="$LDFLAGS -lc -lrdimon -e _mainCRTStartup"
 
         CFLAGS="$CFLAGS  -mthumb -mcpu=cortex-m0 -DCORTEX_M0 "
 
 
-        enable_platformsources=yes
+        # enable_platformsources=yes
 
         if test x$enable_simulate == xyes; then
             enable_simulate_cortex_m0=yes
@@ -2326,8 +2326,6 @@ else
   MSPEXP430F5529_TRUE='#'
   MSPEXP430F5529_FALSE=
 fi
-
-        ;;
 
         ;;
 esac

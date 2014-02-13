@@ -1,3 +1,12 @@
+2014-02-13  James Pallister  <james.pallister@bristol.ac.uk>
+	Fixes and code to allow running on the stm32f0discovery board
+
+	* configure: Regenerated
+	* configure.ac: No longer need platform code, and change LDFLAGS to
+	    correct entry point
+	* src/platformcode/platformcode.c: Added code to toggle PC0 of the
+	    stm32f0discovery board
+
 2014-02-12  James Pallister  <james.pallister@bristol.ac.uk>
 	Added a --with-platform argument to configure, to allow options to be
 	automatically set. This means the generate scripts are not needed.
