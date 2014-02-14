@@ -33,7 +33,7 @@ case $with_platform in
         fi
 
         # gcc-arm-embedded requires these libraries for the tests, else they'll fail
-        AC_SUBST([LDFLAGS], ["$LDFLAGS -lc -lrdimon -e _mainCRTStartup"])
+        AC_SUBST([LDFLAGS], ["$LDFLAGS -lc -lnosys"])
         AC_SUBST([CFLAGS], ["$CFLAGS  -mthumb -mcpu=cortex-m0 -DCORTEX_M0 "])
 
         # enable_platformsources=yes

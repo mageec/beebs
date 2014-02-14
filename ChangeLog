@@ -1,3 +1,47 @@
+2014-02-14  James Pallister  <james.pallister@bristol.ac.uk>
+	Startup file needed to copy initialised data into RAM for
+	stm32f0discovery
+
+	* Makefile.in: Regenerated
+	* aclocal.m4: Regenerated
+	* analysis/Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Changed -lrdimon to -lnosys and removed -e parameters
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: No longer need startup.S, build startup.c for
+	    stm32f0discovery
+	* src/compress/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/platformcode/startup.c: Copy initialised data from flash to RAM
+	    before main
+	* src/platformcode/stm32f05_flash.ld: Specify that data should be in
+	    flash, and specify entry point
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
 2014-02-13  James Pallister  <james.pallister@bristol.ac.uk>
 	Fixes and code to allow running on the stm32f0discovery board
 
