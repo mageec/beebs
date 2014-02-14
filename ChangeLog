@@ -1,4 +1,45 @@
 2014-02-14  James Pallister  <james.pallister@bristol.ac.uk>
+	Removed jrand function because we can now use the libc rand
+
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/blowfish/bf.c: Removed jrand
+	* src/bs/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Removed jrand from platform sources
+	* src/compress/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/crc32/crc_32.c: Removed jrand
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/platformcode/Makefile.am: Removed jrand from distribution
+	* src/platformcode/Makefile.in: Regenerated
+	* src/platformcode/jrand.c: Deleted
+	* src/platformcode/jrand.h: Deleted
+	* src/platformcode/platformcode.h: Removed jrand
+	* src/rijndael/Makefile.in: Regenerated
+	* src/rijndael/aesxam.c: Removed jrand
+	* src/sha/Makefile.in: Regenerated
+	* src/sha/sha.c: Removed jrand
+	* src/template/Makefile.in: Regenerated
+
+2014-02-14  James Pallister  <james.pallister@bristol.ac.uk>
 	Startup file needed to copy initialised data into RAM for
 	stm32f0discovery
 

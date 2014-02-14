@@ -23,7 +23,7 @@
 platform_src = $(top_srcdir)/src/platformcode/platformcode.c
 
 if PLATFORMSRC
-platform_src += $(top_srcdir)/src/platformcode/exit.c $(top_srcdir)/src/platformcode/jrand.c $(top_srcdir)/src/platformcode/sbrk.c
+platform_src += $(top_srcdir)/src/platformcode/exit.c $(top_srcdir)/src/platformcode/sbrk.c
 endif
 
 AM_CFLAGS = -I $(top_srcdir)/src/platformcode -g

@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
       for(n2 = 0; n2 < 256; ++n2)
       {
          while(i<40)
-            indata[i++]=jrand();
+            indata[i++]=rand();
 
          BF_cfb64_encrypt(indata,outdata,i,&key,ivec,&num,encordec);
          encordec = 1-encordec;

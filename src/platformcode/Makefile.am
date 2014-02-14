@@ -24,12 +24,10 @@
 # Only needed to ensure all the sources are included in the distribution.
 EXTRA_DIST = exit.c \
              exit.h \
-             jrand.c \
-             jrand.h \
              platformcode.c \
              platformcode.h \
              sbrk.c \
              sbrk.h \
-             startup.S \
+             startup.c \
              stm32f05_flash.ld \
              stm32vl_flash.ld

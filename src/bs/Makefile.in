@@ -99,7 +99,7 @@ target_triplet = @target@
 bin_PROGRAMS = bs$(EXEEXT)
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(top_srcdir)/src/common.mk.am
-@PLATFORMSRC_TRUE@am__append_1 = $(top_srcdir)/src/platformcode/exit.c $(top_srcdir)/src/platformcode/jrand.c $(top_srcdir)/src/platformcode/sbrk.c
+@PLATFORMSRC_TRUE@am__append_1 = $(top_srcdir)/src/platformcode/exit.c $(top_srcdir)/src/platformcode/sbrk.c
 @STM32F0DISCOVERY_TRUE@am__append_2 = -T $(top_srcdir)/src/platformcode/stm32f05_flash.ld
 @STM32F0DISCOVERY_TRUE@am__append_3 = $(top_srcdir)/src/platformcode/startup.c
 subdir = src/bs
@@ -118,11 +118,9 @@ PROGRAMS = $(bin_PROGRAMS)
 am__bs_SOURCES_DIST = bs.c \
 	$(top_srcdir)/src/platformcode/platformcode.c \
 	$(top_srcdir)/src/platformcode/exit.c \
-	$(top_srcdir)/src/platformcode/jrand.c \
 	$(top_srcdir)/src/platformcode/sbrk.c \
 	$(top_srcdir)/src/platformcode/startup.c
-@PLATFORMSRC_TRUE@am__objects_1 = exit.$(OBJEXT) jrand.$(OBJEXT) \
-@PLATFORMSRC_TRUE@	sbrk.$(OBJEXT)
+@PLATFORMSRC_TRUE@am__objects_1 = exit.$(OBJEXT) sbrk.$(OBJEXT)
 @STM32F0DISCOVERY_TRUE@am__objects_2 = startup.$(OBJEXT)
 am__objects_3 = platformcode.$(OBJEXT) $(am__objects_1) \
 	$(am__objects_2)
@@ -375,7 +373,6 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bs.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/exit.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/jrand.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/platformcode.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sbrk.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/startup.Po@am__quote@
@@ -428,20 +425,6 @@ exit.obj: $(top_srcdir)/src/platformcode/exit.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$(top_srcdir)/src/platformcode/exit.c' object='exit.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o exit.obj `if test -f '$(top_srcdir)/src/platformcode/exit.c'; then $(CYGPATH_W) '$(top_srcdir)/src/platformcode/exit.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/src/platformcode/exit.c'; fi`
-
-jrand.o: $(top_srcdir)/src/platformcode/jrand.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT jrand.o -MD -MP -MF $(DEPDIR)/jrand.Tpo -c -o jrand.o `test -f '$(top_srcdir)/src/platformcode/jrand.c' || echo '$(srcdir)/'`$(top_srcdir)/src/platformcode/jrand.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/jrand.Tpo $(DEPDIR)/jrand.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$(top_srcdir)/src/platformcode/jrand.c' object='jrand.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o jrand.o `test -f '$(top_srcdir)/src/platformcode/jrand.c' || echo '$(srcdir)/'`$(top_srcdir)/src/platformcode/jrand.c
-
-jrand.obj: $(top_srcdir)/src/platformcode/jrand.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT jrand.obj -MD -MP -MF $(DEPDIR)/jrand.Tpo -c -o jrand.obj `if test -f '$(top_srcdir)/src/platformcode/jrand.c'; then $(CYGPATH_W) '$(top_srcdir)/src/platformcode/jrand.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/src/platformcode/jrand.c'; fi`
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/jrand.Tpo $(DEPDIR)/jrand.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$(top_srcdir)/src/platformcode/jrand.c' object='jrand.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o jrand.obj `if test -f '$(top_srcdir)/src/platformcode/jrand.c'; then $(CYGPATH_W) '$(top_srcdir)/src/platformcode/jrand.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/src/platformcode/jrand.c'; fi`
 
 sbrk.o: $(top_srcdir)/src/platformcode/sbrk.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sbrk.o -MD -MP -MF $(DEPDIR)/sbrk.Tpo -c -o sbrk.o `test -f '$(top_srcdir)/src/platformcode/sbrk.c' || echo '$(srcdir)/'`$(top_srcdir)/src/platformcode/sbrk.c
