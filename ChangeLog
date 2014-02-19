@@ -1,3 +1,9 @@
+2014-02-19  James Pallister  <james.pallister@bristol.ac.uk>
+	Added AVR triggers to platform code
+
+	* src/platformcode/platformcode.c: Toggle port C0 on the AVR chip to
+	    start and stop benchmarking
+
 2014-02-14  James Pallister  <james.pallister@bristol.ac.uk>
 	Removed jrand function because we can now use the libc rand
 

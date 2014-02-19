@@ -89,6 +89,27 @@ void stop_trigger()
     GPIOC_BSRR = 0x00010000;// bit low
 }
 
+#elif AVR
+#include <avr/io.h>
+
+void initialise_trigger()
+{
+    int i, j, k;
+    DDRC |= _BV(DDC0);
+    PORTC &= ~_BV(PORTC0);
+
+}
+
+void start_trigger()
+{
+    PORTC |= _BV(PORTC0);
+}
+
+void stop_trigger()
+{
+    PORTC &= ~_BV(PORTC0);
+}
+
 #else
 
 /* Anything to initialize the trigger. */
