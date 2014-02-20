@@ -28,6 +28,9 @@ AM_CONDITIONAL([STM32F0DISCOVERY], [false])
 AM_CONDITIONAL([ATMEGA328P], [false])
 AM_CONDITIONAL([MSPEXP430F5529], [false])
 
+save_CFLAGS=$CFLAGS
+save_LDFLAGS=$LDFLAGS
+
 case $with_platform in
     stm32f0discovery)
         if test x$host == x$build ; then
@@ -37,6 +40,8 @@ case $with_platform in
         # gcc-arm-embedded requires these libraries for the tests, else they'll fail
         AC_SUBST([AM_LDFLAGS], ["-lc -lnosys"])
         AC_SUBST([AM_CFLAGS], ["-mthumb -mcpu=cortex-m0 -DCORTEX_M0"])
+        CFLAGS="$CFLAGS -mthumb -mcpu=cortex-m0 -DCORTEX_M0"
+        LDFLAGS="$LDFLAGS -lc -lnosys"
 
         # enable_platformsources=yes
 
@@ -165,6 +170,8 @@ if test x$enable_simulate_cortex_m0 == xyes ; then
     AM_CONDITIONAL([SIMULATE], [test x$enable_simulate_cortex_m0 != xno])
 fi
 
+CFLAGS=$save_CFLAGS
+LDFLAGS=$save_LDFLAGS
 
 AC_CONFIG_FILES([src/2dfir/Makefile])
 AC_CONFIG_FILES([src/adpcm/Makefile])

@@ -2298,6 +2298,9 @@ else
 fi
 
 
+save_CFLAGS=$CFLAGS
+save_LDFLAGS=$LDFLAGS
+
 case $with_platform in
     stm32f0discovery)
         if test x$host == x$build ; then
@@ -2309,6 +2312,8 @@ case $with_platform in
 
         AM_CFLAGS="-mthumb -mcpu=cortex-m0 -DCORTEX_M0"
 
+        CFLAGS="$CFLAGS -mthumb -mcpu=cortex-m0 -DCORTEX_M0"
+        LDFLAGS="$LDFLAGS -lc -lnosys"
 
         # enable_platformsources=yes
 
@@ -12028,6 +12033,8 @@ fi
 
 fi
 
+CFLAGS=$save_CFLAGS
+LDFLAGS=$save_LDFLAGS
 
 ac_config_files="$ac_config_files src/2dfir/Makefile"
 

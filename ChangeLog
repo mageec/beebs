@@ -1,4 +1,14 @@
 2014-02-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix for stm32f0discovery platform. CFLAGS and LDFLAGS need to be set
+	to include the correct libraries, and specify the processor, however
+	the previous commit to move them into AM_CFLAGS meant the configure
+	tests failed
+
+	* configure: Regenerated
+	* configure.ac: Assign to CFLAGS and LDFLAGS, restoring after tests
+	    are performed
+
+2014-02-20  James Pallister  <james.pallister@bristol.ac.uk>
 	Made make rules silent by default
 
 	* Makefile.in: Regenerated
