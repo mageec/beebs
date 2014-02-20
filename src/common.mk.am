@@ -26,7 +26,7 @@ if PLATFORMSRC
 platform_src += $(top_srcdir)/src/platformcode/exit.c $(top_srcdir)/src/platformcode/sbrk.c
 endif
 
-AM_CFLAGS = -I $(top_srcdir)/src/platformcode -g
+AM_CFLAGS += -I $(top_srcdir)/src/platformcode -g
 
 if STM32F0DISCOVERY
 AM_CFLAGS += -T $(top_srcdir)/src/platformcode/stm32f05_flash.ld

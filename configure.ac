@@ -33,8 +33,8 @@ case $with_platform in
         fi
 
         # gcc-arm-embedded requires these libraries for the tests, else they'll fail
-        AC_SUBST([LDFLAGS], ["$LDFLAGS -lc -lnosys"])
-        AC_SUBST([CFLAGS], ["$CFLAGS  -mthumb -mcpu=cortex-m0 -DCORTEX_M0 "])
+        AC_SUBST([AM_LDFLAGS], ["-lc -lnosys"])
+        AC_SUBST([AM_CFLAGS], ["-mthumb -mcpu=cortex-m0 -DCORTEX_M0"])
 
         # enable_platformsources=yes
 
@@ -50,7 +50,7 @@ case $with_platform in
             AC_MSG_ERROR([Please rerun configure with --host=avr for this platform])
         fi
 
-        AC_SUBST([CFLAGS], ["$CFLAGS -mmcu=atmega328p -std=gnu99 -DAVR "])
+        AC_SUBST([AM_CFLAGS], ["-mmcu=atmega328p -std=gnu99 -DAVR"])
         if test x$enable_simulate == xyes; then
             enable_simulate_avr=yes
         fi
@@ -63,7 +63,7 @@ case $with_platform in
             AC_MSG_ERROR([Please rerun configure with --host=msp430 for this platform])
         fi
 
-        AC_SUBST([CFLAGS], ["$CFLAGS -mmcu=msp430f5529 -std=gnu99 -mcpu=430 -DMSP430F "])
+        AC_SUBST([AM_CFLAGS], ["-mmcu=msp430f5529 -std=gnu99 -mcpu=430 -DMSP430F"])
         if test x$enable_simulate == xyes; then
             enable_simulate_msp430=yes
         fi

@@ -155,6 +155,9 @@ CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
+AM_CFLAGS = @AM_CFLAGS@ -I $(top_srcdir)/src/platformcode -g \
+	$(am__append_2)
+AM_LDFLAGS = @AM_LDFLAGS@
 AR = @AR@
 AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
@@ -285,7 +288,6 @@ EXTRA_DIST = LICENSE
 cubic_LDFLAGS = "-lm"
 platform_src = $(top_srcdir)/src/platformcode/platformcode.c \
 	$(am__append_1) $(am__append_3)
-AM_CFLAGS = -I $(top_srcdir)/src/platformcode -g $(am__append_2)
 all: all-am
 
 .SUFFIXES:
