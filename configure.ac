@@ -8,6 +8,8 @@ AC_CONFIG_AUX_DIR([build-aux])
 
 AM_MAINTAINER_MODE([disable])
 
+AM_SILENT_RULES([yes])
+
 AC_ARG_ENABLE([simulate],
             [AS_HELP_STRING([--enable-simulate],
                 [Enable the simulation for the specified platform])],
