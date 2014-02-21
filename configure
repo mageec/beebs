@@ -12136,9 +12136,6 @@ ac_config_files="$ac_config_files analysis/Makefile"
 
 ac_config_files="$ac_config_files Makefile"
 
-
-ac_config_files="$ac_config_files run"
-
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -13237,7 +13234,6 @@ do
     "src/platformcode/Makefile") CONFIG_FILES="$CONFIG_FILES src/platformcode/Makefile" ;;
     "analysis/Makefile") CONFIG_FILES="$CONFIG_FILES analysis/Makefile" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
-    "run") CONFIG_FILES="$CONFIG_FILES run" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac
@@ -14392,7 +14388,6 @@ fi
   chmod +x "$ofile"
 
  ;;
-    "run":F) chmod +x run ;;
 
   esac
 done # for ac_tag

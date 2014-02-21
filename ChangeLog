@@ -1,4 +1,10 @@
 2014-02-21  James Pallister  <james.pallister@bristol.ac.uk>
+	Regenerate configure and makefile
+
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+
+2014-02-21  James Pallister  <james.pallister@bristol.ac.uk>
 	Added platform support for stm32vldiscovery
 
 	* Makefile.in: Regenerated
