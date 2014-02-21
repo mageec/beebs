@@ -1,3 +1,40 @@
+2014-02-21  James Pallister  <james.pallister@bristol.ac.uk>
+	Added platform support for stm32vldiscovery
+
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added --with-platform option for stm32vldiscovery
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Include linker script for stm32vldiscovery
+	* src/compress/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/platformcode/stm32vl_flash.ld: Store everything in flash, and
+	    copy to memory at runtime
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
 2014-02-20  James Pallister  <james.pallister@bristol.ac.uk>
 	Fix for stm32f0discovery platform. CFLAGS and LDFLAGS need to be set
 	to include the correct libraries, and specify the processor, however

@@ -32,3 +32,7 @@ if STM32F0DISCOVERY
 AM_CFLAGS += -T $(top_srcdir)/src/platformcode/stm32f05_flash.ld
 platform_src += $(top_srcdir)/src/platformcode/startup.c
 endif
+if STM32VLDISCOVERY
+AM_CFLAGS += -T $(top_srcdir)/src/platformcode/stm32vl_flash.ld
+platform_src += $(top_srcdir)/src/platformcode/startup.c
+endif

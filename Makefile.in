@@ -75,8 +75,8 @@ host_triplet = @host@
 target_triplet = @target@
 subdir = .
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
-	$(srcdir)/Makefile.in $(top_srcdir)/configure AUTHORS COPYING \
-	ChangeLog INSTALL NEWS build-aux/config.guess \
+	$(srcdir)/Makefile.in $(srcdir)/run.in $(top_srcdir)/configure \
+	AUTHORS COPYING ChangeLog INSTALL NEWS build-aux/config.guess \
 	build-aux/config.sub build-aux/depcomp build-aux/install-sh \
 	build-aux/ltmain.sh build-aux/missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -89,7 +89,7 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
-CONFIG_CLEAN_FILES =
+CONFIG_CLEAN_FILES = run
 CONFIG_CLEAN_VPATH_FILES =
 AM_V_GEN = $(am__v_GEN_@AM_V@)
 am__v_GEN_ = $(am__v_GEN_@AM_DEFAULT_V@)
@@ -296,6 +296,7 @@ SUBDIRS = src/platformcode src/2dfir src/adpcm src/blowfish src/bs \
 	src/rijndael src/sha src/compress src/lms src/fft src/template \
 	analysis
 ACLOCAL_AMFLAGS = -I m4
+EXTRA_DIST = run
 all: all-recursive
 
 .SUFFIXES:
@@ -333,6 +334,8 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	$(am__cd) $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
 $(am__aclocal_m4_deps):
+run: $(top_builddir)/config.status $(srcdir)/run.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
 
 mostlyclean-libtool:
 	-rm -f *.lo

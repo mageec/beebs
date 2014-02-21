@@ -730,6 +730,8 @@ MSPEXP430F5529_FALSE
 MSPEXP430F5529_TRUE
 ATMEGA328P_FALSE
 ATMEGA328P_TRUE
+STM32VLDISCOVERY_FALSE
+STM32VLDISCOVERY_TRUE
 STM32F0DISCOVERY_FALSE
 STM32F0DISCOVERY_TRUE
 AM_BACKSLASH
@@ -2282,6 +2284,14 @@ else
 fi
 
  if false; then
+  STM32VLDISCOVERY_TRUE=
+  STM32VLDISCOVERY_FALSE='#'
+else
+  STM32VLDISCOVERY_TRUE='#'
+  STM32VLDISCOVERY_FALSE=
+fi
+
+ if false; then
   ATMEGA328P_TRUE=
   ATMEGA328P_FALSE='#'
 else
@@ -2330,6 +2340,36 @@ else
 fi
 
         ;;
+
+    stm32vldiscovery)
+        if test x$host == x$build ; then
+            as_fn_error $? "Please rerun configure with --host=arm-none-eabi for this platform" "$LINENO" 5
+        fi
+
+        # gcc-arm-embedded requires these libraries for the tests, else they'll fail
+        AM_LDFLAGS="-lc -lnosys"
+
+        AM_CFLAGS="-mthumb -mcpu=cortex-m3 -DCORTEX_M3"
+
+        CFLAGS="$CFLAGS -mthumb -mcpu=cortex-m3 -DCORTEX_M0"
+        LDFLAGS="$LDFLAGS -lc -lnosys"
+
+        # enable_platformsources=yes
+
+        if test x$enable_simulate == xyes; then
+            enable_simulate_cortex_m3=yes
+        fi
+
+         if true; then
+  STM32VLDISCOVERY_TRUE=
+  STM32VLDISCOVERY_FALSE='#'
+else
+  STM32VLDISCOVERY_TRUE='#'
+  STM32VLDISCOVERY_FALSE=
+fi
+
+        ;;
+
 
     atmega328p)
         if test x$host == x$build ; then
@@ -12096,6 +12136,9 @@ ac_config_files="$ac_config_files analysis/Makefile"
 
 ac_config_files="$ac_config_files Makefile"
 
+
+ac_config_files="$ac_config_files run"
+
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -12249,6 +12292,10 @@ if test -z "${STM32F0DISCOVERY_TRUE}" && test -z "${STM32F0DISCOVERY_FALSE}"; th
   as_fn_error $? "conditional \"STM32F0DISCOVERY\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
+if test -z "${STM32VLDISCOVERY_TRUE}" && test -z "${STM32VLDISCOVERY_FALSE}"; then
+  as_fn_error $? "conditional \"STM32VLDISCOVERY\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 if test -z "${ATMEGA328P_TRUE}" && test -z "${ATMEGA328P_FALSE}"; then
   as_fn_error $? "conditional \"ATMEGA328P\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -12259,6 +12306,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${STM32F0DISCOVERY_TRUE}" && test -z "${STM32F0DISCOVERY_FALSE}"; then
   as_fn_error $? "conditional \"STM32F0DISCOVERY\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${STM32VLDISCOVERY_TRUE}" && test -z "${STM32VLDISCOVERY_FALSE}"; then
+  as_fn_error $? "conditional \"STM32VLDISCOVERY\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ATMEGA328P_TRUE}" && test -z "${ATMEGA328P_FALSE}"; then
@@ -13186,6 +13237,7 @@ do
     "src/platformcode/Makefile") CONFIG_FILES="$CONFIG_FILES src/platformcode/Makefile" ;;
     "analysis/Makefile") CONFIG_FILES="$CONFIG_FILES analysis/Makefile" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
+    "run") CONFIG_FILES="$CONFIG_FILES run" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac
@@ -14340,6 +14392,7 @@ fi
   chmod +x "$ofile"
 
  ;;
+    "run":F) chmod +x run ;;
 
   esac
 done # for ac_tag

@@ -25,6 +25,7 @@ AC_ARG_WITH([platform],
     )
 
 AM_CONDITIONAL([STM32F0DISCOVERY], [false])
+AM_CONDITIONAL([STM32VLDISCOVERY], [false])
 AM_CONDITIONAL([ATMEGA328P], [false])
 AM_CONDITIONAL([MSPEXP430F5529], [false])
 
@@ -51,6 +52,27 @@ case $with_platform in
 
         AM_CONDITIONAL([STM32F0DISCOVERY], [true])
         ;;
+
+    stm32vldiscovery)
+        if test x$host == x$build ; then
+            AC_MSG_ERROR([Please rerun configure with --host=arm-none-eabi for this platform])
+        fi
+
+        # gcc-arm-embedded requires these libraries for the tests, else they'll fail
+        AC_SUBST([AM_LDFLAGS], ["-lc -lnosys"])
+        AC_SUBST([AM_CFLAGS], ["-mthumb -mcpu=cortex-m3 -DCORTEX_M3"])
+        CFLAGS="$CFLAGS -mthumb -mcpu=cortex-m3 -DCORTEX_M0"
+        LDFLAGS="$LDFLAGS -lc -lnosys"
+
+        # enable_platformsources=yes
+
+        if test x$enable_simulate == xyes; then
+            enable_simulate_cortex_m3=yes
+        fi
+
+        AM_CONDITIONAL([STM32VLDISCOVERY], [true])
+        ;;
+
 
     atmega328p)
         if test x$host == x$build ; then

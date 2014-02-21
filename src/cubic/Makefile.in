@@ -101,6 +101,8 @@ DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 @PLATFORMSRC_TRUE@am__append_1 = $(top_srcdir)/src/platformcode/exit.c $(top_srcdir)/src/platformcode/sbrk.c
 @STM32F0DISCOVERY_TRUE@am__append_2 = -T $(top_srcdir)/src/platformcode/stm32f05_flash.ld
 @STM32F0DISCOVERY_TRUE@am__append_3 = $(top_srcdir)/src/platformcode/startup.c
+@STM32VLDISCOVERY_TRUE@am__append_4 = -T $(top_srcdir)/src/platformcode/stm32vl_flash.ld
+@STM32VLDISCOVERY_TRUE@am__append_5 = $(top_srcdir)/src/platformcode/startup.c
 subdir = src/cubic
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
@@ -121,10 +123,11 @@ am__cubic_SOURCES_DIST = cubic.c basicmath_small.c pi.h snipmath.h \
 	$(top_srcdir)/src/platformcode/startup.c
 @PLATFORMSRC_TRUE@am__objects_1 = exit.$(OBJEXT) sbrk.$(OBJEXT)
 @STM32F0DISCOVERY_TRUE@am__objects_2 = startup.$(OBJEXT)
-am__objects_3 = platformcode.$(OBJEXT) $(am__objects_1) \
-	$(am__objects_2)
+@STM32VLDISCOVERY_TRUE@am__objects_3 = startup.$(OBJEXT)
+am__objects_4 = platformcode.$(OBJEXT) $(am__objects_1) \
+	$(am__objects_2) $(am__objects_3)
 am_cubic_OBJECTS = cubic.$(OBJEXT) basicmath_small.$(OBJEXT) \
-	$(am__objects_3)
+	$(am__objects_4)
 cubic_OBJECTS = $(am_cubic_OBJECTS)
 cubic_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -172,7 +175,7 @@ DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
 AM_CFLAGS = @AM_CFLAGS@ -I $(top_srcdir)/src/platformcode -g \
-	$(am__append_2)
+	$(am__append_2) $(am__append_4)
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
 AM_LDFLAGS = @AM_LDFLAGS@
 AR = @AR@
@@ -304,7 +307,7 @@ cubic_SOURCES = cubic.c basicmath_small.c pi.h snipmath.h sniptype.h \
 EXTRA_DIST = LICENSE
 cubic_LDFLAGS = "-lm"
 platform_src = $(top_srcdir)/src/platformcode/platformcode.c \
-	$(am__append_1) $(am__append_3)
+	$(am__append_1) $(am__append_3) $(am__append_5)
 all: all-am
 
 .SUFFIXES:
