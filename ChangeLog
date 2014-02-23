@@ -1,4 +1,10 @@
 2014-02-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Added GPIO pin toggling for sam4lxplained board
+
+	* src/platformcode/platformcode.c: Added GPIO pin toggling for
+	    sam4lxplained board
+
+2014-02-23  James Pallister  <james.pallister@bristol.ac.uk>
 	Added linker script for sam4lxplained board. Code for some benchmarks
 	compiles and runs on the board
 
