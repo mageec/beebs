@@ -1,3 +1,8 @@
+2014-02-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Added pic32mx250f128b to --with-platform
+
+	* configure.ac: Added pic32mx250f128b to --with-platform
+
 2014-02-21  James Pallister  <james.pallister@bristol.ac.uk>
 	Regenerate configure and makefile
 
