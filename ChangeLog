@@ -1,3 +1,9 @@
+2014-02-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Added initial code for sam4lxplained platform. Platform is Cortex-M4
+	based and very similar to other cortex m-series platforms
+
+	* configure.ac: Added code for sam4lxplained platform
+
 2014-02-13  James Pallister  <james.pallister@bristol.ac.uk>
 	Fixes and code to allow running on the stm32f0discovery board
 
