@@ -107,8 +107,10 @@ case $with_platform in
         fi
 
         # gcc-arm-embedded requires these libraries for the tests, else they'll fail
-        AC_SUBST([LDFLAGS], ["$LDFLAGS -lc -lrdimon -e _mainCRTStartup"])
-        AC_SUBST([CFLAGS], ["$CFLAGS  -mthumb -mcpu=cortex-m4 -DCORTEX_M4 "])
+        AC_SUBST([AM_LDFLAGS], ["-lc -lnosys"])
+        AC_SUBST([AM_CFLAGS], ["-mthumb -mcpu=cortex-m4 -DCORTEX_M4"])
+        CFLAGS="$CFLAGS -mthumb -mcpu=cortex-m4 -DCORTEX_M4"
+        LDFLAGS="$LDFLAGS -lc -lnosys"
 
         if test x$enable_simulate == xyes; then
             enable_simulate_cortex_m4=yes
