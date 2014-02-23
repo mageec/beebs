@@ -1,4 +1,10 @@
 2014-02-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Set the clock properly on the sam4lxplained platform
+
+	* src/platformcode/platformcode.c: Set the start OSC0 and set as main
+	    clock source
+
+2014-02-23  James Pallister  <james.pallister@bristol.ac.uk>
 	Added GPIO pin toggling for sam4lxplained board
 
 	* src/platformcode/platformcode.c: Added GPIO pin toggling for

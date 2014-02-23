@@ -112,30 +112,44 @@ void stop_trigger()
 
 #elif CORTEX_M4
 
-#define ADDR(x)     (*((unsigned long*)(x)))
+#define ADDR(x)     (*((unsigned long volatile  *)(x)))
 #define GPIO_BASE   0x400E1000
+#define PM_BASE     0x400E0000
+#define SCIF_BASE   0x400E0800
 
 #define GPIOC_BASE  (GPIO_BASE+0x400)
 #define GPIOC_GPER  ADDR(GPIOC_BASE)
 #define GPIOC_ODER  ADDR(GPIOC_BASE+0x40)
 #define GPIOC_OVR   ADDR(GPIOC_BASE+0x50)
 
-/* Anything to initialize the trigger. */
+#define PM_UNLOCK   ADDR(PM_BASE + 0x58)
+#define PM_MCCTL    ADDR(PM_BASE)
+#define SCIF_PCLKSR   ADDR(SCIF_BASE + 0x14)
+#define SCIF_OSCCTRL0   ADDR(SCIF_BASE + 0x20)
+
+
 void initialise_trigger ()
 {
-    // TODO set up clock
+    // Set the clock to 12MHz external crystal,
+    // because the startup oscillator is way slow (115kHz)
+    PM_UNLOCK = 0xAA000020;
+    // Enable OSC0, startuptime=4, gain=3, mode=external
+    SCIF_OSCCTRL0 = 0x00010407;
+
+    while(!(SCIF_PCLKSR&1));    // Wait for OSC0
+    PM_UNLOCK = 0xAA000000;
+    PM_MCCTL = 1;               // Switch to OSC0
+
     GPIOC_GPER = 0xFFFFFFFF;
     GPIOC_ODER = 0x1;
     GPIOC_OVR = 0x0;
 }
 
-/* Anything to start the trigger. */
 void start_trigger ()
 {
     GPIOC_OVR = 0x1;
 }
 
-/* Anything to stop the trigger. */
 void stop_trigger ()
 {
     GPIOC_OVR = 0x0;
