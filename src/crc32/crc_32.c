@@ -130,7 +130,7 @@ DWORD crc32pseudo()
 
    for (i = 0 ; i < 1024; ++i)
    {
-      oldcrc32 = UPDC32(jrand(), oldcrc32);
+      oldcrc32 = UPDC32(rand(), oldcrc32);
    }
 
    return ~oldcrc32;

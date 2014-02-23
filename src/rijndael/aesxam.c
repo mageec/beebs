@@ -92,7 +92,7 @@ int encfile(aes *ctx, char *outbuf)
    for(j = 0; j <256; j++)
    {                               /* input 1st 16 bytes to buf[1..16] */
       for(k = 0; k < 16; ++k)
-         inbuf[k] = jrand();
+         inbuf[k] = rand();
 
       for(i = 0; i < 16; ++i)         /* xor in previous cipher text  */
          inbuf[i] ^= outbuf[i];
@@ -113,7 +113,7 @@ int decfile(aes *ctx, char *outbuf)
    fillrand(inbuf1, 16);           /* set an IV for CBC mode           */
 
    for(k = 0; k < 16; ++k)
-      inbuf2[k] = jrand();
+      inbuf2[k] = rand();
 
    decrypt(inbuf2, outbuf, ctx);   /* decrypt it                       */
 
@@ -128,7 +128,7 @@ int decfile(aes *ctx, char *outbuf)
    for(j = 0; j < 256; ++j)
    {
       for(k = 0; k < 16; ++k)
-         bp1[k] = jrand();
+         bp1[k] = rand();
 
       decrypt(bp1, outbuf, ctx);  /* decrypt the new input block and  */
 

@@ -5,8 +5,6 @@
 #define REPEAT_FACTOR   (4096)
 #endif
 
-#include "jrand.h"
-
 #ifdef ARM
 #include "exit.h"
 #include "sbrk.h"

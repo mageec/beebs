@@ -8,6 +8,8 @@ AC_CONFIG_AUX_DIR([build-aux])
 
 AM_MAINTAINER_MODE([disable])
 
+AM_SILENT_RULES([yes])
+
 AC_ARG_ENABLE([simulate],
             [AS_HELP_STRING([--enable-simulate],
                 [Enable the simulation for the specified platform])],
@@ -23,9 +25,13 @@ AC_ARG_WITH([platform],
     )
 
 AM_CONDITIONAL([STM32F0DISCOVERY], [false])
+AM_CONDITIONAL([STM32VLDISCOVERY], [false])
 AM_CONDITIONAL([ATMEGA328P], [false])
 AM_CONDITIONAL([MSPEXP430F5529], [false])
 AM_CONDITIONAL([SAM4LXPLAINED], [false])
+
+save_CFLAGS=$CFLAGS
+save_LDFLAGS=$LDFLAGS
 
 case $with_platform in
     stm32f0discovery)
@@ -34,8 +40,10 @@ case $with_platform in
         fi
 
         # gcc-arm-embedded requires these libraries for the tests, else they'll fail
-        AC_SUBST([LDFLAGS], ["$LDFLAGS -lc -lrdimon -e _mainCRTStartup"])
-        AC_SUBST([CFLAGS], ["$CFLAGS  -mthumb -mcpu=cortex-m0 -DCORTEX_M0 "])
+        AC_SUBST([AM_LDFLAGS], ["-lc -lnosys"])
+        AC_SUBST([AM_CFLAGS], ["-mthumb -mcpu=cortex-m0 -DCORTEX_M0"])
+        CFLAGS="$CFLAGS -mthumb -mcpu=cortex-m0 -DCORTEX_M0"
+        LDFLAGS="$LDFLAGS -lc -lnosys"
 
         # enable_platformsources=yes
 
@@ -46,12 +54,33 @@ case $with_platform in
         AM_CONDITIONAL([STM32F0DISCOVERY], [true])
         ;;
 
+    stm32vldiscovery)
+        if test x$host == x$build ; then
+            AC_MSG_ERROR([Please rerun configure with --host=arm-none-eabi for this platform])
+        fi
+
+        # gcc-arm-embedded requires these libraries for the tests, else they'll fail
+        AC_SUBST([AM_LDFLAGS], ["-lc -lnosys"])
+        AC_SUBST([AM_CFLAGS], ["-mthumb -mcpu=cortex-m3 -DCORTEX_M3"])
+        CFLAGS="$CFLAGS -mthumb -mcpu=cortex-m3 -DCORTEX_M0"
+        LDFLAGS="$LDFLAGS -lc -lnosys"
+
+        # enable_platformsources=yes
+
+        if test x$enable_simulate == xyes; then
+            enable_simulate_cortex_m3=yes
+        fi
+
+        AM_CONDITIONAL([STM32VLDISCOVERY], [true])
+        ;;
+
+
     atmega328p)
         if test x$host == x$build ; then
             AC_MSG_ERROR([Please rerun configure with --host=avr for this platform])
         fi
 
-        AC_SUBST([CFLAGS], ["$CFLAGS -mmcu=atmega328p -std=gnu99 -DAVR "])
+        AC_SUBST([AM_CFLAGS], ["-mmcu=atmega328p -std=gnu99 -DAVR"])
         if test x$enable_simulate == xyes; then
             enable_simulate_avr=yes
         fi
@@ -64,7 +93,7 @@ case $with_platform in
             AC_MSG_ERROR([Please rerun configure with --host=msp430 for this platform])
         fi
 
-        AC_SUBST([CFLAGS], ["$CFLAGS -mmcu=msp430f5529 -std=gnu99 -mcpu=430 -DMSP430F "])
+        AC_SUBST([AM_CFLAGS], ["-mmcu=msp430f5529 -std=gnu99 -mcpu=430 -DMSP430F"])
         if test x$enable_simulate == xyes; then
             enable_simulate_msp430=yes
         fi
@@ -180,6 +209,8 @@ if test x$enable_simulate_cortex_m0 == xyes ; then
     AM_CONDITIONAL([SIMULATE], [test x$enable_simulate_cortex_m0 != xno])
 fi
 
+CFLAGS=$save_CFLAGS
+LDFLAGS=$save_LDFLAGS
 
 AC_CONFIG_FILES([src/2dfir/Makefile])
 AC_CONFIG_FILES([src/adpcm/Makefile])
