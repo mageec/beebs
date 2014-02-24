@@ -49,6 +49,7 @@ SUBDIRS+=src/compress
 SUBDIRS+=src/lms
 SUBDIRS+=src/fft
 SUBDIRS+=src/template
+SUBDIRS+=src/newlib-sqrt
 
 SUBDIRS+=analysis
 

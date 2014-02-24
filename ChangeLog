@@ -1,3 +1,15 @@
+2014-02-24  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add sqrt from newlib.
+
+	* Makefile.am: Add src/newlib-sqrt to SUBDIRS
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add newlib-sqrt benchmark
+	* configure: Regenerate
+	* configure.ac: Add src/newlib-sqrt/Makefile to AC_CONFIG_FILES
+	* src/newlib-sqrt/Makefile.am: Create Makefile.am from template
+	* src/newlib-sqrt/Makefile.in: Regenerate
+	* src/newlib-sqrt/e_sqrt.c: Import sqrt from newlib
+
 2014-02-19  James Pallister  <james.pallister@bristol.ac.uk>
 	Added AVR triggers to platform code
 
