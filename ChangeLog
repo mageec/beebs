@@ -1,3 +1,11 @@
+2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Use float version of sqrt from newlib.
+
+	* src/newlib-sqrt/Makefile.am: Rename e_sqrt to ef_sqrt
+	* src/newlib-sqrt/Makefile.in: Regenerate
+	* src/newlib-sqrt/e_sqrt.c: Delete
+	* src/newlib-sqrt/ef_sqrt.c: Import ef_sqrt from newlib
+
 2014-02-24  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add sqrt from newlib.
 

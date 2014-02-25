@@ -96,7 +96,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-bin_PROGRAMS = e_sqrt$(EXEEXT)
+bin_PROGRAMS = ef_sqrt$(EXEEXT)
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(top_srcdir)/src/common.mk.am
 @PLATFORMSRC_TRUE@am__append_1 = $(top_srcdir)/src/platformcode/exit.c $(top_srcdir)/src/platformcode/sbrk.c
@@ -115,7 +115,7 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am__e_sqrt_SOURCES_DIST = e_sqrt.c \
+am__ef_sqrt_SOURCES_DIST = ef_sqrt.c \
 	$(top_srcdir)/src/platformcode/platformcode.c \
 	$(top_srcdir)/src/platformcode/exit.c \
 	$(top_srcdir)/src/platformcode/sbrk.c \
@@ -124,9 +124,9 @@ am__e_sqrt_SOURCES_DIST = e_sqrt.c \
 @STM32F0DISCOVERY_TRUE@am__objects_2 = startup.$(OBJEXT)
 am__objects_3 = platformcode.$(OBJEXT) $(am__objects_1) \
 	$(am__objects_2)
-am_e_sqrt_OBJECTS = e_sqrt.$(OBJEXT) $(am__objects_3)
-e_sqrt_OBJECTS = $(am_e_sqrt_OBJECTS)
-e_sqrt_LDADD = $(LDADD)
+am_ef_sqrt_OBJECTS = ef_sqrt.$(OBJEXT) $(am__objects_3)
+ef_sqrt_OBJECTS = $(am_ef_sqrt_OBJECTS)
+ef_sqrt_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/build-aux/depcomp
 am__depfiles_maybe = depfiles
@@ -140,8 +140,8 @@ CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = $(e_sqrt_SOURCES)
-DIST_SOURCES = $(am__e_sqrt_SOURCES_DIST)
+SOURCES = $(ef_sqrt_SOURCES)
+DIST_SOURCES = $(am__ef_sqrt_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -276,7 +276,7 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-e_sqrt_SOURCES = e_sqrt.c ${platform_src}
+ef_sqrt_SOURCES = ef_sqrt.c ${platform_src}
 platform_src = $(top_srcdir)/src/platformcode/platformcode.c \
 	$(am__append_1) $(am__append_3)
 AM_CFLAGS = -I $(top_srcdir)/src/platformcode -g $(am__append_2)
@@ -361,9 +361,9 @@ clean-binPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
-e_sqrt$(EXEEXT): $(e_sqrt_OBJECTS) $(e_sqrt_DEPENDENCIES) $(EXTRA_e_sqrt_DEPENDENCIES) 
-	@rm -f e_sqrt$(EXEEXT)
-	$(LINK) $(e_sqrt_OBJECTS) $(e_sqrt_LDADD) $(LIBS)
+ef_sqrt$(EXEEXT): $(ef_sqrt_OBJECTS) $(ef_sqrt_DEPENDENCIES) $(EXTRA_ef_sqrt_DEPENDENCIES) 
+	@rm -f ef_sqrt$(EXEEXT)
+	$(LINK) $(ef_sqrt_OBJECTS) $(ef_sqrt_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -371,7 +371,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/e_sqrt.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ef_sqrt.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/exit.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/platformcode.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sbrk.Po@am__quote@

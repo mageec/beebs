@@ -20,9 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=e_sqrt
-e_sqrt_SOURCES=e_sqrt.c
+bin_PROGRAMS=ef_sqrt
+ef_sqrt_SOURCES=ef_sqrt.c
 
 include $(top_srcdir)/src/common.mk.am
 
-e_sqrt_SOURCES += ${platform_src}
+ef_sqrt_SOURCES += ${platform_src}
