@@ -285,7 +285,8 @@ SUBDIRS = src/platformcode src/2dfir src/adpcm src/blowfish src/bs \
 	src/gdb-advance src/gdb-all-types src/gdb-anon \
 	src/gdb-arrayidx src/gdb-async src/int_matmult src/nbody \
 	src/rijndael src/sha src/compress src/lms src/fft src/template \
-	src/newlib-sqrt src/newlib-exp src/newlib-log analysis
+	src/newlib-sqrt src/newlib-exp src/newlib-log src/newlib-mod \
+	analysis
 ACLOCAL_AMFLAGS = -I m4
 all: all-recursive
 

@@ -1,4 +1,16 @@
 2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add mod from newlib.
+
+	* Makefile.am: Add src/newlib-mod to SUBDIRS
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add newlib-mod benchmark
+	* configure: Regenerate
+	* configure.ac: Add src/newlib-mod/Makefile to AC_CONFIG_FILES
+	* src/newlib-pow/Makefile.am: Create Makefile.am from template
+	* src/newlib-pow/Makefile.in: Regenerate
+	* src/newlib-pow/ef_pow.c: Import ef_fmod from newlib
+
+2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add log from newlib.
 
 	* Makefile.am: Add src/newlib-log to SUBDIRS

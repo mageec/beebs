@@ -52,6 +52,7 @@ SUBDIRS+=src/template
 SUBDIRS+=src/newlib-sqrt
 SUBDIRS+=src/newlib-exp
 SUBDIRS+=src/newlib-log
+SUBDIRS+=src/newlib-mod
 
 SUBDIRS+=analysis
 
