@@ -1,5 +1,14 @@
 /* BEEBS newlib ef_sqrt implementation
 
+   ====================================================
+   Copyright (C) 1993 by Sun Microsystems, Inc. All rights reserved.
+
+   Developed at SunPro, a Sun Microsystems, Inc. business.
+   Permission to use, copy, modify, and distribute this
+   software is freely granted, provided that this notice
+   is preserved.
+   ====================================================
+
    Copyright (C) 2014 Embecosm Limited and University of Bristol
 
    Contributor Pierre Langlois <pierre.langlois@embecosm.com>
@@ -18,17 +27,6 @@
 
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
-
-/*
- * ====================================================
- * Copyright (C) 1993 by Sun Microsystems, Inc. All rights reserved.
- *
- * Developed at SunPro, a Sun Microsystems, Inc. business.
- * Permission to use, copy, modify, and distribute this
- * software is freely granted, provided that this notice
- * is preserved.
- * ====================================================
- */
 
 #include "platformcode.h"
 #include <stdint.h>

@@ -1,4 +1,14 @@
 2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Fix typos and licence in newlib benchmarks.
+
+	* src/newlib-exp/ef_exp.c: Move original licence to the top of the
+	    file. Change e_exp to ef_exp.
+	* src/newlib-log/ef_log.c: Move original licence to the top of the
+	    file. Fix typo.
+	* src/newlib-sqrt/ef_sqrt.c: Move original licence to the top of the
+	    file.
+
+2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add mod from newlib.
 
 	* Makefile.am: Add src/newlib-mod to SUBDIRS
