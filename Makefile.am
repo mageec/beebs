@@ -50,6 +50,7 @@ SUBDIRS+=src/lms
 SUBDIRS+=src/fft
 SUBDIRS+=src/template
 SUBDIRS+=src/newlib-sqrt
+SUBDIRS+=src/newlib-exp
 
 SUBDIRS+=analysis
 

@@ -12036,6 +12036,8 @@ ac_config_files="$ac_config_files src/template/Makefile"
 
 ac_config_files="$ac_config_files src/newlib-sqrt/Makefile"
 
+ac_config_files="$ac_config_files src/newlib-exp/Makefile"
+
 ac_config_files="$ac_config_files src/platformcode/Makefile"
 
 ac_config_files="$ac_config_files analysis/Makefile"
@@ -13130,6 +13132,7 @@ do
     "src/fft/Makefile") CONFIG_FILES="$CONFIG_FILES src/fft/Makefile" ;;
     "src/template/Makefile") CONFIG_FILES="$CONFIG_FILES src/template/Makefile" ;;
     "src/newlib-sqrt/Makefile") CONFIG_FILES="$CONFIG_FILES src/newlib-sqrt/Makefile" ;;
+    "src/newlib-exp/Makefile") CONFIG_FILES="$CONFIG_FILES src/newlib-exp/Makefile" ;;
     "src/platformcode/Makefile") CONFIG_FILES="$CONFIG_FILES src/platformcode/Makefile" ;;
     "analysis/Makefile") CONFIG_FILES="$CONFIG_FILES analysis/Makefile" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;

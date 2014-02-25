@@ -1,4 +1,16 @@
 2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add exp from newlib.
+
+	* Makefile.am: Add src/newlib-exp to SUBDIRS
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add newlib-exp benchmark
+	* configure: Regenerate
+	* configure.ac: Add src/newlib-exp/Makefile to AC_CONFIG_FILES
+	* src/newlib-exp/Makefile.am: Create Makefile.am from template
+	* src/newlib-exp/Makefile.in: Regenerate
+	* src/newlib-exp/ef_exp.c: Import ef_exp from newlib
+
+2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Use float version of sqrt from newlib.
 
 	* src/newlib-sqrt/Makefile.am: Rename e_sqrt to ef_sqrt
