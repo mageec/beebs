@@ -1,4 +1,16 @@
 2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add expint benchmark.
+
+	* Makefile.am: Add src/expint to SUBDIRS
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add expint
+	* configure: Regenerate
+	* configure.ac: Add src/expint/Makefile to AC_CONFIG_FILES
+	* src/expint/Makefile.am: Create Makefile.am from template
+	* src/expint/Makefile.in: Regenerate
+	* src/expint/expint.c: Import expint benchmark from WCET.
+
+2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Fix typos and licence in newlib benchmarks.
 
 	* src/newlib-exp/ef_exp.c: Move original licence to the top of the
