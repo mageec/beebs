@@ -1,4 +1,16 @@
 2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add log from newlib.
+
+	* Makefile.am: Add src/newlib-log to SUBDIRS
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add newlib-log benchmark
+	* configure: Regenerate
+	* configure.ac: Add src/newlib-log/Makefile to AC_CONFIG_FILES
+	* src/newlib-log/Makefile.am: Create Makefile.am from template
+	* src/newlib-log/Makefile.in: Regenerate
+	* src/newlib-log/ef_log.c: Import ef_log from newlib
+
+2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add exp from newlib.
 
 	* Makefile.am: Add src/newlib-exp to SUBDIRS
