@@ -1,4 +1,16 @@
 2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add jfdctint benchmark.
+
+	* Makefile.am: Add jfdctint
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add jfdctint
+	* configure: Regenerate
+	* configure.ac: Add jfdctint
+	* src/jfdctint/Makefile.am: Generated from generate-benchmark script
+	* src/jfdctint/Makefile.in: Regenerate
+	* src/jfdctint/jfdctint.c: Import jfdctint from WCET
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add qurt benchmark.
 
 	* Makefile.am: Add qurt
