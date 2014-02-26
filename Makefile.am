@@ -56,6 +56,7 @@ SUBDIRS+=src/expint
 SUBDIRS+=src/fac
 SUBDIRS+=src/fir
 SUBDIRS+=src/insertsort
+SUBDIRS+=src/ludcmp
 # ==== SUBDIRS (This is a marker for the generate-benchmark.sh script)
 SUBDIRS+=src/template
 

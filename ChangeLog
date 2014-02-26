@@ -1,4 +1,16 @@
 2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add ludcmp benchmark.
+
+	* Makefile.am: Add ludcmp with generate-benchmark script
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add ludcmp
+	* configure: Regenerate
+	* configure.ac: Add ludcmp with generate-benchmark script
+	* src/ludcmp/Makefile.am: Generated with generate-benchmark script
+	* src/ludcmp/Makefile.in: Regenerate
+	* src/ludcmp/ludcmp.c: Import ludcmp from WCET
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add insertsort benchmark.
 
 	* Makefile.am: Add insertsort with generate-benchmark script
