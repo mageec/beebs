@@ -1,4 +1,17 @@
 2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add bitfields test from GDB.
+
+	* Makefile.am: Add gdb-bitfiels
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add gdb-bitfields
+	* configure: Regenerate
+	* configure.ac: Add gdb-bitfiels
+	* src/gdb-bitfields/Makefile.am: Create
+	* src/gdb-bitfields/Makefile.in: Regenerate
+	* src/gdb-bitfields/bitfields.c: Import bitfiels.c from the GDB
+	    testsuite
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add select benchmark.
 
 	* Makefile.am: Add select
