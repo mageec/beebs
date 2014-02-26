@@ -1,4 +1,16 @@
 2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add fir benchmark.
+
+	* Makefile.am: Add fir with generate-benchmark script
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add fir
+	* configure: Regenerate
+	* configure.ac: Add fir with generate-benchmark script
+	* src/fir/Makefile.am: Generated with generate-benchmark script
+	* src/fir/Makefile.in: Regenerate
+	* src/fir/fir.c: Import fir from WCET
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add fac benchmark.
 
 	* Makefile.am: Add fac with generate-benchmark script
