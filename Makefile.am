@@ -60,6 +60,7 @@ SUBDIRS+=src/ludcmp
 SUBDIRS+=src/minver
 SUBDIRS+=src/ndes
 SUBDIRS+=src/prime
+SUBDIRS+=src/qurt
 # ==== SUBDIRS (This is a marker for the generate-benchmark.sh script)
 SUBDIRS+=src/template
 
