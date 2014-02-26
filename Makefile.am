@@ -48,12 +48,13 @@ SUBDIRS+=src/sha
 SUBDIRS+=src/compress
 SUBDIRS+=src/lms
 SUBDIRS+=src/fft
-SUBDIRS+=src/template
 SUBDIRS+=src/newlib-sqrt
 SUBDIRS+=src/newlib-exp
 SUBDIRS+=src/newlib-log
 SUBDIRS+=src/newlib-mod
 SUBDIRS+=src/expint
+# ==== SUBDIRS (This is a marker for the generate-benchmark.sh script)
+SUBDIRS+=src/template
 
 SUBDIRS+=analysis
 

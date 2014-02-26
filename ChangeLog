@@ -1,3 +1,10 @@
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add generate-benchmark script.
+
+	* Makefile.am: Add a marker to append sub-directories.
+	* configure.ac: Add a marker to append config files.
+	* tools/generate-benchmark.sh: New generate-benchmark script.
+
 2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add expint benchmark.
 
