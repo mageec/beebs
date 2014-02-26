@@ -62,6 +62,7 @@ SUBDIRS+=src/ndes
 SUBDIRS+=src/prime
 SUBDIRS+=src/qurt
 SUBDIRS+=src/jfdctint
+SUBDIRS+=src/select
 # ==== SUBDIRS (This is a marker for the generate-benchmark.sh script)
 SUBDIRS+=src/template
 

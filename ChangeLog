@@ -1,4 +1,16 @@
 2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add select benchmark.
+
+	* Makefile.am: Add select
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add select
+	* configure: Regenerate
+	* configure.ac: Add select
+	* src/select/Makefile.am: Generated from generate-benchmark script
+	* src/select/Makefile.in: Regenerate
+	* src/select/select.c: Import select from WCET
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add jfdctint benchmark.
 
 	* Makefile.am: Add jfdctint
