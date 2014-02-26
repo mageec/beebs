@@ -1,4 +1,16 @@
 2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add store test from GDB.
+
+	* Makefile.am: Add gdb-store
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add gdb-store
+	* configure: Regenerate
+	* configure.ac: Add gdb-store
+	* src/gdb-store/Makefile.am: Create
+	* src/gdb-store/Makefile.in: Regenerate
+	* src/gdb-store/store.c: Import store.c from the GDB testsuite
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add bitfields test from GDB.
 
 	* Makefile.am: Add gdb-bitfiels

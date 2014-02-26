@@ -64,6 +64,7 @@ SUBDIRS+=src/qurt
 SUBDIRS+=src/jfdctint
 SUBDIRS+=src/select
 SUBDIRS+=src/gdb-bitfields
+SUBDIRS+=src/gdb-store
 # ==== SUBDIRS (This is a marker for the generate-benchmark.sh script)
 SUBDIRS+=src/template
 
