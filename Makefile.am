@@ -55,6 +55,7 @@ SUBDIRS+=src/newlib-mod
 SUBDIRS+=src/expint
 SUBDIRS+=src/fac
 SUBDIRS+=src/fir
+SUBDIRS+=src/insertsort
 # ==== SUBDIRS (This is a marker for the generate-benchmark.sh script)
 SUBDIRS+=src/template
 

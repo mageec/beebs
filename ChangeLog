@@ -1,4 +1,16 @@
 2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add insertsort benchmark.
+
+	* Makefile.am: Add insertsort with generate-benchmark script
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add insertsort
+	* configure: Regenerate
+	* configure.ac: Add insertsort with generate-benchmark script
+	* src/insertsort/Makefile.am: Generated with generate-benchmark script
+	* src/insertsort/Makefile.in: Regenerate
+	* src/insertsort/insertsort.c: Import insertsort from WCET
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add fir benchmark.
 
 	* Makefile.am: Add fir with generate-benchmark script
