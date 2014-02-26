@@ -12050,6 +12050,8 @@ ac_config_files="$ac_config_files src/insertsort/Makefile"
 
 ac_config_files="$ac_config_files src/ludcmp/Makefile"
 
+ac_config_files="$ac_config_files src/minver/Makefile"
+
 # ==== AC_CONFIG_FILES (This is a marker for the generate-benchmark.sh script)
 ac_config_files="$ac_config_files src/template/Makefile"
 
@@ -13154,6 +13156,7 @@ do
     "src/fir/Makefile") CONFIG_FILES="$CONFIG_FILES src/fir/Makefile" ;;
     "src/insertsort/Makefile") CONFIG_FILES="$CONFIG_FILES src/insertsort/Makefile" ;;
     "src/ludcmp/Makefile") CONFIG_FILES="$CONFIG_FILES src/ludcmp/Makefile" ;;
+    "src/minver/Makefile") CONFIG_FILES="$CONFIG_FILES src/minver/Makefile" ;;
     "src/template/Makefile") CONFIG_FILES="$CONFIG_FILES src/template/Makefile" ;;
     "src/platformcode/Makefile") CONFIG_FILES="$CONFIG_FILES src/platformcode/Makefile" ;;
     "analysis/Makefile") CONFIG_FILES="$CONFIG_FILES analysis/Makefile" ;;
