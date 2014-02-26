@@ -279,14 +279,15 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+# ==== SUBDIRS (This is a marker for the generate-benchmark.sh script)
 SUBDIRS = src/platformcode src/2dfir src/adpcm src/blowfish src/bs \
 	src/bubblesort src/crc32 src/cnt src/cubic src/duff \
 	src/dijkstra src/edn src/fasta src/fdct src/float_matmult \
 	src/gdb-advance src/gdb-all-types src/gdb-anon \
 	src/gdb-arrayidx src/gdb-async src/int_matmult src/nbody \
-	src/rijndael src/sha src/compress src/lms src/fft src/template \
+	src/rijndael src/sha src/compress src/lms src/fft \
 	src/newlib-sqrt src/newlib-exp src/newlib-log src/newlib-mod \
-	src/expint analysis
+	src/expint src/fac src/template analysis
 ACLOCAL_AMFLAGS = -I m4
 all: all-recursive
 

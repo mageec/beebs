@@ -1,4 +1,16 @@
 2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add fac benchmark.
+
+	* Makefile.am: Add fac with generate-benchmark script
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add fac
+	* configure: Regenerate
+	* configure.ac: Add fac with generate-benchmark script
+	* src/fac/Makefile.am: Generated with generate-benchmark script
+	* src/fac/Makefile.in: Regenerate
+	* src/fac/fac.c: Import fac benchmark from WCET
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add generate-benchmark script.
 
 	* Makefile.am: Add a marker to append sub-directories.

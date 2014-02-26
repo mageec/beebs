@@ -53,6 +53,7 @@ SUBDIRS+=src/newlib-exp
 SUBDIRS+=src/newlib-log
 SUBDIRS+=src/newlib-mod
 SUBDIRS+=src/expint
+SUBDIRS+=src/fac
 # ==== SUBDIRS (This is a marker for the generate-benchmark.sh script)
 SUBDIRS+=src/template
 
