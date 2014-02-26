@@ -1,4 +1,17 @@
 2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add constvars test from GDB.
+
+	* Makefile.am: Add gdb-constvars
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add gdb-constvars
+	* configure: Regenerate
+	* configure.ac: Add gdb-constvars
+	* src/gdb-constvars/Makefile.am: Create
+	* src/gdb-constvars/Makefile.in: Regenerate
+	* src/gdb-constvars/constvars.c: Import constvars.c from the GDB
+	    testsuite
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add store test from GDB.
 
 	* Makefile.am: Add gdb-store
