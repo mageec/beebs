@@ -23,14 +23,14 @@
 
 usage () {
   cat << EOF
-Usage: ./tools/generate-benchmark.sh [Benchmark name]
+Usage: ./tools/generate-benchmark.sh <benchmark name> [source name]
 EOF
 }
 
 # Change to the root directory.
 cd `git rev-parse --show-toplevel`
 
-if [ $# -ne 1 ]; then
+if [ $# -eq 0 ]; then
   usage
   exit
 fi
@@ -41,7 +41,15 @@ AUTHOR_EMAIL=`git config user.email`
 AUTHOR_NAME=`git config user.name`
 MAKEFILE_AM="src/${BENCH_NAME}/Makefile.am"
 MAKEFILE="src/${BENCH_NAME}/Makefile"
-SOURCE="src/${BENCH_NAME}/${BENCH_NAME}.c"
+
+if [ $# -gt 1 ]; then
+  SOURCE="src/${BENCH_NAME}/${2}.c"
+  SOURCE_FILE=$2
+else
+  SOURCE="src/${BENCH_NAME}/${BENCH_NAME}.c"
+  SOURCE_FILE=${BENCH_NAME}
+fi
+
 DIR="src/${BENCH_NAME}"
 
 if [ -d ${DIR} ]; then
@@ -77,12 +85,12 @@ cat > ${MAKEFILE_AM} << EOF
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=${BENCH_NAME}
-${BENCH_NAME}_SOURCES=${BENCH_NAME}.c
+bin_PROGRAMS=${SOURCE_FILE}
+${SOURCE_FILE}_SOURCES=${SOURCE_FILE}.c
 
 include \$(top_srcdir)/src/common.mk.am
 
-${BENCH_NAME}_SOURCES += \${platform_src}
+${SOURCE_FILE}_SOURCES += \${platform_src}
 EOF
 
 echo "Generate ${SOURCE}"

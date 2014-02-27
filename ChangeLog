@@ -1,3 +1,9 @@
+2014-02-27  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add source file to generate-benchmark script.
+
+	* tools/generate-benchmark.sh: Add a second optional argument to
+	    specify the name of the source file to generate
+
 2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add constvars test from GDB.
 
