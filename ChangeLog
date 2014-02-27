@@ -1,4 +1,16 @@
 2014-02-27  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add arcfour from nettle library
+
+	* Makefile.am: Add nettle-arcfour
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add nettle-arcfour
+	* configure: Regenerate
+	* configure.ac: Add nettle-arcfour
+	* src/nettle-arcfour/Makefile.am: Create
+	* src/nettle-arcfour/Makefile.in: Regenerate
+	* src/nettle-arcfour/arcfour.c: Import arcfour from the nettle library
+
+2014-02-27  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add md5 from nettle library.
 
 	* Makefile.am: Add nettle-md5
