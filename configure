@@ -12074,6 +12074,8 @@ ac_config_files="$ac_config_files src/nettle-arcfour/Makefile"
 
 ac_config_files="$ac_config_files src/nettle-cast128/Makefile"
 
+ac_config_files="$ac_config_files src/nettle-des/Makefile"
+
 # ==== AC_CONFIG_FILES (This is a marker for the generate-benchmark.sh script)
 ac_config_files="$ac_config_files src/template/Makefile"
 
@@ -13190,6 +13192,7 @@ do
     "src/nettle-md5/Makefile") CONFIG_FILES="$CONFIG_FILES src/nettle-md5/Makefile" ;;
     "src/nettle-arcfour/Makefile") CONFIG_FILES="$CONFIG_FILES src/nettle-arcfour/Makefile" ;;
     "src/nettle-cast128/Makefile") CONFIG_FILES="$CONFIG_FILES src/nettle-cast128/Makefile" ;;
+    "src/nettle-des/Makefile") CONFIG_FILES="$CONFIG_FILES src/nettle-des/Makefile" ;;
     "src/template/Makefile") CONFIG_FILES="$CONFIG_FILES src/template/Makefile" ;;
     "src/platformcode/Makefile") CONFIG_FILES="$CONFIG_FILES src/platformcode/Makefile" ;;
     "analysis/Makefile") CONFIG_FILES="$CONFIG_FILES analysis/Makefile" ;;

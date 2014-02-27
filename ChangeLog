@@ -1,4 +1,20 @@
 2014-02-27  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add des from nettle library.
+
+	* Makefile.am: Add nettle-des
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add nettle-des
+	* configure: Regenerate
+	* configure.ac: Add nettle-des
+	* src/nettle-des/Makefile.am: Create
+	* src/nettle-des/Makefile.in: Regenerate
+	* src/nettle-des/des.c: Import des from the nettle library
+	* src/nettle-des/desCode.h: Ditto
+	* src/nettle-des/descore.README: Ditto
+	* src/nettle-des/keymap.h: Ditto
+	* src/nettle-des/rotors.h: Ditto
+
+2014-02-27  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add cast128 from nettle library.
 
 	* Makefile.am: Add nettle-cast128

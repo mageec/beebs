@@ -291,7 +291,7 @@ SUBDIRS = src/platformcode src/2dfir src/adpcm src/blowfish src/bs \
 	src/minver src/ndes src/prime src/qurt src/jfdctint src/select \
 	src/gdb-bitfields src/gdb-store src/gdb-constvars \
 	src/nettle-md5 src/nettle-arcfour src/nettle-cast128 \
-	src/template analysis
+	src/nettle-des src/template analysis
 ACLOCAL_AMFLAGS = -I m4
 all: all-recursive
 
