@@ -89,6 +89,43 @@ void stop_trigger()
     GPIOC_BSRR = 0x00010000;// bit low
 }
 
+#elif PIC
+
+#define SFR(addr)   (*((unsigned int volatile*)(addr+0xBF880000)))
+
+#define ANSELA   SFR(0x6000)
+#define TRISA    SFR(0x6010)
+#define PORTA    SFR(0x6020)
+
+#define TRISB    SFR(0x6110)
+#define PORTB    SFR(0x6120)
+
+void initialise_trigger()
+{
+    PORTA = 0x0;
+    TRISA = 0x0;
+}
+
+void start_trigger()
+{
+    PORTA = 0x10;
+}
+
+void stop_trigger()
+{
+    PORTA = 0;
+}
+
+void exit(int);
+void __real_main();
+// The pic32 tools repeatedly call main if it returns.
+// This is ...not good, so we call exit after main.
+void __wrap_main()
+{
+  __real_main();
+  exit(0);
+}
+
 #elif AVR
 #include <avr/io.h>
 
