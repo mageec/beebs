@@ -12068,6 +12068,8 @@ ac_config_files="$ac_config_files src/gdb-store/Makefile"
 
 ac_config_files="$ac_config_files src/gdb-constvars/Makefile"
 
+ac_config_files="$ac_config_files src/nettle-md5/Makefile"
+
 # ==== AC_CONFIG_FILES (This is a marker for the generate-benchmark.sh script)
 ac_config_files="$ac_config_files src/template/Makefile"
 
@@ -13181,6 +13183,7 @@ do
     "src/gdb-bitfields/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-bitfields/Makefile" ;;
     "src/gdb-store/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-store/Makefile" ;;
     "src/gdb-constvars/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-constvars/Makefile" ;;
+    "src/nettle-md5/Makefile") CONFIG_FILES="$CONFIG_FILES src/nettle-md5/Makefile" ;;
     "src/template/Makefile") CONFIG_FILES="$CONFIG_FILES src/template/Makefile" ;;
     "src/platformcode/Makefile") CONFIG_FILES="$CONFIG_FILES src/platformcode/Makefile" ;;
     "analysis/Makefile") CONFIG_FILES="$CONFIG_FILES analysis/Makefile" ;;

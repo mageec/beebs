@@ -66,6 +66,7 @@ SUBDIRS+=src/select
 SUBDIRS+=src/gdb-bitfields
 SUBDIRS+=src/gdb-store
 SUBDIRS+=src/gdb-constvars
+SUBDIRS+=src/nettle-md5
 # ==== SUBDIRS (This is a marker for the generate-benchmark.sh script)
 SUBDIRS+=src/template
 

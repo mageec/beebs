@@ -1,4 +1,16 @@
 2014-02-27  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add md5 from nettle library.
+
+	* Makefile.am: Add nettle-md5
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add nettle-md5
+	* configure: Regenerate
+	* configure.ac: Add nettle-md5
+	* src/nettle-md5/Makefile.am: Create
+	* src/nettle-md5/Makefile.in: Regenerate
+	* src/nettle-md5/md5.c: Import md5-compress from the nettle library
+
+2014-02-27  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add source file to generate-benchmark script.
 
 	* tools/generate-benchmark.sh: Add a second optional argument to
