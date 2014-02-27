@@ -34,6 +34,7 @@ benchmarks="2dfir crc32 cubic dijkstra fdct float_matmult int_matmult \
            gdb-arrayidx gdb-async adpcm bs fasta nbody bubblesort cnt duff \
            edn newlib-sqrt newlib-exp newlib-log newlib-mod expint fac fir \
            insertsort ludcmp minver ndes prime qurt jfdctint select \
-           gdb-bitfields gdb-store gdb-constvars nettle-md5 nettle-arcfour"
+           gdb-bitfields gdb-store gdb-constvars nettle-md5 nettle-arcfour \
+           nettle-cast128"
 
 runall $benchmarks

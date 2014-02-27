@@ -1,4 +1,16 @@
 2014-02-27  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add cast128 from nettle library.
+
+	* Makefile.am: Add nettle-cast128
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add nettle-cast128
+	* configure: Regenerate
+	* configure.ac: Add nettle-cast128
+	* src/nettle-cast128/Makefile.am: Create
+	* src/nettle-cast128/Makefile.in: Regenerate
+	* src/nettle-cast128/cast128.c: Import cast128 from the nettle library
+
+2014-02-27  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add arcfour from nettle library
 
 	* Makefile.am: Add nettle-arcfour
