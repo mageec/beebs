@@ -1,3 +1,10 @@
+2014-02-28  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add xmega-a3bu Xplained target
+
+	* configure: Regenerate
+	* configure.ac: Add ATXMEGA256A3BUXPLD platform
+	* src/platformcode/platformcode.c: Add trigger
+
 2014-02-19  James Pallister  <james.pallister@bristol.ac.uk>
 	Added AVR triggers to platform code
 

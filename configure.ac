@@ -24,6 +24,7 @@ AC_ARG_WITH([platform],
 
 AM_CONDITIONAL([STM32F0DISCOVERY], [false])
 AM_CONDITIONAL([ATMEGA328P], [false])
+AM_CONDITIONAL([ATXMEGA256A3BUXPLD], [false])
 AM_CONDITIONAL([MSPEXP430F5529], [false])
 
 case $with_platform in
@@ -50,12 +51,27 @@ case $with_platform in
             AC_MSG_ERROR([Please rerun configure with --host=avr for this platform])
         fi
 
-        AC_SUBST([CFLAGS], ["$CFLAGS -mmcu=atmega328p -std=gnu99 -DAVR "])
+        AC_SUBST([CFLAGS], ["$CFLAGS -mmcu=atmega328p -std=gnu99 -DAVR_ATMEGA"])
         if test x$enable_simulate == xyes; then
             enable_simulate_avr=yes
         fi
 
         AM_CONDITIONAL([ATMEGA328P], [true])
+        ;;
+
+    atxmega256a3buxpld)
+        if test x$host == x$build ; then
+            AC_MSG_ERROR([Please rerun configure with --host=avr for this platform])
+        fi
+
+        # gcc does not support the atxmega256a3bu yet, but atxmega256a3 works
+        # just fine.
+        AC_SUBST([CFLAGS], ["$CFLAGS -mmcu=atxmega256a3 -std=gnu99 -DAVR_ATXMEGA"])
+        if test x$enable_simulate == xyes; then
+            enable_simulate_avr=yes
+        fi
+
+        AM_CONDITIONAL([ATXMEGA256A3BUXPLD], [true])
         ;;
 
     msp-exp430f5529)

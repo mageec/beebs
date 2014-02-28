@@ -726,6 +726,8 @@ CFLAGS
 LDFLAGS
 MSPEXP430F5529_FALSE
 MSPEXP430F5529_TRUE
+ATXMEGA256A3BUXPLD_FALSE
+ATXMEGA256A3BUXPLD_TRUE
 ATMEGA328P_FALSE
 ATMEGA328P_TRUE
 STM32F0DISCOVERY_FALSE
@@ -2241,6 +2243,14 @@ else
 fi
 
  if false; then
+  ATXMEGA256A3BUXPLD_TRUE=
+  ATXMEGA256A3BUXPLD_FALSE='#'
+else
+  ATXMEGA256A3BUXPLD_TRUE='#'
+  ATXMEGA256A3BUXPLD_FALSE=
+fi
+
+ if false; then
   MSPEXP430F5529_TRUE=
   MSPEXP430F5529_FALSE='#'
 else
@@ -2282,7 +2292,7 @@ fi
             as_fn_error $? "Please rerun configure with --host=avr for this platform" "$LINENO" 5
         fi
 
-        CFLAGS="$CFLAGS -mmcu=atmega328p -std=gnu99 -DAVR "
+        CFLAGS="$CFLAGS -mmcu=atmega328p -std=gnu99 -DAVR_ATMEGA"
 
         if test x$enable_simulate == xyes; then
             enable_simulate_avr=yes
@@ -2294,6 +2304,29 @@ fi
 else
   ATMEGA328P_TRUE='#'
   ATMEGA328P_FALSE=
+fi
+
+        ;;
+
+    atxmega256a3buxpld)
+        if test x$host == x$build ; then
+            as_fn_error $? "Please rerun configure with --host=avr for this platform" "$LINENO" 5
+        fi
+
+        # gcc does not support the atxmega256a3bu yet, but atxmega256a3 works
+        # just fine.
+        CFLAGS="$CFLAGS -mmcu=atxmega256a3 -std=gnu99 -DAVR_ATXMEGA"
+
+        if test x$enable_simulate == xyes; then
+            enable_simulate_avr=yes
+        fi
+
+         if true; then
+  ATXMEGA256A3BUXPLD_TRUE=
+  ATXMEGA256A3BUXPLD_FALSE='#'
+else
+  ATXMEGA256A3BUXPLD_TRUE='#'
+  ATXMEGA256A3BUXPLD_FALSE=
 fi
 
         ;;
@@ -12197,6 +12230,10 @@ if test -z "${ATMEGA328P_TRUE}" && test -z "${ATMEGA328P_FALSE}"; then
   as_fn_error $? "conditional \"ATMEGA328P\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
+if test -z "${ATXMEGA256A3BUXPLD_TRUE}" && test -z "${ATXMEGA256A3BUXPLD_FALSE}"; then
+  as_fn_error $? "conditional \"ATXMEGA256A3BUXPLD\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 if test -z "${MSPEXP430F5529_TRUE}" && test -z "${MSPEXP430F5529_FALSE}"; then
   as_fn_error $? "conditional \"MSPEXP430F5529\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -12207,6 +12244,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ATMEGA328P_TRUE}" && test -z "${ATMEGA328P_FALSE}"; then
   as_fn_error $? "conditional \"ATMEGA328P\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ATXMEGA256A3BUXPLD_TRUE}" && test -z "${ATXMEGA256A3BUXPLD_FALSE}"; then
+  as_fn_error $? "conditional \"ATXMEGA256A3BUXPLD\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${MSPEXP430F5529_TRUE}" && test -z "${MSPEXP430F5529_FALSE}"; then
