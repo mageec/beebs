@@ -32,6 +32,9 @@ runall () {
 benchmarks="2dfir crc32 cubic dijkstra fdct float_matmult int_matmult \
            rijndael sha compress lms fft gdb-advance gdb-all-types gdb-anon \
            gdb-arrayidx gdb-async adpcm bs fasta nbody bubblesort cnt duff \
-           edn"
+           edn newlib-sqrt newlib-exp newlib-log newlib-mod expint fac fir \
+           insertsort ludcmp minver ndes prime qurt jfdctint select \
+           gdb-bitfields gdb-store gdb-constvars nettle-md5 nettle-arcfour \
+           nettle-cast128 nettle-des"
 
 runall $benchmarks

@@ -12352,6 +12352,51 @@ ac_config_files="$ac_config_files src/lms/Makefile"
 
 ac_config_files="$ac_config_files src/fft/Makefile"
 
+ac_config_files="$ac_config_files src/newlib-sqrt/Makefile"
+
+ac_config_files="$ac_config_files src/newlib-exp/Makefile"
+
+ac_config_files="$ac_config_files src/newlib-log/Makefile"
+
+ac_config_files="$ac_config_files src/newlib-mod/Makefile"
+
+ac_config_files="$ac_config_files src/expint/Makefile"
+
+ac_config_files="$ac_config_files src/fac/Makefile"
+
+ac_config_files="$ac_config_files src/fir/Makefile"
+
+ac_config_files="$ac_config_files src/insertsort/Makefile"
+
+ac_config_files="$ac_config_files src/ludcmp/Makefile"
+
+ac_config_files="$ac_config_files src/minver/Makefile"
+
+ac_config_files="$ac_config_files src/ndes/Makefile"
+
+ac_config_files="$ac_config_files src/prime/Makefile"
+
+ac_config_files="$ac_config_files src/qurt/Makefile"
+
+ac_config_files="$ac_config_files src/jfdctint/Makefile"
+
+ac_config_files="$ac_config_files src/select/Makefile"
+
+ac_config_files="$ac_config_files src/gdb-bitfields/Makefile"
+
+ac_config_files="$ac_config_files src/gdb-store/Makefile"
+
+ac_config_files="$ac_config_files src/gdb-constvars/Makefile"
+
+ac_config_files="$ac_config_files src/nettle-md5/Makefile"
+
+ac_config_files="$ac_config_files src/nettle-arcfour/Makefile"
+
+ac_config_files="$ac_config_files src/nettle-cast128/Makefile"
+
+ac_config_files="$ac_config_files src/nettle-des/Makefile"
+
+# ==== AC_CONFIG_FILES (This is a marker for the generate-benchmark.sh script)
 ac_config_files="$ac_config_files src/template/Makefile"
 
 ac_config_files="$ac_config_files src/platformcode/Makefile"
@@ -13486,6 +13531,28 @@ do
     "src/compress/Makefile") CONFIG_FILES="$CONFIG_FILES src/compress/Makefile" ;;
     "src/lms/Makefile") CONFIG_FILES="$CONFIG_FILES src/lms/Makefile" ;;
     "src/fft/Makefile") CONFIG_FILES="$CONFIG_FILES src/fft/Makefile" ;;
+    "src/newlib-sqrt/Makefile") CONFIG_FILES="$CONFIG_FILES src/newlib-sqrt/Makefile" ;;
+    "src/newlib-exp/Makefile") CONFIG_FILES="$CONFIG_FILES src/newlib-exp/Makefile" ;;
+    "src/newlib-log/Makefile") CONFIG_FILES="$CONFIG_FILES src/newlib-log/Makefile" ;;
+    "src/newlib-mod/Makefile") CONFIG_FILES="$CONFIG_FILES src/newlib-mod/Makefile" ;;
+    "src/expint/Makefile") CONFIG_FILES="$CONFIG_FILES src/expint/Makefile" ;;
+    "src/fac/Makefile") CONFIG_FILES="$CONFIG_FILES src/fac/Makefile" ;;
+    "src/fir/Makefile") CONFIG_FILES="$CONFIG_FILES src/fir/Makefile" ;;
+    "src/insertsort/Makefile") CONFIG_FILES="$CONFIG_FILES src/insertsort/Makefile" ;;
+    "src/ludcmp/Makefile") CONFIG_FILES="$CONFIG_FILES src/ludcmp/Makefile" ;;
+    "src/minver/Makefile") CONFIG_FILES="$CONFIG_FILES src/minver/Makefile" ;;
+    "src/ndes/Makefile") CONFIG_FILES="$CONFIG_FILES src/ndes/Makefile" ;;
+    "src/prime/Makefile") CONFIG_FILES="$CONFIG_FILES src/prime/Makefile" ;;
+    "src/qurt/Makefile") CONFIG_FILES="$CONFIG_FILES src/qurt/Makefile" ;;
+    "src/jfdctint/Makefile") CONFIG_FILES="$CONFIG_FILES src/jfdctint/Makefile" ;;
+    "src/select/Makefile") CONFIG_FILES="$CONFIG_FILES src/select/Makefile" ;;
+    "src/gdb-bitfields/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-bitfields/Makefile" ;;
+    "src/gdb-store/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-store/Makefile" ;;
+    "src/gdb-constvars/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-constvars/Makefile" ;;
+    "src/nettle-md5/Makefile") CONFIG_FILES="$CONFIG_FILES src/nettle-md5/Makefile" ;;
+    "src/nettle-arcfour/Makefile") CONFIG_FILES="$CONFIG_FILES src/nettle-arcfour/Makefile" ;;
+    "src/nettle-cast128/Makefile") CONFIG_FILES="$CONFIG_FILES src/nettle-cast128/Makefile" ;;
+    "src/nettle-des/Makefile") CONFIG_FILES="$CONFIG_FILES src/nettle-des/Makefile" ;;
     "src/template/Makefile") CONFIG_FILES="$CONFIG_FILES src/template/Makefile" ;;
     "src/platformcode/Makefile") CONFIG_FILES="$CONFIG_FILES src/platformcode/Makefile" ;;
     "analysis/Makefile") CONFIG_FILES="$CONFIG_FILES analysis/Makefile" ;;
