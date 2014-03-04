@@ -27,7 +27,7 @@ AC_ARG_WITH([platform],
 AM_CONDITIONAL([STM32F0DISCOVERY], [false])
 AM_CONDITIONAL([STM32VLDISCOVERY], [false])
 AM_CONDITIONAL([ATMEGA328P], [false])
-AM_CONDITIONAL([ATXMEGA256A3BUXPLD], [false])
+AM_CONDITIONAL([XMEGAA3BUXPLAINED], [false])
 AM_CONDITIONAL([MSPEXP430F5529], [false])
 
 save_CFLAGS=$CFLAGS
@@ -88,7 +88,7 @@ case $with_platform in
         AM_CONDITIONAL([ATMEGA328P], [true])
         ;;
 
-    atxmega256a3buxpld)
+    xmegaa3buxplained)
         if test x$host == x$build ; then
             AC_MSG_ERROR([Please rerun configure with --host=avr for this platform])
         fi
@@ -100,7 +100,7 @@ case $with_platform in
             enable_simulate_avr=yes
         fi
 
-        AM_CONDITIONAL([ATXMEGA256A3BUXPLD], [true])
+        AM_CONDITIONAL([XMEGAA3BUXPLAINED], [true])
         ;;
 
     msp-exp430f5529)

@@ -1,3 +1,13 @@
+2014-03-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Changed the name of the xmega platform from the chip name to the
+	development board's name. Platform was atxmega256a3buxpld, is now
+	xmegaa3buxplained.
+
+	* configure: Regenerated
+	* configure.ac: Changed the name of the xmega platform from the chip
+	    name to the development board's name. Platform was
+	    atxmega256a3buxpld, is now xmegaa3buxplained.
+
 2014-02-28  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add xmega-a3bu Xplained target
 
