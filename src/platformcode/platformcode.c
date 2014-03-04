@@ -89,7 +89,7 @@ void stop_trigger()
     GPIOC_BSRR = 0x00010000;// bit low
 }
 
-#elif AVR
+#elif AVR_ATMEGA
 #include <avr/io.h>
 
 void initialise_trigger()
@@ -108,6 +108,25 @@ void start_trigger()
 void stop_trigger()
 {
     PORTC &= ~_BV(PORTC0);
+}
+
+#elif AVR_ATXMEGA
+#include <avr/io.h>
+
+void initialise_trigger()
+{
+  PORTA.DIRSET = 1;
+  PORTA.OUTCLR = 1;
+}
+
+void start_trigger()
+{
+  PORTA.OUTSET = 1;
+}
+
+void stop_trigger()
+{
+  PORTA.OUTCLR = 1;
 }
 
 #else
