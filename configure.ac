@@ -27,6 +27,7 @@ AC_ARG_WITH([platform],
 AM_CONDITIONAL([STM32F0DISCOVERY], [false])
 AM_CONDITIONAL([STM32VLDISCOVERY], [false])
 AM_CONDITIONAL([ATMEGA328P], [false])
+AM_CONDITIONAL([PIC32MX250F128B], [false])
 AM_CONDITIONAL([XMEGAA3BUXPLAINED], [false])
 AM_CONDITIONAL([MSPEXP430F5529], [false])
 
@@ -80,7 +81,7 @@ case $with_platform in
             AC_MSG_ERROR([Please rerun configure with --host=avr for this platform])
         fi
 
-        AC_SUBST([CFLAGS], ["$CFLAGS -mmcu=atmega328p -std=gnu99 -DAVR "])
+        AC_SUBST([AM_CFLAGS], ["-mmcu=atmega328p -std=gnu99 -DAVR"])
         if test x$enable_simulate == xyes; then
             enable_simulate_avr=yes
         fi
@@ -101,6 +102,19 @@ case $with_platform in
         fi
 
         AM_CONDITIONAL([XMEGAA3BUXPLAINED], [true])
+        ;;
+
+   pic32mx250f128b)
+        if test x$host == x$build ; then
+            AC_MSG_ERROR([Please rerun configure with --host=pic32 for this platform])
+        fi
+
+        AC_SUBST([AM_CFLAGS], ["-mprocessor=32MX250F128B -mips32r2 -std=gnu99 -mips16  -DPIC"])
+        if test x$enable_simulate == xyes; then
+            enable_simulate_pic=yes
+        fi
+
+        AM_CONDITIONAL([PIC32MX250F128B], [true])
         ;;
 
     msp-exp430f5529)

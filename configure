@@ -686,6 +686,7 @@ EXEEXT
 ac_ct_CC
 CPPFLAGS
 LDFLAGS
+CFLAGS
 CC
 LIBTOOL
 am__untar
@@ -723,13 +724,14 @@ build_os
 build_vendor
 build_cpu
 build
-CFLAGS
 AM_CFLAGS
 AM_LDFLAGS
 MSPEXP430F5529_FALSE
 MSPEXP430F5529_TRUE
 XMEGAA3BUXPLAINED_FALSE
 XMEGAA3BUXPLAINED_TRUE
+PIC32MX250F128B_FALSE
+PIC32MX250F128B_TRUE
 ATMEGA328P_FALSE
 ATMEGA328P_TRUE
 STM32VLDISCOVERY_FALSE
@@ -2305,6 +2307,14 @@ else
 fi
 
  if false; then
+  PIC32MX250F128B_TRUE=
+  PIC32MX250F128B_FALSE='#'
+else
+  PIC32MX250F128B_TRUE='#'
+  PIC32MX250F128B_FALSE=
+fi
+
+ if false; then
   XMEGAA3BUXPLAINED_TRUE=
   XMEGAA3BUXPLAINED_FALSE='#'
 else
@@ -2389,7 +2399,7 @@ fi
             as_fn_error $? "Please rerun configure with --host=avr for this platform" "$LINENO" 5
         fi
 
-        CFLAGS="$CFLAGS -mmcu=atmega328p -std=gnu99 -DAVR "
+        AM_CFLAGS="-mmcu=atmega328p -std=gnu99 -DAVR"
 
         if test x$enable_simulate == xyes; then
             enable_simulate_avr=yes
@@ -2424,6 +2434,27 @@ fi
 else
   XMEGAA3BUXPLAINED_TRUE='#'
   XMEGAA3BUXPLAINED_FALSE=
+fi
+
+        ;;
+
+   pic32mx250f128b)
+        if test x$host == x$build ; then
+            as_fn_error $? "Please rerun configure with --host=pic32 for this platform" "$LINENO" 5
+        fi
+
+        AM_CFLAGS="-mprocessor=32MX250F128B -mips32r2 -std=gnu99 -mips16  -DPIC"
+
+        if test x$enable_simulate == xyes; then
+            enable_simulate_pic=yes
+        fi
+
+         if true; then
+  PIC32MX250F128B_TRUE=
+  PIC32MX250F128B_FALSE='#'
+else
+  PIC32MX250F128B_TRUE='#'
+  PIC32MX250F128B_FALSE=
 fi
 
         ;;
@@ -12453,6 +12484,10 @@ if test -z "${ATMEGA328P_TRUE}" && test -z "${ATMEGA328P_FALSE}"; then
   as_fn_error $? "conditional \"ATMEGA328P\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
+if test -z "${PIC32MX250F128B_TRUE}" && test -z "${PIC32MX250F128B_FALSE}"; then
+  as_fn_error $? "conditional \"PIC32MX250F128B\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 if test -z "${XMEGAA3BUXPLAINED_TRUE}" && test -z "${XMEGAA3BUXPLAINED_FALSE}"; then
   as_fn_error $? "conditional \"XMEGAA3BUXPLAINED\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -12475,6 +12510,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${XMEGAA3BUXPLAINED_TRUE}" && test -z "${XMEGAA3BUXPLAINED_FALSE}"; then
   as_fn_error $? "conditional \"XMEGAA3BUXPLAINED\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${PIC32MX250F128B_TRUE}" && test -z "${PIC32MX250F128B_FALSE}"; then
+  as_fn_error $? "conditional \"PIC32MX250F128B\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${MSPEXP430F5529_TRUE}" && test -z "${MSPEXP430F5529_FALSE}"; then
