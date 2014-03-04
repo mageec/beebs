@@ -20,6 +20,66 @@
 
 	* configure.ac: Added pic32mx250f128b to --with-platform
 
+2014-02-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Set the clock properly on the sam4lxplained platform
+
+	* src/platformcode/platformcode.c: Set the start OSC0 and set as main
+	    clock source
+
+2014-02-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Added GPIO pin toggling for sam4lxplained board
+
+	* src/platformcode/platformcode.c: Added GPIO pin toggling for
+	    sam4lxplained board
+
+2014-02-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Added linker script for sam4lxplained board. Code for some benchmarks
+	compiles and runs on the board
+
+	* Makefile.in: Regenerated
+	* aclocal.m4: Regenerated
+	* analysis/Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Small fixes to mimic changes to other Cortex platforms
+	    (saving CFLAGS and LDFLAGS)
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Added in linkerscript
+	* src/compress/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/platformcode/sam4lxplained.ld: Linkerscript for the
+	    sam4lxplained platform
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
+2014-02-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Added initial code for sam4lxplained platform. Platform is Cortex-M4
+	based and very similar to other cortex m-series platforms
+
+	* configure.ac: Added code for sam4lxplained platform
+
 2014-02-21  James Pallister  <james.pallister@bristol.ac.uk>
 	Regenerate configure and makefile
 

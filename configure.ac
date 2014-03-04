@@ -30,6 +30,7 @@ AM_CONDITIONAL([ATMEGA328P], [false])
 AM_CONDITIONAL([PIC32MX250F128B], [false])
 AM_CONDITIONAL([XMEGAA3BUXPLAINED], [false])
 AM_CONDITIONAL([MSPEXP430F5529], [false])
+AM_CONDITIONAL([SAM4LXPLAINED], [false])
 
 save_CFLAGS=$CFLAGS
 save_LDFLAGS=$LDFLAGS
@@ -128,6 +129,24 @@ case $with_platform in
         fi
 
         AM_CONDITIONAL([MSPEXP430F5529], [true])
+        ;;
+
+    sam4lxplained)
+        if test x$host == x$build ; then
+            AC_MSG_ERROR([Please rerun configure with --host=arm-none-eabi for this platform])
+        fi
+
+        # gcc-arm-embedded requires these libraries for the tests, else they'll fail
+        AC_SUBST([AM_LDFLAGS], ["-lc -lnosys"])
+        AC_SUBST([AM_CFLAGS], ["-mthumb -mcpu=cortex-m4 -DCORTEX_M4"])
+        CFLAGS="$CFLAGS -mthumb -mcpu=cortex-m4 -DCORTEX_M4"
+        LDFLAGS="$LDFLAGS -lc -lnosys"
+
+        if test x$enable_simulate == xyes; then
+            enable_simulate_cortex_m4=yes
+        fi
+
+        AM_CONDITIONAL([SAM4LXPLAINED], [true])
         ;;
 esac
 

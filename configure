@@ -726,6 +726,8 @@ build_cpu
 build
 AM_CFLAGS
 AM_LDFLAGS
+SAM4LXPLAINED_FALSE
+SAM4LXPLAINED_TRUE
 MSPEXP430F5529_FALSE
 MSPEXP430F5529_TRUE
 XMEGAA3BUXPLAINED_FALSE
@@ -2330,6 +2332,14 @@ else
   MSPEXP430F5529_FALSE=
 fi
 
+ if false; then
+  SAM4LXPLAINED_TRUE=
+  SAM4LXPLAINED_FALSE='#'
+else
+  SAM4LXPLAINED_TRUE='#'
+  SAM4LXPLAINED_FALSE=
+fi
+
 
 save_CFLAGS=$CFLAGS
 save_LDFLAGS=$LDFLAGS
@@ -2476,6 +2486,33 @@ fi
 else
   MSPEXP430F5529_TRUE='#'
   MSPEXP430F5529_FALSE=
+fi
+
+        ;;
+
+    sam4lxplained)
+        if test x$host == x$build ; then
+            as_fn_error $? "Please rerun configure with --host=arm-none-eabi for this platform" "$LINENO" 5
+        fi
+
+        # gcc-arm-embedded requires these libraries for the tests, else they'll fail
+        AM_LDFLAGS="-lc -lnosys"
+
+        AM_CFLAGS="-mthumb -mcpu=cortex-m4 -DCORTEX_M4"
+
+        CFLAGS="$CFLAGS -mthumb -mcpu=cortex-m4 -DCORTEX_M4"
+        LDFLAGS="$LDFLAGS -lc -lnosys"
+
+        if test x$enable_simulate == xyes; then
+            enable_simulate_cortex_m4=yes
+        fi
+
+         if true; then
+  SAM4LXPLAINED_TRUE=
+  SAM4LXPLAINED_FALSE='#'
+else
+  SAM4LXPLAINED_TRUE='#'
+  SAM4LXPLAINED_FALSE=
 fi
 
         ;;
@@ -12496,6 +12533,10 @@ if test -z "${MSPEXP430F5529_TRUE}" && test -z "${MSPEXP430F5529_FALSE}"; then
   as_fn_error $? "conditional \"MSPEXP430F5529\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
+if test -z "${SAM4LXPLAINED_TRUE}" && test -z "${SAM4LXPLAINED_FALSE}"; then
+  as_fn_error $? "conditional \"SAM4LXPLAINED\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 if test -z "${STM32F0DISCOVERY_TRUE}" && test -z "${STM32F0DISCOVERY_FALSE}"; then
   as_fn_error $? "conditional \"STM32F0DISCOVERY\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -12518,6 +12559,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${MSPEXP430F5529_TRUE}" && test -z "${MSPEXP430F5529_FALSE}"; then
   as_fn_error $? "conditional \"MSPEXP430F5529\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${SAM4LXPLAINED_TRUE}" && test -z "${SAM4LXPLAINED_FALSE}"; then
+  as_fn_error $? "conditional \"SAM4LXPLAINED\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking that generated files are newer than configure" >&5

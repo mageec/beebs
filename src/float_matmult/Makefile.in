@@ -109,6 +109,8 @@ DIST_COMMON = $(top_srcdir)/src/common.mk.am $(srcdir)/Makefile.in \
 @STM32F0DISCOVERY_TRUE@am__append_3 = $(top_srcdir)/src/platformcode/startup.c
 @STM32VLDISCOVERY_TRUE@am__append_4 = -T $(top_srcdir)/src/platformcode/stm32vl_flash.ld
 @STM32VLDISCOVERY_TRUE@am__append_5 = $(top_srcdir)/src/platformcode/startup.c
+@SAM4LXPLAINED_TRUE@am__append_6 = -T $(top_srcdir)/src/platformcode/sam4lxplained.ld
+@SAM4LXPLAINED_TRUE@am__append_7 = $(top_srcdir)/src/platformcode/startup.c
 subdir = src/float_matmult
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
@@ -130,9 +132,10 @@ am__float_matmult_SOURCES_DIST = matmult.c \
 @PLATFORMSRC_TRUE@am__objects_1 = exit.$(OBJEXT) sbrk.$(OBJEXT)
 @STM32F0DISCOVERY_TRUE@am__objects_2 = startup.$(OBJEXT)
 @STM32VLDISCOVERY_TRUE@am__objects_3 = startup.$(OBJEXT)
-am__objects_4 = platformcode.$(OBJEXT) $(am__objects_1) \
-	$(am__objects_2) $(am__objects_3)
-am_float_matmult_OBJECTS = matmult.$(OBJEXT) $(am__objects_4)
+@SAM4LXPLAINED_TRUE@am__objects_4 = startup.$(OBJEXT)
+am__objects_5 = platformcode.$(OBJEXT) $(am__objects_1) \
+	$(am__objects_2) $(am__objects_3) $(am__objects_4)
+am_float_matmult_OBJECTS = matmult.$(OBJEXT) $(am__objects_5)
 float_matmult_OBJECTS = $(am_float_matmult_OBJECTS)
 float_matmult_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -206,7 +209,7 @@ DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
 AM_CFLAGS = @AM_CFLAGS@ -I $(top_srcdir)/src/platformcode -g \
-	$(am__append_2) $(am__append_4)
+	$(am__append_2) $(am__append_4) $(am__append_6)
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
 AM_LDFLAGS = @AM_LDFLAGS@
 AR = @AR@
@@ -336,7 +339,8 @@ top_srcdir = @top_srcdir@
 float_matmult_SOURCES = matmult.c ${platform_src}
 float_matmult_LDFLAGS = "-lm"
 platform_src = $(top_srcdir)/src/platformcode/platformcode.c \
-	$(am__append_1) $(am__append_3) $(am__append_5)
+	$(am__append_1) $(am__append_3) $(am__append_5) \
+	$(am__append_7)
 all: all-am
 
 .SUFFIXES:
