@@ -26,6 +26,7 @@ SUBDIRS+= src/2dfir
 SUBDIRS+= src/adpcm
 SUBDIRS+=src/blowfish
 SUBDIRS+=src/bs
+SUBDIRS+=src/bsort100
 SUBDIRS+=src/bubblesort
 SUBDIRS+=src/cnt
 SUBDIRS+=src/compress

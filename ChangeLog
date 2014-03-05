@@ -1,4 +1,13 @@
 2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added bsort100 benchmark
+
+	* Makefile.am: Added bsort100 benchmark
+	* configure.ac: Added bsort100 benchmark
+	* src/bsort100/Makefile.am: Added bsort100 benchmark
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bsort100/bsort100.c: Added bsort100 benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Sorted the benchmark autotools configuration lines
 
 	* Makefile.am: Sorted the benchmark subdirs
