@@ -1,4 +1,13 @@
 2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added ud benchmark
+
+	* Makefile.am: Added ud benchmark
+	* configure.ac: Added ud benchmark
+	* src/ud/Makefile.am: Added ud benchmark
+	* src/ud/Makefile.in: Regenerated
+	* src/ud/ud.c: Added ud benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added statemate benchmark
 
 	* Makefile.am: Added statemate benchmark
