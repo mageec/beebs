@@ -1,4 +1,13 @@
 2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added another sqrt benchmark
+
+	* Makefile.am: Added another sqrt benchmark
+	* configure.ac: Added another sqrt benchmark
+	* src/sqrt/Makefile.am: Added another sqrt benchmark
+	* src/sqrt/Makefile.in: Regenerated
+	* src/sqrt/sqrt.c: Added another sqrt benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added recursion benchmark
 
 	* Makefile.am: Added recursion benchmark

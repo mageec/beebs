@@ -80,6 +80,7 @@ SUBDIRS+=src/recursion
 SUBDIRS+=src/rijndael
 SUBDIRS+=src/select
 SUBDIRS+=src/sha
+SUBDIRS+=src/sqrt
 # ==== SUBDIRS (This is a marker for the generate-benchmark.sh script)
 SUBDIRS+=src/template
 
