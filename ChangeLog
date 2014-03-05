@@ -1,4 +1,13 @@
 2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added another crc benchmark
+
+	* Makefile.am: Added crc benchmark
+	* configure.ac: Added crc benchmark
+	* src/crc/Makefile.am: Added crc benchmark
+	* src/crc/Makefile.in: Regenerated
+	* src/crc/crc.c: Added crc benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added cover benchmark
 
 	* Makefile.am: Added cover benchmark

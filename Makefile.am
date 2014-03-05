@@ -31,6 +31,7 @@ SUBDIRS+=src/bubblesort
 SUBDIRS+=src/cnt
 SUBDIRS+=src/compress
 SUBDIRS+=src/cover
+SUBDIRS+=src/crc
 SUBDIRS+=src/crc32
 SUBDIRS+=src/cubic
 SUBDIRS+=src/dijkstra
