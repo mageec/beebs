@@ -72,6 +72,7 @@ SUBDIRS+=src/newlib-log
 SUBDIRS+=src/newlib-mod
 SUBDIRS+=src/newlib-sqrt
 SUBDIRS+=src/ns
+SUBDIRS+=src/nsichneu
 SUBDIRS+=src/prime
 SUBDIRS+=src/qurt
 SUBDIRS+=src/rijndael

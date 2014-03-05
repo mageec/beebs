@@ -1,4 +1,13 @@
 2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added nsichneu benchmark
+
+	* Makefile.am: Added nsichneu benchmark
+	* configure.ac: Added nsichneu benchmark
+	* src/nsichneu/Makefile.am: Added nsichneu benchmark
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/nsichneu/nsichneu.c: Added nsichneu benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added ns benchmark
 
 	* Makefile.am: Added ns benchmark
