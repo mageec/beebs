@@ -353,17 +353,17 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 # ==== SUBDIRS (This is a marker for the generate-benchmark.sh script)
 SUBDIRS = src/platformcode src/2dfir src/adpcm src/blowfish src/bs \
-	src/bubblesort src/crc32 src/cnt src/cubic src/duff \
-	src/dijkstra src/edn src/fasta src/fdct src/float_matmult \
-	src/gdb-advance src/gdb-all-types src/gdb-anon \
-	src/gdb-arrayidx src/gdb-async src/int_matmult src/nbody \
-	src/rijndael src/sha src/compress src/lms src/fft \
-	src/newlib-sqrt src/newlib-exp src/newlib-log src/newlib-mod \
-	src/expint src/fac src/fir src/insertsort src/ludcmp \
-	src/minver src/ndes src/prime src/qurt src/jfdctint src/select \
-	src/gdb-bitfields src/gdb-store src/gdb-constvars \
-	src/nettle-md5 src/nettle-arcfour src/nettle-cast128 \
-	src/nettle-des src/template analysis
+	src/bubblesort src/cnt src/compress src/crc32 src/cubic \
+	src/dijkstra src/duff src/edn src/expint src/fac src/fasta \
+	src/fdct src/fft src/fir src/float_matmult src/gdb-advance \
+	src/gdb-all-types src/gdb-anon src/gdb-arrayidx src/gdb-async \
+	src/gdb-bitfields src/gdb-constvars src/gdb-store \
+	src/insertsort src/int_matmult src/jfdctint src/lms src/ludcmp \
+	src/minver src/nbody src/ndes src/nettle-arcfour \
+	src/nettle-cast128 src/nettle-des src/nettle-md5 \
+	src/newlib-exp src/newlib-log src/newlib-mod src/newlib-sqrt \
+	src/prime src/qurt src/rijndael src/select src/sha \
+	src/template analysis
 ACLOCAL_AMFLAGS = -I m4
 all: all-recursive
 

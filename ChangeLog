@@ -1,3 +1,11 @@
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Sorted the benchmark autotools configuration lines
+
+	* Makefile.am: Sorted the benchmark subdirs
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Sorted the benchmark config iels
+
 2014-03-04  James Pallister  <james.pallister@bristol.ac.uk>
 	Changed the name of the xmega platform from the chip name to the
 	development board's name. Platform was atxmega256a3buxpld, is now
