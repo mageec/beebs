@@ -110,7 +110,7 @@ case $with_platform in
             AC_MSG_ERROR([Please rerun configure with --host=pic32 for this platform])
         fi
 
-        AC_SUBST([AM_CFLAGS], ["-mprocessor=32MX250F128B -mips32r2 -std=gnu99 -mips16  -DPIC"])
+        AC_SUBST([AM_CFLAGS], ["-mprocessor=32MX250F128B -mips32r2 -std=gnu99 -mips16 -DPIC -Wl,-wrap,main"])
         if test x$enable_simulate == xyes; then
             enable_simulate_pic=yes
         fi
