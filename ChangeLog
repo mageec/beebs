@@ -1,4 +1,13 @@
 2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added recursion benchmark
+
+	* Makefile.am: Added recursion benchmark
+	* configure.ac: Added recursion benchmark
+	* src/recursion/Makefile.am: Added recursion benchmark
+	* src/recursion/Makefile.in: Regenerated
+	* src/recursion/recursion.c: Added recursion benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added qsort benchmark
 
 	* Makefile.am: Added qsort benchmark

@@ -76,6 +76,7 @@ SUBDIRS+=src/nsichneu
 SUBDIRS+=src/prime
 SUBDIRS+=src/qsort
 SUBDIRS+=src/qurt
+SUBDIRS+=src/recursion
 SUBDIRS+=src/rijndael
 SUBDIRS+=src/select
 SUBDIRS+=src/sha
