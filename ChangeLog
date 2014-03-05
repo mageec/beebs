@@ -1,4 +1,13 @@
 2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added janne complex benchmark
+
+	* Makefile.am: Added janne complex benchmark
+	* configure.ac: Added janne complex benchmark
+	* src/janne_complex/Makefile.am: Added janne complex benchmark
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/janne_complex/janne_complex.c: Added janne complex benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added fibcall benchmark
 
 	* Makefile.am: Added fibcall benchmark

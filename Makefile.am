@@ -55,6 +55,7 @@ SUBDIRS+=src/gdb-constvars
 SUBDIRS+=src/gdb-store
 SUBDIRS+=src/insertsort
 SUBDIRS+=src/int_matmult
+SUBDIRS+=src/janne_complex
 SUBDIRS+=src/jfdctint
 SUBDIRS+=src/lms
 SUBDIRS+=src/ludcmp
