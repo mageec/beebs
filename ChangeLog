@@ -1,4 +1,13 @@
 2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added cover benchmark
+
+	* Makefile.am: Added cover benchmark
+	* configure.ac: Added cover benchmark
+	* src/cover/Makefile.am: Added cover benchmark
+	* src/cover/Makefile.in: Regenerated
+	* src/cover/cover.c: Added cover benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added bsort100 benchmark
 
 	* Makefile.am: Added bsort100 benchmark
