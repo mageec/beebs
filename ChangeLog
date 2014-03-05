@@ -1,4 +1,10 @@
 2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Regenerated Makefiles and configures
+
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added ud benchmark
 
 	* Makefile.am: Added ud benchmark
