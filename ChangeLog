@@ -1,4 +1,13 @@
 2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added ns benchmark
+
+	* Makefile.am: Added ns benchmark
+	* configure.ac: Added ns benchmark
+	* src/ns/Makefile.am: Added ns benchmark
+	* src/ns/Makefile.in: Regenerated
+	* src/ns/ns.c: Added ns benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added lcdnum benchmark
 
 	* Makefile.am: Added lcdnum benchmark
