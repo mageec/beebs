@@ -31,8 +31,6 @@
 #define WCSIM 1
 
 
-#include <sys/types.h>
-#include <sys/times.h>
 #include <stdio.h>
 
 #define WORSTCASE 1
@@ -68,21 +66,6 @@ benchmark()
    printf("     - Number of elements sorted is %d\n", NUMELEMS);
    printf("     - Total time sorting is %3.3f seconds\n\n", TotalTime);
 #endif
-}
-
-
-int ttime()
-/*
- * This function returns in milliseconds the amount of compiler time
- * used prior to it being called.
- */
-{
-   struct tms buffer;
-   int utime;
-
-   /*   times(&buffer);  not implemented */
-   utime = (buffer.tms_utime / 60.0) * 1000.0;
-   return(utime);
 }
 
 

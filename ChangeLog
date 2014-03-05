@@ -1,4 +1,10 @@
 2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Small fixes for benchmark compilation
+
+	* src/bsort100/bsort100.c: Remove dependency on timing
+	* src/st/st.c: Remove dependency on timing
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Regenerated Makefiles and configures
 
 	* Makefile.in: Regenerated
