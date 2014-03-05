@@ -1,4 +1,13 @@
 2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added lcdnum benchmark
+
+	* Makefile.am: Added lcdnum benchmark
+	* configure.ac: Added lcdnum benchmark
+	* src/lcdnum/Makefile.am: Added lcdnum benchmark
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/lcdnum/lcdnum.c: Added lcdnum benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added janne complex benchmark
 
 	* Makefile.am: Added janne complex benchmark
