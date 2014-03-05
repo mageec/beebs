@@ -74,6 +74,7 @@ SUBDIRS+=src/newlib-sqrt
 SUBDIRS+=src/ns
 SUBDIRS+=src/nsichneu
 SUBDIRS+=src/prime
+SUBDIRS+=src/qsort
 SUBDIRS+=src/qurt
 SUBDIRS+=src/rijndael
 SUBDIRS+=src/select
