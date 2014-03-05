@@ -1,4 +1,13 @@
 2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added statemate benchmark
+
+	* Makefile.am: Added statemate benchmark
+	* configure.ac: Added statemate benchmark
+	* src/statemate/Makefile.am: Added statemate benchmark
+	* src/statemate/Makefile.in: Regenerated
+	* src/statemate/statemate.c: Added statemate benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added st benchmark
 
 	* Makefile.am: Added st benchmark

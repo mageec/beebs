@@ -82,6 +82,7 @@ SUBDIRS+=src/select
 SUBDIRS+=src/sha
 SUBDIRS+=src/sqrt
 SUBDIRS+=src/st
+SUBDIRS+=src/statemate
 # ==== SUBDIRS (This is a marker for the generate-benchmark.sh script)
 SUBDIRS+=src/template
 
