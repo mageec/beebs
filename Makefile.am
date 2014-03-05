@@ -42,6 +42,7 @@ SUBDIRS+=src/fac
 SUBDIRS+=src/fasta
 SUBDIRS+=src/fdct
 SUBDIRS+=src/fft
+SUBDIRS+=src/fibcall
 SUBDIRS+=src/fir
 SUBDIRS+=src/float_matmult
 SUBDIRS+=src/gdb-advance

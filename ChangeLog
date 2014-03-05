@@ -1,4 +1,13 @@
 2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added fibcall benchmark
+
+	* Makefile.am: Added fibcall benchmark
+	* configure.ac: Added fibcall benchmark
+	* src/fibcall/Makefile.am: Added fibcall benchmark
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fibcall/fibcall.c: Added fibcall benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Added another crc benchmark
 
 	* Makefile.am: Added crc benchmark
