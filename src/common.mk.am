@@ -40,3 +40,7 @@ if SAM4LXPLAINED
 AM_CFLAGS += -T $(top_srcdir)/src/platformcode/sam4lxplained.ld
 platform_src += $(top_srcdir)/src/platformcode/startup.c
 endif
+if PIC32MX250F128B
+AM_CFLAGS += -T $(top_srcdir)/src/platformcode/pic32mx.ld
+platform_src += $(top_srcdir)/src/platformcode/pic32mx_startup.s
+endif

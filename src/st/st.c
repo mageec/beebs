@@ -41,8 +41,6 @@
  *  - Changed return type of InitSeed from 'missing (default int)' to 'void'
  */
 
-#include <sys/types.h>
-#include <sys/times.h>
 #include <math.h>
 
 
@@ -190,22 +188,6 @@ int RandomInteger()
    Seed = ((Seed * 133) + 81) % 8095;
    return (Seed);
 }
-
-#ifdef POUT
-int ttime()
-/*
- * This function returns in milliseconds the amount of compiler time
- *  used prior to it being called.
- */
-{
-   struct tms buffer;
-   int utime;
-
-   times(&buffer);
-   utime = (buffer.tms_utime / 60.0) * 1000.0;
-   return (utime);
-}
-#endif
 
 int
 main (void)

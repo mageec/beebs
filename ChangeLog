@@ -17,6 +17,12 @@
 	* generate.pic32: Removed, no longer useful
 
 2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Small fixes for benchmark compilation
+
+	* src/bsort100/bsort100.c: Remove dependency on timing
+	* src/st/st.c: Remove dependency on timing
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
 	Regenerated Makefiles and configures
 
 	* Makefile.in: Regenerated
@@ -172,6 +178,19 @@
 	* configure: Regenerate
 	* configure.ac: Add ATXMEGA256A3BUXPLD platform
 	* src/platformcode/platformcode.c: Add trigger
+
+2014-02-27  James Pallister  <james.pallister@bristol.ac.uk>
+	Measurement can now be taken on PIC32MX250F128B platform. Added linker
+	scripts and code to toggle a pin
+
+	* configure.ac: Added LDFLAGS definition to wrap main
+	* src/common.mk.am: Added linkerscript
+	* src/platformcode/pic32mx.ld: Linkerscript for the pic32mx
+	* src/platformcode/pic32mx_startup.s: Added code to jump to the reset
+	    vector in the pic boot memory
+	* src/platformcode/platformcode.c: Toggle PA4, as well as a wrapper
+	    around main, so that exit is called, instead of main being
+	    repeated.
 
 2014-02-27  Pierre Langlois  <pierre.langlois@embecosm.com>
 	Add des from nettle library.
