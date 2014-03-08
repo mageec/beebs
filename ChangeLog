@@ -1,4 +1,10 @@
 2014-03-08  James Pallister  <james.pallister@bristol.ac.uk>
+	Added in header to remove implicit declaration warnings
+
+	* src/platformcode/startup.c: Added in header to remove implicit
+	    declaration warnings
+
+2014-03-08  James Pallister  <james.pallister@bristol.ac.uk>
 	Removed unused source files in platformcode, and corresponding
 	configure options.
 

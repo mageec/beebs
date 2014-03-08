@@ -1,3 +1,4 @@
+#include <string.h>
 
 extern unsigned char __data_start__;
 extern unsigned char __data_end__;
