@@ -2,7 +2,7 @@
 #
 #   Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
-#   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark 
+#   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark
 #   Suite.
 #
 #   Contributor: Jeremy Bennett <jeremy.bennett@embecosm.com>
@@ -29,5 +29,8 @@ EXTRA_DIST = exit.c \
              sbrk.c \
              sbrk.h \
              startup.c \
+             sam4lxplained.ld \
+             pic32mx.ld \
+             pic32mx_startup.s \
              stm32f05_flash.ld \
              stm32vl_flash.ld
