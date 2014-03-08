@@ -1,3 +1,9 @@
+2014-03-08  James Pallister  <james.pallister@bristol.ac.uk>
+	Changes in analysis automake to make distcheck work
+
+	* analysis/Makefile.am: Need to distribute the simulator command files
+	* analysis/Makefile.in: Regenerated
+
 2014-03-06  James Pallister  <james.pallister@bristol.ac.uk>
 	Removed old generate files and added some comments into the readme
 

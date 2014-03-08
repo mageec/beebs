@@ -20,8 +20,11 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# TODO rename simulator command scripts after platform name, rather than
+# the host triple
+
 ANALYSIS=instruction_stats.py all_stats.py
-EXTRA_DIST= $(ANALYSIS) simulate.cortex-m0.in simulate.avr.in
+EXTRA_DIST= $(ANALYSIS) simulator.in cmd.arm-none-eabi cmd.avr-unknown-none
 bin_SCRIPTS=
 
 do_subst = sed -e '/@simulatorcommands@/{r $(srcdir)/cmd.$(host)'$$'\n''d}' \

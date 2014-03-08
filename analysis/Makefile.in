@@ -36,6 +36,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# TODO rename simulator command scripts after platform name, rather than
+# the host triple
+
 VPATH = @srcdir@
 am__is_gnu_make = test -n '$(MAKEFILE_LIST)' && test -n '$(MAKELEVEL)'
 am__make_running_with_option = \
@@ -296,7 +299,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ANALYSIS = instruction_stats.py all_stats.py
-EXTRA_DIST = $(ANALYSIS) simulate.cortex-m0.in simulate.avr.in
+EXTRA_DIST = $(ANALYSIS) simulator.in cmd.arm-none-eabi cmd.avr-unknown-none
 bin_SCRIPTS = $(am__append_1)
 do_subst = sed -e '/@simulatorcommands@/{r $(srcdir)/cmd.$(host)'$$'\n''d}' \
 		       -e 's,[@]simulator[@],$(SIMULATORPATH),g'
