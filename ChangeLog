@@ -1,4 +1,84 @@
 2014-03-08  James Pallister  <james.pallister@bristol.ac.uk>
+	Removed unused source files in platformcode, and corresponding
+	configure options.
+
+	* Makefile.in: Regenerated
+	* analysis/Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Removed the with-platformsources and with-linkerscript
+	    options, as these are now set based on the platform chosen
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Platform sources are no longer used
+	* src/compress/Makefile.in: Regenerated
+	* src/cover/Makefile.in: Regenerated
+	* src/crc/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/expint/Makefile.in: Regenerated
+	* src/fac/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fir/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/gdb-bitfields/Makefile.in: Regenerated
+	* src/gdb-constvars/Makefile.in: Regenerated
+	* src/gdb-store/Makefile.in: Regenerated
+	* src/insertsort/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/jfdctint/Makefile.in: Regenerated
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/ludcmp/Makefile.in: Regenerated
+	* src/minver/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/ndes/Makefile.in: Regenerated
+	* src/nettle-arcfour/Makefile.in: Regenerated
+	* src/nettle-cast128/Makefile.in: Regenerated
+	* src/nettle-des/Makefile.in: Regenerated
+	* src/nettle-md5/Makefile.in: Regenerated
+	* src/newlib-exp/Makefile.in: Regenerated
+	* src/newlib-log/Makefile.in: Regenerated
+	* src/newlib-mod/Makefile.in: Regenerated
+	* src/newlib-sqrt/Makefile.in: Regenerated
+	* src/ns/Makefile.in: Regenerated
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/platformcode/Makefile.am: Remove extra dist for sbrk and exit
+	* src/platformcode/Makefile.in: Regenerated
+	* src/platformcode/exit.c: Removed
+	* src/platformcode/exit.h: Removed
+	* src/platformcode/sbrk.c: Removed
+	* src/platformcode/sbrk.h: Removed
+	* src/prime/Makefile.in: Regenerated
+	* src/qsort/Makefile.in: Regenerated
+	* src/qurt/Makefile.in: Regenerated
+	* src/recursion/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/select/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/sqrt/Makefile.in: Regenerated
+	* src/st/Makefile.in: Regenerated
+	* src/statemate/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+	* src/ud/Makefile.in: Regenerated
+
+2014-03-08  James Pallister  <james.pallister@bristol.ac.uk>
 	Added extra files for distribution in platformcode
 
 	* Makefile.in: Regenerated

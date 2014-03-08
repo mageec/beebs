@@ -125,15 +125,14 @@ target_triplet = @target@
 bin_PROGRAMS = rijndael$(EXEEXT)
 DIST_COMMON = $(top_srcdir)/src/common.mk.am $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/build-aux/depcomp
-@PLATFORMSRC_TRUE@am__append_1 = $(top_srcdir)/src/platformcode/exit.c $(top_srcdir)/src/platformcode/sbrk.c
-@STM32F0DISCOVERY_TRUE@am__append_2 = -T $(top_srcdir)/src/platformcode/stm32f05_flash.ld
-@STM32F0DISCOVERY_TRUE@am__append_3 = $(top_srcdir)/src/platformcode/startup.c
-@STM32VLDISCOVERY_TRUE@am__append_4 = -T $(top_srcdir)/src/platformcode/stm32vl_flash.ld
-@STM32VLDISCOVERY_TRUE@am__append_5 = $(top_srcdir)/src/platformcode/startup.c
-@SAM4LXPLAINED_TRUE@am__append_6 = -T $(top_srcdir)/src/platformcode/sam4lxplained.ld
-@SAM4LXPLAINED_TRUE@am__append_7 = $(top_srcdir)/src/platformcode/startup.c
-@PIC32MX250F128B_TRUE@am__append_8 = -T $(top_srcdir)/src/platformcode/pic32mx.ld
-@PIC32MX250F128B_TRUE@am__append_9 = $(top_srcdir)/src/platformcode/pic32mx_startup.s
+@STM32F0DISCOVERY_TRUE@am__append_1 = -T $(top_srcdir)/src/platformcode/stm32f05_flash.ld
+@STM32F0DISCOVERY_TRUE@am__append_2 = $(top_srcdir)/src/platformcode/startup.c
+@STM32VLDISCOVERY_TRUE@am__append_3 = -T $(top_srcdir)/src/platformcode/stm32vl_flash.ld
+@STM32VLDISCOVERY_TRUE@am__append_4 = $(top_srcdir)/src/platformcode/startup.c
+@SAM4LXPLAINED_TRUE@am__append_5 = -T $(top_srcdir)/src/platformcode/sam4lxplained.ld
+@SAM4LXPLAINED_TRUE@am__append_6 = $(top_srcdir)/src/platformcode/startup.c
+@PIC32MX250F128B_TRUE@am__append_7 = -T $(top_srcdir)/src/platformcode/pic32mx.ld
+@PIC32MX250F128B_TRUE@am__append_8 = $(top_srcdir)/src/platformcode/pic32mx_startup.s
 subdir = src/rijndael
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
@@ -149,19 +148,15 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__rijndael_SOURCES_DIST = aes.c aes.h aestab.h aesxam.c \
 	$(top_srcdir)/src/platformcode/platformcode.c \
-	$(top_srcdir)/src/platformcode/exit.c \
-	$(top_srcdir)/src/platformcode/sbrk.c \
 	$(top_srcdir)/src/platformcode/startup.c \
 	$(top_srcdir)/src/platformcode/pic32mx_startup.s
-@PLATFORMSRC_TRUE@am__objects_1 = exit.$(OBJEXT) sbrk.$(OBJEXT)
-@STM32F0DISCOVERY_TRUE@am__objects_2 = startup.$(OBJEXT)
-@STM32VLDISCOVERY_TRUE@am__objects_3 = startup.$(OBJEXT)
-@SAM4LXPLAINED_TRUE@am__objects_4 = startup.$(OBJEXT)
-@PIC32MX250F128B_TRUE@am__objects_5 = pic32mx_startup.$(OBJEXT)
-am__objects_6 = platformcode.$(OBJEXT) $(am__objects_1) \
-	$(am__objects_2) $(am__objects_3) $(am__objects_4) \
-	$(am__objects_5)
-am_rijndael_OBJECTS = aes.$(OBJEXT) aesxam.$(OBJEXT) $(am__objects_6)
+@STM32F0DISCOVERY_TRUE@am__objects_1 = startup.$(OBJEXT)
+@STM32VLDISCOVERY_TRUE@am__objects_2 = startup.$(OBJEXT)
+@SAM4LXPLAINED_TRUE@am__objects_3 = startup.$(OBJEXT)
+@PIC32MX250F128B_TRUE@am__objects_4 = pic32mx_startup.$(OBJEXT)
+am__objects_5 = platformcode.$(OBJEXT) $(am__objects_1) \
+	$(am__objects_2) $(am__objects_3) $(am__objects_4)
+am_rijndael_OBJECTS = aes.$(OBJEXT) aesxam.$(OBJEXT) $(am__objects_5)
 rijndael_OBJECTS = $(am_rijndael_OBJECTS)
 rijndael_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -240,8 +235,8 @@ DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
 AM_CFLAGS = @AM_CFLAGS@ -I $(top_srcdir)/src/platformcode -g \
-	$(am__append_2) $(am__append_4) $(am__append_6) \
-	$(am__append_8)
+	$(am__append_1) $(am__append_3) $(am__append_5) \
+	$(am__append_7)
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
 AM_LDFLAGS = @AM_LDFLAGS@
 AR = @AR@
@@ -281,7 +276,6 @@ LDFLAGS = @LDFLAGS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
-LINKERSCRIPT = @LINKERSCRIPT@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
@@ -371,8 +365,8 @@ top_srcdir = @top_srcdir@
 rijndael_SOURCES = aes.c aes.h aestab.h aesxam.c ${platform_src}
 EXTRA_DIST = LICENSE
 platform_src = $(top_srcdir)/src/platformcode/platformcode.c \
-	$(am__append_1) $(am__append_3) $(am__append_5) \
-	$(am__append_7) $(am__append_9)
+	$(am__append_2) $(am__append_4) $(am__append_6) \
+	$(am__append_8)
 all: all-am
 
 .SUFFIXES:
@@ -470,9 +464,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/aes.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/aesxam.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/exit.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/platformcode.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sbrk.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/startup.Po@am__quote@
 
 .c.o:
@@ -509,34 +501,6 @@ platformcode.obj: $(top_srcdir)/src/platformcode/platformcode.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/src/platformcode/platformcode.c' object='platformcode.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o platformcode.obj `if test -f '$(top_srcdir)/src/platformcode/platformcode.c'; then $(CYGPATH_W) '$(top_srcdir)/src/platformcode/platformcode.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/src/platformcode/platformcode.c'; fi`
-
-exit.o: $(top_srcdir)/src/platformcode/exit.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT exit.o -MD -MP -MF $(DEPDIR)/exit.Tpo -c -o exit.o `test -f '$(top_srcdir)/src/platformcode/exit.c' || echo '$(srcdir)/'`$(top_srcdir)/src/platformcode/exit.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/exit.Tpo $(DEPDIR)/exit.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/src/platformcode/exit.c' object='exit.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o exit.o `test -f '$(top_srcdir)/src/platformcode/exit.c' || echo '$(srcdir)/'`$(top_srcdir)/src/platformcode/exit.c
-
-exit.obj: $(top_srcdir)/src/platformcode/exit.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT exit.obj -MD -MP -MF $(DEPDIR)/exit.Tpo -c -o exit.obj `if test -f '$(top_srcdir)/src/platformcode/exit.c'; then $(CYGPATH_W) '$(top_srcdir)/src/platformcode/exit.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/src/platformcode/exit.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/exit.Tpo $(DEPDIR)/exit.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/src/platformcode/exit.c' object='exit.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o exit.obj `if test -f '$(top_srcdir)/src/platformcode/exit.c'; then $(CYGPATH_W) '$(top_srcdir)/src/platformcode/exit.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/src/platformcode/exit.c'; fi`
-
-sbrk.o: $(top_srcdir)/src/platformcode/sbrk.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sbrk.o -MD -MP -MF $(DEPDIR)/sbrk.Tpo -c -o sbrk.o `test -f '$(top_srcdir)/src/platformcode/sbrk.c' || echo '$(srcdir)/'`$(top_srcdir)/src/platformcode/sbrk.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/sbrk.Tpo $(DEPDIR)/sbrk.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/src/platformcode/sbrk.c' object='sbrk.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sbrk.o `test -f '$(top_srcdir)/src/platformcode/sbrk.c' || echo '$(srcdir)/'`$(top_srcdir)/src/platformcode/sbrk.c
-
-sbrk.obj: $(top_srcdir)/src/platformcode/sbrk.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sbrk.obj -MD -MP -MF $(DEPDIR)/sbrk.Tpo -c -o sbrk.obj `if test -f '$(top_srcdir)/src/platformcode/sbrk.c'; then $(CYGPATH_W) '$(top_srcdir)/src/platformcode/sbrk.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/src/platformcode/sbrk.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/sbrk.Tpo $(DEPDIR)/sbrk.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/src/platformcode/sbrk.c' object='sbrk.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sbrk.obj `if test -f '$(top_srcdir)/src/platformcode/sbrk.c'; then $(CYGPATH_W) '$(top_srcdir)/src/platformcode/sbrk.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/src/platformcode/sbrk.c'; fi`
 
 startup.o: $(top_srcdir)/src/platformcode/startup.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT startup.o -MD -MP -MF $(DEPDIR)/startup.Tpo -c -o startup.o `test -f '$(top_srcdir)/src/platformcode/startup.c' || echo '$(srcdir)/'`$(top_srcdir)/src/platformcode/startup.c

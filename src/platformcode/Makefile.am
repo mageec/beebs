@@ -22,12 +22,8 @@
 
 
 # Only needed to ensure all the sources are included in the distribution.
-EXTRA_DIST = exit.c \
-             exit.h \
-             platformcode.c \
+EXTRA_DIST = platformcode.c \
              platformcode.h \
-             sbrk.c \
-             sbrk.h \
              startup.c \
              sam4lxplained.ld \
              pic32mx.ld \

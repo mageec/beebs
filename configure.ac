@@ -176,27 +176,6 @@ if test x$cross_compiling == xyes ; then
     fi
 fi
 
-AC_ARG_WITH([linkerscript],
-            [AS_HELP_STRING([--with-linkerscript],
-              [Choose the linker script])],
-            [],
-            [with_linkerscript=none])
-
-if test x$with_linkerscript != xnone ; then
-    lk=`readlink -m ${with_linkerscript}`
-#    with_linkerscript="-T ${lk}"
-    AC_SUBST([LINKERSCRIPT], ["-T ${lk}"])
-fi
-
-AC_ARG_ENABLE([platformsources],
-            [AS_HELP_STRING([--enable-platformsources],
-              [Add platform sources to be compiled in])],
-            [],
-            [   if [[ -z "$enable_platformsources" ]] ; then
-                    enable_platformsources=no
-                fi ])
-
-AM_CONDITIONAL([PLATFORMSRC], [test x$enable_platformsources != xno])
 
 AM_CONDITIONAL([SIMULATE], [false])
 

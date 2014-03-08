@@ -641,9 +641,6 @@ SIMULATORPATH
 simulavr_cmd
 SIMULATE_FALSE
 SIMULATE_TRUE
-PLATFORMSRC_FALSE
-PLATFORMSRC_TRUE
-LINKERSCRIPT
 CROSS_COMPILER_CHECK
 am__fastdepCCAS_FALSE
 am__fastdepCCAS_TRUE
@@ -800,8 +797,6 @@ enable_dependency_tracking
 with_gnu_ld
 with_sysroot
 enable_libtool_lock
-with_linkerscript
-enable_platformsources
 enable_simulate_avr
 enable_simulate_cortex_m0
 '
@@ -1450,8 +1445,6 @@ Optional Features:
   --disable-dependency-tracking
                           speeds up one-time build
   --disable-libtool-lock  avoid locking (might break parallel builds)
-  --enable-platformsources
-                          Add platform sources to be compiled in
   --enable-simulate-avr   Enable the simulation for AVR
   --enable-simulate-cortex-m0
                           Enable the simulation for cortex-m0
@@ -1465,7 +1458,6 @@ Optional Packages:
   --with-gnu-ld           assume the C compiler uses GNU ld [default=no]
   --with-sysroot=DIR Search for dependent libraries within DIR
                         (or the compiler's sysroot if not specified).
-  --with-linkerscript     Choose the linker script
 
 Some influential environment variables:
   CC          C compiler command
@@ -12096,40 +12088,6 @@ fi
 fi
 
 
-# Check whether --with-linkerscript was given.
-if test "${with_linkerscript+set}" = set; then :
-  withval=$with_linkerscript;
-else
-  with_linkerscript=none
-fi
-
-
-if test x$with_linkerscript != xnone ; then
-    lk=`readlink -m ${with_linkerscript}`
-#    with_linkerscript="-T ${lk}"
-    LINKERSCRIPT="-T ${lk}"
-
-fi
-
-# Check whether --enable-platformsources was given.
-if test "${enable_platformsources+set}" = set; then :
-  enableval=$enable_platformsources;
-else
-     if [ -z "$enable_platformsources" ] ; then
-                    enable_platformsources=no
-                fi
-fi
-
-
- if test x$enable_platformsources != xno; then
-  PLATFORMSRC_TRUE=
-  PLATFORMSRC_FALSE='#'
-else
-  PLATFORMSRC_TRUE='#'
-  PLATFORMSRC_FALSE=
-fi
-
-
  if false; then
   SIMULATE_TRUE=
   SIMULATE_FALSE='#'
@@ -12664,10 +12622,6 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${am__fastdepCCAS_TRUE}" && test -z "${am__fastdepCCAS_FALSE}"; then
   as_fn_error $? "conditional \"am__fastdepCCAS\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${PLATFORMSRC_TRUE}" && test -z "${PLATFORMSRC_FALSE}"; then
-  as_fn_error $? "conditional \"PLATFORMSRC\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${SIMULATE_TRUE}" && test -z "${SIMULATE_FALSE}"; then

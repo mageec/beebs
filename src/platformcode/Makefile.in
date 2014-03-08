@@ -175,7 +175,6 @@ LDFLAGS = @LDFLAGS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
-LINKERSCRIPT = @LINKERSCRIPT@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
@@ -264,12 +263,8 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 
 # Only needed to ensure all the sources are included in the distribution.
-EXTRA_DIST = exit.c \
-             exit.h \
-             platformcode.c \
+EXTRA_DIST = platformcode.c \
              platformcode.h \
-             sbrk.c \
-             sbrk.h \
              startup.c \
              sam4lxplained.ld \
              pic32mx.ld \
