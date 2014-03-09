@@ -1,3 +1,14 @@
+2014-03-09  James Pallister  <james.pallister@bristol.ac.uk>
+	Added levenshtein benchmark
+
+	* Makefile.am: Added levenshtein benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added levenshtein benchmark
+	* src/levenshtein/Makefile.am: Added levenshtein benchmark
+	* src/levenshtein/Makefile.in: Regenerated
+	* src/levenshtein/levenshtein.c: Added levenshtein benchmark
+
 2014-03-08  James Pallister  <james.pallister@bristol.ac.uk>
 	Added in header to remove implicit declaration warnings
 

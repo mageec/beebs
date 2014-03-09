@@ -58,6 +58,7 @@ SUBDIRS+=src/int_matmult
 SUBDIRS+=src/janne_complex
 SUBDIRS+=src/jfdctint
 SUBDIRS+=src/lcdnum
+SUBDIRS+=src/levenshtein
 SUBDIRS+=src/lms
 SUBDIRS+=src/ludcmp
 SUBDIRS+=src/minver

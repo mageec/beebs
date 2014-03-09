@@ -12330,6 +12330,8 @@ ac_config_files="$ac_config_files src/jfdctint/Makefile"
 
 ac_config_files="$ac_config_files src/lcdnum/Makefile"
 
+ac_config_files="$ac_config_files src/levenshtein/Makefile"
+
 ac_config_files="$ac_config_files src/lms/Makefile"
 
 ac_config_files="$ac_config_files src/ludcmp/Makefile"
@@ -13523,6 +13525,7 @@ do
     "src/janne_complex/Makefile") CONFIG_FILES="$CONFIG_FILES src/janne_complex/Makefile" ;;
     "src/jfdctint/Makefile") CONFIG_FILES="$CONFIG_FILES src/jfdctint/Makefile" ;;
     "src/lcdnum/Makefile") CONFIG_FILES="$CONFIG_FILES src/lcdnum/Makefile" ;;
+    "src/levenshtein/Makefile") CONFIG_FILES="$CONFIG_FILES src/levenshtein/Makefile" ;;
     "src/lms/Makefile") CONFIG_FILES="$CONFIG_FILES src/lms/Makefile" ;;
     "src/ludcmp/Makefile") CONFIG_FILES="$CONFIG_FILES src/ludcmp/Makefile" ;;
     "src/minver/Makefile") CONFIG_FILES="$CONFIG_FILES src/minver/Makefile" ;;
