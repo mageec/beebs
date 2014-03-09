@@ -1,4 +1,20 @@
 2014-03-09  James Pallister  <james.pallister@bristol.ac.uk>
+	Added dhrystone benchmark. Note: dhrystone is modified slightly to
+	allow it to fit in memory of some of the smaller processors. This may
+	alter the computation slightly from the normal dhrystone, but not
+	significantly
+
+	* Makefile.am: Added dhrystone.
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added dhrystone.
+	* src/dhrystone/Makefile.am: Added dhrystone.
+	* src/dhrystone/Makefile.in: Regenerated
+	* src/dhrystone/dhry.h: Added dhrystone.
+	* src/dhrystone/dhry_1.c: Added dhrystone.
+	* src/dhrystone/dhry_2.c: Added dhrystone.
+
+2014-03-09  James Pallister  <james.pallister@bristol.ac.uk>
 	Added huffbench benchmark
 
 	* Makefile.am: Added huffbench benchmark
