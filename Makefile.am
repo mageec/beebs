@@ -35,6 +35,7 @@ SUBDIRS+=src/crc
 SUBDIRS+=src/crc32
 SUBDIRS+=src/cubic
 SUBDIRS+=src/dijkstra
+SUBDIRS+=src/dtoa
 SUBDIRS+=src/duff
 SUBDIRS+=src/edn
 SUBDIRS+=src/expint

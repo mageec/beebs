@@ -1,4 +1,15 @@
 2014-03-09  James Pallister  <james.pallister@bristol.ac.uk>
+	Added dtoa benchmark
+
+	* Makefile.am: Added dtoa benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added dtoa benchmark
+	* src/dtoa/Makefile.am: Added dtoa benchmark
+	* src/dtoa/Makefile.in: Regenerated
+	* src/dtoa/dtoa.c: Added dtoa benchmark
+
+2014-03-09  James Pallister  <james.pallister@bristol.ac.uk>
 	Added levenshtein benchmark
 
 	* Makefile.am: Added levenshtein benchmark
