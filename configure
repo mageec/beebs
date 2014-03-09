@@ -12322,6 +12322,8 @@ ac_config_files="$ac_config_files src/gdb-constvars/Makefile"
 
 ac_config_files="$ac_config_files src/gdb-store/Makefile"
 
+ac_config_files="$ac_config_files src/huffbench/Makefile"
+
 ac_config_files="$ac_config_files src/insertsort/Makefile"
 
 ac_config_files="$ac_config_files src/int_matmult/Makefile"
@@ -13523,6 +13525,7 @@ do
     "src/gdb-bitfields/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-bitfields/Makefile" ;;
     "src/gdb-constvars/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-constvars/Makefile" ;;
     "src/gdb-store/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-store/Makefile" ;;
+    "src/huffbench/Makefile") CONFIG_FILES="$CONFIG_FILES src/huffbench/Makefile" ;;
     "src/insertsort/Makefile") CONFIG_FILES="$CONFIG_FILES src/insertsort/Makefile" ;;
     "src/int_matmult/Makefile") CONFIG_FILES="$CONFIG_FILES src/int_matmult/Makefile" ;;
     "src/janne_complex/Makefile") CONFIG_FILES="$CONFIG_FILES src/janne_complex/Makefile" ;;

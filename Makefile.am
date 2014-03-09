@@ -54,6 +54,7 @@ SUBDIRS+=src/gdb-async
 SUBDIRS+=src/gdb-bitfields
 SUBDIRS+=src/gdb-constvars
 SUBDIRS+=src/gdb-store
+SUBDIRS+=src/huffbench
 SUBDIRS+=src/insertsort
 SUBDIRS+=src/int_matmult
 SUBDIRS+=src/janne_complex

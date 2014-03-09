@@ -1,4 +1,15 @@
 2014-03-09  James Pallister  <james.pallister@bristol.ac.uk>
+	Added huffbench benchmark
+
+	* Makefile.am: Added huffbench benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added huffbench benchmark
+	* src/huffbench/Makefile.am: Added huffbench benchmark
+	* src/huffbench/Makefile.in: Regenerated
+	* src/huffbench/huffbench.c: Added huffbench benchmark
+
+2014-03-09  James Pallister  <james.pallister@bristol.ac.uk>
 	Added dtoa benchmark
 
 	* Makefile.am: Added dtoa benchmark
