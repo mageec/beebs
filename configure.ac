@@ -17,9 +17,17 @@ AC_ARG_ENABLE([simulate],
             [enable_simulate=no],
             )
 
+# Manually format the help string, so that we can have custom formatting on the RHS
 AC_ARG_WITH([platform],
-    [AS_HELP_STRING([--with-platform],
-        [Select the platform compile for])],
+[  --with-platform         Select the platform compile for. Possible platforms
+                          are:
+                              stm32f0discovery
+                              stm32vldiscovery
+                              atmega328p
+                              pic32mx250f128b
+                              xmegaa3buxplained
+                              msp-exp430f5529
+                              sam4lxplained],
     [],
     [with_platform=none]
     )
@@ -289,6 +297,7 @@ AC_CONFIG_FILES([src/sqrt/Makefile])
 AC_CONFIG_FILES([src/st/Makefile])
 AC_CONFIG_FILES([src/statemate/Makefile])
 AC_CONFIG_FILES([src/ud/Makefile])
+AC_CONFIG_FILES([src/whetstone/Makefile])
 # ==== AC_CONFIG_FILES (This is a marker for the generate-benchmark.sh script)
 AC_CONFIG_FILES([src/template/Makefile])
 AC_CONFIG_FILES([src/platformcode/Makefile])

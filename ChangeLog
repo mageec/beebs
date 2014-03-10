@@ -1,3 +1,14 @@
+2014-03-10  James Pallister  <james.pallister@bristol.ac.uk>
+	Added whetstone benchmark
+
+	* Makefile.am: Added whetstone benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added whetstone benchmark
+	* src/whetstone/Makefile.am: Added whetstone benchmark
+	* src/whetstone/Makefile.in: Added whetstone benchmark
+	* src/whetstone/whetstone.c: Added whetstone benchmark
+
 2014-03-09  James Pallister  <james.pallister@bristol.ac.uk>
 	Added dhrystone benchmark. Note: dhrystone is modified slightly to
 	allow it to fit in memory of some of the smaller processors. This may
