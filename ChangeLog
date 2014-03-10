@@ -1,4 +1,15 @@
 2014-03-10  James Pallister  <james.pallister@bristol.ac.uk>
+	Added frac benchmark
+
+	* Makefile.am: Added frac benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added frac benchmark
+	* src/frac/Makefile.am: Added frac benchmark
+	* src/frac/Makefile.in: Regenerated
+	* src/frac/frac.c: Added frac benchmark
+
+2014-03-10  James Pallister  <james.pallister@bristol.ac.uk>
 	Added stringsearch1 benchmark
 
 	* Makefile.am: Added stringsearch1 benchmark

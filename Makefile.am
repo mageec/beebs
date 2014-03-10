@@ -47,6 +47,7 @@ SUBDIRS+=src/fft
 SUBDIRS+=src/fibcall
 SUBDIRS+=src/fir
 SUBDIRS+=src/float_matmult
+SUBDIRS+=src/frac
 SUBDIRS+=src/gdb-advance
 SUBDIRS+=src/gdb-all-types
 SUBDIRS+=src/gdb-anon

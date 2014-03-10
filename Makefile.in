@@ -356,7 +356,7 @@ SUBDIRS = src/platformcode src/2dfir src/adpcm src/blowfish src/bs \
 	src/crc src/crc32 src/cubic src/dhrystone src/dijkstra \
 	src/dtoa src/duff src/edn src/expint src/fac src/fasta \
 	src/fdct src/fft src/fibcall src/fir src/float_matmult \
-	src/gdb-advance src/gdb-all-types src/gdb-anon \
+	src/frac src/gdb-advance src/gdb-all-types src/gdb-anon \
 	src/gdb-arrayidx src/gdb-async src/gdb-bitfields \
 	src/gdb-constvars src/gdb-store src/huffbench src/insertsort \
 	src/int_matmult src/janne_complex src/jfdctint src/lcdnum \
