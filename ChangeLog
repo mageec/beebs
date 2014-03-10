@@ -1,4 +1,17 @@
 2014-03-10  James Pallister  <james.pallister@bristol.ac.uk>
+	Added stringsearch1 benchmark
+
+	* Makefile.am: Added stringsearch1 benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added stringsearch1 benchmark
+	* src/stringsearch1/Makefile.am: Added stringsearch1 benchmark
+	* src/stringsearch1/Makefile.in: Regenerated
+	* src/stringsearch1/fast.fwd.inc.c: Added stringsearch1 benchmark
+	* src/stringsearch1/fast.rev.d12.c: Added stringsearch1 benchmark
+	* src/stringsearch1/stringsearch1.c: Added stringsearch1 benchmark
+
+2014-03-10  James Pallister  <james.pallister@bristol.ac.uk>
 	Added whetstone benchmark
 
 	* Makefile.am: Added whetstone benchmark
