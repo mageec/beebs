@@ -12397,6 +12397,8 @@ ac_config_files="$ac_config_files src/slre/Makefile"
 
 ac_config_files="$ac_config_files src/stringsearch1/Makefile"
 
+ac_config_files="$ac_config_files src/strstr/Makefile"
+
 ac_config_files="$ac_config_files src/sqrt/Makefile"
 
 ac_config_files="$ac_config_files src/st/Makefile"
@@ -13577,6 +13579,7 @@ do
     "src/sha/Makefile") CONFIG_FILES="$CONFIG_FILES src/sha/Makefile" ;;
     "src/slre/Makefile") CONFIG_FILES="$CONFIG_FILES src/slre/Makefile" ;;
     "src/stringsearch1/Makefile") CONFIG_FILES="$CONFIG_FILES src/stringsearch1/Makefile" ;;
+    "src/strstr/Makefile") CONFIG_FILES="$CONFIG_FILES src/strstr/Makefile" ;;
     "src/sqrt/Makefile") CONFIG_FILES="$CONFIG_FILES src/sqrt/Makefile" ;;
     "src/st/Makefile") CONFIG_FILES="$CONFIG_FILES src/st/Makefile" ;;
     "src/statemate/Makefile") CONFIG_FILES="$CONFIG_FILES src/statemate/Makefile" ;;

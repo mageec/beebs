@@ -1,4 +1,15 @@
 2014-03-11  James Pallister  <james.pallister@bristol.ac.uk>
+	Added strstr benchmark
+
+	* Makefile.am: Added strstr benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added strstr benchmark
+	* src/strstr/Makefile.am: Added strstr benchmark
+	* src/strstr/Makefile.in: Regenerated
+	* src/strstr/strstr.c: Added strstr benchmark
+
+2014-03-11  James Pallister  <james.pallister@bristol.ac.uk>
 	Added slre benchmark
 
 	* Makefile.am: Added slre benchmark
