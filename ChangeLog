@@ -1,4 +1,10 @@
 2014-03-11  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix to make blowfish use less memory
+
+	* src/blowfish/bf.c: Move key off the stack
+	* src/blowfish/bf_pi.h: Make const, so the init stays in flash
+
+2014-03-11  James Pallister  <james.pallister@bristol.ac.uk>
 	Added strstr benchmark
 
 	* Makefile.am: Added strstr benchmark

@@ -4,10 +4,10 @@
 #include "platformcode.h"
 
 char *ckey= "ABCDEF1234567890";
+BF_KEY key;
 
 int main(int argc, char *argv[])
 {
-   BF_KEY key;
    unsigned char ukey[8];
 
    unsigned char indata[40],outdata[40],ivec[8] = {0};
