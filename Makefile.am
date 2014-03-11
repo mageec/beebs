@@ -85,6 +85,7 @@ SUBDIRS+=src/recursion
 SUBDIRS+=src/rijndael
 SUBDIRS+=src/select
 SUBDIRS+=src/sha
+SUBDIRS+=src/slre
 SUBDIRS+=src/sqrt
 SUBDIRS+=src/st
 SUBDIRS+=src/statemate

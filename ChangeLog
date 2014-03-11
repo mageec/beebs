@@ -1,3 +1,15 @@
+2014-03-11  James Pallister  <james.pallister@bristol.ac.uk>
+	Added slre benchmark
+
+	* Makefile.am: Added slre benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added slre benchmark
+	* src/slre/Makefile.am: Added slre benchmark
+	* src/slre/Makefile.in: Regenerated
+	* src/slre/slre.c: Added slre benchmark
+	* src/slre/slre.h: Added slre benchmark
+
 2014-03-10  James Pallister  <james.pallister@bristol.ac.uk>
 	Added frac benchmark
 
