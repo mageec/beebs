@@ -87,6 +87,7 @@ SUBDIRS+=src/rijndael
 SUBDIRS+=src/select
 SUBDIRS+=src/sglib-arraybinsearch
 SUBDIRS+=src/sglib-arraysort
+SUBDIRS+=src/sglib-arraysort1
 SUBDIRS+=src/sha
 SUBDIRS+=src/slre
 SUBDIRS+=src/sqrt
