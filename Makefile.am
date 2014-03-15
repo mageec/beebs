@@ -94,6 +94,7 @@ SUBDIRS+=src/sglib-listinsertsort
 SUBDIRS+=src/sglib-listinsertsort1
 SUBDIRS+=src/sglib-listsort
 SUBDIRS+=src/sglib-queue
+SUBDIRS+=src/sglib-rbtree
 SUBDIRS+=src/sha
 SUBDIRS+=src/slre
 SUBDIRS+=src/sqrt

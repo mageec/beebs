@@ -1,4 +1,16 @@
 2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added rbtree benchmark from sglib
+
+	* Makefile.am: Added rbtree benchmark from sglib
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added rbtree benchmark from sglib
+	* src/sglib-rbtree/Makefile.am: Added rbtree benchmark from sglib
+	* src/sglib-rbtree/Makefile.in: Regenerated
+	* src/sglib-rbtree/rbtree.c: Added rbtree benchmark from sglib
+	* src/sglib-rbtree/sglib.h: Added rbtree benchmark from sglib
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
 	Added queue benchmark from sglib
 
 	* Makefile.am: Added queue benchmark from sglib
