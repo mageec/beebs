@@ -1,4 +1,16 @@
 2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added queue benchmark from sglib
+
+	* Makefile.am: Added queue benchmark from sglib
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added queue benchmark from sglib
+	* src/sglib-queue/Makefile.am: Added queue benchmark from sglib
+	* src/sglib-queue/Makefile.in: Regenerated
+	* src/sglib-queue/queue.c: Added queue benchmark from sglib
+	* src/sglib-queue/sglib.h: Added queue benchmark from sglib
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
 	Added listsort from sglib
 
 	* Makefile.am: Added listsort from sglib
