@@ -90,6 +90,7 @@ SUBDIRS+=src/sglib-arraysort
 SUBDIRS+=src/sglib-arraysort1
 SUBDIRS+=src/sglib-dllist
 SUBDIRS+=src/sglib-hashtable
+SUBDIRS+=src/sglib-listinsertsort
 SUBDIRS+=src/sha
 SUBDIRS+=src/slre
 SUBDIRS+=src/sqrt

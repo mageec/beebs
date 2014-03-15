@@ -1,4 +1,18 @@
 2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added listinsertsort from sglib
+
+	* Makefile.am: Added listinsertsort from sglib
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added listinsertsort from sglib
+	* src/sglib-listinsertsort/Makefile.am: Added listinsertsort from
+	    sglib
+	* src/sglib-listinsertsort/Makefile.in: Regenerated
+	* src/sglib-listinsertsort/listinsertsort.c: Added listinsertsort from
+	    sglib
+	* src/sglib-listinsertsort/sglib.h: Added listinsertsort from sglib
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
 	Added hashtable benchmark from sglib
 
 	* Makefile.am: Added hashtable benchmark from sglib
