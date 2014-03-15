@@ -65,6 +65,7 @@ SUBDIRS+=src/lcdnum
 SUBDIRS+=src/levenshtein
 SUBDIRS+=src/lms
 SUBDIRS+=src/ludcmp
+SUBDIRS+=src/mergesort
 SUBDIRS+=src/minver
 SUBDIRS+=src/nbody
 SUBDIRS+=src/ndes

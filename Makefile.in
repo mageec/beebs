@@ -360,14 +360,14 @@ SUBDIRS = src/platformcode src/2dfir src/adpcm src/blowfish src/bs \
 	src/gdb-arrayidx src/gdb-async src/gdb-bitfields \
 	src/gdb-constvars src/gdb-store src/huffbench src/insertsort \
 	src/int_matmult src/janne_complex src/jfdctint src/lcdnum \
-	src/levenshtein src/lms src/ludcmp src/minver src/nbody \
-	src/ndes src/nettle-arcfour src/nettle-cast128 src/nettle-des \
-	src/nettle-md5 src/newlib-exp src/newlib-log src/newlib-mod \
-	src/newlib-sqrt src/ns src/nsichneu src/prime src/qsort \
-	src/qurt src/recursion src/rijndael src/select src/sha \
-	src/slre src/sqrt src/st src/statemate src/stringsearch1 \
-	src/strstr src/ud src/whetstone src/wikisort src/template \
-	analysis
+	src/levenshtein src/lms src/ludcmp src/mergesort src/minver \
+	src/nbody src/ndes src/nettle-arcfour src/nettle-cast128 \
+	src/nettle-des src/nettle-md5 src/newlib-exp src/newlib-log \
+	src/newlib-mod src/newlib-sqrt src/ns src/nsichneu src/prime \
+	src/qsort src/qurt src/recursion src/rijndael src/select \
+	src/sha src/slre src/sqrt src/st src/statemate \
+	src/stringsearch1 src/strstr src/ud src/whetstone src/wikisort \
+	src/template analysis
 ACLOCAL_AMFLAGS = -I m4
 all: all-recursive
 
