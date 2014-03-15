@@ -12393,6 +12393,8 @@ ac_config_files="$ac_config_files src/rijndael/Makefile"
 
 ac_config_files="$ac_config_files src/select/Makefile"
 
+ac_config_files="$ac_config_files src/sglib-arraybinsearch/Makefile"
+
 ac_config_files="$ac_config_files src/sha/Makefile"
 
 ac_config_files="$ac_config_files src/slre/Makefile"
@@ -13581,6 +13583,7 @@ do
     "src/recursion/Makefile") CONFIG_FILES="$CONFIG_FILES src/recursion/Makefile" ;;
     "src/rijndael/Makefile") CONFIG_FILES="$CONFIG_FILES src/rijndael/Makefile" ;;
     "src/select/Makefile") CONFIG_FILES="$CONFIG_FILES src/select/Makefile" ;;
+    "src/sglib-arraybinsearch/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-arraybinsearch/Makefile" ;;
     "src/sha/Makefile") CONFIG_FILES="$CONFIG_FILES src/sha/Makefile" ;;
     "src/slre/Makefile") CONFIG_FILES="$CONFIG_FILES src/slre/Makefile" ;;
     "src/stringsearch1/Makefile") CONFIG_FILES="$CONFIG_FILES src/stringsearch1/Makefile" ;;

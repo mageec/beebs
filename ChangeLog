@@ -1,4 +1,16 @@
 2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added arraybinsearch from sglib
+
+	* Makefile.am: Added arraybinsearch
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added arraybinsearch
+	* src/sglib-arraybinsearch/Makefile.am: Added arraybinsearch
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated
+	* src/sglib-arraybinsearch/arraybinsearch.c: Added arraybinsearch
+	* src/sglib-arraybinsearch/sglib.h: Added arraybinsearch
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
 	Added mergesort benchmark
 
 	* Makefile.am: Added mergesort benchmark
