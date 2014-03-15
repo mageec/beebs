@@ -12407,6 +12407,8 @@ ac_config_files="$ac_config_files src/statemate/Makefile"
 
 ac_config_files="$ac_config_files src/ud/Makefile"
 
+ac_config_files="$ac_config_files src/wikisort/Makefile"
+
 ac_config_files="$ac_config_files src/whetstone/Makefile"
 
 # ==== AC_CONFIG_FILES (This is a marker for the generate-benchmark.sh script)
@@ -13584,6 +13586,7 @@ do
     "src/st/Makefile") CONFIG_FILES="$CONFIG_FILES src/st/Makefile" ;;
     "src/statemate/Makefile") CONFIG_FILES="$CONFIG_FILES src/statemate/Makefile" ;;
     "src/ud/Makefile") CONFIG_FILES="$CONFIG_FILES src/ud/Makefile" ;;
+    "src/wikisort/Makefile") CONFIG_FILES="$CONFIG_FILES src/wikisort/Makefile" ;;
     "src/whetstone/Makefile") CONFIG_FILES="$CONFIG_FILES src/whetstone/Makefile" ;;
     "src/template/Makefile") CONFIG_FILES="$CONFIG_FILES src/template/Makefile" ;;
     "src/platformcode/Makefile") CONFIG_FILES="$CONFIG_FILES src/platformcode/Makefile" ;;

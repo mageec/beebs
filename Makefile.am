@@ -93,6 +93,7 @@ SUBDIRS+=src/stringsearch1
 SUBDIRS+=src/strstr
 SUBDIRS+=src/ud
 SUBDIRS+=src/whetstone
+SUBDIRS+=src/wikisort
 # ==== SUBDIRS (This is a marker for the generate-benchmark.sh script)
 SUBDIRS+=src/template
 

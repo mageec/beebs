@@ -1,3 +1,14 @@
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added wikisort benchmark
+
+	* Makefile.am: Added wikisort benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added wikisort benchmark
+	* src/wikisort/Makefile.am: Added wikisort benchmark
+	* src/wikisort/Makefile.in: Regenerated
+	* src/wikisort/wikisort.c: Added wikisort benchmark
+
 2014-03-11  James Pallister  <james.pallister@bristol.ac.uk>
 	Fix to make blowfish use less memory
 
