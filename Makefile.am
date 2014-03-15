@@ -92,6 +92,7 @@ SUBDIRS+=src/sglib-dllist
 SUBDIRS+=src/sglib-hashtable
 SUBDIRS+=src/sglib-listinsertsort
 SUBDIRS+=src/sglib-listinsertsort1
+SUBDIRS+=src/sglib-listsort
 SUBDIRS+=src/sha
 SUBDIRS+=src/slre
 SUBDIRS+=src/sqrt

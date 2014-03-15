@@ -1,4 +1,16 @@
 2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added listsort from sglib
+
+	* Makefile.am: Added listsort from sglib
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added listsort from sglib
+	* src/sglib-listsort/Makefile.am: Added listsort from sglib
+	* src/sglib-listsort/Makefile.in: Regenerated
+	* src/sglib-listsort/listsort.c: Added listsort from sglib
+	* src/sglib-listsort/sglib.h: Added listsort from sglib
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
 	Added listinsertsort1 from sglib
 
 	* Makefile.am: Added listinsertsort1 from sglib
