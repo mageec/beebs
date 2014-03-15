@@ -1,4 +1,16 @@
 2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added dllist benchmark from sglib
+
+	* Makefile.am: Added dllist benchmark from sglib
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added dllist benchmark from sglib
+	* src/sglib-dllist/Makefile.am: Added dllist benchmark from sglib
+	* src/sglib-dllist/Makefile.in: Regenerated
+	* src/sglib-dllist/dllist.c: Added dllist benchmark from sglib
+	* src/sglib-dllist/sglib.h: Added dllist benchmark from sglib
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
 	Added arraysort1 from sglib
 
 	* Makefile.am: Added arraysort1 from sglib
