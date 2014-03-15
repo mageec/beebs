@@ -12401,6 +12401,8 @@ ac_config_files="$ac_config_files src/sglib-arraysort1/Makefile"
 
 ac_config_files="$ac_config_files src/sglib-dllist/Makefile"
 
+ac_config_files="$ac_config_files src/sglib-hashtable/Makefile"
+
 ac_config_files="$ac_config_files src/sha/Makefile"
 
 ac_config_files="$ac_config_files src/slre/Makefile"
@@ -13593,6 +13595,7 @@ do
     "src/sglib-arraysort/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-arraysort/Makefile" ;;
     "src/sglib-arraysort1/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-arraysort1/Makefile" ;;
     "src/sglib-dllist/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-dllist/Makefile" ;;
+    "src/sglib-hashtable/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-hashtable/Makefile" ;;
     "src/sha/Makefile") CONFIG_FILES="$CONFIG_FILES src/sha/Makefile" ;;
     "src/slre/Makefile") CONFIG_FILES="$CONFIG_FILES src/slre/Makefile" ;;
     "src/stringsearch1/Makefile") CONFIG_FILES="$CONFIG_FILES src/stringsearch1/Makefile" ;;

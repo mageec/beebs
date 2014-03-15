@@ -1,4 +1,17 @@
 2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added hashtable benchmark from sglib
+
+	* Makefile.am: Added hashtable benchmark from sglib
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added hashtable benchmark from sglib
+	* src/sglib-hashtable/Makefile.am: Regenerated
+	* src/sglib-hashtable/Makefile.in: Regenerated
+	* src/sglib-hashtable/hashtable.c: Added hashtable benchmark from
+	    sglib
+	* src/sglib-hashtable/sglib.h: Added hashtable benchmark from sglib
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
 	Added dllist benchmark from sglib
 
 	* Makefile.am: Added dllist benchmark from sglib
