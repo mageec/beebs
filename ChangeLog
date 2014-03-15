@@ -1,4 +1,16 @@
 2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added arraysort from sglib
+
+	* Makefile.am: Added arraysort from sglib
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added arraysort from sglib
+	* src/sglib-arraysort/Makefile.am: Added arraysort from sglib
+	* src/sglib-arraysort/Makefile.in: Regenerated
+	* src/sglib-arraysort/arraysort.c: Added arraysort from sglib
+	* src/sglib-arraysort/sglib.h: Added arraysort from sglib
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
 	Added arraybinsearch from sglib
 
 	* Makefile.am: Added arraybinsearch

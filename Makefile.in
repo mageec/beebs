@@ -365,9 +365,9 @@ SUBDIRS = src/platformcode src/2dfir src/adpcm src/blowfish src/bs \
 	src/nettle-des src/nettle-md5 src/newlib-exp src/newlib-log \
 	src/newlib-mod src/newlib-sqrt src/ns src/nsichneu src/prime \
 	src/qsort src/qurt src/recursion src/rijndael src/select \
-	src/sglib-arraybinsearch src/sha src/slre src/sqrt src/st \
-	src/statemate src/stringsearch1 src/strstr src/ud \
-	src/whetstone src/wikisort src/template analysis
+	src/sglib-arraybinsearch src/sglib-arraysort src/sha src/slre \
+	src/sqrt src/st src/statemate src/stringsearch1 src/strstr \
+	src/ud src/whetstone src/wikisort src/template analysis
 ACLOCAL_AMFLAGS = -I m4
 all: all-recursive
 
