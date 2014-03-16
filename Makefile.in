@@ -353,8 +353,8 @@ top_srcdir = @top_srcdir@
 # ==== SUBDIRS (This is a marker for the generate-benchmark.sh script)
 SUBDIRS = src/platformcode src/2dfir src/adpcm src/blowfish src/bs \
 	src/bsort100 src/bubblesort src/cnt src/compress src/cover \
-	src/crc src/crc32 src/ctl-stack src/ctl-vector src/cubic \
-	src/dhrystone src/dijkstra src/dtoa src/duff src/edn \
+	src/crc src/crc32 src/ctl-string src/ctl-stack src/ctl-vector \
+	src/cubic src/dhrystone src/dijkstra src/dtoa src/duff src/edn \
 	src/expint src/fac src/fasta src/fdct src/fft src/fibcall \
 	src/fir src/float_matmult src/frac src/gdb-advance \
 	src/gdb-all-types src/gdb-anon src/gdb-arrayidx src/gdb-async \

@@ -1,4 +1,17 @@
 2014-03-16  James Pallister  <james.pallister@bristol.ac.uk>
+	Added ctl string benchmark
+
+	* Makefile.am: Added ctl string benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added ctl string benchmark
+	* src/ctl-string/Makefile.am: Added ctl string benchmark
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/ctl-string/ctl.h: Added ctl string benchmark
+	* src/ctl-string/string.c: Added ctl string benchmark
+	* src/ctl-string/string.h: Added ctl string benchmark
+
+2014-03-16  James Pallister  <james.pallister@bristol.ac.uk>
 	Added stack benchmark from ctl
 
 	* Makefile.am: Added stack benchmark from ctl
