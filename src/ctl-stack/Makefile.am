@@ -22,7 +22,7 @@
 
 
 bin_PROGRAMS=stack
-stack_SOURCES=stack.c ctl.h
+stack_SOURCES=stack.c ctl.h stack.h
 
 include $(top_srcdir)/src/common.mk.am
 

@@ -1,4 +1,13 @@
 2014-03-16  James Pallister  <james.pallister@bristol.ac.uk>
+	Added missing .h files for ctl benchmarks
+
+	* src/ctl-stack/Makefile.am: Added missing .h files for ctl benchmarks
+	* src/ctl-stack/Makefile.in: Regenerated
+	* src/ctl-vector/Makefile.am: Added missing .h files for ctl
+	    benchmarks
+	* src/ctl-vector/Makefile.in: Regenerated
+
+2014-03-16  James Pallister  <james.pallister@bristol.ac.uk>
 	Added ctl string benchmark
 
 	* Makefile.am: Added ctl string benchmark

@@ -21,7 +21,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 bin_PROGRAMS=vector
-vector_SOURCES=vector.c ctl.h
+vector_SOURCES=vector.c ctl.h vector.h
 
 include $(top_srcdir)/src/common.mk.am
 

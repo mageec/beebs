@@ -147,7 +147,7 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am__stack_SOURCES_DIST = stack.c ctl.h \
+am__stack_SOURCES_DIST = stack.c ctl.h stack.h \
 	$(top_srcdir)/src/platformcode/platformcode.c \
 	$(top_srcdir)/src/platformcode/startup.c \
 	$(top_srcdir)/src/platformcode/pic32mx_startup.s
@@ -363,7 +363,7 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-stack_SOURCES = stack.c ctl.h ${platform_src}
+stack_SOURCES = stack.c ctl.h stack.h ${platform_src}
 platform_src = $(top_srcdir)/src/platformcode/platformcode.c \
 	$(am__append_2) $(am__append_4) $(am__append_6) \
 	$(am__append_8)
