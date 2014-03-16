@@ -1,4 +1,14 @@
 2014-03-16  James Pallister  <james.pallister@bristol.ac.uk>
+	Fied ctl-string build for stm32f0discovery platform
+
+	* src/ctl-string/Makefile.am: Fied ctl-string build for
+	    stm32f0discovery platform
+	* src/ctl-string/ctl.h: Removed
+	* src/ctl-string/string.c: Added header contents into c file to
+	    prevent multiple declarations
+	* src/ctl-string/string.h: Removed
+
+2014-03-16  James Pallister  <james.pallister@bristol.ac.uk>
 	Added missing .h files for ctl benchmarks
 
 	* src/ctl-stack/Makefile.am: Added missing .h files for ctl benchmarks

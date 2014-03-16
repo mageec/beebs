@@ -21,7 +21,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 bin_PROGRAMS=string
-string_SOURCES=string.c ctl.h string.h
+string_SOURCES=string.c
 
 include $(top_srcdir)/src/common.mk.am
 
