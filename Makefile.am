@@ -33,6 +33,7 @@ SUBDIRS+=src/compress
 SUBDIRS+=src/cover
 SUBDIRS+=src/crc
 SUBDIRS+=src/crc32
+SUBDIRS+=src/ctl-vector
 SUBDIRS+=src/cubic
 SUBDIRS+=src/dhrystone
 SUBDIRS+=src/dijkstra

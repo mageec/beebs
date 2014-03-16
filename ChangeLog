@@ -1,3 +1,16 @@
+2014-03-16  James Pallister  <james.pallister@bristol.ac.uk>
+	Added vector benchmark from ctl
+
+	* Makefile.am: Added vector benchmark from ctl
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added vector benchmark from ctl
+	* src/ctl-vector/Makefile.am: Added vector benchmark from ctl
+	* src/ctl-vector/Makefile.in: Regenerated
+	* src/ctl-vector/ctl.h: Added vector benchmark from ctl
+	* src/ctl-vector/vector.c: Added vector benchmark from ctl
+	* src/ctl-vector/vector.h: Added vector benchmark from ctl
+
 2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
 	Added rbtree benchmark from sglib
 
