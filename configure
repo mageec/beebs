@@ -12289,6 +12289,8 @@ ac_config_files="$ac_config_files src/crc/Makefile"
 
 ac_config_files="$ac_config_files src/crc32/Makefile"
 
+ac_config_files="$ac_config_files src/ctl-stack/Makefile"
+
 ac_config_files="$ac_config_files src/ctl-vector/Makefile"
 
 ac_config_files="$ac_config_files src/cubic/Makefile"
@@ -13551,6 +13553,7 @@ do
     "src/cover/Makefile") CONFIG_FILES="$CONFIG_FILES src/cover/Makefile" ;;
     "src/crc/Makefile") CONFIG_FILES="$CONFIG_FILES src/crc/Makefile" ;;
     "src/crc32/Makefile") CONFIG_FILES="$CONFIG_FILES src/crc32/Makefile" ;;
+    "src/ctl-stack/Makefile") CONFIG_FILES="$CONFIG_FILES src/ctl-stack/Makefile" ;;
     "src/ctl-vector/Makefile") CONFIG_FILES="$CONFIG_FILES src/ctl-vector/Makefile" ;;
     "src/cubic/Makefile") CONFIG_FILES="$CONFIG_FILES src/cubic/Makefile" ;;
     "src/dhrystone/Makefile") CONFIG_FILES="$CONFIG_FILES src/dhrystone/Makefile" ;;
