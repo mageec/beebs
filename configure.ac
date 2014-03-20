@@ -33,6 +33,10 @@ AC_ARG_WITH([platform],
     [with_platform=none]
     )
 
+# Some platforms cannot compile certain benchmarks, so we exclude them
+# from the build
+EXCLUDED_BENCHMARKS=""
+
 AM_CONDITIONAL([STM32F0DISCOVERY], [false])
 AM_CONDITIONAL([STM32VLDISCOVERY], [false])
 AM_CONDITIONAL([ATMEGA328P], [false])
@@ -112,6 +116,8 @@ case $with_platform in
             enable_simulate_avr=yes
         fi
 
+        EXCLUDED_BENCHMARKS="miniz"
+
         AM_CONDITIONAL([XMEGAA3BUXPLAINED], [true])
         ;;
 
@@ -138,6 +144,8 @@ case $with_platform in
             enable_simulate_msp430=yes
         fi
 
+        EXCLUDED_BENCHMARKS="miniz"
+
         CFLAGS="$CFLAGS -mmcu=msp430f5529 -std=gnu99 -mcpu=430 -DMSP430F"
 
         AM_CONDITIONAL([MSPEXP430F5529], [true])
@@ -152,6 +160,8 @@ case $with_platform in
         if test x$enable_simulate == xyes; then
             enable_simulate_msp430=yes
         fi
+
+        EXCLUDED_BENCHMARKS="blowfish cubic dtoa float_matmult int_matmult nettle-cast128 rijndael stringsearch1 ns nsichneu ud miniz wikisort fir nettle-des whetstone"
 
         CFLAGS="$CFLAGS -mmcu=msp430fr5739 -std=gnu99 -mcpu=430 -DMSP430FR"
 
@@ -257,94 +267,113 @@ fi
 CFLAGS=$save_CFLAGS
 LDFLAGS=$save_LDFLAGS
 
-AC_CONFIG_FILES([src/2dfir/Makefile])
-AC_CONFIG_FILES([src/adpcm/Makefile])
-AC_CONFIG_FILES([src/blowfish/Makefile])
-AC_CONFIG_FILES([src/bs/Makefile])
-AC_CONFIG_FILES([src/bsort100/Makefile])
-AC_CONFIG_FILES([src/bubblesort/Makefile])
-AC_CONFIG_FILES([src/cnt/Makefile])
-AC_CONFIG_FILES([src/compress/Makefile])
-AC_CONFIG_FILES([src/cover/Makefile])
-AC_CONFIG_FILES([src/crc/Makefile])
-AC_CONFIG_FILES([src/crc32/Makefile])
-AC_CONFIG_FILES([src/ctl-string/Makefile])
-AC_CONFIG_FILES([src/ctl-stack/Makefile])
-AC_CONFIG_FILES([src/ctl-vector/Makefile])
-AC_CONFIG_FILES([src/cubic/Makefile])
-AC_CONFIG_FILES([src/dhrystone/Makefile])
-AC_CONFIG_FILES([src/dijkstra/Makefile])
-AC_CONFIG_FILES([src/dtoa/Makefile])
-AC_CONFIG_FILES([src/duff/Makefile])
-AC_CONFIG_FILES([src/edn/Makefile])
-AC_CONFIG_FILES([src/expint/Makefile])
-AC_CONFIG_FILES([src/fac/Makefile])
-AC_CONFIG_FILES([src/fasta/Makefile])
-AC_CONFIG_FILES([src/fdct/Makefile])
-AC_CONFIG_FILES([src/fft/Makefile])
-AC_CONFIG_FILES([src/fibcall/Makefile])
-AC_CONFIG_FILES([src/fir/Makefile])
-AC_CONFIG_FILES([src/float_matmult/Makefile])
-AC_CONFIG_FILES([src/frac/Makefile])
-AC_CONFIG_FILES([src/gdb-advance/Makefile])
-AC_CONFIG_FILES([src/gdb-all-types/Makefile])
-AC_CONFIG_FILES([src/gdb-anon/Makefile])
-AC_CONFIG_FILES([src/gdb-arrayidx/Makefile])
-AC_CONFIG_FILES([src/gdb-async/Makefile])
-AC_CONFIG_FILES([src/gdb-bitfields/Makefile])
-AC_CONFIG_FILES([src/gdb-constvars/Makefile])
-AC_CONFIG_FILES([src/gdb-store/Makefile])
-AC_CONFIG_FILES([src/huffbench/Makefile])
-AC_CONFIG_FILES([src/insertsort/Makefile])
-AC_CONFIG_FILES([src/int_matmult/Makefile])
-AC_CONFIG_FILES([src/janne_complex/Makefile])
-AC_CONFIG_FILES([src/jfdctint/Makefile])
-AC_CONFIG_FILES([src/lcdnum/Makefile])
-AC_CONFIG_FILES([src/levenshtein/Makefile])
-AC_CONFIG_FILES([src/lms/Makefile])
-AC_CONFIG_FILES([src/ludcmp/Makefile])
-AC_CONFIG_FILES([src/mergesort/Makefile])
-AC_CONFIG_FILES([src/miniz/Makefile])
-AC_CONFIG_FILES([src/minver/Makefile])
-AC_CONFIG_FILES([src/nbody/Makefile])
-AC_CONFIG_FILES([src/ndes/Makefile])
-AC_CONFIG_FILES([src/nettle-arcfour/Makefile])
-AC_CONFIG_FILES([src/nettle-cast128/Makefile])
-AC_CONFIG_FILES([src/nettle-des/Makefile])
-AC_CONFIG_FILES([src/nettle-md5/Makefile])
-AC_CONFIG_FILES([src/newlib-exp/Makefile])
-AC_CONFIG_FILES([src/newlib-log/Makefile])
-AC_CONFIG_FILES([src/newlib-mod/Makefile])
-AC_CONFIG_FILES([src/newlib-sqrt/Makefile])
-AC_CONFIG_FILES([src/ns/Makefile])
-AC_CONFIG_FILES([src/nsichneu/Makefile])
-AC_CONFIG_FILES([src/prime/Makefile])
-AC_CONFIG_FILES([src/qsort/Makefile])
-AC_CONFIG_FILES([src/qurt/Makefile])
-AC_CONFIG_FILES([src/recursion/Makefile])
-AC_CONFIG_FILES([src/rijndael/Makefile])
-AC_CONFIG_FILES([src/select/Makefile])
-AC_CONFIG_FILES([src/sglib-arraybinsearch/Makefile])
-AC_CONFIG_FILES([src/sglib-arraysort/Makefile])
-AC_CONFIG_FILES([src/sglib-arraysort1/Makefile])
-AC_CONFIG_FILES([src/sglib-dllist/Makefile])
-AC_CONFIG_FILES([src/sglib-hashtable/Makefile])
-AC_CONFIG_FILES([src/sglib-listinsertsort/Makefile])
-AC_CONFIG_FILES([src/sglib-listinsertsort1/Makefile])
-AC_CONFIG_FILES([src/sglib-listsort/Makefile])
-AC_CONFIG_FILES([src/sglib-queue/Makefile])
-AC_CONFIG_FILES([src/sglib-rbtree/Makefile])
-AC_CONFIG_FILES([src/sha/Makefile])
-AC_CONFIG_FILES([src/slre/Makefile])
-AC_CONFIG_FILES([src/stringsearch1/Makefile])
-AC_CONFIG_FILES([src/strstr/Makefile])
-AC_CONFIG_FILES([src/sqrt/Makefile])
-AC_CONFIG_FILES([src/st/Makefile])
-AC_CONFIG_FILES([src/statemate/Makefile])
-AC_CONFIG_FILES([src/tarai/Makefile])
-AC_CONFIG_FILES([src/ud/Makefile])
-AC_CONFIG_FILES([src/wikisort/Makefile])
-AC_CONFIG_FILES([src/whetstone/Makefile])
+# List of the benchmarks. This list gets expanded into a variable passed
+# into the makefile, and configures the various makefiles. This allows an
+# individual benchmark to be excluded from the compilation in a easy way.
+m4_define([benchmarklist],[dnl
+[2dfir],
+[adpcm],
+[blowfish],
+[bs],
+[bsort100],
+[bubblesort],
+[cnt],
+[compress],
+[cover],
+[crc],
+[crc32],
+[ctl-string],
+[ctl-stack],
+[ctl-vector],
+[cubic],
+[dhrystone],
+[dijkstra],
+[dtoa],
+[duff],
+[edn],
+[expint],
+[fac],
+[fasta],
+[fdct],
+[fft],
+[fibcall],
+[fir],
+[float_matmult],
+[frac],
+[gdb-advance],
+[gdb-all-types],
+[gdb-anon],
+[gdb-arrayidx],
+[gdb-async],
+[gdb-bitfields],
+[gdb-constvars],
+[gdb-store],
+[huffbench],
+[insertsort],
+[int_matmult],
+[janne_complex],
+[jfdctint],
+[lcdnum],
+[levenshtein],
+[lms],
+[ludcmp],
+[mergesort],
+[miniz],
+[minver],
+[nbody],
+[ndes],
+[nettle-arcfour],
+[nettle-cast128],
+[nettle-des],
+[nettle-md5],
+[newlib-exp],
+[newlib-log],
+[newlib-mod],
+[newlib-sqrt],
+[ns],
+[nsichneu],
+[prime],
+[qsort],
+[qurt],
+[recursion],
+[rijndael],
+[select],
+[sglib-arraybinsearch],
+[sglib-arraysort],
+[sglib-arraysort1],
+[sglib-dllist],
+[sglib-hashtable],
+[sglib-listinsertsort],
+[sglib-listinsertsort1],
+[sglib-listsort],
+[sglib-queue],
+[sglib-rbtree],
+[sha],
+[slre],
+[stringsearch1],
+[strstr],
+[sqrt],
+[st],
+[statemate],
+[tarai],
+[ud],
+[wikisort],
+[whetstone]])
+
+BENCHMARKS=""
+BENCHMARKS_SUBDIRS=""
+
+m4_foreach([benchmark], [benchmarklist], [
+    bmark=benchmark
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        AC_CONFIG_FILES(src/benchmark/Makefile)
+        BENCHMARKS+="benchmark "
+        BENCHMARKS_SUBDIRS+="src/benchmark "
+    fi
+])
+
+AC_SUBST(BENCHMARKS_SUBDIRS,$BENCHMARKS_SUBDIRS)
+
 # ==== AC_CONFIG_FILES (This is a marker for the generate-benchmark.sh script)
 AC_CONFIG_FILES([src/template/Makefile])
 AC_CONFIG_FILES([src/platformcode/Makefile])
@@ -358,8 +387,14 @@ echo
 echo "Target platform               $with_platform"
 echo "Target triple                 $host"
 echo "Platform sources              $enable_platformsources"
-if [[ -z "$SIMULATORPATH" ]]; then
+if test x$SIMULATORPATH == x ; then
     echo "Simulator                     none"
 else
     echo "Simulator                     $SIMULATORPATH"
+fi
+
+if test "x$EXCLUDED_BENCHMARKS" == x ; then
+    echo "Excluded benchmarks           none"
+else
+    echo "Excluded benchmarks           $EXCLUDED_BENCHMARKS"
 fi

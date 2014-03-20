@@ -636,6 +636,7 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
+BENCHMARKS_SUBDIRS
 simulate_m0_cmd
 SIMULATORPATH
 simulavr_cmd
@@ -2288,6 +2289,10 @@ else
 fi
 
 
+# Some platforms cannot compile certain benchmarks, so we exclude them
+# from the build
+EXCLUDED_BENCHMARKS=""
+
  if false; then
   STM32F0DISCOVERY_TRUE=
   STM32F0DISCOVERY_FALSE='#'
@@ -2450,6 +2455,8 @@ fi
             enable_simulate_avr=yes
         fi
 
+        EXCLUDED_BENCHMARKS="miniz"
+
          if true; then
   XMEGAA3BUXPLAINED_TRUE=
   XMEGAA3BUXPLAINED_FALSE='#'
@@ -2492,6 +2499,8 @@ fi
             enable_simulate_msp430=yes
         fi
 
+        EXCLUDED_BENCHMARKS="miniz"
+
         CFLAGS="$CFLAGS -mmcu=msp430f5529 -std=gnu99 -mcpu=430 -DMSP430F"
 
          if true; then
@@ -2514,6 +2523,8 @@ fi
         if test x$enable_simulate == xyes; then
             enable_simulate_msp430=yes
         fi
+
+        EXCLUDED_BENCHMARKS="blowfish cubic dtoa float_matmult int_matmult nettle-cast128 rijndael stringsearch1 ns nsichneu ud miniz wikisort fir nettle-des whetstone"
 
         CFLAGS="$CFLAGS -mmcu=msp430fr5739 -std=gnu99 -mcpu=430 -DMSP430FR"
 
@@ -12310,181 +12321,722 @@ fi
 CFLAGS=$save_CFLAGS
 LDFLAGS=$save_LDFLAGS
 
-ac_config_files="$ac_config_files src/2dfir/Makefile"
+# List of the benchmarks. This list gets expanded into a variable passed
+# into the makefile, and configures the various makefiles. This allows an
+# individual benchmark to be excluded from the compilation in a easy way.
 
-ac_config_files="$ac_config_files src/adpcm/Makefile"
 
-ac_config_files="$ac_config_files src/blowfish/Makefile"
+BENCHMARKS=""
+BENCHMARKS_SUBDIRS=""
 
-ac_config_files="$ac_config_files src/bs/Makefile"
 
-ac_config_files="$ac_config_files src/bsort100/Makefile"
+    bmark=2dfir
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/2dfir/Makefile"
 
-ac_config_files="$ac_config_files src/bubblesort/Makefile"
+        BENCHMARKS+="2dfir "
+        BENCHMARKS_SUBDIRS+="src/2dfir "
+    fi
 
-ac_config_files="$ac_config_files src/cnt/Makefile"
+    bmark=adpcm
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/adpcm/Makefile"
 
-ac_config_files="$ac_config_files src/compress/Makefile"
+        BENCHMARKS+="adpcm "
+        BENCHMARKS_SUBDIRS+="src/adpcm "
+    fi
 
-ac_config_files="$ac_config_files src/cover/Makefile"
+    bmark=blowfish
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/blowfish/Makefile"
 
-ac_config_files="$ac_config_files src/crc/Makefile"
+        BENCHMARKS+="blowfish "
+        BENCHMARKS_SUBDIRS+="src/blowfish "
+    fi
 
-ac_config_files="$ac_config_files src/crc32/Makefile"
+    bmark=bs
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/bs/Makefile"
 
-ac_config_files="$ac_config_files src/ctl-string/Makefile"
+        BENCHMARKS+="bs "
+        BENCHMARKS_SUBDIRS+="src/bs "
+    fi
 
-ac_config_files="$ac_config_files src/ctl-stack/Makefile"
+    bmark=bsort100
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/bsort100/Makefile"
 
-ac_config_files="$ac_config_files src/ctl-vector/Makefile"
+        BENCHMARKS+="bsort100 "
+        BENCHMARKS_SUBDIRS+="src/bsort100 "
+    fi
 
-ac_config_files="$ac_config_files src/cubic/Makefile"
+    bmark=bubblesort
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/bubblesort/Makefile"
 
-ac_config_files="$ac_config_files src/dhrystone/Makefile"
+        BENCHMARKS+="bubblesort "
+        BENCHMARKS_SUBDIRS+="src/bubblesort "
+    fi
 
-ac_config_files="$ac_config_files src/dijkstra/Makefile"
+    bmark=cnt
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/cnt/Makefile"
 
-ac_config_files="$ac_config_files src/dtoa/Makefile"
+        BENCHMARKS+="cnt "
+        BENCHMARKS_SUBDIRS+="src/cnt "
+    fi
 
-ac_config_files="$ac_config_files src/duff/Makefile"
+    bmark=compress
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/compress/Makefile"
 
-ac_config_files="$ac_config_files src/edn/Makefile"
+        BENCHMARKS+="compress "
+        BENCHMARKS_SUBDIRS+="src/compress "
+    fi
 
-ac_config_files="$ac_config_files src/expint/Makefile"
+    bmark=cover
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/cover/Makefile"
 
-ac_config_files="$ac_config_files src/fac/Makefile"
+        BENCHMARKS+="cover "
+        BENCHMARKS_SUBDIRS+="src/cover "
+    fi
 
-ac_config_files="$ac_config_files src/fasta/Makefile"
+    bmark=crc
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/crc/Makefile"
 
-ac_config_files="$ac_config_files src/fdct/Makefile"
+        BENCHMARKS+="crc "
+        BENCHMARKS_SUBDIRS+="src/crc "
+    fi
 
-ac_config_files="$ac_config_files src/fft/Makefile"
+    bmark=crc32
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/crc32/Makefile"
 
-ac_config_files="$ac_config_files src/fibcall/Makefile"
+        BENCHMARKS+="crc32 "
+        BENCHMARKS_SUBDIRS+="src/crc32 "
+    fi
 
-ac_config_files="$ac_config_files src/fir/Makefile"
+    bmark=ctl-string
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/ctl-string/Makefile"
 
-ac_config_files="$ac_config_files src/float_matmult/Makefile"
+        BENCHMARKS+="ctl-string "
+        BENCHMARKS_SUBDIRS+="src/ctl-string "
+    fi
 
-ac_config_files="$ac_config_files src/frac/Makefile"
+    bmark=ctl-stack
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/ctl-stack/Makefile"
 
-ac_config_files="$ac_config_files src/gdb-advance/Makefile"
+        BENCHMARKS+="ctl-stack "
+        BENCHMARKS_SUBDIRS+="src/ctl-stack "
+    fi
 
-ac_config_files="$ac_config_files src/gdb-all-types/Makefile"
+    bmark=ctl-vector
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/ctl-vector/Makefile"
 
-ac_config_files="$ac_config_files src/gdb-anon/Makefile"
+        BENCHMARKS+="ctl-vector "
+        BENCHMARKS_SUBDIRS+="src/ctl-vector "
+    fi
 
-ac_config_files="$ac_config_files src/gdb-arrayidx/Makefile"
+    bmark=cubic
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/cubic/Makefile"
 
-ac_config_files="$ac_config_files src/gdb-async/Makefile"
+        BENCHMARKS+="cubic "
+        BENCHMARKS_SUBDIRS+="src/cubic "
+    fi
 
-ac_config_files="$ac_config_files src/gdb-bitfields/Makefile"
+    bmark=dhrystone
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/dhrystone/Makefile"
 
-ac_config_files="$ac_config_files src/gdb-constvars/Makefile"
+        BENCHMARKS+="dhrystone "
+        BENCHMARKS_SUBDIRS+="src/dhrystone "
+    fi
 
-ac_config_files="$ac_config_files src/gdb-store/Makefile"
+    bmark=dijkstra
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/dijkstra/Makefile"
 
-ac_config_files="$ac_config_files src/huffbench/Makefile"
+        BENCHMARKS+="dijkstra "
+        BENCHMARKS_SUBDIRS+="src/dijkstra "
+    fi
 
-ac_config_files="$ac_config_files src/insertsort/Makefile"
+    bmark=dtoa
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/dtoa/Makefile"
 
-ac_config_files="$ac_config_files src/int_matmult/Makefile"
+        BENCHMARKS+="dtoa "
+        BENCHMARKS_SUBDIRS+="src/dtoa "
+    fi
 
-ac_config_files="$ac_config_files src/janne_complex/Makefile"
+    bmark=duff
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/duff/Makefile"
 
-ac_config_files="$ac_config_files src/jfdctint/Makefile"
+        BENCHMARKS+="duff "
+        BENCHMARKS_SUBDIRS+="src/duff "
+    fi
 
-ac_config_files="$ac_config_files src/lcdnum/Makefile"
+    bmark=edn
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/edn/Makefile"
 
-ac_config_files="$ac_config_files src/levenshtein/Makefile"
+        BENCHMARKS+="edn "
+        BENCHMARKS_SUBDIRS+="src/edn "
+    fi
 
-ac_config_files="$ac_config_files src/lms/Makefile"
+    bmark=expint
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/expint/Makefile"
 
-ac_config_files="$ac_config_files src/ludcmp/Makefile"
+        BENCHMARKS+="expint "
+        BENCHMARKS_SUBDIRS+="src/expint "
+    fi
 
-ac_config_files="$ac_config_files src/mergesort/Makefile"
+    bmark=fac
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/fac/Makefile"
 
-ac_config_files="$ac_config_files src/miniz/Makefile"
+        BENCHMARKS+="fac "
+        BENCHMARKS_SUBDIRS+="src/fac "
+    fi
 
-ac_config_files="$ac_config_files src/minver/Makefile"
+    bmark=fasta
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/fasta/Makefile"
 
-ac_config_files="$ac_config_files src/nbody/Makefile"
+        BENCHMARKS+="fasta "
+        BENCHMARKS_SUBDIRS+="src/fasta "
+    fi
 
-ac_config_files="$ac_config_files src/ndes/Makefile"
+    bmark=fdct
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/fdct/Makefile"
 
-ac_config_files="$ac_config_files src/nettle-arcfour/Makefile"
+        BENCHMARKS+="fdct "
+        BENCHMARKS_SUBDIRS+="src/fdct "
+    fi
 
-ac_config_files="$ac_config_files src/nettle-cast128/Makefile"
+    bmark=fft
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/fft/Makefile"
 
-ac_config_files="$ac_config_files src/nettle-des/Makefile"
+        BENCHMARKS+="fft "
+        BENCHMARKS_SUBDIRS+="src/fft "
+    fi
 
-ac_config_files="$ac_config_files src/nettle-md5/Makefile"
+    bmark=fibcall
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/fibcall/Makefile"
 
-ac_config_files="$ac_config_files src/newlib-exp/Makefile"
+        BENCHMARKS+="fibcall "
+        BENCHMARKS_SUBDIRS+="src/fibcall "
+    fi
 
-ac_config_files="$ac_config_files src/newlib-log/Makefile"
+    bmark=fir
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/fir/Makefile"
 
-ac_config_files="$ac_config_files src/newlib-mod/Makefile"
+        BENCHMARKS+="fir "
+        BENCHMARKS_SUBDIRS+="src/fir "
+    fi
 
-ac_config_files="$ac_config_files src/newlib-sqrt/Makefile"
+    bmark=float_matmult
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/float_matmult/Makefile"
 
-ac_config_files="$ac_config_files src/ns/Makefile"
+        BENCHMARKS+="float_matmult "
+        BENCHMARKS_SUBDIRS+="src/float_matmult "
+    fi
 
-ac_config_files="$ac_config_files src/nsichneu/Makefile"
+    bmark=frac
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/frac/Makefile"
 
-ac_config_files="$ac_config_files src/prime/Makefile"
+        BENCHMARKS+="frac "
+        BENCHMARKS_SUBDIRS+="src/frac "
+    fi
 
-ac_config_files="$ac_config_files src/qsort/Makefile"
+    bmark=gdb-advance
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/gdb-advance/Makefile"
 
-ac_config_files="$ac_config_files src/qurt/Makefile"
+        BENCHMARKS+="gdb-advance "
+        BENCHMARKS_SUBDIRS+="src/gdb-advance "
+    fi
 
-ac_config_files="$ac_config_files src/recursion/Makefile"
+    bmark=gdb-all-types
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/gdb-all-types/Makefile"
 
-ac_config_files="$ac_config_files src/rijndael/Makefile"
+        BENCHMARKS+="gdb-all-types "
+        BENCHMARKS_SUBDIRS+="src/gdb-all-types "
+    fi
 
-ac_config_files="$ac_config_files src/select/Makefile"
+    bmark=gdb-anon
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/gdb-anon/Makefile"
 
-ac_config_files="$ac_config_files src/sglib-arraybinsearch/Makefile"
+        BENCHMARKS+="gdb-anon "
+        BENCHMARKS_SUBDIRS+="src/gdb-anon "
+    fi
 
-ac_config_files="$ac_config_files src/sglib-arraysort/Makefile"
+    bmark=gdb-arrayidx
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/gdb-arrayidx/Makefile"
 
-ac_config_files="$ac_config_files src/sglib-arraysort1/Makefile"
+        BENCHMARKS+="gdb-arrayidx "
+        BENCHMARKS_SUBDIRS+="src/gdb-arrayidx "
+    fi
 
-ac_config_files="$ac_config_files src/sglib-dllist/Makefile"
+    bmark=gdb-async
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/gdb-async/Makefile"
 
-ac_config_files="$ac_config_files src/sglib-hashtable/Makefile"
+        BENCHMARKS+="gdb-async "
+        BENCHMARKS_SUBDIRS+="src/gdb-async "
+    fi
 
-ac_config_files="$ac_config_files src/sglib-listinsertsort/Makefile"
+    bmark=gdb-bitfields
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/gdb-bitfields/Makefile"
 
-ac_config_files="$ac_config_files src/sglib-listinsertsort1/Makefile"
+        BENCHMARKS+="gdb-bitfields "
+        BENCHMARKS_SUBDIRS+="src/gdb-bitfields "
+    fi
 
-ac_config_files="$ac_config_files src/sglib-listsort/Makefile"
+    bmark=gdb-constvars
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/gdb-constvars/Makefile"
 
-ac_config_files="$ac_config_files src/sglib-queue/Makefile"
+        BENCHMARKS+="gdb-constvars "
+        BENCHMARKS_SUBDIRS+="src/gdb-constvars "
+    fi
 
-ac_config_files="$ac_config_files src/sglib-rbtree/Makefile"
+    bmark=gdb-store
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/gdb-store/Makefile"
 
-ac_config_files="$ac_config_files src/sha/Makefile"
+        BENCHMARKS+="gdb-store "
+        BENCHMARKS_SUBDIRS+="src/gdb-store "
+    fi
 
-ac_config_files="$ac_config_files src/slre/Makefile"
+    bmark=huffbench
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/huffbench/Makefile"
 
-ac_config_files="$ac_config_files src/stringsearch1/Makefile"
+        BENCHMARKS+="huffbench "
+        BENCHMARKS_SUBDIRS+="src/huffbench "
+    fi
 
-ac_config_files="$ac_config_files src/strstr/Makefile"
+    bmark=insertsort
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/insertsort/Makefile"
 
-ac_config_files="$ac_config_files src/sqrt/Makefile"
+        BENCHMARKS+="insertsort "
+        BENCHMARKS_SUBDIRS+="src/insertsort "
+    fi
 
-ac_config_files="$ac_config_files src/st/Makefile"
+    bmark=int_matmult
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/int_matmult/Makefile"
 
-ac_config_files="$ac_config_files src/statemate/Makefile"
+        BENCHMARKS+="int_matmult "
+        BENCHMARKS_SUBDIRS+="src/int_matmult "
+    fi
 
-ac_config_files="$ac_config_files src/tarai/Makefile"
+    bmark=janne_complex
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/janne_complex/Makefile"
 
-ac_config_files="$ac_config_files src/ud/Makefile"
+        BENCHMARKS+="janne_complex "
+        BENCHMARKS_SUBDIRS+="src/janne_complex "
+    fi
 
-ac_config_files="$ac_config_files src/wikisort/Makefile"
+    bmark=jfdctint
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/jfdctint/Makefile"
 
-ac_config_files="$ac_config_files src/whetstone/Makefile"
+        BENCHMARKS+="jfdctint "
+        BENCHMARKS_SUBDIRS+="src/jfdctint "
+    fi
+
+    bmark=lcdnum
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/lcdnum/Makefile"
+
+        BENCHMARKS+="lcdnum "
+        BENCHMARKS_SUBDIRS+="src/lcdnum "
+    fi
+
+    bmark=levenshtein
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/levenshtein/Makefile"
+
+        BENCHMARKS+="levenshtein "
+        BENCHMARKS_SUBDIRS+="src/levenshtein "
+    fi
+
+    bmark=lms
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/lms/Makefile"
+
+        BENCHMARKS+="lms "
+        BENCHMARKS_SUBDIRS+="src/lms "
+    fi
+
+    bmark=ludcmp
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/ludcmp/Makefile"
+
+        BENCHMARKS+="ludcmp "
+        BENCHMARKS_SUBDIRS+="src/ludcmp "
+    fi
+
+    bmark=mergesort
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/mergesort/Makefile"
+
+        BENCHMARKS+="mergesort "
+        BENCHMARKS_SUBDIRS+="src/mergesort "
+    fi
+
+    bmark=miniz
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/miniz/Makefile"
+
+        BENCHMARKS+="miniz "
+        BENCHMARKS_SUBDIRS+="src/miniz "
+    fi
+
+    bmark=minver
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/minver/Makefile"
+
+        BENCHMARKS+="minver "
+        BENCHMARKS_SUBDIRS+="src/minver "
+    fi
+
+    bmark=nbody
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/nbody/Makefile"
+
+        BENCHMARKS+="nbody "
+        BENCHMARKS_SUBDIRS+="src/nbody "
+    fi
+
+    bmark=ndes
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/ndes/Makefile"
+
+        BENCHMARKS+="ndes "
+        BENCHMARKS_SUBDIRS+="src/ndes "
+    fi
+
+    bmark=nettle-arcfour
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/nettle-arcfour/Makefile"
+
+        BENCHMARKS+="nettle-arcfour "
+        BENCHMARKS_SUBDIRS+="src/nettle-arcfour "
+    fi
+
+    bmark=nettle-cast128
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/nettle-cast128/Makefile"
+
+        BENCHMARKS+="nettle-cast128 "
+        BENCHMARKS_SUBDIRS+="src/nettle-cast128 "
+    fi
+
+    bmark=nettle-des
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/nettle-des/Makefile"
+
+        BENCHMARKS+="nettle-des "
+        BENCHMARKS_SUBDIRS+="src/nettle-des "
+    fi
+
+    bmark=nettle-md5
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/nettle-md5/Makefile"
+
+        BENCHMARKS+="nettle-md5 "
+        BENCHMARKS_SUBDIRS+="src/nettle-md5 "
+    fi
+
+    bmark=newlib-exp
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/newlib-exp/Makefile"
+
+        BENCHMARKS+="newlib-exp "
+        BENCHMARKS_SUBDIRS+="src/newlib-exp "
+    fi
+
+    bmark=newlib-log
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/newlib-log/Makefile"
+
+        BENCHMARKS+="newlib-log "
+        BENCHMARKS_SUBDIRS+="src/newlib-log "
+    fi
+
+    bmark=newlib-mod
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/newlib-mod/Makefile"
+
+        BENCHMARKS+="newlib-mod "
+        BENCHMARKS_SUBDIRS+="src/newlib-mod "
+    fi
+
+    bmark=newlib-sqrt
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/newlib-sqrt/Makefile"
+
+        BENCHMARKS+="newlib-sqrt "
+        BENCHMARKS_SUBDIRS+="src/newlib-sqrt "
+    fi
+
+    bmark=ns
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/ns/Makefile"
+
+        BENCHMARKS+="ns "
+        BENCHMARKS_SUBDIRS+="src/ns "
+    fi
+
+    bmark=nsichneu
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/nsichneu/Makefile"
+
+        BENCHMARKS+="nsichneu "
+        BENCHMARKS_SUBDIRS+="src/nsichneu "
+    fi
+
+    bmark=prime
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/prime/Makefile"
+
+        BENCHMARKS+="prime "
+        BENCHMARKS_SUBDIRS+="src/prime "
+    fi
+
+    bmark=qsort
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/qsort/Makefile"
+
+        BENCHMARKS+="qsort "
+        BENCHMARKS_SUBDIRS+="src/qsort "
+    fi
+
+    bmark=qurt
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/qurt/Makefile"
+
+        BENCHMARKS+="qurt "
+        BENCHMARKS_SUBDIRS+="src/qurt "
+    fi
+
+    bmark=recursion
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/recursion/Makefile"
+
+        BENCHMARKS+="recursion "
+        BENCHMARKS_SUBDIRS+="src/recursion "
+    fi
+
+    bmark=rijndael
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/rijndael/Makefile"
+
+        BENCHMARKS+="rijndael "
+        BENCHMARKS_SUBDIRS+="src/rijndael "
+    fi
+
+    bmark=select
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/select/Makefile"
+
+        BENCHMARKS+="select "
+        BENCHMARKS_SUBDIRS+="src/select "
+    fi
+
+    bmark=sglib-arraybinsearch
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-arraybinsearch/Makefile"
+
+        BENCHMARKS+="sglib-arraybinsearch "
+        BENCHMARKS_SUBDIRS+="src/sglib-arraybinsearch "
+    fi
+
+    bmark=sglib-arraysort
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-arraysort/Makefile"
+
+        BENCHMARKS+="sglib-arraysort "
+        BENCHMARKS_SUBDIRS+="src/sglib-arraysort "
+    fi
+
+    bmark=sglib-arraysort1
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-arraysort1/Makefile"
+
+        BENCHMARKS+="sglib-arraysort1 "
+        BENCHMARKS_SUBDIRS+="src/sglib-arraysort1 "
+    fi
+
+    bmark=sglib-dllist
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-dllist/Makefile"
+
+        BENCHMARKS+="sglib-dllist "
+        BENCHMARKS_SUBDIRS+="src/sglib-dllist "
+    fi
+
+    bmark=sglib-hashtable
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-hashtable/Makefile"
+
+        BENCHMARKS+="sglib-hashtable "
+        BENCHMARKS_SUBDIRS+="src/sglib-hashtable "
+    fi
+
+    bmark=sglib-listinsertsort
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-listinsertsort/Makefile"
+
+        BENCHMARKS+="sglib-listinsertsort "
+        BENCHMARKS_SUBDIRS+="src/sglib-listinsertsort "
+    fi
+
+    bmark=sglib-listinsertsort1
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-listinsertsort1/Makefile"
+
+        BENCHMARKS+="sglib-listinsertsort1 "
+        BENCHMARKS_SUBDIRS+="src/sglib-listinsertsort1 "
+    fi
+
+    bmark=sglib-listsort
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-listsort/Makefile"
+
+        BENCHMARKS+="sglib-listsort "
+        BENCHMARKS_SUBDIRS+="src/sglib-listsort "
+    fi
+
+    bmark=sglib-queue
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-queue/Makefile"
+
+        BENCHMARKS+="sglib-queue "
+        BENCHMARKS_SUBDIRS+="src/sglib-queue "
+    fi
+
+    bmark=sglib-rbtree
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-rbtree/Makefile"
+
+        BENCHMARKS+="sglib-rbtree "
+        BENCHMARKS_SUBDIRS+="src/sglib-rbtree "
+    fi
+
+    bmark=sha
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sha/Makefile"
+
+        BENCHMARKS+="sha "
+        BENCHMARKS_SUBDIRS+="src/sha "
+    fi
+
+    bmark=slre
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/slre/Makefile"
+
+        BENCHMARKS+="slre "
+        BENCHMARKS_SUBDIRS+="src/slre "
+    fi
+
+    bmark=stringsearch1
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/stringsearch1/Makefile"
+
+        BENCHMARKS+="stringsearch1 "
+        BENCHMARKS_SUBDIRS+="src/stringsearch1 "
+    fi
+
+    bmark=strstr
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/strstr/Makefile"
+
+        BENCHMARKS+="strstr "
+        BENCHMARKS_SUBDIRS+="src/strstr "
+    fi
+
+    bmark=sqrt
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sqrt/Makefile"
+
+        BENCHMARKS+="sqrt "
+        BENCHMARKS_SUBDIRS+="src/sqrt "
+    fi
+
+    bmark=st
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/st/Makefile"
+
+        BENCHMARKS+="st "
+        BENCHMARKS_SUBDIRS+="src/st "
+    fi
+
+    bmark=statemate
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/statemate/Makefile"
+
+        BENCHMARKS+="statemate "
+        BENCHMARKS_SUBDIRS+="src/statemate "
+    fi
+
+    bmark=tarai
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/tarai/Makefile"
+
+        BENCHMARKS+="tarai "
+        BENCHMARKS_SUBDIRS+="src/tarai "
+    fi
+
+    bmark=ud
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/ud/Makefile"
+
+        BENCHMARKS+="ud "
+        BENCHMARKS_SUBDIRS+="src/ud "
+    fi
+
+    bmark=wikisort
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/wikisort/Makefile"
+
+        BENCHMARKS+="wikisort "
+        BENCHMARKS_SUBDIRS+="src/wikisort "
+    fi
+
+    bmark=whetstone
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/whetstone/Makefile"
+
+        BENCHMARKS+="whetstone "
+        BENCHMARKS_SUBDIRS+="src/whetstone "
+    fi
+
+
+BENCHMARKS_SUBDIRS=$BENCHMARKS_SUBDIRS
+
 
 # ==== AC_CONFIG_FILES (This is a marker for the generate-benchmark.sh script)
 ac_config_files="$ac_config_files src/template/Makefile"
@@ -14888,8 +15440,14 @@ echo
 echo "Target platform               $with_platform"
 echo "Target triple                 $host"
 echo "Platform sources              $enable_platformsources"
-if [ -z "$SIMULATORPATH" ]; then
+if test x$SIMULATORPATH == x ; then
     echo "Simulator                     none"
 else
     echo "Simulator                     $SIMULATORPATH"
+fi
+
+if test "x$EXCLUDED_BENCHMARKS" == x ; then
+    echo "Excluded benchmarks           none"
+else
+    echo "Excluded benchmarks           $EXCLUDED_BENCHMARKS"
 fi
