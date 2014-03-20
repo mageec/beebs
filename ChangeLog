@@ -1,4 +1,10 @@
 2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Change options for rijndael, to make it smaller, and compiler for
+	msp430
+
+	* src/rijndael/aes.c: Change options for rijndael, to make it smaller.
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
 	Added support for msp-exp430fr5739 platform
 
 	* configure: Regenerated
