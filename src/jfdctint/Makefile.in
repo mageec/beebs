@@ -134,6 +134,8 @@ DIST_COMMON = $(top_srcdir)/src/common.mk.am $(srcdir)/Makefile.in \
 @SAM4LXPLAINED_TRUE@am__append_6 = $(top_srcdir)/src/platformcode/startup.c
 @PIC32MX250F128B_TRUE@am__append_7 = -T $(top_srcdir)/src/platformcode/pic32mx.ld
 @PIC32MX250F128B_TRUE@am__append_8 = $(top_srcdir)/src/platformcode/pic32mx_startup.s
+@MSPEXP430F5529_TRUE@am__append_9 = $(top_srcdir)/src/platformcode/msp430.s
+@MSPEXP430FR5739_TRUE@am__append_10 = $(top_srcdir)/src/platformcode/msp430.s
 subdir = src/jfdctint
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
@@ -150,14 +152,18 @@ PROGRAMS = $(bin_PROGRAMS)
 am__jfdctint_SOURCES_DIST = jfdctint.c \
 	$(top_srcdir)/src/platformcode/platformcode.c \
 	$(top_srcdir)/src/platformcode/startup.c \
-	$(top_srcdir)/src/platformcode/pic32mx_startup.s
+	$(top_srcdir)/src/platformcode/pic32mx_startup.s \
+	$(top_srcdir)/src/platformcode/msp430.s
 @STM32F0DISCOVERY_TRUE@am__objects_1 = startup.$(OBJEXT)
 @STM32VLDISCOVERY_TRUE@am__objects_2 = startup.$(OBJEXT)
 @SAM4LXPLAINED_TRUE@am__objects_3 = startup.$(OBJEXT)
 @PIC32MX250F128B_TRUE@am__objects_4 = pic32mx_startup.$(OBJEXT)
-am__objects_5 = platformcode.$(OBJEXT) $(am__objects_1) \
-	$(am__objects_2) $(am__objects_3) $(am__objects_4)
-am_jfdctint_OBJECTS = jfdctint.$(OBJEXT) $(am__objects_5)
+@MSPEXP430F5529_TRUE@am__objects_5 = msp430.$(OBJEXT)
+@MSPEXP430FR5739_TRUE@am__objects_6 = msp430.$(OBJEXT)
+am__objects_7 = platformcode.$(OBJEXT) $(am__objects_1) \
+	$(am__objects_2) $(am__objects_3) $(am__objects_4) \
+	$(am__objects_5) $(am__objects_6)
+am_jfdctint_OBJECTS = jfdctint.$(OBJEXT) $(am__objects_7)
 jfdctint_OBJECTS = $(am_jfdctint_OBJECTS)
 jfdctint_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -366,7 +372,7 @@ top_srcdir = @top_srcdir@
 jfdctint_SOURCES = jfdctint.c ${platform_src}
 platform_src = $(top_srcdir)/src/platformcode/platformcode.c \
 	$(am__append_2) $(am__append_4) $(am__append_6) \
-	$(am__append_8)
+	$(am__append_8) $(am__append_9) $(am__append_10)
 all: all-am
 
 .SUFFIXES:
@@ -529,6 +535,12 @@ pic32mx_startup.o: $(top_srcdir)/src/platformcode/pic32mx_startup.s
 
 pic32mx_startup.obj: $(top_srcdir)/src/platformcode/pic32mx_startup.s
 	$(AM_V_CCAS)$(CCAS) $(AM_CCASFLAGS) $(CCASFLAGS) -c -o pic32mx_startup.obj `if test -f '$(top_srcdir)/src/platformcode/pic32mx_startup.s'; then $(CYGPATH_W) '$(top_srcdir)/src/platformcode/pic32mx_startup.s'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/src/platformcode/pic32mx_startup.s'; fi`
+
+msp430.o: $(top_srcdir)/src/platformcode/msp430.s
+	$(AM_V_CCAS)$(CCAS) $(AM_CCASFLAGS) $(CCASFLAGS) -c -o msp430.o `test -f '$(top_srcdir)/src/platformcode/msp430.s' || echo '$(srcdir)/'`$(top_srcdir)/src/platformcode/msp430.s
+
+msp430.obj: $(top_srcdir)/src/platformcode/msp430.s
+	$(AM_V_CCAS)$(CCAS) $(AM_CCASFLAGS) $(CCASFLAGS) -c -o msp430.obj `if test -f '$(top_srcdir)/src/platformcode/msp430.s'; then $(CYGPATH_W) '$(top_srcdir)/src/platformcode/msp430.s'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/src/platformcode/msp430.s'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo

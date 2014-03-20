@@ -133,7 +133,7 @@ case $with_platform in
             AC_MSG_ERROR([Please rerun configure with --host=msp430 for this platform])
         fi
 
-        AC_SUBST([AM_CFLAGS], ["-mmcu=msp430f5529 -std=gnu99 -mcpu=430 -DMSP430F -Dpow\(a,b\)=powf\(a,b\)"])
+        AC_SUBST([AM_CFLAGS], ["-mmcu=msp430f5529 -std=gnu99 -mcpu=430 -DMSP430F"])
         if test x$enable_simulate == xyes; then
             enable_simulate_msp430=yes
         fi
@@ -148,7 +148,7 @@ case $with_platform in
             AC_MSG_ERROR([Please rerun configure with --host=msp430 for this platform])
         fi
 
-        AC_SUBST([AM_CFLAGS], ["-mmcu=msp430fr5739 -std=gnu99 -mcpu=430 -DMSP430FR -Dpow\(a,b\)=powf\(a,b\)"])
+        AC_SUBST([AM_CFLAGS], ["-mmcu=msp430fr5739 -std=gnu99 -mcpu=430 -DMSP430FR"])
         if test x$enable_simulate == xyes; then
             enable_simulate_msp430=yes
         fi

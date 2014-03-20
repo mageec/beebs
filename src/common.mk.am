@@ -40,3 +40,9 @@ if PIC32MX250F128B
 AM_CFLAGS += -T $(top_srcdir)/src/platformcode/pic32mx.ld
 platform_src += $(top_srcdir)/src/platformcode/pic32mx_startup.s
 endif
+if MSPEXP430F5529
+platform_src += $(top_srcdir)/src/platformcode/msp430.s
+endif
+if MSPEXP430FR5739
+platform_src += $(top_srcdir)/src/platformcode/msp430.s
+endif
