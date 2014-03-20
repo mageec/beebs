@@ -1,4 +1,16 @@
 2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Added miniz benchmark
+
+	* Makefile.am: Added miniz benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added miniz benchmark
+	* src/miniz/Makefile.am: Added miniz benchmark
+	* src/miniz/Makefile.in: Regenerated
+	* src/miniz/miniz.c: Added miniz benchmark
+	* src/miniz/miniz_b.c: Added miniz benchmark
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
 	Better work around for missing float functions in msp430 libm
 
 	* configure: Regenerated

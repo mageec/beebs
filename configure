@@ -12404,6 +12404,8 @@ ac_config_files="$ac_config_files src/ludcmp/Makefile"
 
 ac_config_files="$ac_config_files src/mergesort/Makefile"
 
+ac_config_files="$ac_config_files src/miniz/Makefile"
+
 ac_config_files="$ac_config_files src/minver/Makefile"
 
 ac_config_files="$ac_config_files src/nbody/Makefile"
@@ -13644,6 +13646,7 @@ do
     "src/lms/Makefile") CONFIG_FILES="$CONFIG_FILES src/lms/Makefile" ;;
     "src/ludcmp/Makefile") CONFIG_FILES="$CONFIG_FILES src/ludcmp/Makefile" ;;
     "src/mergesort/Makefile") CONFIG_FILES="$CONFIG_FILES src/mergesort/Makefile" ;;
+    "src/miniz/Makefile") CONFIG_FILES="$CONFIG_FILES src/miniz/Makefile" ;;
     "src/minver/Makefile") CONFIG_FILES="$CONFIG_FILES src/minver/Makefile" ;;
     "src/nbody/Makefile") CONFIG_FILES="$CONFIG_FILES src/nbody/Makefile" ;;
     "src/ndes/Makefile") CONFIG_FILES="$CONFIG_FILES src/ndes/Makefile" ;;
