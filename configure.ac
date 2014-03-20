@@ -133,10 +133,12 @@ case $with_platform in
             AC_MSG_ERROR([Please rerun configure with --host=msp430 for this platform])
         fi
 
-        AC_SUBST([AM_CFLAGS], ["-mmcu=msp430f5529 -std=gnu99 -mcpu=430 -DMSP430F"])
+        AC_SUBST([AM_CFLAGS], ["-mmcu=msp430f5529 -std=gnu99 -mcpu=430 -DMSP430F -Dpow\(a,b\)=powf\(a,b\)"])
         if test x$enable_simulate == xyes; then
             enable_simulate_msp430=yes
         fi
+
+        CFLAGS="$CFLAGS -mmcu=msp430f5529 -std=gnu99 -mcpu=430 -DMSP430F"
 
         AM_CONDITIONAL([MSPEXP430F5529], [true])
         ;;
@@ -146,7 +148,7 @@ case $with_platform in
             AC_MSG_ERROR([Please rerun configure with --host=msp430 for this platform])
         fi
 
-        AC_SUBST([AM_CFLAGS], ["-mmcu=msp430fr5739 -std=gnu99 -mcpu=430 -DMSP430FR"])
+        AC_SUBST([AM_CFLAGS], ["-mmcu=msp430fr5739 -std=gnu99 -mcpu=430 -DMSP430FR -Dpow\(a,b\)=powf\(a,b\)"])
         if test x$enable_simulate == xyes; then
             enable_simulate_msp430=yes
         fi
@@ -172,6 +174,13 @@ case $with_platform in
         fi
 
         AM_CONDITIONAL([SAM4LXPLAINED], [true])
+        ;;
+
+    none)
+        ;;
+
+    *)
+        AC_MSG_ERROR([Please specify a supported platform])
         ;;
 esac
 

@@ -1,4 +1,11 @@
 2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Added workaround for there being no pow function in msp430's libc
+
+	* configure: Regenerated
+	* configure.ac: Added workaround for there being no pow function in
+	    msp430's libc
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
 	Fixes for ctl benchmarks, and removed realloc
 
 	* src/ctl-stack/ctl.h: Removed printfs
