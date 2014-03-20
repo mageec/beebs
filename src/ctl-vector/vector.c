@@ -72,16 +72,16 @@ benchmark (void)
 
   ctl_pairVectorDelete(v2, 4,8);
 
-  while(v->size > 0)
+  while(v2->size > 0)
   {
     pair k;
 
-    ctl_pairVectorPop_Back(v, &k);
+    ctl_pairVectorPop_Back(v2, &k);
 
     cnt += k.a*k.b;
   }
 
-  ctl_pairVectorFree(v);
+  ctl_pairVectorFree(v2);
 
   return cnt;
 }

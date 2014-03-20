@@ -67,16 +67,16 @@ benchmark (void)
     ctl_pairStackPush(v2, p);
   }
 
-  while(v->size > 0)
+  while(v2->size > 0)
   {
     pair k;
 
-    ctl_pairStackPop(v, &k);
+    ctl_pairStackPop(v2, &k);
 
     cnt += k.a*k.b;
   }
 
-  ctl_pairStackFree(v);
+  ctl_pairStackFree(v2);
 
   return cnt;
 }

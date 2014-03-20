@@ -1,4 +1,14 @@
 2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Fixes for ctl benchmarks, and removed realloc
+
+	* src/ctl-stack/ctl.h: Removed printfs
+	* src/ctl-stack/stack.c: Previously used an incorrect variable
+	* src/ctl-string/string.c: Removed realloc
+	* src/ctl-vector/ctl.h: Removed realloc
+	* src/ctl-vector/vector.c: Previously used an incorrect variable
+	* src/ctl-vector/vector.h: Removed realloc
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
 	Change options for rijndael, to make it smaller, and compiler for
 	msp430
 
