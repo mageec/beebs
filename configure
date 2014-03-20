@@ -725,6 +725,8 @@ AM_CFLAGS
 AM_LDFLAGS
 SAM4LXPLAINED_FALSE
 SAM4LXPLAINED_TRUE
+MSPEXP430FR5739_FALSE
+MSPEXP430FR5739_TRUE
 MSPEXP430F5529_FALSE
 MSPEXP430F5529_TRUE
 XMEGAA3BUXPLAINED_FALSE
@@ -1460,6 +1462,7 @@ Optional Packages:
                               pic32mx250f128b
                               xmegaa3buxplained
                               msp-exp430f5529
+                              msp-exp430fr5739
                               sam4lxplained
   --with-pic[=PKGS]       try to use only PIC/non-PIC objects [default=use
                           both]
@@ -2334,6 +2337,14 @@ else
 fi
 
  if false; then
+  MSPEXP430FR5739_TRUE=
+  MSPEXP430FR5739_FALSE='#'
+else
+  MSPEXP430FR5739_TRUE='#'
+  MSPEXP430FR5739_FALSE=
+fi
+
+ if false; then
   SAM4LXPLAINED_TRUE=
   SAM4LXPLAINED_FALSE='#'
 else
@@ -2487,6 +2498,29 @@ fi
 else
   MSPEXP430F5529_TRUE='#'
   MSPEXP430F5529_FALSE=
+fi
+
+        ;;
+
+    msp-exp430fr5739)
+        if test x$host == x$build ; then
+            as_fn_error $? "Please rerun configure with --host=msp430 for this platform" "$LINENO" 5
+        fi
+
+        AM_CFLAGS="-mmcu=msp430fr5739 -std=gnu99 -mcpu=430 -DMSP430FR"
+
+        if test x$enable_simulate == xyes; then
+            enable_simulate_msp430=yes
+        fi
+
+        CFLAGS="$CFLAGS -mmcu=msp430fr5739 -std=gnu99 -mcpu=430 -DMSP430FR"
+
+         if true; then
+  MSPEXP430FR5739_TRUE=
+  MSPEXP430FR5739_FALSE='#'
+else
+  MSPEXP430FR5739_TRUE='#'
+  MSPEXP430FR5739_FALSE=
 fi
 
         ;;
@@ -12621,6 +12655,10 @@ if test -z "${MSPEXP430F5529_TRUE}" && test -z "${MSPEXP430F5529_FALSE}"; then
   as_fn_error $? "conditional \"MSPEXP430F5529\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
+if test -z "${MSPEXP430FR5739_TRUE}" && test -z "${MSPEXP430FR5739_FALSE}"; then
+  as_fn_error $? "conditional \"MSPEXP430FR5739\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 if test -z "${SAM4LXPLAINED_TRUE}" && test -z "${SAM4LXPLAINED_FALSE}"; then
   as_fn_error $? "conditional \"SAM4LXPLAINED\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -12647,6 +12685,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${MSPEXP430F5529_TRUE}" && test -z "${MSPEXP430F5529_FALSE}"; then
   as_fn_error $? "conditional \"MSPEXP430F5529\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${MSPEXP430FR5739_TRUE}" && test -z "${MSPEXP430FR5739_FALSE}"; then
+  as_fn_error $? "conditional \"MSPEXP430FR5739\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${SAM4LXPLAINED_TRUE}" && test -z "${SAM4LXPLAINED_FALSE}"; then

@@ -27,6 +27,7 @@ AC_ARG_WITH([platform],
                               pic32mx250f128b
                               xmegaa3buxplained
                               msp-exp430f5529
+                              msp-exp430fr5739
                               sam4lxplained],
     [],
     [with_platform=none]
@@ -38,6 +39,7 @@ AM_CONDITIONAL([ATMEGA328P], [false])
 AM_CONDITIONAL([PIC32MX250F128B], [false])
 AM_CONDITIONAL([XMEGAA3BUXPLAINED], [false])
 AM_CONDITIONAL([MSPEXP430F5529], [false])
+AM_CONDITIONAL([MSPEXP430FR5739], [false])
 AM_CONDITIONAL([SAM4LXPLAINED], [false])
 
 save_CFLAGS=$CFLAGS
@@ -137,6 +139,21 @@ case $with_platform in
         fi
 
         AM_CONDITIONAL([MSPEXP430F5529], [true])
+        ;;
+
+    msp-exp430fr5739)
+        if test x$host == x$build ; then
+            AC_MSG_ERROR([Please rerun configure with --host=msp430 for this platform])
+        fi
+
+        AC_SUBST([AM_CFLAGS], ["-mmcu=msp430fr5739 -std=gnu99 -mcpu=430 -DMSP430FR"])
+        if test x$enable_simulate == xyes; then
+            enable_simulate_msp430=yes
+        fi
+
+        CFLAGS="$CFLAGS -mmcu=msp430fr5739 -std=gnu99 -mcpu=430 -DMSP430FR"
+
+        AM_CONDITIONAL([MSPEXP430FR5739], [true])
         ;;
 
     sam4lxplained)

@@ -1,3 +1,24 @@
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Added support for msp-exp430fr5739 platform
+
+	* configure: Regenerated
+	* configure.ac: Added support for msp-exp430fr5739 platform
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/mergesort/mergesort.c: Removed dependency on assert
+	* src/platformcode/platformcode.c: Added trigger code for msp-
+	    exp430fr5739
+	* src/sglib-arraybinsearch/sglib.h: Removed dependency on assert
+	* src/sglib-arraysort/sglib.h: Removed dependency on assert
+	* src/sglib-arraysort1/sglib.h: Removed dependency on assert
+	* src/sglib-dllist/sglib.h: Removed dependency on assert
+	* src/sglib-hashtable/sglib.h: Removed dependency on assert
+	* src/sglib-listinsertsort/sglib.h: Removed dependency on assert
+	* src/sglib-listinsertsort1/sglib.h: Removed dependency on assert
+	* src/sglib-listsort/sglib.h: Removed dependency on assert
+	* src/sglib-queue/sglib.h: Removed dependency on assert
+	* src/sglib-rbtree/sglib.h: Removed dependency on assert
+	* src/wikisort/wikisort.c: Removed dependency on assert
+
 2014-03-16  James Pallister  <james.pallister@bristol.ac.uk>
 	Fied ctl-string build for stm32f0discovery platform
 

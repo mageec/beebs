@@ -34,7 +34,6 @@
 #include <stdarg.h>
 #include <string.h>
 #include <math.h>
-#include <assert.h>
 #include <limits.h>
 
 /* various #defines for the C code */
