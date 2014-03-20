@@ -1,4 +1,15 @@
 2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Added tarai benchmark
+
+	* Makefile.am: Added tarai benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added tarai benchmark
+	* src/tarai/Makefile.am: Added tarai benchmark
+	* src/tarai/Makefile.in: Regenerated
+	* src/tarai/tarai.c: Added tarai benchmark
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
 	Added workaround for there being no pow function in msp430's libc
 
 	* configure: Regenerated

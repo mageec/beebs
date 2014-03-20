@@ -105,6 +105,7 @@ SUBDIRS+=src/st
 SUBDIRS+=src/statemate
 SUBDIRS+=src/stringsearch1
 SUBDIRS+=src/strstr
+SUBDIRS+=src/tarai
 SUBDIRS+=src/ud
 SUBDIRS+=src/whetstone
 SUBDIRS+=src/wikisort

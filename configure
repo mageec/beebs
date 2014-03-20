@@ -12476,6 +12476,8 @@ ac_config_files="$ac_config_files src/st/Makefile"
 
 ac_config_files="$ac_config_files src/statemate/Makefile"
 
+ac_config_files="$ac_config_files src/tarai/Makefile"
+
 ac_config_files="$ac_config_files src/ud/Makefile"
 
 ac_config_files="$ac_config_files src/wikisort/Makefile"
@@ -13678,6 +13680,7 @@ do
     "src/sqrt/Makefile") CONFIG_FILES="$CONFIG_FILES src/sqrt/Makefile" ;;
     "src/st/Makefile") CONFIG_FILES="$CONFIG_FILES src/st/Makefile" ;;
     "src/statemate/Makefile") CONFIG_FILES="$CONFIG_FILES src/statemate/Makefile" ;;
+    "src/tarai/Makefile") CONFIG_FILES="$CONFIG_FILES src/tarai/Makefile" ;;
     "src/ud/Makefile") CONFIG_FILES="$CONFIG_FILES src/ud/Makefile" ;;
     "src/wikisort/Makefile") CONFIG_FILES="$CONFIG_FILES src/wikisort/Makefile" ;;
     "src/whetstone/Makefile") CONFIG_FILES="$CONFIG_FILES src/whetstone/Makefile" ;;

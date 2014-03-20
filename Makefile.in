@@ -370,7 +370,7 @@ SUBDIRS = src/platformcode src/2dfir src/adpcm src/blowfish src/bs \
 	src/sglib-hashtable src/sglib-listinsertsort \
 	src/sglib-listinsertsort1 src/sglib-listsort src/sglib-queue \
 	src/sglib-rbtree src/sha src/slre src/sqrt src/st \
-	src/statemate src/stringsearch1 src/strstr src/ud \
+	src/statemate src/stringsearch1 src/strstr src/tarai src/ud \
 	src/whetstone src/wikisort src/template analysis
 ACLOCAL_AMFLAGS = -I m4
 all: all-recursive
