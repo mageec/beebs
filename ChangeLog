@@ -1,4 +1,18 @@
 2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Small modifications to benchmarks to reduce energy usage. Mostly
+	involves marking some arrays as const, so the compiler puts them into
+	non-volatile storage
+
+	* src/crc/crc.c: Modification to reduce memory
+	* src/crc32/crc_32.c: Modification to reduce memory
+	* src/fir/fir.c: Modification to reduce memory
+	* src/float_matmult/matmult.c: Modification to reduce memory
+	* src/lms/lms.c: Modification to reduce memory
+	* src/mergesort/mergesort.c: Modification to reduce memory
+	* src/ndes/ndes.c: Modification to reduce memory
+	* src/ns/ns.c: Modification to reduce memory
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
 	Modifications to compress to make it fit in memory of msp430
 
 	* src/compress/compress.c: Modifications to compress to make it fit in

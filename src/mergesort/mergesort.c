@@ -190,8 +190,8 @@ long TestingMostlyEqual(long index, long total) {
 }
 
 
-const long max_size = 400;
-Test array1[400];
+const long max_size = 100;
+Test array1[100];
 
 int benchmark() {
 	long total, index, test_case;

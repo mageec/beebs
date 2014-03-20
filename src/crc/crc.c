@@ -79,7 +79,7 @@ typedef unsigned char uchar;
 #define LOBYTE(x) ((uchar)((x) & 0xFF))
 #define HIBYTE(x) ((uchar)((x) >> 8))
 
-unsigned char lin[256] = "asdffeagewaHAFEFaeDsFEawFdsFaefaeerdjgp";
+const unsigned char lin[256] = "asdffeagewaHAFEFaeDsFEawFdsFaefaeerdjgp";
 
 unsigned short icrc1(unsigned short crc, unsigned char onech)
 {
@@ -143,10 +143,7 @@ int benchmark(void)
   unsigned long n;
 
   n=40;
-  lin[n+1]=0;
   i1=icrc(0,n,(short)0,1);
-  lin[n+1]=HIBYTE(i1);
-  lin[n+2]=LOBYTE(i1);
   i2=icrc(i1,n+2,(short)0,1);
   return 0;
 }

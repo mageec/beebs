@@ -70,7 +70,7 @@
 
 static float gaussian(void);
 
-#define N 201
+#define N 101
 #define L 20            /* filter order, (length L+1) */
 
 /* set convergence parameter */
