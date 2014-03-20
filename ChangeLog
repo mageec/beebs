@@ -1,4 +1,10 @@
 2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Modifications to compress to make it fit in memory of msp430
+
+	* src/compress/compress.c: Modifications to compress to make it fit in
+	    memory of msp430
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
 	Added miniz benchmark
 
 	* Makefile.am: Added miniz benchmark
