@@ -89,7 +89,7 @@ void trace(char *s)
 	Jeff Reilyy, 1/15/95				*/
 #define PBITS	16
 #define BITS 16
-#define HSIZE	110		/* 95% occupancy was 69001 */
+#define HSIZE	400		/* 95% occupancy was 69001 */
 
 
 /*

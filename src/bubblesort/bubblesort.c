@@ -9,13 +9,6 @@
 /* All output disabled for wcsim */
 #define WCSIM 1
 
-/* A read from this address will result in an known value of 1 */
-#define KNOWN_VALUE (int)(*((char *)0x80200001))
-
-/* A read from this address will result in an unknown value */
-#define UNKNOWN_VALUE (int)(*((char *)0x80200003))
-
-
 #include <stdio.h>
 
 #define WORSTCASE 1
@@ -50,7 +43,7 @@ int Array[];
 
 fact = factor;
 for (Index = 1; Index <= NUMELEMS; Index ++)
-    Array[Index] = Index*fact * KNOWN_VALUE;
+    Array[Index] = Index*fact;
 }
 
 
