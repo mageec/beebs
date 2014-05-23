@@ -1,4 +1,11 @@
 2014-05-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Added support.h
+
+	* include/support.h: This file includes the respective chipsupport.h
+	    and boardsupport.h required to compile for the specified board and
+	    platform.
+
+2014-05-23  James Pallister  <james.pallister@bristol.ac.uk>
 	Moved over to a new configuration architecture. The benchmark suite
 	can be configured on a chip or a board level, with custom CFLAGS, etc.
 	for each. Also there is set of headers and source for each board,
