@@ -52,7 +52,7 @@
  *                      $Revision: 1.3 $
  */
 
-#include "platformcode.h"
+#include "support.h"
 
 #define STORAGE_CLASS register
 #define TYPE          float
@@ -98,7 +98,7 @@ int main()
    pcoeff  = &coefficients[0] ;
    poutput = &output[0]       ;
 
-   initialise_trigger();
+   initialise_board();
    start_trigger();
 
    for(n = 0; n < REPEAT_FACTOR>>5; ++n)

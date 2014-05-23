@@ -1,3 +1,125 @@
+2014-05-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Moved over to a new configuration architecture. The benchmark suite
+	can be configured on a chip or a board level, with custom CFLAGS, etc.
+	for each. Also there is set of headers and source for each board,
+	which replaces platform code. The chip configuration should expose
+	internals specific to the chip (through chipsupport.h) and the board
+	should use these, through boardsupport.c and boardsupport.h.
+
+	* Makefile.am: Removed old code. We just need the benchmark
+	    directories now
+	* Makefile.in: Regenerated
+	* config.h.in: Template for configure to generate, so that we know
+	    whether we have a boardspport.h or a chipsupport.h or both
+	* config/arm/boards/stm32f0discovery/boardsupport.c: Boardsupport file
+	    for stm32f0discovery
+	* config/arm/boards/stm32vldiscovery/boardsupport.c: Boardsupport file
+	    for stm32vldiscovery
+	* config/arm/chips/stm32f051/chip.cfg: Chip config for stm32f051
+	* config/arm/chips/stm32f051/chipsupport.h: Chip support header for
+	    stm32f051
+	* config/arm/chips/stm32f100/chip.cfg: Chip config for stm32f100
+	* config/arm/chips/stm32f100/chipsupport.h: Chip support header for
+	    stm32f100
+	* config/avr/boards/shrimp/boardsupport.c: Board support for shrimp
+	    (TODO)
+	* config/avr/chips/atmega328p/chip.cfg: Chip config for shrimp (TODO)
+	* configure: Regenerated
+	* configure.ac: Modified to use the new configuration structure
+	* src/2dfir/Makefile.in: Regenerated
+	* src/2dfir/fir2dim.c: Updated this benchmark to use the new headers
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Include the new header files, plus configuration
+	    header files
+	* src/compress/Makefile.in: Regenerated
+	* src/cover/Makefile.in: Regenerated
+	* src/crc/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/ctl-stack/Makefile.in: Regenerated
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/ctl-vector/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dhrystone/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/dtoa/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/expint/Makefile.in: Regenerated
+	* src/fac/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fir/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/frac/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/gdb-bitfields/Makefile.in: Regenerated
+	* src/gdb-constvars/Makefile.in: Regenerated
+	* src/gdb-store/Makefile.in: Regenerated
+	* src/huffbench/Makefile.in: Regenerated
+	* src/insertsort/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/jfdctint/Makefile.in: Regenerated
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/levenshtein/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/ludcmp/Makefile.in: Regenerated
+	* src/mergesort/Makefile.in: Regenerated
+	* src/miniz/Makefile.in: Regenerated
+	* src/minver/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/ndes/Makefile.in: Regenerated
+	* src/nettle-arcfour/Makefile.in: Regenerated
+	* src/nettle-cast128/Makefile.in: Regenerated
+	* src/nettle-des/Makefile.in: Regenerated
+	* src/nettle-md5/Makefile.in: Regenerated
+	* src/newlib-exp/Makefile.in: Regenerated
+	* src/newlib-log/Makefile.in: Regenerated
+	* src/newlib-mod/Makefile.in: Regenerated
+	* src/newlib-sqrt/Makefile.in: Regenerated
+	* src/ns/Makefile.in: Regenerated
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/prime/Makefile.in: Regenerated
+	* src/qsort/Makefile.in: Regenerated
+	* src/qurt/Makefile.in: Regenerated
+	* src/recursion/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/select/Makefile.in: Regenerated
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated
+	* src/sglib-arraysort/Makefile.in: Regenerated
+	* src/sglib-arraysort1/Makefile.in: Regenerated
+	* src/sglib-dllist/Makefile.in: Regenerated
+	* src/sglib-hashtable/Makefile.in: Regenerated
+	* src/sglib-listinsertsort/Makefile.in: Regenerated
+	* src/sglib-listinsertsort1/Makefile.in: Regenerated
+	* src/sglib-listsort/Makefile.in: Regenerated
+	* src/sglib-queue/Makefile.in: Regenerated
+	* src/sglib-rbtree/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/slre/Makefile.in: Regenerated
+	* src/sqrt/Makefile.in: Regenerated
+	* src/st/Makefile.in: Regenerated
+	* src/statemate/Makefile.in: Regenerated
+	* src/stringsearch1/Makefile.in: Regenerated
+	* src/strstr/Makefile.in: Regenerated
+	* src/tarai/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+	* src/ud/Makefile.in: Regenerated
+	* src/whetstone/Makefile.in: Regenerated
+	* src/wikisort/Makefile.in: Regenerated
+
 2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
 	Centralised benchmark list, so benchmarks can be excluded for each
 	platform. The list of benchmarks is embedded into configure.ac, and

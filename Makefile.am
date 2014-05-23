@@ -20,12 +20,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-SUBDIRS=src/platformcode
-
-SUBDIRS+= $(BENCHMARKS_SUBDIRS)
-# ==== SUBDIRS (This is a marker for the generate-benchmark.sh script)
+SUBDIRS= $(BENCHMARKS_SUBDIRS)
 SUBDIRS+=src/template
-
-SUBDIRS+=analysis
 
 ACLOCAL_AMFLAGS= -I m4
