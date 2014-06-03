@@ -31,7 +31,7 @@
  *
  * Stephen R. van den Berg, berg@pool.informatik.rwth-aachen.de */
 
-#include "platformcode.h"
+#include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
@@ -147,7 +147,7 @@ main (void)
 {
   int i;
 
-  initialise_trigger ();
+  initialise_board ();
   start_trigger ();
 
   for (i = 0; i < SCALE_FACTOR; i++)

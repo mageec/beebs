@@ -44,7 +44,7 @@
 /*                                                                       */
 /*                                                                       */
 /*************************************************************************/
-#include "platformcode.h"
+#include "support.h"
 
 #define SCALE_FACTOR (REPEAT_FACTOR >> 10)
 
@@ -128,7 +128,7 @@ int main()
 {
     int n;
 
-    initialise_trigger();
+    initialise_board();
     start_trigger();
 
     for(n = 0; n < SCALE_FACTOR; ++n)

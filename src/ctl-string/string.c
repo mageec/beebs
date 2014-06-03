@@ -20,7 +20,7 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
-#include "platformcode.h"
+#include "support.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -425,7 +425,7 @@ main (void)
 {
   int i;
 
-  initialise_trigger ();
+  initialise_board ();
   start_trigger ();
 
   for (i = 0; i < SCALE_FACTOR; i++)

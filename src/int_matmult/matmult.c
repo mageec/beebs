@@ -16,7 +16,7 @@
  * This is a program that was developed from mm.c to matmult.c by
  * Thomas Lundqvist at Chalmers.
  *----------------------------------------------------------------------*/
-#include "platformcode.h"
+#include "support.h"
 
 /*
  * MATRIX MULTIPLICATION BENCHMARK PROGRAM:
@@ -84,7 +84,7 @@ int main()
    int n;
    InitSeed();
 
-   initialise_trigger();
+   initialise_board();
    start_trigger();
 
    for(n = 0; n < REPEAT_FACTOR>>6; ++n)

@@ -1,7 +1,7 @@
 /* Crc - 32 BIT ANSI X3.66 CRC checksum files */
 
 #include "crc.h"
-#include "platformcode.h"
+#include "support.h"
 
 #ifdef __TURBOC__
 #pragma warn -cln
@@ -150,7 +150,7 @@ int main(int argc, char *argv[])
    DWORD check_output = 469871797;
 #endif
 
-   initialise_trigger();
+   initialise_board();
    start_trigger();
 
    for(n = 0; n < REPEAT_FACTOR>>5; ++n)

@@ -23,7 +23,7 @@
 // *  Number of clock cycles (with these inputs) -> 2132                                                   *
 // *********************************************************************************************************
 
-#include "platformcode.h"
+#include "support.h"
 
 #ifdef IO
 #include "libp.c"
@@ -238,7 +238,7 @@ int main()
       -171, -14, -367, 67, 323, -127, -1400, 28,
       -546, 38, -355, 159, -750, 316, -4, -1849};
 
-   initialise_trigger();
+   initialise_board();
    start_trigger();
 
    for(n = 0; n < REPEAT_FACTOR; ++n)

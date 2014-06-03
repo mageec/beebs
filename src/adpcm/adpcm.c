@@ -48,7 +48,7 @@
 /*                                                                       */
 /*************************************************************************/
 
-#include "platformcode.h"
+#include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
@@ -884,7 +884,7 @@ int main (void)
 {
   int i;
 
-  initialise_trigger ();
+  initialise_board ();
   start_trigger ();
 
   for (i = 0; i < SCALE_FACTOR; i++)
