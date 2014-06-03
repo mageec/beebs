@@ -1,5 +1,11 @@
 2014-06-03  Pierre Langlois  <pierre.langlois@embecosm.com>
 
+	* configure: Regenerate.
+	* configure.ac: Set CFLAGS and LDFLAGS before the config test.
+	Otherwise they get ignored.
+
+2014-06-03  Pierre Langlois  <pierre.langlois@embecosm.com>
+
 	* Makefile.in: Regenerate.
 	* configure: Regenerate.
 	* configure.ac: Make EXCLUDED_BENCHMARKS an argument variable. This way
