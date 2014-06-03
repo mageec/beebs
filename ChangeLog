@@ -1,5 +1,12 @@
 2014-06-03  Pierre Langlois  <pierre.langlois@embecosm.com>
 
+	* config/avr/boards/shrimp/boardsupport.c: Add trigger code.
+	* config/avr/chips/atmega328p/chip.cfg (CHIP_CFLAGS): Add
+	-std=gnu99.
+	(EXCLUDED_BENCHMARKS): Exclude adpcm and miniz benchmarks.
+
+2014-06-03  Pierre Langlois  <pierre.langlois@embecosm.com>
+
 	* configure: Regenerate.
 	* configure.ac: Set CFLAGS and LDFLAGS before the config test.
 	Otherwise they get ignored.
