@@ -9,7 +9,7 @@
 #include <string.h>
 #include "sha.h"
 
-#include "platformcode.h"
+#include "support.h"
 
 /* SHA f()-functions */
 

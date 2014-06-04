@@ -46,7 +46,7 @@ AC_SUBST(CHIP, $chip)
 
 # Some platforms cannot compile certain benchmarks, so we exclude them
 # from the build
-EXCLUDED_BENCHMARKS=""
+AC_ARG_VAR(EXCLUDED_BENCHMARKS, exclude benchmarks from the build)
 
 if test -f $srcdir/config/$arch/boards/$board/boardsupport.h; then
     AC_DEFINE([HAVE_BOARDSUPPORT_H], [1], [Board support header is present])
@@ -66,13 +66,13 @@ fi
 AC_SUBST([AM_LDFLAGS], ["$CHIP_LDFLAGS $BOARD_LDFLAGS"])
 AC_SUBST([AM_CFLAGS], ["$CHIP_CFLAGS $BOARD_CFLAGS"])
 
+CFLAGS="$CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
+LDFLAGS="$LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"
+
 # Sometimes we need to have the CFLAGS and LDFLAGS set so that
 # the config test pass. We save them first so we can restore them later
 save_CFLAGS=$CFLAGS
 save_LDFLAGS=$LDFLAGS
-
-CFLAGS="$CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
-LDFLAGS="$LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"
 
 AM_INIT_AUTOMAKE
 AC_PROG_LIBTOOL

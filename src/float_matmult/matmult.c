@@ -18,7 +18,7 @@
  *----------------------------------------------------------------------*/
 #include <math.h>
 
-#include "platformcode.h"
+#include "support.h"
 
 /*
  * MATRIX MULTIPLICATION BENCHMARK PROGRAM:
@@ -58,7 +58,7 @@ int main()
    int n;
    InitSeed();
 
-   initialise_trigger();
+   initialise_board();
    start_trigger();
 
    for(n = 0; n < REPEAT_FACTOR>>5; ++n)

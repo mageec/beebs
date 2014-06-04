@@ -711,6 +711,7 @@ INSTALL_SCRIPT
 INSTALL_PROGRAM
 AM_CFLAGS
 AM_LDFLAGS
+EXCLUDED_BENCHMARKS
 CHIP
 BOARD
 ARCH
@@ -787,6 +788,7 @@ enable_libtool_lock
       ac_precious_vars='build_alias
 host_alias
 target_alias
+EXCLUDED_BENCHMARKS
 CC
 CFLAGS
 LDFLAGS
@@ -1442,6 +1444,8 @@ Optional Packages:
                         (or the compiler's sysroot if not specified).
 
 Some influential environment variables:
+  EXCLUDED_BENCHMARKS
+              exclude benchmarks from the build
   CC          C compiler command
   CFLAGS      C compiler flags
   LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
@@ -2360,7 +2364,7 @@ CHIP=$chip
 
 # Some platforms cannot compile certain benchmarks, so we exclude them
 # from the build
-EXCLUDED_BENCHMARKS=""
+
 
 if test -f $srcdir/config/$arch/boards/$board/boardsupport.h; then
 
@@ -2386,13 +2390,13 @@ AM_LDFLAGS="$CHIP_LDFLAGS $BOARD_LDFLAGS"
 AM_CFLAGS="$CHIP_CFLAGS $BOARD_CFLAGS"
 
 
+CFLAGS="$CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
+LDFLAGS="$LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"
+
 # Sometimes we need to have the CFLAGS and LDFLAGS set so that
 # the config test pass. We save them first so we can restore them later
 save_CFLAGS=$CFLAGS
 save_LDFLAGS=$LDFLAGS
-
-CFLAGS="$CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
-LDFLAGS="$LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"
 
 am__api_version='1.14'
 

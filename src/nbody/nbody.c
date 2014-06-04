@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-#include "platformcode.h"
+#include "support.h"
 
 #define SCALE_FACTOR (REPEAT_FACTOR >> 8)
 
@@ -111,7 +111,7 @@ int main()
 {
    int n;
 
-   initialise_trigger();
+   initialise_board();
    start_trigger();
    for(n = 0; n < SCALE_FACTOR; ++n)
       benchmark(100);
