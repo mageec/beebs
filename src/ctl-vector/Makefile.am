@@ -20,9 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=vector
-vector_SOURCES=vector.c ctl.h vector.h
+bin_PROGRAMS=ctl-vector
+ctl_vector_SOURCES=vector.c ctl.h vector.h
 
 include $(top_srcdir)/src/common.mk.am
 
-vector_SOURCES += ${platform_src}
+ctl_vector_SOURCES += ${platform_src}

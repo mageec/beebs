@@ -1,5 +1,67 @@
 2014-06-04  Pierre Langlois  <pierre.langlois@embecosm.com>
 
+	* src/ctl-stack/Makefile.am: Rename the executable according to the
+	directory name.
+	* src/ctl-stack/Makefile.in: Regenerate.
+	* src/ctl-string/Makefile.am: Likewise.
+	* src/ctl-string/Makefile.in: Regenerate.
+	* src/ctl-vector/Makefile.am: Likewise.
+	* src/ctl-vector/Makefile.in: Regenerate.
+	* src/gdb-advance/Makefile.am: Likewise.
+	* src/gdb-advance/Makefile.in: Regenerate.
+	* src/gdb-all-types/Makefile.am: Likewise.
+	* src/gdb-all-types/Makefile.in: Regenerate.
+	* src/gdb-anon/Makefile.am: Likewise.
+	* src/gdb-anon/Makefile.in: Regenerate.
+	* src/gdb-arrayidx/Makefile.am: Likewise.
+	* src/gdb-arrayidx/Makefile.in: Regenerate.
+	* src/gdb-async/Makefile.am: Likewise.
+	* src/gdb-async/Makefile.in: Regenerate.
+	* src/gdb-bitfields/Makefile.am: Likewise.
+	* src/gdb-bitfields/Makefile.in: Regenerate.
+	* src/gdb-constvars/Makefile.am: Likewise.
+	* src/gdb-constvars/Makefile.in: Regenerate.
+	* src/gdb-store/Makefile.am: Likewise.
+	* src/gdb-store/Makefile.in: Regenerate.
+	* src/nettle-arcfour/Makefile.am: Likewise.
+	* src/nettle-arcfour/Makefile.in: Regenerate.
+	* src/nettle-cast128/Makefile.am: Likewise.
+	* src/nettle-cast128/Makefile.in: Regenerate.
+	* src/nettle-des/Makefile.am: Likewise.
+	* src/nettle-des/Makefile.in: Regenerate.
+	* src/nettle-md5/Makefile.am: Likewise.
+	* src/nettle-md5/Makefile.in: Regenerate.
+	* src/newlib-exp/Makefile.am: Likewise.
+	* src/newlib-exp/Makefile.in: Regenerate.
+	* src/newlib-log/Makefile.am: Likewise.
+	* src/newlib-log/Makefile.in: Regenerate.
+	* src/newlib-mod/Makefile.am: Likewise.
+	* src/newlib-mod/Makefile.in: Regenerate.
+	* src/newlib-sqrt/Makefile.am: Likewise.
+	* src/newlib-sqrt/Makefile.in: Regenerate.
+	* src/sglib-arraybinsearch/Makefile.am: Likewise.
+	* src/sglib-arraybinsearch/Makefile.in: Regenerate.
+	* src/sglib-arraysort/Makefile.am: Likewise.
+	* src/sglib-arraysort/Makefile.in: Regenerate.
+	* src/sglib-arraysort1/Makefile.am: Likewise.
+	* src/sglib-arraysort1/Makefile.in: Regenerate.
+	* src/sglib-dllist/Makefile.am: Likewise.
+	* src/sglib-dllist/Makefile.in: Regenerate.
+	* src/sglib-hashtable/Makefile.am: Likewise.
+	* src/sglib-hashtable/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort/Makefile.am: Likewise.
+	* src/sglib-listinsertsort/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort1/Makefile.am: Likewise.
+	* src/sglib-listinsertsort1/Makefile.in: Regenerate.
+	* src/sglib-listsort/Makefile.am: Likewise.
+	* src/sglib-listsort/Makefile.in: Regenerate.
+	* src/sglib-queue/Makefile.am: Likewise.
+	* src/sglib-queue/Makefile.in: Regenerate.
+	* src/sglib-rbtree/Makefile.am: Likewise.
+	* src/sglib-rbtree/Makefile.in: Regenerate.
+
+2014-06-04  Pierre Langlois  <pierre.langlois@embecosm.com>
+
 	* config/avr/chips/atmega328p/chip.cfg:  Add a comment about manually
 	setting -std=gnu99.
 

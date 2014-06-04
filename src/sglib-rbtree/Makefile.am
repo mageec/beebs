@@ -20,9 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=rbtree
-rbtree_SOURCES=rbtree.c
+bin_PROGRAMS=sglib-rbtree
+sglib_rbtree_SOURCES=rbtree.c
 
 include $(top_srcdir)/src/common.mk.am
 
-rbtree_SOURCES += ${platform_src}
+sglib_rbtree_SOURCES += ${platform_src}

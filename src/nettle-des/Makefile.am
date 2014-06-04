@@ -20,8 +20,8 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=des
-des_SOURCES=des.c \
+bin_PROGRAMS=nettle-des
+nettle_des_SOURCES=des.c \
 	    rotors.h \
 	    keymap.h \
 	    desCode.h
@@ -30,4 +30,4 @@ EXTRA_DIST = descore.README
 
 include $(top_srcdir)/src/common.mk.am
 
-des_SOURCES += ${platform_src}
+nettle_des_SOURCES += ${platform_src}

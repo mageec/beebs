@@ -123,7 +123,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-bin_PROGRAMS = bitfields$(EXEEXT)
+bin_PROGRAMS = gdb-bitfields$(EXEEXT)
 DIST_COMMON = $(top_srcdir)/src/common.mk.am $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/build-aux/depcomp
 subdir = src/gdb-bitfields
@@ -141,9 +141,9 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__objects_1 = boardsupport.$(OBJEXT)
-am_bitfields_OBJECTS = bitfields.$(OBJEXT) $(am__objects_1)
-bitfields_OBJECTS = $(am_bitfields_OBJECTS)
-bitfields_LDADD = $(LDADD)
+am_gdb_bitfields_OBJECTS = bitfields.$(OBJEXT) $(am__objects_1)
+gdb_bitfields_OBJECTS = $(am_gdb_bitfields_OBJECTS)
+gdb_bitfields_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -182,8 +182,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(bitfields_SOURCES)
-DIST_SOURCES = $(bitfields_SOURCES)
+SOURCES = $(gdb_bitfields_SOURCES)
+DIST_SOURCES = $(gdb_bitfields_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -342,7 +342,7 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-bitfields_SOURCES = bitfields.c ${platform_src}
+gdb_bitfields_SOURCES = bitfields.c ${platform_src}
 platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
 all: all-am
 
@@ -429,9 +429,9 @@ clean-binPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
-bitfields$(EXEEXT): $(bitfields_OBJECTS) $(bitfields_DEPENDENCIES) $(EXTRA_bitfields_DEPENDENCIES) 
-	@rm -f bitfields$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(bitfields_OBJECTS) $(bitfields_LDADD) $(LIBS)
+gdb-bitfields$(EXEEXT): $(gdb_bitfields_OBJECTS) $(gdb_bitfields_DEPENDENCIES) $(EXTRA_gdb_bitfields_DEPENDENCIES) 
+	@rm -f gdb-bitfields$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(gdb_bitfields_OBJECTS) $(gdb_bitfields_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

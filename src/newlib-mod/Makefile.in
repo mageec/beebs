@@ -123,7 +123,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-bin_PROGRAMS = ef_mod$(EXEEXT)
+bin_PROGRAMS = newlib-mod$(EXEEXT)
 DIST_COMMON = $(top_srcdir)/src/common.mk.am $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/build-aux/depcomp
 subdir = src/newlib-mod
@@ -141,9 +141,9 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__objects_1 = boardsupport.$(OBJEXT)
-am_ef_mod_OBJECTS = ef_mod.$(OBJEXT) $(am__objects_1)
-ef_mod_OBJECTS = $(am_ef_mod_OBJECTS)
-ef_mod_LDADD = $(LDADD)
+am_newlib_mod_OBJECTS = ef_mod.$(OBJEXT) $(am__objects_1)
+newlib_mod_OBJECTS = $(am_newlib_mod_OBJECTS)
+newlib_mod_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -182,8 +182,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(ef_mod_SOURCES)
-DIST_SOURCES = $(ef_mod_SOURCES)
+SOURCES = $(newlib_mod_SOURCES)
+DIST_SOURCES = $(newlib_mod_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -342,7 +342,7 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-ef_mod_SOURCES = ef_mod.c ${platform_src}
+newlib_mod_SOURCES = ef_mod.c ${platform_src}
 platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
 all: all-am
 
@@ -429,9 +429,9 @@ clean-binPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
-ef_mod$(EXEEXT): $(ef_mod_OBJECTS) $(ef_mod_DEPENDENCIES) $(EXTRA_ef_mod_DEPENDENCIES) 
-	@rm -f ef_mod$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(ef_mod_OBJECTS) $(ef_mod_LDADD) $(LIBS)
+newlib-mod$(EXEEXT): $(newlib_mod_OBJECTS) $(newlib_mod_DEPENDENCIES) $(EXTRA_newlib_mod_DEPENDENCIES) 
+	@rm -f newlib-mod$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(newlib_mod_OBJECTS) $(newlib_mod_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

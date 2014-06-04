@@ -33,9 +33,9 @@
 # files, so they go into the distribution. If there are other files that are
 # needed, they should go in EXTRA_SOURCES.
 
-bin_PROGRAMS=listinsertsort1
-listinsertsort1_SOURCES=listinsertsort1.c sglib.h
+bin_PROGRAMS=sglib-listinsertsort1
+sglib_listinsertsort1_SOURCES=listinsertsort1.c sglib.h
 
 include $(top_srcdir)/src/common.mk.am
 
-listinsertsort1_SOURCES += ${platform_src}
+sglib_listinsertsort1_SOURCES += ${platform_src}

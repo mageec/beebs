@@ -122,7 +122,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-bin_PROGRAMS = advance$(EXEEXT)
+bin_PROGRAMS = gdb-advance$(EXEEXT)
 DIST_COMMON = $(top_srcdir)/src/common.mk.am $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/build-aux/depcomp
 subdir = src/gdb-advance
@@ -140,9 +140,9 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__objects_1 = boardsupport.$(OBJEXT)
-am_advance_OBJECTS = advance.$(OBJEXT) $(am__objects_1)
-advance_OBJECTS = $(am_advance_OBJECTS)
-advance_LDADD = $(LDADD)
+am_gdb_advance_OBJECTS = advance.$(OBJEXT) $(am__objects_1)
+gdb_advance_OBJECTS = $(am_gdb_advance_OBJECTS)
+gdb_advance_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -181,8 +181,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(advance_SOURCES)
-DIST_SOURCES = $(advance_SOURCES)
+SOURCES = $(gdb_advance_SOURCES)
+DIST_SOURCES = $(gdb_advance_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -341,7 +341,7 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-advance_SOURCES = advance.c ${platform_src}
+gdb_advance_SOURCES = advance.c ${platform_src}
 platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
 all: all-am
 
@@ -428,9 +428,9 @@ clean-binPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
-advance$(EXEEXT): $(advance_OBJECTS) $(advance_DEPENDENCIES) $(EXTRA_advance_DEPENDENCIES) 
-	@rm -f advance$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(advance_OBJECTS) $(advance_LDADD) $(LIBS)
+gdb-advance$(EXEEXT): $(gdb_advance_OBJECTS) $(gdb_advance_DEPENDENCIES) $(EXTRA_gdb_advance_DEPENDENCIES) 
+	@rm -f gdb-advance$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(gdb_advance_OBJECTS) $(gdb_advance_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
