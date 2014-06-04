@@ -1,3 +1,8 @@
+2014-06-04  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* config/avr/chips/atmega328p/chip.cfg:  Add a comment about manually
+	setting -std=gnu99.
+
 2014-06-04  James Pallister  <james.pallister@bristol.ac.uk>
 	Added dummy boardsupport file so the suite will compile on x86_64
 
