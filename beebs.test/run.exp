@@ -1,0 +1,9 @@
+# This is the main test procedure for benchmarks.
+
+global benchmarks
+global objdir
+global srcdir
+
+foreach benchmark $benchmarks {
+  beebs_load "$objdir/src/$benchmark/$benchmark" ""
+}

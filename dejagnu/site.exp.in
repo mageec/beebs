@@ -1,0 +1,9 @@
+set benchmarks "@BENCHMARKS@"
+
+if ![info exists boards_dir] {
+  lappend boards_dir "$srcdir/dejagnu"
+} else {
+  set boards_dir "$srcdir/dejagnu"
+}
+lappend boards_dir "$srcdir/dejagnu/baseboards"
+lappend boards_dir "$srcdir/dejagnu/config"

@@ -20,7 +20,15 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+AUTOMAKE_OPTIONS=dejagnu
+
 SUBDIRS= $(BENCHMARKS_SUBDIRS)
 SUBDIRS+=src/template
 
 ACLOCAL_AMFLAGS= -I m4
+
+EXTRA_DEJAGNU_SITE_CONFIG = $(top_builddir)/dejagnu/site.exp
+
+EXTRA_DIST= beebs.test \
+            dejagnu \
+            config
