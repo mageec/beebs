@@ -48,6 +48,10 @@
 
 void InitSeed(void);
 int RandomInteger();
+void Initialize(double[]);
+void Calc_Sum_Mean(double[], double *, double *);
+void Calc_Var_Stddev(double[], double, double *, double *);
+void Calc_LinCorrCoef(double[], double[], double, double);
 
 
 /* Statistics Program:
@@ -69,9 +73,6 @@ int benchmark()
 #endif
 
    double MeanA, MeanB, VarA, VarB, StddevA, StddevB /*, Coef*/;
-   int ttime();
-   void Initialize(), Calc_Sum_Mean(), Calc_Var_Stddev();
-   void Calc_LinCorrCoef();
 
    InitSeed ();
 #ifdef POUT
@@ -113,9 +114,7 @@ void InitSeed ()
 }
 
 
-void Calc_Sum_Mean(Array, Sum, Mean)
-double Array[], *Sum;
-double *Mean;
+void Calc_Sum_Mean(double Array[], double *Sum, double *Mean)
 {
    int i;
 
@@ -126,15 +125,13 @@ double *Mean;
 }
 
 
-double Square(x)
-double x;
+double Square(double x)
 {
    return x*x;
 }
 
 
-void Calc_Var_Stddev(Array, Mean, Var, Stddev)
-double Array[], Mean, *Var, *Stddev;
+void Calc_Var_Stddev(double Array[], double Mean, double *Var, double *Stddev)
 {
    int i;
    double diffs;
@@ -147,8 +144,7 @@ double Array[], Mean, *Var, *Stddev;
 }
 
 
-void Calc_LinCorrCoef(ArrayA, ArrayB, MeanA, MeanB /*, Coef*/)
-double ArrayA[], ArrayB[], MeanA, MeanB /*, *Coef*/;
+void Calc_LinCorrCoef(double ArrayA[], double ArrayB[], double MeanA, double MeanB /*, Coef*/)
 {
    int i;
    double numerator, Aterm, Bterm;
@@ -167,8 +163,7 @@ double ArrayA[], ArrayB[], MeanA, MeanB /*, *Coef*/;
 
 
 
-void Initialize(Array)
-double Array[];
+void Initialize(double Array[])
 /*
  * Intializes the given array with random integers.
  */

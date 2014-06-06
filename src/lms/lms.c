@@ -85,8 +85,7 @@ int lms_rand()
   return (unsigned int)(next/65536) % 32768;
 }
 
-static float lms_log(r)
-float r;
+static float lms_log(float r)
 {
   return 4.5;
 }
@@ -100,8 +99,7 @@ static float lms_fabs(float n)
   return f;
 }
 
-static float lms_sqrt(val)
-float val;
+static float lms_sqrt(float val)
 {
   float x = val/10;
 
@@ -131,8 +129,7 @@ float val;
 }
 
 
-static float lms_sin(rad)
-float rad;
+static float lms_sin(float rad)
 {
   float app;
 

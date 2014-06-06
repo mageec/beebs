@@ -33,9 +33,9 @@
 int Array[MAXDIM], Seed;
 int factor;
 
+void BubbleSort(int[]);
 
-Initialize(Array)
-int Array[];
+void Initialize(int Array[])
 /*
  * Initializes given array with randomly generated integers.
  */
@@ -55,8 +55,7 @@ for (Index = 1; Index <= NUMELEMS; Index ++)
 
 
 
-BubbleSort(Array)
-int Array[];
+void BubbleSort(int Array[])
 /*
  * Sorts an array of integers of size NUMELEMS in ascending order.
  */

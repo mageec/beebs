@@ -88,8 +88,7 @@ float qurt_fabs(float n)
   return f;
 }
 
-float qurt_sqrt(val)
-float val;
+float qurt_sqrt(float val)
 {
   float x = val/10;
 
