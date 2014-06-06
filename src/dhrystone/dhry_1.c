@@ -33,8 +33,6 @@ char            Ch_1_Glob,
 int             Arr_1_Glob [20];
 int             Arr_2_Glob [20] [20];
 
-extern char     *malloc ();
-Enumeration     Func_1 ();
   /* forward declaration necessary since Enumeration may not simply be int */
 
 #ifndef REG
@@ -55,9 +53,18 @@ float           Microseconds,
                 Dhrystones_Per_Second;
 
 /* end of variables for time measurement */
+void Proc_1 (REG Rec_Pointer);
+void Proc_2 (One_Fifty *);
+void Proc_3 (Rec_Pointer *);
+void Proc_4 ();
+void Proc_5 ();
+void Proc_6 (Enumeration, Enumeration *);
+void Proc_7 (One_Fifty, One_Fifty, One_Fifty *);
+void Proc_8 (Arr_1_Dim, Arr_2_Dim, int, int);
+Enumeration Func_1 (Capital_Letter, Capital_Letter);
+Boolean Func_2 (Str_30, Str_30);
 
-
-main ()
+int main ()
 /*****/
 
   /* main program, corresponds to procedures        */
@@ -142,11 +149,7 @@ main ()
 }
 
 
-Proc_1 (Ptr_Val_Par)
-/******************/
-
-REG Rec_Pointer Ptr_Val_Par;
-    /* executed once */
+void Proc_1 (REG Rec_Pointer Ptr_Val_Par)
 {
   REG Rec_Pointer Next_Record = Ptr_Val_Par->Ptr_Comp;
                                         /* == Ptr_Glob_Next */
@@ -176,12 +179,10 @@ REG Rec_Pointer Ptr_Val_Par;
 } /* Proc_1 */
 
 
-Proc_2 (Int_Par_Ref)
+void Proc_2 (One_Fifty *Int_Par_Ref)
 /******************/
     /* executed once */
     /* *Int_Par_Ref == 1, becomes 4 */
-
-One_Fifty   *Int_Par_Ref;
 {
   One_Fifty  Int_Loc;
   Enumeration   Enum_Loc;
@@ -199,13 +200,10 @@ One_Fifty   *Int_Par_Ref;
 } /* Proc_2 */
 
 
-Proc_3 (Ptr_Ref_Par)
+void Proc_3 (Rec_Pointer *Ptr_Ref_Par)
 /******************/
     /* executed once */
     /* Ptr_Ref_Par becomes Ptr_Glob */
-
-Rec_Pointer *Ptr_Ref_Par;
-
 {
   if (Ptr_Glob != Null)
     /* then, executed */
@@ -214,7 +212,7 @@ Rec_Pointer *Ptr_Ref_Par;
 } /* Proc_3 */
 
 
-Proc_4 () /* without parameters */
+void Proc_4 () /* without parameters */
 /*******/
     /* executed once */
 {
@@ -226,7 +224,7 @@ Proc_4 () /* without parameters */
 } /* Proc_4 */
 
 
-Proc_5 () /* without parameters */
+void Proc_5 () /* without parameters */
 /*******/
     /* executed once */
 {

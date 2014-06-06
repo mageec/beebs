@@ -373,6 +373,8 @@
 /* General definitions: */
 
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
                 /* for strcpy, strcmp */
 
 #define Null 0
@@ -385,8 +387,8 @@ typedef int     One_Fifty;
 typedef char    Capital_Letter;
 typedef int     Boolean;
 typedef char    Str_30 [31];
-typedef int     Arr_1_Dim [50];
-typedef int     Arr_2_Dim [50] [50];
+typedef int     Arr_1_Dim [20];
+typedef int     Arr_2_Dim [20] [20];
 
 typedef struct record
     {

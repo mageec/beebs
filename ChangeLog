@@ -1,3 +1,15 @@
+2014-06-06  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* src/bsort100/bsort100.c: Remove K&R style functions.
+	* src/bubblesort/bubblesort.c: Likewise.
+	* src/dhrystone/dhry.h: Likewise.
+	* src/dhrystone/dhry_1.c: Likewise.
+	* src/dhrystone/dhry_2.c: Likewise.
+	* src/frac/frac.c: Likewise.
+	* src/lms/lms.c: Likewise.
+	* src/qurt/qurt.c: Likewise.
+	* src/st/st.c: Likewise.
+
 2014-07-09  George Field  <george.field@bristol.ac.uk>
 	Make stb_perlin self checking and fix some bugs, including array
 	out-of-bounds access. Adjusted SCALE_FACTOR to a reasonable timeframe.

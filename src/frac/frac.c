@@ -24,6 +24,7 @@
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#include <math.h>
 
 
 /* The following values are used to test for too small
@@ -37,9 +38,7 @@
 #define MIN 3.0e-10
 
 double
-frac(v, n, d, error)
-double v, error;
-int *n, *d;
+frac(double v, int *n, int *d, double error)
 {
     /*
       given a number, v, this function outputs two integers,
@@ -67,7 +66,7 @@ int *n, *d;
     */
 
     int D, N, t;
-    double epsilon, r, m, fabs();
+    double epsilon, r, m;
 
 
     if (v < MIN || v > MAX || error < 0.0)
