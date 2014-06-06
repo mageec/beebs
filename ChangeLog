@@ -1,3 +1,13 @@
+2014-06-06  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* config/avr/boards/shrimp/boardsupport.c (initialise_board): Call
+	PIN_INIT.
+	(start_trigger): Call PIN_SET.
+	(stop_trigger): Call PIN_CLEAR.
+	* config/avr/chips/atmega328p/chipsupport.h (PIN_INIT): New macro.
+	(PIN_SET): Likewise.
+	(PIN_CLEAR): Likewise.
+
 2014-06-04  Pierre Langlois  <pierre.langlois@embecosm.com>
 
 	* Makefile.am (AUTOMAKE_OPTIONS): Add dejagnu.
