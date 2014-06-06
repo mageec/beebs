@@ -1,5 +1,13 @@
 2014-06-06  Pierre Langlois  <pierre.langlois@embecosm.com>
 
+	* beebs.test/measure.exp: New test case for measuring.
+	* run-avr-measurement.sh: New script for easily running measurements of
+	all the benchmarks.
+	* tools/energytool.py: New python script for taking one measurement. It
+	relies on pyenergy.
+
+2014-06-06  Pierre Langlois  <pierre.langlois@embecosm.com>
+
 	* config/avr/boards/shrimp/boardsupport.c (initialise_board): Call
 	PIN_INIT.
 	(start_trigger): Call PIN_SET.
