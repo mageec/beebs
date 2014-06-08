@@ -1,3 +1,9 @@
+2014-06-08  James Pallister  <james.pallister@bristol.ac.uk>
+	Added the ability to load an architecture specific config file
+
+	* configure: Regenerated
+	* configure.ac: Load environment variables from config/ARCH/arch.cfg
+
 2014-05-22  James Pallister  <james.pallister@bristol.ac.uk>
 	Small changes to fix segfaulting benchmarks
 

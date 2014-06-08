@@ -55,6 +55,10 @@ if test -f $srcdir/config/$arch/chips/$chip/chipsupport.h; then
     AC_DEFINE([HAVE_CHIPSUPPORT_H], [1], [Chip support header is present])
 fi
 
+if test -f $srcdir/config/$arch/arch.cfg; then
+    source $srcdir/config/$arch/arch.cfg
+fi
+
 if test -f $srcdir/config/$arch/boards/$board/board.cfg; then
     source $srcdir/config/$arch/boards/$board/board.cfg
 fi
@@ -63,11 +67,11 @@ if test -f $srcdir/config/$arch/chips/$chip/chip.cfg; then
     source $srcdir/config/$arch/chips/$chip/chip.cfg
 fi
 
-AC_SUBST([AM_LDFLAGS], ["$CHIP_LDFLAGS $BOARD_LDFLAGS"])
-AC_SUBST([AM_CFLAGS], ["$CHIP_CFLAGS $BOARD_CFLAGS"])
+AC_SUBST([AM_LDFLAGS], ["$ARCH_LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"])
+AC_SUBST([AM_CFLAGS], ["$ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"])
 
-CFLAGS="$CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
-LDFLAGS="$LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"
+CFLAGS="$CFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
+LDFLAGS="$LDFLAGS $ARCH_LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"
 
 # Sometimes we need to have the CFLAGS and LDFLAGS set so that
 # the config test pass. We save them first so we can restore them later
