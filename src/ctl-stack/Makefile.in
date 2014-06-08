@@ -123,7 +123,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-bin_PROGRAMS = stack$(EXEEXT)
+bin_PROGRAMS = ctl-stack$(EXEEXT)
 DIST_COMMON = $(top_srcdir)/src/common.mk.am $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/build-aux/depcomp
 subdir = src/ctl-stack
@@ -141,9 +141,9 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__objects_1 = boardsupport.$(OBJEXT)
-am_stack_OBJECTS = stack.$(OBJEXT) $(am__objects_1)
-stack_OBJECTS = $(am_stack_OBJECTS)
-stack_LDADD = $(LDADD)
+am_ctl_stack_OBJECTS = stack.$(OBJEXT) $(am__objects_1)
+ctl_stack_OBJECTS = $(am_ctl_stack_OBJECTS)
+ctl_stack_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -182,8 +182,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(stack_SOURCES)
-DIST_SOURCES = $(stack_SOURCES)
+SOURCES = $(ctl_stack_SOURCES)
+DIST_SOURCES = $(ctl_stack_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -223,6 +223,7 @@ AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
+BENCHMARKS = @BENCHMARKS@
 BENCHMARKS_SUBDIRS = @BENCHMARKS_SUBDIRS@
 BOARD = @BOARD@
 CC = @CC@
@@ -342,7 +343,7 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-stack_SOURCES = stack.c ctl.h stack.h ${platform_src}
+ctl_stack_SOURCES = stack.c ctl.h stack.h ${platform_src}
 platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
 all: all-am
 
@@ -429,9 +430,9 @@ clean-binPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
-stack$(EXEEXT): $(stack_OBJECTS) $(stack_DEPENDENCIES) $(EXTRA_stack_DEPENDENCIES) 
-	@rm -f stack$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(stack_OBJECTS) $(stack_LDADD) $(LIBS)
+ctl-stack$(EXEEXT): $(ctl_stack_OBJECTS) $(ctl_stack_DEPENDENCIES) $(EXTRA_ctl_stack_DEPENDENCIES) 
+	@rm -f ctl-stack$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(ctl_stack_OBJECTS) $(ctl_stack_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

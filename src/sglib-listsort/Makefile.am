@@ -20,9 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=listsort
-listsort_SOURCES=listsort.c sglib.h
+bin_PROGRAMS=sglib-listsort
+sglib_listsort_SOURCES=listsort.c sglib.h
 
 include $(top_srcdir)/src/common.mk.am
 
-listsort_SOURCES += ${platform_src}
+sglib_listsort_SOURCES += ${platform_src}

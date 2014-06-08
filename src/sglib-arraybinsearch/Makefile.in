@@ -123,7 +123,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-bin_PROGRAMS = arraybinsearch$(EXEEXT)
+bin_PROGRAMS = sglib-arraybinsearch$(EXEEXT)
 DIST_COMMON = $(top_srcdir)/src/common.mk.am $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/build-aux/depcomp
 subdir = src/sglib-arraybinsearch
@@ -141,9 +141,10 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__objects_1 = boardsupport.$(OBJEXT)
-am_arraybinsearch_OBJECTS = arraybinsearch.$(OBJEXT) $(am__objects_1)
-arraybinsearch_OBJECTS = $(am_arraybinsearch_OBJECTS)
-arraybinsearch_LDADD = $(LDADD)
+am_sglib_arraybinsearch_OBJECTS = arraybinsearch.$(OBJEXT) \
+	$(am__objects_1)
+sglib_arraybinsearch_OBJECTS = $(am_sglib_arraybinsearch_OBJECTS)
+sglib_arraybinsearch_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -182,8 +183,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(arraybinsearch_SOURCES)
-DIST_SOURCES = $(arraybinsearch_SOURCES)
+SOURCES = $(sglib_arraybinsearch_SOURCES)
+DIST_SOURCES = $(sglib_arraybinsearch_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -223,6 +224,7 @@ AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
+BENCHMARKS = @BENCHMARKS@
 BENCHMARKS_SUBDIRS = @BENCHMARKS_SUBDIRS@
 BOARD = @BOARD@
 CC = @CC@
@@ -342,7 +344,8 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-arraybinsearch_SOURCES = arraybinsearch.c sglib.h ${platform_src}
+sglib_arraybinsearch_SOURCES = arraybinsearch.c sglib.h \
+	${platform_src}
 platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
 all: all-am
 
@@ -429,9 +432,9 @@ clean-binPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
-arraybinsearch$(EXEEXT): $(arraybinsearch_OBJECTS) $(arraybinsearch_DEPENDENCIES) $(EXTRA_arraybinsearch_DEPENDENCIES) 
-	@rm -f arraybinsearch$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(arraybinsearch_OBJECTS) $(arraybinsearch_LDADD) $(LIBS)
+sglib-arraybinsearch$(EXEEXT): $(sglib_arraybinsearch_OBJECTS) $(sglib_arraybinsearch_DEPENDENCIES) $(EXTRA_sglib_arraybinsearch_DEPENDENCIES) 
+	@rm -f sglib-arraybinsearch$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(sglib_arraybinsearch_OBJECTS) $(sglib_arraybinsearch_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

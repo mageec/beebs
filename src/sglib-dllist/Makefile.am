@@ -20,9 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=dllist
-dllist_SOURCES=dllist.c sglib.h
+bin_PROGRAMS=sglib-dllist
+sglib_dllist_SOURCES=dllist.c sglib.h
 
 include $(top_srcdir)/src/common.mk.am
 
-dllist_SOURCES += ${platform_src}
+sglib_dllist_SOURCES += ${platform_src}

@@ -19,9 +19,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=anon
-anon_SOURCES=anon.c
+bin_PROGRAMS=gdb-anon
+gdb_anon_SOURCES=anon.c
 
 include $(top_srcdir)/src/common.mk.am
 
-anon_SOURCES += ${platform_src}
+gdb_anon_SOURCES += ${platform_src}

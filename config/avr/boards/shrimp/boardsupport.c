@@ -3,16 +3,15 @@
 
 void initialise_board()
 {
-  DDRC |= _BV(DDC0);
-  PORTC &= ~_BV(PORTC0);
+  PIN_INIT(C, 0);
 }
 
 void start_trigger()
 {
-  PORTC |= _BV(PORTC0);
+  PIN_SET(C, 0);
 }
 
 void stop_trigger()
 {
-  PORTC &= ~_BV(PORTC0);
+  PIN_CLEAR(C, 0);
 }

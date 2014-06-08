@@ -210,11 +210,13 @@ m4_foreach([benchmark], [benchmarklist], [
     fi
 ])
 
+AC_SUBST(BENCHMARKS,$BENCHMARKS)
 AC_SUBST(BENCHMARKS_SUBDIRS,$BENCHMARKS_SUBDIRS)
 
 AC_CONFIG_SRCDIR([src/])
 AC_CONFIG_HEADERS([config.h])
 
+AC_CONFIG_FILES([dejagnu/site.exp])
 AC_CONFIG_FILES([src/template/Makefile])
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

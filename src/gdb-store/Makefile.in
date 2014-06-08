@@ -123,7 +123,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-bin_PROGRAMS = store$(EXEEXT)
+bin_PROGRAMS = gdb-store$(EXEEXT)
 DIST_COMMON = $(top_srcdir)/src/common.mk.am $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/build-aux/depcomp
 subdir = src/gdb-store
@@ -141,9 +141,9 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__objects_1 = boardsupport.$(OBJEXT)
-am_store_OBJECTS = store.$(OBJEXT) $(am__objects_1)
-store_OBJECTS = $(am_store_OBJECTS)
-store_LDADD = $(LDADD)
+am_gdb_store_OBJECTS = store.$(OBJEXT) $(am__objects_1)
+gdb_store_OBJECTS = $(am_gdb_store_OBJECTS)
+gdb_store_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -182,8 +182,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(store_SOURCES)
-DIST_SOURCES = $(store_SOURCES)
+SOURCES = $(gdb_store_SOURCES)
+DIST_SOURCES = $(gdb_store_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -223,6 +223,7 @@ AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
+BENCHMARKS = @BENCHMARKS@
 BENCHMARKS_SUBDIRS = @BENCHMARKS_SUBDIRS@
 BOARD = @BOARD@
 CC = @CC@
@@ -342,7 +343,7 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-store_SOURCES = store.c ${platform_src}
+gdb_store_SOURCES = store.c ${platform_src}
 platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
 all: all-am
 
@@ -429,9 +430,9 @@ clean-binPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
-store$(EXEEXT): $(store_OBJECTS) $(store_DEPENDENCIES) $(EXTRA_store_DEPENDENCIES) 
-	@rm -f store$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(store_OBJECTS) $(store_LDADD) $(LIBS)
+gdb-store$(EXEEXT): $(gdb_store_OBJECTS) $(gdb_store_DEPENDENCIES) $(EXTRA_gdb_store_DEPENDENCIES) 
+	@rm -f gdb-store$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(gdb_store_OBJECTS) $(gdb_store_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

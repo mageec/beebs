@@ -637,6 +637,7 @@ am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
 BENCHMARKS_SUBDIRS
+BENCHMARKS
 CROSS_COMPILER_CHECK
 am__fastdepCCAS_FALSE
 am__fastdepCCAS_TRUE
@@ -12623,12 +12624,16 @@ BENCHMARKS_SUBDIRS=""
     fi
 
 
+BENCHMARKS=$BENCHMARKS
+
 BENCHMARKS_SUBDIRS=$BENCHMARKS_SUBDIRS
 
 
 
 ac_config_headers="$ac_config_headers config.h"
 
+
+ac_config_files="$ac_config_files dejagnu/site.exp"
 
 ac_config_files="$ac_config_files src/template/Makefile"
 
@@ -13735,6 +13740,7 @@ do
     "src/wikisort/Makefile") CONFIG_FILES="$CONFIG_FILES src/wikisort/Makefile" ;;
     "src/whetstone/Makefile") CONFIG_FILES="$CONFIG_FILES src/whetstone/Makefile" ;;
     "config.h") CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
+    "dejagnu/site.exp") CONFIG_FILES="$CONFIG_FILES dejagnu/site.exp" ;;
     "src/template/Makefile") CONFIG_FILES="$CONFIG_FILES src/template/Makefile" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
 

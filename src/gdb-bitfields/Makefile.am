@@ -20,9 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=bitfields
-bitfields_SOURCES=bitfields.c
+bin_PROGRAMS=gdb-bitfields
+gdb_bitfields_SOURCES=bitfields.c
 
 include $(top_srcdir)/src/common.mk.am
 
-bitfields_SOURCES += ${platform_src}
+gdb_bitfields_SOURCES += ${platform_src}

@@ -123,7 +123,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-bin_PROGRAMS = string$(EXEEXT)
+bin_PROGRAMS = ctl-string$(EXEEXT)
 DIST_COMMON = $(top_srcdir)/src/common.mk.am $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/build-aux/depcomp
 subdir = src/ctl-string
@@ -141,9 +141,9 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__objects_1 = boardsupport.$(OBJEXT)
-am_string_OBJECTS = string.$(OBJEXT) $(am__objects_1)
-string_OBJECTS = $(am_string_OBJECTS)
-string_LDADD = $(LDADD)
+am_ctl_string_OBJECTS = string.$(OBJEXT) $(am__objects_1)
+ctl_string_OBJECTS = $(am_ctl_string_OBJECTS)
+ctl_string_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -182,8 +182,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(string_SOURCES)
-DIST_SOURCES = $(string_SOURCES)
+SOURCES = $(ctl_string_SOURCES)
+DIST_SOURCES = $(ctl_string_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -223,6 +223,7 @@ AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
+BENCHMARKS = @BENCHMARKS@
 BENCHMARKS_SUBDIRS = @BENCHMARKS_SUBDIRS@
 BOARD = @BOARD@
 CC = @CC@
@@ -342,7 +343,7 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-string_SOURCES = string.c ${platform_src}
+ctl_string_SOURCES = string.c ${platform_src}
 platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
 all: all-am
 
@@ -429,9 +430,9 @@ clean-binPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
-string$(EXEEXT): $(string_OBJECTS) $(string_DEPENDENCIES) $(EXTRA_string_DEPENDENCIES) 
-	@rm -f string$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(string_OBJECTS) $(string_LDADD) $(LIBS)
+ctl-string$(EXEEXT): $(ctl_string_OBJECTS) $(ctl_string_DEPENDENCIES) $(EXTRA_ctl_string_DEPENDENCIES) 
+	@rm -f ctl-string$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(ctl_string_OBJECTS) $(ctl_string_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

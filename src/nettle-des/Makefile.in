@@ -123,7 +123,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-bin_PROGRAMS = des$(EXEEXT)
+bin_PROGRAMS = nettle-des$(EXEEXT)
 DIST_COMMON = $(top_srcdir)/src/common.mk.am $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/build-aux/depcomp
 subdir = src/nettle-des
@@ -141,9 +141,9 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__objects_1 = boardsupport.$(OBJEXT)
-am_des_OBJECTS = des.$(OBJEXT) $(am__objects_1)
-des_OBJECTS = $(am_des_OBJECTS)
-des_LDADD = $(LDADD)
+am_nettle_des_OBJECTS = des.$(OBJEXT) $(am__objects_1)
+nettle_des_OBJECTS = $(am_nettle_des_OBJECTS)
+nettle_des_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -182,8 +182,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(des_SOURCES)
-DIST_SOURCES = $(des_SOURCES)
+SOURCES = $(nettle_des_SOURCES)
+DIST_SOURCES = $(nettle_des_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -223,6 +223,7 @@ AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
+BENCHMARKS = @BENCHMARKS@
 BENCHMARKS_SUBDIRS = @BENCHMARKS_SUBDIRS@
 BOARD = @BOARD@
 CC = @CC@
@@ -342,7 +343,7 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-des_SOURCES = des.c rotors.h keymap.h desCode.h ${platform_src}
+nettle_des_SOURCES = des.c rotors.h keymap.h desCode.h ${platform_src}
 EXTRA_DIST = descore.README
 platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
 all: all-am
@@ -430,9 +431,9 @@ clean-binPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
-des$(EXEEXT): $(des_OBJECTS) $(des_DEPENDENCIES) $(EXTRA_des_DEPENDENCIES) 
-	@rm -f des$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(des_OBJECTS) $(des_LDADD) $(LIBS)
+nettle-des$(EXEEXT): $(nettle_des_OBJECTS) $(nettle_des_DEPENDENCIES) $(EXTRA_nettle_des_DEPENDENCIES) 
+	@rm -f nettle-des$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(nettle_des_OBJECTS) $(nettle_des_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

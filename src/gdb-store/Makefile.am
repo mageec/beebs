@@ -20,9 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=store
-store_SOURCES=store.c
+bin_PROGRAMS=gdb-store
+gdb_store_SOURCES=store.c
 
 include $(top_srcdir)/src/common.mk.am
 
-store_SOURCES += ${platform_src}
+gdb_store_SOURCES += ${platform_src}

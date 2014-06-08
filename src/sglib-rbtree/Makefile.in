@@ -123,7 +123,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-bin_PROGRAMS = rbtree$(EXEEXT)
+bin_PROGRAMS = sglib-rbtree$(EXEEXT)
 DIST_COMMON = $(top_srcdir)/src/common.mk.am $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/build-aux/depcomp
 subdir = src/sglib-rbtree
@@ -141,9 +141,9 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__objects_1 = boardsupport.$(OBJEXT)
-am_rbtree_OBJECTS = rbtree.$(OBJEXT) $(am__objects_1)
-rbtree_OBJECTS = $(am_rbtree_OBJECTS)
-rbtree_LDADD = $(LDADD)
+am_sglib_rbtree_OBJECTS = rbtree.$(OBJEXT) $(am__objects_1)
+sglib_rbtree_OBJECTS = $(am_sglib_rbtree_OBJECTS)
+sglib_rbtree_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -182,8 +182,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(rbtree_SOURCES)
-DIST_SOURCES = $(rbtree_SOURCES)
+SOURCES = $(sglib_rbtree_SOURCES)
+DIST_SOURCES = $(sglib_rbtree_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -223,6 +223,7 @@ AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
+BENCHMARKS = @BENCHMARKS@
 BENCHMARKS_SUBDIRS = @BENCHMARKS_SUBDIRS@
 BOARD = @BOARD@
 CC = @CC@
@@ -342,7 +343,7 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-rbtree_SOURCES = rbtree.c ${platform_src}
+sglib_rbtree_SOURCES = rbtree.c ${platform_src}
 platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
 all: all-am
 
@@ -429,9 +430,9 @@ clean-binPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
-rbtree$(EXEEXT): $(rbtree_OBJECTS) $(rbtree_DEPENDENCIES) $(EXTRA_rbtree_DEPENDENCIES) 
-	@rm -f rbtree$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(rbtree_OBJECTS) $(rbtree_LDADD) $(LIBS)
+sglib-rbtree$(EXEEXT): $(sglib_rbtree_OBJECTS) $(sglib_rbtree_DEPENDENCIES) $(EXTRA_sglib_rbtree_DEPENDENCIES) 
+	@rm -f sglib-rbtree$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(sglib_rbtree_OBJECTS) $(sglib_rbtree_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
