@@ -212,12 +212,7 @@ CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
-AM_CFLAGS = -I $(top_srcdir)/include \
-		  -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@/ \
-		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/
-
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
-AM_LDFLAGS = @AM_LDFLAGS@
 AR = @AR@
 ARCH = @ARCH@
 AUTOCONF = @AUTOCONF@
@@ -234,6 +229,8 @@ CCASFLAGS = @CCASFLAGS@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CHIP = @CHIP@
+CONFIG_CFLAGS = @CONFIG_CFLAGS@
+CONFIG_LDFLAGS = @CONFIG_LDFLAGS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CROSS_COMPILER_CHECK = @CROSS_COMPILER_CHECK@
@@ -347,6 +344,12 @@ top_srcdir = @top_srcdir@
 stringsearch1_SOURCES = stringsearch1.c fast.fwd.inc.c fast.rev.d12.c \
 	${platform_src}
 platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
+AM_CFLAGS = -I $(top_srcdir)/include \
+		  -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@/ \
+		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/ \
+		  @CONFIG_CFLAGS@
+
+AM_LDFLAGS = @CONFIG_LDFLAGS@
 all: all-am
 
 .SUFFIXES:
