@@ -22,6 +22,10 @@
 
 platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
 
+if CHIPSUPPORT_C
+platform_src += $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
+endif
+
 AM_CFLAGS=-I $(top_srcdir)/include \
 		  -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@/ \
 		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/

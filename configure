@@ -713,6 +713,8 @@ INSTALL_PROGRAM
 CHIP
 BOARD
 ARCH
+CHIPSUPPORT_C_FALSE
+CHIPSUPPORT_C_TRUE
 EXCLUDED_BENCHMARKS
 target_os
 target_vendor
@@ -2378,6 +2380,14 @@ fi
 if test -f $srcdir/config/$arch/chips/$chip/chip.cfg; then
     source $srcdir/config/$arch/chips/$chip/chip.cfg
 fi
+ if test -f $srcdir/config/$arch/chips/$chip/chipsupport.c; then
+  CHIPSUPPORT_C_TRUE=
+  CHIPSUPPORT_C_FALSE='#'
+else
+  CHIPSUPPORT_C_TRUE='#'
+  CHIPSUPPORT_C_FALSE=
+fi
+
 
 if test -f $srcdir/config/$arch/boards/$board/boardsupport.h; then
 
@@ -12743,6 +12753,10 @@ LTLIBOBJS=$ac_ltlibobjs
 
 if test -z "${MAINTAINER_MODE_TRUE}" && test -z "${MAINTAINER_MODE_FALSE}"; then
   as_fn_error $? "conditional \"MAINTAINER_MODE\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${CHIPSUPPORT_C_TRUE}" && test -z "${CHIPSUPPORT_C_FALSE}"; then
+  as_fn_error $? "conditional \"CHIPSUPPORT_C\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking that generated files are newer than configure" >&5

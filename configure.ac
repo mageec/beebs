@@ -64,6 +64,7 @@ fi
 if test -f $srcdir/config/$arch/chips/$chip/chip.cfg; then
     source $srcdir/config/$arch/chips/$chip/chip.cfg
 fi
+AM_CONDITIONAL([CHIPSUPPORT_C], [test -f $srcdir/config/$arch/chips/$chip/chipsupport.c])
 
 if test -f $srcdir/config/$arch/boards/$board/boardsupport.h; then
     AC_DEFINE([HAVE_BOARDSUPPORT_H], [1], [Board support header is present])

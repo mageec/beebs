@@ -126,6 +126,7 @@ target_triplet = @target@
 bin_PROGRAMS = fft$(EXEEXT)
 DIST_COMMON = $(top_srcdir)/src/common.mk.am $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/build-aux/depcomp
+@CHIPSUPPORT_C_TRUE@am__append_1 = $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
 subdir = src/fft
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
@@ -140,8 +141,12 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am__objects_1 = boardsupport.$(OBJEXT)
-am_fft_OBJECTS = fft1.$(OBJEXT) $(am__objects_1)
+am__fft_SOURCES_DIST = fft1.c \
+	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
+	$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
+@CHIPSUPPORT_C_TRUE@am__objects_1 = chipsupport.$(OBJEXT)
+am__objects_2 = boardsupport.$(OBJEXT) $(am__objects_1)
+am_fft_OBJECTS = fft1.$(OBJEXT) $(am__objects_2)
 fft_OBJECTS = $(am_fft_OBJECTS)
 fft_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -186,7 +191,7 @@ am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(fft_SOURCES)
-DIST_SOURCES = $(fft_SOURCES)
+DIST_SOURCES = $(am__fft_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -343,7 +348,9 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 fft_SOURCES = fft1.c ${platform_src}
 fft_LDFLAGS = "-lm"
-platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
+platform_src =  \
+	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
+	$(am__append_1)
 AM_CFLAGS = -I $(top_srcdir)/include \
 		  -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@/ \
 		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/
@@ -444,6 +451,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/boardsupport.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chipsupport.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fft1.Po@am__quote@
 
 .c.o:
@@ -480,6 +488,20 @@ boardsupport.obj: $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c' object='boardsupport.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o boardsupport.obj `if test -f '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; then $(CYGPATH_W) '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; fi`
+
+chipsupport.o: $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT chipsupport.o -MD -MP -MF $(DEPDIR)/chipsupport.Tpo -c -o chipsupport.o `test -f '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c' || echo '$(srcdir)/'`$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/chipsupport.Tpo $(DEPDIR)/chipsupport.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c' object='chipsupport.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o chipsupport.o `test -f '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c' || echo '$(srcdir)/'`$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
+
+chipsupport.obj: $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT chipsupport.obj -MD -MP -MF $(DEPDIR)/chipsupport.Tpo -c -o chipsupport.obj `if test -f '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; then $(CYGPATH_W) '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/chipsupport.Tpo $(DEPDIR)/chipsupport.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c' object='chipsupport.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o chipsupport.obj `if test -f '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; then $(CYGPATH_W) '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
