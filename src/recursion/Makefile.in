@@ -228,8 +228,6 @@ CCASFLAGS = @CCASFLAGS@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CHIP = @CHIP@
-CONFIG_CFLAGS = @CONFIG_CFLAGS@
-CONFIG_LDFLAGS = @CONFIG_LDFLAGS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CROSS_COMPILER_CHECK = @CROSS_COMPILER_CHECK@
@@ -344,10 +342,8 @@ recursion_SOURCES = recursion.c ${platform_src}
 platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
 AM_CFLAGS = -I $(top_srcdir)/include \
 		  -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@/ \
-		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/ \
-		  @CONFIG_CFLAGS@
+		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/
 
-AM_LDFLAGS = @CONFIG_LDFLAGS@
 all: all-am
 
 .SUFFIXES:
