@@ -40,13 +40,30 @@ arch=$target_cpu
 board=$with_board
 chip=$with_chip
 
-AC_SUBST(ARCH, $arch)
-AC_SUBST(BOARD, $board)
-AC_SUBST(CHIP, $chip)
-
 # Some platforms cannot compile certain benchmarks, so we exclude them
 # from the build
 AC_ARG_VAR(EXCLUDED_BENCHMARKS, exclude benchmarks from the build)
+
+if test -f $srcdir/config/$arch/arch.cfg; then
+    source $srcdir/config/$arch/arch.cfg
+fi
+
+if ! test -d $srcdir/config/$arch/boards/$board; then
+    AC_MSG_ERROR([Config directory for board "$board" does not exist])
+fi
+
+if test -f $srcdir/config/$arch/boards/$board/board.cfg; then
+    source $srcdir/config/$arch/boards/$board/board.cfg
+fi
+
+
+if ! test -d $srcdir/config/$arch/chips/$chip; then
+    AC_MSG_ERROR([Config directory for chip "$chip" does not exist])
+fi
+
+if test -f $srcdir/config/$arch/chips/$chip/chip.cfg; then
+    source $srcdir/config/$arch/chips/$chip/chip.cfg
+fi
 
 if test -f $srcdir/config/$arch/boards/$board/boardsupport.h; then
     AC_DEFINE([HAVE_BOARDSUPPORT_H], [1], [Board support header is present])
@@ -55,17 +72,9 @@ if test -f $srcdir/config/$arch/chips/$chip/chipsupport.h; then
     AC_DEFINE([HAVE_CHIPSUPPORT_H], [1], [Chip support header is present])
 fi
 
-if test -f $srcdir/config/$arch/arch.cfg; then
-    source $srcdir/config/$arch/arch.cfg
-fi
-
-if test -f $srcdir/config/$arch/boards/$board/board.cfg; then
-    source $srcdir/config/$arch/boards/$board/board.cfg
-fi
-
-if test -f $srcdir/config/$arch/chips/$chip/chip.cfg; then
-    source $srcdir/config/$arch/chips/$chip/chip.cfg
-fi
+AC_SUBST(ARCH, $arch)
+AC_SUBST(BOARD, $board)
+AC_SUBST(CHIP, $chip)
 
 AC_SUBST([CONFIG_LDFLAGS], ["$ARCH_LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"])
 AC_SUBST([CONFIG_CFLAGS], ["$ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"])
@@ -225,8 +234,8 @@ echo
 echo \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 echo
 echo "Target arch                   $arch"
-echo "Target board                  $with_board"
-echo "Target chip                   $with_chip"
+echo "Target board                  $board"
+echo "Target chip                   $chip"
 echo "Target triple                 $target"
 
 if test "x$EXCLUDED_BENCHMARKS" == x ; then

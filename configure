@@ -712,10 +712,10 @@ INSTALL_SCRIPT
 INSTALL_PROGRAM
 CONFIG_CFLAGS
 CONFIG_LDFLAGS
-EXCLUDED_BENCHMARKS
 CHIP
 BOARD
 ARCH
+EXCLUDED_BENCHMARKS
 target_os
 target_vendor
 target_cpu
@@ -2356,16 +2356,30 @@ arch=$target_cpu
 board=$with_board
 chip=$with_chip
 
-ARCH=$arch
-
-BOARD=$board
-
-CHIP=$chip
-
-
 # Some platforms cannot compile certain benchmarks, so we exclude them
 # from the build
 
+
+if test -f $srcdir/config/$arch/arch.cfg; then
+    source $srcdir/config/$arch/arch.cfg
+fi
+
+if ! test -d $srcdir/config/$arch/boards/$board; then
+    as_fn_error $? "Config directory for board \"$board\" does not exist" "$LINENO" 5
+fi
+
+if test -f $srcdir/config/$arch/boards/$board/board.cfg; then
+    source $srcdir/config/$arch/boards/$board/board.cfg
+fi
+
+
+if ! test -d $srcdir/config/$arch/chips/$chip; then
+    as_fn_error $? "Config directory for chip \"$chip\" does not exist" "$LINENO" 5
+fi
+
+if test -f $srcdir/config/$arch/chips/$chip/chip.cfg; then
+    source $srcdir/config/$arch/chips/$chip/chip.cfg
+fi
 
 if test -f $srcdir/config/$arch/boards/$board/boardsupport.h; then
 
@@ -2378,17 +2392,12 @@ $as_echo "#define HAVE_CHIPSUPPORT_H 1" >>confdefs.h
 
 fi
 
-if test -f $srcdir/config/$arch/arch.cfg; then
-    source $srcdir/config/$arch/arch.cfg
-fi
+ARCH=$arch
 
-if test -f $srcdir/config/$arch/boards/$board/board.cfg; then
-    source $srcdir/config/$arch/boards/$board/board.cfg
-fi
+BOARD=$board
 
-if test -f $srcdir/config/$arch/chips/$chip/chip.cfg; then
-    source $srcdir/config/$arch/chips/$chip/chip.cfg
-fi
+CHIP=$chip
+
 
 CONFIG_LDFLAGS="$ARCH_LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"
 
@@ -15104,8 +15113,8 @@ echo
 echo \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 echo
 echo "Target arch                   $arch"
-echo "Target board                  $with_board"
-echo "Target chip                   $with_chip"
+echo "Target board                  $board"
+echo "Target chip                   $chip"
 echo "Target triple                 $target"
 
 if test "x$EXCLUDED_BENCHMARKS" == x ; then

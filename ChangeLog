@@ -1,4 +1,16 @@
 2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Added the ability to specify default chips with a board.
+
+	* config/arm/boards/stm32f0discovery/board.cfg: If there is no chip
+	    specified on the command line, select the stm32f051
+	* config/arm/boards/stm32vldiscovery/board.cfg: If there is no chip
+	    specified on the command line, select the stm32f100
+	* configure: Regenerated
+	* configure.ac: Reordered the sourcing of the various cfg files, since
+	    this needs to happen before variables are substituted (board.cfg
+	    could modify $chip)
+
+2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
 	Added proper configuration for the STM32VLDISCOVERY and
 	STM32F0DISCOVERY boards, with example linkerscripts
 
