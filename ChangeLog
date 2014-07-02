@@ -1,3 +1,10 @@
+2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Properly save CFLAGS and LDFLAGS before running the configure checks
+
+	* configure: Regenerated
+	* configure.ac: Properly save CFLAGS and LDFLAGS before running the
+	    configure checks
+
 2014-06-11  James Pallister  <james.pallister@bristol.ac.uk>
 	Fixed the CFLAGS and LDFLAGS so that if custom flags are given to make
 	the do not wipe out the flags defined by the config
