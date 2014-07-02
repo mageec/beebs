@@ -1,4 +1,17 @@
 2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Added proper configuration for the STM32VLDISCOVERY and
+	STM32F0DISCOVERY boards, with example linkerscripts
+
+	* config/arm/chips/stm32f051/chip.cfg: Set the CFLAGS and LDFLAGS for
+	    this chip
+	* config/arm/chips/stm32f051/chip.ld: Example linkerscript specifying
+	    the memory regions for this chip
+	* config/arm/chips/stm32f100/chip.cfg: Set the CFLAGS and LDFLAGS for
+	    this chip
+	* config/arm/chips/stm32f100/chip.ld: Example linkerscript specifying
+	    the memory regions for this chip
+
+2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
 	Properly save CFLAGS and LDFLAGS before running the configure checks
 
 	* configure: Regenerated
