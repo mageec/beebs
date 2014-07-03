@@ -1,3 +1,11 @@
+2014-07-03  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* src/fdct/fdct.c: Use ANSI style comments and 80 column
+	throughout.  Correct expected value for block[12].  Add GPL header.
+	(void fdct): Use long int instead of int for all temporaries.
+	(int main): Use long int where needed.  Add check blocks for 1 and
+	4096 transformations and use where appropriate.
+
 2014-06-25  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	Added first version of documentation.
