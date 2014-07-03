@@ -6,6 +6,8 @@ MEMORY
 
 __stack = ORIGIN(ram) + LENGTH(ram);
 
+ENTRY(_mainCRTStartup)
+
 SECTIONS
 {
 
@@ -21,6 +23,7 @@ SECTIONS
 	__bss_start__ = ALIGN(0x8);
     __bss_start = .;
         *(.bss*)       /* Zero-filled run time allocate data memory */
+        *(COMMON)
 	__bss_end__ = .;
     __bss_end = .;
     end = .;
@@ -35,7 +38,9 @@ SECTIONS
         *(.data .data.*)      /* Data memory */
         __data_end__ = .;
         __data_end = .;
-    } >ram
+    } >ram AT >flash
+    _data_loadaddr = LOADADDR(.data);
+
 
     . = ALIGN(256);
 

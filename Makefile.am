@@ -2,7 +2,7 @@
 #
 #   Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
-#   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark 
+#   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark
 #   Suite.
 #
 #   Contributor: James Pallister <james.pallister@bristol.ac.uk>
@@ -20,20 +20,16 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-SUBDIRS=src/platformcode
+AUTOMAKE_OPTIONS=dejagnu
 
-SUBDIRS+= src/2dfir
-SUBDIRS+=src/blowfish
-SUBDIRS+=src/crc32
-SUBDIRS+=src/cubic
-SUBDIRS+=src/dijkstra
-SUBDIRS+=src/fdct
-SUBDIRS+=src/float_matmult
-SUBDIRS+=src/int_matmult
-SUBDIRS+=src/rijndael
-SUBDIRS+=src/sha
+SUBDIRS= $(BENCHMARKS_SUBDIRS)
 SUBDIRS+=src/template
-
-SUBDIRS+=analysis
+SUBDIRS+=doc
 
 ACLOCAL_AMFLAGS= -I m4
+
+EXTRA_DEJAGNU_SITE_CONFIG = $(top_builddir)/dejagnu/site.exp
+
+EXTRA_DIST= beebs.test \
+            dejagnu \
+            config

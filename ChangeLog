@@ -1,8 +1,2622 @@
+2014-07-03  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* src/fdct/fdct.c: Use ANSI style comments and 80 column
+	throughout.  Correct expected value for block[12].  Add GPL header.
+	(void fdct): Use long int instead of int for all temporaries.
+	(int main): Use long int where needed.  Add check blocks for 1 and
+	4096 transformations and use where appropriate.
+
+2014-06-25  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Added first version of documentation.
+
+	* INSTALL: Regenerated.
+	* Makefile.am: Add doc subdir
+	* Makefile.in: Regenerated.
+	* aclocal.m4: Regenerated.
+	* build-aux/config.guess: Regenerated.
+	* build-aux/config.sub: Regenerated.
+	* build-aux/depcomp: Regenerated.
+	* build-aux/ltmain.sh: Regenerated
+	* build-aux/missing: Regenerated.
+	* configure.ac: Add Makefile for doc subdir
+	* m4/libtool.m4: Regenerated.
+	* src/2dfir/Makefile.in: Regenerated.
+	* src/adpcm/Makefile.in: Regenerated.
+	* src/blowfish/Makefile.in: Regenerated.
+	* src/bs/Makefile.in: Regenerated.
+	* src/bsort100/Makefile.in: Regenerated.
+	* src/bubblesort/Makefile.in: Regenerated.
+	* src/cnt/Makefile.in: Regenerated.
+	* src/compress/Makefile.in: Regenerated.
+	* src/cover/Makefile.in: Regenerated.
+	* src/crc/Makefile.in: Regenerated.
+	* src/crc32/Makefile.in: Regenerated.
+	* src/ctl-stack/Makefile.in: Regenerated.
+	* src/ctl-string/Makefile.in: Regenerated.
+	* src/ctl-vector/Makefile.in: Regenerated.
+	* src/cubic/Makefile.in: Regenerated.
+	* src/dhrystone/Makefile.in: Regenerated.
+	* src/dijkstra/Makefile.in: Regenerated.
+	* doc/Makefile.am: Created.
+	* doc/Makefile.in: Generated.
+	* doc/beebs.info: Generated.
+	* doc/beebs.texi: Created.
+	* doc/config.texi: Created.
+	* doc/fdl-1.2.texi: Created.
+	* doc/texinfo.tex: Generated.
+	* doc/version.texi: Generated.
+	* src/dtoa/Makefile.in: Regenerated.
+	* src/duff/Makefile.in: Regenerated.
+	* src/edn/Makefile.in: Regenerated.
+	* src/expint/Makefile.in: Regenerated.
+	* src/fac/Makefile.in: Regenerated.
+	* src/fasta/Makefile.in: Regenerated.
+	* src/fdct/Makefile.in: Regenerated.
+	* src/fft/Makefile.in: Regenerated.
+	* src/fibcall/Makefile.in: Regenerated.
+	* src/fir/Makefile.in: Regenerated.
+	* src/float_matmult/Makefile.in: Regenerated.
+	* src/frac/Makefile.in: Regenerated.
+	* src/gdb-advance/Makefile.in: Regenerated.
+	* src/gdb-all-types/Makefile.in: Regenerated.
+	* src/gdb-anon/Makefile.in: Regenerated.
+	* src/gdb-arrayidx/Makefile.in: Regenerated.
+	* src/gdb-async/Makefile.in: Regenerated.
+	* src/gdb-bitfields/Makefile.in: Regenerated.
+	* src/gdb-constvars/Makefile.in: Regenerated.
+	* src/gdb-store/Makefile.in: Regenerated.
+	* src/huffbench/Makefile.in: Regenerated.
+	* src/insertsort/Makefile.in: Regenerated.
+	* src/int_matmult/Makefile.in: Regenerated.
+	* src/janne_complex/Makefile.in: Regenerated.
+	* src/jfdctint/Makefile.in: Regenerated.
+	* src/lcdnum/Makefile.in: Regenerated.
+	* src/levenshtein/Makefile.in: Regenerated.
+	* src/lms/Makefile.in: Regenerated.
+	* src/ludcmp/Makefile.in: Regenerated.
+	* src/mergesort/Makefile.in: Regenerated.
+	* src/miniz/Makefile.in: Regenerated.
+	* src/minver/Makefile.in: Regenerated.
+	* src/nbody/Makefile.in: Regenerated.
+	* src/ndes/Makefile.in: Regenerated.
+	* src/nettle-arcfour/Makefile.in: Regenerated.
+	* src/nettle-cast128/Makefile.in: Regenerated.
+	* src/nettle-des/Makefile.in: Regenerated.
+	* src/nettle-md5/Makefile.in: Regenerated.
+	* src/newlib-exp/Makefile.in: Regenerated.
+	* src/newlib-log/Makefile.in: Regenerated.
+	* src/newlib-mod/Makefile.in: Regenerated.
+	* src/newlib-sqrt/Makefile.in: Regenerated.
+	* src/ns/Makefile.in: Regenerated.
+	* src/nsichneu/Makefile.in: Regenerated.
+	* src/prime/Makefile.in: Regenerated.
+	* src/qsort/Makefile.in: Regenerated.
+	* src/qurt/Makefile.in: Regenerated.
+	* src/recursion/Makefile.in: Regenerated.
+	* src/rijndael/Makefile.in: Regenerated.
+	* src/select/Makefile.in: Regenerated.
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated.
+	* src/sglib-arraysort/Makefile.in: Regenerated.
+	* src/sglib-arraysort1/Makefile.in: Regenerated.
+	* src/sglib-dllist/Makefile.in: Regenerated.
+	* src/sglib-hashtable/Makefile.in: Regenerated.
+	* src/sglib-listinsertsort/Makefile.in: Regenerated.
+	* src/sglib-listinsertsort1/Makefile.in: Regenerated.
+	* src/sglib-listsort/Makefile.in: Regenerated.
+	* src/sglib-queue/Makefile.in: Regenerated.
+	* src/sglib-rbtree/Makefile.in: Regenerated.
+	* src/sha/Makefile.in: Regenerated.
+	* src/slre/Makefile.in: Regenerated.
+	* src/sqrt/Makefile.in: Regenerated.
+	* src/st/Makefile.in: Regenerated.
+	* src/statemate/Makefile.in: Regenerated.
+	* src/stringsearch1/Makefile.in: Regenerated.
+	* src/strstr/Makefile.in: Regenerated.
+	* src/tarai/Makefile.in: Regenerated.
+	* src/template/Makefile.in: Regenerated.
+	* src/ud/Makefile.in: Regenerated.
+	* src/whetstone/Makefile.in: Regenerated.
+	* src/wikisort/Makefile.in: Regenerated.
+
+
+2014-06-11  James Pallister  <james.pallister@bristol.ac.uk>
+
+	Fixed the CFLAGS and LDFLAGS so that if custom flags are given to make
+	the do not wipe out the flags defined by the config
+
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Config flags are now placed into CONFIG_CFLAGS and
+	    CONFIG_LDFLAGS for substitution into the Makefiles
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Use CONFIG_CFLAGS and CONFIG_LDFLAGS when
+	    constructing AM_CFLAGS and AM_LDFLAGS
+	* src/compress/Makefile.in: Regenerated
+	* src/cover/Makefile.in: Regenerated
+	* src/crc/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/ctl-stack/Makefile.in: Regenerated
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/ctl-vector/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dhrystone/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/dtoa/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/expint/Makefile.in: Regenerated
+	* src/fac/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fir/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/frac/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/gdb-bitfields/Makefile.in: Regenerated
+	* src/gdb-constvars/Makefile.in: Regenerated
+	* src/gdb-store/Makefile.in: Regenerated
+	* src/huffbench/Makefile.in: Regenerated
+	* src/insertsort/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/jfdctint/Makefile.in: Regenerated
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/levenshtein/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/ludcmp/Makefile.in: Regenerated
+	* src/mergesort/Makefile.in: Regenerated
+	* src/miniz/Makefile.in: Regenerated
+	* src/minver/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/ndes/Makefile.in: Regenerated
+	* src/nettle-arcfour/Makefile.in: Regenerated
+	* src/nettle-cast128/Makefile.in: Regenerated
+	* src/nettle-des/Makefile.in: Regenerated
+	* src/nettle-md5/Makefile.in: Regenerated
+	* src/newlib-exp/Makefile.in: Regenerated
+	* src/newlib-log/Makefile.in: Regenerated
+	* src/newlib-mod/Makefile.in: Regenerated
+	* src/newlib-sqrt/Makefile.in: Regenerated
+	* src/ns/Makefile.in: Regenerated
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/prime/Makefile.in: Regenerated
+	* src/qsort/Makefile.in: Regenerated
+	* src/qurt/Makefile.in: Regenerated
+	* src/recursion/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/select/Makefile.in: Regenerated
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated
+	* src/sglib-arraysort/Makefile.in: Regenerated
+	* src/sglib-arraysort1/Makefile.in: Regenerated
+	* src/sglib-dllist/Makefile.in: Regenerated
+	* src/sglib-hashtable/Makefile.in: Regenerated
+	* src/sglib-listinsertsort/Makefile.in: Regenerated
+	* src/sglib-listinsertsort1/Makefile.in: Regenerated
+	* src/sglib-listsort/Makefile.in: Regenerated
+	* src/sglib-queue/Makefile.in: Regenerated
+	* src/sglib-rbtree/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/slre/Makefile.in: Regenerated
+	* src/sqrt/Makefile.in: Regenerated
+	* src/st/Makefile.in: Regenerated
+	* src/statemate/Makefile.in: Regenerated
+	* src/stringsearch1/Makefile.in: Regenerated
+	* src/strstr/Makefile.in: Regenerated
+	* src/tarai/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+	* src/ud/Makefile.in: Regenerated
+	* src/whetstone/Makefile.in: Regenerated
+	* src/wikisort/Makefile.in: Regenerated
+
+2014-06-06  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* beebs.test/measure.exp: New test case for measuring.
+	* run-avr-measurement.sh: New script for easily running measurements of
+	all the benchmarks.
+	* tools/energytool.py: New python script for taking one measurement. It
+	relies on pyenergy.
+
+2014-06-06  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* config/avr/boards/shrimp/boardsupport.c (initialise_board): Call
+	PIN_INIT.
+	(start_trigger): Call PIN_SET.
+	(stop_trigger): Call PIN_CLEAR.
+	* config/avr/chips/atmega328p/chipsupport.h (PIN_INIT): New macro.
+	(PIN_SET): Likewise.
+	(PIN_CLEAR): Likewise.
+
+2014-06-04  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* Makefile.am (AUTOMAKE_OPTIONS): Add dejagnu.
+	(EXTRA_DEJAGNU_SITE_CONFIG): Add dejagnu/site.exp.
+	(EXTRA_DIST): Include the dejagnu scripts in the distribution.
+	* Makefile.in: Regenerate.
+	* beebs.test/run.exp: New file. This is the main run script.
+	* build-aux/compile: Import from automake.
+	* config/default.exp: New file. Needed for running BEEBS native.
+	* configure: Regenerate.
+	* configure.ac: Add BENCHMARKS as a substitute.
+	Add dejagnu/site.exp config file.
+	* dejagnu/baseboards/avr-avrdude.exp: New board file for avrdude.
+	* dejagnu/config/avrdude.exp: New config file for avrdude.
+	* dejagnu/site.exp.in: New template for EXTRA_DEJAGNU_SITE_CONFIG.
+	* src/2dfir/Makefile.in: Regenerate.
+	* src/adpcm/Makefile.in: Regenerate.
+	* src/blowfish/Makefile.in: Regenerate.
+	* src/bs/Makefile.in: Regenerate.
+	* src/bsort100/Makefile.in: Regenerate.
+	* src/bubblesort/Makefile.in: Regenerate.
+	* src/cnt/Makefile.in: Regenerate.
+	* src/compress/Makefile.in: Regenerate.
+	* src/cover/Makefile.in: Regenerate.
+	* src/crc/Makefile.in: Regenerate.
+	* src/crc32/Makefile.in: Regenerate.
+	* src/ctl-stack/Makefile.in: Regenerate.
+	* src/ctl-string/Makefile.in: Regenerate.
+	* src/ctl-vector/Makefile.in: Regenerate.
+	* src/cubic/Makefile.in: Regenerate.
+	* src/dhrystone/Makefile.in: Regenerate.
+	* src/dijkstra/Makefile.in: Regenerate.
+	* src/dtoa/Makefile.in: Regenerate.
+	* src/duff/Makefile.in: Regenerate.
+	* src/edn/Makefile.in: Regenerate.
+	* src/expint/Makefile.in: Regenerate.
+	* src/fac/Makefile.in: Regenerate.
+	* src/fasta/Makefile.in: Regenerate.
+	* src/fdct/Makefile.in: Regenerate.
+	* src/fft/Makefile.in: Regenerate.
+	* src/fibcall/Makefile.in: Regenerate.
+	* src/fir/Makefile.in: Regenerate.
+	* src/float_matmult/Makefile.in: Regenerate.
+	* src/frac/Makefile.in: Regenerate.
+	* src/gdb-advance/Makefile.in: Regenerate.
+	* src/gdb-all-types/Makefile.in: Regenerate.
+	* src/gdb-anon/Makefile.in: Regenerate.
+	* src/gdb-arrayidx/Makefile.in: Regenerate.
+	* src/gdb-async/Makefile.in: Regenerate.
+	* src/gdb-bitfields/Makefile.in: Regenerate.
+	* src/gdb-constvars/Makefile.in: Regenerate.
+	* src/gdb-store/Makefile.in: Regenerate.
+	* src/huffbench/Makefile.in: Regenerate.
+	* src/insertsort/Makefile.in: Regenerate.
+	* src/int_matmult/Makefile.in: Regenerate.
+	* src/janne_complex/Makefile.in: Regenerate.
+	* src/jfdctint/Makefile.in: Regenerate.
+	* src/lcdnum/Makefile.in: Regenerate.
+	* src/levenshtein/Makefile.in: Regenerate.
+	* src/lms/Makefile.in: Regenerate.
+	* src/ludcmp/Makefile.in: Regenerate.
+	* src/mergesort/Makefile.in: Regenerate.
+	* src/miniz/Makefile.in: Regenerate.
+	* src/minver/Makefile.in: Regenerate.
+	* src/nbody/Makefile.in: Regenerate.
+	* src/ndes/Makefile.in: Regenerate.
+	* src/nettle-arcfour/Makefile.in: Regenerate.
+	* src/nettle-cast128/Makefile.in: Regenerate.
+	* src/nettle-des/Makefile.in: Regenerate.
+	* src/nettle-md5/Makefile.in: Regenerate.
+	* src/newlib-exp/Makefile.in: Regenerate.
+	* src/newlib-log/Makefile.in: Regenerate.
+	* src/newlib-mod/Makefile.in: Regenerate.
+	* src/newlib-sqrt/Makefile.in: Regenerate.
+	* src/ns/Makefile.in: Regenerate.
+	* src/nsichneu/Makefile.in: Regenerate.
+	* src/prime/Makefile.in: Regenerate.
+	* src/qsort/Makefile.in: Regenerate.
+	* src/qurt/Makefile.in: Regenerate.
+	* src/recursion/Makefile.in: Regenerate.
+	* src/rijndael/Makefile.in: Regenerate.
+	* src/select/Makefile.in: Regenerate.
+	* src/sglib-arraybinsearch/Makefile.in: Regenerate.
+	* src/sglib-arraysort/Makefile.in: Regenerate.
+	* src/sglib-arraysort1/Makefile.in: Regenerate.
+	* src/sglib-dllist/Makefile.in: Regenerate.
+	* src/sglib-hashtable/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort1/Makefile.in: Regenerate.
+	* src/sglib-listsort/Makefile.in: Regenerate.
+	* src/sglib-queue/Makefile.in: Regenerate.
+	* src/sglib-rbtree/Makefile.in: Regenerate.
+	* src/sha/Makefile.in: Regenerate.
+	* src/slre/Makefile.in: Regenerate.
+	* src/sqrt/Makefile.in: Regenerate.
+	* src/st/Makefile.in: Regenerate.
+	* src/statemate/Makefile.in: Regenerate.
+	* src/stringsearch1/Makefile.in: Regenerate.
+	* src/strstr/Makefile.in: Regenerate.
+	* src/tarai/Makefile.in: Regenerate.
+	* src/template/Makefile.in: Regenerate.
+	* src/ud/Makefile.in: Regenerate.
+	* src/whetstone/Makefile.in: Regenerate.
+	* src/wikisort/Makefile.in: Regenerate.
+
+2014-06-04  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* src/ctl-stack/Makefile.am: Rename the executable according to the
+	directory name.
+	* src/ctl-stack/Makefile.in: Regenerate.
+	* src/ctl-string/Makefile.am: Likewise.
+	* src/ctl-string/Makefile.in: Regenerate.
+	* src/ctl-vector/Makefile.am: Likewise.
+	* src/ctl-vector/Makefile.in: Regenerate.
+	* src/gdb-advance/Makefile.am: Likewise.
+	* src/gdb-advance/Makefile.in: Regenerate.
+	* src/gdb-all-types/Makefile.am: Likewise.
+	* src/gdb-all-types/Makefile.in: Regenerate.
+	* src/gdb-anon/Makefile.am: Likewise.
+	* src/gdb-anon/Makefile.in: Regenerate.
+	* src/gdb-arrayidx/Makefile.am: Likewise.
+	* src/gdb-arrayidx/Makefile.in: Regenerate.
+	* src/gdb-async/Makefile.am: Likewise.
+	* src/gdb-async/Makefile.in: Regenerate.
+	* src/gdb-bitfields/Makefile.am: Likewise.
+	* src/gdb-bitfields/Makefile.in: Regenerate.
+	* src/gdb-constvars/Makefile.am: Likewise.
+	* src/gdb-constvars/Makefile.in: Regenerate.
+	* src/gdb-store/Makefile.am: Likewise.
+	* src/gdb-store/Makefile.in: Regenerate.
+	* src/nettle-arcfour/Makefile.am: Likewise.
+	* src/nettle-arcfour/Makefile.in: Regenerate.
+	* src/nettle-cast128/Makefile.am: Likewise.
+	* src/nettle-cast128/Makefile.in: Regenerate.
+	* src/nettle-des/Makefile.am: Likewise.
+	* src/nettle-des/Makefile.in: Regenerate.
+	* src/nettle-md5/Makefile.am: Likewise.
+	* src/nettle-md5/Makefile.in: Regenerate.
+	* src/newlib-exp/Makefile.am: Likewise.
+	* src/newlib-exp/Makefile.in: Regenerate.
+	* src/newlib-log/Makefile.am: Likewise.
+	* src/newlib-log/Makefile.in: Regenerate.
+	* src/newlib-mod/Makefile.am: Likewise.
+	* src/newlib-mod/Makefile.in: Regenerate.
+	* src/newlib-sqrt/Makefile.am: Likewise.
+	* src/newlib-sqrt/Makefile.in: Regenerate.
+	* src/sglib-arraybinsearch/Makefile.am: Likewise.
+	* src/sglib-arraybinsearch/Makefile.in: Regenerate.
+	* src/sglib-arraysort/Makefile.am: Likewise.
+	* src/sglib-arraysort/Makefile.in: Regenerate.
+	* src/sglib-arraysort1/Makefile.am: Likewise.
+	* src/sglib-arraysort1/Makefile.in: Regenerate.
+	* src/sglib-dllist/Makefile.am: Likewise.
+	* src/sglib-dllist/Makefile.in: Regenerate.
+	* src/sglib-hashtable/Makefile.am: Likewise.
+	* src/sglib-hashtable/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort/Makefile.am: Likewise.
+	* src/sglib-listinsertsort/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort1/Makefile.am: Likewise.
+	* src/sglib-listinsertsort1/Makefile.in: Regenerate.
+	* src/sglib-listsort/Makefile.am: Likewise.
+	* src/sglib-listsort/Makefile.in: Regenerate.
+	* src/sglib-queue/Makefile.am: Likewise.
+	* src/sglib-queue/Makefile.in: Regenerate.
+	* src/sglib-rbtree/Makefile.am: Likewise.
+	* src/sglib-rbtree/Makefile.in: Regenerate.
+
+2014-06-04  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* config/avr/chips/atmega328p/chip.cfg:  Add a comment about manually
+	setting -std=gnu99.
+
+2014-06-08  James Pallister  <james.pallister@bristol.ac.uk>
+	Added the ability to load an architecture specific config file
+
+	* configure: Regenerated
+	* configure.ac: Load environment variables from config/ARCH/arch.cfg
+
+2014-05-22  James Pallister  <james.pallister@bristol.ac.uk>
+	Small changes to fix segfaulting benchmarks
+
+	* gcc.beebs/bubblesort.c: Remove call to hardware specific memory
+	    address
+	* gcc.beebs/compress.c: Reduce HSIZE so that we don't overflow
+	* gcc.beebs/crc32.c: Temporarily remove check for output
+
+2014-06-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Added dummy boardsupport file so the suite will compile on x86_64
+
+	* config/x86_64/boards/none/boardsupport.c: Dummy boardsupport file
+	    which contains empty definitions
+
+2014-06-03  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* config/avr/boards/shrimp/boardsupport.c: Add trigger code.
+	* config/avr/chips/atmega328p/chip.cfg (CHIP_CFLAGS): Add
+	-std=gnu99.
+	(EXCLUDED_BENCHMARKS): Exclude adpcm and miniz benchmarks.
+
+2014-06-03  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* configure: Regenerate.
+	* configure.ac: Set CFLAGS and LDFLAGS before the config test.
+	Otherwise they get ignored.
+
+2014-06-03  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* Makefile.in: Regenerate.
+	* configure: Regenerate.
+	* configure.ac: Make EXCLUDED_BENCHMARKS an argument variable. This way
+	it shows up with `configure --help`.
+	* src/2dfir/Makefile.in: Regenerate.
+	* src/adpcm/Makefile.in: Regenerate.
+	* src/blowfish/Makefile.in: Regenerate.
+	* src/bs/Makefile.in: Regenerate.
+	* src/bsort100/Makefile.in: Regenerate.
+	* src/bubblesort/Makefile.in: Regenerate.
+	* src/cnt/Makefile.in: Regenerate.
+	* src/compress/Makefile.in: Regenerate.
+	* src/cover/Makefile.in: Regenerate.
+	* src/crc/Makefile.in: Regenerate.
+	* src/crc32/Makefile.in: Regenerate.
+	* src/ctl-stack/Makefile.in: Regenerate.
+	* src/ctl-string/Makefile.in: Regenerate.
+	* src/ctl-vector/Makefile.in: Regenerate.
+	* src/cubic/Makefile.in: Regenerate.
+	* src/dhrystone/Makefile.in: Regenerate.
+	* src/dijkstra/Makefile.in: Regenerate.
+	* src/dtoa/Makefile.in: Regenerate.
+	* src/duff/Makefile.in: Regenerate.
+	* src/edn/Makefile.in: Regenerate.
+	* src/expint/Makefile.in: Regenerate.
+	* src/fac/Makefile.in: Regenerate.
+	* src/fasta/Makefile.in: Regenerate.
+	* src/fdct/Makefile.in: Regenerate.
+	* src/fft/Makefile.in: Regenerate.
+	* src/fibcall/Makefile.in: Regenerate.
+	* src/fir/Makefile.in: Regenerate.
+	* src/float_matmult/Makefile.in: Regenerate.
+	* src/frac/Makefile.in: Regenerate.
+	* src/gdb-advance/Makefile.in: Regenerate.
+	* src/gdb-all-types/Makefile.in: Regenerate.
+	* src/gdb-anon/Makefile.in: Regenerate.
+	* src/gdb-arrayidx/Makefile.in: Regenerate.
+	* src/gdb-async/Makefile.in: Regenerate.
+	* src/gdb-bitfields/Makefile.in: Regenerate.
+	* src/gdb-constvars/Makefile.in: Regenerate.
+	* src/gdb-store/Makefile.in: Regenerate.
+	* src/huffbench/Makefile.in: Regenerate.
+	* src/insertsort/Makefile.in: Regenerate.
+	* src/int_matmult/Makefile.in: Regenerate.
+	* src/janne_complex/Makefile.in: Regenerate.
+	* src/jfdctint/Makefile.in: Regenerate.
+	* src/lcdnum/Makefile.in: Regenerate.
+	* src/levenshtein/Makefile.in: Regenerate.
+	* src/lms/Makefile.in: Regenerate.
+	* src/ludcmp/Makefile.in: Regenerate.
+	* src/mergesort/Makefile.in: Regenerate.
+	* src/miniz/Makefile.in: Regenerate.
+	* src/minver/Makefile.in: Regenerate.
+	* src/nbody/Makefile.in: Regenerate.
+	* src/ndes/Makefile.in: Regenerate.
+	* src/nettle-arcfour/Makefile.in: Regenerate.
+	* src/nettle-cast128/Makefile.in: Regenerate.
+	* src/nettle-des/Makefile.in: Regenerate.
+	* src/nettle-md5/Makefile.in: Regenerate.
+	* src/newlib-exp/Makefile.in: Regenerate.
+	* src/newlib-log/Makefile.in: Regenerate.
+	* src/newlib-mod/Makefile.in: Regenerate.
+	* src/newlib-sqrt/Makefile.in: Regenerate.
+	* src/ns/Makefile.in: Regenerate.
+	* src/nsichneu/Makefile.in: Regenerate.
+	* src/prime/Makefile.in: Regenerate.
+	* src/qsort/Makefile.in: Regenerate.
+	* src/qurt/Makefile.in: Regenerate.
+	* src/recursion/Makefile.in: Regenerate.
+	* src/rijndael/Makefile.in: Regenerate.
+	* src/select/Makefile.in: Regenerate.
+	* src/sglib-arraybinsearch/Makefile.in: Regenerate.
+	* src/sglib-arraysort/Makefile.in: Regenerate.
+	* src/sglib-arraysort1/Makefile.in: Regenerate.
+	* src/sglib-dllist/Makefile.in: Regenerate.
+	* src/sglib-hashtable/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort1/Makefile.in: Regenerate.
+	* src/sglib-listsort/Makefile.in: Regenerate.
+	* src/sglib-queue/Makefile.in: Regenerate.
+	* src/sglib-rbtree/Makefile.in: Regenerate.
+	* src/sha/Makefile.in: Regenerate.
+	* src/slre/Makefile.in: Regenerate.
+	* src/sqrt/Makefile.in: Regenerate.
+	* src/st/Makefile.in: Regenerate.
+	* src/statemate/Makefile.in: Regenerate.
+	* src/stringsearch1/Makefile.in: Regenerate.
+	* src/strstr/Makefile.in: Regenerate.
+	* src/tarai/Makefile.in: Regenerate.
+	* src/template/Makefile.in: Regenerate.
+	* src/ud/Makefile.in: Regenerate.
+	* src/whetstone/Makefile.in: Regenerate.
+	* src/wikisort/Makefile.in: Regenerate.
+
+2014-06-03  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* src/adpcm/adpcm.c: Change platformcode.h to support.h. Rename
+	initialise_trigger to initialise_board.
+	* src/blowfish/bf.c: Likewise.
+	* src/bs/bs.c: Likewise.
+	* src/bsort100/bsort100.c: Likewise.
+	* src/bubblesort/bubblesort.c: Likewise.
+	* src/cnt/cnt.c: Likewise.
+	* src/compress/compress.c: Likewise.
+	* src/cover/cover.c: Likewise.
+	* src/crc/crc.c: Likewise.
+	* src/crc32/crc_32.c: Likewise.
+	* src/ctl-stack/stack.c: Likewise.
+	* src/ctl-string/string.c: Likewise.
+	* src/ctl-vector/vector.c: Likewise.
+	* src/cubic/basicmath_small.c: Likewise.
+	* src/dhrystone/dhry_1.c: Likewise.
+	* src/dijkstra/dijkstra_small.c: Likewise.
+	* src/dtoa/dtoa.c: Likewise.
+	* src/duff/duff.c: Likewise.
+	* src/edn/edn.c: Likewise.
+	* src/expint/expint.c: Likewise.
+	* src/fac/fac.c: Likewise.
+	* src/fasta/fasta.c: Likewise.
+	* src/fdct/fdct.c: Likewise.
+	* src/fft/fft1.c: Likewise.
+	* src/fibcall/fibcall.c: Likewise.
+	* src/fir/fir.c: Likewise.
+	* src/float_matmult/matmult.c: Likewise.
+	* src/frac/frac.c: Likewise.
+	* src/gdb-advance/advance.c: Likewise.
+	* src/gdb-all-types/all-types.c: Likewise.
+	* src/gdb-anon/anon.c: Likewise.
+	* src/gdb-arrayidx/arrayidx.c: Likewise.
+	* src/gdb-async/async.c: Likewise.
+	* src/gdb-bitfields/bitfields.c: Likewise.
+	* src/gdb-constvars/constvars.c: Likewise.
+	* src/gdb-store/store.c: Likewise.
+	* src/huffbench/huffbench.c: Likewise.
+	* src/insertsort/insertsort.c: Likewise.
+	* src/int_matmult/matmult.c: Likewise.
+	* src/janne_complex/janne_complex.c: Likewise.
+	* src/jfdctint/jfdctint.c: Likewise.
+	* src/lcdnum/lcdnum.c: Likewise.
+	* src/levenshtein/levenshtein.c: Likewise.
+	* src/lms/lms.c: Likewise.
+	* src/ludcmp/ludcmp.c: Likewise.
+	* src/mergesort/mergesort.c: Likewise.
+	* src/miniz/miniz_b.c: Likewise.
+	* src/minver/minver.c: Likewise.
+	* src/nbody/nbody.c: Likewise.
+	* src/ndes/ndes.c: Likewise.
+	* src/nettle-arcfour/arcfour.c: Likewise.
+	* src/nettle-cast128/cast128.c: Likewise.
+	* src/nettle-des/des.c: Likewise.
+	* src/nettle-md5/md5.c: Likewise.
+	* src/newlib-exp/ef_exp.c: Likewise.
+	* src/newlib-log/ef_log.c: Likewise.
+	* src/newlib-mod/ef_mod.c: Likewise.
+	* src/newlib-sqrt/ef_sqrt.c: Likewise.
+	* src/ns/ns.c: Likewise.
+	* src/nsichneu/nsichneu.c: Likewise.
+	* src/prime/prime.c: Likewise.
+	* src/qsort/qsort.c: Likewise.
+	* src/qurt/qurt.c: Likewise.
+	* src/recursion/recursion.c: Likewise.
+	* src/rijndael/aesxam.c: Likewise.
+	* src/select/select.c: Likewise.
+	* src/sglib-arraybinsearch/arraybinsearch.c: Likewise.
+	* src/sglib-arraysort/arraysort.c: Likewise.
+	* src/sglib-arraysort1/arraysort1.c: Likewise.
+	* src/sglib-dllist/dllist.c: Likewise.
+	* src/sglib-hashtable/hashtable.c: Likewise.
+	* src/sglib-listinsertsort/listinsertsort.c: Likewise.
+	* src/sglib-listinsertsort1/listinsertsort1.c: Likewise.
+	* src/sglib-listsort/listsort.c: Likewise.
+	* src/sglib-queue/queue.c: Likewise.
+	* src/sglib-rbtree/rbtree.c: Likewise.
+	* src/sha/sha.c: Likewise.
+	* src/sha/sha_driver.c: Likewise.
+	* src/slre/slre.c: Likewise.
+	* src/sqrt/sqrt.c: Likewise.
+	* src/st/st.c: Likewise.
+	* src/statemate/statemate.c: Likewise.
+	* src/stringsearch1/stringsearch1.c: Likewise.
+	* src/strstr/strstr.c: Likewise.
+	* src/tarai/tarai.c: Likewise.
+	* src/template/template.c: Likewise.
+	* src/ud/ud.c: Likewise.
+	* src/whetstone/whetstone.c: Likewise.
+	* src/wikisort/wikisort.c: Likewise.
+
+2014-05-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Added support.h
+
+	* include/support.h: This file includes the respective chipsupport.h
+	    and boardsupport.h required to compile for the specified board and
+	    platform.
+
+2014-05-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Moved over to a new configuration architecture. The benchmark suite
+	can be configured on a chip or a board level, with custom CFLAGS, etc.
+	for each. Also there is set of headers and source for each board,
+	which replaces platform code. The chip configuration should expose
+	internals specific to the chip (through chipsupport.h) and the board
+	should use these, through boardsupport.c and boardsupport.h.
+
+	* Makefile.am: Removed old code. We just need the benchmark
+	    directories now
+	* Makefile.in: Regenerated
+	* config.h.in: Template for configure to generate, so that we know
+	    whether we have a boardspport.h or a chipsupport.h or both
+	* config/arm/boards/stm32f0discovery/boardsupport.c: Boardsupport file
+	    for stm32f0discovery
+	* config/arm/boards/stm32vldiscovery/boardsupport.c: Boardsupport file
+	    for stm32vldiscovery
+	* config/arm/chips/stm32f051/chip.cfg: Chip config for stm32f051
+	* config/arm/chips/stm32f051/chipsupport.h: Chip support header for
+	    stm32f051
+	* config/arm/chips/stm32f100/chip.cfg: Chip config for stm32f100
+	* config/arm/chips/stm32f100/chipsupport.h: Chip support header for
+	    stm32f100
+	* config/avr/boards/shrimp/boardsupport.c: Board support for shrimp
+	    (TODO)
+	* config/avr/chips/atmega328p/chip.cfg: Chip config for shrimp (TODO)
+	* configure: Regenerated
+	* configure.ac: Modified to use the new configuration structure
+	* src/2dfir/Makefile.in: Regenerated
+	* src/2dfir/fir2dim.c: Updated this benchmark to use the new headers
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Include the new header files, plus configuration
+	    header files
+	* src/compress/Makefile.in: Regenerated
+	* src/cover/Makefile.in: Regenerated
+	* src/crc/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/ctl-stack/Makefile.in: Regenerated
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/ctl-vector/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dhrystone/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/dtoa/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/expint/Makefile.in: Regenerated
+	* src/fac/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fir/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/frac/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/gdb-bitfields/Makefile.in: Regenerated
+	* src/gdb-constvars/Makefile.in: Regenerated
+	* src/gdb-store/Makefile.in: Regenerated
+	* src/huffbench/Makefile.in: Regenerated
+	* src/insertsort/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/jfdctint/Makefile.in: Regenerated
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/levenshtein/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/ludcmp/Makefile.in: Regenerated
+	* src/mergesort/Makefile.in: Regenerated
+	* src/miniz/Makefile.in: Regenerated
+	* src/minver/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/ndes/Makefile.in: Regenerated
+	* src/nettle-arcfour/Makefile.in: Regenerated
+	* src/nettle-cast128/Makefile.in: Regenerated
+	* src/nettle-des/Makefile.in: Regenerated
+	* src/nettle-md5/Makefile.in: Regenerated
+	* src/newlib-exp/Makefile.in: Regenerated
+	* src/newlib-log/Makefile.in: Regenerated
+	* src/newlib-mod/Makefile.in: Regenerated
+	* src/newlib-sqrt/Makefile.in: Regenerated
+	* src/ns/Makefile.in: Regenerated
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/prime/Makefile.in: Regenerated
+	* src/qsort/Makefile.in: Regenerated
+	* src/qurt/Makefile.in: Regenerated
+	* src/recursion/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/select/Makefile.in: Regenerated
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated
+	* src/sglib-arraysort/Makefile.in: Regenerated
+	* src/sglib-arraysort1/Makefile.in: Regenerated
+	* src/sglib-dllist/Makefile.in: Regenerated
+	* src/sglib-hashtable/Makefile.in: Regenerated
+	* src/sglib-listinsertsort/Makefile.in: Regenerated
+	* src/sglib-listinsertsort1/Makefile.in: Regenerated
+	* src/sglib-listsort/Makefile.in: Regenerated
+	* src/sglib-queue/Makefile.in: Regenerated
+	* src/sglib-rbtree/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/slre/Makefile.in: Regenerated
+	* src/sqrt/Makefile.in: Regenerated
+	* src/st/Makefile.in: Regenerated
+	* src/statemate/Makefile.in: Regenerated
+	* src/stringsearch1/Makefile.in: Regenerated
+	* src/strstr/Makefile.in: Regenerated
+	* src/tarai/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+	* src/ud/Makefile.in: Regenerated
+	* src/whetstone/Makefile.in: Regenerated
+	* src/wikisort/Makefile.in: Regenerated
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Centralised benchmark list, so benchmarks can be excluded for each
+	platform. The list of benchmarks is embedded into configure.ac, and
+	expanded using a m4 macro. This allows each benchmark to check whether
+	it should be compiled for the chosen platform. As there are some
+	benchmarks that will never fit into the target memory of some
+	platforms, this is a way to stop them from being compiled.
+
+	* Makefile.am: No longer has a list of all the subdirs, now gets a
+	    list of the subdirs from configure
+	* Makefile.in: Regenerated
+	* analysis/Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added EXCLUDED_BENCHMARKS variable to control which
+	    benchmarks should not be compiled. Various other infrastructure to
+	    help this.
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/compress/Makefile.in: Regenerated
+	* src/cover/Makefile.in: Regenerated
+	* src/crc/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/ctl-stack/Makefile.in: Regenerated
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/ctl-vector/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dhrystone/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/dtoa/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/expint/Makefile.in: Regenerated
+	* src/fac/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fir/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/frac/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/gdb-bitfields/Makefile.in: Regenerated
+	* src/gdb-constvars/Makefile.in: Regenerated
+	* src/gdb-store/Makefile.in: Regenerated
+	* src/huffbench/Makefile.in: Regenerated
+	* src/insertsort/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/jfdctint/Makefile.in: Regenerated
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/levenshtein/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/ludcmp/Makefile.in: Regenerated
+	* src/mergesort/Makefile.in: Regenerated
+	* src/miniz/Makefile.in: Regenerated
+	* src/minver/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/ndes/Makefile.in: Regenerated
+	* src/nettle-arcfour/Makefile.in: Regenerated
+	* src/nettle-cast128/Makefile.in: Regenerated
+	* src/nettle-des/Makefile.in: Regenerated
+	* src/nettle-md5/Makefile.in: Regenerated
+	* src/newlib-exp/Makefile.in: Regenerated
+	* src/newlib-log/Makefile.in: Regenerated
+	* src/newlib-mod/Makefile.in: Regenerated
+	* src/newlib-sqrt/Makefile.in: Regenerated
+	* src/ns/Makefile.in: Regenerated
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/prime/Makefile.in: Regenerated
+	* src/qsort/Makefile.in: Regenerated
+	* src/qurt/Makefile.in: Regenerated
+	* src/recursion/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/select/Makefile.in: Regenerated
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated
+	* src/sglib-arraysort/Makefile.in: Regenerated
+	* src/sglib-arraysort1/Makefile.in: Regenerated
+	* src/sglib-dllist/Makefile.in: Regenerated
+	* src/sglib-hashtable/Makefile.in: Regenerated
+	* src/sglib-listinsertsort/Makefile.in: Regenerated
+	* src/sglib-listinsertsort1/Makefile.in: Regenerated
+	* src/sglib-listsort/Makefile.in: Regenerated
+	* src/sglib-queue/Makefile.in: Regenerated
+	* src/sglib-rbtree/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/slre/Makefile.in: Regenerated
+	* src/sqrt/Makefile.in: Regenerated
+	* src/st/Makefile.in: Regenerated
+	* src/statemate/Makefile.in: Regenerated
+	* src/stringsearch1/Makefile.in: Regenerated
+	* src/strstr/Makefile.in: Regenerated
+	* src/tarai/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+	* src/ud/Makefile.in: Regenerated
+	* src/whetstone/Makefile.in: Regenerated
+	* src/wikisort/Makefile.in: Regenerated
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Small modifications to benchmarks to reduce energy usage. Mostly
+	involves marking some arrays as const, so the compiler puts them into
+	non-volatile storage
+
+	* src/crc/crc.c: Modification to reduce memory
+	* src/crc32/crc_32.c: Modification to reduce memory
+	* src/fir/fir.c: Modification to reduce memory
+	* src/float_matmult/matmult.c: Modification to reduce memory
+	* src/lms/lms.c: Modification to reduce memory
+	* src/mergesort/mergesort.c: Modification to reduce memory
+	* src/ndes/ndes.c: Modification to reduce memory
+	* src/ns/ns.c: Modification to reduce memory
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Modifications to compress to make it fit in memory of msp430
+
+	* src/compress/compress.c: Modifications to compress to make it fit in
+	    memory of msp430
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Added miniz benchmark
+
+	* Makefile.am: Added miniz benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added miniz benchmark
+	* src/miniz/Makefile.am: Added miniz benchmark
+	* src/miniz/Makefile.in: Regenerated
+	* src/miniz/miniz.c: Added miniz benchmark
+	* src/miniz/miniz_b.c: Added miniz benchmark
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Better work around for missing float functions in msp430 libm
+
+	* configure: Regenerated
+	* configure.ac: Removed old hack
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Compile msp430.s when using a msp430 platform
+	* src/compress/Makefile.in: Regenerated
+	* src/cover/Makefile.in: Regenerated
+	* src/crc/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/ctl-stack/Makefile.in: Regenerated
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/ctl-vector/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dhrystone/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/dtoa/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/expint/Makefile.in: Regenerated
+	* src/fac/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fir/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/frac/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/gdb-bitfields/Makefile.in: Regenerated
+	* src/gdb-constvars/Makefile.in: Regenerated
+	* src/gdb-store/Makefile.in: Regenerated
+	* src/huffbench/Makefile.in: Regenerated
+	* src/insertsort/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/jfdctint/Makefile.in: Regenerated
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/levenshtein/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/ludcmp/Makefile.in: Regenerated
+	* src/mergesort/Makefile.in: Regenerated
+	* src/minver/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/ndes/Makefile.in: Regenerated
+	* src/nettle-arcfour/Makefile.in: Regenerated
+	* src/nettle-cast128/Makefile.in: Regenerated
+	* src/nettle-des/Makefile.in: Regenerated
+	* src/nettle-md5/Makefile.in: Regenerated
+	* src/newlib-exp/Makefile.in: Regenerated
+	* src/newlib-log/Makefile.in: Regenerated
+	* src/newlib-mod/Makefile.in: Regenerated
+	* src/newlib-sqrt/Makefile.in: Regenerated
+	* src/ns/Makefile.in: Regenerated
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/platformcode/msp430.s: Define symbols pow, exp and log, mapping
+	    to corresponding powf, expf and logf
+	* src/prime/Makefile.in: Regenerated
+	* src/qsort/Makefile.in: Regenerated
+	* src/qurt/Makefile.in: Regenerated
+	* src/recursion/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/select/Makefile.in: Regenerated
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated
+	* src/sglib-arraysort/Makefile.in: Regenerated
+	* src/sglib-arraysort1/Makefile.in: Regenerated
+	* src/sglib-dllist/Makefile.in: Regenerated
+	* src/sglib-hashtable/Makefile.in: Regenerated
+	* src/sglib-listinsertsort/Makefile.in: Regenerated
+	* src/sglib-listinsertsort1/Makefile.in: Regenerated
+	* src/sglib-listsort/Makefile.in: Regenerated
+	* src/sglib-queue/Makefile.in: Regenerated
+	* src/sglib-rbtree/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/slre/Makefile.in: Regenerated
+	* src/sqrt/Makefile.in: Regenerated
+	* src/st/Makefile.in: Regenerated
+	* src/statemate/Makefile.in: Regenerated
+	* src/stringsearch1/Makefile.in: Regenerated
+	* src/strstr/Makefile.in: Regenerated
+	* src/tarai/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+	* src/ud/Makefile.in: Regenerated
+	* src/whetstone/Makefile.in: Regenerated
+	* src/wikisort/Makefile.in: Regenerated
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Added tarai benchmark
+
+	* Makefile.am: Added tarai benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added tarai benchmark
+	* src/tarai/Makefile.am: Added tarai benchmark
+	* src/tarai/Makefile.in: Regenerated
+	* src/tarai/tarai.c: Added tarai benchmark
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Added workaround for there being no pow function in msp430's libc
+
+	* configure: Regenerated
+	* configure.ac: Added workaround for there being no pow function in
+	    msp430's libc
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Fixes for ctl benchmarks, and removed realloc
+
+	* src/ctl-stack/ctl.h: Removed printfs
+	* src/ctl-stack/stack.c: Previously used an incorrect variable
+	* src/ctl-string/string.c: Removed realloc
+	* src/ctl-vector/ctl.h: Removed realloc
+	* src/ctl-vector/vector.c: Previously used an incorrect variable
+	* src/ctl-vector/vector.h: Removed realloc
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Change options for rijndael, to make it smaller, and compiler for
+	msp430
+
+	* src/rijndael/aes.c: Change options for rijndael, to make it smaller.
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Added support for msp-exp430fr5739 platform
+
+	* configure: Regenerated
+	* configure.ac: Added support for msp-exp430fr5739 platform
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/mergesort/mergesort.c: Removed dependency on assert
+	* src/platformcode/platformcode.c: Added trigger code for msp-
+	    exp430fr5739
+	* src/sglib-arraybinsearch/sglib.h: Removed dependency on assert
+	* src/sglib-arraysort/sglib.h: Removed dependency on assert
+	* src/sglib-arraysort1/sglib.h: Removed dependency on assert
+	* src/sglib-dllist/sglib.h: Removed dependency on assert
+	* src/sglib-hashtable/sglib.h: Removed dependency on assert
+	* src/sglib-listinsertsort/sglib.h: Removed dependency on assert
+	* src/sglib-listinsertsort1/sglib.h: Removed dependency on assert
+	* src/sglib-listsort/sglib.h: Removed dependency on assert
+	* src/sglib-queue/sglib.h: Removed dependency on assert
+	* src/sglib-rbtree/sglib.h: Removed dependency on assert
+	* src/wikisort/wikisort.c: Removed dependency on assert
+
+2014-03-16  James Pallister  <james.pallister@bristol.ac.uk>
+	Fied ctl-string build for stm32f0discovery platform
+
+	* src/ctl-string/Makefile.am: Fied ctl-string build for
+	    stm32f0discovery platform
+	* src/ctl-string/ctl.h: Removed
+	* src/ctl-string/string.c: Added header contents into c file to
+	    prevent multiple declarations
+	* src/ctl-string/string.h: Removed
+
+2014-03-16  James Pallister  <james.pallister@bristol.ac.uk>
+	Added missing .h files for ctl benchmarks
+
+	* src/ctl-stack/Makefile.am: Added missing .h files for ctl benchmarks
+	* src/ctl-stack/Makefile.in: Regenerated
+	* src/ctl-vector/Makefile.am: Added missing .h files for ctl
+	    benchmarks
+	* src/ctl-vector/Makefile.in: Regenerated
+
+2014-03-16  James Pallister  <james.pallister@bristol.ac.uk>
+	Added ctl string benchmark
+
+	* Makefile.am: Added ctl string benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added ctl string benchmark
+	* src/ctl-string/Makefile.am: Added ctl string benchmark
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/ctl-string/ctl.h: Added ctl string benchmark
+	* src/ctl-string/string.c: Added ctl string benchmark
+	* src/ctl-string/string.h: Added ctl string benchmark
+
+2014-03-16  James Pallister  <james.pallister@bristol.ac.uk>
+	Added stack benchmark from ctl
+
+	* Makefile.am: Added stack benchmark from ctl
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added stack benchmark from ctl
+	* src/ctl-stack/Makefile.am: Added stack benchmark from ctl
+	* src/ctl-stack/Makefile.in: Regenerated
+	* src/ctl-stack/ctl.h: Added stack benchmark from ctl
+	* src/ctl-stack/stack.c: Added stack benchmark from ctl
+	* src/ctl-stack/stack.h: Added stack benchmark from ctl
+
+2014-03-16  James Pallister  <james.pallister@bristol.ac.uk>
+	Added vector benchmark from ctl
+
+	* Makefile.am: Added vector benchmark from ctl
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added vector benchmark from ctl
+	* src/ctl-vector/Makefile.am: Added vector benchmark from ctl
+	* src/ctl-vector/Makefile.in: Regenerated
+	* src/ctl-vector/ctl.h: Added vector benchmark from ctl
+	* src/ctl-vector/vector.c: Added vector benchmark from ctl
+	* src/ctl-vector/vector.h: Added vector benchmark from ctl
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added rbtree benchmark from sglib
+
+	* Makefile.am: Added rbtree benchmark from sglib
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added rbtree benchmark from sglib
+	* src/sglib-rbtree/Makefile.am: Added rbtree benchmark from sglib
+	* src/sglib-rbtree/Makefile.in: Regenerated
+	* src/sglib-rbtree/rbtree.c: Added rbtree benchmark from sglib
+	* src/sglib-rbtree/sglib.h: Added rbtree benchmark from sglib
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added queue benchmark from sglib
+
+	* Makefile.am: Added queue benchmark from sglib
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added queue benchmark from sglib
+	* src/sglib-queue/Makefile.am: Added queue benchmark from sglib
+	* src/sglib-queue/Makefile.in: Regenerated
+	* src/sglib-queue/queue.c: Added queue benchmark from sglib
+	* src/sglib-queue/sglib.h: Added queue benchmark from sglib
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added listsort from sglib
+
+	* Makefile.am: Added listsort from sglib
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added listsort from sglib
+	* src/sglib-listsort/Makefile.am: Added listsort from sglib
+	* src/sglib-listsort/Makefile.in: Regenerated
+	* src/sglib-listsort/listsort.c: Added listsort from sglib
+	* src/sglib-listsort/sglib.h: Added listsort from sglib
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added listinsertsort1 from sglib
+
+	* Makefile.am: Added listinsertsort1 from sglib
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added listinsertsort1 from sglib
+	* src/sglib-listinsertsort1/Makefile.am: Added listinsertsort1 from
+	    sglib
+	* src/sglib-listinsertsort1/Makefile.in: Regenerated
+	* src/sglib-listinsertsort1/listinsertsort1.c: Added listinsertsort1
+	    from sglib
+	* src/sglib-listinsertsort1/sglib.h: Added listinsertsort1 from sglib
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added listinsertsort from sglib
+
+	* Makefile.am: Added listinsertsort from sglib
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added listinsertsort from sglib
+	* src/sglib-listinsertsort/Makefile.am: Added listinsertsort from
+	    sglib
+	* src/sglib-listinsertsort/Makefile.in: Regenerated
+	* src/sglib-listinsertsort/listinsertsort.c: Added listinsertsort from
+	    sglib
+	* src/sglib-listinsertsort/sglib.h: Added listinsertsort from sglib
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added hashtable benchmark from sglib
+
+	* Makefile.am: Added hashtable benchmark from sglib
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added hashtable benchmark from sglib
+	* src/sglib-hashtable/Makefile.am: Regenerated
+	* src/sglib-hashtable/Makefile.in: Regenerated
+	* src/sglib-hashtable/hashtable.c: Added hashtable benchmark from
+	    sglib
+	* src/sglib-hashtable/sglib.h: Added hashtable benchmark from sglib
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added dllist benchmark from sglib
+
+	* Makefile.am: Added dllist benchmark from sglib
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added dllist benchmark from sglib
+	* src/sglib-dllist/Makefile.am: Added dllist benchmark from sglib
+	* src/sglib-dllist/Makefile.in: Regenerated
+	* src/sglib-dllist/dllist.c: Added dllist benchmark from sglib
+	* src/sglib-dllist/sglib.h: Added dllist benchmark from sglib
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added arraysort1 from sglib
+
+	* Makefile.am: Added arraysort1 from sglib
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added arraysort1 from sglib
+	* src/sglib-arraysort1/Makefile.am: Added arraysort1 from sglib
+	* src/sglib-arraysort1/Makefile.in: Regenerated
+	* src/sglib-arraysort1/arraysort1.c: Added arraysort1 from sglib
+	* src/sglib-arraysort1/sglib.h: Added arraysort1 from sglib
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added arraysort from sglib
+
+	* Makefile.am: Added arraysort from sglib
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added arraysort from sglib
+	* src/sglib-arraysort/Makefile.am: Added arraysort from sglib
+	* src/sglib-arraysort/Makefile.in: Regenerated
+	* src/sglib-arraysort/arraysort.c: Added arraysort from sglib
+	* src/sglib-arraysort/sglib.h: Added arraysort from sglib
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added arraybinsearch from sglib
+
+	* Makefile.am: Added arraybinsearch
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added arraybinsearch
+	* src/sglib-arraybinsearch/Makefile.am: Added arraybinsearch
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated
+	* src/sglib-arraybinsearch/arraybinsearch.c: Added arraybinsearch
+	* src/sglib-arraybinsearch/sglib.h: Added arraybinsearch
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added mergesort benchmark
+
+	* Makefile.am: Added mergesort benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added mergesort benchmark
+	* src/mergesort/Makefile.am: Added mergesort benchmark
+	* src/mergesort/Makefile.in: Regenerated
+	* src/mergesort/mergesort.c: Added mergesort benchmark
+
+2014-03-15  James Pallister  <james.pallister@bristol.ac.uk>
+	Added wikisort benchmark
+
+	* Makefile.am: Added wikisort benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added wikisort benchmark
+	* src/wikisort/Makefile.am: Added wikisort benchmark
+	* src/wikisort/Makefile.in: Regenerated
+	* src/wikisort/wikisort.c: Added wikisort benchmark
+
+2014-03-11  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix to make blowfish use less memory
+
+	* src/blowfish/bf.c: Move key off the stack
+	* src/blowfish/bf_pi.h: Make const, so the init stays in flash
+
+2014-03-11  James Pallister  <james.pallister@bristol.ac.uk>
+	Added strstr benchmark
+
+	* Makefile.am: Added strstr benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added strstr benchmark
+	* src/strstr/Makefile.am: Added strstr benchmark
+	* src/strstr/Makefile.in: Regenerated
+	* src/strstr/strstr.c: Added strstr benchmark
+
+2014-03-11  James Pallister  <james.pallister@bristol.ac.uk>
+	Added slre benchmark
+
+	* Makefile.am: Added slre benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added slre benchmark
+	* src/slre/Makefile.am: Added slre benchmark
+	* src/slre/Makefile.in: Regenerated
+	* src/slre/slre.c: Added slre benchmark
+	* src/slre/slre.h: Added slre benchmark
+
+2014-03-10  James Pallister  <james.pallister@bristol.ac.uk>
+	Added frac benchmark
+
+	* Makefile.am: Added frac benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added frac benchmark
+	* src/frac/Makefile.am: Added frac benchmark
+	* src/frac/Makefile.in: Regenerated
+	* src/frac/frac.c: Added frac benchmark
+
+2014-03-10  James Pallister  <james.pallister@bristol.ac.uk>
+	Added stringsearch1 benchmark
+
+	* Makefile.am: Added stringsearch1 benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added stringsearch1 benchmark
+	* src/stringsearch1/Makefile.am: Added stringsearch1 benchmark
+	* src/stringsearch1/Makefile.in: Regenerated
+	* src/stringsearch1/fast.fwd.inc.c: Added stringsearch1 benchmark
+	* src/stringsearch1/fast.rev.d12.c: Added stringsearch1 benchmark
+	* src/stringsearch1/stringsearch1.c: Added stringsearch1 benchmark
+
+2014-03-10  James Pallister  <james.pallister@bristol.ac.uk>
+	Added whetstone benchmark
+
+	* Makefile.am: Added whetstone benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added whetstone benchmark
+	* src/whetstone/Makefile.am: Added whetstone benchmark
+	* src/whetstone/Makefile.in: Added whetstone benchmark
+	* src/whetstone/whetstone.c: Added whetstone benchmark
+
+2014-03-09  James Pallister  <james.pallister@bristol.ac.uk>
+	Added dhrystone benchmark. Note: dhrystone is modified slightly to
+	allow it to fit in memory of some of the smaller processors. This may
+	alter the computation slightly from the normal dhrystone, but not
+	significantly
+
+	* Makefile.am: Added dhrystone.
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added dhrystone.
+	* src/dhrystone/Makefile.am: Added dhrystone.
+	* src/dhrystone/Makefile.in: Regenerated
+	* src/dhrystone/dhry.h: Added dhrystone.
+	* src/dhrystone/dhry_1.c: Added dhrystone.
+	* src/dhrystone/dhry_2.c: Added dhrystone.
+
+2014-03-09  James Pallister  <james.pallister@bristol.ac.uk>
+	Added huffbench benchmark
+
+	* Makefile.am: Added huffbench benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added huffbench benchmark
+	* src/huffbench/Makefile.am: Added huffbench benchmark
+	* src/huffbench/Makefile.in: Regenerated
+	* src/huffbench/huffbench.c: Added huffbench benchmark
+
+2014-03-09  James Pallister  <james.pallister@bristol.ac.uk>
+	Added dtoa benchmark
+
+	* Makefile.am: Added dtoa benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added dtoa benchmark
+	* src/dtoa/Makefile.am: Added dtoa benchmark
+	* src/dtoa/Makefile.in: Regenerated
+	* src/dtoa/dtoa.c: Added dtoa benchmark
+
+2014-03-09  James Pallister  <james.pallister@bristol.ac.uk>
+	Added levenshtein benchmark
+
+	* Makefile.am: Added levenshtein benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added levenshtein benchmark
+	* src/levenshtein/Makefile.am: Added levenshtein benchmark
+	* src/levenshtein/Makefile.in: Regenerated
+	* src/levenshtein/levenshtein.c: Added levenshtein benchmark
+
+2014-03-08  James Pallister  <james.pallister@bristol.ac.uk>
+	Added in header to remove implicit declaration warnings
+
+	* src/platformcode/startup.c: Added in header to remove implicit
+	    declaration warnings
+
+2014-03-08  James Pallister  <james.pallister@bristol.ac.uk>
+	Removed unused source files in platformcode, and corresponding
+	configure options.
+
+	* Makefile.in: Regenerated
+	* analysis/Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Removed the with-platformsources and with-linkerscript
+	    options, as these are now set based on the platform chosen
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Platform sources are no longer used
+	* src/compress/Makefile.in: Regenerated
+	* src/cover/Makefile.in: Regenerated
+	* src/crc/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/expint/Makefile.in: Regenerated
+	* src/fac/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fir/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/gdb-bitfields/Makefile.in: Regenerated
+	* src/gdb-constvars/Makefile.in: Regenerated
+	* src/gdb-store/Makefile.in: Regenerated
+	* src/insertsort/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/jfdctint/Makefile.in: Regenerated
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/ludcmp/Makefile.in: Regenerated
+	* src/minver/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/ndes/Makefile.in: Regenerated
+	* src/nettle-arcfour/Makefile.in: Regenerated
+	* src/nettle-cast128/Makefile.in: Regenerated
+	* src/nettle-des/Makefile.in: Regenerated
+	* src/nettle-md5/Makefile.in: Regenerated
+	* src/newlib-exp/Makefile.in: Regenerated
+	* src/newlib-log/Makefile.in: Regenerated
+	* src/newlib-mod/Makefile.in: Regenerated
+	* src/newlib-sqrt/Makefile.in: Regenerated
+	* src/ns/Makefile.in: Regenerated
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/platformcode/Makefile.am: Remove extra dist for sbrk and exit
+	* src/platformcode/Makefile.in: Regenerated
+	* src/platformcode/exit.c: Removed
+	* src/platformcode/exit.h: Removed
+	* src/platformcode/sbrk.c: Removed
+	* src/platformcode/sbrk.h: Removed
+	* src/prime/Makefile.in: Regenerated
+	* src/qsort/Makefile.in: Regenerated
+	* src/qurt/Makefile.in: Regenerated
+	* src/recursion/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/select/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/sqrt/Makefile.in: Regenerated
+	* src/st/Makefile.in: Regenerated
+	* src/statemate/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+	* src/ud/Makefile.in: Regenerated
+
+2014-03-08  James Pallister  <james.pallister@bristol.ac.uk>
+	Added extra files for distribution in platformcode
+
+	* Makefile.in: Regenerated
+	* aclocal.m4: Regenerated
+	* analysis/Makefile.in: Regenerated
+	* configure: Regenerated
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/compress/Makefile.in: Regenerated
+	* src/cover/Makefile.in: Regenerated
+	* src/crc/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/expint/Makefile.in: Regenerated
+	* src/fac/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fir/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/gdb-bitfields/Makefile.in: Regenerated
+	* src/gdb-constvars/Makefile.in: Regenerated
+	* src/gdb-store/Makefile.in: Regenerated
+	* src/insertsort/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/jfdctint/Makefile.in: Regenerated
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/ludcmp/Makefile.in: Regenerated
+	* src/minver/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/ndes/Makefile.in: Regenerated
+	* src/nettle-arcfour/Makefile.in: Regenerated
+	* src/nettle-cast128/Makefile.in: Regenerated
+	* src/nettle-des/Makefile.in: Regenerated
+	* src/nettle-md5/Makefile.in: Regenerated
+	* src/newlib-exp/Makefile.in: Regenerated
+	* src/newlib-log/Makefile.in: Regenerated
+	* src/newlib-mod/Makefile.in: Regenerated
+	* src/newlib-sqrt/Makefile.in: Regenerated
+	* src/ns/Makefile.in: Regenerated
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/platformcode/Makefile.am: Distribute linker scripts
+	* src/platformcode/Makefile.in: Regenerated
+	* src/prime/Makefile.in: Regenerated
+	* src/qsort/Makefile.in: Regenerated
+	* src/qurt/Makefile.in: Regenerated
+	* src/recursion/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/select/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/sqrt/Makefile.in: Regenerated
+	* src/st/Makefile.in: Regenerated
+	* src/statemate/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+	* src/ud/Makefile.in: Regenerated
+
+2014-03-08  James Pallister  <james.pallister@bristol.ac.uk>
+	Changes in analysis automake to make distcheck work
+
+	* analysis/Makefile.am: Need to distribute the simulator command files
+	* analysis/Makefile.in: Regenerated
+
+2014-03-06  James Pallister  <james.pallister@bristol.ac.uk>
+	Removed old generate files and added some comments into the readme
+
+	* README.md: Description of compiling the benchmark suite
+	* generate.avr: Removed, no longer useful
+	* generate.cortex-m0: Removed, no longer useful
+	* generate.cortex-m3: Removed, no longer useful
+	* generate.fram: Removed, no longer useful
+	* generate.generic: Removed, no longer useful
+	* generate.msp430: Removed, no longer useful
+	* generate.pic32: Removed, no longer useful
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Small fixes for benchmark compilation
+
+	* src/bsort100/bsort100.c: Remove dependency on timing
+	* src/st/st.c: Remove dependency on timing
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Regenerated Makefiles and configures
+
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added ud benchmark
+
+	* Makefile.am: Added ud benchmark
+	* configure.ac: Added ud benchmark
+	* src/ud/Makefile.am: Added ud benchmark
+	* src/ud/Makefile.in: Regenerated
+	* src/ud/ud.c: Added ud benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added statemate benchmark
+
+	* Makefile.am: Added statemate benchmark
+	* configure.ac: Added statemate benchmark
+	* src/statemate/Makefile.am: Added statemate benchmark
+	* src/statemate/Makefile.in: Regenerated
+	* src/statemate/statemate.c: Added statemate benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added st benchmark
+
+	* Makefile.am: Added st benchmark
+	* configure.ac: Added st benchmark
+	* src/st/Makefile.am: Added st benchmark
+	* src/st/Makefile.in: Regenerated
+	* src/st/st.c: Added st benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added another sqrt benchmark
+
+	* Makefile.am: Added another sqrt benchmark
+	* configure.ac: Added another sqrt benchmark
+	* src/sqrt/Makefile.am: Added another sqrt benchmark
+	* src/sqrt/Makefile.in: Regenerated
+	* src/sqrt/sqrt.c: Added another sqrt benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added recursion benchmark
+
+	* Makefile.am: Added recursion benchmark
+	* configure.ac: Added recursion benchmark
+	* src/recursion/Makefile.am: Added recursion benchmark
+	* src/recursion/Makefile.in: Regenerated
+	* src/recursion/recursion.c: Added recursion benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added qsort benchmark
+
+	* Makefile.am: Added qsort benchmark
+	* configure.ac: Added qsort benchmark
+	* src/qsort/Makefile.am: Added qsort benchmark
+	* src/qsort/Makefile.in: Regenerated
+	* src/qsort/qsort.c: Added qsort benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added nsichneu benchmark
+
+	* Makefile.am: Added nsichneu benchmark
+	* configure.ac: Added nsichneu benchmark
+	* src/nsichneu/Makefile.am: Added nsichneu benchmark
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/nsichneu/nsichneu.c: Added nsichneu benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added ns benchmark
+
+	* Makefile.am: Added ns benchmark
+	* configure.ac: Added ns benchmark
+	* src/ns/Makefile.am: Added ns benchmark
+	* src/ns/Makefile.in: Regenerated
+	* src/ns/ns.c: Added ns benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added lcdnum benchmark
+
+	* Makefile.am: Added lcdnum benchmark
+	* configure.ac: Added lcdnum benchmark
+	* src/lcdnum/Makefile.am: Added lcdnum benchmark
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/lcdnum/lcdnum.c: Added lcdnum benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added janne complex benchmark
+
+	* Makefile.am: Added janne complex benchmark
+	* configure.ac: Added janne complex benchmark
+	* src/janne_complex/Makefile.am: Added janne complex benchmark
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/janne_complex/janne_complex.c: Added janne complex benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added fibcall benchmark
+
+	* Makefile.am: Added fibcall benchmark
+	* configure.ac: Added fibcall benchmark
+	* src/fibcall/Makefile.am: Added fibcall benchmark
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fibcall/fibcall.c: Added fibcall benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added another crc benchmark
+
+	* Makefile.am: Added crc benchmark
+	* configure.ac: Added crc benchmark
+	* src/crc/Makefile.am: Added crc benchmark
+	* src/crc/Makefile.in: Regenerated
+	* src/crc/crc.c: Added crc benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added cover benchmark
+
+	* Makefile.am: Added cover benchmark
+	* configure.ac: Added cover benchmark
+	* src/cover/Makefile.am: Added cover benchmark
+	* src/cover/Makefile.in: Regenerated
+	* src/cover/cover.c: Added cover benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added bsort100 benchmark
+
+	* Makefile.am: Added bsort100 benchmark
+	* configure.ac: Added bsort100 benchmark
+	* src/bsort100/Makefile.am: Added bsort100 benchmark
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bsort100/bsort100.c: Added bsort100 benchmark
+
+2014-03-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Sorted the benchmark autotools configuration lines
+
+	* Makefile.am: Sorted the benchmark subdirs
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Sorted the benchmark config iels
+
+2014-03-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Changed the name of the xmega platform from the chip name to the
+	development board's name. Platform was atxmega256a3buxpld, is now
+	xmegaa3buxplained.
+
+	* configure: Regenerated
+	* configure.ac: Changed the name of the xmega platform from the chip
+	    name to the development board's name. Platform was
+	    atxmega256a3buxpld, is now xmegaa3buxplained.
+
+2014-02-28  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add xmega-a3bu Xplained target
+
+	* configure: Regenerate
+	* configure.ac: Add ATXMEGA256A3BUXPLD platform
+	* src/platformcode/platformcode.c: Add trigger
+
+2014-02-27  James Pallister  <james.pallister@bristol.ac.uk>
+	Measurement can now be taken on PIC32MX250F128B platform. Added linker
+	scripts and code to toggle a pin
+
+	* configure.ac: Added LDFLAGS definition to wrap main
+	* src/common.mk.am: Added linkerscript
+	* src/platformcode/pic32mx.ld: Linkerscript for the pic32mx
+	* src/platformcode/pic32mx_startup.s: Added code to jump to the reset
+	    vector in the pic boot memory
+	* src/platformcode/platformcode.c: Toggle PA4, as well as a wrapper
+	    around main, so that exit is called, instead of main being
+	    repeated.
+
+2014-02-27  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add des from nettle library.
+
+	* Makefile.am: Add nettle-des
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add nettle-des
+	* configure: Regenerate
+	* configure.ac: Add nettle-des
+	* src/nettle-des/Makefile.am: Create
+	* src/nettle-des/Makefile.in: Regenerate
+	* src/nettle-des/des.c: Import des from the nettle library
+	* src/nettle-des/desCode.h: Ditto
+	* src/nettle-des/descore.README: Ditto
+	* src/nettle-des/keymap.h: Ditto
+	* src/nettle-des/rotors.h: Ditto
+
+2014-02-27  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add cast128 from nettle library.
+
+	* Makefile.am: Add nettle-cast128
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add nettle-cast128
+	* configure: Regenerate
+	* configure.ac: Add nettle-cast128
+	* src/nettle-cast128/Makefile.am: Create
+	* src/nettle-cast128/Makefile.in: Regenerate
+	* src/nettle-cast128/cast128.c: Import cast128 from the nettle library
+
+2014-02-27  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add arcfour from nettle library
+
+	* Makefile.am: Add nettle-arcfour
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add nettle-arcfour
+	* configure: Regenerate
+	* configure.ac: Add nettle-arcfour
+	* src/nettle-arcfour/Makefile.am: Create
+	* src/nettle-arcfour/Makefile.in: Regenerate
+	* src/nettle-arcfour/arcfour.c: Import arcfour from the nettle library
+
+2014-02-27  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add md5 from nettle library.
+
+	* Makefile.am: Add nettle-md5
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add nettle-md5
+	* configure: Regenerate
+	* configure.ac: Add nettle-md5
+	* src/nettle-md5/Makefile.am: Create
+	* src/nettle-md5/Makefile.in: Regenerate
+	* src/nettle-md5/md5.c: Import md5-compress from the nettle library
+
+2014-02-27  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add source file to generate-benchmark script.
+
+	* tools/generate-benchmark.sh: Add a second optional argument to
+	    specify the name of the source file to generate
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add constvars test from GDB.
+
+	* Makefile.am: Add gdb-constvars
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add gdb-constvars
+	* configure: Regenerate
+	* configure.ac: Add gdb-constvars
+	* src/gdb-constvars/Makefile.am: Create
+	* src/gdb-constvars/Makefile.in: Regenerate
+	* src/gdb-constvars/constvars.c: Import constvars.c from the GDB
+	    testsuite
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add store test from GDB.
+
+	* Makefile.am: Add gdb-store
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add gdb-store
+	* configure: Regenerate
+	* configure.ac: Add gdb-store
+	* src/gdb-store/Makefile.am: Create
+	* src/gdb-store/Makefile.in: Regenerate
+	* src/gdb-store/store.c: Import store.c from the GDB testsuite
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add bitfields test from GDB.
+
+	* Makefile.am: Add gdb-bitfiels
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add gdb-bitfields
+	* configure: Regenerate
+	* configure.ac: Add gdb-bitfiels
+	* src/gdb-bitfields/Makefile.am: Create
+	* src/gdb-bitfields/Makefile.in: Regenerate
+	* src/gdb-bitfields/bitfields.c: Import bitfiels.c from the GDB
+	    testsuite
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add select benchmark.
+
+	* Makefile.am: Add select
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add select
+	* configure: Regenerate
+	* configure.ac: Add select
+	* src/select/Makefile.am: Generated from generate-benchmark script
+	* src/select/Makefile.in: Regenerate
+	* src/select/select.c: Import select from WCET
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add jfdctint benchmark.
+
+	* Makefile.am: Add jfdctint
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add jfdctint
+	* configure: Regenerate
+	* configure.ac: Add jfdctint
+	* src/jfdctint/Makefile.am: Generated from generate-benchmark script
+	* src/jfdctint/Makefile.in: Regenerate
+	* src/jfdctint/jfdctint.c: Import jfdctint from WCET
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add qurt benchmark.
+
+	* Makefile.am: Add qurt
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add qurt
+	* configure: Regenerate
+	* configure.ac: Add qurt
+	* src/qurt/Makefile.am: Generated by generate-benchmark script
+	* src/qurt/Makefile.in: Regenerate
+	* src/qurt/qurt.c: Import qurt from WCET
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add prime benchmark.
+
+	* Makefile.am: Add prime
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add prime
+	* configure: Regenerate
+	* configure.ac: Add prime
+	* src/prime/Makefile.am: Generated by generate-benchmark script
+	* src/prime/Makefile.in: Regenerate
+	* src/prime/prime.c: Import prime from WCET
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add ndes benchmark.
+
+	* Makefile.am: Add ndes
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add ndes
+	* configure: Regenerate
+	* configure.ac: Add ndes
+	* src/ndes/Makefile.am: Generated by generate-benchmark script
+	* src/ndes/Makefile.in: Regenerate
+	* src/ndes/ndes.c: Import ndes from WCET
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add minver benchmark.
+
+	* Makefile.am: Add minver
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add minver
+	* configure: Regenerate
+	* configure.ac: Add minver
+	* src/minver/Makefile.am: Generated by generate-benchmark script
+	* src/minver/Makefile.in: Regenerate
+	* src/minver/minver.c: Import minver from WCET
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add ludcmp benchmark.
+
+	* Makefile.am: Add ludcmp with generate-benchmark script
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add ludcmp
+	* configure: Regenerate
+	* configure.ac: Add ludcmp with generate-benchmark script
+	* src/ludcmp/Makefile.am: Generated with generate-benchmark script
+	* src/ludcmp/Makefile.in: Regenerate
+	* src/ludcmp/ludcmp.c: Import ludcmp from WCET
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add insertsort benchmark.
+
+	* Makefile.am: Add insertsort with generate-benchmark script
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add insertsort
+	* configure: Regenerate
+	* configure.ac: Add insertsort with generate-benchmark script
+	* src/insertsort/Makefile.am: Generated with generate-benchmark script
+	* src/insertsort/Makefile.in: Regenerate
+	* src/insertsort/insertsort.c: Import insertsort from WCET
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add fir benchmark.
+
+	* Makefile.am: Add fir with generate-benchmark script
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add fir
+	* configure: Regenerate
+	* configure.ac: Add fir with generate-benchmark script
+	* src/fir/Makefile.am: Generated with generate-benchmark script
+	* src/fir/Makefile.in: Regenerate
+	* src/fir/fir.c: Import fir from WCET
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add fac benchmark.
+
+	* Makefile.am: Add fac with generate-benchmark script
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add fac
+	* configure: Regenerate
+	* configure.ac: Add fac with generate-benchmark script
+	* src/fac/Makefile.am: Generated with generate-benchmark script
+	* src/fac/Makefile.in: Regenerate
+	* src/fac/fac.c: Import fac benchmark from WCET
+
+2014-02-26  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add generate-benchmark script.
+
+	* Makefile.am: Add a marker to append sub-directories.
+	* configure.ac: Add a marker to append config files.
+	* tools/generate-benchmark.sh: New generate-benchmark script.
+
+2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add expint benchmark.
+
+	* Makefile.am: Add src/expint to SUBDIRS
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add expint
+	* configure: Regenerate
+	* configure.ac: Add src/expint/Makefile to AC_CONFIG_FILES
+	* src/expint/Makefile.am: Create Makefile.am from template
+	* src/expint/Makefile.in: Regenerate
+	* src/expint/expint.c: Import expint benchmark from WCET.
+
+2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Fix typos and licence in newlib benchmarks.
+
+	* src/newlib-exp/ef_exp.c: Move original licence to the top of the
+	    file. Change e_exp to ef_exp.
+	* src/newlib-log/ef_log.c: Move original licence to the top of the
+	    file. Fix typo.
+	* src/newlib-sqrt/ef_sqrt.c: Move original licence to the top of the
+	    file.
+
+2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add mod from newlib.
+
+	* Makefile.am: Add src/newlib-mod to SUBDIRS
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add newlib-mod benchmark
+	* configure: Regenerate
+	* configure.ac: Add src/newlib-mod/Makefile to AC_CONFIG_FILES
+	* src/newlib-pow/Makefile.am: Create Makefile.am from template
+	* src/newlib-pow/Makefile.in: Regenerate
+	* src/newlib-pow/ef_pow.c: Import ef_fmod from newlib
+
+2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add log from newlib.
+
+	* Makefile.am: Add src/newlib-log to SUBDIRS
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add newlib-log benchmark
+	* configure: Regenerate
+	* configure.ac: Add src/newlib-log/Makefile to AC_CONFIG_FILES
+	* src/newlib-log/Makefile.am: Create Makefile.am from template
+	* src/newlib-log/Makefile.in: Regenerate
+	* src/newlib-log/ef_log.c: Import ef_log from newlib
+
+2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add exp from newlib.
+
+	* Makefile.am: Add src/newlib-exp to SUBDIRS
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add newlib-exp benchmark
+	* configure: Regenerate
+	* configure.ac: Add src/newlib-exp/Makefile to AC_CONFIG_FILES
+	* src/newlib-exp/Makefile.am: Create Makefile.am from template
+	* src/newlib-exp/Makefile.in: Regenerate
+	* src/newlib-exp/ef_exp.c: Import ef_exp from newlib
+
+2014-02-25  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Use float version of sqrt from newlib.
+
+	* src/newlib-sqrt/Makefile.am: Rename e_sqrt to ef_sqrt
+	* src/newlib-sqrt/Makefile.in: Regenerate
+	* src/newlib-sqrt/e_sqrt.c: Delete
+	* src/newlib-sqrt/ef_sqrt.c: Import ef_sqrt from newlib
+
+2014-02-24  Pierre Langlois  <pierre.langlois@embecosm.com>
+	Add sqrt from newlib.
+
+	* Makefile.am: Add src/newlib-sqrt to SUBDIRS
+	* Makefile.in: Regenerate
+	* analysis/simulator.in: Add newlib-sqrt benchmark
+	* configure: Regenerate
+	* configure.ac: Add src/newlib-sqrt/Makefile to AC_CONFIG_FILES
+	* src/newlib-sqrt/Makefile.am: Create Makefile.am from template
+	* src/newlib-sqrt/Makefile.in: Regenerate
+	* src/newlib-sqrt/e_sqrt.c: Import sqrt from newlib
+
+2014-02-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Added pic32mx250f128b to --with-platform
+
+	* configure.ac: Added pic32mx250f128b to --with-platform
+
+2014-02-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Set the clock properly on the sam4lxplained platform
+
+	* src/platformcode/platformcode.c: Set the start OSC0 and set as main
+	    clock source
+
+2014-02-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Added GPIO pin toggling for sam4lxplained board
+
+	* src/platformcode/platformcode.c: Added GPIO pin toggling for
+	    sam4lxplained board
+
+2014-02-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Added linker script for sam4lxplained board. Code for some benchmarks
+	compiles and runs on the board
+
+	* Makefile.in: Regenerated
+	* aclocal.m4: Regenerated
+	* analysis/Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Small fixes to mimic changes to other Cortex platforms
+	    (saving CFLAGS and LDFLAGS)
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Added in linkerscript
+	* src/compress/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/platformcode/sam4lxplained.ld: Linkerscript for the
+	    sam4lxplained platform
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
+2014-02-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Added initial code for sam4lxplained platform. Platform is Cortex-M4
+	based and very similar to other cortex m-series platforms
+
+	* configure.ac: Added code for sam4lxplained platform
+
+2014-02-21  James Pallister  <james.pallister@bristol.ac.uk>
+	Regenerate configure and makefile
+
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+
+2014-02-21  James Pallister  <james.pallister@bristol.ac.uk>
+	Added platform support for stm32vldiscovery
+
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added --with-platform option for stm32vldiscovery
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Include linker script for stm32vldiscovery
+	* src/compress/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/platformcode/stm32vl_flash.ld: Store everything in flash, and
+	    copy to memory at runtime
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
+2014-02-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix for stm32f0discovery platform. CFLAGS and LDFLAGS need to be set
+	to include the correct libraries, and specify the processor, however
+	the previous commit to move them into AM_CFLAGS meant the configure
+	tests failed
+
+	* configure: Regenerated
+	* configure.ac: Assign to CFLAGS and LDFLAGS, restoring after tests
+	    are performed
+
+2014-02-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Made make rules silent by default
+
+	* Makefile.in: Regenerated
+	* aclocal.m4: Regenerated
+	* analysis/Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Made make rules silent by default
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/compress/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
+2014-02-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Fixed handling of CFLAGS for specifying platform specific options. Now
+	use AM_CFLAGS so we don't override user options.
+
+	* Makefile.in: Regenerated
+	* analysis/Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Changed substitutions for CFLAGS to AM_CFLAGS
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Append to AM_CFLAGS instead of set
+	* src/compress/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
+2014-02-19  James Pallister  <james.pallister@bristol.ac.uk>
+	Added AVR triggers to platform code
+
+	* src/platformcode/platformcode.c: Toggle port C0 on the AVR chip to
+	    start and stop benchmarking
+
+2014-02-14  James Pallister  <james.pallister@bristol.ac.uk>
+	Removed jrand function because we can now use the libc rand
+
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/blowfish/bf.c: Removed jrand
+	* src/bs/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Removed jrand from platform sources
+	* src/compress/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/crc32/crc_32.c: Removed jrand
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/platformcode/Makefile.am: Removed jrand from distribution
+	* src/platformcode/Makefile.in: Regenerated
+	* src/platformcode/jrand.c: Deleted
+	* src/platformcode/jrand.h: Deleted
+	* src/platformcode/platformcode.h: Removed jrand
+	* src/rijndael/Makefile.in: Regenerated
+	* src/rijndael/aesxam.c: Removed jrand
+	* src/sha/Makefile.in: Regenerated
+	* src/sha/sha.c: Removed jrand
+	* src/template/Makefile.in: Regenerated
+
+2014-02-14  James Pallister  <james.pallister@bristol.ac.uk>
+	Startup file needed to copy initialised data into RAM for
+	stm32f0discovery
+
+	* Makefile.in: Regenerated
+	* aclocal.m4: Regenerated
+	* analysis/Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Changed -lrdimon to -lnosys and removed -e parameters
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: No longer need startup.S, build startup.c for
+	    stm32f0discovery
+	* src/compress/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/platformcode/startup.c: Copy initialised data from flash to RAM
+	    before main
+	* src/platformcode/stm32f05_flash.ld: Specify that data should be in
+	    flash, and specify entry point
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
+2014-02-13  James Pallister  <james.pallister@bristol.ac.uk>
+	Fixes and code to allow running on the stm32f0discovery board
+
+	* configure: Regenerated
+	* configure.ac: No longer need platform code, and change LDFLAGS to
+	    correct entry point
+	* src/platformcode/platformcode.c: Added code to toggle PC0 of the
+	    stm32f0discovery board
+
+2014-02-12  James Pallister  <james.pallister@bristol.ac.uk>
+	Added a --with-platform argument to configure, to allow options to be
+	automatically set. This means the generate scripts are not needed.
+
+	* Makefile.in: Regenerated
+	* aclocal.m4: Regenerated
+	* analysis/Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added --with-platform argument
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Platform dependent linker script selection
+	* src/compress/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
+2014-02-12  James Pallister  <james.pallister@bristol.ac.uk>
+	The conditions for --enable and --with currently give incorrect
+	results if --disable is used. Fix this and fix an error in a automake
+	conditional
+
+	* configure.ac: The conditions for --enable and --with currently give
+	    incorrect results if --disable is used. Fix this and fix an error
+	    in a automake conditional
+
+2014-02-12  James Pallister  <james.pallister@bristol.ac.uk>
+	Added edn benchmark
+
+	* Makefile.am: Added edn benchmark
+	* Makefile.in: Regenerated
+	* analysis/simulator.in: Added edn benchmark
+	* configure: Regenerated
+	* configure.ac: Added edn benchmark
+	* src/edn/Makefile.am: Automake file for edn
+	* src/edn/Makefile.in: Regenerated
+	* src/edn/edn.c: Source for edn
+
+2014-02-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added duff benchmark
+
+	* Makefile.am: Added duff benchmark
+	* Makefile.in: Regenerated
+	* analysis/simulator.in: Added duff benchmark
+	* configure: Regenerated
+	* configure.ac: Added duff benchmark
+	* src/duff/Makefile.am: Automake file for duff
+	* src/duff/Makefile.in: Regenerated
+	* src/duff/duff.c: Source for duff
+
+2014-02-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added cnt benchmark
+
+	* Makefile.am: Added cnt benchmark
+	* Makefile.in: Regenerated
+	* analysis/simulator.in: Added cnt benchmark
+	* configure: Regenerated
+	* configure.ac: Added cnt benchmark
+	* src/cnt/Makefile.am: Automake file for cnt
+	* src/cnt/Makefile.in: Regenerated
+	* src/cnt/cnt.c: Source for cnt
+
+2014-02-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Added bubblesort benchmark
+
+	* Makefile.am: Added bubblesort benchmark
+	* Makefile.in: Regenerated
+	* analysis/simulator.in: Added bubblesort benchmark
+	* configure: Regenerated
+	* configure.ac: Added bubblesort benchmark
+	* src/bubblesort/Makefile.am: Automake file for bubblesort
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/bubblesort/bubblesort.c: Source code for bubblesort
+
+2014-02-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Added benchmarks to simulation list
+
+	* analysis/simulator.in: Added benchmarks to simulation list
+
+2014-02-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Added binary search benchmark
+
+	* Makefile.am: Added binary search benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added binary search benchmark
+	* src/bs/Makefile.am: Automake file for binary search
+	* src/bs/Makefile.in: Regenerated
+	* src/bs/bs.c: Source for binary search
+
+2014-02-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Added adpcm benchmark
+
+	* Makefile.am: Added adpcm benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added adpcm benchmark
+	* src/adpcm/Makefile.am: Added adpcm benchmark
+	* src/adpcm/Makefile.in: Regenerated
+	* src/adpcm/adpcm.c: Added adpcm benchmark
+
+2014-02-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix for targets which don't simulate
+
+	* configure: Regenerated
+	* configure.ac: Fix for targets which don't simulate
+
+2014-02-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Changed simulation framework to work with a generic simulation script.
+	Individual commands are included based on the compilation target
+
+	* Makefile.in: Regenerated
+	* analysis/Makefile.am: Generate new simulate script based on the
+	    target
+	* analysis/Makefile.in: Regenerated
+	* analysis/cmd.arm-none-eabi: Commands to simulate for cortex-m0
+	* analysis/cmd.avr-unknown-none: Commands to simulate for AVR
+	* analysis/simulate.avr.in: Removed
+	* analysis/simulate.cortex-m0.in: Removed
+	* analysis/simulator.in: Generic simulation framework
+	* configure: Regenerated
+	* configure.ac: A single SIMULATE conditional rather than a simulate
+	    conditional for each target
+	* src/2dfir/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/compress/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
+2014-01-13  James Pallister  <james.pallister@bristol.ac.uk>
+	Fixes for FFT and nbody - math library required
+
+	* generate.cortex-m0: When using gcc-arm-embedded, -lc -lrdimon is
+	    needed in LDFLAGS to allow autotools checks to pass
+	* src/fft/Makefile.am: Added -lm to LDFLAGS
+	* src/fft/Makefile.in: Regenerated
+	* src/nbody/Makefile.am: Added -lm to LDFLAGS
+	* src/nbody/Makefile.in: Regenerated
+
+014-01-13  James Pallister  <james.pallister@bristol.ac.uk>
+	Benchmarking loop for nbody benchmark and build files
+
+	* Makefile.am: Added nbody benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added nbody benchmark
+	* src/nbody/Makefile.am: Automake file for nbody
+	* src/nbody/Makefile.in: Generated
+	* src/nbody/nbody.c: Added benchmarking loop
+
+2014-01-13  James Pallister  <james.pallister@bristol.ac.uk>
+	Added automake files for fasta, and benchmarking loop
+
+	* Makefile.am: Added fasta benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added fasta benchmark
+	* src/fasta/Makefile.am: Automake file for fasta
+	* src/fasta/Makefile.in: Regenerated
+	* src/fasta/fasta.c: Added benchmarking loop
+
+2014-01-13  James Pallister  <james.pallister@bristol.ac.uk>
+	Choose O2 optimisation level
+
+	* src/2dfir/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/common.mk.am: Choose O2 optimisation level
+	* src/compress/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+
+2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix for simulation scripts when executable name is different from its
+	directory name
+
+	* analysis/simulate.avr.in: Added a parameter to find the executable
+	    within the given directory
+	* analysis/simulate.cortex-m0.in: Added a parameter to find the
+	    executable within the given directory
+
+2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added GDB tests to simulation scripts
+
+	* analysis/simulate.avr.in: Added GDB tests to simulation scripts
+	* analysis/simulate.cortex-m0.in: Added GDB tests to simulation
+	    scripts
+
+2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added scale factor into FFT
+
+	* src/fft/fft1.c: Added scale factor into FFT
+
+2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix for lms
+
+	* src/lms/lms.c: Added stop trigger for lms
+
+2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Added fft to simulation scripts
+
+	* analysis/simulate.avr.in: Added fft to simulation scripts
+	* analysis/simulate.cortex-m0.in: Added fft to simulation scripts
+
+2014-01-05  James Pallister  <james.pallister@bristol.ac.uk>
+	Updated FFT benchmark for autotools
+
+	* Makefile.am: Added FFT benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added FFT benchmark
+	* fft/fft1.c: Moved
+	* src/fft/Makefile.am: FFT benchmark Makefile.am
+	* src/fft/Makefile.in: Generated
+	* src/fft/fft1.c: FFT benchmark source
+
 2014-01-04  James Pallister  <james.pallister@bristol.ac.uk>
 	Fix: distribute simulation scripts
 
 	* analysis/Makefile.am: Fix: distribute simulation scripts
 	* analysis/Makefile.in: Regenerated
+
+2014-01-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Added lms to simulation scripts
+
+	* analysis/simulate.avr.in: Added lms to simulation scripts
+	* analysis/simulate.cortex-m0.in: Added lms to simulation scripts
+
+2014-01-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Added lms benchmark
+
+	* Makefile.am: Added lms benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added lms benchmark
+	* src/lms/Makefile.am: Automake file for lms
+	* src/lms/Makefile.in: Generated
+	* src/lms/lms.c: Lms benchmark
+
+2013-12-28  James Pallister  <james.pallister@bristol.ac.uk>
+	Added compress benchmark to analysis
+
+	* Makefile.in: Regenerated
+	* analysis/simulate.avr.in: Added compress benchmark
+	* analysis/simulate.cortex-m0.in: Added compress benchmark
+	* configure: Regenerated
+	* src/compress/Makefile.in: Generated
 
 2013-12-27  James Pallister  <james.pallister@bristol.ac.uk>
 	Added a change to minimize the number of autoreconfs needed

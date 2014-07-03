@@ -9,7 +9,7 @@
 #include <string.h>
 #include "sha.h"
 
-#include "platformcode.h"
+#include "support.h"
 
 /* SHA f()-functions */
 
@@ -190,7 +190,7 @@ void sha_stream(SHA_INFO *sha_info)
    for(n = 0; n < 256; ++n)
    {
       for(i = 0; i < BLOCK_SIZE; ++i)
-         data[i] = jrand();
+         data[i] = rand();
       sha_update(sha_info, data, BLOCK_SIZE);
    }
    sha_final(sha_info);

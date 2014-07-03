@@ -20,29 +20,24 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# TODO rename simulator command scripts after platform name, rather than
+# the host triple
+
 ANALYSIS=instruction_stats.py all_stats.py
-EXTRA_DIST= $(ANALYSIS) simulate.cortex-m0.in simulate.avr.in
+EXTRA_DIST= $(ANALYSIS) simulator.in cmd.arm-none-eabi cmd.avr-unknown-none
 bin_SCRIPTS=
 
-# If creating script for AVR simulator
-if SIMULATE_AVR
-bin_SCRIPTS+=simulate.avr
-AVRSIMPATH="simulavr"
+do_subst = sed -e '/@simulatorcommands@/{r $(srcdir)/cmd.$(host)'$$'\n''d}' \
+		       -e 's,[@]simulator[@],$(SIMULATORPATH),g'
 
-simulate.avr: $(srcdir)/simulate.avr.in Makefile
-	sed -e 's,[@]avrsimpath,$(AVRSIMPATH),g' < $(srcdir)/simulate.avr.in > simulate.avr
-	chmod +x simulate.avr
 
-endif
+# If creating script for simulator
+if SIMULATE
+bin_SCRIPTS+=simulate
 
-# If creating script for Cortex-M0 simulator
-if SIMULATE_CORTEX_M0
-bin_SCRIPTS+=simulate.cortex-m0
-CORTEXM0SIMPATH="thumbulator"
-
-simulate.cortex-m0: $(srcdir)/simulate.cortex-m0.in Makefile
-	sed -e 's,[@]cortexm0simpath,$(CORTEXM0SIMPATH),g' < $(srcdir)/simulate.cortex-m0.in > simulate.cortex-m0
-	chmod +x simulate.cortex-m0
+simulate: $(srcdir)/simulator.in $(srcdir)/cmd.$(host) Makefile
+	$(do_subst) < $(srcdir)/simulator.in > simulate
+	chmod +x simulate
 
 endif
 

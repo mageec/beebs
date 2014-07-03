@@ -12,10 +12,34 @@ benchmarks see http://arxiv.org/abs/1308.5174.
 
 For an example of their use, see http://arxiv.org/abs/1303.6485.
 
+## Compiling
+
+The strength of the benchmark suite is the ability to run on embedded devices,
+however the suite can also be compiled to be executed natively:
+
+    $ ./configure
+    $ make
+
+This will create a benchmark in each directory in ./src. However, the
+benchmark suite can be cross compiled for a number of architectures and
+development boards. Each target needs the prerequisite tools installed:
+
+ * STM32F0DISCOVERY
+ * STM32VLDISCOVERY
+ * Breadboarded ATMEGA328P (with USB to serial programmer)
+ * Breadboarded PIC32MX250F128B (with PICKIT2 as a programmer)
+ * SAM4L Xplained
+ * XMEGA-A3BU Xplained Pro
+ * MSP-EXP439F5529LP LaunchPad
+
+Compiling for one these boards will produce executables for that board, which
+toggle a specific pin at the beginning and end of the benchmark. This allows
+them to be easily hooked up to other tools for time and energy measurements.
+
 ## Using the tests
 
-All tests provide the functions initialize_trigger (), start_trigger () and
-stop_trigger () to control measurement of the test execution (performance,
+All tests provide the functions initialize\_trigger (), start\_trigger () and
+stop\_trigger () to control measurement of the test execution (performance,
 energy consumed etc). The implementation of these functions should be provided
 in platformcode.c.
 
@@ -46,6 +70,7 @@ Embedded Platforms". Available http://arxiv.org/abs/1303.6485.
 ## Origin of the tests
 
 All of these benchmarks are derived from other benchmark suites:
+
  * MiBench
  * WCET set of benchmarks
  * DSPstone

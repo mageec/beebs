@@ -2,7 +2,7 @@
 #
 #   Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
-#   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark 
+#   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark
 #   Suite.
 #
 #   Contributor: Jeremy Bennett <jeremy.bennett@embecosm.com>
@@ -22,14 +22,11 @@
 
 
 # Only needed to ensure all the sources are included in the distribution.
-EXTRA_DIST = exit.c \
-             exit.h \
-             jrand.c \
-             jrand.h \
-             platformcode.c \
+EXTRA_DIST = platformcode.c \
              platformcode.h \
-             sbrk.c \
-             sbrk.h \
-             startup.S \
+             startup.c \
+             sam4lxplained.ld \
+             pic32mx.ld \
+             pic32mx_startup.s \
              stm32f05_flash.ld \
              stm32vl_flash.ld

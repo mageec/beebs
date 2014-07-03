@@ -41,7 +41,7 @@
 #include <ctype.h>
 
 #include "aes.h"
-#include "platformcode.h"
+#include "support.h"
 
 #ifndef fpos_t
    #define fpos_t size_t
@@ -92,7 +92,7 @@ int encfile(aes *ctx, char *outbuf)
    for(j = 0; j <256; j++)
    {                               /* input 1st 16 bytes to buf[1..16] */
       for(k = 0; k < 16; ++k)
-         inbuf[k] = jrand();
+         inbuf[k] = rand();
 
       for(i = 0; i < 16; ++i)         /* xor in previous cipher text  */
          inbuf[i] ^= outbuf[i];
@@ -113,7 +113,7 @@ int decfile(aes *ctx, char *outbuf)
    fillrand(inbuf1, 16);           /* set an IV for CBC mode           */
 
    for(k = 0; k < 16; ++k)
-      inbuf2[k] = jrand();
+      inbuf2[k] = rand();
 
    decrypt(inbuf2, outbuf, ctx);   /* decrypt it                       */
 
@@ -128,7 +128,7 @@ int decfile(aes *ctx, char *outbuf)
    for(j = 0; j < 256; ++j)
    {
       for(k = 0; k < 16; ++k)
-         bp1[k] = jrand();
+         bp1[k] = rand();
 
       decrypt(bp1, outbuf, ctx);  /* decrypt the new input block and  */
 
@@ -167,7 +167,7 @@ int main(int argc, char *argv[])
       -19, 41, -115, 12, 11, 26, 113, 23};
 #endif
 
-   initialise_trigger();
+   initialise_board();
    start_trigger();
 
    for(n = 0; n < REPEAT_FACTOR>>9; n++)

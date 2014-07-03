@@ -1,4 +1,4 @@
-#include "platformcode.h"
+#include "support.h"
 #include "snipmath.h"
 
 int main(void)
@@ -30,7 +30,7 @@ int main(void)
       0, -1, -3, 0,
       -0, -3, 0, -1};
 
-   initialise_trigger();
+   initialise_board();
    start_trigger();
 
    for(n = 0; n < (REPEAT_FACTOR>>13)+1; ++n)
