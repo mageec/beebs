@@ -58,7 +58,7 @@
 
 #define NULL 0
 
-#include "platformcode.h"
+#include "support.h"
 
 #ifdef IO
 #include "libp.c"
@@ -286,7 +286,7 @@ int main()
    short int *check_block;
    int to_return;
 
-   initialise_trigger();
+   initialise_board ();
    start_trigger();
 
    for(n = 0; n < REPEAT_FACTOR; ++n)

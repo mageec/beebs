@@ -1,5 +1,10 @@
 2014-07-03  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* src/fdct/fdct.c: Include name changed.
+	(int main): Correct initialization function name.
+
+2014-07-03  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* src/fdct/fdct.c: Use ANSI style comments and 80 column
 	throughout.  Correct expected value for block[12].  Add GPL header.
 	(void fdct): Use long int instead of int for all temporaries.
