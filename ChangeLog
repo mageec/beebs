@@ -1,3 +1,18 @@
+2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
+	Added a test of the snprintf function provided by the trio library
+
+	* configure: Regenerated
+	* configure.ac: Added trio-snprintf benchmark
+	* src/trio-snprintf/Makefile.am: Makefile.am for trio-snprintf
+	* src/trio-snprintf/Makefile.in: Regenerated
+	* src/trio-snprintf/trio.c: Main library file for trio
+	* src/trio-snprintf/trio.h: Main header for trio
+	* src/trio-snprintf/trio_test.c: Benchmark test file for trio-snprintf
+	* src/trio-snprintf/triodef.h: Part of trio library
+	* src/trio-snprintf/triop.h: Part of trio library
+	* src/trio-snprintf/triostr.c: Part of trio library
+	* src/trio-snprintf/triostr.h: Part of trio library
+
 2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
 	Added the ability to use a chipsupport.c file, if present. This is
 	implemented as an automake conditional, decided at configure time on

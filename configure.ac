@@ -192,6 +192,7 @@ m4_define([benchmarklist],[dnl
 [st],
 [statemate],
 [tarai],
+[trio-snprintf],
 [ud],
 [wikisort],
 [whetstone]])
