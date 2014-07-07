@@ -1,4 +1,11 @@
 2014-07-07  George Field  <george.field@bristol.ac.uk>
+	Rewrite LDFLAGS configuration for stb_perlin to avoid overriding
+	AM_LDFLAGS
+
+	* src/stb_perlin/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS
+	* src/stb_perlin/Makefile.in: Regenerated
+
+2014-07-07  George Field  <george.field@bristol.ac.uk>
 	Added stb_perlin benchmark
 
 	* configure: Regenerated

@@ -23,8 +23,8 @@
 bin_PROGRAMS=stb_perlin
 stb_perlin_SOURCES=stb_perlin.c
 
-stb_perlin_LDFLAGS = "-lm"
-
 include $(top_srcdir)/src/common.mk.am
+
+AM_LDFLAGS += "-lm"
 
 stb_perlin_SOURCES += ${platform_src}
