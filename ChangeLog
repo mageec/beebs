@@ -1,4 +1,19 @@
 2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
+	Added trio-sscanf benchmark
+
+	* configure: Regenerated
+	* configure.ac: Added trio-sscanf benchmark
+	* src/trio-sscanf/Makefile.am: Makefile.am for trio-sscanf
+	* src/trio-sscanf/Makefile.in: Generated
+	* src/trio-sscanf/trio.c: Library file for trio
+	* src/trio-sscanf/trio.h: Library file for trio
+	* src/trio-sscanf/trio_test.c: Benchmarking trio_sscanf
+	* src/trio-sscanf/triodef.h: Library file for trio
+	* src/trio-sscanf/triop.h: Library file for trio
+	* src/trio-sscanf/triostr.c: Library file for trio
+	* src/trio-sscanf/triostr.h: Library file for trio
+
+2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
 	Compilation fix for trio-snprintf and renamed benchmark to be trio-
 	snprintf
 
