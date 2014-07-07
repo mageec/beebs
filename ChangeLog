@@ -1,3 +1,12 @@
+2014-07-07  George Field  <george.field@bristol.ac.uk>
+	Added stb_perlin benchmark
+
+	* configure: Regenerated
+	* configure.ac: Added stb_perlin benchmark
+	* src/stb_perlin/Makefile.am: Makefile.am for stb_perlin
+	* src/stb_perlin/Makefile.in: Generated
+	* src/stb_perlin/stb_perlin.c: Benchmarking perlin noise generation
+
 2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
 	Added trio-sscanf benchmark
 
