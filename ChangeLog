@@ -1,3 +1,252 @@
+2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
+	Added a test of the snprintf function provided by the trio library
+
+	* configure: Regenerated
+	* configure.ac: Added trio-snprintf benchmark
+	* src/trio-snprintf/Makefile.am: Makefile.am for trio-snprintf
+	* src/trio-snprintf/Makefile.in: Regenerated
+	* src/trio-snprintf/trio.c: Main library file for trio
+	* src/trio-snprintf/trio.h: Main header for trio
+	* src/trio-snprintf/trio_test.c: Benchmark test file for trio-snprintf
+	* src/trio-snprintf/triodef.h: Part of trio library
+	* src/trio-snprintf/triop.h: Part of trio library
+	* src/trio-snprintf/triostr.c: Part of trio library
+	* src/trio-snprintf/triostr.h: Part of trio library
+
+2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Added the ability to use a chipsupport.c file, if present. This is
+	implemented as an automake conditional, decided at configure time on
+	whether the file exists
+
+	* config/arm/chips/stm32f051/chipsupport.c: Chip support file for the
+	    stm32f051 chip
+	* config/arm/chips/stm32f100/chipsupport.c: Chip support file for the
+	    stm32f051 chip
+	* configure: Regenerated
+	* configure.ac: Conditional test on existance of the chipsupport.c
+	    file
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Conditionally compile in chipsupport.c
+	* src/compress/Makefile.in: Regenerated
+	* src/cover/Makefile.in: Regenerated
+	* src/crc/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/ctl-stack/Makefile.in: Regenerated
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/ctl-vector/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dhrystone/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/dtoa/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/expint/Makefile.in: Regenerated
+	* src/fac/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fir/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/frac/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/gdb-bitfields/Makefile.in: Regenerated
+	* src/gdb-constvars/Makefile.in: Regenerated
+	* src/gdb-store/Makefile.in: Regenerated
+	* src/huffbench/Makefile.in: Regenerated
+	* src/insertsort/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/jfdctint/Makefile.in: Regenerated
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/levenshtein/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/ludcmp/Makefile.in: Regenerated
+	* src/mergesort/Makefile.in: Regenerated
+	* src/miniz/Makefile.in: Regenerated
+	* src/minver/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/ndes/Makefile.in: Regenerated
+	* src/nettle-arcfour/Makefile.in: Regenerated
+	* src/nettle-cast128/Makefile.in: Regenerated
+	* src/nettle-des/Makefile.in: Regenerated
+	* src/nettle-md5/Makefile.in: Regenerated
+	* src/newlib-exp/Makefile.in: Regenerated
+	* src/newlib-log/Makefile.in: Regenerated
+	* src/newlib-mod/Makefile.in: Regenerated
+	* src/newlib-sqrt/Makefile.in: Regenerated
+	* src/ns/Makefile.in: Regenerated
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/prime/Makefile.in: Regenerated
+	* src/qsort/Makefile.in: Regenerated
+	* src/qurt/Makefile.in: Regenerated
+	* src/recursion/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/select/Makefile.in: Regenerated
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated
+	* src/sglib-arraysort/Makefile.in: Regenerated
+	* src/sglib-arraysort1/Makefile.in: Regenerated
+	* src/sglib-dllist/Makefile.in: Regenerated
+	* src/sglib-hashtable/Makefile.in: Regenerated
+	* src/sglib-listinsertsort/Makefile.in: Regenerated
+	* src/sglib-listinsertsort1/Makefile.in: Regenerated
+	* src/sglib-listsort/Makefile.in: Regenerated
+	* src/sglib-queue/Makefile.in: Regenerated
+	* src/sglib-rbtree/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/slre/Makefile.in: Regenerated
+	* src/sqrt/Makefile.in: Regenerated
+	* src/st/Makefile.in: Regenerated
+	* src/statemate/Makefile.in: Regenerated
+	* src/stringsearch1/Makefile.in: Regenerated
+	* src/strstr/Makefile.in: Regenerated
+	* src/tarai/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+	* src/ud/Makefile.in: Regenerated
+	* src/whetstone/Makefile.in: Regenerated
+	* src/wikisort/Makefile.in: Regenerated
+
+2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Saving the CFLAGS and LDFLAGS seems unnecessary - just setting CFLAGS
+	once works.
+
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Removed the saving of CFLAGS and LDFLAGS. This removes
+	    the need for CONFIG_CFLAGS and CONFIG_LDFLAGS
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Removed CONFIG_CFLAGS and CONFIG_LDFLAGS usages
+	* src/compress/Makefile.in: Regenerated
+	* src/cover/Makefile.in: Regenerated
+	* src/crc/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/ctl-stack/Makefile.in: Regenerated
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/ctl-vector/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dhrystone/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/dtoa/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/expint/Makefile.in: Regenerated
+	* src/fac/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fir/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/frac/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/gdb-bitfields/Makefile.in: Regenerated
+	* src/gdb-constvars/Makefile.in: Regenerated
+	* src/gdb-store/Makefile.in: Regenerated
+	* src/huffbench/Makefile.in: Regenerated
+	* src/insertsort/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/jfdctint/Makefile.in: Regenerated
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/levenshtein/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/ludcmp/Makefile.in: Regenerated
+	* src/mergesort/Makefile.in: Regenerated
+	* src/miniz/Makefile.in: Regenerated
+	* src/minver/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/ndes/Makefile.in: Regenerated
+	* src/nettle-arcfour/Makefile.in: Regenerated
+	* src/nettle-cast128/Makefile.in: Regenerated
+	* src/nettle-des/Makefile.in: Regenerated
+	* src/nettle-md5/Makefile.in: Regenerated
+	* src/newlib-exp/Makefile.in: Regenerated
+	* src/newlib-log/Makefile.in: Regenerated
+	* src/newlib-mod/Makefile.in: Regenerated
+	* src/newlib-sqrt/Makefile.in: Regenerated
+	* src/ns/Makefile.in: Regenerated
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/prime/Makefile.in: Regenerated
+	* src/qsort/Makefile.in: Regenerated
+	* src/qurt/Makefile.in: Regenerated
+	* src/recursion/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/select/Makefile.in: Regenerated
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated
+	* src/sglib-arraysort/Makefile.in: Regenerated
+	* src/sglib-arraysort1/Makefile.in: Regenerated
+	* src/sglib-dllist/Makefile.in: Regenerated
+	* src/sglib-hashtable/Makefile.in: Regenerated
+	* src/sglib-listinsertsort/Makefile.in: Regenerated
+	* src/sglib-listinsertsort1/Makefile.in: Regenerated
+	* src/sglib-listsort/Makefile.in: Regenerated
+	* src/sglib-queue/Makefile.in: Regenerated
+	* src/sglib-rbtree/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/slre/Makefile.in: Regenerated
+	* src/sqrt/Makefile.in: Regenerated
+	* src/st/Makefile.in: Regenerated
+	* src/statemate/Makefile.in: Regenerated
+	* src/stringsearch1/Makefile.in: Regenerated
+	* src/strstr/Makefile.in: Regenerated
+	* src/tarai/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+	* src/ud/Makefile.in: Regenerated
+	* src/whetstone/Makefile.in: Regenerated
+	* src/wikisort/Makefile.in: Regenerated
+
+2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Added the ability to specify default chips with a board.
+
+	* config/arm/boards/stm32f0discovery/board.cfg: If there is no chip
+	    specified on the command line, select the stm32f051
+	* config/arm/boards/stm32vldiscovery/board.cfg: If there is no chip
+	    specified on the command line, select the stm32f100
+	* configure: Regenerated
+	* configure.ac: Reordered the sourcing of the various cfg files, since
+	    this needs to happen before variables are substituted (board.cfg
+	    could modify $chip)
+
+2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Added proper configuration for the STM32VLDISCOVERY and
+	STM32F0DISCOVERY boards, with example linkerscripts
+
+	* config/arm/chips/stm32f051/chip.cfg: Set the CFLAGS and LDFLAGS for
+	    this chip
+	* config/arm/chips/stm32f051/chip.ld: Example linkerscript specifying
+	    the memory regions for this chip
+	* config/arm/chips/stm32f100/chip.cfg: Set the CFLAGS and LDFLAGS for
+	    this chip
+	* config/arm/chips/stm32f100/chip.ld: Example linkerscript specifying
+	    the memory regions for this chip
+
+2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Properly save CFLAGS and LDFLAGS before running the configure checks
+
+	* configure: Regenerated
+	* configure.ac: Properly save CFLAGS and LDFLAGS before running the
+	    configure checks
+
 2014-07-03  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* src/fdct/fdct.c: Include name changed.
