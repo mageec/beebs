@@ -153,9 +153,6 @@ AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-st_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(st_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -236,6 +233,8 @@ CCASFLAGS = @CCASFLAGS@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CHIP = @CHIP@
+CONFIG_CFLAGS = @CONFIG_CFLAGS@
+CONFIG_LDFLAGS = @CONFIG_LDFLAGS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CROSS_COMPILER_CHECK = @CROSS_COMPILER_CHECK@
@@ -347,14 +346,15 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 st_SOURCES = st.c ${platform_src}
-st_LDFLAGS = "-lm"
 platform_src =  \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
 	$(am__append_1)
 AM_CFLAGS = -I $(top_srcdir)/include \
 		  -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@/ \
-		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/
+		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/ \
+		  @CONFIG_CFLAGS@
 
+AM_LDFLAGS = @CONFIG_LDFLAGS@ "-lm"
 all: all-am
 
 .SUFFIXES:
@@ -442,7 +442,7 @@ clean-binPROGRAMS:
 
 st$(EXEEXT): $(st_OBJECTS) $(st_DEPENDENCIES) $(EXTRA_st_DEPENDENCIES) 
 	@rm -f st$(EXEEXT)
-	$(AM_V_CCLD)$(st_LINK) $(st_OBJECTS) $(st_LDADD) $(LIBS)
+	$(AM_V_CCLD)$(LINK) $(st_OBJECTS) $(st_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

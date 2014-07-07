@@ -77,6 +77,14 @@ AC_SUBST(ARCH, $arch)
 AC_SUBST(BOARD, $board)
 AC_SUBST(CHIP, $chip)
 
+AC_SUBST([CONFIG_LDFLAGS], ["$ARCH_LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"])
+AC_SUBST([CONFIG_CFLAGS], ["$ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"])
+
+# Sometimes we need to have the CFLAGS and LDFLAGS set so that
+# the config test pass. We save them first so we can restore them later
+confsave_CFLAGS=$CFLAGS
+confsave_LDFLAGS=$LDFLAGS
+
 CFLAGS="$CFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
 LDFLAGS="$LDFLAGS $ARCH_LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"
 
@@ -102,6 +110,13 @@ if test x$cross_compiling == xyes ; then
         AC_MSG_ERROR([Cannot find $host_alias-gcc])
     fi
 fi
+
+# Restore the saved CFLAGs, etc.
+echo $CONFIG_CFLAGS
+echo $LDFLAGS
+echo $confsave_LDFLAGS
+CFLAGS=$confsave_CFLAGS
+LDFLAGS=$confsave_LDFLAGS
 
 # List of the benchmarks. This list gets expanded into a variable passed
 # into the makefile, and configures the various makefiles. This allows an

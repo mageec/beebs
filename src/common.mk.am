@@ -28,4 +28,7 @@ endif
 
 AM_CFLAGS=-I $(top_srcdir)/include \
 		  -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@/ \
-		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/
+		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/ \
+		  @CONFIG_CFLAGS@
+
+AM_LDFLAGS= @CONFIG_LDFLAGS@

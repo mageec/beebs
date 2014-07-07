@@ -8,55 +8,47 @@
 	* src/stb_perlin/stb_perlin.c: Benchmarking perlin noise generation
 
 2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
-	Added trio-sscanf benchmark
+	Rewrite the saving of LDFLAGS in configure. save_LDFLAGS is used
+	internally by autoconf, so destroys our variable. The previous value
+	must be saved otherwise LDFLAGS gets substituted in twice, causing
+	duplicate libraries and linkerscripts on some platforms. Duplicate
+	linkerscripts is particularly a problem, causing everything to go
+	horrifically wrong.
 
 	* configure: Regenerated
-	* configure.ac: Added trio-sscanf benchmark
-	* src/trio-sscanf/Makefile.am: Makefile.am for trio-sscanf
-	* src/trio-sscanf/Makefile.in: Generated
-	* src/trio-sscanf/trio.c: Library file for trio
-	* src/trio-sscanf/trio.h: Library file for trio
-	* src/trio-sscanf/trio_test.c: Benchmarking trio_sscanf
-	* src/trio-sscanf/triodef.h: Library file for trio
-	* src/trio-sscanf/triop.h: Library file for trio
-	* src/trio-sscanf/triostr.c: Library file for trio
-	* src/trio-sscanf/triostr.h: Library file for trio
+	* configure.ac: Use confsave_LDFLAGS instead of save_LDFLAGS
+	* src/cubic/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS, since
+	    using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/cubic/Makefile.in: Regenerated
+	* src/fft/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS, since
+	    using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS,
+	    since using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/nbody/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS, since
+	    using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/nbody/Makefile.in: Regenerated
+	* src/st/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS, since
+	    using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/st/Makefile.in: Regenerated
+	* src/trio-snprintf/Makefile.in: Rewrite to add LDFLAGS to AM_LDFLAGS,
+	    since using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/trio-sscanf/Makefile.in: Regenerated
+	* src/whetstone/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS,
+	    since using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/whetstone/Makefile.in: Regenerated
+	* src/wikisort/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS,
+	    since using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/wikisort/Makefile.in: Regenerated
 
 2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
-	Compilation fix for trio-snprintf and renamed benchmark to be trio-
-	snprintf
+	Revert commit 74409cb, we do need to save the CFLAGS and LDFLAGS. It
+	however needs to be done properly.
 
-	* src/trio-snprintf/Makefile.am: Renamed trio to trio-snprintf
-	* src/trio-snprintf/Makefile.in: Regenerated
-	* src/trio-snprintf/trio.c: Removed dependencies on trionan.{c,h}
-
-2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
-	Added a test of the snprintf function provided by the trio library
-
+	* Makefile.in: Regenerated
 	* configure: Regenerated
-	* configure.ac: Added trio-snprintf benchmark
-	* src/trio-snprintf/Makefile.am: Makefile.am for trio-snprintf
-	* src/trio-snprintf/Makefile.in: Regenerated
-	* src/trio-snprintf/trio.c: Main library file for trio
-	* src/trio-snprintf/trio.h: Main header for trio
-	* src/trio-snprintf/trio_test.c: Benchmark test file for trio-snprintf
-	* src/trio-snprintf/triodef.h: Part of trio library
-	* src/trio-snprintf/triop.h: Part of trio library
-	* src/trio-snprintf/triostr.c: Part of trio library
-	* src/trio-snprintf/triostr.h: Part of trio library
-
-2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
-	Added the ability to use a chipsupport.c file, if present. This is
-	implemented as an automake conditional, decided at configure time on
-	whether the file exists
-
-	* config/arm/chips/stm32f051/chipsupport.c: Chip support file for the
-	    stm32f051 chip
-	* config/arm/chips/stm32f100/chipsupport.c: Chip support file for the
-	    stm32f051 chip
-	* configure: Regenerated
-	* configure.ac: Conditional test on existance of the chipsupport.c
-	    file
+	* configure.ac: Reverted
 	* src/2dfir/Makefile.in: Regenerated
 	* src/adpcm/Makefile.in: Regenerated
 	* src/blowfish/Makefile.in: Regenerated
@@ -64,7 +56,7 @@
 	* src/bsort100/Makefile.in: Regenerated
 	* src/bubblesort/Makefile.in: Regenerated
 	* src/cnt/Makefile.in: Regenerated
-	* src/common.mk.am: Conditionally compile in chipsupport.c
+	* src/common.mk.am: Reverted
 	* src/compress/Makefile.in: Regenerated
 	* src/cover/Makefile.in: Regenerated
 	* src/crc/Makefile.in: Regenerated
@@ -148,14 +140,56 @@
 	* src/whetstone/Makefile.in: Regenerated
 	* src/wikisort/Makefile.in: Regenerated
 
-2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
-	Saving the CFLAGS and LDFLAGS seems unnecessary - just setting CFLAGS
-	once works.
+2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
+	Added trio-sscanf benchmark
 
-	* Makefile.in: Regenerated
 	* configure: Regenerated
-	* configure.ac: Removed the saving of CFLAGS and LDFLAGS. This removes
-	    the need for CONFIG_CFLAGS and CONFIG_LDFLAGS
+	* configure.ac: Added trio-sscanf benchmark
+	* src/trio-sscanf/Makefile.am: Makefile.am for trio-sscanf
+	* src/trio-sscanf/Makefile.in: Generated
+	* src/trio-sscanf/trio.c: Library file for trio
+	* src/trio-sscanf/trio.h: Library file for trio
+	* src/trio-sscanf/trio_test.c: Benchmarking trio_sscanf
+	* src/trio-sscanf/triodef.h: Library file for trio
+	* src/trio-sscanf/triop.h: Library file for trio
+	* src/trio-sscanf/triostr.c: Library file for trio
+	* src/trio-sscanf/triostr.h: Library file for trio
+
+2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
+	Compilation fix for trio-snprintf and renamed benchmark to be trio-
+	snprintf
+
+	* src/trio-snprintf/Makefile.am: Renamed trio to trio-snprintf
+	* src/trio-snprintf/Makefile.in: Regenerated
+	* src/trio-snprintf/trio.c: Removed dependencies on trionan.{c,h}
+
+2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
+	Added a test of the snprintf function provided by the trio library
+
+	* configure: Regenerated
+	* configure.ac: Added trio-snprintf benchmark
+	* src/trio-snprintf/Makefile.am: Makefile.am for trio-snprintf
+	* src/trio-snprintf/Makefile.in: Regenerated
+	* src/trio-snprintf/trio.c: Main library file for trio
+	* src/trio-snprintf/trio.h: Main header for trio
+	* src/trio-snprintf/trio_test.c: Benchmark test file for trio-snprintf
+	* src/trio-snprintf/triodef.h: Part of trio library
+	* src/trio-snprintf/triop.h: Part of trio library
+	* src/trio-snprintf/triostr.c: Part of trio library
+	* src/trio-snprintf/triostr.h: Part of trio library
+
+2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Added the ability to use a chipsupport.c file, if present. This is
+	implemented as an automake conditional, decided at configure time on
+	whether the file exists
+
+	* config/arm/chips/stm32f051/chipsupport.c: Chip support file for the
+	    stm32f051 chip
+	* config/arm/chips/stm32f100/chipsupport.c: Chip support file for the
+	    stm32f051 chip
+	* configure: Regenerated
+	* configure.ac: Conditional test on existance of the chipsupport.c
+	    file
 	* src/2dfir/Makefile.in: Regenerated
 	* src/adpcm/Makefile.in: Regenerated
 	* src/blowfish/Makefile.in: Regenerated
@@ -163,7 +197,7 @@
 	* src/bsort100/Makefile.in: Regenerated
 	* src/bubblesort/Makefile.in: Regenerated
 	* src/cnt/Makefile.in: Regenerated
-	* src/common.mk.am: Removed CONFIG_CFLAGS and CONFIG_LDFLAGS usages
+	* src/common.mk.am: Conditionally compile in chipsupport.c
 	* src/compress/Makefile.in: Regenerated
 	* src/cover/Makefile.in: Regenerated
 	* src/crc/Makefile.in: Regenerated
