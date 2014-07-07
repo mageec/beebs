@@ -23,8 +23,8 @@
 bin_PROGRAMS=nbody
 nbody_SOURCES=nbody.c
 
-nbody_LDFLAGS = "-lm"
-
 include $(top_srcdir)/src/common.mk.am
+
+AM_LDFLAGS += "-lm"
 
 nbody_SOURCES += ${platform_src}

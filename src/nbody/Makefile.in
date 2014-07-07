@@ -153,9 +153,6 @@ AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-nbody_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(nbody_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -349,7 +346,6 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 nbody_SOURCES = nbody.c ${platform_src}
-nbody_LDFLAGS = "-lm"
 platform_src =  \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
 	$(am__append_1)
@@ -358,7 +354,7 @@ AM_CFLAGS = -I $(top_srcdir)/include \
 		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/ \
 		  @CONFIG_CFLAGS@
 
-AM_LDFLAGS = @CONFIG_LDFLAGS@
+AM_LDFLAGS = @CONFIG_LDFLAGS@ "-lm"
 all: all-am
 
 .SUFFIXES:
@@ -446,7 +442,7 @@ clean-binPROGRAMS:
 
 nbody$(EXEEXT): $(nbody_OBJECTS) $(nbody_DEPENDENCIES) $(EXTRA_nbody_DEPENDENCIES) 
 	@rm -f nbody$(EXEEXT)
-	$(AM_V_CCLD)$(nbody_LINK) $(nbody_OBJECTS) $(nbody_LDADD) $(LIBS)
+	$(AM_V_CCLD)$(LINK) $(nbody_OBJECTS) $(nbody_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

@@ -23,8 +23,8 @@
 bin_PROGRAMS=fft
 fft_SOURCES=fft1.c
 
-fft_LDFLAGS = "-lm"
-
 include $(top_srcdir)/src/common.mk.am
+
+AM_LDFLAGS += "-lm"
 
 fft_SOURCES += ${platform_src}

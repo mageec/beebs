@@ -131,9 +131,6 @@ AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-float_matmult_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(float_matmult_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -327,7 +324,6 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 float_matmult_SOURCES = matmult.c ${platform_src}
-float_matmult_LDFLAGS = "-lm"
 platform_src =  \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
 	$(am__append_1)
@@ -336,7 +332,7 @@ AM_CFLAGS = -I $(top_srcdir)/include \
 		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/ \
 		  @CONFIG_CFLAGS@
 
-AM_LDFLAGS = @CONFIG_LDFLAGS@
+AM_LDFLAGS = @CONFIG_LDFLAGS@ "-lm"
 all: all-am
 
 .SUFFIXES:
@@ -424,7 +420,7 @@ clean-binPROGRAMS:
 
 float_matmult$(EXEEXT): $(float_matmult_OBJECTS) $(float_matmult_DEPENDENCIES) $(EXTRA_float_matmult_DEPENDENCIES) 
 	@rm -f float_matmult$(EXEEXT)
-	$(AM_V_CCLD)$(float_matmult_LINK) $(float_matmult_OBJECTS) $(float_matmult_LDADD) $(LIBS)
+	$(AM_V_CCLD)$(LINK) $(float_matmult_OBJECTS) $(float_matmult_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

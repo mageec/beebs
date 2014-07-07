@@ -1,4 +1,39 @@
 2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
+	Rewrite the saving of LDFLAGS in configure. save_LDFLAGS is used
+	internally by autoconf, so destroys our variable. The previous value
+	must be saved otherwise LDFLAGS gets substituted in twice, causing
+	duplicate libraries and linkerscripts on some platforms. Duplicate
+	linkerscripts is particularly a problem, causing everything to go
+	horrifically wrong.
+
+	* configure: Regenerated
+	* configure.ac: Use confsave_LDFLAGS instead of save_LDFLAGS
+	* src/cubic/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS, since
+	    using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/cubic/Makefile.in: Regenerated
+	* src/fft/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS, since
+	    using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS,
+	    since using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/nbody/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS, since
+	    using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/nbody/Makefile.in: Regenerated
+	* src/st/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS, since
+	    using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/st/Makefile.in: Regenerated
+	* src/trio-snprintf/Makefile.in: Rewrite to add LDFLAGS to AM_LDFLAGS,
+	    since using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/trio-sscanf/Makefile.in: Regenerated
+	* src/whetstone/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS,
+	    since using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/whetstone/Makefile.in: Regenerated
+	* src/wikisort/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS,
+	    since using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/wikisort/Makefile.in: Regenerated
+
+2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
 	Revert commit 74409cb, we do need to save the CFLAGS and LDFLAGS. It
 	however needs to be done properly.
 
