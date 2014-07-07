@@ -1,4 +1,15 @@
 2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
+	Added picojpeg benchmark
+
+	* configure: Regenerated
+	* configure.ac: Added picojpeg benchmark
+	* src/picojpeg/Makefile.am: Makefile.am for picojpeg
+	* src/picojpeg/Makefile.in: Regenerated
+	* src/picojpeg/picojpeg.c: Library file for picojpeg
+	* src/picojpeg/picojpeg.h: Library file for picojpeg
+	* src/picojpeg/picojpeg_test.c: Benchmark file for picojpeg
+
+2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
 	Rewrite the saving of LDFLAGS in configure. save_LDFLAGS is used
 	internally by autoconf, so destroys our variable. The previous value
 	must be saved otherwise LDFLAGS gets substituted in twice, causing

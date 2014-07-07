@@ -183,6 +183,7 @@ m4_define([benchmarklist],[dnl
 [newlib-sqrt],
 [ns],
 [nsichneu],
+[picojpeg],
 [prime],
 [qsort],
 [qurt],
