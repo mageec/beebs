@@ -20,11 +20,11 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=trio
-trio_SOURCES=trio.c trio.h trio_test.c triostr.c triostr.h triodef.h triop.h
+bin_PROGRAMS=trio-snprintf
+trio_snprintf_SOURCES=trio.c trio.h trio_test.c triostr.c triostr.h triodef.h triop.h
 
 include $(top_srcdir)/src/common.mk.am
 
 AM_CFLAGS += -DTRIO_SNPRINTF_ONLY -DTRIO_EXTENSION=0 -DTRIO_DEPRECATED=0 -DTRIO_MICROSOFT=0 -DTRIO_ERRORS=0 -DTRIO_FEATURE_FLOAT=0
 
-trio_SOURCES += ${platform_src}
+trio_snprintf_SOURCES += ${platform_src}

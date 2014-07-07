@@ -1,4 +1,12 @@
 2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
+	Compilation fix for trio-snprintf and renamed benchmark to be trio-
+	snprintf
+
+	* src/trio-snprintf/Makefile.am: Renamed trio to trio-snprintf
+	* src/trio-snprintf/Makefile.in: Regenerated
+	* src/trio-snprintf/trio.c: Removed dependencies on trionan.{c,h}
+
+2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
 	Added a test of the snprintf function provided by the trio library
 
 	* configure: Regenerated
