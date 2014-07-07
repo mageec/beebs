@@ -123,7 +123,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-bin_PROGRAMS = trio$(EXEEXT)
+bin_PROGRAMS = trio-snprintf$(EXEEXT)
 DIST_COMMON = $(top_srcdir)/src/common.mk.am $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/build-aux/depcomp
 @CHIPSUPPORT_C_TRUE@am__append_1 = $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
@@ -141,16 +141,16 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am__trio_SOURCES_DIST = trio.c trio.h trio_test.c triostr.c triostr.h \
-	triodef.h triop.h \
+am__trio_snprintf_SOURCES_DIST = trio.c trio.h trio_test.c triostr.c \
+	triostr.h triodef.h triop.h \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
 	$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
 @CHIPSUPPORT_C_TRUE@am__objects_1 = chipsupport.$(OBJEXT)
 am__objects_2 = boardsupport.$(OBJEXT) $(am__objects_1)
-am_trio_OBJECTS = trio.$(OBJEXT) trio_test.$(OBJEXT) triostr.$(OBJEXT) \
-	$(am__objects_2)
-trio_OBJECTS = $(am_trio_OBJECTS)
-trio_LDADD = $(LDADD)
+am_trio_snprintf_OBJECTS = trio.$(OBJEXT) trio_test.$(OBJEXT) \
+	triostr.$(OBJEXT) $(am__objects_2)
+trio_snprintf_OBJECTS = $(am_trio_snprintf_OBJECTS)
+trio_snprintf_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -189,8 +189,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(trio_SOURCES)
-DIST_SOURCES = $(am__trio_SOURCES_DIST)
+SOURCES = $(trio_snprintf_SOURCES)
+DIST_SOURCES = $(am__trio_snprintf_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -345,8 +345,8 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-trio_SOURCES = trio.c trio.h trio_test.c triostr.c triostr.h triodef.h \
-	triop.h ${platform_src}
+trio_snprintf_SOURCES = trio.c trio.h trio_test.c triostr.c triostr.h \
+	triodef.h triop.h ${platform_src}
 platform_src =  \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
 	$(am__append_1)
@@ -440,9 +440,9 @@ clean-binPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
-trio$(EXEEXT): $(trio_OBJECTS) $(trio_DEPENDENCIES) $(EXTRA_trio_DEPENDENCIES) 
-	@rm -f trio$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(trio_OBJECTS) $(trio_LDADD) $(LIBS)
+trio-snprintf$(EXEEXT): $(trio_snprintf_OBJECTS) $(trio_snprintf_DEPENDENCIES) $(EXTRA_trio_snprintf_DEPENDENCIES) 
+	@rm -f trio-snprintf$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(trio_snprintf_OBJECTS) $(trio_snprintf_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
