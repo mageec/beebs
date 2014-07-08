@@ -107,8 +107,8 @@ DIST_COMMON = INSTALL NEWS README AUTHORS ChangeLog \
 	$(srcdir)/config.h.in $(top_srcdir)/dejagnu/site.exp.in \
 	COPYING build-aux/compile build-aux/config.guess \
 	build-aux/config.sub build-aux/depcomp build-aux/install-sh \
-	build-aux/missing build-aux/ltmain.sh \
-	$(top_srcdir)/build-aux/compile \
+	build-aux/mdate-sh build-aux/missing build-aux/texinfo.tex \
+	build-aux/ltmain.sh $(top_srcdir)/build-aux/compile \
 	$(top_srcdir)/build-aux/config.guess \
 	$(top_srcdir)/build-aux/config.sub \
 	$(top_srcdir)/build-aux/install-sh \
@@ -362,7 +362,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = dejagnu
-SUBDIRS = $(BENCHMARKS_SUBDIRS) src/template
+SUBDIRS = $(BENCHMARKS_SUBDIRS) src/template doc
 ACLOCAL_AMFLAGS = -I m4
 EXTRA_DEJAGNU_SITE_CONFIG = $(top_builddir)/dejagnu/site.exp
 EXTRA_DIST = beebs.test \

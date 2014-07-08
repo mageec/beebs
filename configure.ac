@@ -234,6 +234,7 @@ AC_CONFIG_HEADERS([config.h])
 
 AC_CONFIG_FILES([dejagnu/site.exp])
 AC_CONFIG_FILES([src/template/Makefile])
+AC_CONFIG_FILES([doc/Makefile])
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 
