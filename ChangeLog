@@ -1,3 +1,1380 @@
+2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
+	Added picojpeg benchmark
+
+	* configure: Regenerated
+	* configure.ac: Added picojpeg benchmark
+	* src/picojpeg/Makefile.am: Makefile.am for picojpeg
+	* src/picojpeg/Makefile.in: Regenerated
+	* src/picojpeg/picojpeg.c: Library file for picojpeg
+	* src/picojpeg/picojpeg.h: Library file for picojpeg
+	* src/picojpeg/picojpeg_test.c: Benchmark file for picojpeg
+
+2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
+	Rewrite the saving of LDFLAGS in configure. save_LDFLAGS is used
+	internally by autoconf, so destroys our variable. The previous value
+	must be saved otherwise LDFLAGS gets substituted in twice, causing
+	duplicate libraries and linkerscripts on some platforms. Duplicate
+	linkerscripts is particularly a problem, causing everything to go
+	horrifically wrong.
+
+	* configure: Regenerated
+	* configure.ac: Use confsave_LDFLAGS instead of save_LDFLAGS
+	* src/cubic/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS, since
+	    using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/cubic/Makefile.in: Regenerated
+	* src/fft/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS, since
+	    using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/fft/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS,
+	    since using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/nbody/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS, since
+	    using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/nbody/Makefile.in: Regenerated
+	* src/st/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS, since
+	    using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/st/Makefile.in: Regenerated
+	* src/trio-snprintf/Makefile.in: Rewrite to add LDFLAGS to AM_LDFLAGS,
+	    since using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/trio-sscanf/Makefile.in: Regenerated
+	* src/whetstone/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS,
+	    since using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/whetstone/Makefile.in: Regenerated
+	* src/wikisort/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS,
+	    since using program_LDFLAGS causes AM_LDFLAGS not to be included
+	* src/wikisort/Makefile.in: Regenerated
+
+2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
+	Revert commit 74409cb, we do need to save the CFLAGS and LDFLAGS. It
+	however needs to be done properly.
+
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Reverted
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Reverted
+	* src/compress/Makefile.in: Regenerated
+	* src/cover/Makefile.in: Regenerated
+	* src/crc/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/ctl-stack/Makefile.in: Regenerated
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/ctl-vector/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dhrystone/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/dtoa/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/expint/Makefile.in: Regenerated
+	* src/fac/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fir/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/frac/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/gdb-bitfields/Makefile.in: Regenerated
+	* src/gdb-constvars/Makefile.in: Regenerated
+	* src/gdb-store/Makefile.in: Regenerated
+	* src/huffbench/Makefile.in: Regenerated
+	* src/insertsort/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/jfdctint/Makefile.in: Regenerated
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/levenshtein/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/ludcmp/Makefile.in: Regenerated
+	* src/mergesort/Makefile.in: Regenerated
+	* src/miniz/Makefile.in: Regenerated
+	* src/minver/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/ndes/Makefile.in: Regenerated
+	* src/nettle-arcfour/Makefile.in: Regenerated
+	* src/nettle-cast128/Makefile.in: Regenerated
+	* src/nettle-des/Makefile.in: Regenerated
+	* src/nettle-md5/Makefile.in: Regenerated
+	* src/newlib-exp/Makefile.in: Regenerated
+	* src/newlib-log/Makefile.in: Regenerated
+	* src/newlib-mod/Makefile.in: Regenerated
+	* src/newlib-sqrt/Makefile.in: Regenerated
+	* src/ns/Makefile.in: Regenerated
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/prime/Makefile.in: Regenerated
+	* src/qsort/Makefile.in: Regenerated
+	* src/qurt/Makefile.in: Regenerated
+	* src/recursion/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/select/Makefile.in: Regenerated
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated
+	* src/sglib-arraysort/Makefile.in: Regenerated
+	* src/sglib-arraysort1/Makefile.in: Regenerated
+	* src/sglib-dllist/Makefile.in: Regenerated
+	* src/sglib-hashtable/Makefile.in: Regenerated
+	* src/sglib-listinsertsort/Makefile.in: Regenerated
+	* src/sglib-listinsertsort1/Makefile.in: Regenerated
+	* src/sglib-listsort/Makefile.in: Regenerated
+	* src/sglib-queue/Makefile.in: Regenerated
+	* src/sglib-rbtree/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/slre/Makefile.in: Regenerated
+	* src/sqrt/Makefile.in: Regenerated
+	* src/st/Makefile.in: Regenerated
+	* src/statemate/Makefile.in: Regenerated
+	* src/stringsearch1/Makefile.in: Regenerated
+	* src/strstr/Makefile.in: Regenerated
+	* src/tarai/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+	* src/ud/Makefile.in: Regenerated
+	* src/whetstone/Makefile.in: Regenerated
+	* src/wikisort/Makefile.in: Regenerated
+
+2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
+	Added trio-sscanf benchmark
+
+	* configure: Regenerated
+	* configure.ac: Added trio-sscanf benchmark
+	* src/trio-sscanf/Makefile.am: Makefile.am for trio-sscanf
+	* src/trio-sscanf/Makefile.in: Generated
+	* src/trio-sscanf/trio.c: Library file for trio
+	* src/trio-sscanf/trio.h: Library file for trio
+	* src/trio-sscanf/trio_test.c: Benchmarking trio_sscanf
+	* src/trio-sscanf/triodef.h: Library file for trio
+	* src/trio-sscanf/triop.h: Library file for trio
+	* src/trio-sscanf/triostr.c: Library file for trio
+	* src/trio-sscanf/triostr.h: Library file for trio
+
+2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
+	Compilation fix for trio-snprintf and renamed benchmark to be trio-
+	snprintf
+
+	* src/trio-snprintf/Makefile.am: Renamed trio to trio-snprintf
+	* src/trio-snprintf/Makefile.in: Regenerated
+	* src/trio-snprintf/trio.c: Removed dependencies on trionan.{c,h}
+
+2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
+	Added a test of the snprintf function provided by the trio library
+
+	* configure: Regenerated
+	* configure.ac: Added trio-snprintf benchmark
+	* src/trio-snprintf/Makefile.am: Makefile.am for trio-snprintf
+	* src/trio-snprintf/Makefile.in: Regenerated
+	* src/trio-snprintf/trio.c: Main library file for trio
+	* src/trio-snprintf/trio.h: Main header for trio
+	* src/trio-snprintf/trio_test.c: Benchmark test file for trio-snprintf
+	* src/trio-snprintf/triodef.h: Part of trio library
+	* src/trio-snprintf/triop.h: Part of trio library
+	* src/trio-snprintf/triostr.c: Part of trio library
+	* src/trio-snprintf/triostr.h: Part of trio library
+
+2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Added the ability to use a chipsupport.c file, if present. This is
+	implemented as an automake conditional, decided at configure time on
+	whether the file exists
+
+	* config/arm/chips/stm32f051/chipsupport.c: Chip support file for the
+	    stm32f051 chip
+	* config/arm/chips/stm32f100/chipsupport.c: Chip support file for the
+	    stm32f051 chip
+	* configure: Regenerated
+	* configure.ac: Conditional test on existance of the chipsupport.c
+	    file
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Conditionally compile in chipsupport.c
+	* src/compress/Makefile.in: Regenerated
+	* src/cover/Makefile.in: Regenerated
+	* src/crc/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/ctl-stack/Makefile.in: Regenerated
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/ctl-vector/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dhrystone/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/dtoa/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/expint/Makefile.in: Regenerated
+	* src/fac/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fir/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/frac/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/gdb-bitfields/Makefile.in: Regenerated
+	* src/gdb-constvars/Makefile.in: Regenerated
+	* src/gdb-store/Makefile.in: Regenerated
+	* src/huffbench/Makefile.in: Regenerated
+	* src/insertsort/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/jfdctint/Makefile.in: Regenerated
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/levenshtein/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/ludcmp/Makefile.in: Regenerated
+	* src/mergesort/Makefile.in: Regenerated
+	* src/miniz/Makefile.in: Regenerated
+	* src/minver/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/ndes/Makefile.in: Regenerated
+	* src/nettle-arcfour/Makefile.in: Regenerated
+	* src/nettle-cast128/Makefile.in: Regenerated
+	* src/nettle-des/Makefile.in: Regenerated
+	* src/nettle-md5/Makefile.in: Regenerated
+	* src/newlib-exp/Makefile.in: Regenerated
+	* src/newlib-log/Makefile.in: Regenerated
+	* src/newlib-mod/Makefile.in: Regenerated
+	* src/newlib-sqrt/Makefile.in: Regenerated
+	* src/ns/Makefile.in: Regenerated
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/prime/Makefile.in: Regenerated
+	* src/qsort/Makefile.in: Regenerated
+	* src/qurt/Makefile.in: Regenerated
+	* src/recursion/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/select/Makefile.in: Regenerated
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated
+	* src/sglib-arraysort/Makefile.in: Regenerated
+	* src/sglib-arraysort1/Makefile.in: Regenerated
+	* src/sglib-dllist/Makefile.in: Regenerated
+	* src/sglib-hashtable/Makefile.in: Regenerated
+	* src/sglib-listinsertsort/Makefile.in: Regenerated
+	* src/sglib-listinsertsort1/Makefile.in: Regenerated
+	* src/sglib-listsort/Makefile.in: Regenerated
+	* src/sglib-queue/Makefile.in: Regenerated
+	* src/sglib-rbtree/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/slre/Makefile.in: Regenerated
+	* src/sqrt/Makefile.in: Regenerated
+	* src/st/Makefile.in: Regenerated
+	* src/statemate/Makefile.in: Regenerated
+	* src/stringsearch1/Makefile.in: Regenerated
+	* src/strstr/Makefile.in: Regenerated
+	* src/tarai/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+	* src/ud/Makefile.in: Regenerated
+	* src/whetstone/Makefile.in: Regenerated
+	* src/wikisort/Makefile.in: Regenerated
+
+2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Added the ability to specify default chips with a board.
+
+	* config/arm/boards/stm32f0discovery/board.cfg: If there is no chip
+	    specified on the command line, select the stm32f051
+	* config/arm/boards/stm32vldiscovery/board.cfg: If there is no chip
+	    specified on the command line, select the stm32f100
+	* configure: Regenerated
+	* configure.ac: Reordered the sourcing of the various cfg files, since
+	    this needs to happen before variables are substituted (board.cfg
+	    could modify $chip)
+
+2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Added proper configuration for the STM32VLDISCOVERY and
+	STM32F0DISCOVERY boards, with example linkerscripts
+
+	* config/arm/chips/stm32f051/chip.cfg: Set the CFLAGS and LDFLAGS for
+	    this chip
+	* config/arm/chips/stm32f051/chip.ld: Example linkerscript specifying
+	    the memory regions for this chip
+	* config/arm/chips/stm32f100/chip.cfg: Set the CFLAGS and LDFLAGS for
+	    this chip
+	* config/arm/chips/stm32f100/chip.ld: Example linkerscript specifying
+	    the memory regions for this chip
+
+2014-07-02  James Pallister  <james.pallister@bristol.ac.uk>
+	Properly save CFLAGS and LDFLAGS before running the configure checks
+
+	* configure: Regenerated
+	* configure.ac: Properly save CFLAGS and LDFLAGS before running the
+	    configure checks
+
+2014-07-03  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* src/fdct/fdct.c: Include name changed.
+	(int main): Correct initialization function name.
+
+2014-07-03  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* src/fdct/fdct.c: Use ANSI style comments and 80 column
+	throughout.  Correct expected value for block[12].  Add GPL header.
+	(void fdct): Use long int instead of int for all temporaries.
+	(int main): Use long int where needed.  Add check blocks for 1 and
+	4096 transformations and use where appropriate.
+
+2014-06-25  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Added first version of documentation.
+
+	* INSTALL: Regenerated.
+	* Makefile.am: Add doc subdir
+	* Makefile.in: Regenerated.
+	* aclocal.m4: Regenerated.
+	* build-aux/config.guess: Regenerated.
+	* build-aux/config.sub: Regenerated.
+	* build-aux/depcomp: Regenerated.
+	* build-aux/ltmain.sh: Regenerated
+	* build-aux/missing: Regenerated.
+	* configure.ac: Add Makefile for doc subdir
+	* m4/libtool.m4: Regenerated.
+	* src/2dfir/Makefile.in: Regenerated.
+	* src/adpcm/Makefile.in: Regenerated.
+	* src/blowfish/Makefile.in: Regenerated.
+	* src/bs/Makefile.in: Regenerated.
+	* src/bsort100/Makefile.in: Regenerated.
+	* src/bubblesort/Makefile.in: Regenerated.
+	* src/cnt/Makefile.in: Regenerated.
+	* src/compress/Makefile.in: Regenerated.
+	* src/cover/Makefile.in: Regenerated.
+	* src/crc/Makefile.in: Regenerated.
+	* src/crc32/Makefile.in: Regenerated.
+	* src/ctl-stack/Makefile.in: Regenerated.
+	* src/ctl-string/Makefile.in: Regenerated.
+	* src/ctl-vector/Makefile.in: Regenerated.
+	* src/cubic/Makefile.in: Regenerated.
+	* src/dhrystone/Makefile.in: Regenerated.
+	* src/dijkstra/Makefile.in: Regenerated.
+	* doc/Makefile.am: Created.
+	* doc/Makefile.in: Generated.
+	* doc/beebs.info: Generated.
+	* doc/beebs.texi: Created.
+	* doc/config.texi: Created.
+	* doc/fdl-1.2.texi: Created.
+	* doc/texinfo.tex: Generated.
+	* doc/version.texi: Generated.
+	* src/dtoa/Makefile.in: Regenerated.
+	* src/duff/Makefile.in: Regenerated.
+	* src/edn/Makefile.in: Regenerated.
+	* src/expint/Makefile.in: Regenerated.
+	* src/fac/Makefile.in: Regenerated.
+	* src/fasta/Makefile.in: Regenerated.
+	* src/fdct/Makefile.in: Regenerated.
+	* src/fft/Makefile.in: Regenerated.
+	* src/fibcall/Makefile.in: Regenerated.
+	* src/fir/Makefile.in: Regenerated.
+	* src/float_matmult/Makefile.in: Regenerated.
+	* src/frac/Makefile.in: Regenerated.
+	* src/gdb-advance/Makefile.in: Regenerated.
+	* src/gdb-all-types/Makefile.in: Regenerated.
+	* src/gdb-anon/Makefile.in: Regenerated.
+	* src/gdb-arrayidx/Makefile.in: Regenerated.
+	* src/gdb-async/Makefile.in: Regenerated.
+	* src/gdb-bitfields/Makefile.in: Regenerated.
+	* src/gdb-constvars/Makefile.in: Regenerated.
+	* src/gdb-store/Makefile.in: Regenerated.
+	* src/huffbench/Makefile.in: Regenerated.
+	* src/insertsort/Makefile.in: Regenerated.
+	* src/int_matmult/Makefile.in: Regenerated.
+	* src/janne_complex/Makefile.in: Regenerated.
+	* src/jfdctint/Makefile.in: Regenerated.
+	* src/lcdnum/Makefile.in: Regenerated.
+	* src/levenshtein/Makefile.in: Regenerated.
+	* src/lms/Makefile.in: Regenerated.
+	* src/ludcmp/Makefile.in: Regenerated.
+	* src/mergesort/Makefile.in: Regenerated.
+	* src/miniz/Makefile.in: Regenerated.
+	* src/minver/Makefile.in: Regenerated.
+	* src/nbody/Makefile.in: Regenerated.
+	* src/ndes/Makefile.in: Regenerated.
+	* src/nettle-arcfour/Makefile.in: Regenerated.
+	* src/nettle-cast128/Makefile.in: Regenerated.
+	* src/nettle-des/Makefile.in: Regenerated.
+	* src/nettle-md5/Makefile.in: Regenerated.
+	* src/newlib-exp/Makefile.in: Regenerated.
+	* src/newlib-log/Makefile.in: Regenerated.
+	* src/newlib-mod/Makefile.in: Regenerated.
+	* src/newlib-sqrt/Makefile.in: Regenerated.
+	* src/ns/Makefile.in: Regenerated.
+	* src/nsichneu/Makefile.in: Regenerated.
+	* src/prime/Makefile.in: Regenerated.
+	* src/qsort/Makefile.in: Regenerated.
+	* src/qurt/Makefile.in: Regenerated.
+	* src/recursion/Makefile.in: Regenerated.
+	* src/rijndael/Makefile.in: Regenerated.
+	* src/select/Makefile.in: Regenerated.
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated.
+	* src/sglib-arraysort/Makefile.in: Regenerated.
+	* src/sglib-arraysort1/Makefile.in: Regenerated.
+	* src/sglib-dllist/Makefile.in: Regenerated.
+	* src/sglib-hashtable/Makefile.in: Regenerated.
+	* src/sglib-listinsertsort/Makefile.in: Regenerated.
+	* src/sglib-listinsertsort1/Makefile.in: Regenerated.
+	* src/sglib-listsort/Makefile.in: Regenerated.
+	* src/sglib-queue/Makefile.in: Regenerated.
+	* src/sglib-rbtree/Makefile.in: Regenerated.
+	* src/sha/Makefile.in: Regenerated.
+	* src/slre/Makefile.in: Regenerated.
+	* src/sqrt/Makefile.in: Regenerated.
+	* src/st/Makefile.in: Regenerated.
+	* src/statemate/Makefile.in: Regenerated.
+	* src/stringsearch1/Makefile.in: Regenerated.
+	* src/strstr/Makefile.in: Regenerated.
+	* src/tarai/Makefile.in: Regenerated.
+	* src/template/Makefile.in: Regenerated.
+	* src/ud/Makefile.in: Regenerated.
+	* src/whetstone/Makefile.in: Regenerated.
+	* src/wikisort/Makefile.in: Regenerated.
+
+
+2014-06-11  James Pallister  <james.pallister@bristol.ac.uk>
+
+	Fixed the CFLAGS and LDFLAGS so that if custom flags are given to make
+	the do not wipe out the flags defined by the config
+
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Config flags are now placed into CONFIG_CFLAGS and
+	    CONFIG_LDFLAGS for substitution into the Makefiles
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Use CONFIG_CFLAGS and CONFIG_LDFLAGS when
+	    constructing AM_CFLAGS and AM_LDFLAGS
+	* src/compress/Makefile.in: Regenerated
+	* src/cover/Makefile.in: Regenerated
+	* src/crc/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/ctl-stack/Makefile.in: Regenerated
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/ctl-vector/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dhrystone/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/dtoa/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/expint/Makefile.in: Regenerated
+	* src/fac/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fir/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/frac/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/gdb-bitfields/Makefile.in: Regenerated
+	* src/gdb-constvars/Makefile.in: Regenerated
+	* src/gdb-store/Makefile.in: Regenerated
+	* src/huffbench/Makefile.in: Regenerated
+	* src/insertsort/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/jfdctint/Makefile.in: Regenerated
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/levenshtein/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/ludcmp/Makefile.in: Regenerated
+	* src/mergesort/Makefile.in: Regenerated
+	* src/miniz/Makefile.in: Regenerated
+	* src/minver/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/ndes/Makefile.in: Regenerated
+	* src/nettle-arcfour/Makefile.in: Regenerated
+	* src/nettle-cast128/Makefile.in: Regenerated
+	* src/nettle-des/Makefile.in: Regenerated
+	* src/nettle-md5/Makefile.in: Regenerated
+	* src/newlib-exp/Makefile.in: Regenerated
+	* src/newlib-log/Makefile.in: Regenerated
+	* src/newlib-mod/Makefile.in: Regenerated
+	* src/newlib-sqrt/Makefile.in: Regenerated
+	* src/ns/Makefile.in: Regenerated
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/prime/Makefile.in: Regenerated
+	* src/qsort/Makefile.in: Regenerated
+	* src/qurt/Makefile.in: Regenerated
+	* src/recursion/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/select/Makefile.in: Regenerated
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated
+	* src/sglib-arraysort/Makefile.in: Regenerated
+	* src/sglib-arraysort1/Makefile.in: Regenerated
+	* src/sglib-dllist/Makefile.in: Regenerated
+	* src/sglib-hashtable/Makefile.in: Regenerated
+	* src/sglib-listinsertsort/Makefile.in: Regenerated
+	* src/sglib-listinsertsort1/Makefile.in: Regenerated
+	* src/sglib-listsort/Makefile.in: Regenerated
+	* src/sglib-queue/Makefile.in: Regenerated
+	* src/sglib-rbtree/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/slre/Makefile.in: Regenerated
+	* src/sqrt/Makefile.in: Regenerated
+	* src/st/Makefile.in: Regenerated
+	* src/statemate/Makefile.in: Regenerated
+	* src/stringsearch1/Makefile.in: Regenerated
+	* src/strstr/Makefile.in: Regenerated
+	* src/tarai/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+	* src/ud/Makefile.in: Regenerated
+	* src/whetstone/Makefile.in: Regenerated
+	* src/wikisort/Makefile.in: Regenerated
+
+2014-06-06  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* beebs.test/measure.exp: New test case for measuring.
+	* run-avr-measurement.sh: New script for easily running measurements of
+	all the benchmarks.
+	* tools/energytool.py: New python script for taking one measurement. It
+	relies on pyenergy.
+
+2014-06-06  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* config/avr/boards/shrimp/boardsupport.c (initialise_board): Call
+	PIN_INIT.
+	(start_trigger): Call PIN_SET.
+	(stop_trigger): Call PIN_CLEAR.
+	* config/avr/chips/atmega328p/chipsupport.h (PIN_INIT): New macro.
+	(PIN_SET): Likewise.
+	(PIN_CLEAR): Likewise.
+
+2014-06-04  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* Makefile.am (AUTOMAKE_OPTIONS): Add dejagnu.
+	(EXTRA_DEJAGNU_SITE_CONFIG): Add dejagnu/site.exp.
+	(EXTRA_DIST): Include the dejagnu scripts in the distribution.
+	* Makefile.in: Regenerate.
+	* beebs.test/run.exp: New file. This is the main run script.
+	* build-aux/compile: Import from automake.
+	* config/default.exp: New file. Needed for running BEEBS native.
+	* configure: Regenerate.
+	* configure.ac: Add BENCHMARKS as a substitute.
+	Add dejagnu/site.exp config file.
+	* dejagnu/baseboards/avr-avrdude.exp: New board file for avrdude.
+	* dejagnu/config/avrdude.exp: New config file for avrdude.
+	* dejagnu/site.exp.in: New template for EXTRA_DEJAGNU_SITE_CONFIG.
+	* src/2dfir/Makefile.in: Regenerate.
+	* src/adpcm/Makefile.in: Regenerate.
+	* src/blowfish/Makefile.in: Regenerate.
+	* src/bs/Makefile.in: Regenerate.
+	* src/bsort100/Makefile.in: Regenerate.
+	* src/bubblesort/Makefile.in: Regenerate.
+	* src/cnt/Makefile.in: Regenerate.
+	* src/compress/Makefile.in: Regenerate.
+	* src/cover/Makefile.in: Regenerate.
+	* src/crc/Makefile.in: Regenerate.
+	* src/crc32/Makefile.in: Regenerate.
+	* src/ctl-stack/Makefile.in: Regenerate.
+	* src/ctl-string/Makefile.in: Regenerate.
+	* src/ctl-vector/Makefile.in: Regenerate.
+	* src/cubic/Makefile.in: Regenerate.
+	* src/dhrystone/Makefile.in: Regenerate.
+	* src/dijkstra/Makefile.in: Regenerate.
+	* src/dtoa/Makefile.in: Regenerate.
+	* src/duff/Makefile.in: Regenerate.
+	* src/edn/Makefile.in: Regenerate.
+	* src/expint/Makefile.in: Regenerate.
+	* src/fac/Makefile.in: Regenerate.
+	* src/fasta/Makefile.in: Regenerate.
+	* src/fdct/Makefile.in: Regenerate.
+	* src/fft/Makefile.in: Regenerate.
+	* src/fibcall/Makefile.in: Regenerate.
+	* src/fir/Makefile.in: Regenerate.
+	* src/float_matmult/Makefile.in: Regenerate.
+	* src/frac/Makefile.in: Regenerate.
+	* src/gdb-advance/Makefile.in: Regenerate.
+	* src/gdb-all-types/Makefile.in: Regenerate.
+	* src/gdb-anon/Makefile.in: Regenerate.
+	* src/gdb-arrayidx/Makefile.in: Regenerate.
+	* src/gdb-async/Makefile.in: Regenerate.
+	* src/gdb-bitfields/Makefile.in: Regenerate.
+	* src/gdb-constvars/Makefile.in: Regenerate.
+	* src/gdb-store/Makefile.in: Regenerate.
+	* src/huffbench/Makefile.in: Regenerate.
+	* src/insertsort/Makefile.in: Regenerate.
+	* src/int_matmult/Makefile.in: Regenerate.
+	* src/janne_complex/Makefile.in: Regenerate.
+	* src/jfdctint/Makefile.in: Regenerate.
+	* src/lcdnum/Makefile.in: Regenerate.
+	* src/levenshtein/Makefile.in: Regenerate.
+	* src/lms/Makefile.in: Regenerate.
+	* src/ludcmp/Makefile.in: Regenerate.
+	* src/mergesort/Makefile.in: Regenerate.
+	* src/miniz/Makefile.in: Regenerate.
+	* src/minver/Makefile.in: Regenerate.
+	* src/nbody/Makefile.in: Regenerate.
+	* src/ndes/Makefile.in: Regenerate.
+	* src/nettle-arcfour/Makefile.in: Regenerate.
+	* src/nettle-cast128/Makefile.in: Regenerate.
+	* src/nettle-des/Makefile.in: Regenerate.
+	* src/nettle-md5/Makefile.in: Regenerate.
+	* src/newlib-exp/Makefile.in: Regenerate.
+	* src/newlib-log/Makefile.in: Regenerate.
+	* src/newlib-mod/Makefile.in: Regenerate.
+	* src/newlib-sqrt/Makefile.in: Regenerate.
+	* src/ns/Makefile.in: Regenerate.
+	* src/nsichneu/Makefile.in: Regenerate.
+	* src/prime/Makefile.in: Regenerate.
+	* src/qsort/Makefile.in: Regenerate.
+	* src/qurt/Makefile.in: Regenerate.
+	* src/recursion/Makefile.in: Regenerate.
+	* src/rijndael/Makefile.in: Regenerate.
+	* src/select/Makefile.in: Regenerate.
+	* src/sglib-arraybinsearch/Makefile.in: Regenerate.
+	* src/sglib-arraysort/Makefile.in: Regenerate.
+	* src/sglib-arraysort1/Makefile.in: Regenerate.
+	* src/sglib-dllist/Makefile.in: Regenerate.
+	* src/sglib-hashtable/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort1/Makefile.in: Regenerate.
+	* src/sglib-listsort/Makefile.in: Regenerate.
+	* src/sglib-queue/Makefile.in: Regenerate.
+	* src/sglib-rbtree/Makefile.in: Regenerate.
+	* src/sha/Makefile.in: Regenerate.
+	* src/slre/Makefile.in: Regenerate.
+	* src/sqrt/Makefile.in: Regenerate.
+	* src/st/Makefile.in: Regenerate.
+	* src/statemate/Makefile.in: Regenerate.
+	* src/stringsearch1/Makefile.in: Regenerate.
+	* src/strstr/Makefile.in: Regenerate.
+	* src/tarai/Makefile.in: Regenerate.
+	* src/template/Makefile.in: Regenerate.
+	* src/ud/Makefile.in: Regenerate.
+	* src/whetstone/Makefile.in: Regenerate.
+	* src/wikisort/Makefile.in: Regenerate.
+
+2014-06-04  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* src/ctl-stack/Makefile.am: Rename the executable according to the
+	directory name.
+	* src/ctl-stack/Makefile.in: Regenerate.
+	* src/ctl-string/Makefile.am: Likewise.
+	* src/ctl-string/Makefile.in: Regenerate.
+	* src/ctl-vector/Makefile.am: Likewise.
+	* src/ctl-vector/Makefile.in: Regenerate.
+	* src/gdb-advance/Makefile.am: Likewise.
+	* src/gdb-advance/Makefile.in: Regenerate.
+	* src/gdb-all-types/Makefile.am: Likewise.
+	* src/gdb-all-types/Makefile.in: Regenerate.
+	* src/gdb-anon/Makefile.am: Likewise.
+	* src/gdb-anon/Makefile.in: Regenerate.
+	* src/gdb-arrayidx/Makefile.am: Likewise.
+	* src/gdb-arrayidx/Makefile.in: Regenerate.
+	* src/gdb-async/Makefile.am: Likewise.
+	* src/gdb-async/Makefile.in: Regenerate.
+	* src/gdb-bitfields/Makefile.am: Likewise.
+	* src/gdb-bitfields/Makefile.in: Regenerate.
+	* src/gdb-constvars/Makefile.am: Likewise.
+	* src/gdb-constvars/Makefile.in: Regenerate.
+	* src/gdb-store/Makefile.am: Likewise.
+	* src/gdb-store/Makefile.in: Regenerate.
+	* src/nettle-arcfour/Makefile.am: Likewise.
+	* src/nettle-arcfour/Makefile.in: Regenerate.
+	* src/nettle-cast128/Makefile.am: Likewise.
+	* src/nettle-cast128/Makefile.in: Regenerate.
+	* src/nettle-des/Makefile.am: Likewise.
+	* src/nettle-des/Makefile.in: Regenerate.
+	* src/nettle-md5/Makefile.am: Likewise.
+	* src/nettle-md5/Makefile.in: Regenerate.
+	* src/newlib-exp/Makefile.am: Likewise.
+	* src/newlib-exp/Makefile.in: Regenerate.
+	* src/newlib-log/Makefile.am: Likewise.
+	* src/newlib-log/Makefile.in: Regenerate.
+	* src/newlib-mod/Makefile.am: Likewise.
+	* src/newlib-mod/Makefile.in: Regenerate.
+	* src/newlib-sqrt/Makefile.am: Likewise.
+	* src/newlib-sqrt/Makefile.in: Regenerate.
+	* src/sglib-arraybinsearch/Makefile.am: Likewise.
+	* src/sglib-arraybinsearch/Makefile.in: Regenerate.
+	* src/sglib-arraysort/Makefile.am: Likewise.
+	* src/sglib-arraysort/Makefile.in: Regenerate.
+	* src/sglib-arraysort1/Makefile.am: Likewise.
+	* src/sglib-arraysort1/Makefile.in: Regenerate.
+	* src/sglib-dllist/Makefile.am: Likewise.
+	* src/sglib-dllist/Makefile.in: Regenerate.
+	* src/sglib-hashtable/Makefile.am: Likewise.
+	* src/sglib-hashtable/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort/Makefile.am: Likewise.
+	* src/sglib-listinsertsort/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort1/Makefile.am: Likewise.
+	* src/sglib-listinsertsort1/Makefile.in: Regenerate.
+	* src/sglib-listsort/Makefile.am: Likewise.
+	* src/sglib-listsort/Makefile.in: Regenerate.
+	* src/sglib-queue/Makefile.am: Likewise.
+	* src/sglib-queue/Makefile.in: Regenerate.
+	* src/sglib-rbtree/Makefile.am: Likewise.
+	* src/sglib-rbtree/Makefile.in: Regenerate.
+
+2014-06-04  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* config/avr/chips/atmega328p/chip.cfg:  Add a comment about manually
+	setting -std=gnu99.
+
+2014-06-08  James Pallister  <james.pallister@bristol.ac.uk>
+	Added the ability to load an architecture specific config file
+
+	* configure: Regenerated
+	* configure.ac: Load environment variables from config/ARCH/arch.cfg
+
+2014-05-22  James Pallister  <james.pallister@bristol.ac.uk>
+	Small changes to fix segfaulting benchmarks
+
+	* gcc.beebs/bubblesort.c: Remove call to hardware specific memory
+	    address
+	* gcc.beebs/compress.c: Reduce HSIZE so that we don't overflow
+	* gcc.beebs/crc32.c: Temporarily remove check for output
+
+2014-06-04  James Pallister  <james.pallister@bristol.ac.uk>
+	Added dummy boardsupport file so the suite will compile on x86_64
+
+	* config/x86_64/boards/none/boardsupport.c: Dummy boardsupport file
+	    which contains empty definitions
+
+2014-06-03  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* config/avr/boards/shrimp/boardsupport.c: Add trigger code.
+	* config/avr/chips/atmega328p/chip.cfg (CHIP_CFLAGS): Add
+	-std=gnu99.
+	(EXCLUDED_BENCHMARKS): Exclude adpcm and miniz benchmarks.
+
+2014-06-03  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* configure: Regenerate.
+	* configure.ac: Set CFLAGS and LDFLAGS before the config test.
+	Otherwise they get ignored.
+
+2014-06-03  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* Makefile.in: Regenerate.
+	* configure: Regenerate.
+	* configure.ac: Make EXCLUDED_BENCHMARKS an argument variable. This way
+	it shows up with `configure --help`.
+	* src/2dfir/Makefile.in: Regenerate.
+	* src/adpcm/Makefile.in: Regenerate.
+	* src/blowfish/Makefile.in: Regenerate.
+	* src/bs/Makefile.in: Regenerate.
+	* src/bsort100/Makefile.in: Regenerate.
+	* src/bubblesort/Makefile.in: Regenerate.
+	* src/cnt/Makefile.in: Regenerate.
+	* src/compress/Makefile.in: Regenerate.
+	* src/cover/Makefile.in: Regenerate.
+	* src/crc/Makefile.in: Regenerate.
+	* src/crc32/Makefile.in: Regenerate.
+	* src/ctl-stack/Makefile.in: Regenerate.
+	* src/ctl-string/Makefile.in: Regenerate.
+	* src/ctl-vector/Makefile.in: Regenerate.
+	* src/cubic/Makefile.in: Regenerate.
+	* src/dhrystone/Makefile.in: Regenerate.
+	* src/dijkstra/Makefile.in: Regenerate.
+	* src/dtoa/Makefile.in: Regenerate.
+	* src/duff/Makefile.in: Regenerate.
+	* src/edn/Makefile.in: Regenerate.
+	* src/expint/Makefile.in: Regenerate.
+	* src/fac/Makefile.in: Regenerate.
+	* src/fasta/Makefile.in: Regenerate.
+	* src/fdct/Makefile.in: Regenerate.
+	* src/fft/Makefile.in: Regenerate.
+	* src/fibcall/Makefile.in: Regenerate.
+	* src/fir/Makefile.in: Regenerate.
+	* src/float_matmult/Makefile.in: Regenerate.
+	* src/frac/Makefile.in: Regenerate.
+	* src/gdb-advance/Makefile.in: Regenerate.
+	* src/gdb-all-types/Makefile.in: Regenerate.
+	* src/gdb-anon/Makefile.in: Regenerate.
+	* src/gdb-arrayidx/Makefile.in: Regenerate.
+	* src/gdb-async/Makefile.in: Regenerate.
+	* src/gdb-bitfields/Makefile.in: Regenerate.
+	* src/gdb-constvars/Makefile.in: Regenerate.
+	* src/gdb-store/Makefile.in: Regenerate.
+	* src/huffbench/Makefile.in: Regenerate.
+	* src/insertsort/Makefile.in: Regenerate.
+	* src/int_matmult/Makefile.in: Regenerate.
+	* src/janne_complex/Makefile.in: Regenerate.
+	* src/jfdctint/Makefile.in: Regenerate.
+	* src/lcdnum/Makefile.in: Regenerate.
+	* src/levenshtein/Makefile.in: Regenerate.
+	* src/lms/Makefile.in: Regenerate.
+	* src/ludcmp/Makefile.in: Regenerate.
+	* src/mergesort/Makefile.in: Regenerate.
+	* src/miniz/Makefile.in: Regenerate.
+	* src/minver/Makefile.in: Regenerate.
+	* src/nbody/Makefile.in: Regenerate.
+	* src/ndes/Makefile.in: Regenerate.
+	* src/nettle-arcfour/Makefile.in: Regenerate.
+	* src/nettle-cast128/Makefile.in: Regenerate.
+	* src/nettle-des/Makefile.in: Regenerate.
+	* src/nettle-md5/Makefile.in: Regenerate.
+	* src/newlib-exp/Makefile.in: Regenerate.
+	* src/newlib-log/Makefile.in: Regenerate.
+	* src/newlib-mod/Makefile.in: Regenerate.
+	* src/newlib-sqrt/Makefile.in: Regenerate.
+	* src/ns/Makefile.in: Regenerate.
+	* src/nsichneu/Makefile.in: Regenerate.
+	* src/prime/Makefile.in: Regenerate.
+	* src/qsort/Makefile.in: Regenerate.
+	* src/qurt/Makefile.in: Regenerate.
+	* src/recursion/Makefile.in: Regenerate.
+	* src/rijndael/Makefile.in: Regenerate.
+	* src/select/Makefile.in: Regenerate.
+	* src/sglib-arraybinsearch/Makefile.in: Regenerate.
+	* src/sglib-arraysort/Makefile.in: Regenerate.
+	* src/sglib-arraysort1/Makefile.in: Regenerate.
+	* src/sglib-dllist/Makefile.in: Regenerate.
+	* src/sglib-hashtable/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort1/Makefile.in: Regenerate.
+	* src/sglib-listsort/Makefile.in: Regenerate.
+	* src/sglib-queue/Makefile.in: Regenerate.
+	* src/sglib-rbtree/Makefile.in: Regenerate.
+	* src/sha/Makefile.in: Regenerate.
+	* src/slre/Makefile.in: Regenerate.
+	* src/sqrt/Makefile.in: Regenerate.
+	* src/st/Makefile.in: Regenerate.
+	* src/statemate/Makefile.in: Regenerate.
+	* src/stringsearch1/Makefile.in: Regenerate.
+	* src/strstr/Makefile.in: Regenerate.
+	* src/tarai/Makefile.in: Regenerate.
+	* src/template/Makefile.in: Regenerate.
+	* src/ud/Makefile.in: Regenerate.
+	* src/whetstone/Makefile.in: Regenerate.
+	* src/wikisort/Makefile.in: Regenerate.
+
+2014-06-03  Pierre Langlois  <pierre.langlois@embecosm.com>
+
+	* src/adpcm/adpcm.c: Change platformcode.h to support.h. Rename
+	initialise_trigger to initialise_board.
+	* src/blowfish/bf.c: Likewise.
+	* src/bs/bs.c: Likewise.
+	* src/bsort100/bsort100.c: Likewise.
+	* src/bubblesort/bubblesort.c: Likewise.
+	* src/cnt/cnt.c: Likewise.
+	* src/compress/compress.c: Likewise.
+	* src/cover/cover.c: Likewise.
+	* src/crc/crc.c: Likewise.
+	* src/crc32/crc_32.c: Likewise.
+	* src/ctl-stack/stack.c: Likewise.
+	* src/ctl-string/string.c: Likewise.
+	* src/ctl-vector/vector.c: Likewise.
+	* src/cubic/basicmath_small.c: Likewise.
+	* src/dhrystone/dhry_1.c: Likewise.
+	* src/dijkstra/dijkstra_small.c: Likewise.
+	* src/dtoa/dtoa.c: Likewise.
+	* src/duff/duff.c: Likewise.
+	* src/edn/edn.c: Likewise.
+	* src/expint/expint.c: Likewise.
+	* src/fac/fac.c: Likewise.
+	* src/fasta/fasta.c: Likewise.
+	* src/fdct/fdct.c: Likewise.
+	* src/fft/fft1.c: Likewise.
+	* src/fibcall/fibcall.c: Likewise.
+	* src/fir/fir.c: Likewise.
+	* src/float_matmult/matmult.c: Likewise.
+	* src/frac/frac.c: Likewise.
+	* src/gdb-advance/advance.c: Likewise.
+	* src/gdb-all-types/all-types.c: Likewise.
+	* src/gdb-anon/anon.c: Likewise.
+	* src/gdb-arrayidx/arrayidx.c: Likewise.
+	* src/gdb-async/async.c: Likewise.
+	* src/gdb-bitfields/bitfields.c: Likewise.
+	* src/gdb-constvars/constvars.c: Likewise.
+	* src/gdb-store/store.c: Likewise.
+	* src/huffbench/huffbench.c: Likewise.
+	* src/insertsort/insertsort.c: Likewise.
+	* src/int_matmult/matmult.c: Likewise.
+	* src/janne_complex/janne_complex.c: Likewise.
+	* src/jfdctint/jfdctint.c: Likewise.
+	* src/lcdnum/lcdnum.c: Likewise.
+	* src/levenshtein/levenshtein.c: Likewise.
+	* src/lms/lms.c: Likewise.
+	* src/ludcmp/ludcmp.c: Likewise.
+	* src/mergesort/mergesort.c: Likewise.
+	* src/miniz/miniz_b.c: Likewise.
+	* src/minver/minver.c: Likewise.
+	* src/nbody/nbody.c: Likewise.
+	* src/ndes/ndes.c: Likewise.
+	* src/nettle-arcfour/arcfour.c: Likewise.
+	* src/nettle-cast128/cast128.c: Likewise.
+	* src/nettle-des/des.c: Likewise.
+	* src/nettle-md5/md5.c: Likewise.
+	* src/newlib-exp/ef_exp.c: Likewise.
+	* src/newlib-log/ef_log.c: Likewise.
+	* src/newlib-mod/ef_mod.c: Likewise.
+	* src/newlib-sqrt/ef_sqrt.c: Likewise.
+	* src/ns/ns.c: Likewise.
+	* src/nsichneu/nsichneu.c: Likewise.
+	* src/prime/prime.c: Likewise.
+	* src/qsort/qsort.c: Likewise.
+	* src/qurt/qurt.c: Likewise.
+	* src/recursion/recursion.c: Likewise.
+	* src/rijndael/aesxam.c: Likewise.
+	* src/select/select.c: Likewise.
+	* src/sglib-arraybinsearch/arraybinsearch.c: Likewise.
+	* src/sglib-arraysort/arraysort.c: Likewise.
+	* src/sglib-arraysort1/arraysort1.c: Likewise.
+	* src/sglib-dllist/dllist.c: Likewise.
+	* src/sglib-hashtable/hashtable.c: Likewise.
+	* src/sglib-listinsertsort/listinsertsort.c: Likewise.
+	* src/sglib-listinsertsort1/listinsertsort1.c: Likewise.
+	* src/sglib-listsort/listsort.c: Likewise.
+	* src/sglib-queue/queue.c: Likewise.
+	* src/sglib-rbtree/rbtree.c: Likewise.
+	* src/sha/sha.c: Likewise.
+	* src/sha/sha_driver.c: Likewise.
+	* src/slre/slre.c: Likewise.
+	* src/sqrt/sqrt.c: Likewise.
+	* src/st/st.c: Likewise.
+	* src/statemate/statemate.c: Likewise.
+	* src/stringsearch1/stringsearch1.c: Likewise.
+	* src/strstr/strstr.c: Likewise.
+	* src/tarai/tarai.c: Likewise.
+	* src/template/template.c: Likewise.
+	* src/ud/ud.c: Likewise.
+	* src/whetstone/whetstone.c: Likewise.
+	* src/wikisort/wikisort.c: Likewise.
+
+2014-05-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Added support.h
+
+	* include/support.h: This file includes the respective chipsupport.h
+	    and boardsupport.h required to compile for the specified board and
+	    platform.
+
+2014-05-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Moved over to a new configuration architecture. The benchmark suite
+	can be configured on a chip or a board level, with custom CFLAGS, etc.
+	for each. Also there is set of headers and source for each board,
+	which replaces platform code. The chip configuration should expose
+	internals specific to the chip (through chipsupport.h) and the board
+	should use these, through boardsupport.c and boardsupport.h.
+
+	* Makefile.am: Removed old code. We just need the benchmark
+	    directories now
+	* Makefile.in: Regenerated
+	* config.h.in: Template for configure to generate, so that we know
+	    whether we have a boardspport.h or a chipsupport.h or both
+	* config/arm/boards/stm32f0discovery/boardsupport.c: Boardsupport file
+	    for stm32f0discovery
+	* config/arm/boards/stm32vldiscovery/boardsupport.c: Boardsupport file
+	    for stm32vldiscovery
+	* config/arm/chips/stm32f051/chip.cfg: Chip config for stm32f051
+	* config/arm/chips/stm32f051/chipsupport.h: Chip support header for
+	    stm32f051
+	* config/arm/chips/stm32f100/chip.cfg: Chip config for stm32f100
+	* config/arm/chips/stm32f100/chipsupport.h: Chip support header for
+	    stm32f100
+	* config/avr/boards/shrimp/boardsupport.c: Board support for shrimp
+	    (TODO)
+	* config/avr/chips/atmega328p/chip.cfg: Chip config for shrimp (TODO)
+	* configure: Regenerated
+	* configure.ac: Modified to use the new configuration structure
+	* src/2dfir/Makefile.in: Regenerated
+	* src/2dfir/fir2dim.c: Updated this benchmark to use the new headers
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Include the new header files, plus configuration
+	    header files
+	* src/compress/Makefile.in: Regenerated
+	* src/cover/Makefile.in: Regenerated
+	* src/crc/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/ctl-stack/Makefile.in: Regenerated
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/ctl-vector/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dhrystone/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/dtoa/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/expint/Makefile.in: Regenerated
+	* src/fac/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fir/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/frac/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/gdb-bitfields/Makefile.in: Regenerated
+	* src/gdb-constvars/Makefile.in: Regenerated
+	* src/gdb-store/Makefile.in: Regenerated
+	* src/huffbench/Makefile.in: Regenerated
+	* src/insertsort/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/jfdctint/Makefile.in: Regenerated
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/levenshtein/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/ludcmp/Makefile.in: Regenerated
+	* src/mergesort/Makefile.in: Regenerated
+	* src/miniz/Makefile.in: Regenerated
+	* src/minver/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/ndes/Makefile.in: Regenerated
+	* src/nettle-arcfour/Makefile.in: Regenerated
+	* src/nettle-cast128/Makefile.in: Regenerated
+	* src/nettle-des/Makefile.in: Regenerated
+	* src/nettle-md5/Makefile.in: Regenerated
+	* src/newlib-exp/Makefile.in: Regenerated
+	* src/newlib-log/Makefile.in: Regenerated
+	* src/newlib-mod/Makefile.in: Regenerated
+	* src/newlib-sqrt/Makefile.in: Regenerated
+	* src/ns/Makefile.in: Regenerated
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/prime/Makefile.in: Regenerated
+	* src/qsort/Makefile.in: Regenerated
+	* src/qurt/Makefile.in: Regenerated
+	* src/recursion/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/select/Makefile.in: Regenerated
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated
+	* src/sglib-arraysort/Makefile.in: Regenerated
+	* src/sglib-arraysort1/Makefile.in: Regenerated
+	* src/sglib-dllist/Makefile.in: Regenerated
+	* src/sglib-hashtable/Makefile.in: Regenerated
+	* src/sglib-listinsertsort/Makefile.in: Regenerated
+	* src/sglib-listinsertsort1/Makefile.in: Regenerated
+	* src/sglib-listsort/Makefile.in: Regenerated
+	* src/sglib-queue/Makefile.in: Regenerated
+	* src/sglib-rbtree/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/slre/Makefile.in: Regenerated
+	* src/sqrt/Makefile.in: Regenerated
+	* src/st/Makefile.in: Regenerated
+	* src/statemate/Makefile.in: Regenerated
+	* src/stringsearch1/Makefile.in: Regenerated
+	* src/strstr/Makefile.in: Regenerated
+	* src/tarai/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+	* src/ud/Makefile.in: Regenerated
+	* src/whetstone/Makefile.in: Regenerated
+	* src/wikisort/Makefile.in: Regenerated
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Centralised benchmark list, so benchmarks can be excluded for each
+	platform. The list of benchmarks is embedded into configure.ac, and
+	expanded using a m4 macro. This allows each benchmark to check whether
+	it should be compiled for the chosen platform. As there are some
+	benchmarks that will never fit into the target memory of some
+	platforms, this is a way to stop them from being compiled.
+
+	* Makefile.am: No longer has a list of all the subdirs, now gets a
+	    list of the subdirs from configure
+	* Makefile.in: Regenerated
+	* analysis/Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added EXCLUDED_BENCHMARKS variable to control which
+	    benchmarks should not be compiled. Various other infrastructure to
+	    help this.
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/compress/Makefile.in: Regenerated
+	* src/cover/Makefile.in: Regenerated
+	* src/crc/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/ctl-stack/Makefile.in: Regenerated
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/ctl-vector/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dhrystone/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/dtoa/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/expint/Makefile.in: Regenerated
+	* src/fac/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fir/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/frac/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/gdb-bitfields/Makefile.in: Regenerated
+	* src/gdb-constvars/Makefile.in: Regenerated
+	* src/gdb-store/Makefile.in: Regenerated
+	* src/huffbench/Makefile.in: Regenerated
+	* src/insertsort/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/jfdctint/Makefile.in: Regenerated
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/levenshtein/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/ludcmp/Makefile.in: Regenerated
+	* src/mergesort/Makefile.in: Regenerated
+	* src/miniz/Makefile.in: Regenerated
+	* src/minver/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/ndes/Makefile.in: Regenerated
+	* src/nettle-arcfour/Makefile.in: Regenerated
+	* src/nettle-cast128/Makefile.in: Regenerated
+	* src/nettle-des/Makefile.in: Regenerated
+	* src/nettle-md5/Makefile.in: Regenerated
+	* src/newlib-exp/Makefile.in: Regenerated
+	* src/newlib-log/Makefile.in: Regenerated
+	* src/newlib-mod/Makefile.in: Regenerated
+	* src/newlib-sqrt/Makefile.in: Regenerated
+	* src/ns/Makefile.in: Regenerated
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/platformcode/Makefile.in: Regenerated
+	* src/prime/Makefile.in: Regenerated
+	* src/qsort/Makefile.in: Regenerated
+	* src/qurt/Makefile.in: Regenerated
+	* src/recursion/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/select/Makefile.in: Regenerated
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated
+	* src/sglib-arraysort/Makefile.in: Regenerated
+	* src/sglib-arraysort1/Makefile.in: Regenerated
+	* src/sglib-dllist/Makefile.in: Regenerated
+	* src/sglib-hashtable/Makefile.in: Regenerated
+	* src/sglib-listinsertsort/Makefile.in: Regenerated
+	* src/sglib-listinsertsort1/Makefile.in: Regenerated
+	* src/sglib-listsort/Makefile.in: Regenerated
+	* src/sglib-queue/Makefile.in: Regenerated
+	* src/sglib-rbtree/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/slre/Makefile.in: Regenerated
+	* src/sqrt/Makefile.in: Regenerated
+	* src/st/Makefile.in: Regenerated
+	* src/statemate/Makefile.in: Regenerated
+	* src/stringsearch1/Makefile.in: Regenerated
+	* src/strstr/Makefile.in: Regenerated
+	* src/tarai/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+	* src/ud/Makefile.in: Regenerated
+	* src/whetstone/Makefile.in: Regenerated
+	* src/wikisort/Makefile.in: Regenerated
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Small modifications to benchmarks to reduce energy usage. Mostly
+	involves marking some arrays as const, so the compiler puts them into
+	non-volatile storage
+
+	* src/crc/crc.c: Modification to reduce memory
+	* src/crc32/crc_32.c: Modification to reduce memory
+	* src/fir/fir.c: Modification to reduce memory
+	* src/float_matmult/matmult.c: Modification to reduce memory
+	* src/lms/lms.c: Modification to reduce memory
+	* src/mergesort/mergesort.c: Modification to reduce memory
+	* src/ndes/ndes.c: Modification to reduce memory
+	* src/ns/ns.c: Modification to reduce memory
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Modifications to compress to make it fit in memory of msp430
+
+	* src/compress/compress.c: Modifications to compress to make it fit in
+	    memory of msp430
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Added miniz benchmark
+
+	* Makefile.am: Added miniz benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added miniz benchmark
+	* src/miniz/Makefile.am: Added miniz benchmark
+	* src/miniz/Makefile.in: Regenerated
+	* src/miniz/miniz.c: Added miniz benchmark
+	* src/miniz/miniz_b.c: Added miniz benchmark
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Better work around for missing float functions in msp430 libm
+
+	* configure: Regenerated
+	* configure.ac: Removed old hack
+	* src/2dfir/Makefile.in: Regenerated
+	* src/adpcm/Makefile.in: Regenerated
+	* src/blowfish/Makefile.in: Regenerated
+	* src/bs/Makefile.in: Regenerated
+	* src/bsort100/Makefile.in: Regenerated
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/cnt/Makefile.in: Regenerated
+	* src/common.mk.am: Compile msp430.s when using a msp430 platform
+	* src/compress/Makefile.in: Regenerated
+	* src/cover/Makefile.in: Regenerated
+	* src/crc/Makefile.in: Regenerated
+	* src/crc32/Makefile.in: Regenerated
+	* src/ctl-stack/Makefile.in: Regenerated
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/ctl-vector/Makefile.in: Regenerated
+	* src/cubic/Makefile.in: Regenerated
+	* src/dhrystone/Makefile.in: Regenerated
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/dtoa/Makefile.in: Regenerated
+	* src/duff/Makefile.in: Regenerated
+	* src/edn/Makefile.in: Regenerated
+	* src/expint/Makefile.in: Regenerated
+	* src/fac/Makefile.in: Regenerated
+	* src/fasta/Makefile.in: Regenerated
+	* src/fdct/Makefile.in: Regenerated
+	* src/fft/Makefile.in: Regenerated
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fir/Makefile.in: Regenerated
+	* src/float_matmult/Makefile.in: Regenerated
+	* src/frac/Makefile.in: Regenerated
+	* src/gdb-advance/Makefile.in: Regenerated
+	* src/gdb-all-types/Makefile.in: Regenerated
+	* src/gdb-anon/Makefile.in: Regenerated
+	* src/gdb-arrayidx/Makefile.in: Regenerated
+	* src/gdb-async/Makefile.in: Regenerated
+	* src/gdb-bitfields/Makefile.in: Regenerated
+	* src/gdb-constvars/Makefile.in: Regenerated
+	* src/gdb-store/Makefile.in: Regenerated
+	* src/huffbench/Makefile.in: Regenerated
+	* src/insertsort/Makefile.in: Regenerated
+	* src/int_matmult/Makefile.in: Regenerated
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/jfdctint/Makefile.in: Regenerated
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/levenshtein/Makefile.in: Regenerated
+	* src/lms/Makefile.in: Regenerated
+	* src/ludcmp/Makefile.in: Regenerated
+	* src/mergesort/Makefile.in: Regenerated
+	* src/minver/Makefile.in: Regenerated
+	* src/nbody/Makefile.in: Regenerated
+	* src/ndes/Makefile.in: Regenerated
+	* src/nettle-arcfour/Makefile.in: Regenerated
+	* src/nettle-cast128/Makefile.in: Regenerated
+	* src/nettle-des/Makefile.in: Regenerated
+	* src/nettle-md5/Makefile.in: Regenerated
+	* src/newlib-exp/Makefile.in: Regenerated
+	* src/newlib-log/Makefile.in: Regenerated
+	* src/newlib-mod/Makefile.in: Regenerated
+	* src/newlib-sqrt/Makefile.in: Regenerated
+	* src/ns/Makefile.in: Regenerated
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/platformcode/msp430.s: Define symbols pow, exp and log, mapping
+	    to corresponding powf, expf and logf
+	* src/prime/Makefile.in: Regenerated
+	* src/qsort/Makefile.in: Regenerated
+	* src/qurt/Makefile.in: Regenerated
+	* src/recursion/Makefile.in: Regenerated
+	* src/rijndael/Makefile.in: Regenerated
+	* src/select/Makefile.in: Regenerated
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated
+	* src/sglib-arraysort/Makefile.in: Regenerated
+	* src/sglib-arraysort1/Makefile.in: Regenerated
+	* src/sglib-dllist/Makefile.in: Regenerated
+	* src/sglib-hashtable/Makefile.in: Regenerated
+	* src/sglib-listinsertsort/Makefile.in: Regenerated
+	* src/sglib-listinsertsort1/Makefile.in: Regenerated
+	* src/sglib-listsort/Makefile.in: Regenerated
+	* src/sglib-queue/Makefile.in: Regenerated
+	* src/sglib-rbtree/Makefile.in: Regenerated
+	* src/sha/Makefile.in: Regenerated
+	* src/slre/Makefile.in: Regenerated
+	* src/sqrt/Makefile.in: Regenerated
+	* src/st/Makefile.in: Regenerated
+	* src/statemate/Makefile.in: Regenerated
+	* src/stringsearch1/Makefile.in: Regenerated
+	* src/strstr/Makefile.in: Regenerated
+	* src/tarai/Makefile.in: Regenerated
+	* src/template/Makefile.in: Regenerated
+	* src/ud/Makefile.in: Regenerated
+	* src/whetstone/Makefile.in: Regenerated
+	* src/wikisort/Makefile.in: Regenerated
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Added tarai benchmark
+
+	* Makefile.am: Added tarai benchmark
+	* Makefile.in: Regenerated
+	* configure: Regenerated
+	* configure.ac: Added tarai benchmark
+	* src/tarai/Makefile.am: Added tarai benchmark
+	* src/tarai/Makefile.in: Regenerated
+	* src/tarai/tarai.c: Added tarai benchmark
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Added workaround for there being no pow function in msp430's libc
+
+	* configure: Regenerated
+	* configure.ac: Added workaround for there being no pow function in
+	    msp430's libc
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Fixes for ctl benchmarks, and removed realloc
+
+	* src/ctl-stack/ctl.h: Removed printfs
+	* src/ctl-stack/stack.c: Previously used an incorrect variable
+	* src/ctl-string/string.c: Removed realloc
+	* src/ctl-vector/ctl.h: Removed realloc
+	* src/ctl-vector/vector.c: Previously used an incorrect variable
+	* src/ctl-vector/vector.h: Removed realloc
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Change options for rijndael, to make it smaller, and compiler for
+	msp430
+
+	* src/rijndael/aes.c: Change options for rijndael, to make it smaller.
+
+2014-03-20  James Pallister  <james.pallister@bristol.ac.uk>
+	Added support for msp-exp430fr5739 platform
+
+	* configure: Regenerated
+	* configure.ac: Added support for msp-exp430fr5739 platform
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/mergesort/mergesort.c: Removed dependency on assert
+	* src/platformcode/platformcode.c: Added trigger code for msp-
+	    exp430fr5739
+	* src/sglib-arraybinsearch/sglib.h: Removed dependency on assert
+	* src/sglib-arraysort/sglib.h: Removed dependency on assert
+	* src/sglib-arraysort1/sglib.h: Removed dependency on assert
+	* src/sglib-dllist/sglib.h: Removed dependency on assert
+	* src/sglib-hashtable/sglib.h: Removed dependency on assert
+	* src/sglib-listinsertsort/sglib.h: Removed dependency on assert
+	* src/sglib-listinsertsort1/sglib.h: Removed dependency on assert
+	* src/sglib-listsort/sglib.h: Removed dependency on assert
+	* src/sglib-queue/sglib.h: Removed dependency on assert
+	* src/sglib-rbtree/sglib.h: Removed dependency on assert
+	* src/wikisort/wikisort.c: Removed dependency on assert
+
 2014-06-06  Pierre Langlois  <pierre.langlois@embecosm.com>
 
 	* src/bsort100/bsort100.c: Remove K&R style functions.

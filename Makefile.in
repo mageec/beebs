@@ -103,9 +103,11 @@ target_triplet = @target@
 subdir = .
 DIST_COMMON = INSTALL NEWS README AUTHORS ChangeLog \
 	$(srcdir)/Makefile.in $(srcdir)/Makefile.am \
-	$(top_srcdir)/configure $(am__configure_deps) COPYING \
-	build-aux/compile build-aux/config.guess build-aux/config.sub \
-	build-aux/depcomp build-aux/install-sh build-aux/missing \
+	$(top_srcdir)/configure $(am__configure_deps) \
+	$(srcdir)/config.h.in $(top_srcdir)/dejagnu/site.exp.in \
+	COPYING build-aux/compile build-aux/config.guess \
+	build-aux/config.sub build-aux/depcomp build-aux/install-sh \
+	build-aux/mdate-sh build-aux/missing build-aux/texinfo.tex \
 	build-aux/ltmain.sh $(top_srcdir)/build-aux/compile \
 	$(top_srcdir)/build-aux/config.guess \
 	$(top_srcdir)/build-aux/config.sub \
@@ -122,7 +124,8 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
-CONFIG_CLEAN_FILES =
+CONFIG_HEADER = config.h
+CONFIG_CLEAN_FILES = dejagnu/site.exp
 CONFIG_CLEAN_VPATH_FILES =
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -159,7 +162,8 @@ am__recursive_targets = \
   $(am__extra_recursive_targets)
 AM_RECURSIVE_TARGETS = $(am__recursive_targets:-recursive=) TAGS CTAGS \
 	cscope distdir dist dist-all distcheck
-am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
+am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) \
+	$(LISP)config.h.in
 # Read a list of newline-separated strings from the standard input,
 # and print each of them once, without duplicates.  Input order is
 # *not* preserved.
@@ -179,6 +183,10 @@ am__define_uniq_tagged_files = \
 ETAGS = etags
 CTAGS = ctags
 CSCOPE = cscope
+DEJATOOL = $(PACKAGE)
+RUNTESTDEFAULTFLAGS = --tool $$tool --srcdir $$srcdir
+EXPECT = expect
+RUNTEST = runtest
 DIST_SUBDIRS = $(SUBDIRS)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
@@ -224,20 +232,25 @@ am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
 distcleancheck_listfiles = find . -type f -print
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
-AM_CFLAGS = @AM_CFLAGS@
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
-AM_LDFLAGS = @AM_LDFLAGS@
 AR = @AR@
+ARCH = @ARCH@
 AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
+BENCHMARKS = @BENCHMARKS@
+BENCHMARKS_SUBDIRS = @BENCHMARKS_SUBDIRS@
+BOARD = @BOARD@
 CC = @CC@
 CCAS = @CCAS@
 CCASDEPMODE = @CCASDEPMODE@
 CCASFLAGS = @CCASFLAGS@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+CHIP = @CHIP@
+CONFIG_CFLAGS = @CONFIG_CFLAGS@
+CONFIG_LDFLAGS = @CONFIG_LDFLAGS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CROSS_COMPILER_CHECK = @CROSS_COMPILER_CHECK@
@@ -251,6 +264,7 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EGREP = @EGREP@
+EXCLUDED_BENCHMARKS = @EXCLUDED_BENCHMARKS@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GREP = @GREP@
@@ -289,7 +303,6 @@ RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
-SIMULATORPATH = @SIMULATORPATH@
 STRIP = @STRIP@
 VERSION = @VERSION@
 abs_builddir = @abs_builddir@
@@ -338,8 +351,6 @@ program_transform_name = @program_transform_name@
 psdir = @psdir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
-simulate_m0_cmd = @simulate_m0_cmd@
-simulavr_cmd = @simulavr_cmd@
 srcdir = @srcdir@
 sysconfdir = @sysconfdir@
 target = @target@
@@ -350,30 +361,16 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-# ==== SUBDIRS (This is a marker for the generate-benchmark.sh script)
-SUBDIRS = src/platformcode src/2dfir src/adpcm src/blowfish src/bs \
-	src/bsort100 src/bubblesort src/cnt src/compress src/cover \
-	src/crc src/crc32 src/ctl-string src/ctl-stack src/ctl-vector \
-	src/cubic src/dhrystone src/dijkstra src/dtoa src/duff src/edn \
-	src/expint src/fac src/fasta src/fdct src/fft src/fibcall \
-	src/fir src/float_matmult src/frac src/gdb-advance \
-	src/gdb-all-types src/gdb-anon src/gdb-arrayidx src/gdb-async \
-	src/gdb-bitfields src/gdb-constvars src/gdb-store \
-	src/huffbench src/insertsort src/int_matmult src/janne_complex \
-	src/jfdctint src/lcdnum src/levenshtein src/lms src/ludcmp \
-	src/mergesort src/minver src/nbody src/ndes src/nettle-arcfour \
-	src/nettle-cast128 src/nettle-des src/nettle-md5 \
-	src/newlib-exp src/newlib-log src/newlib-mod src/newlib-sqrt \
-	src/ns src/nsichneu src/prime src/qsort src/qurt src/recursion \
-	src/rijndael src/select src/sglib-arraybinsearch \
-	src/sglib-arraysort src/sglib-arraysort1 src/sglib-dllist \
-	src/sglib-hashtable src/sglib-listinsertsort \
-	src/sglib-listinsertsort1 src/sglib-listsort src/sglib-queue \
-	src/sglib-rbtree src/sha src/slre src/sqrt src/st \
-	src/statemate src/stringsearch1 src/strstr src/ud \
-	src/whetstone src/wikisort src/template analysis
+AUTOMAKE_OPTIONS = dejagnu
+SUBDIRS = $(BENCHMARKS_SUBDIRS) src/template doc
 ACLOCAL_AMFLAGS = -I m4
-all: all-recursive
+EXTRA_DEJAGNU_SITE_CONFIG = $(top_builddir)/dejagnu/site.exp
+EXTRA_DIST = beebs.test \
+            dejagnu \
+            config
+
+all: config.h
+	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
 .SUFFIXES:
 am--refresh: Makefile
@@ -410,6 +407,23 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	$(am__cd) $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
 $(am__aclocal_m4_deps):
+
+config.h: stamp-h1
+	@test -f $@ || rm -f stamp-h1
+	@test -f $@ || $(MAKE) $(AM_MAKEFLAGS) stamp-h1
+
+stamp-h1: $(srcdir)/config.h.in $(top_builddir)/config.status
+	@rm -f stamp-h1
+	cd $(top_builddir) && $(SHELL) ./config.status config.h
+$(srcdir)/config.h.in: @MAINTAINER_MODE_TRUE@ $(am__configure_deps) 
+	($(am__cd) $(top_srcdir) && $(AUTOHEADER))
+	rm -f stamp-h1
+	touch $@
+
+distclean-hdr:
+	-rm -f config.h stamp-h1
+dejagnu/site.exp: $(top_builddir)/config.status $(top_srcdir)/dejagnu/site.exp.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -525,6 +539,50 @@ cscopelist-am: $(am__tagged_files)
 distclean-tags:
 	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags
 	-rm -f cscope.out cscope.in.out cscope.po.out cscope.files
+
+check-DEJAGNU: site.exp
+	srcdir='$(srcdir)'; export srcdir; \
+	EXPECT=$(EXPECT); export EXPECT; \
+	if $(SHELL) -c "$(RUNTEST) --version" > /dev/null 2>&1; then \
+	  exit_status=0; l='$(DEJATOOL)'; for tool in $$l; do \
+	    if $(RUNTEST) $(AM_RUNTESTFLAGS) $(RUNTESTDEFAULTFLAGS) $(RUNTESTFLAGS); \
+	    then :; else exit_status=1; fi; \
+	  done; \
+	else echo "WARNING: could not find '$(RUNTEST)'" 1>&2; :;\
+	fi; \
+	exit $$exit_status
+site.exp: Makefile $(EXTRA_DEJAGNU_SITE_CONFIG)
+	@echo 'Making a new site.exp file ...'
+	@echo '## these variables are automatically generated by make ##' >site.tmp
+	@echo '# Do not edit here.  If you wish to override these values' >>site.tmp
+	@echo '# edit the last section' >>site.tmp
+	@echo 'set srcdir "$(srcdir)"' >>site.tmp
+	@echo "set objdir `pwd`" >>site.tmp
+	@echo 'set build_alias "$(build_alias)"' >>site.tmp
+	@echo 'set build_triplet $(build_triplet)' >>site.tmp
+	@echo 'set host_alias "$(host_alias)"' >>site.tmp
+	@echo 'set host_triplet $(host_triplet)' >>site.tmp
+	@echo 'set target_alias "$(target_alias)"' >>site.tmp
+	@echo 'set target_triplet $(target_triplet)' >>site.tmp
+	@list='$(EXTRA_DEJAGNU_SITE_CONFIG)'; for f in $$list; do \
+	  echo "## Begin content included from file $$f.  Do not modify. ##" \
+	   && cat `test -f "$$f" || echo '$(srcdir)/'`$$f \
+	   && echo "## End content included from file $$f. ##" \
+	   || exit 1; \
+	 done >> site.tmp
+	@echo "## End of auto-generated content; you can edit from here. ##" >> site.tmp
+	@if test -f site.exp; then \
+	   sed -e '1,/^## End of auto-generated content.*##/d' site.exp >> site.tmp; \
+	 fi
+	@-rm -f site.bak
+	@test ! -f site.exp || mv site.exp site.bak
+	@mv site.tmp site.exp
+
+distclean-DEJAGNU:
+	-rm -f site.exp site.bak
+	-l='$(DEJATOOL)'; for tool in $$l; do \
+	  rm -f $$tool.sum $$tool.log; \
+	done
 
 distdir: $(DISTFILES)
 	$(am__remove_distdir)
@@ -715,8 +773,9 @@ distcleancheck: distclean
 	       $(distcleancheck_listfiles) ; \
 	       exit 1; } >&2
 check-am: all-am
+	$(MAKE) $(AM_MAKEFLAGS) check-DEJAGNU
 check: check-recursive
-all-am: Makefile
+all-am: Makefile config.h
 installdirs: installdirs-recursive
 installdirs-am:
 install: install-recursive
@@ -756,8 +815,8 @@ clean-am: clean-generic clean-libtool mostlyclean-am
 distclean: distclean-recursive
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -f Makefile
-distclean-am: clean-am distclean-generic distclean-libtool \
-	distclean-tags
+distclean-am: clean-am distclean-DEJAGNU distclean-generic \
+	distclean-hdr distclean-libtool distclean-tags
 
 dvi: dvi-recursive
 
@@ -819,13 +878,14 @@ ps-am:
 
 uninstall-am:
 
-.MAKE: $(am__recursive_targets) install-am install-strip
+.MAKE: $(am__recursive_targets) all check-am install-am install-strip
 
 .PHONY: $(am__recursive_targets) CTAGS GTAGS TAGS all all-am \
-	am--refresh check check-am clean clean-cscope clean-generic \
-	clean-libtool cscope cscopelist-am ctags ctags-am dist \
-	dist-all dist-bzip2 dist-gzip dist-lzip dist-shar dist-tarZ \
-	dist-xz dist-zip distcheck distclean distclean-generic \
+	am--refresh check check-DEJAGNU check-am clean clean-cscope \
+	clean-generic clean-libtool cscope cscopelist-am ctags \
+	ctags-am dist dist-all dist-bzip2 dist-gzip dist-lzip \
+	dist-shar dist-tarZ dist-xz dist-zip distcheck distclean \
+	distclean-DEJAGNU distclean-generic distclean-hdr \
 	distclean-libtool distclean-tags distcleancheck distdir \
 	distuninstallcheck dvi dvi-am html html-am info info-am \
 	install install-am install-data install-data-am install-dvi \

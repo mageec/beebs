@@ -20,9 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=cast128
-cast128_SOURCES=cast128.c
+bin_PROGRAMS=nettle-cast128
+nettle_cast128_SOURCES=cast128.c
 
 include $(top_srcdir)/src/common.mk.am
 
-cast128_SOURCES += ${platform_src}
+nettle_cast128_SOURCES += ${platform_src}

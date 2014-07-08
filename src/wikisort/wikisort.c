@@ -22,7 +22,7 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
-#include "platformcode.h"
+#include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
@@ -34,7 +34,6 @@
 #include <stdarg.h>
 #include <string.h>
 #include <math.h>
-#include <assert.h>
 #include <limits.h>
 
 /* various #defines for the C code */
@@ -730,7 +729,7 @@ main (void)
 {
   int i;
 
-  initialise_trigger ();
+  initialise_board ();
   start_trigger ();
 
   for (i = 0; i < SCALE_FACTOR; i++)

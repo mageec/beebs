@@ -20,7 +20,7 @@
 #define _SGLIB__h_
 
 /* the assert is used exclusively to write unexpected error messages */
-#include <assert.h>
+#define assert(a)
 
 
 /* ---------------------------------------------------------------------------- */

@@ -41,7 +41,7 @@
 #include <ctype.h>
 
 #include "aes.h"
-#include "platformcode.h"
+#include "support.h"
 
 #ifndef fpos_t
    #define fpos_t size_t
@@ -167,7 +167,7 @@ int main(int argc, char *argv[])
       -19, 41, -115, 12, 11, 26, 113, 23};
 #endif
 
-   initialise_trigger();
+   initialise_board();
    start_trigger();
 
    for(n = 0; n < REPEAT_FACTOR>>9; n++)

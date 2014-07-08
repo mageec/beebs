@@ -18,7 +18,7 @@
  *----------------------------------------------------------------------*/
 #include <math.h>
 
-#include "platformcode.h"
+#include "support.h"
 
 /*
  * MATRIX MULTIPLICATION BENCHMARK PROGRAM:
@@ -42,7 +42,7 @@ int RandomInteger(void);
 
 int main()
 {
-   matrix check_ResultArray = {
+   const matrix check_ResultArray = {
       {931.049988, 562.409973, 676.890015, 648.630005, 837.449951, 728.460022, 936.089905, 582.47998,  668.700012, 477.360016},
       {1296,       792.98999,  1174.41003, 411.120026, 1174.04993, 952.289978, 1285.56006, 1148.66992, 828,        751.139954},
       {903.150024, 596.609985, 937.890015, 665.279968, 1135.79993, 778.410034, 805.589966, 587.880005, 1077.29993, 540.809998},
@@ -58,7 +58,7 @@ int main()
    int n;
    InitSeed();
 
-   initialise_trigger();
+   initialise_board();
    start_trigger();
 
    for(n = 0; n < REPEAT_FACTOR>>5; ++n)

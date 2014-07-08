@@ -636,11 +636,8 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
-simulate_m0_cmd
-SIMULATORPATH
-simulavr_cmd
-SIMULATE_FALSE
-SIMULATE_TRUE
+BENCHMARKS_SUBDIRS
+BENCHMARKS
 CROSS_COMPILER_CHECK
 am__fastdepCCAS_FALSE
 am__fastdepCCAS_TRUE
@@ -686,6 +683,10 @@ LDFLAGS
 CFLAGS
 CC
 LIBTOOL
+AM_BACKSLASH
+AM_DEFAULT_VERBOSITY
+AM_DEFAULT_V
+AM_V
 am__untar
 am__tar
 AMTAR
@@ -709,6 +710,14 @@ am__isrc
 INSTALL_DATA
 INSTALL_SCRIPT
 INSTALL_PROGRAM
+CONFIG_CFLAGS
+CONFIG_LDFLAGS
+CHIP
+BOARD
+ARCH
+CHIPSUPPORT_C_FALSE
+CHIPSUPPORT_C_TRUE
+EXCLUDED_BENCHMARKS
 target_os
 target_vendor
 target_cpu
@@ -721,26 +730,6 @@ build_os
 build_vendor
 build_cpu
 build
-AM_CFLAGS
-AM_LDFLAGS
-SAM4LXPLAINED_FALSE
-SAM4LXPLAINED_TRUE
-MSPEXP430F5529_FALSE
-MSPEXP430F5529_TRUE
-XMEGAA3BUXPLAINED_FALSE
-XMEGAA3BUXPLAINED_TRUE
-PIC32MX250F128B_FALSE
-PIC32MX250F128B_TRUE
-ATMEGA328P_FALSE
-ATMEGA328P_TRUE
-STM32VLDISCOVERY_FALSE
-STM32VLDISCOVERY_TRUE
-STM32F0DISCOVERY_FALSE
-STM32F0DISCOVERY_TRUE
-AM_BACKSLASH
-AM_DEFAULT_VERBOSITY
-AM_DEFAULT_V
-AM_V
 MAINT
 MAINTAINER_MODE_FALSE
 MAINTAINER_MODE_TRUE
@@ -786,9 +775,10 @@ ac_subst_files=''
 ac_user_opts='
 enable_option_checking
 enable_maintainer_mode
-enable_silent_rules
 enable_simulate
-with_platform
+with_board
+with_chip
+enable_silent_rules
 enable_shared
 enable_static
 with_pic
@@ -797,12 +787,11 @@ enable_dependency_tracking
 with_gnu_ld
 with_sysroot
 enable_libtool_lock
-enable_simulate_avr
-enable_simulate_cortex_m0
 '
       ac_precious_vars='build_alias
 host_alias
 target_alias
+EXCLUDED_BENCHMARKS
 CC
 CFLAGS
 LDFLAGS
@@ -1433,9 +1422,9 @@ Optional Features:
   --enable-maintainer-mode
                           enable make rules and dependencies not useful (and
                           sometimes confusing) to the casual installer
+  --enable-simulate       Enable the simulation for the specified platform
   --enable-silent-rules   less verbose build output (undo: "make V=1")
   --disable-silent-rules  verbose build output (undo: "make V=0")
-  --enable-simulate       Enable the simulation for the specified platform
   --enable-shared[=PKGS]  build shared libraries [default=yes]
   --enable-static[=PKGS]  build static libraries [default=yes]
   --enable-fast-install[=PKGS]
@@ -1445,22 +1434,12 @@ Optional Features:
   --disable-dependency-tracking
                           speeds up one-time build
   --disable-libtool-lock  avoid locking (might break parallel builds)
-  --enable-simulate-avr   Enable the simulation for AVR
-  --enable-simulate-cortex-m0
-                          Enable the simulation for cortex-m0
 
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
-  --with-platform         Select the platform compile for. Possible platforms
-                          are:
-                              stm32f0discovery
-                              stm32vldiscovery
-                              atmega328p
-                              pic32mx250f128b
-                              xmegaa3buxplained
-                              msp-exp430f5529
-                              sam4lxplained
+  --with-board            Select the board to target
+  --with-chip             Select the chip to target
   --with-pic[=PKGS]       try to use only PIC/non-PIC objects [default=use
                           both]
   --with-gnu-ld           assume the C compiler uses GNU ld [default=no]
@@ -1468,6 +1447,8 @@ Optional Packages:
                         (or the compiler's sysroot if not specified).
 
 Some influential environment variables:
+  EXCLUDED_BENCHMARKS
+              exclude benchmarks from the build
   CC          C compiler command
   CFLAGS      C compiler flags
   LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
@@ -2226,45 +2207,7 @@ fi
 
 
 
-# Check whether --enable-silent-rules was given.
-if test "${enable_silent_rules+set}" = set; then :
-  enableval=$enable_silent_rules;
-fi
-
-case $enable_silent_rules in # (((
-  yes) AM_DEFAULT_VERBOSITY=0;;
-   no) AM_DEFAULT_VERBOSITY=1;;
-    *) AM_DEFAULT_VERBOSITY=0;;
-esac
-am_make=${MAKE-make}
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether $am_make supports nested variables" >&5
-$as_echo_n "checking whether $am_make supports nested variables... " >&6; }
-if ${am_cv_make_support_nested_variables+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  if $as_echo 'TRUE=$(BAR$(V))
-BAR0=false
-BAR1=true
-V=1
-am__doit:
-	@$(TRUE)
-.PHONY: am__doit' | $am_make -f - >/dev/null 2>&1; then
-  am_cv_make_support_nested_variables=yes
-else
-  am_cv_make_support_nested_variables=no
-fi
-fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $am_cv_make_support_nested_variables" >&5
-$as_echo "$am_cv_make_support_nested_variables" >&6; }
-if test $am_cv_make_support_nested_variables = yes; then
-    AM_V='$(V)'
-  AM_DEFAULT_V='$(AM_DEFAULT_VERBOSITY)'
-else
-  AM_V=$AM_DEFAULT_VERBOSITY
-  AM_DEFAULT_V=$AM_DEFAULT_VERBOSITY
-fi
-AM_BACKSLASH='\'
-
+# AM_SILENT_RULES([yes])
 
 # Check whether --enable-simulate was given.
 if test "${enable_simulate+set}" = set; then :
@@ -2274,250 +2217,28 @@ else
 fi
 
 
-# Manually format the help string, so that we can have custom formatting on the RHS
+# Option for selecting the target board
 
-# Check whether --with-platform was given.
-if test "${with_platform+set}" = set; then :
-  withval=$with_platform;
+# Check whether --with-board was given.
+if test "${with_board+set}" = set; then :
+  withval=$with_board;
 else
-  with_platform=none
+  with_board=none
 
 fi
 
 
- if false; then
-  STM32F0DISCOVERY_TRUE=
-  STM32F0DISCOVERY_FALSE='#'
-else
-  STM32F0DISCOVERY_TRUE='#'
-  STM32F0DISCOVERY_FALSE=
-fi
+# Option for selecting the target board
 
- if false; then
-  STM32VLDISCOVERY_TRUE=
-  STM32VLDISCOVERY_FALSE='#'
+# Check whether --with-chip was given.
+if test "${with_chip+set}" = set; then :
+  withval=$with_chip;
 else
-  STM32VLDISCOVERY_TRUE='#'
-  STM32VLDISCOVERY_FALSE=
-fi
+  with_chip=none
 
- if false; then
-  ATMEGA328P_TRUE=
-  ATMEGA328P_FALSE='#'
-else
-  ATMEGA328P_TRUE='#'
-  ATMEGA328P_FALSE=
-fi
-
- if false; then
-  PIC32MX250F128B_TRUE=
-  PIC32MX250F128B_FALSE='#'
-else
-  PIC32MX250F128B_TRUE='#'
-  PIC32MX250F128B_FALSE=
-fi
-
- if false; then
-  XMEGAA3BUXPLAINED_TRUE=
-  XMEGAA3BUXPLAINED_FALSE='#'
-else
-  XMEGAA3BUXPLAINED_TRUE='#'
-  XMEGAA3BUXPLAINED_FALSE=
-fi
-
- if false; then
-  MSPEXP430F5529_TRUE=
-  MSPEXP430F5529_FALSE='#'
-else
-  MSPEXP430F5529_TRUE='#'
-  MSPEXP430F5529_FALSE=
-fi
-
- if false; then
-  SAM4LXPLAINED_TRUE=
-  SAM4LXPLAINED_FALSE='#'
-else
-  SAM4LXPLAINED_TRUE='#'
-  SAM4LXPLAINED_FALSE=
 fi
 
 
-save_CFLAGS=$CFLAGS
-save_LDFLAGS=$LDFLAGS
-
-case $with_platform in
-    stm32f0discovery)
-        if test x$host == x$build ; then
-            as_fn_error $? "Please rerun configure with --host=arm-none-eabi for this platform" "$LINENO" 5
-        fi
-
-        # gcc-arm-embedded requires these libraries for the tests, else they'll fail
-        AM_LDFLAGS="-lc -lnosys"
-
-        AM_CFLAGS="-mthumb -mcpu=cortex-m0 -DCORTEX_M0"
-
-        CFLAGS="$CFLAGS -mthumb -mcpu=cortex-m0 -DCORTEX_M0"
-        LDFLAGS="$LDFLAGS -lc -lnosys"
-
-        # enable_platformsources=yes
-
-        if test x$enable_simulate == xyes; then
-            enable_simulate_cortex_m0=yes
-        fi
-
-         if true; then
-  STM32F0DISCOVERY_TRUE=
-  STM32F0DISCOVERY_FALSE='#'
-else
-  STM32F0DISCOVERY_TRUE='#'
-  STM32F0DISCOVERY_FALSE=
-fi
-
-        ;;
-
-    stm32vldiscovery)
-        if test x$host == x$build ; then
-            as_fn_error $? "Please rerun configure with --host=arm-none-eabi for this platform" "$LINENO" 5
-        fi
-
-        # gcc-arm-embedded requires these libraries for the tests, else they'll fail
-        AM_LDFLAGS="-lc -lnosys"
-
-        AM_CFLAGS="-mthumb -mcpu=cortex-m3 -DCORTEX_M3"
-
-        CFLAGS="$CFLAGS -mthumb -mcpu=cortex-m3 -DCORTEX_M0"
-        LDFLAGS="$LDFLAGS -lc -lnosys"
-
-        # enable_platformsources=yes
-
-        if test x$enable_simulate == xyes; then
-            enable_simulate_cortex_m3=yes
-        fi
-
-         if true; then
-  STM32VLDISCOVERY_TRUE=
-  STM32VLDISCOVERY_FALSE='#'
-else
-  STM32VLDISCOVERY_TRUE='#'
-  STM32VLDISCOVERY_FALSE=
-fi
-
-        ;;
-
-
-    atmega328p)
-        if test x$host == x$build ; then
-            as_fn_error $? "Please rerun configure with --host=avr for this platform" "$LINENO" 5
-        fi
-
-        AM_CFLAGS="-mmcu=atmega328p -std=gnu99 -DAVR"
-
-        if test x$enable_simulate == xyes; then
-            enable_simulate_avr=yes
-        fi
-
-         if true; then
-  ATMEGA328P_TRUE=
-  ATMEGA328P_FALSE='#'
-else
-  ATMEGA328P_TRUE='#'
-  ATMEGA328P_FALSE=
-fi
-
-        ;;
-
-    xmegaa3buxplained)
-        if test x$host == x$build ; then
-            as_fn_error $? "Please rerun configure with --host=avr for this platform" "$LINENO" 5
-        fi
-
-        # gcc does not support the atxmega256a3bu yet, but atxmega256a3 works
-        # just fine.
-        AM_CFLAGS="$AM_CFLAGS -mmcu=atxmega256a3 -std=gnu99 -DAVR_ATXMEGA"
-
-        if test x$enable_simulate == xyes; then
-            enable_simulate_avr=yes
-        fi
-
-         if true; then
-  XMEGAA3BUXPLAINED_TRUE=
-  XMEGAA3BUXPLAINED_FALSE='#'
-else
-  XMEGAA3BUXPLAINED_TRUE='#'
-  XMEGAA3BUXPLAINED_FALSE=
-fi
-
-        ;;
-
-   pic32mx250f128b)
-        if test x$host == x$build ; then
-            as_fn_error $? "Please rerun configure with --host=pic32 for this platform" "$LINENO" 5
-        fi
-
-        AM_CFLAGS="-mprocessor=32MX250F128B -mips32r2 -std=gnu99 -mips16 -DPIC -Wl,-wrap,main"
-
-        if test x$enable_simulate == xyes; then
-            enable_simulate_pic=yes
-        fi
-
-         if true; then
-  PIC32MX250F128B_TRUE=
-  PIC32MX250F128B_FALSE='#'
-else
-  PIC32MX250F128B_TRUE='#'
-  PIC32MX250F128B_FALSE=
-fi
-
-        ;;
-
-    msp-exp430f5529)
-        if test x$host == x$build ; then
-            as_fn_error $? "Please rerun configure with --host=msp430 for this platform" "$LINENO" 5
-        fi
-
-        AM_CFLAGS="-mmcu=msp430f5529 -std=gnu99 -mcpu=430 -DMSP430F"
-
-        if test x$enable_simulate == xyes; then
-            enable_simulate_msp430=yes
-        fi
-
-         if true; then
-  MSPEXP430F5529_TRUE=
-  MSPEXP430F5529_FALSE='#'
-else
-  MSPEXP430F5529_TRUE='#'
-  MSPEXP430F5529_FALSE=
-fi
-
-        ;;
-
-    sam4lxplained)
-        if test x$host == x$build ; then
-            as_fn_error $? "Please rerun configure with --host=arm-none-eabi for this platform" "$LINENO" 5
-        fi
-
-        # gcc-arm-embedded requires these libraries for the tests, else they'll fail
-        AM_LDFLAGS="-lc -lnosys"
-
-        AM_CFLAGS="-mthumb -mcpu=cortex-m4 -DCORTEX_M4"
-
-        CFLAGS="$CFLAGS -mthumb -mcpu=cortex-m4 -DCORTEX_M4"
-        LDFLAGS="$LDFLAGS -lc -lnosys"
-
-        if test x$enable_simulate == xyes; then
-            enable_simulate_cortex_m4=yes
-        fi
-
-         if true; then
-  SAM4LXPLAINED_TRUE=
-  SAM4LXPLAINED_FALSE='#'
-else
-  SAM4LXPLAINED_TRUE='#'
-  SAM4LXPLAINED_FALSE=
-fi
-
-        ;;
-esac
 
 # Make sure we can run config.sub.
 $SHELL "$ac_aux_dir/config.sub" sun4 >/dev/null 2>&1 ||
@@ -2630,6 +2351,76 @@ test -n "$target_alias" &&
     NONENONEs,x,x, &&
   program_prefix=${target_alias}-
 
+
+# Work out which architecutre, board and chip we need
+# Also pass this through to be substituted
+arch=$target_cpu
+board=$with_board
+chip=$with_chip
+
+# Some platforms cannot compile certain benchmarks, so we exclude them
+# from the build
+
+
+if test -f $srcdir/config/$arch/arch.cfg; then
+    source $srcdir/config/$arch/arch.cfg
+fi
+
+if ! test -d $srcdir/config/$arch/boards/$board; then
+    as_fn_error $? "Config directory for board \"$board\" does not exist" "$LINENO" 5
+fi
+
+if test -f $srcdir/config/$arch/boards/$board/board.cfg; then
+    source $srcdir/config/$arch/boards/$board/board.cfg
+fi
+
+
+if ! test -d $srcdir/config/$arch/chips/$chip; then
+    as_fn_error $? "Config directory for chip \"$chip\" does not exist" "$LINENO" 5
+fi
+
+if test -f $srcdir/config/$arch/chips/$chip/chip.cfg; then
+    source $srcdir/config/$arch/chips/$chip/chip.cfg
+fi
+ if test -f $srcdir/config/$arch/chips/$chip/chipsupport.c; then
+  CHIPSUPPORT_C_TRUE=
+  CHIPSUPPORT_C_FALSE='#'
+else
+  CHIPSUPPORT_C_TRUE='#'
+  CHIPSUPPORT_C_FALSE=
+fi
+
+
+if test -f $srcdir/config/$arch/boards/$board/boardsupport.h; then
+
+$as_echo "#define HAVE_BOARDSUPPORT_H 1" >>confdefs.h
+
+fi
+if test -f $srcdir/config/$arch/chips/$chip/chipsupport.h; then
+
+$as_echo "#define HAVE_CHIPSUPPORT_H 1" >>confdefs.h
+
+fi
+
+ARCH=$arch
+
+BOARD=$board
+
+CHIP=$chip
+
+
+CONFIG_LDFLAGS="$ARCH_LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"
+
+CONFIG_CFLAGS="$ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
+
+
+# Sometimes we need to have the CFLAGS and LDFLAGS set so that
+# the config test pass. We save them first so we can restore them later
+confsave_CFLAGS=$CFLAGS
+confsave_LDFLAGS=$LDFLAGS
+
+CFLAGS="$CFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
+LDFLAGS="$LDFLAGS $ARCH_LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"
 
 am__api_version='1.14'
 
@@ -3055,6 +2846,45 @@ else
   am__leading_dot=_
 fi
 rmdir .tst 2>/dev/null
+
+# Check whether --enable-silent-rules was given.
+if test "${enable_silent_rules+set}" = set; then :
+  enableval=$enable_silent_rules;
+fi
+
+case $enable_silent_rules in # (((
+  yes) AM_DEFAULT_VERBOSITY=0;;
+   no) AM_DEFAULT_VERBOSITY=1;;
+    *) AM_DEFAULT_VERBOSITY=1;;
+esac
+am_make=${MAKE-make}
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether $am_make supports nested variables" >&5
+$as_echo_n "checking whether $am_make supports nested variables... " >&6; }
+if ${am_cv_make_support_nested_variables+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  if $as_echo 'TRUE=$(BAR$(V))
+BAR0=false
+BAR1=true
+V=1
+am__doit:
+	@$(TRUE)
+.PHONY: am__doit' | $am_make -f - >/dev/null 2>&1; then
+  am_cv_make_support_nested_variables=yes
+else
+  am_cv_make_support_nested_variables=no
+fi
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $am_cv_make_support_nested_variables" >&5
+$as_echo "$am_cv_make_support_nested_variables" >&6; }
+if test $am_cv_make_support_nested_variables = yes; then
+    AM_V='$(V)'
+  AM_DEFAULT_V='$(AM_DEFAULT_VERBOSITY)'
+else
+  AM_V=$AM_DEFAULT_VERBOSITY
+  AM_DEFAULT_V=$AM_DEFAULT_VERBOSITY
+fi
+AM_BACKSLASH='\'
 
 if test "`cd $srcdir && pwd`" != "`pwd`"; then
   # Use -I$(srcdir) only when $(srcdir) != ., so that make's output
@@ -5023,8 +4853,7 @@ else
     ;;
   *)
     lt_cv_sys_max_cmd_len=`(getconf ARG_MAX) 2> /dev/null`
-    if test -n "$lt_cv_sys_max_cmd_len" && \
-	test undefined != "$lt_cv_sys_max_cmd_len"; then
+    if test -n "$lt_cv_sys_max_cmd_len"; then
       lt_cv_sys_max_cmd_len=`expr $lt_cv_sys_max_cmd_len \/ 4`
       lt_cv_sys_max_cmd_len=`expr $lt_cv_sys_max_cmd_len \* 3`
     else
@@ -5425,6 +5254,10 @@ freebsd* | dragonfly*)
   fi
   ;;
 
+gnu*)
+  lt_cv_deplibs_check_method=pass_all
+  ;;
+
 haiku*)
   lt_cv_deplibs_check_method=pass_all
   ;;
@@ -5463,11 +5296,11 @@ irix5* | irix6* | nonstopux*)
   ;;
 
 # This must be glibc/ELF.
-linux* | k*bsd*-gnu | kopensolaris*-gnu | gnu*)
+linux* | k*bsd*-gnu | kopensolaris*-gnu)
   lt_cv_deplibs_check_method=pass_all
   ;;
 
-netbsd* | netbsdelf*-gnu)
+netbsd*)
   if echo __ELF__ | $CC -E - | $GREP __ELF__ > /dev/null; then
     lt_cv_deplibs_check_method='match_pattern /lib[^/]+(\.so\.[0-9]+\.[0-9]+|_pic\.a)$'
   else
@@ -6561,14 +6394,7 @@ s390*-*linux*|s390*-*tpf*|sparc*-*linux*)
 	    LD="${LD-ld} -m elf_i386_fbsd"
 	    ;;
 	  x86_64-*linux*)
-	    case `/usr/bin/file conftest.o` in
-	      *x86-64*)
-		LD="${LD-ld} -m elf32_x86_64"
-		;;
-	      *)
-		LD="${LD-ld} -m elf_i386"
-		;;
-	    esac
+	    LD="${LD-ld} -m elf_i386"
 	    ;;
 	  ppc64-*linux*|powerpc64-*linux*)
 	    LD="${LD-ld} -m elf32ppclinux"
@@ -8397,7 +8223,7 @@ lt_prog_compiler_static=
       lt_prog_compiler_static='-non_shared'
       ;;
 
-    linux* | k*bsd*-gnu | kopensolaris*-gnu | gnu*)
+    linux* | k*bsd*-gnu | kopensolaris*-gnu)
       case $cc_basename in
       # old Intel for x86_64 which still supported -KPIC.
       ecc*)
@@ -8875,9 +8701,6 @@ $as_echo_n "checking whether the $compiler linker ($LD) supports shared librarie
   openbsd*)
     with_gnu_ld=no
     ;;
-  linux* | k*bsd*-gnu | gnu*)
-    link_all_deplibs=no
-    ;;
   esac
 
   ld_shlibs=yes
@@ -9099,7 +8922,7 @@ _LT_EOF
       fi
       ;;
 
-    netbsd* | netbsdelf*-gnu)
+    netbsd*)
       if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
 	archive_cmds='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
 	wlarc=
@@ -9276,7 +9099,6 @@ _LT_EOF
 	if test "$aix_use_runtimelinking" = yes; then
 	  shared_flag="$shared_flag "'${wl}-G'
 	fi
-	link_all_deplibs=no
       else
 	# not using gcc
 	if test "$host_cpu" = ia64; then
@@ -9730,7 +9552,7 @@ $as_echo "$lt_cv_irix_exported_symbol" >&6; }
       link_all_deplibs=yes
       ;;
 
-    netbsd* | netbsdelf*-gnu)
+    netbsd*)
       if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
 	archive_cmds='$LD -Bshareable -o $lib $libobjs $deplibs $linker_flags'  # a.out
       else
@@ -10567,6 +10389,17 @@ freebsd* | dragonfly*)
   esac
   ;;
 
+gnu*)
+  version_type=linux # correct to gnu/linux during the next big refactor
+  need_lib_prefix=no
+  need_version=no
+  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}${major} ${libname}${shared_ext}'
+  soname_spec='${libname}${release}${shared_ext}$major'
+  shlibpath_var=LD_LIBRARY_PATH
+  shlibpath_overrides_runpath=no
+  hardcode_into_libs=yes
+  ;;
+
 haiku*)
   version_type=linux # correct to gnu/linux during the next big refactor
   need_lib_prefix=no
@@ -10683,7 +10516,7 @@ linux*oldld* | linux*aout* | linux*coff*)
   ;;
 
 # This must be glibc/ELF.
-linux* | k*bsd*-gnu | kopensolaris*-gnu | gnu*)
+linux* | k*bsd*-gnu | kopensolaris*-gnu)
   version_type=linux # correct to gnu/linux during the next big refactor
   need_lib_prefix=no
   need_version=no
@@ -10732,10 +10565,14 @@ fi
   # before this can be enabled.
   hardcode_into_libs=yes
 
+  # Add ABI-specific directories to the system library path.
+  sys_lib_dlsearch_path_spec="/lib64 /usr/lib64 /lib /usr/lib"
+
   # Append ld.so.conf contents to the search path
   if test -f /etc/ld.so.conf; then
     lt_ld_extra=`awk '/^include / { system(sprintf("cd /etc; cat %s 2>/dev/null", \$2)); skip = 1; } { if (!skip) print \$0; skip = 0; }' < /etc/ld.so.conf | $SED -e 's/#.*//;/^[	 ]*hwcap[	 ]/d;s/[:,	]/ /g;s/=[^=]*$//;s/=[^= ]* / /g;s/"//g;/^$/d' | tr '\n' ' '`
-    sys_lib_dlsearch_path_spec="/lib /usr/lib $lt_ld_extra"
+    sys_lib_dlsearch_path_spec="$sys_lib_dlsearch_path_spec $lt_ld_extra"
+
   fi
 
   # We used to test for /lib/ld.so.1 and disable shared libraries on
@@ -10745,18 +10582,6 @@ fi
   # people can always --disable-shared, the test was removed, and we
   # assume the GNU/Linux dynamic linker is in use.
   dynamic_linker='GNU/Linux ld.so'
-  ;;
-
-netbsdelf*-gnu)
-  version_type=linux
-  need_lib_prefix=no
-  need_version=no
-  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
-  soname_spec='${libname}${release}${shared_ext}$major'
-  shlibpath_var=LD_LIBRARY_PATH
-  shlibpath_overrides_runpath=no
-  hardcode_into_libs=yes
-  dynamic_linker='NetBSD ld.elf_so'
   ;;
 
 netbsd*)
@@ -11731,14 +11556,6 @@ CC="$lt_save_CC"
 
 
 
-#AC_CONFIG_HEADERS([config.h])
-
-if test x$host == x$build ; then
-    cross_compiling=no
-else
-    cross_compiling=yes
-fi
-
    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $CC option to accept ISO C99" >&5
 $as_echo_n "checking for $CC option to accept ISO C99... " >&6; }
 if ${ac_cv_prog_cc_c99+:} false; then :
@@ -12050,6 +11867,13 @@ fi
 
 
 
+# Quick check to see if we are cross compiling or not
+if test x$host == x$build ; then
+    cross_compiling=no
+else
+    cross_compiling=yes
+fi
+
 if test x$cross_compiling == xyes ; then
     # Check that the specified cross compiler exists
     # Extract the first word of "$host_alias-gcc", so it can be a program name with args.
@@ -12096,355 +11920,765 @@ fi
     fi
 fi
 
+# Restore the saved CFLAGs, etc.
+echo $CONFIG_CFLAGS
+echo $LDFLAGS
+echo $confsave_LDFLAGS
+CFLAGS=$confsave_CFLAGS
+LDFLAGS=$confsave_LDFLAGS
 
- if false; then
-  SIMULATE_TRUE=
-  SIMULATE_FALSE='#'
-else
-  SIMULATE_TRUE='#'
-  SIMULATE_FALSE=
-fi
-
-
-# Check if we want to simulate AVR #########################################
-# Check whether --enable-simulate-avr was given.
-if test "${enable_simulate_avr+set}" = set; then :
-  enableval=$enable_simulate_avr;
-else
-  if [ -z "$enable_simulate_avr" ] ; then enable_simulate_avr=no; fi
-fi
+# List of the benchmarks. This list gets expanded into a variable passed
+# into the makefile, and configures the various makefiles. This allows an
+# individual benchmark to be excluded from the compilation in a easy way.
 
 
-if test x$enable_simulate_avr == xyes ; then
-    for ac_prog in simulavr
-do
-  # Extract the first word of "$ac_prog", so it can be a program name with args.
-set dummy $ac_prog; ac_word=$2
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-$as_echo_n "checking for $ac_word... " >&6; }
-if ${ac_cv_prog_simulavr_cmd+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  if test -n "$simulavr_cmd"; then
-  ac_cv_prog_simulavr_cmd="$simulavr_cmd" # Let the user override the test.
-else
-as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-    for ac_exec_ext in '' $ac_executable_extensions; do
-  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_prog_simulavr_cmd="$ac_prog"
-    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-  done
-IFS=$as_save_IFS
-
-fi
-fi
-simulavr_cmd=$ac_cv_prog_simulavr_cmd
-if test -n "$simulavr_cmd"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $simulavr_cmd" >&5
-$as_echo "$simulavr_cmd" >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-fi
+BENCHMARKS=""
+BENCHMARKS_SUBDIRS=""
 
 
-  test -n "$simulavr_cmd" && break
-done
+    bmark=2dfir
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/2dfir/Makefile"
 
-    if test "$cross_compiling" = yes; then :
-  found_version=`simulavr --version | grep "SimulAVR 1.0.0" -c`
-else
-  if ac_fn_c_try_run "$LINENO"; then :
-
-fi
-rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
-  conftest.$ac_objext conftest.beam
-fi
-
-    if test x$found_version == x0 ; then
-        { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
-$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
-as_fn_error $? "Need version 1.0.0 of simulavr
-See \`config.log' for more details" "$LINENO" 5; }
+        BENCHMARKS+="2dfir "
+        BENCHMARKS_SUBDIRS+="src/2dfir "
     fi
-    SIMULATORPATH=simulavr
 
-     if test x$enable_simulate_avr != xno; then
-  SIMULATE_TRUE=
-  SIMULATE_FALSE='#'
-else
-  SIMULATE_TRUE='#'
-  SIMULATE_FALSE=
-fi
+    bmark=adpcm
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/adpcm/Makefile"
 
-fi
-
-# Check if we want to simulate cortex-m0 ###################################
-# Check whether --enable-simulate-cortex-m0 was given.
-if test "${enable_simulate_cortex_m0+set}" = set; then :
-  enableval=$enable_simulate_cortex_m0;
-else
-   if [ -z "$enable_simulate_cortex_m0" ] ; then enable_simulate_cortex_m0=no; fi
-fi
-
-
-if test x$enable_simulate_cortex_m0 == xyes ; then
-    # Extract the first word of "thumbulator", so it can be a program name with args.
-set dummy thumbulator; ac_word=$2
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-$as_echo_n "checking for $ac_word... " >&6; }
-if ${ac_cv_prog_simulate_m0_cmd+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  if test -n "$simulate_m0_cmd"; then
-  ac_cv_prog_simulate_m0_cmd="$simulate_m0_cmd" # Let the user override the test.
-else
-as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-    for ac_exec_ext in '' $ac_executable_extensions; do
-  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_prog_simulate_m0_cmd="thumbulator"
-    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-  done
-IFS=$as_save_IFS
-
-fi
-fi
-simulate_m0_cmd=$ac_cv_prog_simulate_m0_cmd
-if test -n "$simulate_m0_cmd"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $simulate_m0_cmd" >&5
-$as_echo "$simulate_m0_cmd" >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-fi
-
-
-
-    # Check the version supports the --elf flag
-    if test "$cross_compiling" = yes; then :
-  thumbulator_version=`thumbulator --version | grep "Version: 1.1.0" -c`
-else
-  if ac_fn_c_try_run "$LINENO"; then :
-
-fi
-rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
-  conftest.$ac_objext conftest.beam
-fi
-
-    if test x$thumbulator_version == x0 ; then
-        echo $thumbulator_version
-        { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
-$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
-as_fn_error $? "Need a version of thumbulator which supports --elf
-See \`config.log' for more details" "$LINENO" 5; }
+        BENCHMARKS+="adpcm "
+        BENCHMARKS_SUBDIRS+="src/adpcm "
     fi
-    SIMULATORPATH=thumbulator
 
-     if test x$enable_simulate_cortex_m0 != xno; then
-  SIMULATE_TRUE=
-  SIMULATE_FALSE='#'
-else
-  SIMULATE_TRUE='#'
-  SIMULATE_FALSE=
-fi
+    bmark=blowfish
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/blowfish/Makefile"
 
-fi
+        BENCHMARKS+="blowfish "
+        BENCHMARKS_SUBDIRS+="src/blowfish "
+    fi
 
-CFLAGS=$save_CFLAGS
-LDFLAGS=$save_LDFLAGS
+    bmark=bs
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/bs/Makefile"
 
-ac_config_files="$ac_config_files src/2dfir/Makefile"
+        BENCHMARKS+="bs "
+        BENCHMARKS_SUBDIRS+="src/bs "
+    fi
 
-ac_config_files="$ac_config_files src/adpcm/Makefile"
+    bmark=bsort100
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/bsort100/Makefile"
 
-ac_config_files="$ac_config_files src/blowfish/Makefile"
+        BENCHMARKS+="bsort100 "
+        BENCHMARKS_SUBDIRS+="src/bsort100 "
+    fi
 
-ac_config_files="$ac_config_files src/bs/Makefile"
+    bmark=bubblesort
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/bubblesort/Makefile"
 
-ac_config_files="$ac_config_files src/bsort100/Makefile"
+        BENCHMARKS+="bubblesort "
+        BENCHMARKS_SUBDIRS+="src/bubblesort "
+    fi
 
-ac_config_files="$ac_config_files src/bubblesort/Makefile"
+    bmark=cnt
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/cnt/Makefile"
 
-ac_config_files="$ac_config_files src/cnt/Makefile"
+        BENCHMARKS+="cnt "
+        BENCHMARKS_SUBDIRS+="src/cnt "
+    fi
 
-ac_config_files="$ac_config_files src/compress/Makefile"
+    bmark=compress
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/compress/Makefile"
 
-ac_config_files="$ac_config_files src/cover/Makefile"
+        BENCHMARKS+="compress "
+        BENCHMARKS_SUBDIRS+="src/compress "
+    fi
 
-ac_config_files="$ac_config_files src/crc/Makefile"
+    bmark=cover
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/cover/Makefile"
 
-ac_config_files="$ac_config_files src/crc32/Makefile"
+        BENCHMARKS+="cover "
+        BENCHMARKS_SUBDIRS+="src/cover "
+    fi
 
-ac_config_files="$ac_config_files src/ctl-string/Makefile"
+    bmark=crc
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/crc/Makefile"
 
-ac_config_files="$ac_config_files src/ctl-stack/Makefile"
+        BENCHMARKS+="crc "
+        BENCHMARKS_SUBDIRS+="src/crc "
+    fi
 
-ac_config_files="$ac_config_files src/ctl-vector/Makefile"
+    bmark=crc32
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/crc32/Makefile"
 
-ac_config_files="$ac_config_files src/cubic/Makefile"
+        BENCHMARKS+="crc32 "
+        BENCHMARKS_SUBDIRS+="src/crc32 "
+    fi
 
-ac_config_files="$ac_config_files src/dhrystone/Makefile"
+    bmark=ctl-string
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/ctl-string/Makefile"
 
-ac_config_files="$ac_config_files src/dijkstra/Makefile"
+        BENCHMARKS+="ctl-string "
+        BENCHMARKS_SUBDIRS+="src/ctl-string "
+    fi
 
-ac_config_files="$ac_config_files src/dtoa/Makefile"
+    bmark=ctl-stack
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/ctl-stack/Makefile"
 
-ac_config_files="$ac_config_files src/duff/Makefile"
+        BENCHMARKS+="ctl-stack "
+        BENCHMARKS_SUBDIRS+="src/ctl-stack "
+    fi
 
-ac_config_files="$ac_config_files src/edn/Makefile"
+    bmark=ctl-vector
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/ctl-vector/Makefile"
 
-ac_config_files="$ac_config_files src/expint/Makefile"
+        BENCHMARKS+="ctl-vector "
+        BENCHMARKS_SUBDIRS+="src/ctl-vector "
+    fi
 
-ac_config_files="$ac_config_files src/fac/Makefile"
+    bmark=cubic
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/cubic/Makefile"
 
-ac_config_files="$ac_config_files src/fasta/Makefile"
+        BENCHMARKS+="cubic "
+        BENCHMARKS_SUBDIRS+="src/cubic "
+    fi
 
-ac_config_files="$ac_config_files src/fdct/Makefile"
+    bmark=dhrystone
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/dhrystone/Makefile"
 
-ac_config_files="$ac_config_files src/fft/Makefile"
+        BENCHMARKS+="dhrystone "
+        BENCHMARKS_SUBDIRS+="src/dhrystone "
+    fi
 
-ac_config_files="$ac_config_files src/fibcall/Makefile"
+    bmark=dijkstra
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/dijkstra/Makefile"
 
-ac_config_files="$ac_config_files src/fir/Makefile"
+        BENCHMARKS+="dijkstra "
+        BENCHMARKS_SUBDIRS+="src/dijkstra "
+    fi
 
-ac_config_files="$ac_config_files src/float_matmult/Makefile"
+    bmark=dtoa
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/dtoa/Makefile"
 
-ac_config_files="$ac_config_files src/frac/Makefile"
+        BENCHMARKS+="dtoa "
+        BENCHMARKS_SUBDIRS+="src/dtoa "
+    fi
 
-ac_config_files="$ac_config_files src/gdb-advance/Makefile"
+    bmark=duff
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/duff/Makefile"
 
-ac_config_files="$ac_config_files src/gdb-all-types/Makefile"
+        BENCHMARKS+="duff "
+        BENCHMARKS_SUBDIRS+="src/duff "
+    fi
 
-ac_config_files="$ac_config_files src/gdb-anon/Makefile"
+    bmark=edn
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/edn/Makefile"
 
-ac_config_files="$ac_config_files src/gdb-arrayidx/Makefile"
+        BENCHMARKS+="edn "
+        BENCHMARKS_SUBDIRS+="src/edn "
+    fi
 
-ac_config_files="$ac_config_files src/gdb-async/Makefile"
+    bmark=expint
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/expint/Makefile"
 
-ac_config_files="$ac_config_files src/gdb-bitfields/Makefile"
+        BENCHMARKS+="expint "
+        BENCHMARKS_SUBDIRS+="src/expint "
+    fi
 
-ac_config_files="$ac_config_files src/gdb-constvars/Makefile"
+    bmark=fac
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/fac/Makefile"
 
-ac_config_files="$ac_config_files src/gdb-store/Makefile"
+        BENCHMARKS+="fac "
+        BENCHMARKS_SUBDIRS+="src/fac "
+    fi
 
-ac_config_files="$ac_config_files src/huffbench/Makefile"
+    bmark=fasta
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/fasta/Makefile"
 
-ac_config_files="$ac_config_files src/insertsort/Makefile"
+        BENCHMARKS+="fasta "
+        BENCHMARKS_SUBDIRS+="src/fasta "
+    fi
 
-ac_config_files="$ac_config_files src/int_matmult/Makefile"
+    bmark=fdct
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/fdct/Makefile"
 
-ac_config_files="$ac_config_files src/janne_complex/Makefile"
+        BENCHMARKS+="fdct "
+        BENCHMARKS_SUBDIRS+="src/fdct "
+    fi
 
-ac_config_files="$ac_config_files src/jfdctint/Makefile"
+    bmark=fft
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/fft/Makefile"
 
-ac_config_files="$ac_config_files src/lcdnum/Makefile"
+        BENCHMARKS+="fft "
+        BENCHMARKS_SUBDIRS+="src/fft "
+    fi
 
-ac_config_files="$ac_config_files src/levenshtein/Makefile"
+    bmark=fibcall
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/fibcall/Makefile"
 
-ac_config_files="$ac_config_files src/lms/Makefile"
+        BENCHMARKS+="fibcall "
+        BENCHMARKS_SUBDIRS+="src/fibcall "
+    fi
 
-ac_config_files="$ac_config_files src/ludcmp/Makefile"
+    bmark=fir
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/fir/Makefile"
 
-ac_config_files="$ac_config_files src/mergesort/Makefile"
+        BENCHMARKS+="fir "
+        BENCHMARKS_SUBDIRS+="src/fir "
+    fi
 
-ac_config_files="$ac_config_files src/minver/Makefile"
+    bmark=float_matmult
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/float_matmult/Makefile"
 
-ac_config_files="$ac_config_files src/nbody/Makefile"
+        BENCHMARKS+="float_matmult "
+        BENCHMARKS_SUBDIRS+="src/float_matmult "
+    fi
 
-ac_config_files="$ac_config_files src/ndes/Makefile"
+    bmark=frac
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/frac/Makefile"
 
-ac_config_files="$ac_config_files src/nettle-arcfour/Makefile"
+        BENCHMARKS+="frac "
+        BENCHMARKS_SUBDIRS+="src/frac "
+    fi
 
-ac_config_files="$ac_config_files src/nettle-cast128/Makefile"
+    bmark=gdb-advance
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/gdb-advance/Makefile"
 
-ac_config_files="$ac_config_files src/nettle-des/Makefile"
+        BENCHMARKS+="gdb-advance "
+        BENCHMARKS_SUBDIRS+="src/gdb-advance "
+    fi
 
-ac_config_files="$ac_config_files src/nettle-md5/Makefile"
+    bmark=gdb-all-types
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/gdb-all-types/Makefile"
 
-ac_config_files="$ac_config_files src/newlib-exp/Makefile"
+        BENCHMARKS+="gdb-all-types "
+        BENCHMARKS_SUBDIRS+="src/gdb-all-types "
+    fi
 
-ac_config_files="$ac_config_files src/newlib-log/Makefile"
+    bmark=gdb-anon
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/gdb-anon/Makefile"
 
-ac_config_files="$ac_config_files src/newlib-mod/Makefile"
+        BENCHMARKS+="gdb-anon "
+        BENCHMARKS_SUBDIRS+="src/gdb-anon "
+    fi
 
-ac_config_files="$ac_config_files src/newlib-sqrt/Makefile"
+    bmark=gdb-arrayidx
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/gdb-arrayidx/Makefile"
 
-ac_config_files="$ac_config_files src/ns/Makefile"
+        BENCHMARKS+="gdb-arrayidx "
+        BENCHMARKS_SUBDIRS+="src/gdb-arrayidx "
+    fi
 
-ac_config_files="$ac_config_files src/nsichneu/Makefile"
+    bmark=gdb-async
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/gdb-async/Makefile"
 
-ac_config_files="$ac_config_files src/prime/Makefile"
+        BENCHMARKS+="gdb-async "
+        BENCHMARKS_SUBDIRS+="src/gdb-async "
+    fi
 
-ac_config_files="$ac_config_files src/qsort/Makefile"
+    bmark=gdb-bitfields
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/gdb-bitfields/Makefile"
 
-ac_config_files="$ac_config_files src/qurt/Makefile"
+        BENCHMARKS+="gdb-bitfields "
+        BENCHMARKS_SUBDIRS+="src/gdb-bitfields "
+    fi
 
-ac_config_files="$ac_config_files src/recursion/Makefile"
+    bmark=gdb-constvars
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/gdb-constvars/Makefile"
 
-ac_config_files="$ac_config_files src/rijndael/Makefile"
+        BENCHMARKS+="gdb-constvars "
+        BENCHMARKS_SUBDIRS+="src/gdb-constvars "
+    fi
 
-ac_config_files="$ac_config_files src/select/Makefile"
+    bmark=gdb-store
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/gdb-store/Makefile"
 
-ac_config_files="$ac_config_files src/sglib-arraybinsearch/Makefile"
+        BENCHMARKS+="gdb-store "
+        BENCHMARKS_SUBDIRS+="src/gdb-store "
+    fi
 
-ac_config_files="$ac_config_files src/sglib-arraysort/Makefile"
+    bmark=huffbench
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/huffbench/Makefile"
 
-ac_config_files="$ac_config_files src/sglib-arraysort1/Makefile"
+        BENCHMARKS+="huffbench "
+        BENCHMARKS_SUBDIRS+="src/huffbench "
+    fi
 
-ac_config_files="$ac_config_files src/sglib-dllist/Makefile"
+    bmark=insertsort
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/insertsort/Makefile"
 
-ac_config_files="$ac_config_files src/sglib-hashtable/Makefile"
+        BENCHMARKS+="insertsort "
+        BENCHMARKS_SUBDIRS+="src/insertsort "
+    fi
 
-ac_config_files="$ac_config_files src/sglib-listinsertsort/Makefile"
+    bmark=int_matmult
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/int_matmult/Makefile"
 
-ac_config_files="$ac_config_files src/sglib-listinsertsort1/Makefile"
+        BENCHMARKS+="int_matmult "
+        BENCHMARKS_SUBDIRS+="src/int_matmult "
+    fi
 
-ac_config_files="$ac_config_files src/sglib-listsort/Makefile"
+    bmark=janne_complex
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/janne_complex/Makefile"
 
-ac_config_files="$ac_config_files src/sglib-queue/Makefile"
+        BENCHMARKS+="janne_complex "
+        BENCHMARKS_SUBDIRS+="src/janne_complex "
+    fi
 
-ac_config_files="$ac_config_files src/sglib-rbtree/Makefile"
+    bmark=jfdctint
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/jfdctint/Makefile"
 
-ac_config_files="$ac_config_files src/sha/Makefile"
+        BENCHMARKS+="jfdctint "
+        BENCHMARKS_SUBDIRS+="src/jfdctint "
+    fi
 
-ac_config_files="$ac_config_files src/slre/Makefile"
+    bmark=lcdnum
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/lcdnum/Makefile"
 
-ac_config_files="$ac_config_files src/stringsearch1/Makefile"
+        BENCHMARKS+="lcdnum "
+        BENCHMARKS_SUBDIRS+="src/lcdnum "
+    fi
 
-ac_config_files="$ac_config_files src/strstr/Makefile"
+    bmark=levenshtein
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/levenshtein/Makefile"
 
-ac_config_files="$ac_config_files src/sqrt/Makefile"
+        BENCHMARKS+="levenshtein "
+        BENCHMARKS_SUBDIRS+="src/levenshtein "
+    fi
 
-ac_config_files="$ac_config_files src/st/Makefile"
+    bmark=lms
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/lms/Makefile"
 
-ac_config_files="$ac_config_files src/statemate/Makefile"
+        BENCHMARKS+="lms "
+        BENCHMARKS_SUBDIRS+="src/lms "
+    fi
 
-ac_config_files="$ac_config_files src/ud/Makefile"
+    bmark=ludcmp
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/ludcmp/Makefile"
 
-ac_config_files="$ac_config_files src/wikisort/Makefile"
+        BENCHMARKS+="ludcmp "
+        BENCHMARKS_SUBDIRS+="src/ludcmp "
+    fi
 
-ac_config_files="$ac_config_files src/whetstone/Makefile"
+    bmark=mergesort
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/mergesort/Makefile"
 
-# ==== AC_CONFIG_FILES (This is a marker for the generate-benchmark.sh script)
+        BENCHMARKS+="mergesort "
+        BENCHMARKS_SUBDIRS+="src/mergesort "
+    fi
+
+    bmark=miniz
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/miniz/Makefile"
+
+        BENCHMARKS+="miniz "
+        BENCHMARKS_SUBDIRS+="src/miniz "
+    fi
+
+    bmark=minver
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/minver/Makefile"
+
+        BENCHMARKS+="minver "
+        BENCHMARKS_SUBDIRS+="src/minver "
+    fi
+
+    bmark=nbody
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/nbody/Makefile"
+
+        BENCHMARKS+="nbody "
+        BENCHMARKS_SUBDIRS+="src/nbody "
+    fi
+
+    bmark=ndes
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/ndes/Makefile"
+
+        BENCHMARKS+="ndes "
+        BENCHMARKS_SUBDIRS+="src/ndes "
+    fi
+
+    bmark=nettle-arcfour
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/nettle-arcfour/Makefile"
+
+        BENCHMARKS+="nettle-arcfour "
+        BENCHMARKS_SUBDIRS+="src/nettle-arcfour "
+    fi
+
+    bmark=nettle-cast128
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/nettle-cast128/Makefile"
+
+        BENCHMARKS+="nettle-cast128 "
+        BENCHMARKS_SUBDIRS+="src/nettle-cast128 "
+    fi
+
+    bmark=nettle-des
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/nettle-des/Makefile"
+
+        BENCHMARKS+="nettle-des "
+        BENCHMARKS_SUBDIRS+="src/nettle-des "
+    fi
+
+    bmark=nettle-md5
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/nettle-md5/Makefile"
+
+        BENCHMARKS+="nettle-md5 "
+        BENCHMARKS_SUBDIRS+="src/nettle-md5 "
+    fi
+
+    bmark=newlib-exp
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/newlib-exp/Makefile"
+
+        BENCHMARKS+="newlib-exp "
+        BENCHMARKS_SUBDIRS+="src/newlib-exp "
+    fi
+
+    bmark=newlib-log
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/newlib-log/Makefile"
+
+        BENCHMARKS+="newlib-log "
+        BENCHMARKS_SUBDIRS+="src/newlib-log "
+    fi
+
+    bmark=newlib-mod
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/newlib-mod/Makefile"
+
+        BENCHMARKS+="newlib-mod "
+        BENCHMARKS_SUBDIRS+="src/newlib-mod "
+    fi
+
+    bmark=newlib-sqrt
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/newlib-sqrt/Makefile"
+
+        BENCHMARKS+="newlib-sqrt "
+        BENCHMARKS_SUBDIRS+="src/newlib-sqrt "
+    fi
+
+    bmark=ns
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/ns/Makefile"
+
+        BENCHMARKS+="ns "
+        BENCHMARKS_SUBDIRS+="src/ns "
+    fi
+
+    bmark=nsichneu
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/nsichneu/Makefile"
+
+        BENCHMARKS+="nsichneu "
+        BENCHMARKS_SUBDIRS+="src/nsichneu "
+    fi
+
+    bmark=picojpeg
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/picojpeg/Makefile"
+
+        BENCHMARKS+="picojpeg "
+        BENCHMARKS_SUBDIRS+="src/picojpeg "
+    fi
+
+    bmark=prime
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/prime/Makefile"
+
+        BENCHMARKS+="prime "
+        BENCHMARKS_SUBDIRS+="src/prime "
+    fi
+
+    bmark=qsort
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/qsort/Makefile"
+
+        BENCHMARKS+="qsort "
+        BENCHMARKS_SUBDIRS+="src/qsort "
+    fi
+
+    bmark=qurt
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/qurt/Makefile"
+
+        BENCHMARKS+="qurt "
+        BENCHMARKS_SUBDIRS+="src/qurt "
+    fi
+
+    bmark=recursion
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/recursion/Makefile"
+
+        BENCHMARKS+="recursion "
+        BENCHMARKS_SUBDIRS+="src/recursion "
+    fi
+
+    bmark=rijndael
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/rijndael/Makefile"
+
+        BENCHMARKS+="rijndael "
+        BENCHMARKS_SUBDIRS+="src/rijndael "
+    fi
+
+    bmark=select
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/select/Makefile"
+
+        BENCHMARKS+="select "
+        BENCHMARKS_SUBDIRS+="src/select "
+    fi
+
+    bmark=sglib-arraybinsearch
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-arraybinsearch/Makefile"
+
+        BENCHMARKS+="sglib-arraybinsearch "
+        BENCHMARKS_SUBDIRS+="src/sglib-arraybinsearch "
+    fi
+
+    bmark=sglib-arraysort
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-arraysort/Makefile"
+
+        BENCHMARKS+="sglib-arraysort "
+        BENCHMARKS_SUBDIRS+="src/sglib-arraysort "
+    fi
+
+    bmark=sglib-arraysort1
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-arraysort1/Makefile"
+
+        BENCHMARKS+="sglib-arraysort1 "
+        BENCHMARKS_SUBDIRS+="src/sglib-arraysort1 "
+    fi
+
+    bmark=sglib-dllist
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-dllist/Makefile"
+
+        BENCHMARKS+="sglib-dllist "
+        BENCHMARKS_SUBDIRS+="src/sglib-dllist "
+    fi
+
+    bmark=sglib-hashtable
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-hashtable/Makefile"
+
+        BENCHMARKS+="sglib-hashtable "
+        BENCHMARKS_SUBDIRS+="src/sglib-hashtable "
+    fi
+
+    bmark=sglib-listinsertsort
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-listinsertsort/Makefile"
+
+        BENCHMARKS+="sglib-listinsertsort "
+        BENCHMARKS_SUBDIRS+="src/sglib-listinsertsort "
+    fi
+
+    bmark=sglib-listinsertsort1
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-listinsertsort1/Makefile"
+
+        BENCHMARKS+="sglib-listinsertsort1 "
+        BENCHMARKS_SUBDIRS+="src/sglib-listinsertsort1 "
+    fi
+
+    bmark=sglib-listsort
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-listsort/Makefile"
+
+        BENCHMARKS+="sglib-listsort "
+        BENCHMARKS_SUBDIRS+="src/sglib-listsort "
+    fi
+
+    bmark=sglib-queue
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-queue/Makefile"
+
+        BENCHMARKS+="sglib-queue "
+        BENCHMARKS_SUBDIRS+="src/sglib-queue "
+    fi
+
+    bmark=sglib-rbtree
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-rbtree/Makefile"
+
+        BENCHMARKS+="sglib-rbtree "
+        BENCHMARKS_SUBDIRS+="src/sglib-rbtree "
+    fi
+
+    bmark=sha
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sha/Makefile"
+
+        BENCHMARKS+="sha "
+        BENCHMARKS_SUBDIRS+="src/sha "
+    fi
+
+    bmark=slre
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/slre/Makefile"
+
+        BENCHMARKS+="slre "
+        BENCHMARKS_SUBDIRS+="src/slre "
+    fi
+
+    bmark=stringsearch1
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/stringsearch1/Makefile"
+
+        BENCHMARKS+="stringsearch1 "
+        BENCHMARKS_SUBDIRS+="src/stringsearch1 "
+    fi
+
+    bmark=strstr
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/strstr/Makefile"
+
+        BENCHMARKS+="strstr "
+        BENCHMARKS_SUBDIRS+="src/strstr "
+    fi
+
+    bmark=sqrt
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sqrt/Makefile"
+
+        BENCHMARKS+="sqrt "
+        BENCHMARKS_SUBDIRS+="src/sqrt "
+    fi
+
+    bmark=st
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/st/Makefile"
+
+        BENCHMARKS+="st "
+        BENCHMARKS_SUBDIRS+="src/st "
+    fi
+
+    bmark=statemate
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/statemate/Makefile"
+
+        BENCHMARKS+="statemate "
+        BENCHMARKS_SUBDIRS+="src/statemate "
+    fi
+
+    bmark=tarai
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/tarai/Makefile"
+
+        BENCHMARKS+="tarai "
+        BENCHMARKS_SUBDIRS+="src/tarai "
+    fi
+
+    bmark=trio-snprintf
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/trio-snprintf/Makefile"
+
+        BENCHMARKS+="trio-snprintf "
+        BENCHMARKS_SUBDIRS+="src/trio-snprintf "
+    fi
+
+    bmark=trio-sscanf
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/trio-sscanf/Makefile"
+
+        BENCHMARKS+="trio-sscanf "
+        BENCHMARKS_SUBDIRS+="src/trio-sscanf "
+    fi
+
+    bmark=ud
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/ud/Makefile"
+
+        BENCHMARKS+="ud "
+        BENCHMARKS_SUBDIRS+="src/ud "
+    fi
+
+    bmark=wikisort
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/wikisort/Makefile"
+
+        BENCHMARKS+="wikisort "
+        BENCHMARKS_SUBDIRS+="src/wikisort "
+    fi
+
+    bmark=whetstone
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/whetstone/Makefile"
+
+        BENCHMARKS+="whetstone "
+        BENCHMARKS_SUBDIRS+="src/whetstone "
+    fi
+
+
+BENCHMARKS=$BENCHMARKS
+
+BENCHMARKS_SUBDIRS=$BENCHMARKS_SUBDIRS
+
+
+
+ac_config_headers="$ac_config_headers config.h"
+
+
+ac_config_files="$ac_config_files dejagnu/site.exp"
+
 ac_config_files="$ac_config_files src/template/Makefile"
 
-ac_config_files="$ac_config_files src/platformcode/Makefile"
-
-ac_config_files="$ac_config_files analysis/Makefile"
+ac_config_files="$ac_config_files doc/Makefile"
 
 ac_config_files="$ac_config_files Makefile"
 
@@ -12538,43 +12772,7 @@ test "x$prefix" = xNONE && prefix=$ac_default_prefix
 # Let make expand exec_prefix.
 test "x$exec_prefix" = xNONE && exec_prefix='${prefix}'
 
-# Transform confdefs.h into DEFS.
-# Protect against shell expansion while executing Makefile rules.
-# Protect against Makefile macro expansion.
-#
-# If the first sed substitution is executed (which looks for macros that
-# take arguments), then branch to the quote section.  Otherwise,
-# look for a macro that doesn't take arguments.
-ac_script='
-:mline
-/\\$/{
- N
- s,\\\n,,
- b mline
-}
-t clear
-:clear
-s/^[	 ]*#[	 ]*define[	 ][	 ]*\([^	 (][^	 (]*([^)]*)\)[	 ]*\(.*\)/-D\1=\2/g
-t quote
-s/^[	 ]*#[	 ]*define[	 ][	 ]*\([^	 ][^	 ]*\)[	 ]*\(.*\)/-D\1=\2/g
-t quote
-b any
-:quote
-s/[	 `~#$^&*(){}\\|;'\''"<>?]/\\&/g
-s/\[/\\&/g
-s/\]/\\&/g
-s/\$/$$/g
-H
-:any
-${
-	g
-	s/^\n//
-	s/\n/ /g
-	p
-}
-'
-DEFS=`sed -n "$ac_script" confdefs.h`
-
+DEFS=-DHAVE_CONFIG_H
 
 ac_libobjs=
 ac_ltlibobjs=
@@ -12597,60 +12795,8 @@ if test -z "${MAINTAINER_MODE_TRUE}" && test -z "${MAINTAINER_MODE_FALSE}"; then
   as_fn_error $? "conditional \"MAINTAINER_MODE\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${STM32F0DISCOVERY_TRUE}" && test -z "${STM32F0DISCOVERY_FALSE}"; then
-  as_fn_error $? "conditional \"STM32F0DISCOVERY\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${STM32VLDISCOVERY_TRUE}" && test -z "${STM32VLDISCOVERY_FALSE}"; then
-  as_fn_error $? "conditional \"STM32VLDISCOVERY\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${ATMEGA328P_TRUE}" && test -z "${ATMEGA328P_FALSE}"; then
-  as_fn_error $? "conditional \"ATMEGA328P\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${PIC32MX250F128B_TRUE}" && test -z "${PIC32MX250F128B_FALSE}"; then
-  as_fn_error $? "conditional \"PIC32MX250F128B\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${XMEGAA3BUXPLAINED_TRUE}" && test -z "${XMEGAA3BUXPLAINED_FALSE}"; then
-  as_fn_error $? "conditional \"XMEGAA3BUXPLAINED\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${MSPEXP430F5529_TRUE}" && test -z "${MSPEXP430F5529_FALSE}"; then
-  as_fn_error $? "conditional \"MSPEXP430F5529\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${SAM4LXPLAINED_TRUE}" && test -z "${SAM4LXPLAINED_FALSE}"; then
-  as_fn_error $? "conditional \"SAM4LXPLAINED\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${STM32F0DISCOVERY_TRUE}" && test -z "${STM32F0DISCOVERY_FALSE}"; then
-  as_fn_error $? "conditional \"STM32F0DISCOVERY\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${STM32VLDISCOVERY_TRUE}" && test -z "${STM32VLDISCOVERY_FALSE}"; then
-  as_fn_error $? "conditional \"STM32VLDISCOVERY\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${ATMEGA328P_TRUE}" && test -z "${ATMEGA328P_FALSE}"; then
-  as_fn_error $? "conditional \"ATMEGA328P\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${XMEGAA3BUXPLAINED_TRUE}" && test -z "${XMEGAA3BUXPLAINED_FALSE}"; then
-  as_fn_error $? "conditional \"XMEGAA3BUXPLAINED\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${PIC32MX250F128B_TRUE}" && test -z "${PIC32MX250F128B_FALSE}"; then
-  as_fn_error $? "conditional \"PIC32MX250F128B\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${MSPEXP430F5529_TRUE}" && test -z "${MSPEXP430F5529_FALSE}"; then
-  as_fn_error $? "conditional \"MSPEXP430F5529\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${SAM4LXPLAINED_TRUE}" && test -z "${SAM4LXPLAINED_FALSE}"; then
-  as_fn_error $? "conditional \"SAM4LXPLAINED\" was never defined.
+if test -z "${CHIPSUPPORT_C_TRUE}" && test -z "${CHIPSUPPORT_C_FALSE}"; then
+  as_fn_error $? "conditional \"CHIPSUPPORT_C\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking that generated files are newer than configure" >&5
@@ -12679,18 +12825,6 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${am__fastdepCCAS_TRUE}" && test -z "${am__fastdepCCAS_FALSE}"; then
   as_fn_error $? "conditional \"am__fastdepCCAS\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${SIMULATE_TRUE}" && test -z "${SIMULATE_FALSE}"; then
-  as_fn_error $? "conditional \"SIMULATE\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${SIMULATE_TRUE}" && test -z "${SIMULATE_FALSE}"; then
-  as_fn_error $? "conditional \"SIMULATE\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${SIMULATE_TRUE}" && test -z "${SIMULATE_FALSE}"; then
-  as_fn_error $? "conditional \"SIMULATE\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 
@@ -13108,11 +13242,15 @@ case $ac_config_files in *"
 "*) set x $ac_config_files; shift; ac_config_files=$*;;
 esac
 
+case $ac_config_headers in *"
+"*) set x $ac_config_headers; shift; ac_config_headers=$*;;
+esac
 
 
 cat >>$CONFIG_STATUS <<_ACEOF || ac_write_fail=1
 # Files that config.status was made for.
 config_files="$ac_config_files"
+config_headers="$ac_config_headers"
 config_commands="$ac_config_commands"
 
 _ACEOF
@@ -13134,9 +13272,14 @@ Usage: $0 [OPTION]... [TAG]...
       --recheck    update $as_me by reconfiguring in the same conditions
       --file=FILE[:TEMPLATE]
                    instantiate the configuration file FILE
+      --header=FILE[:TEMPLATE]
+                   instantiate the configuration header FILE
 
 Configuration files:
 $config_files
+
+Configuration headers:
+$config_headers
 
 Configuration commands:
 $config_commands
@@ -13204,7 +13347,18 @@ do
     esac
     as_fn_append CONFIG_FILES " '$ac_optarg'"
     ac_need_defaults=false;;
-  --he | --h |  --help | --hel | -h )
+  --header | --heade | --head | --hea )
+    $ac_shift
+    case $ac_optarg in
+    *\'*) ac_optarg=`$as_echo "$ac_optarg" | sed "s/'/'\\\\\\\\''/g"` ;;
+    esac
+    as_fn_append CONFIG_HEADERS " '$ac_optarg'"
+    ac_need_defaults=false;;
+  --he | --h)
+    # Conflict between --help and --header
+    as_fn_error $? "ambiguous option: \`$1'
+Try \`$0 --help' for more information.";;
+  --help | --hel | -h )
     $as_echo "$ac_cs_usage"; exit ;;
   -q | -quiet | --quiet | --quie | --qui | --qu | --q \
   | -silent | --silent | --silen | --sile | --sil | --si | --s)
@@ -13591,6 +13745,7 @@ do
     "src/lms/Makefile") CONFIG_FILES="$CONFIG_FILES src/lms/Makefile" ;;
     "src/ludcmp/Makefile") CONFIG_FILES="$CONFIG_FILES src/ludcmp/Makefile" ;;
     "src/mergesort/Makefile") CONFIG_FILES="$CONFIG_FILES src/mergesort/Makefile" ;;
+    "src/miniz/Makefile") CONFIG_FILES="$CONFIG_FILES src/miniz/Makefile" ;;
     "src/minver/Makefile") CONFIG_FILES="$CONFIG_FILES src/minver/Makefile" ;;
     "src/nbody/Makefile") CONFIG_FILES="$CONFIG_FILES src/nbody/Makefile" ;;
     "src/ndes/Makefile") CONFIG_FILES="$CONFIG_FILES src/ndes/Makefile" ;;
@@ -13604,6 +13759,7 @@ do
     "src/newlib-sqrt/Makefile") CONFIG_FILES="$CONFIG_FILES src/newlib-sqrt/Makefile" ;;
     "src/ns/Makefile") CONFIG_FILES="$CONFIG_FILES src/ns/Makefile" ;;
     "src/nsichneu/Makefile") CONFIG_FILES="$CONFIG_FILES src/nsichneu/Makefile" ;;
+    "src/picojpeg/Makefile") CONFIG_FILES="$CONFIG_FILES src/picojpeg/Makefile" ;;
     "src/prime/Makefile") CONFIG_FILES="$CONFIG_FILES src/prime/Makefile" ;;
     "src/qsort/Makefile") CONFIG_FILES="$CONFIG_FILES src/qsort/Makefile" ;;
     "src/qurt/Makefile") CONFIG_FILES="$CONFIG_FILES src/qurt/Makefile" ;;
@@ -13627,12 +13783,16 @@ do
     "src/sqrt/Makefile") CONFIG_FILES="$CONFIG_FILES src/sqrt/Makefile" ;;
     "src/st/Makefile") CONFIG_FILES="$CONFIG_FILES src/st/Makefile" ;;
     "src/statemate/Makefile") CONFIG_FILES="$CONFIG_FILES src/statemate/Makefile" ;;
+    "src/tarai/Makefile") CONFIG_FILES="$CONFIG_FILES src/tarai/Makefile" ;;
+    "src/trio-snprintf/Makefile") CONFIG_FILES="$CONFIG_FILES src/trio-snprintf/Makefile" ;;
+    "src/trio-sscanf/Makefile") CONFIG_FILES="$CONFIG_FILES src/trio-sscanf/Makefile" ;;
     "src/ud/Makefile") CONFIG_FILES="$CONFIG_FILES src/ud/Makefile" ;;
     "src/wikisort/Makefile") CONFIG_FILES="$CONFIG_FILES src/wikisort/Makefile" ;;
     "src/whetstone/Makefile") CONFIG_FILES="$CONFIG_FILES src/whetstone/Makefile" ;;
+    "config.h") CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
+    "dejagnu/site.exp") CONFIG_FILES="$CONFIG_FILES dejagnu/site.exp" ;;
     "src/template/Makefile") CONFIG_FILES="$CONFIG_FILES src/template/Makefile" ;;
-    "src/platformcode/Makefile") CONFIG_FILES="$CONFIG_FILES src/platformcode/Makefile" ;;
-    "analysis/Makefile") CONFIG_FILES="$CONFIG_FILES analysis/Makefile" ;;
+    "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
@@ -13646,6 +13806,7 @@ done
 # bizarre bug on SunOS 4.1.3.
 if $ac_need_defaults; then
   test "${CONFIG_FILES+set}" = set || CONFIG_FILES=$config_files
+  test "${CONFIG_HEADERS+set}" = set || CONFIG_HEADERS=$config_headers
   test "${CONFIG_COMMANDS+set}" = set || CONFIG_COMMANDS=$config_commands
 fi
 
@@ -13834,8 +13995,116 @@ fi
 cat >>$CONFIG_STATUS <<\_ACEOF || ac_write_fail=1
 fi # test -n "$CONFIG_FILES"
 
+# Set up the scripts for CONFIG_HEADERS section.
+# No need to generate them if there are no CONFIG_HEADERS.
+# This happens for instance with `./config.status Makefile'.
+if test -n "$CONFIG_HEADERS"; then
+cat >"$ac_tmp/defines.awk" <<\_ACAWK ||
+BEGIN {
+_ACEOF
 
-eval set X "  :F $CONFIG_FILES      :C $CONFIG_COMMANDS"
+# Transform confdefs.h into an awk script `defines.awk', embedded as
+# here-document in config.status, that substitutes the proper values into
+# config.h.in to produce config.h.
+
+# Create a delimiter string that does not exist in confdefs.h, to ease
+# handling of long lines.
+ac_delim='%!_!# '
+for ac_last_try in false false :; do
+  ac_tt=`sed -n "/$ac_delim/p" confdefs.h`
+  if test -z "$ac_tt"; then
+    break
+  elif $ac_last_try; then
+    as_fn_error $? "could not make $CONFIG_HEADERS" "$LINENO" 5
+  else
+    ac_delim="$ac_delim!$ac_delim _$ac_delim!! "
+  fi
+done
+
+# For the awk script, D is an array of macro values keyed by name,
+# likewise P contains macro parameters if any.  Preserve backslash
+# newline sequences.
+
+ac_word_re=[_$as_cr_Letters][_$as_cr_alnum]*
+sed -n '
+s/.\{148\}/&'"$ac_delim"'/g
+t rset
+:rset
+s/^[	 ]*#[	 ]*define[	 ][	 ]*/ /
+t def
+d
+:def
+s/\\$//
+t bsnl
+s/["\\]/\\&/g
+s/^ \('"$ac_word_re"'\)\(([^()]*)\)[	 ]*\(.*\)/P["\1"]="\2"\
+D["\1"]=" \3"/p
+s/^ \('"$ac_word_re"'\)[	 ]*\(.*\)/D["\1"]=" \2"/p
+d
+:bsnl
+s/["\\]/\\&/g
+s/^ \('"$ac_word_re"'\)\(([^()]*)\)[	 ]*\(.*\)/P["\1"]="\2"\
+D["\1"]=" \3\\\\\\n"\\/p
+t cont
+s/^ \('"$ac_word_re"'\)[	 ]*\(.*\)/D["\1"]=" \2\\\\\\n"\\/p
+t cont
+d
+:cont
+n
+s/.\{148\}/&'"$ac_delim"'/g
+t clear
+:clear
+s/\\$//
+t bsnlc
+s/["\\]/\\&/g; s/^/"/; s/$/"/p
+d
+:bsnlc
+s/["\\]/\\&/g; s/^/"/; s/$/\\\\\\n"\\/p
+b cont
+' <confdefs.h | sed '
+s/'"$ac_delim"'/"\\\
+"/g' >>$CONFIG_STATUS || ac_write_fail=1
+
+cat >>$CONFIG_STATUS <<_ACEOF || ac_write_fail=1
+  for (key in D) D_is_set[key] = 1
+  FS = ""
+}
+/^[\t ]*#[\t ]*(define|undef)[\t ]+$ac_word_re([\t (]|\$)/ {
+  line = \$ 0
+  split(line, arg, " ")
+  if (arg[1] == "#") {
+    defundef = arg[2]
+    mac1 = arg[3]
+  } else {
+    defundef = substr(arg[1], 2)
+    mac1 = arg[2]
+  }
+  split(mac1, mac2, "(") #)
+  macro = mac2[1]
+  prefix = substr(line, 1, index(line, defundef) - 1)
+  if (D_is_set[macro]) {
+    # Preserve the white space surrounding the "#".
+    print prefix "define", macro P[macro] D[macro]
+    next
+  } else {
+    # Replace #undef with comments.  This is necessary, for example,
+    # in the case of _POSIX_SOURCE, which is predefined and required
+    # on some systems where configure will not decide to define it.
+    if (defundef == "undef") {
+      print "/*", prefix defundef, macro, "*/"
+      next
+    }
+  }
+}
+{ print }
+_ACAWK
+_ACEOF
+cat >>$CONFIG_STATUS <<\_ACEOF || ac_write_fail=1
+  as_fn_error $? "could not setup config headers machinery" "$LINENO" 5
+fi # test -n "$CONFIG_HEADERS"
+
+
+eval set X "  :F $CONFIG_FILES  :H $CONFIG_HEADERS    :C $CONFIG_COMMANDS"
 shift
 for ac_tag
 do
@@ -14054,7 +14323,64 @@ which seems to be undefined.  Please make sure it is defined" >&2;}
   esac \
   || as_fn_error $? "could not create $ac_file" "$LINENO" 5
  ;;
-
+  :H)
+  #
+  # CONFIG_HEADER
+  #
+  if test x"$ac_file" != x-; then
+    {
+      $as_echo "/* $configure_input  */" \
+      && eval '$AWK -f "$ac_tmp/defines.awk"' "$ac_file_inputs"
+    } >"$ac_tmp/config.h" \
+      || as_fn_error $? "could not create $ac_file" "$LINENO" 5
+    if diff "$ac_file" "$ac_tmp/config.h" >/dev/null 2>&1; then
+      { $as_echo "$as_me:${as_lineno-$LINENO}: $ac_file is unchanged" >&5
+$as_echo "$as_me: $ac_file is unchanged" >&6;}
+    else
+      rm -f "$ac_file"
+      mv "$ac_tmp/config.h" "$ac_file" \
+	|| as_fn_error $? "could not create $ac_file" "$LINENO" 5
+    fi
+  else
+    $as_echo "/* $configure_input  */" \
+      && eval '$AWK -f "$ac_tmp/defines.awk"' "$ac_file_inputs" \
+      || as_fn_error $? "could not create -" "$LINENO" 5
+  fi
+# Compute "$ac_file"'s index in $config_headers.
+_am_arg="$ac_file"
+_am_stamp_count=1
+for _am_header in $config_headers :; do
+  case $_am_header in
+    $_am_arg | $_am_arg:* )
+      break ;;
+    * )
+      _am_stamp_count=`expr $_am_stamp_count + 1` ;;
+  esac
+done
+echo "timestamp for $_am_arg" >`$as_dirname -- "$_am_arg" ||
+$as_expr X"$_am_arg" : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
+	 X"$_am_arg" : 'X\(//\)[^/]' \| \
+	 X"$_am_arg" : 'X\(//\)$' \| \
+	 X"$_am_arg" : 'X\(/\)' \| . 2>/dev/null ||
+$as_echo X"$_am_arg" |
+    sed '/^X\(.*[^/]\)\/\/*[^/][^/]*\/*$/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\/\)[^/].*/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\/\)$/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\).*/{
+	    s//\1/
+	    q
+	  }
+	  s/.*/./; q'`/stamp-h$_am_stamp_count
+ ;;
 
   :C)  { $as_echo "$as_me:${as_lineno-$LINENO}: executing $ac_file commands" >&5
 $as_echo "$as_me: executing $ac_file commands" >&6;}
@@ -14828,11 +15154,13 @@ fi
 echo
 echo \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 echo
-echo "Target platform               $with_platform"
-echo "Target triple                 $host"
-echo "Platform sources              $enable_platformsources"
-if [ -z "$SIMULATORPATH" ]; then
-    echo "Simulator                     none"
+echo "Target arch                   $arch"
+echo "Target board                  $board"
+echo "Target chip                   $chip"
+echo "Target triple                 $target"
+
+if test "x$EXCLUDED_BENCHMARKS" == x ; then
+    echo "Excluded benchmarks           none"
 else
-    echo "Simulator                     $SIMULATORPATH"
+    echo "Excluded benchmarks           $EXCLUDED_BENCHMARKS"
 fi

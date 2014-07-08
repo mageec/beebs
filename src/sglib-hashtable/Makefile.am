@@ -20,9 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=hashtable
-hashtable_SOURCES=hashtable.c sglib.h
+bin_PROGRAMS=sglib-hashtable
+sglib_hashtable_SOURCES=hashtable.c sglib.h
 
 include $(top_srcdir)/src/common.mk.am
 
-hashtable_SOURCES += ${platform_src}
+sglib_hashtable_SOURCES += ${platform_src}

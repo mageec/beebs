@@ -129,6 +129,30 @@ void stop_trigger()
   PORTA.OUTCLR = 1;
 }
 
+#elif MSP430FR
+#include <msp430fr5739.h>
+#define T_PADIR (*(unsigned char volatile*)0x0204)
+#define T_PAOUT (*(unsigned char volatile*)0x0202)
+
+void initialise_trigger()
+{
+  WDTCTL = WDTPW + WDTHOLD;
+
+  T_PAOUT = 0;
+  T_PADIR = 0x20; // Pin 1.5
+}
+
+void start_trigger()
+{
+  T_PAOUT = 0x20;
+}
+
+void stop_trigger()
+{
+  T_PAOUT = 0x0;
+}
+
+
 #elif CORTEX_M4
 
 #define ADDR(x)     (*((unsigned long volatile  *)(x)))

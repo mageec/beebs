@@ -20,23 +20,15 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-platform_src = $(top_srcdir)/src/platformcode/platformcode.c
+platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
 
-AM_CFLAGS += -I $(top_srcdir)/src/platformcode -g
+if CHIPSUPPORT_C
+platform_src += $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
+endif
 
-if STM32F0DISCOVERY
-AM_CFLAGS += -T $(top_srcdir)/src/platformcode/stm32f05_flash.ld
-platform_src += $(top_srcdir)/src/platformcode/startup.c
-endif
-if STM32VLDISCOVERY
-AM_CFLAGS += -T $(top_srcdir)/src/platformcode/stm32vl_flash.ld
-platform_src += $(top_srcdir)/src/platformcode/startup.c
-endif
-if SAM4LXPLAINED
-AM_CFLAGS += -T $(top_srcdir)/src/platformcode/sam4lxplained.ld
-platform_src += $(top_srcdir)/src/platformcode/startup.c
-endif
-if PIC32MX250F128B
-AM_CFLAGS += -T $(top_srcdir)/src/platformcode/pic32mx.ld
-platform_src += $(top_srcdir)/src/platformcode/pic32mx_startup.s
-endif
+AM_CFLAGS=-I $(top_srcdir)/include \
+		  -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@/ \
+		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/ \
+		  @CONFIG_CFLAGS@
+
+AM_LDFLAGS= @CONFIG_LDFLAGS@

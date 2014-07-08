@@ -23,8 +23,8 @@
 bin_PROGRAMS=wikisort
 wikisort_SOURCES=wikisort.c
 
-wikisort_LDFLAGS = "-lm"
-
 include $(top_srcdir)/src/common.mk.am
+
+AM_LDFLAGS += "-lm"
 
 wikisort_SOURCES += ${platform_src}

@@ -17,9 +17,9 @@
  * Changes:
  * JG 2005/12/20: Changed declaration of maxmaxcode to avoid warning
  * JG 2012/09/28: Comment within comment removed
- */ 
+ */
 
-#include "platformcode.h"
+#include "support.h"
 
 // This scale factor will be changed to equalise the runtime of the
 // benchmarks
@@ -79,7 +79,7 @@ void trace(char *s)
 
 /* For SPEC95 use, USERMEM automatically set to 450000.
 	Jeff Reilly, 1/15/95				*/
-# define USERMEM 	450000	/* default user memory */
+# define USERMEM 	1000	/* default user memory */
 
 #ifdef interdata		/* (Perkin-Elmer) */
 #define SIGNED_COMPARE_SLOW	/* signed compare is slower than unsigned */
@@ -89,7 +89,7 @@ void trace(char *s)
 	Jeff Reilyy, 1/15/95				*/
 #define PBITS	16
 #define BITS 16
-#define HSIZE	257		/* 95% occupancy was 69001 */
+#define HSIZE	400		/* 95% occupancy was 69001 */
 
 
 /*
@@ -179,7 +179,7 @@ int apsim_InCnt;
 unsigned char *InBuff;
 unsigned char *OutBuff;
 
-char orig_text_buffer[BUFFERSIZE];
+const unsigned char orig_text_buffer[BUFFERSIZE]={214, 162, 160, 241, 211, 0, 221, 149, 99, 223, 24, 22, 4, 79, 46, 168, 39, 115, 50, 31, 42, 96, 240, 36, 195, 8, 110, 205, 66, 92, 203, 188, 117, 173, 211, 77, 14, 140, 80, 0, 180, 253, 15, 6, 89, 228, 199, 36, 217, 110};
 char comp_text_buffer[BUFFERSIZE+5];
 
 count_int htab [HSIZE];
@@ -211,12 +211,12 @@ int main(void)
    int i;
 
 
-   initialise_trigger();
+   initialise_board();
    start_trigger();
 
    for(i = 0; i < REPEAT_FACTOR; ++i)
    {
-       initbuffer();
+       // initbuffer();
 
        /*if(maxbits < INIT_BITS) maxbits = INIT_BITS;*/
        /* With our setting, maxbits = 16,
@@ -234,28 +234,10 @@ int main(void)
     }
 
     stop_trigger();
-   
+
    return (0);
 
 }
-
-
-
-void initbuffer(void)
-{
-   int seed = 1;
-   int i;
-   int tabort;
-
-   for (i = 0 ; i < BUFFERSIZE ; i++) {
-      /* Generates random integers between 0 and 8095 */
-      tabort = i;
-      seed = ((seed * 133) + 81) % 8095;
-
-      orig_text_buffer[i] = seed % 256;
-   }
-}
-
 
 
 static int offset;

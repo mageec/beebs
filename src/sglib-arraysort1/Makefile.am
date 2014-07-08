@@ -20,9 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=arraysort1
-arraysort1_SOURCES=arraysort1.c sglib.h
+bin_PROGRAMS=sglib-arraysort1
+sglib_arraysort1_SOURCES=arraysort1.c sglib.h
 
 include $(top_srcdir)/src/common.mk.am
 
-arraysort1_SOURCES += ${platform_src}
+sglib_arraysort1_SOURCES += ${platform_src}

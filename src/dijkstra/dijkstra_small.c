@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "platformcode.h"
+#include "support.h"
 
 #define NUM_NODES                          10
 #define NONE                               9999
@@ -148,7 +148,7 @@ int main() {
       28, 24, 55, 16,  8, 35, 31, 28,  0, 38,
       23, 19, 41, 16,  8, 35, 15, 28,  0,  0};
 
-   initialise_trigger();
+   initialise_board();
    start_trigger();
 
    /* finds 10 shortest paths between nodes */

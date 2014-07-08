@@ -1,6 +1,6 @@
 /* NIST Secure Hash Algorithm */
 
-#include "platformcode.h"
+#include "support.h"
 #include "sha.h"
 
 int main()
@@ -17,7 +17,7 @@ int main()
       242085432, 2188392725, 1497303427};
 #endif
 
-   initialise_trigger();
+   initialise_board();
    start_trigger();
 
    for(n = 0; n < REPEAT_FACTOR>>10; ++n) {

@@ -20,9 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=arcfour
-arcfour_SOURCES=arcfour.c
+bin_PROGRAMS=nettle-arcfour
+nettle_arcfour_SOURCES=arcfour.c
 
 include $(top_srcdir)/src/common.mk.am
 
-arcfour_SOURCES += ${platform_src}
+nettle_arcfour_SOURCES += ${platform_src}

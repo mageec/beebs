@@ -81,13 +81,14 @@ int ctl_##type##VectorPush_Back(ctl_##type##Vector* s, type push)\
 	{														\
 		type* secure;										\
 		s->alloc+=s->BlockSize;								\
-		secure=realloc(s->value,s->alloc*sizeof(type));		\
+		secure=malloc(s->alloc*sizeof(type));				\
 		if(!secure)											\
 		{													\
 			ctl_errno	= CTL_OUT_OF_MEMORY;				\
 			s->alloc-=s->BlockSize;							\
 			return 1;										\
 		}													\
+		memcpy(secure, s->value, s->size*sizeof(type));	  	\
 		CTL_GROW_ALLOC_SIZE(s);								\
 		s->value=secure;									\
 	}														\
@@ -118,12 +119,13 @@ int ctl_##type##VectorSet(ctl_##type##Vector* s, type* vector, size_t size)\
 	{														\
 		size_t alloc=(size/s->BlockSize+1)*s->BlockSize;	\
 		type* secure;										\
-		secure=realloc(s->value,alloc*sizeof(type));		\
+		secure=malloc(alloc*sizeof(type));					\
 		if(!secure)											\
 		{													\
 			ctl_errno	= CTL_OUT_OF_MEMORY;				\
 			return 1;										\
 		}													\
+		memcpy(secure, s->value, s->size*sizeof(type));	  	\
 		s->value=secure;									\
 		s->alloc=alloc;										\
 	}														\
@@ -140,12 +142,13 @@ int ctl_##type##VectorSetVector(ctl_##type##Vector* s, ctl_##type##Vector* vecto
 	{														\
 		size_t alloc=(vector->size/s->BlockSize+1)*s->BlockSize;\
 		type* secure;										\
-		secure=realloc(s->value,alloc*sizeof(type));		\
+		secure=malloc(alloc*sizeof(type));					\
 		if(!secure)											\
 		{													\
 			ctl_errno	= CTL_OUT_OF_MEMORY;				\
 			return 1;										\
 		}													\
+		memcpy(secure, s->value, s->size*sizeof(type));	  	\
 		s->alloc=alloc;										\
 		s->value=secure;									\
 	}														\
@@ -187,13 +190,14 @@ int ctl_##type##VectorInsert(ctl_##type##Vector* s, size_t pos, type value)\
 	{														\
 		type* secure;										\
 		s->alloc+=s->BlockSize;								\
-		secure=realloc(s->value,s->alloc*sizeof(type));		\
+		secure=malloc(s->alloc*sizeof(type));				\
 		if(!secure)											\
 		{													\
 			s->alloc-=s->BlockSize;							\
 			ctl_errno=CTL_OUT_OF_MEMORY;					\
 			return 1;										\
 		}													\
+		memcpy(secure, s->value, s->size*sizeof(type));	  	\
 		s->alloc+=s->BlockSize;								\
 		CTL_GROW_ALLOC_SIZE(s);								\
 		s->value=secure;									\
@@ -219,12 +223,13 @@ int ctl_##type##VectorDelete(ctl_##type##Vector* s, size_t begin, size_t end)\
 int ctl_##type##VectorShrink(ctl_##type##Vector* s)			\
 {															\
 	type* secure;											\
-	secure=realloc(s->value,s->size*sizeof(type));			\
+	secure=malloc(s->size*sizeof(type));					\
 	if(!secure)												\
 	{														\
 		ctl_errno=CTL_OUT_OF_MEMORY;						\
 		return 1;											\
 	}														\
+	memcpy(secure, s->value, s->size*sizeof(type));	  		\
 	s->value=secure;										\
 	return 0;												\
 }

@@ -20,9 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=string
-string_SOURCES=string.c
+bin_PROGRAMS=ctl-string
+ctl_string_SOURCES=string.c
 
 include $(top_srcdir)/src/common.mk.am
 
-string_SOURCES += ${platform_src}
+ctl_string_SOURCES += ${platform_src}

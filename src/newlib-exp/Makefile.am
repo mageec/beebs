@@ -20,9 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=ef_exp
-ef_exp_SOURCES=ef_exp.c
+bin_PROGRAMS=newlib-exp
+newlib_exp_SOURCES=ef_exp.c
 
 include $(top_srcdir)/src/common.mk.am
 
-ef_exp_SOURCES += ${platform_src}
+newlib_exp_SOURCES += ${platform_src}

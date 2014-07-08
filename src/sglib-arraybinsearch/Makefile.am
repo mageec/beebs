@@ -20,9 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=arraybinsearch
-arraybinsearch_SOURCES=arraybinsearch.c sglib.h
+bin_PROGRAMS=sglib-arraybinsearch
+sglib_arraybinsearch_SOURCES=arraybinsearch.c sglib.h
 
 include $(top_srcdir)/src/common.mk.am
 
-arraybinsearch_SOURCES += ${platform_src}
+sglib_arraybinsearch_SOURCES += ${platform_src}

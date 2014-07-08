@@ -20,9 +20,11 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
-#include "platformcode.h"
+#include "support.h"
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
@@ -141,12 +143,14 @@ int ctl_StringSet(ctl_string* s, const char* string)
   if(s->alloc<len)
   {
     alloc = (len/s->BlockSize+1)*s->BlockSize;
-    secure=realloc(s->string,alloc);
+
+    secure=malloc(alloc);
     if(!secure)
     {
       ctl_errno=CTL_OUT_OF_MEMORY;
       return 1;
     }
+    memcpy(secure, s->string, s->alloc);
     s->alloc=alloc;
     s->string=secure;
   }
@@ -162,12 +166,14 @@ int ctl_StringSetString(ctl_string* s, ctl_string* string)
   if(s->alloc<string->size)
   {
     len = (string->size/s->BlockSize+1)*s->BlockSize;
-    secure=realloc(s->string,len);
+
+    secure=malloc(len);
     if(!secure)
     {
       ctl_errno=CTL_OUT_OF_MEMORY;
       return 1;
     }
+    memcpy(secure, s->string, s->alloc);
     s->alloc=len;
     s->string=secure;
   }
@@ -185,13 +191,15 @@ int ctl_StringAppend(ctl_string* s, const char* string)
     size_t alloc;
     char* secure;
     alloc = (size/s->BlockSize+1)*s->BlockSize;
-    secure=realloc(s->string,alloc);
+    secure=malloc(alloc);
     if(!secure)
     {
       ctl_errno=CTL_OUT_OF_MEMORY;
       s->size-=len;
       return 1;
     }
+    memcpy(secure, s->string, s->alloc);
+
     CTL_GROW_ALLOC_SIZE(s);
     s->alloc=alloc;
     s->string=secure;
@@ -232,15 +240,18 @@ int ctl_StringInsertAt(ctl_string* s, size_t pos, char value)
   if(s->size>=s->alloc)
   {
     char* secure;
-    s->alloc+=s->BlockSize;
-    secure=realloc(s->string,s->alloc);
+    int alloc = s->alloc + s->BlockSize;
+    secure=malloc(alloc);
+
     if(!secure)
     {
       ctl_errno=CTL_OUT_OF_MEMORY;
       s->alloc-=s->BlockSize;
       return 1;
     }
+    memcpy(secure, s->string, s->alloc);
     CTL_GROW_ALLOC_SIZE(s);
+    s->alloc+=s->BlockSize;
     s->string=secure;
   }
   ++s->size;
@@ -287,12 +298,13 @@ int ctl_StringSetSubStr(ctl_string* s, size_t begin, size_t end, char* string)
   {
     char* secure;
     alloc = ((s->size+diff)/s->BlockSize+1)*s->BlockSize;
-    secure=realloc(s->string,alloc);
+    secure=malloc(alloc);
     if(!secure)
     {
       ctl_errno=CTL_OUT_OF_MEMORY;
       return 1;
     }
+    memcpy(secure, s->string, s->alloc);
     CTL_GROW_ALLOC_SIZE(s);
     s->alloc=alloc;
     s->string=secure;
@@ -413,7 +425,7 @@ main (void)
 {
   int i;
 
-  initialise_trigger ();
+  initialise_board ();
   start_trigger ();
 
   for (i = 0; i < SCALE_FACTOR; i++)

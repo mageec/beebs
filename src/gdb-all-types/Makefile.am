@@ -19,9 +19,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=all-types
-all_types_SOURCES=all-types.c
+bin_PROGRAMS=gdb-all-types
+gdb_all_types_SOURCES=all-types.c
 
 include $(top_srcdir)/src/common.mk.am
 
-all_types_SOURCES += ${platform_src}
+gdb_all_types_SOURCES += ${platform_src}

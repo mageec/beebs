@@ -21,9 +21,9 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-bin_PROGRAMS=stack
-stack_SOURCES=stack.c ctl.h stack.h
+bin_PROGRAMS=ctl-stack
+ctl_stack_SOURCES=stack.c ctl.h stack.h
 
 include $(top_srcdir)/src/common.mk.am
 
-stack_SOURCES += ${platform_src}
+ctl_stack_SOURCES += ${platform_src}

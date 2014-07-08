@@ -20,9 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=queue
-queue_SOURCES=queue.c sglib.h
+bin_PROGRAMS=sglib-queue
+sglib_queue_SOURCES=queue.c sglib.h
 
 include $(top_srcdir)/src/common.mk.am
 
-queue_SOURCES += ${platform_src}
+sglib_queue_SOURCES += ${platform_src}

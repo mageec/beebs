@@ -122,9 +122,9 @@ needed.
 
 #include "aes.h"
 
-#define FOUR_TABLES
-#define FOUR_LR_TABLES
-#define FOUR_IM_TABLES
+#define ONE_TABLE
+#define ONE_LR_TABLE
+#define ONE_IM_TABLE
 
 /*
    In this implementation the columns of the state array are each held in

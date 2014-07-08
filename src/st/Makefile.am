@@ -23,8 +23,8 @@
 bin_PROGRAMS=st
 st_SOURCES=st.c
 
-st_LDFLAGS="-lm"
-
 include $(top_srcdir)/src/common.mk.am
+
+AM_LDFLAGS+="-lm"
 
 st_SOURCES += ${platform_src}

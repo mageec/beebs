@@ -55,7 +55,7 @@
 /*************************************************************************/
 
 
-#include "platformcode.h"
+#include "support.h"
 
 // This scale factor will be changed to equalise the runtime of the
 // benchmarks
@@ -70,7 +70,7 @@
 
 static float gaussian(void);
 
-#define N 201
+#define N 101
 #define L 20            /* filter order, (length L+1) */
 
 /* set convergence parameter */
@@ -224,7 +224,7 @@ int main()
 {
     int n;
 
-    initialise_trigger();
+    initialise_board();
     start_trigger();
 
     for(n = 0; n < SCALE_FACTOR; ++n)

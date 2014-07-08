@@ -20,7 +20,7 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
-#include "platformcode.h"
+#include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
@@ -72,16 +72,16 @@ benchmark (void)
 
   ctl_pairVectorDelete(v2, 4,8);
 
-  while(v->size > 0)
+  while(v2->size > 0)
   {
     pair k;
 
-    ctl_pairVectorPop_Back(v, &k);
+    ctl_pairVectorPop_Back(v2, &k);
 
     cnt += k.a*k.b;
   }
 
-  ctl_pairVectorFree(v);
+  ctl_pairVectorFree(v2);
 
   return cnt;
 }
@@ -92,7 +92,7 @@ main (void)
 {
   int i;
 
-  initialise_trigger ();
+  initialise_board ();
   start_trigger ();
 
   for (i = 0; i < SCALE_FACTOR; i++)

@@ -20,9 +20,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=ef_mod
-ef_mod_SOURCES=ef_mod.c
+bin_PROGRAMS=newlib-mod
+newlib_mod_SOURCES=ef_mod.c
 
 include $(top_srcdir)/src/common.mk.am
 
-ef_mod_SOURCES += ${platform_src}
+newlib_mod_SOURCES += ${platform_src}
