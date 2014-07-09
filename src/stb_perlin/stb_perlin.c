@@ -30,12 +30,12 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define SCALE_FACTOR    (REPEAT_FACTOR >> 10)
 
 
 /* Not same permutation table as Perlin's reference to avoid copyright issues;
    Perlin's table can be found at http://mrl.nyu.edu/~perlin/noise/ */
-static int stb__perlin_randtab[512] =
+static const int stb__perlin_randtab[512] =
 {
    23,  125, 161, 52,  103, 117, 70,  37,  247, 101, 203, 169, 124, 126, 44,  123, 
    152, 238, 145, 45,  171, 114, 253, 10,  192, 136, 4,   157, 249, 30,  35,  72, 
@@ -168,46 +168,62 @@ float stb_perlin_noise3(float x, float y, float z, int x_wrap, int y_wrap, int z
    return stb__perlin_lerp(n0,n1,u);
 }
 
-#define NOISE_BOUND_LOWER 5.0
-#define NOISE_BOUND_UPPER 6.0
+#define NOISE_START_XY 5.0
+#define NOISE_Z 1.0
+#define NOISE_STEP 0.1
+
+#define PX_LIM 10
+
+static const float expected[PX_LIM][PX_LIM] =
+{
+    {0, -0.0077039809, -0.0463358946, -0.114156149, -0.190464064, -0.25, -0.273023993, -0.251076102, -0.188415885, -0.0991439149},
+    {0.0991439074, 0.0914399251, 0.0486288741, -0.0293106586, -0.121270522, -0.200000048, -0.242842749, -0.238228917, -0.187921792, -0.105018668},
+    {0.188415855, 0.184891015, 0.142079949, 0.0571305156, -0.0497226715, -0.15000008, -0.217995092, -0.237974435, -0.207558259, -0.137281746},
+    {0.251076072, 0.257670492, 0.221869349, 0.136919931, 0.0202583969, -0.0999999046, -0.195655048, -0.246107936, -0.243134528, -0.192748934},
+    {0.273024023, 0.295270383, 0.274362564, 0.199221492, 0.0825599432, -0.0499999821, -0.169228643, -0.25001502, -0.277515233, -0.251722753},
+    {0.25, 0.29143998, 0.292080045, 0.236919835, 0.132559896, 0, -0.132559896, -0.23691988, -0.292080224, -0.29144001},
+    {0.19046405, 0.251722723, 0.277515113, 0.25001502, 0.169228613, 0.0499999523, -0.0825599432, -0.199221492, -0.274362803, -0.295270443},
+    {0.114156127, 0.192748874, 0.243134409, 0.246107906, 0.195655018, 0.0999999046, -0.0202584267, -0.136919975, -0.221869588, -0.257670581},
+    {0.0463357568, 0.137281597, 0.207558081, 0.237974346, 0.217995077, 0.150000095, 0.0497227311, -0.0571305752, -0.142080128, -0.184891045},
+    {0.00770395994, 0.105018653, 0.187921703, 0.238228887, 0.242842719, 0.200000048, 0.121270508, 0.0293106437, -0.0486289859, -0.0914399624}
+};
 
 int benchmark(void)
 {
     int xpx, ypx;
-    float x, y;
-    volatile float out[10][10];
-    /* Need to define constants to check output accuracy. */
-    /*float test[6] = {
-	0.000000,
-	-0.099144,
-	-0.188416,
-	-0.251076,
-	-0.273024,
-	-0.250000
-    }; */
+    float x, y, out;
+    int ret = 0;
 
-    /* Calculate a 2D plane of noise */
-    for (y = NOISE_BOUND_LOWER; y < NOISE_BOUND_UPPER; y = y + 0.1) {
-	for (x = NOISE_BOUND_LOWER; x < NOISE_BOUND_UPPER; x = x + 0.1) {
-	    xpx = (int)(x*10);
-	    ypx = (int)(y*10);
-	    out[ypx][xpx] = stb_perlin_noise3(x, y, 1.0, 0, 0, 0);
+    /* Calculate a plane of noise */
+    for (ypx = 0; ypx < PX_LIM; ++ypx)
+	{
+	    for (xpx = 0; xpx < PX_LIM; ++xpx)
+		{
+		    x = (float)xpx * NOISE_STEP + NOISE_START_XY;
+		    y = (float)ypx * NOISE_STEP + NOISE_START_XY;
+		    out = stb_perlin_noise3(x, y, NOISE_Z, 0, 0, 0);
+		    if (out != expected[ypx][xpx])
+			{
+			    ret = 1;
+			}
+		}
 	}
-    }
+
+    return ret;
 }
 
 int main(void)
 {
-    int i;
+    int i, ret;
 
     initialise_board();
     start_trigger();
-    
+
     for (i = 0; i < SCALE_FACTOR; i++)
 	{
-	    benchmark();
+	    ret = benchmark();
 	}
 
     stop_trigger();
-    return 0;
+    return ret;
 }

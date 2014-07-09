@@ -1,3 +1,10 @@
+2014-07-09  George Field  <george.field@bristol.ac.uk>
+	Make stb_perlin self checking and fix some bugs, including array
+	out-of-bounds access. Adjusted SCALE_FACTOR to a reasonable timeframe.
+
+	* src/stb_perlin/stb_perlin.c: Fixed array access bug and made
+	    benchmark self-checking.
+
 2014-07-07  George Field  <george.field@bristol.ac.uk>
 	Rewrite LDFLAGS configuration for stb_perlin to avoid overriding
 	AM_LDFLAGS
