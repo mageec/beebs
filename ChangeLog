@@ -1,3 +1,26 @@
+2014-07-09  George Field  <george.field@bristol.ac.uk>
+	Make stb_perlin self checking and fix some bugs, including array
+	out-of-bounds access. Adjusted SCALE_FACTOR to a reasonable timeframe.
+
+	* src/stb_perlin/stb_perlin.c: Fixed array access bug and made
+	    benchmark self-checking.
+
+2014-07-07  George Field  <george.field@bristol.ac.uk>
+	Rewrite LDFLAGS configuration for stb_perlin to avoid overriding
+	AM_LDFLAGS
+
+	* src/stb_perlin/Makefile.am: Rewrite to add LDFLAGS to AM_LDFLAGS
+	* src/stb_perlin/Makefile.in: Regenerated
+
+2014-07-07  George Field  <george.field@bristol.ac.uk>
+	Added stb_perlin benchmark
+
+	* configure: Regenerated
+	* configure.ac: Added stb_perlin benchmark
+	* src/stb_perlin/Makefile.am: Makefile.am for stb_perlin
+	* src/stb_perlin/Makefile.in: Generated
+	* src/stb_perlin/stb_perlin.c: Benchmarking perlin noise generation
+
 2014-07-07  James Pallister  <james.pallister@bristol.ac.uk>
 	Added picojpeg benchmark
 
