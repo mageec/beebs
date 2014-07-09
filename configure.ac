@@ -207,6 +207,7 @@ m4_define([benchmarklist],[dnl
 [sqrt],
 [st],
 [statemate],
+[stb_perlin],
 [tarai],
 [trio-snprintf],
 [trio-sscanf],
