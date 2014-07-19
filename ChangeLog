@@ -1,3 +1,17 @@
+2014-07-19  James Pallister  <james.pallister@bristol.ac.uk>
+	Added the qrduino benchmark
+
+	* configure: Regenerated
+	* configure.ac: Added the qrduino benchmark
+	* src/qrduino/Makefile.am: Makefile for qrduino
+	* src/qrduino/Makefile.in: Generated
+	* src/qrduino/ecctable.h: qrduino library code
+	* src/qrduino/qrbits.h: qrduino library code
+	* src/qrduino/qrencode.c: qrduino library code
+	* src/qrduino/qrencode.h: qrduino library code
+	* src/qrduino/qrframe.c: qrduino library code
+	* src/qrduino/qrtest.c: qrduino test code
+
 2014-07-14  James Pallister  <james.pallister@bristol.ac.uk>
 	Add the compress and mont64 benchmarks from the Hacker's Delight
 	book's code

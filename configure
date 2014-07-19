@@ -12456,6 +12456,14 @@ BENCHMARKS_SUBDIRS=""
         BENCHMARKS_SUBDIRS+="src/prime "
     fi
 
+    bmark=qrduino
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/qrduino/Makefile"
+
+        BENCHMARKS+="qrduino "
+        BENCHMARKS_SUBDIRS+="src/qrduino "
+    fi
+
     bmark=qsort
     if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
         ac_config_files="$ac_config_files src/qsort/Makefile"
@@ -13787,6 +13795,7 @@ do
     "src/nsichneu/Makefile") CONFIG_FILES="$CONFIG_FILES src/nsichneu/Makefile" ;;
     "src/picojpeg/Makefile") CONFIG_FILES="$CONFIG_FILES src/picojpeg/Makefile" ;;
     "src/prime/Makefile") CONFIG_FILES="$CONFIG_FILES src/prime/Makefile" ;;
+    "src/qrduino/Makefile") CONFIG_FILES="$CONFIG_FILES src/qrduino/Makefile" ;;
     "src/qsort/Makefile") CONFIG_FILES="$CONFIG_FILES src/qsort/Makefile" ;;
     "src/qurt/Makefile") CONFIG_FILES="$CONFIG_FILES src/qurt/Makefile" ;;
     "src/recursion/Makefile") CONFIG_FILES="$CONFIG_FILES src/recursion/Makefile" ;;

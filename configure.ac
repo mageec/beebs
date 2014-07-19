@@ -187,6 +187,7 @@ m4_define([benchmarklist],[dnl
 [nsichneu],
 [picojpeg],
 [prime],
+[qrduino],
 [qsort],
 [qurt],
 [recursion],
