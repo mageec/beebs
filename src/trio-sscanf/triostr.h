@@ -25,7 +25,6 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 #include "triodef.h"
 #include "triop.h"
 
@@ -58,7 +57,7 @@ enum {
  *
  * The following resolves internal dependencies.
  */
-  
+
 # if defined(TRIO_FUNC_XSTRING_SET)
 #  if !defined(TRIO_FUNC_DUPLICATE)
 #   define TRIO_FUNC_DUPLICATE

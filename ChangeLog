@@ -1,4 +1,12 @@
 2014-07-22  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix compilation of trio benchmarks on AVR
+
+	* src/trio-snprintf/trio.c: Remove references to mblen
+	* src/trio-snprintf/triostr.h: Remove dependency on time.h
+	* src/trio-sscanf/trio.c: Remove references to mblen
+	* src/trio-sscanf/triostr.h: Remove dependency on time.h
+
+2014-07-22  James Pallister  <james.pallister@bristol.ac.uk>
 	Fix expint so that it does not get compiled away with optimizations
 
 	* src/expint/expint.c: Make the return value volatile so it does not
