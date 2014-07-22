@@ -11952,6 +11952,22 @@ BENCHMARKS_SUBDIRS=""
         BENCHMARKS_SUBDIRS+="src/adpcm "
     fi
 
+    bmark=aha-compress
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/aha-compress/Makefile"
+
+        BENCHMARKS+="aha-compress "
+        BENCHMARKS_SUBDIRS+="src/aha-compress "
+    fi
+
+    bmark=aha-mont64
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/aha-mont64/Makefile"
+
+        BENCHMARKS+="aha-mont64 "
+        BENCHMARKS_SUBDIRS+="src/aha-mont64 "
+    fi
+
     bmark=blowfish
     if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
         ac_config_files="$ac_config_files src/blowfish/Makefile"
@@ -12438,6 +12454,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="prime "
         BENCHMARKS_SUBDIRS+="src/prime "
+    fi
+
+    bmark=qrduino
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/qrduino/Makefile"
+
+        BENCHMARKS+="qrduino "
+        BENCHMARKS_SUBDIRS+="src/qrduino "
     fi
 
     bmark=qsort
@@ -13708,6 +13732,8 @@ do
     "libtool") CONFIG_COMMANDS="$CONFIG_COMMANDS libtool" ;;
     "src/2dfir/Makefile") CONFIG_FILES="$CONFIG_FILES src/2dfir/Makefile" ;;
     "src/adpcm/Makefile") CONFIG_FILES="$CONFIG_FILES src/adpcm/Makefile" ;;
+    "src/aha-compress/Makefile") CONFIG_FILES="$CONFIG_FILES src/aha-compress/Makefile" ;;
+    "src/aha-mont64/Makefile") CONFIG_FILES="$CONFIG_FILES src/aha-mont64/Makefile" ;;
     "src/blowfish/Makefile") CONFIG_FILES="$CONFIG_FILES src/blowfish/Makefile" ;;
     "src/bs/Makefile") CONFIG_FILES="$CONFIG_FILES src/bs/Makefile" ;;
     "src/bsort100/Makefile") CONFIG_FILES="$CONFIG_FILES src/bsort100/Makefile" ;;
@@ -13769,6 +13795,7 @@ do
     "src/nsichneu/Makefile") CONFIG_FILES="$CONFIG_FILES src/nsichneu/Makefile" ;;
     "src/picojpeg/Makefile") CONFIG_FILES="$CONFIG_FILES src/picojpeg/Makefile" ;;
     "src/prime/Makefile") CONFIG_FILES="$CONFIG_FILES src/prime/Makefile" ;;
+    "src/qrduino/Makefile") CONFIG_FILES="$CONFIG_FILES src/qrduino/Makefile" ;;
     "src/qsort/Makefile") CONFIG_FILES="$CONFIG_FILES src/qsort/Makefile" ;;
     "src/qurt/Makefile") CONFIG_FILES="$CONFIG_FILES src/qurt/Makefile" ;;
     "src/recursion/Makefile") CONFIG_FILES="$CONFIG_FILES src/recursion/Makefile" ;;

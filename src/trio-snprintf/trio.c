@@ -1977,26 +1977,10 @@ TRIO_ARGS5((type, format, parameters, arglist, argarray),
   save_errno = errno;
   offset = 0;
   parameterPosition = 0;
-#if defined(TRIO_COMPILER_SUPPORTS_MULTIBYTE)
-  (void)mblen(NULL, 0);
-#endif
 
   while (format[offset])
     {
       TrioInitializeParameter(&workParameter);
-
-#if defined(TRIO_COMPILER_SUPPORTS_MULTIBYTE)
-      if (! isascii(format[offset]))
-	{
-	  /*
-	   * Multibyte characters cannot be legal specifiers or
-	   * modifiers, so we skip over them.
-	   */
-	  charlen = mblen(&format[offset], MB_LEN_MAX);
-	  offset += (charlen > 0) ? charlen : 1;
-	  continue; /* while */
-	}
-#endif /* TRIO_COMPILER_SUPPORTS_MULTIBYTE */
 
       switch(format[offset++]) {
 

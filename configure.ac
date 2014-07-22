@@ -124,6 +124,8 @@ LDFLAGS=$confsave_LDFLAGS
 m4_define([benchmarklist],[dnl
 [2dfir],
 [adpcm],
+[aha-compress],
+[aha-mont64],
 [blowfish],
 [bs],
 [bsort100],
@@ -185,6 +187,7 @@ m4_define([benchmarklist],[dnl
 [nsichneu],
 [picojpeg],
 [prime],
+[qrduino],
 [qsort],
 [qurt],
 [recursion],
