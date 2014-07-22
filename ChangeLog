@@ -1,3 +1,9 @@
+2014-07-22  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix expint so that it does not get compiled away with optimizations
+
+	* src/expint/expint.c: Make the return value volatile so it does not
+	    get optimized away
+
 2014-07-19  James Pallister  <james.pallister@bristol.ac.uk>
 	Added the qrduino benchmark
 

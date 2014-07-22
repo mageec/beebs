@@ -105,7 +105,7 @@ long int expint(int n, long int x)
 void
 benchmark (void)
 {
-  expint(50,1);
+  volatile int i = expint(50,1);
 }
 
 
