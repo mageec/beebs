@@ -715,6 +715,8 @@ CONFIG_LDFLAGS
 CHIP
 BOARD
 ARCH
+CALIBRATION_FALSE
+CALIBRATION_TRUE
 CHIPSUPPORT_C_FALSE
 CHIPSUPPORT_C_TRUE
 EXCLUDED_BENCHMARKS
@@ -2401,6 +2403,22 @@ if test -f $srcdir/config/$arch/chips/$chip/chipsupport.h; then
 $as_echo "#define HAVE_CHIPSUPPORT_H 1" >>confdefs.h
 
 fi
+
+# Test whether we have a calibration file
+if test -f $srcdir/config/$arch/boards/$board/calibration; then
+
+$as_echo "#define HAVE_CALIBRATION 1" >>confdefs.h
+
+    HAVE_CALIBRATION=yes
+fi
+ if test xHAVE_CALIBRATION == xyes; then
+  CALIBRATION_TRUE=
+  CALIBRATION_FALSE='#'
+else
+  CALIBRATION_TRUE='#'
+  CALIBRATION_FALSE=
+fi
+
 
 ARCH=$arch
 
@@ -11934,6 +11952,10 @@ LDFLAGS=$confsave_LDFLAGS
 
 BENCHMARKS=""
 BENCHMARKS_SUBDIRS=""
+# Count the number of benchmarks that are not in the calibration file
+# This will be reported to the user at the end of configure
+UNCALIBRATED_BENCHMARKS=""
+N_UNCALIBRATED_BENCHMARKS=0
 
 
     bmark=2dfir
@@ -11942,6 +11964,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="2dfir "
         BENCHMARKS_SUBDIRS+="src/2dfir "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=adpcm
@@ -11950,6 +11980,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="adpcm "
         BENCHMARKS_SUBDIRS+="src/adpcm "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=aha-compress
@@ -11958,6 +11996,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="aha-compress "
         BENCHMARKS_SUBDIRS+="src/aha-compress "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=aha-mont64
@@ -11966,6 +12012,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="aha-mont64 "
         BENCHMARKS_SUBDIRS+="src/aha-mont64 "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=blowfish
@@ -11974,6 +12028,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="blowfish "
         BENCHMARKS_SUBDIRS+="src/blowfish "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=bs
@@ -11982,6 +12044,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="bs "
         BENCHMARKS_SUBDIRS+="src/bs "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=bsort100
@@ -11990,6 +12060,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="bsort100 "
         BENCHMARKS_SUBDIRS+="src/bsort100 "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=bubblesort
@@ -11998,6 +12076,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="bubblesort "
         BENCHMARKS_SUBDIRS+="src/bubblesort "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=cnt
@@ -12006,6 +12092,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="cnt "
         BENCHMARKS_SUBDIRS+="src/cnt "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=compress
@@ -12014,6 +12108,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="compress "
         BENCHMARKS_SUBDIRS+="src/compress "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=cover
@@ -12022,6 +12124,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="cover "
         BENCHMARKS_SUBDIRS+="src/cover "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=crc
@@ -12030,6 +12140,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="crc "
         BENCHMARKS_SUBDIRS+="src/crc "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=crc32
@@ -12038,6 +12156,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="crc32 "
         BENCHMARKS_SUBDIRS+="src/crc32 "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=ctl-string
@@ -12046,6 +12172,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="ctl-string "
         BENCHMARKS_SUBDIRS+="src/ctl-string "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=ctl-stack
@@ -12054,6 +12188,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="ctl-stack "
         BENCHMARKS_SUBDIRS+="src/ctl-stack "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=ctl-vector
@@ -12062,6 +12204,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="ctl-vector "
         BENCHMARKS_SUBDIRS+="src/ctl-vector "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=cubic
@@ -12070,6 +12220,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="cubic "
         BENCHMARKS_SUBDIRS+="src/cubic "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=dhrystone
@@ -12078,6 +12236,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="dhrystone "
         BENCHMARKS_SUBDIRS+="src/dhrystone "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=dijkstra
@@ -12086,6 +12252,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="dijkstra "
         BENCHMARKS_SUBDIRS+="src/dijkstra "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=dtoa
@@ -12094,6 +12268,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="dtoa "
         BENCHMARKS_SUBDIRS+="src/dtoa "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=duff
@@ -12102,6 +12284,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="duff "
         BENCHMARKS_SUBDIRS+="src/duff "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=edn
@@ -12110,6 +12300,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="edn "
         BENCHMARKS_SUBDIRS+="src/edn "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=expint
@@ -12118,6 +12316,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="expint "
         BENCHMARKS_SUBDIRS+="src/expint "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=fac
@@ -12126,6 +12332,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="fac "
         BENCHMARKS_SUBDIRS+="src/fac "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=fasta
@@ -12134,6 +12348,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="fasta "
         BENCHMARKS_SUBDIRS+="src/fasta "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=fdct
@@ -12142,6 +12364,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="fdct "
         BENCHMARKS_SUBDIRS+="src/fdct "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=fft
@@ -12150,6 +12380,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="fft "
         BENCHMARKS_SUBDIRS+="src/fft "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=fibcall
@@ -12158,6 +12396,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="fibcall "
         BENCHMARKS_SUBDIRS+="src/fibcall "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=fir
@@ -12166,6 +12412,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="fir "
         BENCHMARKS_SUBDIRS+="src/fir "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=float_matmult
@@ -12174,6 +12428,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="float_matmult "
         BENCHMARKS_SUBDIRS+="src/float_matmult "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=frac
@@ -12182,6 +12444,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="frac "
         BENCHMARKS_SUBDIRS+="src/frac "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=gdb-advance
@@ -12190,6 +12460,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="gdb-advance "
         BENCHMARKS_SUBDIRS+="src/gdb-advance "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=gdb-all-types
@@ -12198,6 +12476,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="gdb-all-types "
         BENCHMARKS_SUBDIRS+="src/gdb-all-types "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=gdb-anon
@@ -12206,6 +12492,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="gdb-anon "
         BENCHMARKS_SUBDIRS+="src/gdb-anon "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=gdb-arrayidx
@@ -12214,6 +12508,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="gdb-arrayidx "
         BENCHMARKS_SUBDIRS+="src/gdb-arrayidx "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=gdb-async
@@ -12222,6 +12524,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="gdb-async "
         BENCHMARKS_SUBDIRS+="src/gdb-async "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=gdb-bitfields
@@ -12230,6 +12540,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="gdb-bitfields "
         BENCHMARKS_SUBDIRS+="src/gdb-bitfields "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=gdb-constvars
@@ -12238,6 +12556,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="gdb-constvars "
         BENCHMARKS_SUBDIRS+="src/gdb-constvars "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=gdb-store
@@ -12246,6 +12572,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="gdb-store "
         BENCHMARKS_SUBDIRS+="src/gdb-store "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=huffbench
@@ -12254,6 +12588,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="huffbench "
         BENCHMARKS_SUBDIRS+="src/huffbench "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=insertsort
@@ -12262,6 +12604,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="insertsort "
         BENCHMARKS_SUBDIRS+="src/insertsort "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=int_matmult
@@ -12270,6 +12620,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="int_matmult "
         BENCHMARKS_SUBDIRS+="src/int_matmult "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=janne_complex
@@ -12278,6 +12636,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="janne_complex "
         BENCHMARKS_SUBDIRS+="src/janne_complex "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=jfdctint
@@ -12286,6 +12652,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="jfdctint "
         BENCHMARKS_SUBDIRS+="src/jfdctint "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=lcdnum
@@ -12294,6 +12668,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="lcdnum "
         BENCHMARKS_SUBDIRS+="src/lcdnum "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=levenshtein
@@ -12302,6 +12684,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="levenshtein "
         BENCHMARKS_SUBDIRS+="src/levenshtein "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=lms
@@ -12310,6 +12700,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="lms "
         BENCHMARKS_SUBDIRS+="src/lms "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=ludcmp
@@ -12318,6 +12716,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="ludcmp "
         BENCHMARKS_SUBDIRS+="src/ludcmp "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=mergesort
@@ -12326,6 +12732,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="mergesort "
         BENCHMARKS_SUBDIRS+="src/mergesort "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=miniz
@@ -12334,6 +12748,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="miniz "
         BENCHMARKS_SUBDIRS+="src/miniz "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=minver
@@ -12342,6 +12764,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="minver "
         BENCHMARKS_SUBDIRS+="src/minver "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=nbody
@@ -12350,6 +12780,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="nbody "
         BENCHMARKS_SUBDIRS+="src/nbody "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=ndes
@@ -12358,6 +12796,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="ndes "
         BENCHMARKS_SUBDIRS+="src/ndes "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=nettle-arcfour
@@ -12366,6 +12812,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="nettle-arcfour "
         BENCHMARKS_SUBDIRS+="src/nettle-arcfour "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=nettle-cast128
@@ -12374,6 +12828,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="nettle-cast128 "
         BENCHMARKS_SUBDIRS+="src/nettle-cast128 "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=nettle-des
@@ -12382,6 +12844,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="nettle-des "
         BENCHMARKS_SUBDIRS+="src/nettle-des "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=nettle-md5
@@ -12390,6 +12860,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="nettle-md5 "
         BENCHMARKS_SUBDIRS+="src/nettle-md5 "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=newlib-exp
@@ -12398,6 +12876,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="newlib-exp "
         BENCHMARKS_SUBDIRS+="src/newlib-exp "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=newlib-log
@@ -12406,6 +12892,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="newlib-log "
         BENCHMARKS_SUBDIRS+="src/newlib-log "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=newlib-mod
@@ -12414,6 +12908,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="newlib-mod "
         BENCHMARKS_SUBDIRS+="src/newlib-mod "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=newlib-sqrt
@@ -12422,6 +12924,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="newlib-sqrt "
         BENCHMARKS_SUBDIRS+="src/newlib-sqrt "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=ns
@@ -12430,6 +12940,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="ns "
         BENCHMARKS_SUBDIRS+="src/ns "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=nsichneu
@@ -12438,6 +12956,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="nsichneu "
         BENCHMARKS_SUBDIRS+="src/nsichneu "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=picojpeg
@@ -12446,6 +12972,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="picojpeg "
         BENCHMARKS_SUBDIRS+="src/picojpeg "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=prime
@@ -12454,6 +12988,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="prime "
         BENCHMARKS_SUBDIRS+="src/prime "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=qrduino
@@ -12462,6 +13004,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="qrduino "
         BENCHMARKS_SUBDIRS+="src/qrduino "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=qsort
@@ -12470,6 +13020,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="qsort "
         BENCHMARKS_SUBDIRS+="src/qsort "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=qurt
@@ -12478,6 +13036,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="qurt "
         BENCHMARKS_SUBDIRS+="src/qurt "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=recursion
@@ -12486,6 +13052,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="recursion "
         BENCHMARKS_SUBDIRS+="src/recursion "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=rijndael
@@ -12494,6 +13068,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="rijndael "
         BENCHMARKS_SUBDIRS+="src/rijndael "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=select
@@ -12502,6 +13084,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="select "
         BENCHMARKS_SUBDIRS+="src/select "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=sglib-arraybinsearch
@@ -12510,6 +13100,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="sglib-arraybinsearch "
         BENCHMARKS_SUBDIRS+="src/sglib-arraybinsearch "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=sglib-arraysort
@@ -12518,6 +13116,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="sglib-arraysort "
         BENCHMARKS_SUBDIRS+="src/sglib-arraysort "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=sglib-arraysort1
@@ -12526,6 +13132,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="sglib-arraysort1 "
         BENCHMARKS_SUBDIRS+="src/sglib-arraysort1 "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=sglib-dllist
@@ -12534,6 +13148,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="sglib-dllist "
         BENCHMARKS_SUBDIRS+="src/sglib-dllist "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=sglib-hashtable
@@ -12542,6 +13164,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="sglib-hashtable "
         BENCHMARKS_SUBDIRS+="src/sglib-hashtable "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=sglib-listinsertsort
@@ -12550,6 +13180,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="sglib-listinsertsort "
         BENCHMARKS_SUBDIRS+="src/sglib-listinsertsort "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=sglib-listinsertsort1
@@ -12558,6 +13196,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="sglib-listinsertsort1 "
         BENCHMARKS_SUBDIRS+="src/sglib-listinsertsort1 "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=sglib-listsort
@@ -12566,6 +13212,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="sglib-listsort "
         BENCHMARKS_SUBDIRS+="src/sglib-listsort "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=sglib-queue
@@ -12574,6 +13228,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="sglib-queue "
         BENCHMARKS_SUBDIRS+="src/sglib-queue "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=sglib-rbtree
@@ -12582,6 +13244,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="sglib-rbtree "
         BENCHMARKS_SUBDIRS+="src/sglib-rbtree "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=sha
@@ -12590,6 +13260,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="sha "
         BENCHMARKS_SUBDIRS+="src/sha "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=slre
@@ -12598,6 +13276,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="slre "
         BENCHMARKS_SUBDIRS+="src/slre "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=stringsearch1
@@ -12606,6 +13292,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="stringsearch1 "
         BENCHMARKS_SUBDIRS+="src/stringsearch1 "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=strstr
@@ -12614,6 +13308,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="strstr "
         BENCHMARKS_SUBDIRS+="src/strstr "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=sqrt
@@ -12622,6 +13324,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="sqrt "
         BENCHMARKS_SUBDIRS+="src/sqrt "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=st
@@ -12630,6 +13340,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="st "
         BENCHMARKS_SUBDIRS+="src/st "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=statemate
@@ -12638,6 +13356,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="statemate "
         BENCHMARKS_SUBDIRS+="src/statemate "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=stb_perlin
@@ -12646,6 +13372,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="stb_perlin "
         BENCHMARKS_SUBDIRS+="src/stb_perlin "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=tarai
@@ -12654,6 +13388,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="tarai "
         BENCHMARKS_SUBDIRS+="src/tarai "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=trio-snprintf
@@ -12662,6 +13404,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="trio-snprintf "
         BENCHMARKS_SUBDIRS+="src/trio-snprintf "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=trio-sscanf
@@ -12670,6 +13420,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="trio-sscanf "
         BENCHMARKS_SUBDIRS+="src/trio-sscanf "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=ud
@@ -12678,6 +13436,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="ud "
         BENCHMARKS_SUBDIRS+="src/ud "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=wikisort
@@ -12686,6 +13452,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="wikisort "
         BENCHMARKS_SUBDIRS+="src/wikisort "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
     bmark=whetstone
@@ -12694,6 +13468,14 @@ BENCHMARKS_SUBDIRS=""
 
         BENCHMARKS+="whetstone "
         BENCHMARKS_SUBDIRS+="src/whetstone "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 
 
@@ -12829,6 +13611,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${CHIPSUPPORT_C_TRUE}" && test -z "${CHIPSUPPORT_C_FALSE}"; then
   as_fn_error $? "conditional \"CHIPSUPPORT_C\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${CALIBRATION_TRUE}" && test -z "${CALIBRATION_FALSE}"; then
+  as_fn_error $? "conditional \"CALIBRATION\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking that generated files are newer than configure" >&5
@@ -15199,4 +15985,14 @@ if test "x$EXCLUDED_BENCHMARKS" == x ; then
     echo "Excluded benchmarks           none"
 else
     echo "Excluded benchmarks           $EXCLUDED_BENCHMARKS"
+fi
+
+if test "x$HAVE_CALIBRATION" == xyes ; then
+    echo "Calibrated benchmarks         Yes"
+    echo "Uncalibrated benchmarks       $N_UNCALIBRATED_BENCHMARKS"
+    if test $N_UNCALIBRATED_BENCHMARKS > 0; then
+        echo "                              $UNCALIBRATED_BENCHMARKS"
+    fi
+else
+    echo "Calibrated benchmarks         No"
 fi

@@ -1,4 +1,24 @@
 2014-07-22  James Pallister  <james.pallister@bristol.ac.uk>
+	Calibration for each benchmark can be specified on a per board basis.
+	A calibration file can be specified in the config directory, which is
+	used at compile time to specify the per benchmark scaling factor.
+
+	* configure.ac: Test whether a calibration file is present. If so,
+	    report which benchmarks are uncalibrated.
+	* doc/beebs.info: Updated documentation to mention calibration, and
+	    the changed REPEAT_FACTOR
+	* doc/beebs.texi: Updated documentation to mention calibration, and
+	    the changed REPEAT_FACTOR
+	* include/support.h: Change REPEAT_FACTOR to BOARD_REPEAT_FACTOR and
+	    add new definition of REPEAT_FACTOR
+	* src/common.mk.am: Grep through the calibration file to find the
+	    number needed, and add this to the CFLAGS for this benchmark.
+
+	* src/*/Makefile.in: Regenerated
+	* config.h.in: Regenerated
+	* configure: Regenerated
+
+2014-07-22  James Pallister  <james.pallister@bristol.ac.uk>
 	Fix compilation of trio benchmarks on AVR
 
 	* src/trio-snprintf/trio.c: Remove references to mblen

@@ -5,6 +5,7 @@
 @c Copyright (C) 2014 University of Bristol
 @c
 @c Contributor Jeremy Bennett <jeremy.bennett@embecosm.com>
+@c Contributor James Pallister <james.pallister@bristol.ac.uk>
 @c
 @c This file is part of BEEBS
 @c
@@ -211,6 +212,7 @@ The configuration files, assume bash.
 * Configuration files::
 * Header files::
 * Board specific code::
+* Calibration::
 @end menu
 
 @node Where to add files
@@ -318,10 +320,11 @@ included by all benchmarks, and defines values which may be used by
 the benchmarks. The values that may be defined are:
 
 @table @code
-@item REPEAT_FACTOR
-@cindex @code{REPEAT_FACTOR}
-Controls how often the tests are run.  Fast boards may need a larger
-value, small boards a smaller value.  Default value 4096.
+@item BOARD_REPEAT_FACTOR
+@cindex @code{BOARD_REPEAT_FACTOR}
+Controls how often the tests are run, at a coarse granularity.
+Fast boards may need a larger value, small boards a smaller value.
+Default value 4096.
 
 @end table
 
@@ -357,6 +360,34 @@ energy measurement).
 
 It is usual for this file to include @file{support.h} to pick up any
 board and chip specific definitions that may prove useful.
+
+@node Calibration
+@section Calibration
+@cindex Calibration
+@cindex @file{calibration}
+
+Each benchmark is run a number of times to allow measurement collection. The
+number of times can be scaled on a per benchmark basic by creating a file
+called @file{calibration}. This file should be placed at
+@file{config/@var{arch}/boards/@var{boardname}/calibration}.
+
+Inside the file is a list of benchmark names followed by a scaling factor
+(separated by a space).
+
+@example
+@kbd{2dfir 2}
+@kbd{blowfish 3}
+@end example
+
+The numbers are used in the following expression to compute the number of runs:
+
+@example
+@kbd{(BOARD_REPEAT_FACTOR >> scale) >> extra}
+@end example
+
+In this code snippet, @kbd{scale} is the entry in the calibration file, and
+@kbd{extra} is an extra scale factor specified in the source code file. The
+@kbd{extra} allows default scaling for the benchmark to be provided.
 
 @node  GNU Free Documentation License
 @chapter GNU Free Documentation License
