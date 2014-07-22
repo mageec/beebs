@@ -1,4 +1,10 @@
 2014-07-22  James Pallister  <james.pallister@bristol.ac.uk>
+	Added initial calibration file for AVR shrimp
+
+	* config/avr/boards/shrimp/calibration: Initial calibration file with
+	    values for 2dfir and crc32
+
+2014-07-22  James Pallister  <james.pallister@bristol.ac.uk>
 	Calibration for each benchmark can be specified on a per board basis.
 	A calibration file can be specified in the config directory, which is
 	used at compile time to specify the per benchmark scaling factor.
