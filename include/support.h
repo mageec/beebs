@@ -12,6 +12,10 @@
 #define BOARD_REPEAT_FACTOR   4096
 #endif
 
+#ifndef BOARD_REPEAT_FACTOR
+#define BOARD_REPEAT_FACTOR 4096
+#endif
+
 // If we don't define a default scaling value for the benchmark, define
 #ifndef CALIB_SCALE
 #define CALIB_SCALE 0

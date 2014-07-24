@@ -2411,7 +2411,7 @@ $as_echo "#define HAVE_CALIBRATION 1" >>confdefs.h
 
     HAVE_CALIBRATION=yes
 fi
- if test xHAVE_CALIBRATION == xyes; then
+ if test x$HAVE_CALIBRATION == xyes; then
   CALIBRATION_TRUE=
   CALIBRATION_FALSE='#'
 else

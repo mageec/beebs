@@ -78,7 +78,7 @@ if test -f $srcdir/config/$arch/boards/$board/calibration; then
     AC_DEFINE([HAVE_CALIBRATION], [1], [Calibration file is present])
     HAVE_CALIBRATION=yes
 fi
-AM_CONDITIONAL([CALIBRATION], [test xHAVE_CALIBRATION == xyes])
+AM_CONDITIONAL([CALIBRATION], [test x$HAVE_CALIBRATION == xyes])
 
 AC_SUBST(ARCH, $arch)
 AC_SUBST(BOARD, $board)

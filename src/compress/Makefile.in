@@ -360,8 +360,8 @@ platform_src =  \
 # If there is a benchmark calibration file, this specifies the shifting
 # of the repeat factor. If grep doesn't find the program, then we specify
 # 0 as the default. This is the default if a calibration file is not found
-@CALIBRATION_TRUE@calib = egrep "\b$(bin_PROGRAMS)\b" $(top_srcdir)/config/@ARCH@/boards/@BOARD@/calibration \
-@CALIBRATION_TRUE@		|| echo "0 0" | cut -d ' ' -f 2
+@CALIBRATION_TRUE@calib = (egrep "\b$(bin_PROGRAMS)\b" $(top_srcdir)/config/@ARCH@/boards/@BOARD@/calibration \
+@CALIBRATION_TRUE@		|| echo "0 0") | cut -d " " -f 2
 
 AM_CFLAGS = -I $(top_srcdir)/include \
 		  -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@/ \
