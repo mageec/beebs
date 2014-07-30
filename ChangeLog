@@ -1,3 +1,9 @@
+2014-07-30  Andrew Burgess  <andrew.burgess@embecosm.com>
+	Add support for building for x86_64 platforms.
+
+	* config/x86_64/chips/generic/chip.cfg: New file.
+	* config/x86_64/chips/generic/chipsupport.h: New file.
+
 2014-07-22  James Pallister  <james.pallister@bristol.ac.uk>
 	Fix compilation of trio benchmarks on AVR
 
