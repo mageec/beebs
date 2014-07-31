@@ -8,8 +8,7 @@ AC_CONFIG_AUX_DIR([build-aux])
 
 AM_INIT_AUTOMAKE([1.11])
 AM_MAINTAINER_MODE([enable])
-
-# AM_SILENT_RULES([yes])
+AM_SILENT_RULES([yes])
 
 AC_ARG_ENABLE([simulate],
             [AS_HELP_STRING([--enable-simulate],

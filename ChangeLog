@@ -1,5 +1,10 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* configure.ac: Turn on AM_SILENT_RULES by default.
+	* configure: Regenerate.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* configure.ac: Move AM_INIT_AUTOMAKE earlier in the file, require
 	automake 1.11 or later.
 	* configure: Regenerate.
