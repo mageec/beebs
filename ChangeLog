@@ -1,5 +1,10 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* config/avr/chips/atmega328p/chip.cfg (EXCLUDED_BENCHMARKS):
+	Include any existing benchmarks in the chip specific list.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* configure.ac: Turn on AM_SILENT_RULES by default.
 	* configure: Regenerate.
 
