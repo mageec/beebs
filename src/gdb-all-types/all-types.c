@@ -59,13 +59,12 @@ float		v_float;
 double		v_double;
 
 
-void
+int
 benchmark (void)
 {
     extern void dummy();
     dummy();
     return 0;
-    
 }
 
 void
