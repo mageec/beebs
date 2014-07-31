@@ -194,8 +194,8 @@ long out_data[720]={
  *--------------------------------------------------*/
 
 
-void fir_filter_int(long* in,long* out,long in_len,
-                    long* coef,long coef_len,
+void fir_filter_int(const long* in,long* out,long in_len,
+                    const long* coef,long coef_len,
                     long scale);
 
 /**************************************************************************
@@ -220,13 +220,13 @@ No return value.
 
 *************************************************************************/
 
-void fir_filter_int(long* in,long* out,long in_len,
-                    long* coef,long coef_len,
+void fir_filter_int(const long* in,long* out,long in_len,
+                    const long* coef,long coef_len,
                     long scale)
 {
   long i,j,coef_len2,acc_length;
   long acc;
-  long *in_ptr,*data_ptr,*coef_start,*coef_ptr,*in_end;
+  const long *in_ptr, *data_ptr, *coef_start, *coef_ptr, *in_end;
 
   /* set up for coefficients */
   coef_start = coef;

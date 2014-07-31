@@ -1,5 +1,10 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/fir/fir.c (fir_filter_int): Make parameters and variables
+	const to match input data.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/fft/fft1.c (benchmark): Cast defined but unused variable to
 	void.
 
