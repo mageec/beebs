@@ -1,3 +1,14 @@
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+	Reimport helper scripts from automake 1.14.1.
+
+	* INSTALL: Take latest version from automake 1.14.1.
+	* build-aux/config.guess: Likewise.
+	* build-aux/config.sub: Likewise.
+	* build-aux/depcomp: Likewise.
+	* build-aux/mdate-sh: Likewise.
+	* build-aux/missing: Likewise.
+	* build-aux/texinfo.tex: Likewise.
+
 2014-07-30  Andrew Burgess  <andrew.burgess@embecosm.com>
 	Add support for building for x86_64 platforms.
 
