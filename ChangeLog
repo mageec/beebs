@@ -1,5 +1,11 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/crc32/crc_32.c: Add include for stdlib.h.
+	(main): Comment out check_output, cast defined but unused variable
+	'output' to void.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/crc/crc.c (icrc1): Rewrite undefined code.
 	(benchmark): Discard unused variable by casting to void.
 
