@@ -1,5 +1,13 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/gdb-advance/advance.c (func2): Move definition before use.
+	Change return type to void.
+	(func3): Change return type to void.
+	(benchmark): Change return type to int.  Cast defined but unused
+	variable to void.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/frac/frac.c (frac): Add a return at the end of the function.
 
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>

@@ -48,18 +48,18 @@ int bar (int y)
 }
 
 
+void func2 ()
+{
+  x = 6;
+}
+
 void func()
 {
   x = x + 5;
   func2 ();
 }
-int func2 ()
-{
-  x = 6;
-}
 
-
-int func3 ()
+void func3 ()
 {
   x = 4;
 }
@@ -69,8 +69,7 @@ void marker1 ()
 {
 }
 
-
-void
+int
 benchmark ()
 {
   int result;
@@ -82,6 +81,8 @@ benchmark ()
   marker1 (); /* stop here after leaving current frame */
   func3 (); /* break here */
   result = bar (b + foo (c));
+
+  (void) result;
   return 0; /* advance malformed */
 }
 
