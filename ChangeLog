@@ -1,4 +1,8 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/nbody/a.out: Delete.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 	General clean up in the configure.ac script.
 
 	* configure.ac: Add GPL header.  Change contact email address.
