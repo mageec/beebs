@@ -30,6 +30,7 @@
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
+int baz (void);
 
 int
 foo (void)
@@ -42,8 +43,7 @@ foo (void)
  return x + y;
 }
 
-
-void
+int
 benchmark (void)
 {
  int y, z;
@@ -54,16 +54,16 @@ benchmark (void)
  z = y;
  y = y + 2;
  y = baz ();
+
+ (void) z;
  return 0;
 }
-
 
 int
 baz (void)
 { 
   return 5;
 }
-
 
 int
 main (void)

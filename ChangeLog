@@ -1,5 +1,13 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/gdb-async/async.c (baz): Forward declaration, remove blank
+	line before definition.
+	(benchmark): Change return type, and cast defined but unused
+	variable to void.
+	(main): Remove blank line before definition.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/gdb-arrayidx/arrayidx.c (benchmark): Change return type.
 
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
