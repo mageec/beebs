@@ -1,5 +1,9 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/expint/expint.c (foo): Make possibly ambiguous code clearer.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/edn/edn.c (codebook): Remove commented out code.
 
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>

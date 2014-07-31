@@ -40,7 +40,7 @@ long int expint(int n, long int x);
 
 long int foo(long int x)
 {
-  return x*x+(8*x)<<4-x;
+  return (x*x+(8*x))<<(4-x);
 }
 
 
