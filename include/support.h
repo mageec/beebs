@@ -9,8 +9,21 @@
 #include "boardsupport.h"
 #else
 // Default board support is here
-#define REPEAT_FACTOR   4096
+#define BOARD_REPEAT_FACTOR   4096
 #endif
+
+#ifndef BOARD_REPEAT_FACTOR
+#define BOARD_REPEAT_FACTOR 4096
+#endif
+
+// If we don't define a default scaling value for the benchmark, define
+#ifndef CALIB_SCALE
+#define CALIB_SCALE 0
+#endif
+
+// The overall repeat factor is scaled by the command-line given
+// CALIB_SCALE.
+#define REPEAT_FACTOR ((BOARD_REPEAT_FACTOR) >> (CALIB_SCALE))
 
 #ifdef HAVE_CHIPSUPPORT_H
 // #include "@srcdir@/config/@ARCH@/chips/@CHIP@/chipsupport.h"

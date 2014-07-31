@@ -73,6 +73,13 @@ if test -f $srcdir/config/$arch/chips/$chip/chipsupport.h; then
     AC_DEFINE([HAVE_CHIPSUPPORT_H], [1], [Chip support header is present])
 fi
 
+# Test whether we have a calibration file
+if test -f $srcdir/config/$arch/boards/$board/calibration; then
+    AC_DEFINE([HAVE_CALIBRATION], [1], [Calibration file is present])
+    HAVE_CALIBRATION=yes
+fi
+AM_CONDITIONAL([CALIBRATION], [test x$HAVE_CALIBRATION == xyes])
+
 AC_SUBST(ARCH, $arch)
 AC_SUBST(BOARD, $board)
 AC_SUBST(CHIP, $chip)
@@ -220,6 +227,10 @@ m4_define([benchmarklist],[dnl
 
 BENCHMARKS=""
 BENCHMARKS_SUBDIRS=""
+# Count the number of benchmarks that are not in the calibration file
+# This will be reported to the user at the end of configure
+UNCALIBRATED_BENCHMARKS=""
+N_UNCALIBRATED_BENCHMARKS=0
 
 m4_foreach([benchmark], [benchmarklist], [
     bmark=benchmark
@@ -227,6 +238,14 @@ m4_foreach([benchmark], [benchmarklist], [
         AC_CONFIG_FILES(src/benchmark/Makefile)
         BENCHMARKS+="benchmark "
         BENCHMARKS_SUBDIRS+="src/benchmark "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
     fi
 ])
 
@@ -254,4 +273,14 @@ if test "x$EXCLUDED_BENCHMARKS" == x ; then
     echo "Excluded benchmarks           none"
 else
     echo "Excluded benchmarks           $EXCLUDED_BENCHMARKS"
+fi
+
+if test "x$HAVE_CALIBRATION" == xyes ; then
+    echo "Calibrated benchmarks         Yes"
+    echo "Uncalibrated benchmarks       $N_UNCALIBRATED_BENCHMARKS"
+    if test $N_UNCALIBRATED_BENCHMARKS > 0; then
+        echo "                              $UNCALIBRATED_BENCHMARKS"
+    fi
+else
+    echo "Calibrated benchmarks         No"
 fi
