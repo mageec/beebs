@@ -97,39 +97,11 @@ main (void)
 int Test(matrix Array)
 
 {
-
-   long StartTime, StopTime;
-
-   float TotalTime;
-
-
-
    Initialize(Array);
-
-   StartTime = 1000.0; //ttime();
 
    Sum(Array);
 
-   StopTime = 1500.0; //ttime();
-
-
-
-   TotalTime = (StopTime - StartTime) / 1000.0;
-
-
-
-   //printf("    - Size of array is %d\n", MAXSIZE);
-
-   //printf("    - Num pos was %d and Sum was %d\n", Poscnt, Postotal);
-
-   //printf("    - Num neg was %d and Sum was %d\n", Negcnt, Negtotal);
-
-   //printf("    - Num neg was %d\n", Negcnt);
-
-   //printf("    - Total sum time is %3.3f seconds\n\n", TotalTime);
-
    return 0;
-
 }
 
 

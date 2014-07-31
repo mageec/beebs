@@ -1,5 +1,9 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/cnt/cnt.c (Test): Remove unused variables.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/bubblesort/bubblesort.c (Inisialize): Add declaration.
 	(BubbleSort): Add declaration, remove unused variables.
 
