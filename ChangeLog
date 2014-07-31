@@ -1,5 +1,15 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/dhrystone/dhry.h (Proc_1, Proc_2, Proc_3, Proc_4): Add
+	forward declarations.
+	(Proc_5, Proc_6, Proc_7, Proc_8): Likewise
+	(Func_1, Func_2, Func_3): Likewise.
+	* src/dhrystone/dhry_1.c: Add missing includes.
+	(main): Return a value.
+	* src/dhrystone/dhry_2.c: Add missing include.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/cubic/basicmath_small.c (main): Remove unused variables.
 
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>

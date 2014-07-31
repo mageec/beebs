@@ -18,6 +18,9 @@
 #include "dhry.h"
 #include "support.h"
 
+#include <string.h>
+#include <stdlib.h>
+
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
@@ -146,8 +149,9 @@ int main ()
       /* Int_1_Loc == 5 */
 
   } /* loop "for Run_Index" */
-}
 
+  return 0;
+}
 
 void Proc_1 (REG Rec_Pointer Ptr_Val_Par)
 {
