@@ -1,5 +1,9 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* .gitignore: Add doc/stamp-vti.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* configure.ac: Turn on maintainer mode by default.
 	* configure: Regenerate.
 

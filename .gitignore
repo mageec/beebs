@@ -15,3 +15,6 @@ results
 # Autotools things
 autom4te.cache
 
+# Stamp file created as part of the
+# documentation process.
+doc/stamp-vti
