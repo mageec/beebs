@@ -1,4 +1,8 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/bs/bs.c (binary_search): Add return type to function.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 	Add, or fix whitespace in GPL headers on Makefile.am files.
 
 	* analysis/Makefile.am: Add GPL header, or fix whitespace around
