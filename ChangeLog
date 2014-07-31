@@ -1,5 +1,10 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* configure.ac: Turn on maintainer mode by default.
+	* configure: Regenerate.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/trio-snprintf/triop.h: Change file mode to remove execute
 	permissions.
 
