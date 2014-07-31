@@ -36,7 +36,8 @@ else
 calib = echo 0
 endif
 
-AM_CFLAGS=-I $(top_srcdir)/include \
+AM_CFLAGS=$(WERROR_CFLAGS) $(WARN_CFLAGS) \
+		  -I $(top_srcdir)/include \
 		  -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@/ \
 		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/ \
 		  "-DCALIB_SCALE=$(shell $(calib))" \
