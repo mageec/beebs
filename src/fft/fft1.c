@@ -122,6 +122,8 @@ void benchmark()
     /* inverse fft */
     flag = 1;
     chkerr = fft1(n, flag);
+
+    (void) chkerr; /* Silence compiler about unused 'chkerr'.  */
 }
 
 int main()
