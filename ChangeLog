@@ -1,5 +1,10 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/crc/crc.c (icrc1): Rewrite undefined code.
+	(benchmark): Discard unused variable by casting to void.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/compress/compress.c (HSIZE, BITS): Remove duplicate
 	definitions, use last definition for HSIZE, BITS was always 16.
 	(PBITS): Unused, so remove.

@@ -88,7 +88,10 @@ unsigned short icrc1(unsigned short crc, unsigned char onech)
 
 	for (i=0;i<8;i++) {
 		if (ans & 0x8000)
-			ans = (ans <<= 1) ^ 4129;
+		  {
+			ans <<= 1;
+			ans = ans ^ 4129;
+		  }
 		else
 			ans <<= 1;
 	}
@@ -138,13 +141,16 @@ unsigned short icrc(unsigned short crc, unsigned long len,
 
 int benchmark(void)
 {
-
   unsigned short i1,i2;
   unsigned long n;
 
   n=40;
   i1=icrc(0,n,(short)0,1);
   i2=icrc(i1,n+2,(short)0,1);
+
+  /* Silence compiler warning about unused variables.  */
+  (void) i2;
+
   return 0;
 }
 
