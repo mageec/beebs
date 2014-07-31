@@ -1,4 +1,9 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/trio-snprintf/triop.h: Change file mode to remove execute
+	permissions.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 	Import libtool.m4 from libtool 2.4.2
 
 	* m4/libtool.m4: Import latest from libtool 2.4.2.
