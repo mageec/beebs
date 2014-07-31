@@ -109,6 +109,10 @@ six:
         return(epsilon);
     if (r != 0.0)
         goto one;
+
+    /* Fall through case, not sure what should be returned here, but
+       must return something.  */
+    return 0.0;
 }
 
 double nums[10] = {0.0, 1.12312, 10000.2, 1200, 3.1415, 3.1415926, 9.9999999, 12.1212, 0.0000012, 1.000001};
