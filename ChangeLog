@@ -1,5 +1,10 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/bubblesort/bubblesort.c (Inisialize): Add declaration.
+	(BubbleSort): Add declaration, remove unused variables.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/bsort100/bsort100.c (Initialize): Add declaration.
 	(benchmark): Remove unused variables, and commented out code.
 	(BubbleSort): Add declaration.  Remove unused variables.
