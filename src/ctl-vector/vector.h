@@ -168,17 +168,6 @@ int ctl_##type##VectorSetAt(ctl_##type##Vector* s, size_t pos, type value)\
 	return 0;												\
 }															\
 															\
-type ctl_##type##VectorGetAt(ctl_##type##Vector* s, size_t pos)\
-{															\
-	CTL_RANGE(pos>=s->size)									\
-	{														\
-		type k;												\
-		ctl_errno=CTL_OUT_OF_RANGE;							\
-		return k;											\
-	}														\
-	return s->value[pos];									\
-}															\
-															\
 int ctl_##type##VectorInsert(ctl_##type##Vector* s, size_t pos, type value)\
 {															\
 	CTL_RANGE(pos>=s->size)									\

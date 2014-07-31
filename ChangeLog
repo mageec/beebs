@@ -1,5 +1,9 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/ctl-vector/vector.h (ctl_##type##VectorGetAt): Remove.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/ctl-string/string.c: Add include for ctype.h.
 	(ctl_StringSetSubStr): Remove unused variable.
 
