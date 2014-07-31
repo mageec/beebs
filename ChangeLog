@@ -1,4 +1,14 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+	    Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* config/arm/boards/stm32f0discovery/board.cfg: Add GPL header.
+	* config/arm/boards/stm32vldiscovery/board.cfg: Likewise.
+	* config/avr/chips/atmega328p/chip.cfg: Likewise.
+	* config/arm/chips/stm32f051/chip.cfg: Likewise.
+	* config/arm/chips/stm32f100/chip.cfg: Likewise.
+	* dejagnu/site.exp.in: Likewise.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 	Add support for Wall and Werror.
 
 	* configure.ac: Add support for Wall and Werror.
