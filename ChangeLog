@@ -1,5 +1,11 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/compress/compress.c (HSIZE, BITS): Remove duplicate
+	definitions, use last definition for HSIZE, BITS was always 16.
+	(PBITS): Unused, so remove.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/cnt/cnt.c (Test): Remove unused variables.
 
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>

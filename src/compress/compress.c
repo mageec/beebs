@@ -52,11 +52,9 @@ void trace(char *s)
 #define BUFFERSIZE	50
 #define IN_COUNT        BUFFERSIZE
 
-#define HSIZE	257		/* 95% occupancy */
+#define HSIZE	400		/* 95% occupancy */
 #define BITS 16
 #define INIT_BITS 9			/* initial number of bits/code */
-
-
 
 /*----------------------------------------------------------------------*/
 /*----------------------------------------------------------------------*/
@@ -85,11 +83,6 @@ void trace(char *s)
 #define SIGNED_COMPARE_SLOW	/* signed compare is slower than unsigned */
 #endif
 
-/* For SPEC95 use, PBITS and BITS automatically set to 16.
-	Jeff Reilyy, 1/15/95				*/
-#define PBITS	16
-#define BITS 16
-#define HSIZE	400		/* 95% occupancy was 69001 */
 
 
 /*
