@@ -1,24 +1,24 @@
-#   Makefile.am for building the benchmark
-#   Copyright (C) 2013 Embecosm Limited and University of Bristol
+# Makefile.am for building the benchmark
 #
-#   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark 
-#   Suite.
+# Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
-#   Contributor: James Pallister <james.pallister@bristol.ac.uk>
+# This file is part of the Bristol/Embecosm Energy Efficiency Benchmark
+# Suite.
 #
-#   This program is free software: you can redistribute it and/or modify
-#   it under the terms of the GNU General Public License as published by
-#   the Free Software Foundation, either version 3 of the License, or
-#   (at your option) any later version.
+# Contributor: James Pallister <james.pallister@bristol.ac.uk>
 #
-#   This program is distributed in the hope that it will be useful,
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#   GNU General Public License for more details.
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 #
-#   You should have received a copy of the GNU General Public License
-#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Change every instance of template to the name of your benchmark
 
