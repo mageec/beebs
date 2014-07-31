@@ -1,5 +1,9 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/cubic/basicmath_small.c (main): Remove unused variables.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/ctl-vector/vector.h (ctl_##type##VectorGetAt): Remove.
 
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>

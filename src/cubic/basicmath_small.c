@@ -7,11 +7,8 @@ int main(void)
    double  a2 = 1.0, b2 = -4.5, c2 = 17.0, d2 = -30.0;
    double  a3 = 1.0, b3 = -3.5, c3 = 22.0, d3 = -31.0;
    double  a4 = 1.0, b4 = -13.7, c4 = 1.0, d4 = -35.0;
-   double X;
    int     solutions;
    int i;
-   unsigned long l = 0x3fed0169L;
-   struct int_sqrt q;
    long n = 0;
 
    double output[48] = {0};
