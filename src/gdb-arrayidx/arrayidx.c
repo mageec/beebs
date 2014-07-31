@@ -33,7 +33,7 @@
 
 int array[] = {1, 2, 3, 4};
 
-void
+int
 benchmark (void)
 {
   array[0] = 5;

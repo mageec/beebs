@@ -1,5 +1,9 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/gdb-arrayidx/arrayidx.c (benchmark): Change return type.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/gdb-anon/anon.c (benchmark): Change return type.
 
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
