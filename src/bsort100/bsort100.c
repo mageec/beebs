@@ -39,6 +39,9 @@
 #define NUMELEMS 100
 #define MAXDIM   (NUMELEMS+1)
 
+void Initialize(int Array []);
+void BubbleSort(int Array []);
+
 /* BUBBLESORT BENCHMARK PROGRAM:
  * This program tests the basic loop constructs, integer comparisons,
  * and simple array handling of compilers by sorting 10 arrays of
@@ -53,21 +56,14 @@ void Initialize(int Array[]);
 
 void benchmark()
 {
-   long  StartTime, StopTime;
-   float TotalTime;
-
 #ifndef WCSIM
    printf("\n *** BUBBLE SORT BENCHMARK TEST ***\n\n");
    printf("RESULTS OF TEST:\n\n");
 #endif
    Initialize(Array);
-   /*   StartTime = ttime (); */
    BubbleSort(Array);
-   /*   StopTime = ttime(); */
-   /*   TotalTime = (StopTime - StartTime) / 1000.0; */
 #ifndef WCSIM
    printf("     - Number of elements sorted is %d\n", NUMELEMS);
-   printf("     - Total time sorting is %3.3f seconds\n\n", TotalTime);
 #endif
 }
 
@@ -98,7 +94,7 @@ void BubbleSort(int Array[])
  */
 {
    int Sorted = FALSE;
-   int Temp, LastIndex, Index, i;
+   int Temp, Index, i;
 
    for (i = 1;
 	i <= NUMELEMS-1;           /* apsim_loop 1 0 */
