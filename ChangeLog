@@ -1,5 +1,14 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/dtoa/dtoa.c: Remove support for KR_headers (K&R style
+	function headers) through out this file.
+	(DBL_MAX_EXP, Exp_msk1, Frac_mask): Mark these costants as
+	unsigned long to reflect how they are used and to prevent integer
+	overflow on 16-bit platforms.
+	(strtod): Remove unused variables.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/dhrystone/dhry.h (Proc_1, Proc_2, Proc_3, Proc_4): Add
 	forward declarations.
 	(Proc_5, Proc_6, Proc_7, Proc_8): Likewise

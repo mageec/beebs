@@ -125,7 +125,6 @@
  *	something other than "long long", #define Llong to be the name,
  *	and if "unsigned Llong" does not work as an unsigned version of
  *	Llong, #define #ULLong to be the corresponding unsigned type.
- * #define KR_headers for old-style C function headers.
  * #define Bad_float_h if your system lacks a float.h or if it does not
  *	define some or all of DBL_DIG, DBL_MAX_10_EXP, DBL_MAX_EXP,
  *	FLT_RADIX, FLT_ROUNDS, and DBL_MAX.
@@ -241,11 +240,7 @@ typedef unsigned Long ULong;
 #endif
 
 #ifdef MALLOC
-#ifdef KR_headers
-extern char *MALLOC();
-#else
 extern void *MALLOC(size_t);
-#endif
 #else
 #define MALLOC malloc
 #endif
@@ -284,14 +279,14 @@ static double private_mem[PRIVATE_mem], *pmem_next = private_mem;
 #ifdef IEEE_Arith
 #define DBL_DIG 15
 #define DBL_MAX_10_EXP 308
-#define DBL_MAX_EXP 1024
+#define DBL_MAX_EXP 1024UL
 #define FLT_RADIX 2
 #endif /*IEEE_Arith*/
 
 #ifdef IBM
 #define DBL_DIG 16
 #define DBL_MAX_10_EXP 75
-#define DBL_MAX_EXP 63
+#define DBL_MAX_EXP 63UL
 #define FLT_RADIX 16
 #define DBL_MAX 7.2370055773322621e+75
 #endif
@@ -299,7 +294,7 @@ static double private_mem[PRIVATE_mem], *pmem_next = private_mem;
 #ifdef VAX
 #define DBL_DIG 16
 #define DBL_MAX_10_EXP 38
-#define DBL_MAX_EXP 127
+#define DBL_MAX_EXP 127UL
 #define FLT_RADIX 2
 #define DBL_MAX 1.7014118346046923e+38
 #endif
@@ -321,11 +316,7 @@ extern "C" {
 #endif
 
 #ifndef CONST
-#ifdef KR_headers
-#define CONST /* blank */
-#else
 #define CONST const
-#endif
 #endif
 
 #define IEEE_8087
@@ -376,7 +367,7 @@ extern int strtod_diglim;
 #ifdef IEEE_Arith
 #define Exp_shift  20
 #define Exp_shift1 20
-#define Exp_msk1    0x100000
+#define Exp_msk1    0x100000UL
 #define Exp_msk11   0x100000
 #define Exp_mask  0x7ff00000
 #define P 53
@@ -387,7 +378,7 @@ extern int strtod_diglim;
 #define Exp_1  0x3ff00000
 #define Exp_11 0x3ff00000
 #define Ebits 11
-#define Frac_mask  0xfffff
+#define Frac_mask  0xfffffUL
 #define Frac_mask1 0xfffff
 #define Ten_pmax 22
 #define Bletch 0x10
@@ -433,7 +424,7 @@ extern int strtod_diglim;
 #define Flt_Rounds 0
 #define Exp_shift  24
 #define Exp_shift1 24
-#define Exp_msk1   0x1000000
+#define Exp_msk1   0x1000000UL
 #define Exp_msk11  0x1000000
 #define Exp_mask  0x7f000000
 #define P 14
@@ -444,7 +435,7 @@ extern int strtod_diglim;
 #define Exp_1  0x41000000
 #define Exp_11 0x41000000
 #define Ebits 8	/* exponent has 7 bits, but 8 is the right value in b2d */
-#define Frac_mask  0xffffff
+#define Frac_mask  0xffffffUL
 #define Frac_mask1 0xffffff
 #define Bletch 4
 #define Ten_pmax 22
@@ -462,7 +453,7 @@ extern int strtod_diglim;
 #define Flt_Rounds 1
 #define Exp_shift  23
 #define Exp_shift1 7
-#define Exp_msk1    0x80
+#define Exp_msk1    0x80UL
 #define Exp_msk11   0x800000
 #define Exp_mask  0x7f80
 #define P 56
@@ -473,7 +464,7 @@ extern int strtod_diglim;
 #define Exp_1  0x40800000
 #define Exp_11 0x4080
 #define Ebits 8
-#define Frac_mask  0x7fffff
+#define Frac_mask  0x7fffffUL
 #define Frac_mask1 0xffff007f
 #define Ten_pmax 24
 #define Bletch 2
@@ -501,11 +492,7 @@ extern int strtod_diglim;
 #ifdef RND_PRODQUOT
 #define rounded_product(a,b) a = rnd_prod(a, b)
 #define rounded_quotient(a,b) a = rnd_quot(a, b)
-#ifdef KR_headers
-extern double rnd_prod(), rnd_quot();
-#else
 extern double rnd_prod(double, double), rnd_quot(double, double);
-#endif
 #else
 #define rounded_product(a,b) a *= b
 #define rounded_quotient(a,b) a /= b
@@ -522,11 +509,7 @@ typedef struct BCinfo BCinfo;
  struct
 BCinfo { int dp0, dp1, dplen, dsign, e0, inexact, nd, nd0, rounding, scale, uflchk; };
 
-#ifdef KR_headers
-#define FFFFFFFF ((((unsigned long)0xffff)<<16)|(unsigned long)0xffff)
-#else
 #define FFFFFFFF 0xffffffffUL
-#endif
 
 #ifdef NO_LONG_LONG
 #undef ULLong
@@ -572,12 +555,7 @@ Bigint {
  static Bigint *freelist[Kmax+1];
 
  static Bigint *
-Balloc
-#ifdef KR_headers
-	(k) int k;
-#else
-	(int k)
-#endif
+Balloc (int k)
 {
 	int x;
 	Bigint *rv;
@@ -613,12 +591,7 @@ Balloc
 	}
 
  static void
-Bfree
-#ifdef KR_headers
-	(v) Bigint *v;
-#else
-	(Bigint *v)
-#endif
+Bfree (Bigint *v)
 {
 	if (v) {
 		if (v->k > Kmax)
@@ -639,13 +612,9 @@ Bfree
 #define Bcopy(x,y) memcpy((char *)&x->sign, (char *)&y->sign, \
 y->wds*sizeof(Long) + 2*sizeof(int))
 
+ /* multiply by m and add a */
  static Bigint *
-multadd
-#ifdef KR_headers
-	(b, m, a) Bigint *b; int m, a;
-#else
-	(Bigint *b, int m, int a)	/* multiply by m and add a */
-#endif
+multadd (Bigint *b, int m, int a)
 {
 	int i, wds;
 #ifdef ULLong
@@ -697,12 +666,7 @@ multadd
 	}
 
  static Bigint *
-s2b
-#ifdef KR_headers
-	(s, nd0, nd, y9, dplen) CONST char *s; int nd0, nd, dplen; ULong y9;
-#else
-	(const char *s, int nd0, int nd, ULong y9, int dplen)
-#endif
+s2b (const char *s, int nd0, int nd, ULong y9, int dplen)
 {
 	Bigint *b;
 	int i, k;
@@ -735,12 +699,7 @@ s2b
 	}
 
  static int
-hi0bits
-#ifdef KR_headers
-	(x) ULong x;
-#else
-	(ULong x)
-#endif
+hi0bits (ULong x)
 {
 	int k = 0;
 
@@ -769,12 +728,7 @@ hi0bits
 	}
 
  static int
-lo0bits
-#ifdef KR_headers
-	(y) ULong *y;
-#else
-	(ULong *y)
-#endif
+lo0bits (ULong *y)
 {
 	int k;
 	ULong x = *y;
@@ -817,12 +771,7 @@ lo0bits
 	}
 
  static Bigint *
-i2b
-#ifdef KR_headers
-	(i) int i;
-#else
-	(int i)
-#endif
+i2b (int i)
 {
 	Bigint *b;
 
@@ -833,12 +782,7 @@ i2b
 	}
 
  static Bigint *
-mult
-#ifdef KR_headers
-	(a, b) Bigint *a, *b;
-#else
-	(Bigint *a, Bigint *b)
-#endif
+mult (Bigint *a, Bigint *b)
 {
 	Bigint *c;
 	int k, wa, wb, wc;
@@ -945,12 +889,7 @@ mult
  static Bigint *p5s;
 
  static Bigint *
-pow5mult
-#ifdef KR_headers
-	(b, k) Bigint *b; int k;
-#else
-	(Bigint *b, int k)
-#endif
+pow5mult (Bigint *b, int k)
 {
 	Bigint *b1, *p5, *p51;
 	int i;
@@ -1002,12 +941,7 @@ pow5mult
 	}
 
  static Bigint *
-lshift
-#ifdef KR_headers
-	(b, k) Bigint *b; int k;
-#else
-	(Bigint *b, int k)
-#endif
+lshift (Bigint *b, int k)
 {
 	int i, k1, n, n1;
 	Bigint *b1;
@@ -1062,12 +996,7 @@ lshift
 	}
 
  static int
-cmp
-#ifdef KR_headers
-	(a, b) Bigint *a, *b;
-#else
-	(Bigint *a, Bigint *b)
-#endif
+cmp (Bigint *a, Bigint *b)
 {
 	ULong *xa, *xa0, *xb, *xb0;
 	int i, j;
@@ -1096,12 +1025,7 @@ cmp
 	}
 
  static Bigint *
-diff
-#ifdef KR_headers
-	(a, b) Bigint *a, *b;
-#else
-	(Bigint *a, Bigint *b)
-#endif
+diff (Bigint *a, Bigint *b)
 {
 	Bigint *c;
 	int i, wa, wb;
@@ -1190,12 +1114,7 @@ diff
 	}
 
  static double
-ulp
-#ifdef KR_headers
-	(x) U *x;
-#else
-	(U *x)
-#endif
+ulp (U *x)
 {
 	Long L;
 	U u;
@@ -1232,12 +1151,7 @@ ulp
 	}
 
  static double
-b2d
-#ifdef KR_headers
-	(a, e) Bigint *a; int *e;
-#else
-	(Bigint *a, int *e)
-#endif
+b2d (Bigint *a, int *e)
 {
 	ULong *xa, *xa0, w, y, z;
 	int k;
@@ -1302,12 +1216,7 @@ b2d
 	}
 
  static Bigint *
-d2b
-#ifdef KR_headers
-	(d, e, bits) U *d; int *e, *bits;
-#else
-	(U *d, int *e, int *bits)
-#endif
+d2b (U *d, int *e, int *bits)
 {
 	Bigint *b;
 	int de, k;
@@ -1436,12 +1345,7 @@ d2b
 #undef d1
 
  static double
-ratio
-#ifdef KR_headers
-	(a, b) Bigint *a, *b;
-#else
-	(Bigint *a, Bigint *b)
-#endif
+ratio (Bigint *a, Bigint *b)
 {
 	U da, db;
 	int k, ka, kb;
@@ -1580,12 +1484,7 @@ static unsigned char hexdig[256] = {
 #endif
 
  static int
-match
-#ifdef KR_headers
-	(sp, t) char **sp, *t;
-#else
-	(const char **sp, const char *t)
-#endif
+match (const char **sp, const char *t)
 {
 	int c, d;
 	CONST char *s = *sp;
@@ -1602,12 +1501,7 @@ match
 
 #ifndef No_Hex_NaN
  static void
-hexnan
-#ifdef KR_headers
-	(rvp, sp) U *rvp; CONST char **sp;
-#else
-	(U *rvp, const char **sp)
-#endif
+hexnan (U *rvp, const char **sp)
 {
 	ULong c, x[2];
 	CONST char *s;
@@ -1681,11 +1575,7 @@ hexnan
 
 #if !defined(NO_HEX_FP) || defined(Honor_FLT_ROUNDS) /*{*/
  static Bigint *
-#ifdef KR_headers
-increment(b) Bigint *b;
-#else
 increment(Bigint *b)
-#endif
 {
 	ULong *x, *xe;
 	Bigint *b1;
@@ -1716,11 +1606,7 @@ increment(Bigint *b)
 #ifndef NO_HEX_FP /*{*/
 
  static void
-#ifdef KR_headers
-rshift(b, k) Bigint *b; int k;
-#else
 rshift(Bigint *b, int k)
-#endif
 {
 	ULong *x, *x1, *xe, y;
 	int n;
@@ -1749,11 +1635,7 @@ rshift(Bigint *b, int k)
 	}
 
  static ULong
-#ifdef KR_headers
-any_on(b, k) Bigint *b; int k;
-#else
 any_on(Bigint *b, int k)
-#endif
 {
 	int n, nwds;
 	ULong *x, *x0, x1, x2;
@@ -1786,12 +1668,7 @@ enum {	/* rounding values: same as FLT_ROUNDS */
 	};
 
  void
-#ifdef KR_headers
-gethex(sp, rvp, rounding, sign)
-	CONST char **sp; U *rvp; int rounding, sign;
-#else
 gethex( CONST char **sp, U *rvp, int rounding, int sign)
-#endif
 {
 	Bigint *b;
 	CONST unsigned char *decpt, *s0, *s, *s1;
@@ -2148,11 +2025,7 @@ gethex( CONST char **sp, U *rvp, int rounding, int sign)
 #endif /*!NO_HEX_FP}*/
 
  static int
-#ifdef KR_headers
-dshift(b, p2) Bigint *b; int p2;
-#else
 dshift(Bigint *b, int p2)
-#endif
 {
 	int rv = hi0bits(b->x[b->wds-1]) - 4;
 	if (p2 > 0)
@@ -2161,12 +2034,7 @@ dshift(Bigint *b, int p2)
 	}
 
  static int
-quorem
-#ifdef KR_headers
-	(b, S) Bigint *b, *S;
-#else
-	(Bigint *b, Bigint *S)
-#endif
+quorem (Bigint *b, Bigint *S)
 {
 	int n;
 	ULong *bx, *bxe, q, *sx, *sxe;
@@ -2286,12 +2154,7 @@ quorem
 
 #if defined(Avoid_Underflow) || !defined(NO_STRTOD_BIGCOMP) /*{*/
  static double
-sulp
-#ifdef KR_headers
-	(x, bc) U *x; BCinfo *bc;
-#else
-	(U *x, BCinfo *bc)
-#endif
+sulp (U *x, BCinfo *bc)
 {
 	U u;
 	double rv;
@@ -2308,13 +2171,7 @@ sulp
 
 #ifndef NO_STRTOD_BIGCOMP
  static void
-bigcomp
-#ifdef KR_headers
-	(rv, s0, bc)
-	U *rv; CONST char *s0; BCinfo *bc;
-#else
-	(U *rv, const char *s0, BCinfo *bc)
-#endif
+bigcomp (U *rv, const char *s0, BCinfo *bc)
 {
 	Bigint *b, *d;
 	int b2, bbits, d2, dd, dig, dsign, i, j, nd, nd0, p2, p5, speccase;
@@ -2517,19 +2374,14 @@ retlow1:
 #endif /* NO_STRTOD_BIGCOMP */
 
  double
-strtod
-#ifdef KR_headers
-	(s00, se) CONST char *s00; char **se;
-#else
-	(const char *s00, char **se)
-#endif
+strtod (const char *s00, char **se)
 {
 	int bb2, bb5, bbe, bd2, bd5, bbbits, bs2, c, e, e1;
 	int esign, i, j, k, nd, nd0, nf, nz, nz0, nz1, sign;
 	CONST char *s, *s0, *s1;
 	double aadj, aadj1;
 	Long L;
-	U aadj2, adj, rv, rv0;
+	U adj, rv, rv0;
 	ULong y, z;
 	BCinfo bc;
 	Bigint *bb, *bb1, *bd, *bd0, *bs, *delta;
@@ -3593,11 +3445,7 @@ strtod
 #endif
 
  static char *
-#ifdef KR_headers
-rv_alloc(i) int i;
-#else
 rv_alloc(int i)
-#endif
 {
 	int j, k, *r;
 
@@ -3616,11 +3464,7 @@ rv_alloc(int i)
 	}
 
  static char *
-#ifdef KR_headers
-nrv_alloc(s, rve, n) char *s, **rve; int n;
-#else
 nrv_alloc(const char *s, char **rve, int n)
-#endif
 {
 	char *rv, *t;
 
@@ -3638,11 +3482,7 @@ nrv_alloc(const char *s, char **rve, int n)
  */
 
  void
-#ifdef KR_headers
-freedtoa(s) char *s;
-#else
 freedtoa(char *s)
-#endif
 {
 	Bigint *b = (Bigint *)((int *)s - 1);
 	b->maxwds = 1 << (b->k = *(int*)b);
@@ -3688,13 +3528,7 @@ freedtoa(char *s)
  */
 
  char *
-dtoa
-#ifdef KR_headers
-	(dd, mode, ndigits, decpt, sign, rve)
-	double dd; int mode, ndigits, *decpt, *sign; char **rve;
-#else
-	(double dd, int mode, int ndigits, int *decpt, int *sign, char **rve)
-#endif
+dtoa (double dd, int mode, int ndigits, int *decpt, int *sign, char **rve)
 {
  /*	Arguments ndigits, decpt, sign are similar to those
 	of ecvt and fcvt; trailing zeros are suppressed from
