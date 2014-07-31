@@ -163,9 +163,15 @@ codebook(long int mask, long int bitchanged, long int numbasis, long int codewor
 
 {
 	long int        j;
+
+
+	/*
+	 * Remove along with the code below.
+	 *
 	long int        tmpMask;
 
 	tmpMask = mask << 1;
+	*/
 	for (j = bitchanged + 1; j <= numbasis; j++) {
 
 

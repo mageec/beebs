@@ -1,5 +1,9 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/edn/edn.c (codebook): Remove commented out code.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/dtoa/dtoa.c: Remove support for KR_headers (K&R style
 	function headers) through out this file.
 	(DBL_MAX_EXP, Exp_msk1, Frac_mask): Mark these costants as
