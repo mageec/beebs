@@ -33,3 +33,8 @@ EXTRA_DEJAGNU_SITE_CONFIG = $(top_builddir)/dejagnu/site.exp
 EXTRA_DIST= beebs.test \
             dejagnu \
             config
+
+# Libtool dependency
+all: libtool
+libtool: $(LIBTOOL_DEPS)
+	$(SHELL) ./config.status libtool
