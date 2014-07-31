@@ -1,5 +1,10 @@
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/fasta/fasta.c (random_fasta): Cast defined but unused
+	variable to void.
+
+2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/expint/expint.c (foo): Make possibly ambiguous code clearer.
 
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>

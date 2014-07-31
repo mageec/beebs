@@ -78,6 +78,7 @@ static void random_fasta (aminoacid_t const *genelist, size_t count) {
 	} while (pos < line);
 	buf[line] = '\n';
 	/*fwrite_unlocked (buf, 1, line + 1, stdout);    */
+	(void) buf; /* Silence compiler warning about unused 'buf'.  */
 	count -= line;
     } while (count);
 }
