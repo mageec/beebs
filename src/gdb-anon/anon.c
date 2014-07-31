@@ -59,7 +59,7 @@ struct outer
 };
 
 
-void
+int
 benchmark (void)
 {
   struct outer val;
