@@ -1,5 +1,10 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/minver/minver.c (data_sink): Added.
+	(minver): Write defined but unused variables into the data_sink.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/miniz/miniz.h: New file.
 	* src/miniz/miniz.c: Add miniz.h include.
 	(MINIZ_NO_ARCHIVE_WRITING_APIS): Move definition earlier in the

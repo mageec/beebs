@@ -111,6 +111,9 @@ int  mmul(int row_a, int col_a, int row_b, int col_b)
 
 }
 
+/* Volatile global.  Write defined, but otherwise unused local
+   variables here to avoid their definitions being optimised out.  */
+volatile int data_sink = 0;
 
 int minver(int row, int col, float eps)
 {
@@ -199,8 +202,12 @@ int minver(int row, int col, float eps)
 	      }
 	  }
 	det = w1;
-	return(0);
 
+	/* Silence compiler warnings about unused variables.  */
+	data_sink = t;
+	data_sink = s;
+
+	return(0);
 }
 
 
