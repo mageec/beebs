@@ -1,5 +1,10 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/gdb-constvars/constvars.c (benchmark): Cast defined but
+	unused variables to void.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/aha-mont64/mont64.c (xbinGCD): Make parameters volatile to
 	match the data being passed in.
 	(benchmark): Remove unused variable.
