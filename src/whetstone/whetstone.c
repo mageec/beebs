@@ -117,13 +117,7 @@ main()
 	long LOOP;
 	int II, JJ;
 
-	/* added for this version */
-	long loopstart;
-	long startsec, finisec;
-	float KIPS;
-	int continuous;
-
-LCONT:
+/*LCONT:*/
 /*
 C
 C	Start benchmark timing at this point.
