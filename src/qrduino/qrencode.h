@@ -20,4 +20,4 @@ extern unsigned char  WD, WDB;
 // strinbuf in, qrframe out
 void qrencode(void);
 
-
+void freeecc();

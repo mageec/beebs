@@ -210,9 +210,11 @@ unsigned char neccblk2;
 unsigned char datablkw;
 unsigned char eccblkwid;
 
+#ifndef __AVR__
 #define PROGMEM
 #define memcpy_P memcpy
 #define __LPM(x) *x
+#endif
 
 #include "ecctable.h"
 
