@@ -159,7 +159,7 @@ value.
    Parameter a is half what it "should" be. In other words, this function
 does not find u and v st. u*a - v*b = 1, but rather u*(2a) - v*b = 1. */
 
-void xbinGCD(uint64 a, uint64 b, uint64 *pu, uint64 *pv)
+void xbinGCD(uint64 a, uint64 b, volatile uint64 *pu, volatile uint64 *pv)
    {
    uint64 alpha, beta, u, v;
 
@@ -194,7 +194,6 @@ void xbinGCD(uint64 a, uint64 b, uint64 *pu, uint64 *pv)
 /* ------------------------------ main ------------------------------ */
 
 int benchmark() {
-   char *q;
    uint64 a, b, m, hr, p1hi, p1lo, p1, p, abar, bbar;
    uint64 phi, plo;
    volatile uint64 rinv, mprime;

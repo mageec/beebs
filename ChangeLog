@@ -1,5 +1,11 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/aha-mont64/mont64.c (xbinGCD): Make parameters volatile to
+	match the data being passed in.
+	(benchmark): Remove unused variable.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/aha-compress/compress_test.c (compress4): Add parentheses to
 	make meaning clearer, use long rather than int.
 	(compress3): Use long rather than int.
