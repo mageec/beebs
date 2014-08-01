@@ -76,7 +76,7 @@
 /*************************************************************************/
 
 
-float fabs(float x)
+float fabs_float (float x)
 {
    if (x < 0)
       return -x;
@@ -105,7 +105,7 @@ float sqrtfcn(float val)
             dx = (val - (x*x)) / (2.0 * x);
             x = x + dx;
             diff = val - (x*x);
-            if (fabs(diff) <= min_tol)
+            if (fabs_float (diff) <= min_tol)
                flag = 1;
          }
          else {} /* JG */

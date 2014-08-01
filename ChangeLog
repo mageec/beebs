@@ -1,5 +1,11 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/sqrt/sqrt.c (fabs, fabs_float): Rename fabs to fabs_float to
+	avoid using the name of a standard library function.
+	(sqrtfcn): Change use of fabs to fabs_float.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/stringsearch1/fast.fwd.inc.c: Add string.h and stdlib.h
 	includes.
 	(prep1): Add return type, remove use of K&R style arguments,
