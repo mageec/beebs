@@ -51,7 +51,7 @@
 
 #define RAND(a,b) (((a = 36969 * (a & 65535) + (a >> 16)) << 16) + (b = 18000 * (b & 65535) + (b >> 16))  )
 
-void fillrand(char *buf, int len)
+void fillrand(byte *buf, int len)
 {
    static unsigned long a[2], mt = 1, count = 4;
    static char          r[4];
@@ -76,16 +76,15 @@ void fillrand(char *buf, int len)
    }
 }
 
-int encfile(aes *ctx, char *outbuf)
+int encfile(aes *ctx, byte *outbuf)
 {
-   char            inbuf[16];
+   byte            inbuf[16];
    fpos_t          flen;
-   unsigned long   i=0, l=0, j, k;
+   unsigned long   i=0, j, k;
 
    fillrand(outbuf, 16);           /* set an IV for CBC mode           */
    FLEN = 4096;
    fillrand(inbuf, 1);             /* make top 4 bits of a byte random */
-   l = 15;                         /* and store the length of the last */
    /* block in the lower 4 bits        */
    inbuf[0] = ((char)FLEN & 15) | (inbuf[0] & ~15);
 
@@ -99,16 +98,15 @@ int encfile(aes *ctx, char *outbuf)
 
       encrypt(inbuf, outbuf, ctx);    /* and do the encryption        */
       /* in all but first round read 16   */
-      l = 16;                     /* bytes into the buffer            */
    }
 
    return 0;
 }
 
-int decfile(aes *ctx, char *outbuf)
+int decfile(aes *ctx, byte *outbuf)
 {
-   char    inbuf1[16], inbuf2[16], *bp1, *bp2, *tp;
-   int     i,j, l, flen, k;
+   byte    inbuf1[16], inbuf2[16], *bp1, *bp2, *tp;
+   int     i,j, k;
 
    fillrand(inbuf1, 16);           /* set an IV for CBC mode           */
 
@@ -120,8 +118,6 @@ int decfile(aes *ctx, char *outbuf)
    for(i = 0; i < 16; ++i)         /* xor with previous input          */
       outbuf[i] ^= inbuf1[i];
 
-   flen = 0;  /* recover length of the last block and set */
-   l = 15;                 /* the count of valid bytes in block to 15  */
    bp1 = inbuf1;           /* set up pointers to two input buffers     */
    bp2 = inbuf2;
 
@@ -135,9 +131,9 @@ int decfile(aes *ctx, char *outbuf)
       for(i = 0; i < 16; ++i)     /* xor it with previous input block */
          outbuf[i] ^= bp2[i];
 
-      /* set byte count to 16 and swap buffer pointers                */
+      /* Swap buffer pointers.  */
 
-      l = i; tp = bp1, bp1 = bp2, bp2 = tp;
+      tp = bp1, bp1 = bp2, bp2 = tp;
    }
 
    return 0;
@@ -147,9 +143,10 @@ char *presetkey="ABCDEF1234567890ABCDEF1234567890";
 
 int main(int argc, char *argv[])
 {
-   char    *cp, ch, key[32];
+   char    *cp, ch;
+   byte key[32];
    int     i=0, by=0, key_len=0, err = 0, n;
-   char    encoutbuf[16], decoutbuf[16];
+   byte    encoutbuf[16], decoutbuf[16];
    int to_return = 0;
 
    /* TODO: Check if this difference is caused by uninitialised memory,

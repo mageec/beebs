@@ -1,5 +1,14 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/rijndael/aes.c (c_name): Add parenthesis to make precedence
+	more obvious.
+	* src/rijndael/aesxam.c (fillrand): Change types parameters, to
+	match how function is used.
+	(encfile, decfile, main): Change type of parameters and variables,
+	to match how function is used.  Remove unused variables.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/qurt/qurt.c (benchmark): Make result a global.
 	(result): New global.
 

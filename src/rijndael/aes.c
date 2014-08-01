@@ -500,12 +500,12 @@ cf_dec c_name(set_key)(const byte in_key[], const word n_bytes, const enum aes_k
    if(!(cx->mode & 0x04)) c_name(set_blk)(16, cx);
 #endif
 
-   if((n_bytes & 7) || n_bytes < 16 || n_bytes > 32 || !(f & 1) && !(f & 2))
+   if((n_bytes & 7) || n_bytes < 16 || n_bytes > 32 || (!(f & 1) && !(f & 2)))
    {
       return (n_bytes ? cx->mode &= ~0x03, aes_bad : (aes_ret)(cx->Nkey << 2));
    }
 
-   cx->mode = cx->mode & ~0x03 | (byte)f & 0x03;
+   cx->mode = (cx->mode & ~0x03) | ((byte)f & 0x03);
    cx->Nkey = n_bytes >> 2;
    cx->Nrnd = Nr(cx->Nkey, nc);
 
