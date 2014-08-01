@@ -1,3 +1,8 @@
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/expint/expint.c (benchmark_result): Added.
+	(benchmark): Write result of call to benchmark_result.
+
 2014-07-31  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* src/gdb-async/async.c (baz): Forward declaration, remove blank

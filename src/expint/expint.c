@@ -101,11 +101,14 @@ long int expint(int n, long int x)
   return ans;
 }
 
+/* The benchmark result is a volatile global, writing to this ensures
+   the call inside BENCHMARK is not optimised away.  */
+volatile int benchmark_result = 0;
 
 void
 benchmark (void)
 {
-  volatile int i = expint(50,1);
+  benchmark_result = expint(50,1);
 }
 
 
