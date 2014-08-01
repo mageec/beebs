@@ -140,12 +140,14 @@ ludcmp( /* int nmax, */ int n, float eps)
 
 }
 
+/* Write to CHKERR from BENCHMARK to ensure that the core call within
+   BENCHMARK is not optimised away.  */
+volatile int chkerr;
 
 void
 benchmark (void)
 {
   int             i, j/*, nmax = 50*/, n = 5;
-  volatile int chkerr;
   float          eps, w;
 
   eps = 1.0e-6;

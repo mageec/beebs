@@ -1,5 +1,10 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/ludcmp/ludcmp.c (chkerr): Added as global.
+	(benchmark): Variable chkerr moved from here.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/huffbench/huffbench.c (benchmark): Remove unused variables,
 	and commented out code.
 
