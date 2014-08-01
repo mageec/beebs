@@ -452,8 +452,8 @@ int slre_match(const char *regexp, const char *s, int s_len,
   return foo(regexp, strlen(regexp), s, s_len, &info);
 }
 
-unsigned char *text = "abbbababaabccababcacbcbcbabbabcbabcabcbbcbbac";
-unsigned char *regexes[] = {"(ab)+", "(b.+)+", "a[ab]*", "([ab^c][ab^c])+"};
+char text[] = "abbbababaabccababcacbcbcbabbabcbabcabcbbcbbac";
+char *regexes[] = {"(ab)+", "(b.+)+", "a[ab]*", "([ab^c][ab^c])+"};
 
 int benchmark()
 {

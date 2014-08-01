@@ -1,5 +1,10 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/slre/slre.c (text, regexes): Change types so for
+	initialisation by string literal.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/sha/sha.c: Add stdlib.h include.
 
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
