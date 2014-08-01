@@ -1,5 +1,11 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/trio-snprintf/trio.c (TRIO_ARGS5): Remove unused local
+	variable.
+	* src/trio-sscanf/trio.c (TRIO_ARGS5): Likewise.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/whetstone/whetstone.c (main): Remove unused local variables,
 	and comment out an unused label LCONT.
 

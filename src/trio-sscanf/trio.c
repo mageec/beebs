@@ -1958,9 +1958,6 @@ TRIO_ARGS5((type, format, parameters, arglist, argarray),
   int indices[MAX_PARAMETERS];
   int pos = 0;
   /* Various variables */
-#if defined(TRIO_COMPILER_SUPPORTS_MULTIBYTE)
-  int charlen;
-#endif
   int save_errno;
   int i = -1;
   int num;
