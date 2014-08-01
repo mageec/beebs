@@ -148,11 +148,12 @@ static const float one = 1.0, Zero[] = {0.0, -0.0,};
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
+/* Tell the compiler not to optimize out calls in BENCHMARK. */
+volatile float result = 0;
 
 void
 benchmark (void)
 {
-  volatile float result = 0;
   result = __ieee754_fmodf(2.2353, 1234.5);
   result = __ieee754_fmodf(3.2515, 2345.6);
   result = __ieee754_fmodf(4.9346, 3456.7);

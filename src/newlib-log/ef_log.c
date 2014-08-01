@@ -121,12 +121,12 @@ static const float zero   =  0.0;
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
+/* Tell the compiler not to optimize out calls in BENCHMARK. */
+volatile float result = 0;
 
 void
 benchmark (void)
 {
-  /* Tell the compiler not to optimize out these calls. */
-  volatile float result = 0;
   result = __ieee754_logf(2);
   result = __ieee754_logf(3);
   result = __ieee754_logf(4);

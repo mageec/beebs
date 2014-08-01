@@ -1,5 +1,13 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/newlib-exp/ef_exp.c (result): New global.
+	(benchmark): Make result into a new global.
+	* src/newlib-log/ef_log.c: Likewise.
+	* src/newlib-mod/ef_mod.c: Likewise.
+	* src/newlib-sqrt/ef_sqrt.c: Likewise.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/ndes/ndes.c (des, ks, cyfun): Remove use of undefined
 	behaviour where '<<=' is used within assignment.
 
