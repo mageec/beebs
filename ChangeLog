@@ -1,5 +1,9 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/wikisort/wikisort.c (benchmark): Remove unused variables.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/ud/ud.c (benchmark): Make chkerr a global.
 	(chkerr): New global.
 
