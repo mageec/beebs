@@ -1,5 +1,14 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/prime/prime.c (uint, ulong): Change uint to ulong.
+	(divides, even, prime, swap): Change uint parameters to uint,
+	change all uint variables to ulong.
+	(benchmark): Change uint variables to ulong.  Make variable result
+	a volatile global.
+	(result): New global.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/picojpeg/picojpeg.c (readSOSMarker): Move local variables
 	out to be volatile globals, preventing the compiler from
 	optimising away function calls.

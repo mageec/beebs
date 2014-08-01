@@ -28,23 +28,23 @@
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
 typedef  unsigned char  bool;
-typedef  unsigned int   uint;
+typedef  unsigned long  ulong;
 
-bool divides (uint n, uint m);
-bool even (uint n);
-bool prime (uint n);
-void swap (uint* a, uint* b);
+bool divides (ulong n, ulong m);
+bool even (ulong n);
+bool prime (ulong n);
+void swap (ulong* a, ulong* b);
 
-bool divides (uint n, uint m) {
+bool divides (ulong n, ulong m) {
   return (m % n == 0);
 }
 
-bool even (uint n) {
+bool even (ulong n) {
   return (divides (2, n));
 }
 
-bool prime (uint n) {
-  uint i;
+bool prime (ulong n) {
+  ulong i;
   if (even (n))
       return (n == 2);
   for (i = 3; i * i <= n; i += 2) {
@@ -54,18 +54,20 @@ bool prime (uint n) {
   return (n > 1);
 }
 
-void swap (uint* a, uint* b) {
-  uint tmp = *a;
+void swap (ulong* a, ulong* b) {
+  ulong tmp = *a;
   *a = *b;
   *b = tmp;
 }
 
+/* Write to this so call in BENCHMARK is not optimised away.  */
+volatile int result = 0;
+
 void
 benchmark (void)
 {
-  volatile int result = 0;
-  uint x =  21649;
-  uint y = 513239;
+  ulong x =  21649L;
+  ulong y = 513239L;
   swap (&x, &y);
   result = (!(prime(x) && prime(y)));
 }
