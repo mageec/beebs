@@ -1,5 +1,25 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/stringsearch1/fast.fwd.inc.c: Add string.h and stdlib.h
+	includes.
+	(prep1): Add return type, remove use of K&R style arguments,
+	remove unused variables.
+	(exec1): Add return type, remove use of K&R style arguments,
+	provide explicit type int to parameters and variables that were
+	previously defaulting to int, remove unused variables.
+	* src/stringsearch1/fast.rev.d12.c: Add missing includes.
+	(prep2, exec2): Add return type, remove use of K&R style
+	arguments, make int type explicit for some parameter and
+	variables, remove unused variables.
+	* src/stringsearch1/stringsearch1.c: Add string.h include.
+	(buf, search): Change type to match initialisation by string
+	literal.
+	(prep1, prep2, exec1, exec2): Change parameter types on
+	declaration to match definition.
+	(benchmark): Cast string literal data to correct type for calls.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/st/st.c (benchmark): Change return type to void.
 
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>

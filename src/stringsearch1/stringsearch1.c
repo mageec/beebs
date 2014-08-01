@@ -22,25 +22,31 @@
 
 #include "support.h"
 
+#include <string.h>
+
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
-void prep1(unsigned char *base, int m);
-void exec1(unsigned char *base, int n);
-void prep2(unsigned char *base, int m);
-void exec2(unsigned char *base, int n);
+#ifndef	CHARTYPE
+#define	CHARTYPE	unsigned char
+#endif
 
-unsigned char *buf="abacacbabbabbadcabdcabccacacbadbadbcabdcabcbadcbacabadbadcabcbacdcacabacabcabcbadcbacabadbadcabcbac";
-unsigned char *search="abc";
+void prep1(CHARTYPE *base, int m);
+void exec1(CHARTYPE *base, int n);
+void prep2(CHARTYPE *base, int m);
+void exec2(CHARTYPE *base, int n);
+
+char buf[] = "abacacbabbabbadcabdcabccacacbadbadbcabdcabcbadcbacabadbadcabcbacdcacabacabcabcbadcbacabadbadcabcbac";
+char search[] ="abc";
 
 void
 benchmark (void)
 {
-  prep1(search, 3);
-  exec1(buf, strlen(buf));
-  prep2(search, 3);
-  exec2(buf, strlen(buf));
+  prep1((CHARTYPE *) search, 3);
+  exec1((CHARTYPE *) buf, strlen(buf));
+  prep2((CHARTYPE *) search, 3);
+  exec2((CHARTYPE *) buf, strlen(buf));
 }
 
 
