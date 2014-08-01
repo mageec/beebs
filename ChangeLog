@@ -1,5 +1,9 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/int_matmult/matmult.c (matrix): Change from int to long.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/ludcmp/ludcmp.c (chkerr): Added as global.
 	(benchmark): Variable chkerr moved from here.
 

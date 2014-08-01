@@ -27,7 +27,7 @@
 
 #define UPPERLIMIT 20
 
-typedef int matrix [UPPERLIMIT][UPPERLIMIT];
+typedef long matrix [UPPERLIMIT][UPPERLIMIT];
 
 int Seed;
 matrix ArrayA, ArrayB, ResultArray;
