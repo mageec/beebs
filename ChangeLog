@@ -1,5 +1,10 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/qurt/qurt.c (benchmark): Make result a global.
+	(result): New global.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/qsort/qsort.c (sort): Remove unused variable.
 	(benchmark): Add return type.
 

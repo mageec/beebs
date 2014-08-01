@@ -155,11 +155,12 @@ int  qurt()
 	}
 }
 
+/* Write to RESULT in BENCHMARK so call is not optimised out.  */
+volatile int result = 0;
 
 void
 benchmark (void)
 {
-  volatile int result = 0;
   a[0] =  1.0;
   a[1] = -3.0;
   a[2] =  2.0;
