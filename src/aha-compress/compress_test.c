@@ -73,7 +73,7 @@ independent of x).  But this costs 5 stores and 5 loads because
 
 unsigned compress3(unsigned x, unsigned mask) {
   unsigned masks[5];
-  unsigned q, m, zm;
+  unsigned long q, m, zm;
   int i;
   m = ~mask;
   zm = mask;
@@ -106,7 +106,7 @@ can be omitted. */
 
 // ------------------------------ cut ----------------------------------
 unsigned compress4(unsigned x, unsigned m) {
-   unsigned mk, mp, mv, t;
+   unsigned long mk, mp, mv, t;
    int i;
 
    x = x & m;           // Clear irrelevant bits.
@@ -119,9 +119,9 @@ unsigned compress4(unsigned x, unsigned m) {
       mp = mp ^ (mp << 8);
       mp = mp ^ (mp << 16);
       mv = mp & m;                      // Bits to move.
-      m = m ^ mv | (mv >> (1 << i));    // Compress m.
+      m = (m ^ mv) | (mv >> (1 << i));    // Compress m.
       t = x & mv;
-      x = x ^ t | (t >> (1 << i));      // Compress x.
+      x = (x ^ t) | (t >> (1 << i));      // Compress x.
       mk = mk & ~mp;
    }
    return x;
@@ -132,7 +132,7 @@ unsigned compress4(unsigned x, unsigned m) {
 int
 benchmark (void)
 {
-  static const unsigned test[] = {
+  static const unsigned long test[] = {
 //       Data        Mask       Result
       0xFFFFFFFF, 0x80000000, 0x00000001,
       0xFFFFFFFF, 0x0010084A, 0x0000001F,
