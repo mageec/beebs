@@ -678,11 +678,16 @@ static uint8 readDRIMarker(void)
 }
 //------------------------------------------------------------------------------
 // Read a start of scan (SOS) marker.
+
+/* Make these volatile global so the compiler does not optimise out
+   calls within READSOSMARKER.  */
+volatile uint8 spectral_start, spectral_end;
+volatile uint8 successive_high, successive_low;
+
 static uint8 readSOSMarker(void)
 {
    uint8 i;
    uint16 left = getBits1(16);
-   uint8 spectral_start, spectral_end, successive_high, successive_low;
 
    gCompsInScan = (uint8)getBits1(8);
 
@@ -1019,32 +1024,6 @@ static uint8 processRestart(void)
    gBitsLeft = 8;
    getBits2(8);
    getBits2(8);
-   
-   return 0;
-}
-//------------------------------------------------------------------------------
-// FIXME: findEOI() is not actually called at the end of the image 
-// (it's optional, and probably not needed on embedded devices)
-static uint8 findEOI(void)
-{
-   uint8 c;
-   uint8 status;
-
-   // Prime the bit buffer
-   gBitsLeft = 8;
-   getBits1(8);
-   getBits1(8);
-
-   // The next marker _should_ be EOI
-   status = processMarkers(&c);
-   if (status)
-      return status;
-   else if (gCallbackStatus)
-      return gCallbackStatus;
-   
-   //gTotalBytesRead -= in_buf_left;
-   if (c != M_EOI)
-      return PJPG_UNEXPECTED_MARKER;
    
    return 0;
 }
@@ -1725,10 +1704,12 @@ static void convertCb(uint8 dstOfs)
       int16 cbG, cbB;
 
       cbG = ((cb * 88U) >> 8U) - 44U;
-      *pDstG++ = subAndClamp(pDstG[0], cbG);
+      *pDstG = subAndClamp(pDstG[0], cbG);
+      pDstG++;
 
       cbB = (cb + ((cb * 198U) >> 8U)) - 227U;
-      *pDstB++ = addAndClamp(pDstB[0], cbB);
+      *pDstB = addAndClamp(pDstB[0], cbB);
+      pDstB++;
    }
 }
 /*----------------------------------------------------------------------------*/
@@ -1746,10 +1727,12 @@ static void convertCr(uint8 dstOfs)
       int16 crR, crG;
 
       crR = (cr + ((cr * 103U) >> 8U)) - 179;
-      *pDstR++ = addAndClamp(pDstR[0], crR);
+      *pDstR = addAndClamp(pDstR[0], crR);
+      pDstR++;
 
       crG = ((cr * 183U) >> 8U) - 91;
-      *pDstG++ = subAndClamp(pDstG[0], crG);
+      *pDstG = subAndClamp(pDstG[0], crG);
+      pDstG++;
    }
 }
 /*----------------------------------------------------------------------------*/

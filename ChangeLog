@@ -1,5 +1,17 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/picojpeg/picojpeg.c (readSOSMarker): Move local variables
+	out to be volatile globals, preventing the compiler from
+	optimising away function calls.
+	(spectral_start, spectral_end, successive_high, successive_low):
+	New globals from readSOSMarker.
+	(findEOI): Remove unused function.
+	(checkHuffTables): Re-write undefined code.
+	(convertCr): Re-write undefined code.
+	* src/picojpeg/picojpeg_test.c: Add string.h include.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/newlib-exp/ef_exp.c (result): New global.
 	(benchmark): Make result into a new global.
 	* src/newlib-log/ef_log.c: Likewise.
