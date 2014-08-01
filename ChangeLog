@@ -1,5 +1,10 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/huffbench/huffbench.c (benchmark): Remove unused variables,
+	and commented out code.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/gdb-constvars/constvars.c (benchmark): Cast defined but
 	unused variables to void.
 
