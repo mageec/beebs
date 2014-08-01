@@ -1,5 +1,10 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/qsort/qsort.c (sort): Remove unused variable.
+	(benchmark): Add return type.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/qrduino/qrencode.h (freeecc): Add declaration.
 	* src/qrduino/qrframe.c: Guard code with __AVR__.
 	* src/qrduino/qrtest.c: Add string.h include.
