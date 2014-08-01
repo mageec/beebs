@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "sglib.h"
+#include <stdlib.h>
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
@@ -45,8 +46,8 @@ struct ilist {
 
 int benchmark()
 {
-  int i,a;
-  struct ilist *l, *the_list, *ll;
+  int i;
+  struct ilist *l, *the_list;
   int cnt;
 
   the_list = NULL;

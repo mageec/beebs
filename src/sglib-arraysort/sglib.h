@@ -91,7 +91,6 @@
   /* can sort up to 2^64 elements */\
   int   _startStack_[64]; \
   int   _endStack_[64];\
-  type  _tmp_;\
   _startStack_[0] = 0;\
   _endStack_[0] = (max);\
   _stacki_ = 1;\

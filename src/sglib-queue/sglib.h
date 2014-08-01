@@ -59,7 +59,6 @@
 }
 
 #define SGLIB___ARRAY_HEAP_DOWN(type, a, ind, max, comparator, elem_exchanger) {\
-  type  _t_;\
   int   _m_, _l_, _r_, _i_;\
   _i_ = (ind);\
   _m_ = _i_;\

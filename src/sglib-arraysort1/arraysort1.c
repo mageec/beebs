@@ -42,7 +42,7 @@ int array2[100];
 int benchmark()
 {
   volatile int cnt=0;
-  int tmp, found, index, i;
+  int i;
 
   for(i = 0 ;i<100; ++i)
     array2[i] = array[i];

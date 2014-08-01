@@ -40,10 +40,13 @@ int array[100] = {14, 66, 12, 41, 86, 69, 19, 77, 68, 38, 26, 42, 37, 23, 17, 29
   64, 5, 30, 82, 72, 46, 59, 9, 7, 3, 39, 31, 4, 73, 70, 60, 58, 81, 56, 51, 45, 1, 6, 49,
   27, 47, 34, 35, 62, 97, 2, 79, 98, 25, 22, 65, 71, 0};
 
+/* Use within BENCHMARK to avoid calls being optimised out.  */
+volatile int found = 0;
+
 int benchmark()
 {
   volatile int cnt=0;
-  int tmp, found, index, i;
+  int tmp, index, i;
 
   for(i=0; i< 100; i++) {
     tmp = array[i];

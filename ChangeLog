@@ -1,5 +1,44 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/sglib-arraybinsearch/arraybinsearch.c (benchmark): Make
+	found a global.
+	(found): New global.
+	* src/sglib-arraysort/arraysort.c (benchmark): Remove unused
+	locals.
+	* src/sglib-arraysort/sglib.h (GLIB_ARRAY_QUICK_SORT): Remove
+	unused variable.
+	* src/sglib-arraysort1/arraysort1.c (benchmark): Remove unused
+	variables.
+	* src/sglib-arraysort1/sglib.h (SGLIB___ARRAY_HEAP_DOWN): Remove
+	unused variable.
+	* src/sglib-dllist/dllist.c: Add missing stdlib.h include.
+	* src/sglib-dllist/sglib.h (SGLIB_LIST_LEN, SGLIB_DL_LIST_SORT):
+	Remove unused variable.
+	* src/sglib-hashtable/hashtable.c: Add stdlib.h include.
+	(benchmark): Remove unused variables.
+	* src/sglib-hashtable/sglib.h (SGLIB_LIST_LEN): Remove unused
+	variables.
+	* src/sglib-listinsertsort/listinsertsort.c: Add stdlib.h include.
+	(benchmark): Remove unused variables.
+	* src/sglib-listinsertsort1/listinsertsort1.c: Add stdlib.h
+	include.
+	(benchmark): Remove unused variable.
+	* src/sglib-listinsertsort1/sglib.h (SGLIB_LIST_LEN): Remove
+	unused variables.
+	* src/sglib-listsort/listsort.c: Add stdlib.h include.
+	(benchmark): Remove unused variables.
+	* src/sglib-queue/queue.c: Add stdlib.h include.
+	* src/sglib-queue/sglib.h (SGLIB___ARRAY_HEAP_DOWN): Remove unused
+	variable.
+	* src/sglib-rbtree/rbtree.c: Add stdlib.h include.
+	(benchmark): Remove unused variables.
+	* src/sglib-rbtree/sglib.h:
+	(SGLIB___RBTREE_FIX_INSERTION_DISCREPANCY): Remove unused
+	variables, including definitions that are then never used.
+	(SGLIB___RBTREE_FIX_DELETION_DISCREPANCY): Likewise.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/rijndael/aes.c (c_name): Add parenthesis to make precedence
 	more obvious.
 	* src/rijndael/aesxam.c (fillrand): Change types parameters, to

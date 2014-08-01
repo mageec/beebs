@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "sglib.h"
+#include <stdlib.h>
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
@@ -57,7 +58,7 @@ int array[100] = {14, 66, 12, 41, 86, 69, 19, 77, 68, 38, 26, 42, 37, 23, 17, 29
 
 int benchmark()
 {
-  int                                   i, ai,aj, n;
+  int                                   i;
   struct ilist                          ii, *nn, *ll, *last;
   struct sglib_hashed_ilist_iterator    it;
   volatile int cnt = 0;

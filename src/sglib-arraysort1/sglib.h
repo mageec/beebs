@@ -59,7 +59,6 @@
 }
 
 #define SGLIB___ARRAY_HEAP_DOWN(type, a, ind, max, comparator, elem_exchanger) {\
-  type  _t_;\
   int   _m_, _l_, _r_, _i_;\
   _i_ = (ind);\
   _m_ = _i_;\
@@ -91,7 +90,6 @@
   /* can sort up to 2^64 elements */\
   int   _startStack_[64]; \
   int   _endStack_[64];\
-  type  _tmp_;\
   _startStack_[0] = 0;\
   _endStack_[0] = (max);\
   _stacki_ = 1;\

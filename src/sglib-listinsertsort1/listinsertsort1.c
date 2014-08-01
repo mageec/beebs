@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "sglib.h"
+#include <stdlib.h>
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
@@ -47,7 +48,7 @@ int array[100] = {14, 66, 12, 41, 86, 69, 19, 77, 68, 38, 26, 42, 37, 23, 17, 29
 
 int benchmark()
 {
-  int                               i,a;
+  int                               i;
   struct ilist                      *l, *the_list;
   struct sglib_iListType_iterator   it;
   int cnt= 0;
