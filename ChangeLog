@@ -1,5 +1,18 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/miniz/miniz.h: New file.
+	* src/miniz/miniz.c: Add miniz.h include.
+	(MINIZ_NO_ARCHIVE_WRITING_APIS): Move definition earlier in the
+	file.
+	(def_realloc_func): Guard declaration with
+	MINIZ_NO_ARCHIVE_WRITING_APIS.
+	(mz_ulong, mz_uncompress): Move into header file.
+	* src/miniz/miniz_b.c: Add string.h and miniz.h includes.
+	(benchmark): Remove unused variable. Cast data before calling
+	mz_compress2.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/mergesort/mergesort.c (benchmark): Remove unused variables.
 
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
