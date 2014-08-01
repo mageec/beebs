@@ -195,7 +195,6 @@ Test array1[100];
 
 int benchmark() {
 	long total, index, test_case;
-	double total_time, total_time1, total_time2;
 	Comparison compare = TestCompare;
 
 	__typeof__(&TestingPathological) test_cases[] = {
