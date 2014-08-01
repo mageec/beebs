@@ -11,6 +11,8 @@
 
 #include "support.h"
 
+#include <stdlib.h>
+
 /* SHA f()-functions */
 
 #define f1(x,y,z)	((x & y) | (~x & z))

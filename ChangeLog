@@ -1,5 +1,9 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/sha/sha.c: Add stdlib.h include.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/sglib-arraybinsearch/arraybinsearch.c (benchmark): Make
 	found a global.
 	(found): New global.
