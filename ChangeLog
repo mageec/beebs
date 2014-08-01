@@ -1,5 +1,10 @@
 2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/ndes/ndes.c (des, ks, cyfun): Remove use of undefined
+	behaviour where '<<=' is used within assignment.
+
+2014-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/minver/minver.c (data_sink): Added.
 	(minver): Write defined but unused variables into the data_sink.
 
