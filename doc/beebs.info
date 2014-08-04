@@ -23,7 +23,7 @@ File: beebs.info,  Node: Top,  Next: About,  Up: (dir)
 Scope of this Document
 **********************
 
-This document is the user guide for BEEBS, the Bristol/Embecosm
+This document is the user guide for BEEBS, the Bristol/Embecosm Embedded
 Benchmark Suite.
 
 * Menu:
@@ -70,7 +70,7 @@ File: beebs.info,  Node: Preparation,  Next: Configuring the Build,  Up: Buildin
 Unpack the software and create a _separate_ directory in which to build
 it:
 
-     tar jxf beebs-0.0.1.tar.bz2
+     tar jxf beebs-1.0.tar.bz2
      mkdir bd
      cd bd
 
@@ -135,7 +135,7 @@ File: beebs.info,  Node: Known Issues,  Prev: Running,  Up: Building and Running
 2.5 Known Problems and Issues
 =============================
 
-The following problems and issues are known about with BEEBS 0.0.1.
+The following problems and issues are known about with BEEBS 1.0.
 Notify other issues by email to <mailto:support@embecosm.com>.
 
    * 'make check' does not currently work
@@ -280,7 +280,25 @@ File: beebs.info,  Node: Calibration,  Prev: Board specific code,  Up: Adding a 
 3.5 Calibration
 ===============
 
-test
+Each benchmark is run a number of times to allow measurement collection.
+The number of times can be scaled on a per benchmark basic by creating a
+file called 'calibration'.  This file should be placed at
+'config/ARCH/boards/BOARDNAME/calibration'.
+
+Inside the file is a list of benchmark names followed by a scaling
+factor (separated by a space).
+
+     2dfir 2
+     blowfish 3
+
+The numbers are used in the following expression to compute the number
+of runs:
+
+     (BOARD_REPEAT_FACTOR >> scale) >> extra
+
+In this code snippet, 'scale' is the entry in the calibration file, and
+'extra' is an extra scale factor specified in the source code file.  The
+'extra' allows default scaling for the benchmark to be provided.
 
 
 File: beebs.info,  Node: GNU Free Documentation License,  Next: Index,  Prev: Adding a New Board to BEEBS,  Up: Top
@@ -759,20 +777,20 @@ Index
 
 Tag Table:
 Node: Top770
-Node: About1122
-Node: Building and Running BEEBS1419
-Node: Preparation1729
-Node: Configuring the Build2001
-Node: Building2813
-Node: Running3281
-Node: Known Issues3455
-Node: Adding a New Board to BEEBS3825
-Node: Where to add files4140
-Node: Configuration files5309
-Node: Header files6134
-Node: Board specific code6890
-Node: Calibration7714
-Node: GNU Free Documentation License7855
-Node: Index30254
+Node: About1131
+Node: Building and Running BEEBS1428
+Node: Preparation1738
+Node: Configuring the Build2008
+Node: Building2820
+Node: Running3288
+Node: Known Issues3462
+Node: Adding a New Board to BEEBS3830
+Node: Where to add files4145
+Node: Configuration files5314
+Node: Header files6139
+Node: Board specific code6895
+Node: Calibration7719
+Node: GNU Free Documentation License8570
+Node: Index30969
 
 End Tag Table

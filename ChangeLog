@@ -1,5 +1,11 @@
 2014-08-04  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* doc/beebs.info: Regenerate after recent commits that changed
+	doc/beebs.texi.
+	* doc/version.texi: Regenerate a more upto date version file.
+
+2014-08-04  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* configure.ac: When no --with-chip is specified, the default is
 	now generic.
 	* configure: Regenerate.
