@@ -87,7 +87,7 @@ binary_search(int x)
 	up = mid - 1;
       }
       else   {
-             	low = mid + 1;
+	low = mid + 1;
       }
   }
   return fvalue;

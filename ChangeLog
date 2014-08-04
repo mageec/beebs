@@ -1,5 +1,29 @@
 2014-08-04  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/adpcm/adpcm.c: Convert dos style line endings to unix style
+	line endings.
+	* src/bs/bs.c: Likewise.
+	* src/bsort100/bsort100.c: Likewise.
+	* src/bubblesort/bubblesort.c: Likewise.
+	* src/cnt/cnt.c: Likewise.
+	* src/ctl-stack/ctl.h: Likewise.
+	* src/ctl-stack/stack.h: Likewise.
+	* src/ctl-vector/ctl.h: Likewise.
+	* src/ctl-vector/vector.h: Likewise.
+	* src/duff/duff.c: Likewise.
+	* src/fft/fft1.c: Likewise.
+	* src/janne_complex/janne_complex.c: Likewise.
+	* src/miniz/miniz.c: Likewise.
+	* src/ns/ns.c: Likewise.
+	* src/nsichneu/nsichneu.c: Likewise.
+	* src/picojpeg/picojpeg.c: Likewise.
+	* src/picojpeg/picojpeg.h: Likewise.
+	* src/qsort/qsort.c: Likewise.
+	* src/st/st.c: Likewise.
+	* src/ud/ud.c: Likewise.
+
+2014-08-04  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* doc/beebs.info: Regenerate after recent commits that changed
 	doc/beebs.texi.
 	* doc/version.texi: Regenerate a more upto date version file.
