@@ -5,7 +5,7 @@
    Contributor James Pallister <james.pallister@embecosm.com>
    Contributor Jeremy Bennett <jeremy.bennett@embecosm.com>
 
-   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark
+   This file is part of the Bristol/Embecosm Embedded Benchmark Suite
    Suite (BEEBS)
 
    This program is free software: you can redistribute it and/or modify it

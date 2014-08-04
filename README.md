@@ -1,6 +1,6 @@
 # BEEBS: Open Benchmarks for Energy Measurements on Embedded Platforms
 
-This repository contains the Bristol Energy Efficiency Benchmark Suite
+This repository contains the Bristol/Embecosm Embedded Benchmark Suite
 (BEEBS).These benchmarks are designed to test the performance of deeply
 embedded systems, particularly with regard to energy consumed. As such they
 assume the presence of no OS and in particular no output stream.

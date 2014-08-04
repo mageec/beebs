@@ -77,7 +77,7 @@ Published by Embecosm Limited and University of Bristol
 @top Scope of this Document
 
 This document is the user guide for @value{BEEBS}, the
-Bristol/Embecosm Benchmark Suite.
+Bristol/Embecosm Embedded Benchmark Suite.
 
 @menu
 * About::

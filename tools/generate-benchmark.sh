@@ -3,7 +3,7 @@
 #
 #  Copyright (C) 2014 Embecosm Limited and University of Bristol
 #
-#  This file is part of the Bristol/Embecosm Energy Efficiency Benchmark
+#  This file is part of the Bristol/Embecosm Embedded Benchmark Suite
 #  Suite.
 #
 #  Contributor Pierre Langlois <pierre.langlois@embecosm.com>
@@ -67,7 +67,7 @@ cat > ${MAKEFILE_AM} << EOF
 #
 #   Copyright (C) 2014 Embecosm Limited and University of Bristol
 #
-#   This file is part of the Bristol/Embecosm Energy Efficiency Benchmark
+#   This file is part of the Bristol/Embecosm Embedded Benchmark Suite
 #   Suite.
 #
 #   Contributor: ${AUTHOR_NAME} <${AUTHOR_EMAIL}>
@@ -103,7 +103,7 @@ cat > ${SOURCE} << EOF
 
    Contributor ${AUTHOR_NAME} <${AUTHOR_EMAIL}>
 
-   This file is part of the Bristol/Embecosm Embedded Energy Benchmark Suite.
+   This file is part of the Bristol/Embecosm Embedded Benchmark Suite.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by

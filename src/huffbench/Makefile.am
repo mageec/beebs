@@ -2,7 +2,7 @@
 #
 # Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
-# This file is part of the Bristol/Embecosm Energy Efficiency Benchmark
+# This file is part of the Bristol/Embecosm Embedded Benchmark Suite
 # Suite.
 #
 # Contributor: James Pallister <james.pallister@bristol.ac.uk>
