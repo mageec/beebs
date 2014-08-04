@@ -41,11 +41,11 @@ AC_ARG_WITH([board],
     [with_board=none]
     )
 
-# Option for selecting the target board
+# Option for selecting the target chip.
 AC_ARG_WITH([chip],
 [AS_HELP_STRING([--with-chip], [Select the chip to target])],
     [],
-    [with_chip=none]
+    [with_chip=generic]
     )
 
 # Work out which architecutre, board and chip we need

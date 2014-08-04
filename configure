@@ -2953,13 +2953,13 @@ else
 fi
 
 
-# Option for selecting the target board
+# Option for selecting the target chip.
 
 # Check whether --with-chip was given.
 if test "${with_chip+set}" = set; then :
   withval=$with_chip;
 else
-  with_chip=none
+  with_chip=generic
 
 fi
 

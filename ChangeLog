@@ -1,5 +1,11 @@
 2014-08-04  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* configure.ac: When no --with-chip is specified, the default is
+	now generic.
+	* configure: Regenerate.
+
+2014-08-04  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* Makefile.am: Correct the expansion of the BEEBS acronym.
 	* Makefile.in: Likewise.
 	* README.md: Likewise.
