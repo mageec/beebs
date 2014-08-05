@@ -1,3 +1,10 @@
+2014-08-05  James Pallister  <james.pallister@bristol.ac.uk>
+	The flags defined in trio's enum overflow on 16 bit architectures. At
+	the point of overflow, convert to unsigned long so we don't overflow
+
+	* src/trio-snprintf/trio.c: Added UL suffix to the multiplicand
+	* src/trio-sscanf/trio.c: Added UL suffix to the multiplicand
+
 2014-08-05  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* src/bsort100/Makefile.am: Deleted.
