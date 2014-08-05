@@ -12760,22 +12760,6 @@ N_UNCALIBRATED_BENCHMARKS=0
         fi
     fi
 
-    bmark=bsort100
-    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/bsort100/Makefile"
-
-        BENCHMARKS+="bsort100 "
-        BENCHMARKS_SUBDIRS+="src/bsort100 "
-
-        if test x$HAVE_CALIBRATION == xyes; then
-            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
-            if test x$no_calib == x0; then
-                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
-                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
-            fi
-        fi
-    fi
-
     bmark=bubblesort
     if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
         ac_config_files="$ac_config_files src/bubblesort/Makefile"
@@ -15234,7 +15218,6 @@ do
     "src/aha-mont64/Makefile") CONFIG_FILES="$CONFIG_FILES src/aha-mont64/Makefile" ;;
     "src/blowfish/Makefile") CONFIG_FILES="$CONFIG_FILES src/blowfish/Makefile" ;;
     "src/bs/Makefile") CONFIG_FILES="$CONFIG_FILES src/bs/Makefile" ;;
-    "src/bsort100/Makefile") CONFIG_FILES="$CONFIG_FILES src/bsort100/Makefile" ;;
     "src/bubblesort/Makefile") CONFIG_FILES="$CONFIG_FILES src/bubblesort/Makefile" ;;
     "src/cnt/Makefile") CONFIG_FILES="$CONFIG_FILES src/cnt/Makefile" ;;
     "src/compress/Makefile") CONFIG_FILES="$CONFIG_FILES src/compress/Makefile" ;;

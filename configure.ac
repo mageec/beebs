@@ -181,7 +181,6 @@ m4_define([benchmarklist],[dnl
 [aha-mont64],
 [blowfish],
 [bs],
-[bsort100],
 [bubblesort],
 [cnt],
 [compress],

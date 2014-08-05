@@ -1,5 +1,18 @@
 2014-08-05  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/bsort100/Makefile.am: Deleted.
+	* src/bsort100/Makefile.in: Deleted.
+	* src/bsort100/bsort100.c: Deleted.
+	* src/bubblesort/Makefile.am: Add rules for building second
+	variation of bubblesort program.
+	* src/bubblesort/Makefile.in: Regenerate.
+	* src/bubblesort/bubblesort.c: Add GPL header.  Restructure code
+	in line with old contents of bsort100.c.
+	* configure.ac: Remove bsort100.
+	* configure: Regenerate.
+
+2014-08-05  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* beebs.test/measure.exp: Add GPL header.
 	* beebs.test/run.exp: Likewise.
 	* include/support.h: Likewise.

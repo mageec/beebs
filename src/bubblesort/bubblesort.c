@@ -1,13 +1,33 @@
+/* BEEBS bsort100 benchmark
+
+   Copyright (C) 2014 Embecosm Limited and University of Bristol
+
+   Contributor James Pallister <james.pallister@bristol.ac.uk>
+
+   This file is part of the Bristol/Embecosm Embedded Benchmark Suite.
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program. If not, see <http://www.gnu.org/licenses/>. */
+
 #include "support.h"
+
+#ifndef BUBBLESORT_RSHIFT
+#define BUBBLESORT_RSHIFT 0
+#endif
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
-
-/* bsort100.c */
-
-/* All output disabled for wcsim */
-#define WCSIM 1
+#define SCALE_FACTOR    (REPEAT_FACTOR >> BUBBLESORT_RSHIFT)
 
 #include <stdio.h>
 
@@ -29,7 +49,15 @@ void BubbleSort(int Array []);
 int Array[MAXDIM], Seed;
 int factor;
 
-void BubbleSort(int[]);
+void BubbleSort(int Array[]);
+void Initialize(int Array[]);
+
+void benchmark()
+{
+   Initialize(Array);
+   BubbleSort(Array);
+}
+
 
 void Initialize(int Array[])
 /*
@@ -82,13 +110,6 @@ void BubbleSort(int Array[])
          break;
    }
 }
-
-void benchmark()
-{
-   Initialize(Array);
-   BubbleSort(Array);
-}
-
 
 int
 main (void)
