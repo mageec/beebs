@@ -286,7 +286,7 @@ m4_foreach([benchmark], [benchmarklist], [
         BENCHMARKS_SUBDIRS+="src/benchmark "
 
         if test x$HAVE_CALIBRATION == xyes; then
-            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            no_calib=`egrep -xc "^$bmark [[0-9]]+( .*)?" $srcdir/config/$arch/boards/$board/calibration`
             if test x$no_calib == x0; then
                 UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
                 N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
