@@ -1,5 +1,24 @@
 2014-08-05  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* beebs.test/measure.exp: Add GPL header.
+	* beebs.test/run.exp: Likewise.
+	* include/support.h: Likewise.
+	* config/arm/boards/stm32f0discovery/boardsupport.c: Likewise.
+	* config/arm/boards/stm32vldiscovery/boardsupport.c: Likewise.
+	* config/arm/chips/stm32f051/chip.ld: Likewise.
+	* config/arm/chips/stm32f051/chipsupport.c: Likewise.
+	* config/arm/chips/stm32f051/chipsupport.h: Likewise.
+	* config/arm/chips/stm32f100/chip.ld: Likewise.
+	* config/arm/chips/stm32f100/chipsupport.c: Likewise.
+	* config/arm/chips/stm32f100/chipsupport.h: Likewise.
+	* config/avr/boards/shrimp/boardsupport.c: Likewise.
+	* config/avr/boards/shrimp/calibration: Likewise.
+	* config/avr/chips/atmega328p/chipsupport.h: Likewise.
+	* config/default.exp: Likewise.
+	* config/x86_64/boards/none/boardsupport.c: Likewise.
+
+2014-08-05  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/common.mk.am: Expect binary names to appear at the start of
 	a line in the calibration file, add '^' to the grep pattern.
 	* src/2dfir/Makefile.in: Regenerate.
