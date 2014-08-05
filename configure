@@ -16702,7 +16702,7 @@ fi
 if test "x$HAVE_CALIBRATION" == xyes ; then
     echo "Calibrated benchmarks       Yes"
     echo "Uncalibrated benchmarks     $N_UNCALIBRATED_BENCHMARKS"
-    if test $N_UNCALIBRATED_BENCHMARKS > 0; then
+    if test $N_UNCALIBRATED_BENCHMARKS -gt 0; then
         echo "                            $UNCALIBRATED_BENCHMARKS"
     fi
 else

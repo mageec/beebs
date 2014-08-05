@@ -1,3 +1,8 @@
+2014-08-05  Simon Cook <simon.cook@embecosm.com>
+
+	* configure.ac: Fix comparison using > to actually use -gt.
+	* configure: Rengerate.
+
 2014-08-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 	    Andrew Burgess  <andrew.burgess@embecosm.com>
 
