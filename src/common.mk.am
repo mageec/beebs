@@ -30,7 +30,8 @@ endif
 # of the repeat factor. If grep doesn't find the program, then we specify
 # 0 as the default. This is the default if a calibration file is not found
 if CALIBRATION
-calib = (egrep "\b$(bin_PROGRAMS)\b" $(top_srcdir)/config/@ARCH@/boards/@BOARD@/calibration \
+calib = (egrep "^\b$(bin_PROGRAMS)\b" \
+	        $(top_srcdir)/config/@ARCH@/boards/@BOARD@/calibration \
 		|| echo "0 0") | cut -d " " -f 2
 else
 calib = echo 0
