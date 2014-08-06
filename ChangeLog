@@ -1,5 +1,9 @@
 2014-08-06  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* configure.ac: Add -Wno-portability to the automake options.
+
+2014-08-06  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* configure.ac: Remove trio-sscanf and trio-snprintf, add trio.
 	* configure: Regenerate.
 	* src/trio/Makefile.am: New file.
