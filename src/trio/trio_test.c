@@ -26,21 +26,37 @@
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
+#ifdef TRIO_SNPRINTF
+void
+benchmark (void)
+{
+  char output[50];
+
+  trio_snprintf(output, 50, "%d", 123);
+  trio_snprintf(output, 50, "%ld", 123);
+  trio_snprintf(output, 50, "%5d", 123);
+  trio_snprintf(output, 50, "%05x", 123);
+  trio_snprintf(output, 50, "%*d", 5, 10);
+}
+#elif TRIO_SSCANF
+
+/* Global variables, so calls in BENCHMARK are not optimised away.  */
+volatile int int_dest;
+volatile char char_dest [20];
 
 void
 benchmark (void)
 {
-  volatile int d;
-  volatile char s[20];
-
-  trio_sscanf("123", "%d", &d);
-  trio_sscanf("123 456", "%d %d", &d, &d);
-  trio_sscanf("000000123", "%d", &d);
-  trio_sscanf("abcdefg", "%x", &d);
-  trio_sscanf("FF", "%x",&d);
-  trio_sscanf("abcdefg", "%[^f]%xg", s, &d);
+  trio_sscanf("123", "%d", &int_dest);
+  trio_sscanf("123 456", "%d %d", &int_dest, &int_dest);
+  trio_sscanf("000000123", "%d", &int_dest);
+  trio_sscanf("abcdefg", "%x", &int_dest);
+  trio_sscanf("FF", "%x",&int_dest);
+  trio_sscanf("abcdefg", "%[^f]%xg", char_dest, &int_dest);
 }
-
+#else
+#error "Missing a TRIO_SSCANF or TRIO_SNPRINTF macro"
+#endif
 
 int
 main (void)

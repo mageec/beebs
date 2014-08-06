@@ -14104,28 +14104,12 @@ N_UNCALIBRATED_BENCHMARKS=0
         fi
     fi
 
-    bmark=trio-snprintf
+    bmark=trio
     if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/trio-snprintf/Makefile"
+        ac_config_files="$ac_config_files src/trio/Makefile"
 
-        BENCHMARKS+="trio-snprintf "
-        BENCHMARKS_SUBDIRS+="src/trio-snprintf "
-
-        if test x$HAVE_CALIBRATION == xyes; then
-            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
-            if test x$no_calib == x0; then
-                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
-                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
-            fi
-        fi
-    fi
-
-    bmark=trio-sscanf
-    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/trio-sscanf/Makefile"
-
-        BENCHMARKS+="trio-sscanf "
-        BENCHMARKS_SUBDIRS+="src/trio-sscanf "
+        BENCHMARKS+="trio "
+        BENCHMARKS_SUBDIRS+="src/trio "
 
         if test x$HAVE_CALIBRATION == xyes; then
             no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
@@ -15318,8 +15302,7 @@ do
     "src/statemate/Makefile") CONFIG_FILES="$CONFIG_FILES src/statemate/Makefile" ;;
     "src/stb_perlin/Makefile") CONFIG_FILES="$CONFIG_FILES src/stb_perlin/Makefile" ;;
     "src/tarai/Makefile") CONFIG_FILES="$CONFIG_FILES src/tarai/Makefile" ;;
-    "src/trio-snprintf/Makefile") CONFIG_FILES="$CONFIG_FILES src/trio-snprintf/Makefile" ;;
-    "src/trio-sscanf/Makefile") CONFIG_FILES="$CONFIG_FILES src/trio-sscanf/Makefile" ;;
+    "src/trio/Makefile") CONFIG_FILES="$CONFIG_FILES src/trio/Makefile" ;;
     "src/ud/Makefile") CONFIG_FILES="$CONFIG_FILES src/ud/Makefile" ;;
     "src/wikisort/Makefile") CONFIG_FILES="$CONFIG_FILES src/wikisort/Makefile" ;;
     "src/whetstone/Makefile") CONFIG_FILES="$CONFIG_FILES src/whetstone/Makefile" ;;

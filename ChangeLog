@@ -1,3 +1,37 @@
+2014-08-06  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* configure.ac: Remove trio-sscanf and trio-snprintf, add trio.
+	* configure: Regenerate.
+	* src/trio/Makefile.am: New file.
+	* src/trio/Makefile.in: Generated.
+	* src/trio/trio_test.c: New file based on merging the old versions
+	from src/trio-snprintf/ and src/trio-sscanf/.
+	* src/trio/trio.c: New file is identical to old versions in
+	src/trio-snprintf/ and src/trio-sscanf/.
+	* src/trio/trio.h: Likewise.
+	* src/trio/triodef.h: Likewise.
+	* src/trio/triop.h: Likewise.
+	* src/trio/triostr.c: Likewise.
+	* src/trio/triostr.h: Likewise.
+	* src/trio-snprintf/Makefile.am: Deleted.
+	* src/trio-snprintf/Makefile.in: Deleted.
+	* src/trio-snprintf/trio.c: Deleted.
+	* src/trio-snprintf/trio.h: Deleted.
+	* src/trio-snprintf/trio_test.c: Deleted.
+	* src/trio-snprintf/triodef.h: Deleted.
+	* src/trio-snprintf/triop.h: Deleted.
+	* src/trio-snprintf/triostr.c: Deleted.
+	* src/trio-snprintf/triostr.h: Deleted.
+	* src/trio-sscanf/Makefile.am: Deleted.
+	* src/trio-sscanf/Makefile.in: Deleted.
+	* src/trio-sscanf/trio.c: Deleted.
+	* src/trio-sscanf/trio.h: Deleted.
+	* src/trio-sscanf/trio_test.c: Deleted.
+	* src/trio-sscanf/triodef.h: Deleted.
+	* src/trio-sscanf/triop.h: Deleted.
+	* src/trio-sscanf/triostr.c: Deleted.
+	* src/trio-sscanf/triostr.h: Deleted.
+
 2014-08-06  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* configure.ac: Added gdb-auxv.
