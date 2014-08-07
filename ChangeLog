@@ -1,3 +1,17 @@
+2014-08-07  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* 2dfir/fir2dim.c (SCALE_FACTOR): Added.
+	(main) Switch to use SCALE_FACTOR.
+	* blowfish/bf.c: Likewise.
+	* crc32/crc_32.c: Likewise.
+	* cubic/basicmath_small.c: Likewise.
+	* dijkstra/dijkstra_small.c: Likewise.
+	* fdct/fdct.c: Likewise.
+	* float_matmult/matmult.c: Likewise.
+	* int_matmult/matmult.c: Likewise.
+	* rijndael/aesxam.c: Likewise.
+	* sha/sha_driver.c: Likewise.
+
 2014-08-07  James Pallister  <james.pallister@bristol.ac.uk>
 	The flags defined in trio's enum overflow on 16 bit
 	architectures. At the point of overflow, convert to unsigned long

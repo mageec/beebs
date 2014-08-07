@@ -60,6 +60,10 @@
 
 #include "support.h"
 
+/* This scale factor will be changed to equalise the runtime of the
+   benchmarks. */
+#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+
 #ifdef IO
 #include "libp.c"
 #include "arith.c"
@@ -289,15 +293,15 @@ int main()
    initialise_board ();
    start_trigger();
 
-   for(n = 0; n < REPEAT_FACTOR; ++n)
+   for(n = 0; n < SCALE_FACTOR; ++n)
       fdct (block, 8);  /* 8x8 Blocks, DC precision value = 0,
 			   Quantization coefficient (mquant) = 64 */
    stop_trigger();
 
    /* Verify if we can */
    to_return = 0;
-   check_block = (1 == REPEAT_FACTOR) ? check_block_1
-     : (4096 == REPEAT_FACTOR) ? check_block_4096 : NULL;
+   check_block = (1 == SCALE_FACTOR) ? check_block_1
+     : (4096 == SCALE_FACTOR) ? check_block_4096 : NULL;
 
    if (NULL != check_block)
      for (i = 0; i < 64; i++)

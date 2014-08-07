@@ -43,6 +43,10 @@
 #include "aes.h"
 #include "support.h"
 
+/* This scale factor will be changed to equalise the runtime of the
+   benchmarks. */
+#define SCALE_FACTOR    (REPEAT_FACTOR >> 9)
+
 #ifndef fpos_t
    #define fpos_t size_t
 #endif
@@ -167,7 +171,7 @@ int main(int argc, char *argv[])
    initialise_board();
    start_trigger();
 
-   for(n = 0; n < REPEAT_FACTOR>>9; n++)
+   for(n = 0; n < SCALE_FACTOR; n++)
    {
       aes     ctx[1];
       by=0; key_len=0; err = 0;

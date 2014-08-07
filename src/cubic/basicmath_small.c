@@ -1,6 +1,10 @@
 #include "support.h"
 #include "snipmath.h"
 
+/* This scale factor will be changed to equalise the runtime of the
+   benchmarks. */
+#define SCALE_FACTOR    ((REPEAT_FACTOR >> 13) + 1)
+
 int main(void)
 {
    double  a1 = 1.0, b1 = -10.5, c1 = 32.0, d1 = -30.0;
@@ -30,7 +34,7 @@ int main(void)
    initialise_board();
    start_trigger();
 
-   for(n = 0; n < (REPEAT_FACTOR>>13)+1; ++n)
+   for(n = 0; n < SCALE_FACTOR; ++n)
    {
       /* solve some cubic functions */
       /* should get 3 solutions: 2, 6 & 2.5   */

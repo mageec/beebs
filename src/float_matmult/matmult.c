@@ -20,6 +20,10 @@
 
 #include "support.h"
 
+/* This scale factor will be changed to equalise the runtime of the
+   benchmarks. */
+#define SCALE_FACTOR    (REPEAT_FACTOR >> 5)
+
 /*
  * MATRIX MULTIPLICATION BENCHMARK PROGRAM:
  * This program multiplies 2 square matrices resulting in a 3rd
@@ -61,7 +65,7 @@ int main()
    initialise_board();
    start_trigger();
 
-   for(n = 0; n < REPEAT_FACTOR>>5; ++n)
+   for(n = 0; n < SCALE_FACTOR; ++n)
       Test(ArrayA, ArrayB, ResultArray);
 
    stop_trigger();

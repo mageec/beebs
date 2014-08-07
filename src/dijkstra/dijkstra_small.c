@@ -3,6 +3,10 @@
 
 #include "support.h"
 
+/* This scale factor will be changed to equalise the runtime of the
+   benchmarks. */
+#define SCALE_FACTOR    (REPEAT_FACTOR >> 9)
+
 #define NUM_NODES                          10
 #define NONE                               9999
 
@@ -152,7 +156,7 @@ int main() {
    start_trigger();
 
    /* finds 10 shortest paths between nodes */
-   for(n = 0; n < REPEAT_FACTOR >> 9; ++n) {
+   for(n = 0; n < SCALE_FACTOR; ++n) {
       output_count = 0;
       for(j = 0; j < NUM_NODES; j++) {
          for (i=0; i < NUM_NODES; i++) {

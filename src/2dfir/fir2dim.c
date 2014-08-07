@@ -54,6 +54,10 @@
 
 #include "support.h"
 
+/* This scale factor will be changed to equalise the runtime of the
+   benchmarks. */
+#define SCALE_FACTOR    (REPEAT_FACTOR >> 5)
+
 #define STORAGE_CLASS register
 #define TYPE          float
 #define IMAGEDIM      4
@@ -101,7 +105,7 @@ int main()
    initialise_board();
    start_trigger();
 
-   for(n = 0; n < REPEAT_FACTOR>>5; ++n)
+   for(n = 0; n < SCALE_FACTOR; ++n)
    {
       /* Resets all pointers to the start of their arrays */
       parray  = &array[0]        ;

@@ -3,6 +3,10 @@
 #include "support.h"
 #include "sha.h"
 
+/* This scale factor will be changed to equalise the runtime of the
+   benchmarks. */
+#define SCALE_FACTOR    (REPEAT_FACTOR >> 10)
+
 int main()
 {
    int n;
@@ -20,7 +24,7 @@ int main()
    initialise_board();
    start_trigger();
 
-   for(n = 0; n < REPEAT_FACTOR>>10; ++n) {
+   for(n = 0; n < SCALE_FACTOR; ++n) {
       sha_stream(&sha_info);
    }
 
