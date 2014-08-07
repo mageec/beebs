@@ -13112,22 +13112,6 @@ N_UNCALIBRATED_BENCHMARKS=0
         fi
     fi
 
-    bmark=float_matmult
-    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/float_matmult/Makefile"
-
-        BENCHMARKS+="float_matmult "
-        BENCHMARKS_SUBDIRS+="src/float_matmult "
-
-        if test x$HAVE_CALIBRATION == xyes; then
-            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
-            if test x$no_calib == x0; then
-                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
-                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
-            fi
-        fi
-    fi
-
     bmark=frac
     if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
         ac_config_files="$ac_config_files src/frac/Makefile"
@@ -13320,22 +13304,6 @@ N_UNCALIBRATED_BENCHMARKS=0
         fi
     fi
 
-    bmark=int_matmult
-    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/int_matmult/Makefile"
-
-        BENCHMARKS+="int_matmult "
-        BENCHMARKS_SUBDIRS+="src/int_matmult "
-
-        if test x$HAVE_CALIBRATION == xyes; then
-            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
-            if test x$no_calib == x0; then
-                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
-                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
-            fi
-        fi
-    fi
-
     bmark=janne_complex
     if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
         ac_config_files="$ac_config_files src/janne_complex/Makefile"
@@ -13422,6 +13390,22 @@ N_UNCALIBRATED_BENCHMARKS=0
 
         BENCHMARKS+="ludcmp "
         BENCHMARKS_SUBDIRS+="src/ludcmp "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
+    fi
+
+    bmark=matmult
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/matmult/Makefile"
+
+        BENCHMARKS+="matmult "
+        BENCHMARKS_SUBDIRS+="src/matmult "
 
         if test x$HAVE_CALIBRATION == xyes; then
             no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
@@ -15240,7 +15224,6 @@ do
     "src/fft/Makefile") CONFIG_FILES="$CONFIG_FILES src/fft/Makefile" ;;
     "src/fibcall/Makefile") CONFIG_FILES="$CONFIG_FILES src/fibcall/Makefile" ;;
     "src/fir/Makefile") CONFIG_FILES="$CONFIG_FILES src/fir/Makefile" ;;
-    "src/float_matmult/Makefile") CONFIG_FILES="$CONFIG_FILES src/float_matmult/Makefile" ;;
     "src/frac/Makefile") CONFIG_FILES="$CONFIG_FILES src/frac/Makefile" ;;
     "src/gdb-advance/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-advance/Makefile" ;;
     "src/gdb-auxv/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-auxv/Makefile" ;;
@@ -15253,13 +15236,13 @@ do
     "src/gdb-store/Makefile") CONFIG_FILES="$CONFIG_FILES src/gdb-store/Makefile" ;;
     "src/huffbench/Makefile") CONFIG_FILES="$CONFIG_FILES src/huffbench/Makefile" ;;
     "src/insertsort/Makefile") CONFIG_FILES="$CONFIG_FILES src/insertsort/Makefile" ;;
-    "src/int_matmult/Makefile") CONFIG_FILES="$CONFIG_FILES src/int_matmult/Makefile" ;;
     "src/janne_complex/Makefile") CONFIG_FILES="$CONFIG_FILES src/janne_complex/Makefile" ;;
     "src/jfdctint/Makefile") CONFIG_FILES="$CONFIG_FILES src/jfdctint/Makefile" ;;
     "src/lcdnum/Makefile") CONFIG_FILES="$CONFIG_FILES src/lcdnum/Makefile" ;;
     "src/levenshtein/Makefile") CONFIG_FILES="$CONFIG_FILES src/levenshtein/Makefile" ;;
     "src/lms/Makefile") CONFIG_FILES="$CONFIG_FILES src/lms/Makefile" ;;
     "src/ludcmp/Makefile") CONFIG_FILES="$CONFIG_FILES src/ludcmp/Makefile" ;;
+    "src/matmult/Makefile") CONFIG_FILES="$CONFIG_FILES src/matmult/Makefile" ;;
     "src/mergesort/Makefile") CONFIG_FILES="$CONFIG_FILES src/mergesort/Makefile" ;;
     "src/miniz/Makefile") CONFIG_FILES="$CONFIG_FILES src/miniz/Makefile" ;;
     "src/minver/Makefile") CONFIG_FILES="$CONFIG_FILES src/minver/Makefile" ;;

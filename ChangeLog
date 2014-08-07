@@ -1,5 +1,19 @@
 2014-08-07  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* configure.ac: Remove int_matmult and float_matmult, add matmult.
+	* configure: Regenerate.
+	* src/float_matmult/Makefile.in: Removed.
+	* src/float_matmult/matmult.c: Removed.
+	* src/float_matmult/Makefile.am: Removed.
+	* src/int_matmult/Makefile.am: Removed.
+	* src/int_matmult/Makefile.in: Removed.
+	* src/int_matmult/matmult.c: Removed.
+	* src/matmult/Makefile.am: New file.
+	* src/matmult/Makefile.in: New file.
+	* src/matmult/matmult.c: New file.
+
+2014-08-07  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* 2dfir/fir2dim.c (SCALE_FACTOR): Added.
 	(main) Switch to use SCALE_FACTOR.
 	* blowfish/bf.c: Likewise.

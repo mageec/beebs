@@ -16,11 +16,61 @@
  * This is a program that was developed from mm.c to matmult.c by
  * Thomas Lundqvist at Chalmers.
  *----------------------------------------------------------------------*/
+#ifdef MATMULT_FLOAT
+#include <math.h>
+#endif /* MATMULT_FLOAT */
+
 #include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
+#ifdef MATMULT_FLOAT
+#define SCALE_FACTOR    (REPEAT_FACTOR >> 5)
+#define UPPERLIMIT 10
+typedef float matrix [UPPERLIMIT][UPPERLIMIT];
+#define RANDOM_VALUE ((float) RandomInteger () / 10.0)
+#define ZERO 0.0
+#define MOD_SIZE 255
+
+int
+values_match (float v1, float v2)
+{
+  if (v1 != v2)
+    {
+      int exp;
+      float diff;
+
+      /* Ignore the least significant bit of the mantissa
+       * to account for any loss of precision due to floating point
+       * operations */
+      frexpf(v1, &exp);
+      diff = fabsf(v1 - v2);
+      /* TODO: Fix for big endian */
+      if (diff > (1 << exp)) {
+	return 0;
+      }
+    }
+
+  return 1;
+}
+
+#elif defined MATMULT_INT
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 6)
+#define UPPERLIMIT 20
+#define RANDOM_VALUE (RandomInteger ())
+#define ZERO 0
+#define MOD_SIZE 8095
+typedef long matrix [UPPERLIMIT][UPPERLIMIT];
+
+int
+values_match (long v1, long v2)
+{
+  return (v1 == v2);
+}
+
+#else
+#error "No SCALE_FACTOR defined"
+#endif
 
 /*
  * MATRIX MULTIPLICATION BENCHMARK PROGRAM:
@@ -29,9 +79,8 @@
  * arrays and simple arithmetic.
  */
 
-#define UPPERLIMIT 20
 
-typedef long matrix [UPPERLIMIT][UPPERLIMIT];
+
 
 int Seed;
 matrix ArrayA, ArrayB, ResultArray;
@@ -42,26 +91,22 @@ void Test(matrix A, matrix B, matrix Res);
 void Initialize(matrix Array);
 int RandomInteger(void);
 
-/*
- * Runs a multiplication test on an array.  Calculates and prints the
- * time it takes to multiply the matrices.
- */
-void Test(matrix A, matrix B, matrix Res)
-{
-   int OuterIndex, InnerIndex;
-
-   for (OuterIndex = 0; OuterIndex < UPPERLIMIT; OuterIndex++)
-      for (InnerIndex = 0; InnerIndex < UPPERLIMIT; InnerIndex++)
-         A[OuterIndex][InnerIndex] = RandomInteger();
-   for (OuterIndex = 0; OuterIndex < UPPERLIMIT; OuterIndex++)
-      for (InnerIndex = 0; InnerIndex < UPPERLIMIT; InnerIndex++)
-         B[OuterIndex][InnerIndex] = RandomInteger();
-
-   Multiply(A, B, Res);
-}
-
 int main()
 {
+#ifdef MATMULT_FLOAT
+   const matrix check_ResultArray = {
+      {931.049988, 562.409973, 676.890015, 648.630005, 837.449951, 728.460022, 936.089905, 582.47998,  668.700012, 477.360016},
+      {1296,       792.98999,  1174.41003, 411.120026, 1174.04993, 952.289978, 1285.56006, 1148.66992, 828,        751.139954},
+      {903.150024, 596.609985, 937.890015, 665.279968, 1135.79993, 778.410034, 805.589966, 587.880005, 1077.29993, 540.809998},
+      {552.599976, 630.539978, 1013.30994, 353.069977, 707.399963, 762.839966, 1052.45996, 924.119995, 822.599976, 631.439941},
+      {1144.79993, 612.809998, 1148.48999, 759.329956, 913.949951, 808.110046, 1052.18994, 765.179993, 949.950073, 860.76001},
+      {1147.04993, 698.940002, 885.059998, 386.370026, 1304.09998, 862.73999,  791.460083, 934.919983, 989.550049, 758.339966},
+      {904.950012, 731.609924, 1078.73999, 819.179993, 1036.34998, 796.409973, 1067.94006, 453.780029, 809.099976, 644.309937},
+      {850.049927, 784.890015, 1069.10999, 689.219971, 959.850037, 937.439941, 1162.26013, 1060.0199,  1216.79993, 916.290039},
+      {931.049988, 562.409973, 676.890015, 648.630005, 837.449951, 728.460022, 936.089905, 582.47998,  668.700012, 477.360016},
+      {1296,       792.98999,  1174.41003, 411.120026, 1174.04993, 952.289978, 1285.56006, 1148.66992, 828,        751.139954}
+   };
+#elif defined MATMULT_INT
    matrix check_ResultArray = {
       {299008155, 278859640, 356434140, 316921550, 310148425, 369422180, 363493165, 314898120, 265393255, 342605520, 351189510, 339881235, 349775180, 332407175, 271374935, 360571355, 379819765, 339962860, 292803300, 319827495},
       {329877145, 291981125, 401048060, 278783525, 282082465, 370360365, 368884060, 314521795, 281532195, 355215605, 326492030, 331864510, 351780495, 328795085, 293801430, 325047505, 368475005, 369699495, 317423945, 335623145},
@@ -84,6 +129,9 @@ int main()
       {353784680, 321355165, 403458490, 322727125, 341452075, 384460505, 414371440, 348951870, 285603105, 398078620, 385303910, 356217410, 350776430, 362338275, 338092935, 388634955, 393937840, 362511785, 379448275, 386488920},
       {469268630, 381624415, 460637690, 350851775, 326930600, 464558605, 458079940, 368923345, 325959180, 470384345, 455095285, 399817360, 420989805, 360067225, 366408910, 369932005, 467833590, 473619585, 426808550, 407822620}
    };
+#else
+   #error "No matrix initialisation data."
+#endif
 
    int n;
    InitSeed();
@@ -99,10 +147,11 @@ int main()
    int to_return = 0;
    for (int i = 0; i < UPPERLIMIT; i++) {
       for (int j = 0; j < UPPERLIMIT; j++) {
-         if (ResultArray[i][j] != check_ResultArray[i][j]) {
-            to_return = -1;
-            break;
-         }
+	if (!values_match (ResultArray[i][j], check_ResultArray[i][j]))
+	  {
+               to_return = -1;
+               break;
+	  }
       }
    }
 
@@ -119,11 +168,29 @@ void InitSeed(void)
 }
 
 /*
+ * Runs a multiplication test on an array.  Calculates and prints the
+ * time it takes to multiply the matrices.
+ */
+void Test(matrix A, matrix B, matrix Res)
+{
+   int OuterIndex, InnerIndex;
+
+   for (OuterIndex = 0; OuterIndex < UPPERLIMIT; OuterIndex++)
+      for (InnerIndex = 0; InnerIndex < UPPERLIMIT; InnerIndex++)
+         A[OuterIndex][InnerIndex] = RANDOM_VALUE;
+   for (OuterIndex = 0; OuterIndex < UPPERLIMIT; OuterIndex++)
+      for (InnerIndex = 0; InnerIndex < UPPERLIMIT; InnerIndex++)
+         B[OuterIndex][InnerIndex] = RANDOM_VALUE;
+
+   Multiply(A, B, Res);
+}
+
+/*
  * Generates random integers between 0 and 8095
  */
 int RandomInteger(void)
 {
-   Seed = ((Seed * 133) + 81) % 8095;
+   Seed = ((Seed * 133) + 81) % MOD_SIZE;
    return (Seed);
 }
 
@@ -137,10 +204,9 @@ void Multiply(matrix A, matrix B, matrix Res)
    for (Outer = 0; Outer < UPPERLIMIT; Outer++)
       for (Inner = 0; Inner < UPPERLIMIT; Inner++)
       {
-         Res [Outer][Inner] = 0;
+         Res [Outer][Inner] = ZERO;
          for (Index = 0; Index < UPPERLIMIT; Index++)
-            Res[Outer][Inner]  +=
-               A[Outer][Index] * B[Index][Inner];
+            Res[Outer][Inner] += A[Outer][Index] * B[Index][Inner];
       }
 }
 
