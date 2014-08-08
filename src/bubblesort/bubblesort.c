@@ -21,13 +21,9 @@
 
 #include "support.h"
 
-#ifndef BUBBLESORT_RSHIFT
-#define BUBBLESORT_RSHIFT 0
-#endif
-
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> BUBBLESORT_RSHIFT)
+#define SCALE_FACTOR    (REPEAT_FACTOR >> 4)
 
 #define WORSTCASE 1
 #define FALSE 0

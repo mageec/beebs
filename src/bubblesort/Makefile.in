@@ -122,7 +122,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = bubblesort$(EXEEXT) bubblesort_quick$(EXEEXT)
+bin_PROGRAMS = bubblesort$(EXEEXT)
 DIST_COMMON = $(top_srcdir)/src/common.mk.am $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/build-aux/depcomp
 @CHIPSUPPORT_C_TRUE@am__append_1 = $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
@@ -152,21 +152,6 @@ AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-am__bubblesort_quick_SOURCES_DIST = bubblesort.c \
-	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
-	$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
-@CHIPSUPPORT_C_TRUE@am__objects_3 =  \
-@CHIPSUPPORT_C_TRUE@	bubblesort_quick-chipsupport.$(OBJEXT)
-am__objects_4 = bubblesort_quick-boardsupport.$(OBJEXT) \
-	$(am__objects_3)
-am_bubblesort_quick_OBJECTS = bubblesort_quick-bubblesort.$(OBJEXT) \
-	$(am__objects_4)
-bubblesort_quick_OBJECTS = $(am_bubblesort_quick_OBJECTS)
-bubblesort_quick_LDADD = $(LDADD)
-bubblesort_quick_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
-	$(bubblesort_quick_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
-	-o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -201,9 +186,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(bubblesort_SOURCES) $(bubblesort_quick_SOURCES)
-DIST_SOURCES = $(am__bubblesort_SOURCES_DIST) \
-	$(am__bubblesort_quick_SOURCES_DIST)
+SOURCES = $(bubblesort_SOURCES)
+DIST_SOURCES = $(am__bubblesort_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -359,7 +343,6 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 bubblesort_SOURCES = bubblesort.c ${platform_src}
-bubblesort_quick_SOURCES = bubblesort.c ${platform_src}
 platform_src =  \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
 	$(am__append_1)
@@ -380,7 +363,6 @@ AM_CFLAGS = $(WERROR_CFLAGS) $(WARN_CFLAGS) \
 		  @CONFIG_CFLAGS@
 
 AM_LDFLAGS = @CONFIG_LDFLAGS@
-bubblesort_quick_CFLAGS = -DBUBBLESORT_RSHIFT=7 $(AM_CFLAGS)
 all: all-am
 
 .SUFFIXES:
@@ -470,10 +452,6 @@ bubblesort$(EXEEXT): $(bubblesort_OBJECTS) $(bubblesort_DEPENDENCIES) $(EXTRA_bu
 	@rm -f bubblesort$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(bubblesort_OBJECTS) $(bubblesort_LDADD) $(LIBS)
 
-bubblesort_quick$(EXEEXT): $(bubblesort_quick_OBJECTS) $(bubblesort_quick_DEPENDENCIES) $(EXTRA_bubblesort_quick_DEPENDENCIES) 
-	@rm -f bubblesort_quick$(EXEEXT)
-	$(AM_V_CCLD)$(bubblesort_quick_LINK) $(bubblesort_quick_OBJECTS) $(bubblesort_quick_LDADD) $(LIBS)
-
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 
@@ -482,9 +460,6 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/boardsupport.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bubblesort.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bubblesort_quick-boardsupport.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bubblesort_quick-bubblesort.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bubblesort_quick-chipsupport.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chipsupport.Po@am__quote@
 
 .c.o:
@@ -535,48 +510,6 @@ chipsupport.obj: $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c' object='chipsupport.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o chipsupport.obj `if test -f '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; then $(CYGPATH_W) '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; fi`
-
-bubblesort_quick-bubblesort.o: bubblesort.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(bubblesort_quick_CFLAGS) $(CFLAGS) -MT bubblesort_quick-bubblesort.o -MD -MP -MF $(DEPDIR)/bubblesort_quick-bubblesort.Tpo -c -o bubblesort_quick-bubblesort.o `test -f 'bubblesort.c' || echo '$(srcdir)/'`bubblesort.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/bubblesort_quick-bubblesort.Tpo $(DEPDIR)/bubblesort_quick-bubblesort.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='bubblesort.c' object='bubblesort_quick-bubblesort.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(bubblesort_quick_CFLAGS) $(CFLAGS) -c -o bubblesort_quick-bubblesort.o `test -f 'bubblesort.c' || echo '$(srcdir)/'`bubblesort.c
-
-bubblesort_quick-bubblesort.obj: bubblesort.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(bubblesort_quick_CFLAGS) $(CFLAGS) -MT bubblesort_quick-bubblesort.obj -MD -MP -MF $(DEPDIR)/bubblesort_quick-bubblesort.Tpo -c -o bubblesort_quick-bubblesort.obj `if test -f 'bubblesort.c'; then $(CYGPATH_W) 'bubblesort.c'; else $(CYGPATH_W) '$(srcdir)/bubblesort.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/bubblesort_quick-bubblesort.Tpo $(DEPDIR)/bubblesort_quick-bubblesort.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='bubblesort.c' object='bubblesort_quick-bubblesort.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(bubblesort_quick_CFLAGS) $(CFLAGS) -c -o bubblesort_quick-bubblesort.obj `if test -f 'bubblesort.c'; then $(CYGPATH_W) 'bubblesort.c'; else $(CYGPATH_W) '$(srcdir)/bubblesort.c'; fi`
-
-bubblesort_quick-boardsupport.o: $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(bubblesort_quick_CFLAGS) $(CFLAGS) -MT bubblesort_quick-boardsupport.o -MD -MP -MF $(DEPDIR)/bubblesort_quick-boardsupport.Tpo -c -o bubblesort_quick-boardsupport.o `test -f '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c' || echo '$(srcdir)/'`$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/bubblesort_quick-boardsupport.Tpo $(DEPDIR)/bubblesort_quick-boardsupport.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c' object='bubblesort_quick-boardsupport.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(bubblesort_quick_CFLAGS) $(CFLAGS) -c -o bubblesort_quick-boardsupport.o `test -f '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c' || echo '$(srcdir)/'`$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
-
-bubblesort_quick-boardsupport.obj: $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(bubblesort_quick_CFLAGS) $(CFLAGS) -MT bubblesort_quick-boardsupport.obj -MD -MP -MF $(DEPDIR)/bubblesort_quick-boardsupport.Tpo -c -o bubblesort_quick-boardsupport.obj `if test -f '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; then $(CYGPATH_W) '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/bubblesort_quick-boardsupport.Tpo $(DEPDIR)/bubblesort_quick-boardsupport.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c' object='bubblesort_quick-boardsupport.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(bubblesort_quick_CFLAGS) $(CFLAGS) -c -o bubblesort_quick-boardsupport.obj `if test -f '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; then $(CYGPATH_W) '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; fi`
-
-bubblesort_quick-chipsupport.o: $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(bubblesort_quick_CFLAGS) $(CFLAGS) -MT bubblesort_quick-chipsupport.o -MD -MP -MF $(DEPDIR)/bubblesort_quick-chipsupport.Tpo -c -o bubblesort_quick-chipsupport.o `test -f '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c' || echo '$(srcdir)/'`$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/bubblesort_quick-chipsupport.Tpo $(DEPDIR)/bubblesort_quick-chipsupport.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c' object='bubblesort_quick-chipsupport.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(bubblesort_quick_CFLAGS) $(CFLAGS) -c -o bubblesort_quick-chipsupport.o `test -f '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c' || echo '$(srcdir)/'`$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
-
-bubblesort_quick-chipsupport.obj: $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(bubblesort_quick_CFLAGS) $(CFLAGS) -MT bubblesort_quick-chipsupport.obj -MD -MP -MF $(DEPDIR)/bubblesort_quick-chipsupport.Tpo -c -o bubblesort_quick-chipsupport.obj `if test -f '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; then $(CYGPATH_W) '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/bubblesort_quick-chipsupport.Tpo $(DEPDIR)/bubblesort_quick-chipsupport.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c' object='bubblesort_quick-chipsupport.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(bubblesort_quick_CFLAGS) $(CFLAGS) -c -o bubblesort_quick-chipsupport.obj `if test -f '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; then $(CYGPATH_W) '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo

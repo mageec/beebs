@@ -1,5 +1,12 @@
 2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/bubblesort/Makefile.am: Remove bubblesort_quick test.
+	* src/bubblesort/Makefile.in: Regenerate.
+	* src/bubblesort/bubblesort.c (BUBBLESORT_RSHIFT): Remove.
+	(SCALE_FACTOR): No longer rely on BUBBLESORT_RSHIFT.
+
+2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/fasta/fasta.c (SCALE_FACTOR): Whitespace fixes.
 
 2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>
