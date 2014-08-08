@@ -1,5 +1,9 @@
 2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/fasta/fasta.c (SCALE_FACTOR): Whitespace fixes.
+
+2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/cubic/basicmath_small.c (SCALE_FACTOR): Remove the +1.
 
 2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>

@@ -3,7 +3,7 @@
 
 #include "support.h"
 
-#define SCALE_FACTOR   (REPEAT_FACTOR>>6)
+#define SCALE_FACTOR   (REPEAT_FACTOR >> 6)
 
 #define WIDTH 60
 #define MIN(a,b) ((a) <= (b) ? (a) : (b))
