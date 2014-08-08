@@ -1,5 +1,21 @@
 2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* configure.ac: Remove sglib-listinsertsort1.
+	* configure: Regenerate.
+	* src/sglib-listinsertsort/Makefile.am: Remove general automake
+	HOWTO comment.
+	* src/sglib-listinsertsort/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort/listinsertsort.c: Copied from old
+	listinsertsort1.
+	* src/sglib-listinsertsort/sglib.h (SGLIB_LIST_LEN): Remove
+	declaraion of _ce_.
+	* src/sglib-listinsertsort1/Makefile.am: Removed.
+	* src/sglib-listinsertsort1/Makefile.in: Removed.
+	* src/sglib-listinsertsort1/listinsertsort1.c: Removed.
+	* src/sglib-listinsertsort1/sglib.h: Removed.
+
+2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/bubblesort/Makefile.am: Remove bubblesort_quick test.
 	* src/bubblesort/Makefile.in: Regenerate.
 	* src/bubblesort/bubblesort.c (BUBBLESORT_RSHIFT): Remove.

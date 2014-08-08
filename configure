@@ -13880,22 +13880,6 @@ N_UNCALIBRATED_BENCHMARKS=0
         fi
     fi
 
-    bmark=sglib-listinsertsort1
-    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/sglib-listinsertsort1/Makefile"
-
-        BENCHMARKS+="sglib-listinsertsort1 "
-        BENCHMARKS_SUBDIRS+="src/sglib-listinsertsort1 "
-
-        if test x$HAVE_CALIBRATION == xyes; then
-            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
-            if test x$no_calib == x0; then
-                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
-                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
-            fi
-        fi
-    fi
-
     bmark=sglib-listsort
     if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
         ac_config_files="$ac_config_files src/sglib-listsort/Makefile"
@@ -15272,7 +15256,6 @@ do
     "src/sglib-dllist/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-dllist/Makefile" ;;
     "src/sglib-hashtable/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-hashtable/Makefile" ;;
     "src/sglib-listinsertsort/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-listinsertsort/Makefile" ;;
-    "src/sglib-listinsertsort1/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-listinsertsort1/Makefile" ;;
     "src/sglib-listsort/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-listsort/Makefile" ;;
     "src/sglib-queue/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-queue/Makefile" ;;
     "src/sglib-rbtree/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-rbtree/Makefile" ;;

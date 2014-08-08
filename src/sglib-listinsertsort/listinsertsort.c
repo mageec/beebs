@@ -1,4 +1,4 @@
-/* BEEBS listinsertsort benchmark
+/* BEEBS listinsertsort1 benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
 
@@ -36,34 +36,39 @@ int array[100] = {14, 66, 12, 41, 86, 69, 19, 77, 68, 38, 26, 42, 37, 23, 17, 29
   64, 5, 30, 82, 72, 46, 59, 9, 7, 3, 39, 31, 4, 73, 70, 60, 58, 81, 56, 51, 45, 1, 6, 49,
   27, 47, 34, 35, 62, 97, 2, 79, 98, 25, 22, 65, 71, 0};
 
-
-struct ilist {
+typedef struct ilist {
     int i;
     struct ilist *next_ptr;
-};
+} iListType;
 
 #define ILIST_COMPARATOR(e1, e2) (e1->i - e2->i)
+
+SGLIB_DEFINE_SORTED_LIST_PROTOTYPES(iListType, ILIST_COMPARATOR, next_ptr)
+SGLIB_DEFINE_SORTED_LIST_FUNCTIONS(iListType, ILIST_COMPARATOR, next_ptr)
 
 int benchmark()
 {
   int i;
   struct ilist *l, *the_list;
-  int cnt;
+  struct sglib_iListType_iterator   it;
+  int cnt = 0;
 
   the_list = NULL;
-  for (i=1; i<100; i++) {
+  for (i = 1; i < 100; i++) {
+    l = malloc (sizeof (struct ilist));
+    l->i = array [i];
 
-    l = malloc(sizeof(struct ilist));
-    l->i = array[i];
-    // insert the new element into the list while keeping it sorted
-    SGLIB_SORTED_LIST_ADD(struct ilist, the_list, l, ILIST_COMPARATOR, next_ptr);
+    /* Insert the new element into the list while keeping it sorted.  */
+    sglib_iListType_add (&the_list, l);
   }
-  SGLIB_LIST_MAP_ON_ELEMENTS(struct ilist, the_list, ll, next_ptr, {
-    cnt += ll->i;
-  });
-  SGLIB_LIST_MAP_ON_ELEMENTS(struct ilist, the_list, ll, next_ptr, {
-    free(ll);
-  });
+
+  for (l = sglib_iListType_it_init (&it, the_list); l != NULL; l = sglib_iListType_it_next (&it)) {
+    cnt += l->i;
+  }
+
+  for(l = sglib_iListType_it_init (&it, the_list); l != NULL; l = sglib_iListType_it_next (&it)) {
+    free (l);
+  }
 
   return cnt;
 }
@@ -82,4 +87,3 @@ main (void)
   stop_trigger ();
   return 0;
 }
-

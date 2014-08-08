@@ -251,7 +251,6 @@ m4_define([benchmarklist],[dnl
 [sglib-dllist],
 [sglib-hashtable],
 [sglib-listinsertsort],
-[sglib-listinsertsort1],
 [sglib-listsort],
 [sglib-queue],
 [sglib-rbtree],
