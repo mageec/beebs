@@ -1,5 +1,37 @@
 2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* configure.ac: Remove all the gdb-* tests.
+	* configure: Regenerate.
+	* src/gdb-advance/Makefile.am: Deleted.
+	* src/gdb-advance/Makefile.in: Deleted.
+	* src/gdb-advance/advance.c: Deleted.
+	* src/gdb-all-types/Makefile.am: Deleted.
+	* src/gdb-all-types/Makefile.in: Deleted.
+	* src/gdb-all-types/all-types.c: Deleted.
+	* src/gdb-anon/Makefile.am: Deleted.
+	* src/gdb-anon/Makefile.in: Deleted.
+	* src/gdb-anon/anon.c: Deleted.
+	* src/gdb-arrayidx/Makefile.am: Deleted.
+	* src/gdb-arrayidx/Makefile.in: Deleted.
+	* src/gdb-arrayidx/arrayidx.c: Deleted.
+	* src/gdb-async/Makefile.am: Deleted.
+	* src/gdb-async/Makefile.in: Deleted.
+	* src/gdb-async/async.c: Deleted.
+	* src/gdb-auxv/Makefile.am: Deleted.
+	* src/gdb-auxv/Makefile.in: Deleted.
+	* src/gdb-auxv/auxv.c: Deleted.
+	* src/gdb-bitfields/Makefile.am: Deleted.
+	* src/gdb-bitfields/Makefile.in: Deleted.
+	* src/gdb-bitfields/bitfields.c: Deleted.
+	* src/gdb-constvars/Makefile.am: Deleted.
+	* src/gdb-constvars/Makefile.in: Deleted.
+	* src/gdb-constvars/constvars.c: Deleted.
+	* src/gdb-store/Makefile.am: Deleted.
+	* src/gdb-store/Makefile.in: Deleted.
+	* src/gdb-store/store.c: Deleted.
+
+2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* configure.ac: Remove sglib-listinsertsort1.
 	* configure: Regenerate.
 	* src/sglib-listinsertsort/Makefile.am: Remove general automake
