@@ -29,8 +29,6 @@
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> BUBBLESORT_RSHIFT)
 
-#include <stdio.h>
-
 #define WORSTCASE 1
 #define FALSE 0
 #define TRUE 1

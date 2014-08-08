@@ -1,3 +1,7 @@
+2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/bubblesort/bubblesort.c: Remove stdio.h include.
+
 2014-08-07  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* configure.ac: Remove int_matmult and float_matmult, add matmult.
