@@ -1,5 +1,10 @@
 2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/miniz/miniz.c: Add GPL header.
+	* src/miniz/miniz.h: Add GPL header.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/dijkstra/LICENSE: Removed.
 	* src/dijkstra/Makefile.am: Remove reference to LICENCE file.
 	* src/dijkstra/dijkstra_small.c: Add GPL header, and copy in the
