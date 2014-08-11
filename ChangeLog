@@ -1,5 +1,10 @@
 2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/picojpeg/picojpeg.c: Add GPL header.
+	* src/picojpeg/picojpeg.h: Add GPL header.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/nettle-des/keymap.h: Add GPL header.
 	* src/nettle-des/rotors.h: Add GPL header.
 
