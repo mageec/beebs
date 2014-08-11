@@ -20,9 +20,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=sglib-arraysort
-sglib_arraysort_SOURCES=arraysort.c sglib.h
+bin_PROGRAMS=sglib-arrayheapsort sglib-arrayquicksort
+
+sglib_arrayheapsort_SOURCES=arraysort.c sglib.h
+sglib_arrayquicksort_SOURCES=arraysort.c sglib.h
 
 include $(top_srcdir)/src/common.mk.am
 
-sglib_arraysort_SOURCES += ${platform_src}
+sglib_arrayheapsort_CFLAGS = -DHEAP_SORT ${AM_CFLAGS}
+sglib_arrayquicksort_CFLAGS = -DQUICK_SORT ${AM_CFLAGS}
+
+sglib_arrayheapsort_SOURCES += ${platform_src}
+sglib_arrayquicksort_SOURCES += ${platform_src}

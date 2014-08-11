@@ -1,5 +1,21 @@
 2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* configure.ac: Remove sglib-arraysort1.
+	* configure: Regenerate.
+	* src/sglib-arraysort/Makefile.am: Add support for quick sort and
+	heap sort variants.
+	* src/sglib-arraysort/Makefile.in: Regenerate.
+	* src/sglib-arraysort/arraysort.c (benchmark): Add quick sort and
+	heap sort variants.
+	* src/sglib-arraysort/sglib.h (SGLIB___ARRAY_HEAP_DOWN): Remove
+	unused variable _t_.
+	* src/sglib-arraysort1/Makefile.am: Removed.
+	* src/sglib-arraysort1/arraysort1.c: Removed.
+	* src/sglib-arraysort1/sglib.h: Removed.
+	* src/sglib-arraysort1/Makefile.in: Removed.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/dijkstra/Makefile.in: Regenerate after commit 64e1ea3.
 
 2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>

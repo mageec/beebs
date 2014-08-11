@@ -237,7 +237,6 @@ m4_define([benchmarklist],[dnl
 [select],
 [sglib-arraybinsearch],
 [sglib-arraysort],
-[sglib-arraysort1],
 [sglib-dllist],
 [sglib-hashtable],
 [sglib-listinsertsort],
