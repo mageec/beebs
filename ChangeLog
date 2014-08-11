@@ -1,5 +1,26 @@
 2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* configure.ac: Remove ctl-stack and ctl-vector, add ctl.
+	* configure: Regenerate.
+	* src/ctl-stack/Makefile.am: Remove.
+	* src/ctl-stack/Makefile.in: Remove.
+	* src/ctl-stack/ctl.h: Remove.
+	* src/ctl-stack/stack.c: Remove.
+	* src/ctl-vector/Makefile.am: Remove.
+	* src/ctl-vector/Makefile.in: Remove.
+	* src/ctl-vector/vector.c: Remove.
+	* src/ctl-vector/ctl.h: Move to src/ctl/ctl.h.
+	* src/ctl-stack/stack.h: Move to src/ctl/stack.h.
+	* src/ctl-vector/vector.h: Move to src/ctl/vector.h.
+	* src/ctl/Makefile.am: New file.
+	* src/ctl/Makefile.in: Generated.
+	* src/ctl/ctl.c New file, merging old stack.c and vector.c.
+	* src/ctl/ctl.h: Moved from src/ctl-vector/ctl.h.
+	* src/ctl/stack.h: Moved from src/ctl-vector/stack.h.
+	* src/ctl/vector.h: Moved from src/ctl-vector/vector.h.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/crc32/LICENSE: Removed.
 	* src/crc32/crc.h: Removed.
 	* src/crc32/crc_32.c: Add licence information originally from

@@ -12872,28 +12872,12 @@ N_UNCALIBRATED_BENCHMARKS=0
         fi
     fi
 
-    bmark=ctl-stack
+    bmark=ctl
     if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/ctl-stack/Makefile"
+        ac_config_files="$ac_config_files src/ctl/Makefile"
 
-        BENCHMARKS+="ctl-stack "
-        BENCHMARKS_SUBDIRS+="src/ctl-stack "
-
-        if test x$HAVE_CALIBRATION == xyes; then
-            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
-            if test x$no_calib == x0; then
-                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
-                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
-            fi
-        fi
-    fi
-
-    bmark=ctl-vector
-    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/ctl-vector/Makefile"
-
-        BENCHMARKS+="ctl-vector "
-        BENCHMARKS_SUBDIRS+="src/ctl-vector "
+        BENCHMARKS+="ctl "
+        BENCHMARKS_SUBDIRS+="src/ctl "
 
         if test x$HAVE_CALIBRATION == xyes; then
             no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
@@ -15049,8 +15033,7 @@ do
     "src/crc/Makefile") CONFIG_FILES="$CONFIG_FILES src/crc/Makefile" ;;
     "src/crc32/Makefile") CONFIG_FILES="$CONFIG_FILES src/crc32/Makefile" ;;
     "src/ctl-string/Makefile") CONFIG_FILES="$CONFIG_FILES src/ctl-string/Makefile" ;;
-    "src/ctl-stack/Makefile") CONFIG_FILES="$CONFIG_FILES src/ctl-stack/Makefile" ;;
-    "src/ctl-vector/Makefile") CONFIG_FILES="$CONFIG_FILES src/ctl-vector/Makefile" ;;
+    "src/ctl/Makefile") CONFIG_FILES="$CONFIG_FILES src/ctl/Makefile" ;;
     "src/cubic/Makefile") CONFIG_FILES="$CONFIG_FILES src/cubic/Makefile" ;;
     "src/dhrystone/Makefile") CONFIG_FILES="$CONFIG_FILES src/dhrystone/Makefile" ;;
     "src/dijkstra/Makefile") CONFIG_FILES="$CONFIG_FILES src/dijkstra/Makefile" ;;

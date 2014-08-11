@@ -26,62 +26,98 @@
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
-#include "vector.h"
-
 typedef struct {
   int a, b;
 } pair;
 
+#ifdef CTL_VECTOR
+#include "vector.h"
+
+/* Create vector functions for different types.  */
 MAKE_VECTOR(int)
 MAKE_VECTOR(pair)
 
+/* Container types.  */
+typedef ctl_intVector int_container;
+typedef ctl_pairVector pair_container;
+
+#define CTL_INIT(type) ctl_##type##VectorInit ()
+#define CTL_PUSH(type, vec, val) ctl_ ## type ## VectorPush_Back(vec, val)
+#define CTL_DELETE(type, vec, a, b) ctl_ ## type ## VectorDelete(vec, a, b)
+#define CTL_POP(type, vec, res) ctl_ ## type ## VectorPop_Back(vec, res)
+#define CTL_FREE(type, vec) ctl_ ## type ## VectorFree(vec)
+
+#elif defined CTL_STACK
+#include "stack.h"
+
+/* Create stack functions for different types.  */
+MAKE_STACK(int)
+MAKE_STACK(pair)
+
+/* Container types.  */
+typedef ctl_intStack int_container;
+typedef ctl_pairStack pair_container;
+
+#define CTL_INIT(type) ctl_ ## type ## StackInit ()
+#define CTL_PUSH(type, stk, val) ctl_ ## type ## StackPush (stk, val)
+#define CTL_POP(type, stk, res) ctl_ ## type ## StackPop (stk, res)
+#define CTL_FREE(type, stk) ctl_ ## type ## StackFree (stk)
+
+/* There's no DELETE for stacks.  */
+#define CTL_DELETE(type, vec, a, b) do { } while (0)
+
+
+#else
+#error "Expected CTL_VECTOR or CTL_STACK to be defined"
+#endif
 
 
 int
 benchmark (void)
 {
-  ctl_intVector *v;
-  ctl_pairVector *v2;
+  int_container *v;
+  pair_container *v2;
+
   int cnt=0, i;
 
-  v = ctl_intVectorInit();
+  v = CTL_INIT (int);
 
   for (i = 1; i <= 100; ++i)
-    ctl_intVectorPush_Back(v, i*11);
+    CTL_PUSH (int, v, i * 11);
 
-  ctl_intVectorDelete(v, 4,50);
+  CTL_DELETE (int, v, 4, 50);
 
   while(v->size > 0)
   {
     int k;
 
-    ctl_intVectorPop_Back(v, &k);
+    CTL_POP (int, v, &k);
 
     cnt += k;
   }
 
-  ctl_intVectorFree(v);
+  CTL_FREE (int, v);
 
-  v2 = ctl_pairVectorInit();
+  v2 = CTL_INIT (pair);
 
   for (i = 1; i <= 100; ++i)
   {
     pair p = {i, i*i};
-    ctl_pairVectorPush_Back(v2, p);
+    CTL_PUSH (pair, v2, p);
   }
 
-  ctl_pairVectorDelete(v2, 4,8);
+  CTL_DELETE (pair, v2, 4, 8);
 
   while(v2->size > 0)
   {
     pair k;
 
-    ctl_pairVectorPop_Back(v2, &k);
+    CTL_POP (pair, v2, &k);
 
     cnt += k.a*k.b;
   }
 
-  ctl_pairVectorFree(v2);
+  CTL_FREE (pair, v2);
 
   return cnt;
 }
