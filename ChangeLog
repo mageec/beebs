@@ -1,5 +1,16 @@
 2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/sglib-arraybinsearch/sglib.h: Add GPL header.
+	* src/sglib-arraysort/sglib.h: Add GPL header.
+	* src/sglib-dllist/sglib.h: Add GPL header.
+	* src/sglib-hashtable/sglib.h: Add GPL header.
+	* src/sglib-listinsertsort/sglib.h: Add GPL header.
+	* src/sglib-listsort/sglib.h: Add GPL header.
+	* src/sglib-queue/sglib.h: Add GPL header.
+	* src/sglib-rbtree/sglib.h: Add GPL header.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* configure.ac: Remove sglib-arraysort1.
 	* configure: Regenerate.
 	* src/sglib-arraysort/Makefile.am: Add support for quick sort and
