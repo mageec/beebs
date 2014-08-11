@@ -1,5 +1,9 @@
 2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/bs/bs.c: Add GPL header.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/ctl/ctl.h: Add GPL header.
 	* src/ctl/stack.h: Add GPL header.
 	* src/ctl/vector.h: Add GPL header.
