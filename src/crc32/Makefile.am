@@ -20,9 +20,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 bin_PROGRAMS = crc32
-crc32_SOURCES = crc_32.c \
-	        crc.h
-EXTRA_DIST = LICENSE
+crc32_SOURCES = crc_32.c
 
 include $(top_srcdir)/src/common.mk.am
 

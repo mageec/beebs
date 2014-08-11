@@ -1,3 +1,13 @@
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/crc32/LICENSE: Removed.
+	* src/crc32/crc.h: Removed.
+	* src/crc32/crc_32.c: Add licence information originally from
+	LICENCE, add a GPL header.  Add in contents of header file.
+	(updateCRC32): Remove, unused.
+	* src/crc32/Makefile.am: Remove crc.h and LICENCE references.
+	* src/crc32/Makefile.in: Regenerate.
+
 2014-08-08  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* configure.ac: Remove all the gdb-* tests.

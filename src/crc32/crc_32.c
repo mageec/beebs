@@ -1,6 +1,23 @@
+/* This file is part of the Bristol/Embecosm Embedded Benchmark Suite.
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+   Code originally from:  From http://www.snippets.org/.
+   This code is FREE with no restrictions. */
+
 /* Crc - 32 BIT ANSI X3.66 CRC checksum files */
 
-#include "crc.h"
 #include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
@@ -24,6 +41,13 @@
   |* PUB 78 says that the 32-bit FCS reduces otherwise undetected       *|
   |* errors by a factor of 10^-5 over 16-bit FCS.                       *|
   \**********************************************************************/
+
+/* Some basic types.  */
+typedef unsigned char  BYTE;
+typedef unsigned long  DWORD;
+typedef unsigned short WORD;
+
+#define UPDC32(octet,crc) (crc_32_tab[((crc)^((BYTE)octet)) & 0xff] ^ ((crc) >> 8))
 
 /* Need an unsigned type capable of holding 32 bits; */
 
@@ -120,12 +144,6 @@ const static UNS_32_BITS crc_32_tab[] = { /* CRC polynomial 0xedb88320 */
    0x54de5729, 0x23d967bf, 0xb3667a2e, 0xc4614ab8, 0x5d681b02, 0x2a6f2b94,
    0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d
 };
-
-DWORD updateCRC32(unsigned char ch, DWORD crc)
-{
-   return UPDC32(ch, crc);
-}
-
 
 DWORD crc32pseudo()
 {
