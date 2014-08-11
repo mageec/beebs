@@ -1,5 +1,11 @@
 2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/ctl/ctl.h: Add GPL header.
+	* src/ctl/stack.h: Add GPL header.
+	* src/ctl/vector.h: Add GPL header.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* configure.ac: Remove ctl-stack and ctl-vector, add ctl.
 	* configure: Regenerate.
 	* src/ctl-stack/Makefile.am: Remove.
