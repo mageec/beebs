@@ -1,5 +1,12 @@
 2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/dijkstra/LICENSE: Removed.
+	* src/dijkstra/Makefile.am: Remove reference to LICENCE file.
+	* src/dijkstra/dijkstra_small.c: Add GPL header, and copy in the
+	original contents of the LICENCE file.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/bs/bs.c: Add GPL header.
 
 2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>

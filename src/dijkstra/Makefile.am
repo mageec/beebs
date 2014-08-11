@@ -21,7 +21,6 @@
 
 bin_PROGRAMS=dijkstra
 dijkstra_SOURCES=dijkstra_small.c
-EXTRA_DIST = LICENSE
 
 include $(top_srcdir)/src/common.mk.am
 
