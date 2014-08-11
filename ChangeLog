@@ -1,5 +1,9 @@
 2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/dijkstra/Makefile.in: Regenerate after commit 64e1ea3.
+
+2014-08-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/picojpeg/picojpeg.c: Add GPL header.
 	* src/picojpeg/picojpeg.h: Add GPL header.
 
