@@ -1,5 +1,17 @@
 2014-08-12  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/platformcode/msp430.s: Add GPL header.
+	* src/platformcode/pic32mx.ld: Add GPL header.
+	* src/platformcode/pic32mx_startup.s: Add GPL header.
+	* src/platformcode/platformcode.h: Add GPL header.
+	* src/platformcode/sam4lxplained.ld: Add GPL header.
+	* src/platformcode/startup.S: Add GPL header.
+	* src/platformcode/startup.c: Add GPL header.
+	* src/platformcode/stm32f05_flash.ld: Add GPL header.
+	* src/platformcode/stm32vl_flash.ld: Add GPL header.
+
+2014-08-12  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* Makefile.am: Remove duplicate 'Suite' in header comment.
 	* analysis/Makefile.am: Likewise.
 	* src/2dfir/Makefile.am: Likewise.
