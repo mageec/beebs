@@ -1,5 +1,13 @@
 2014-08-12  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/cubic/basicmath_small.c: Add GPL header.
+	* src/cubic/cubic.c: Add GPL header.
+	* src/cubic/pi.h: Add GPL header.
+	* src/cubic/snipmath.h: Add GPL header.
+	* src/cubic/sniptype.h: Add GPL header.
+
+2014-08-12  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/compress/compress.c (main): Use SCALE_FACTOR not
 	REPEAT_FACTOR.
 
