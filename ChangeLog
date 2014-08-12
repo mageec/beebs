@@ -1,5 +1,10 @@
 2014-08-12  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/compress/compress.c (main): Use SCALE_FACTOR not
+	REPEAT_FACTOR.
+
+2014-08-12  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/platformcode/msp430.s: Add GPL header.
 	* src/platformcode/pic32mx.ld: Add GPL header.
 	* src/platformcode/pic32mx_startup.s: Add GPL header.
