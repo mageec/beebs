@@ -25,7 +25,6 @@ cubic_SOURCES = cubic.c \
 		pi.h \
 		snipmath.h \
 		sniptype.h
-EXTRA_DIST = LICENSE
 
 include $(top_srcdir)/src/common.mk.am
 

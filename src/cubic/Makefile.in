@@ -345,7 +345,6 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 cubic_SOURCES = cubic.c basicmath_small.c pi.h snipmath.h sniptype.h \
 	${platform_src}
-EXTRA_DIST = LICENSE
 platform_src =  \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
 	$(am__append_1)

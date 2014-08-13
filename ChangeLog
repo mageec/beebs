@@ -1,3 +1,9 @@
+2014-08-13  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/cubic/LICENCE: Removed.
+	* src/cubic/Makefile.am (EXTRA_DIST): Removed.
+	* src/cubic/Makefile.in: Regenerate.
+
 2014-08-12  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* src/cubic/basicmath_small.c: Add GPL header.
