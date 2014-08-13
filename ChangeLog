@@ -1,5 +1,10 @@
 2014-08-13  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/fasta/fasta.c: Add GPL header, and original licence and
+	copyright information.
+
+2014-08-13  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/trio/trio.c: Add GPL header.
 	* src/trio/trio.h: Add GPL header.
 	* src/trio/triodef.h: Add GPL header.
