@@ -141,6 +141,7 @@ PROGRAMS = $(bin_PROGRAMS)
 am__trio_snprintf_SOURCES_DIST = trio.c trio.h trio_test.c triostr.c \
 	triostr.h triodef.h triop.h \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
+	$(top_srcdir)/include/support.h \
 	$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
 am__objects_1 = trio_snprintf-trio.$(OBJEXT) \
 	trio_snprintf-trio_test.$(OBJEXT) \
@@ -161,6 +162,7 @@ trio_snprintf_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 am__trio_sscanf_SOURCES_DIST = trio.c trio.h trio_test.c triostr.c \
 	triostr.h triodef.h triop.h \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
+	$(top_srcdir)/include/support.h \
 	$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
 am__objects_4 = trio_sscanf-trio.$(OBJEXT) \
 	trio_sscanf-trio_test.$(OBJEXT) trio_sscanf-triostr.$(OBJEXT)
@@ -370,7 +372,7 @@ trio_snprintf_SOURCES = ${SRC} ${platform_src}
 trio_sscanf_SOURCES = ${SRC} ${platform_src}
 platform_src =  \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
-	$(am__append_1)
+	$(top_srcdir)/include/support.h $(am__append_1)
 @CALIBRATION_FALSE@calib = echo 0
 
 # If there is a benchmark calibration file, this specifies the shifting

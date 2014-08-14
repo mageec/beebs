@@ -20,7 +20,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 bin_PROGRAMS=sglib-rbtree
-sglib_rbtree_SOURCES=rbtree.c
+sglib_rbtree_SOURCES=rbtree.c sglib.h
 
 include $(top_srcdir)/src/common.mk.am
 

@@ -140,6 +140,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__stb_perlin_SOURCES_DIST = stb_perlin.c \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
+	$(top_srcdir)/include/support.h \
 	$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
 @CHIPSUPPORT_C_TRUE@am__objects_1 = chipsupport.$(OBJEXT)
 am__objects_2 = boardsupport.$(OBJEXT) $(am__objects_1)
@@ -343,7 +344,7 @@ top_srcdir = @top_srcdir@
 stb_perlin_SOURCES = stb_perlin.c ${platform_src}
 platform_src =  \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
-	$(am__append_1)
+	$(top_srcdir)/include/support.h $(am__append_1)
 @CALIBRATION_FALSE@calib = echo 0
 
 # If there is a benchmark calibration file, this specifies the shifting

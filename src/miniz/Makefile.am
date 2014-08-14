@@ -20,7 +20,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 bin_PROGRAMS=miniz
-miniz_SOURCES=miniz.c miniz_b.c
+miniz_SOURCES=miniz.c miniz_b.c miniz.h
 
 include $(top_srcdir)/src/common.mk.am
 

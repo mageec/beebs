@@ -140,6 +140,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__matmult_float_SOURCES_DIST = matmult.c \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
+	$(top_srcdir)/include/support.h \
 	$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
 @CHIPSUPPORT_C_TRUE@am__objects_1 =  \
 @CHIPSUPPORT_C_TRUE@	matmult_float-chipsupport.$(OBJEXT)
@@ -157,6 +158,7 @@ matmult_float_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(CFLAGS) $(matmult_float_LDFLAGS) $(LDFLAGS) -o $@
 am__matmult_int_SOURCES_DIST = matmult.c \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
+	$(top_srcdir)/include/support.h \
 	$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
 @CHIPSUPPORT_C_TRUE@am__objects_3 = matmult_int-chipsupport.$(OBJEXT)
 am__objects_4 = matmult_int-boardsupport.$(OBJEXT) $(am__objects_3)
@@ -362,7 +364,7 @@ matmult_float_SOURCES = matmult.c ${platform_src}
 matmult_int_SOURCES = matmult.c ${platform_src}
 platform_src =  \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
-	$(am__append_1)
+	$(top_srcdir)/include/support.h $(am__append_1)
 @CALIBRATION_FALSE@calib = echo 0
 
 # If there is a benchmark calibration file, this specifies the shifting

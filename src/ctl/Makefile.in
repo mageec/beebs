@@ -140,6 +140,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__ctl_stack_SOURCES_DIST = ctl.c ctl.h stack.h \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
+	$(top_srcdir)/include/support.h \
 	$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
 @CHIPSUPPORT_C_TRUE@am__objects_1 = ctl_stack-chipsupport.$(OBJEXT)
 am__objects_2 = ctl_stack-boardsupport.$(OBJEXT) $(am__objects_1)
@@ -155,6 +156,7 @@ ctl_stack_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 am__ctl_vector_SOURCES_DIST = ctl.c ctl.h vector.h \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
+	$(top_srcdir)/include/support.h \
 	$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
 @CHIPSUPPORT_C_TRUE@am__objects_3 = ctl_vector-chipsupport.$(OBJEXT)
 am__objects_4 = ctl_vector-boardsupport.$(OBJEXT) $(am__objects_3)
@@ -359,7 +361,7 @@ ctl_vector_SOURCES = ctl.c ctl.h vector.h ${platform_src}
 ctl_stack_SOURCES = ctl.c ctl.h stack.h ${platform_src}
 platform_src =  \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
-	$(am__append_1)
+	$(top_srcdir)/include/support.h $(am__append_1)
 @CALIBRATION_FALSE@calib = echo 0
 
 # If there is a benchmark calibration file, this specifies the shifting

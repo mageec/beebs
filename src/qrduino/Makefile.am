@@ -20,7 +20,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 bin_PROGRAMS=qrduino
-qrduino_SOURCES=qrtest.c qrencode.c qrencode.h qrframe.c exxtable.h
+qrduino_SOURCES=qrtest.c qrencode.c qrencode.h qrframe.c ecctable.h qrbits.h
 
 include $(top_srcdir)/src/common.mk.am
 

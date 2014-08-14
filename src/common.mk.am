@@ -19,7 +19,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
+platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
+               $(top_srcdir)/include/support.h
 
 if CHIPSUPPORT_C
 platform_src += $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
