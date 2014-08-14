@@ -3,8 +3,7 @@
 #
 #  Copyright (C) 2014 Embecosm Limited and University of Bristol
 #
-#  This file is part of the Bristol/Embecosm Embedded Benchmark Suite
-#  Suite.
+#  This file is part of the Bristol/Embecosm Embedded Benchmark Suite.
 #
 #  Contributor Pierre Langlois <pierre.langlois@embecosm.com>
 #
@@ -67,8 +66,7 @@ cat > ${MAKEFILE_AM} << EOF
 #
 #   Copyright (C) 2014 Embecosm Limited and University of Bristol
 #
-#   This file is part of the Bristol/Embecosm Embedded Benchmark Suite
-#   Suite.
+#   This file is part of the Bristol/Embecosm Embedded Benchmark Suite.
 #
 #   Contributor: ${AUTHOR_NAME} <${AUTHOR_EMAIL}>
 #
