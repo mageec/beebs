@@ -1,3 +1,13 @@
+2014-08-14  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/rijndael/LICENSE: Removed.
+	* src/rijndael/Makefile.am: Remove reference to LICENCE file.
+	* src/rijndael/Makefile.in: Regenerate.
+	* src/rijndael/aes.c: Add GPL header.
+	* src/rijndael/aes.h: Add GPL header.
+	* src/rijndael/aestab.h: Add GPL header.
+	* src/rijndael/aesxam.c: Add GPL header.
+
 2014-08-13  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* src/nbody/nbody.c: Add GPL header, and original licence and

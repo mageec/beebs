@@ -24,7 +24,6 @@ rijndael_SOURCES = aes.c \
 		   aes.h \
 		   aestab.h \
 		   aesxam.c
-EXTRA_DIST = LICENSE
 
 include $(top_srcdir)/src/common.mk.am
 
