@@ -1,5 +1,9 @@
 2014-08-14  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/common.mk.in: Deleted.
+
+2014-08-14  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* config/x86_64/chips/generic/chipsupport.c: New file.
 	* src/common.mk.am: Add support.h as a source file.
 	* src/miniz/Makefile.am: Add miniz.h as a source file.
