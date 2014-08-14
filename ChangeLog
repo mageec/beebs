@@ -1,5 +1,12 @@
 2014-08-14  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* analysis/all_stats.py: Add GPL header.
+	* analysis/instruction_stats.py: Add GPL header.
+	* analysis/simulator.in: Add GPL header.
+	* tools/energytool.py: Add GPL header.
+
+2014-08-14  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/common.mk.in: Deleted.
 
 2014-08-14  Andrew Burgess  <andrew.burgess@embecosm.com>
