@@ -325,9 +325,9 @@ int ctl_StringCmpNoCase(ctl_string* s, const char* string)
   size_t i=0;
   while(s->string[i]&&string[i])
   {
-    if(tolower(s->string[i])!=tolower(string[i]))
+    if(tolower((unsigned char)s->string[i])!=tolower((unsigned char)string[i]))
     {
-      return tolower(s->string[i])-tolower(string[i]);
+      return tolower((unsigned char)s->string[i])-tolower((unsigned char)string[i]);
     }
     ++i;
   }

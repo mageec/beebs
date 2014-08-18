@@ -1,3 +1,11 @@
+2014-08-18  James Pallister  <james.pallister@bristol.ac.uk>
+
+	Cast the signed char strings to unsigned char to prevent
+	warnings with newlib's ctype.h
+
+	* src/ctl-string/string.c: Cast the string to unsigned char.
+	* src/slre/slre.c: Cast to unsigned char.
+
 2014-08-14  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* analysis/all_stats.py: Add GPL header.
