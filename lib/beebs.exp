@@ -1,0 +1,198 @@
+# Copyright (C) 2014 Embecosm Limited.
+
+# Contributor Andrew Burgess <andrew.burgess@embecosm.com>
+
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 3 of the License, or (at your option)
+# any later version.
+
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+# more details.
+
+# You should have received a copy of the GNU General Public License along
+# with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Called for each binary within each benchmark.  Return true
+# (non-zero) if we should run this benchmark, otherwise, return false
+# (zero).
+proc default_beebs_filter_benchmarks { benchmark binary_filename } {
+    return 1
+}
+
+# Called once before we run any benchmark tests.
+proc default_beebs_setup_before_all_benchmarks { } {
+    return 1;
+}
+
+# Called once after we've finished all the benchmark tests.
+proc default_beebs_cleanup_after_all_benchmarks { } {
+    return 1
+}
+
+# Called once for every benchmark directory before any tests in that
+# directory are run.
+proc default_beebs_setup_before_benchmark { benchmark } {
+    return 1;
+}
+
+# Called once for every benchmark directory after all the tests in
+# that directory are run.
+proc default_beebs_cleanup_after_benchmark { benchmark } {
+    return 1
+}
+
+# Called once for every binary within a benchmark directory, before
+# the test is run.
+proc default_beebs_setup_before_benchmark_run { benchmark filename } {
+    return 1
+}
+
+# Called once for every binary within a benchmark directory after the
+# benchmark is run.
+proc default_beebs_cleanup_after_benchmark_run { benchmark filename } {
+    return 1
+}
+
+# Give an announcement before running a benchmark.
+proc default_beebs_announce { dir benchmark filename } {
+    verbose -log "\n - - - - -     $benchmark : $filename     - - - - -\n"
+}
+
+# Given a directory DIR, return a list of all the binary files within
+# the directory.  Will return a list of paths including the DIR
+# prefix.
+proc beebs_get_benchmark_files { dir } {
+    set files [glob -directory "$dir" -type f -type x *]
+    set res {}
+    foreach file $files {
+        lappend res [file tail $file]
+    }
+    set res
+    return $res;
+}
+
+# Method called to run benchmarks.  Passed the path to the benchmark
+# directory DIR, the benchmark name BENCHMARK, and the binary to
+# execute FILE.  The parameter FILE will not include the directory
+# suffix, while the path DIR does already include the benchmark name.
+proc default_beebs_run_benchmark { dir benchmark file } {
+    beebs_load "${dir}${file}"
+    return 1
+}
+
+# Main loop to run all benchmarks.
+proc beebs_run_all_benchmarks { } {
+    global benchmarks
+    global objdir
+    global srcdir
+
+    # Perform any setup required before running any benchmarks.
+    if { [catch {beebs_setup_before_all_benchmarks} msg] } {
+        error "Failed to setup before all benchmarks\n$msg"
+    }
+
+    # First, need to find all of the benchmark files.  The BENCHMARKS
+    # variable contains all the directories that can contain
+    # benchmarks, the benchmarks themselves are the executable files
+    # within those directories.
+    foreach benchmark $benchmarks {
+
+        # Perform any benchmark specific setup required.
+        if { [catch {beebs_setup_before_benchmark $benchmark} msg] } {
+            error "Failed to setup before benchmark '$benchmark'\n$msg"
+        }
+
+        # Now find all the executable files to run.
+        set benchmark_dir "$objdir/src/$benchmark/"
+        set files [beebs_get_benchmark_files $benchmark_dir]
+        foreach file $files {
+
+            # Filter.
+            if { ![beebs_filter_benchmarks $benchmark $file ] } {
+                continue;
+            }
+
+            beebs_announce $benchmark_dir $benchmark $file
+
+            # Setup.
+            if { [catch {beebs_setup_before_benchmark_run $benchmark $file} msg] } {
+                error "Failed to setup before benchmark run '$benchmark' '$file'\n$msg"
+            }
+
+            # Run.
+            if { [catch {beebs_run_benchmark $benchmark_dir $benchmark $file} msg] } {
+                error "Failed to run benchmark '$benchmark' '$file'\n$msg"
+            }
+
+            # Cleanup.
+            if { [catch {beebs_cleanup_after_benchmark_run $benchmark $file} msg] } {
+                error "Failed to cleanup after benchmark run '$benchmark' '$file'\n$msg"
+            }
+        }
+
+        # Now clean up after we've run all the tests in this benchmark.
+        if { [catch {beebs_cleanup_after_benchmark $benchmark} msg] } {
+            error "Failed to cleanup after benchmark '$benchmark'\n$msg"
+        }
+    }
+
+    # Now cleanup after we've finished running all the benchmarks.
+    if { [catch {beebs_cleanup_after_all_benchmarks} msg] } {
+        error "Failed to cleanup after all benchmarks\n$msg"
+    }
+}
+
+proc beebs_results_root { } {
+    set dir [pwd]
+    set dir "$dir/results"
+    file mkdir ${dir}
+    return ${dir}
+}
+
+proc beebs_results_directory { benchmark file } {
+    set dir [beebs_results_root]
+    set dir "${dir}/${benchmark}/${file}/"
+    file mkdir ${dir}
+    return ${dir}
+}
+
+proc beebs_restore_default_procs {} {
+    uplevel #0 {
+        proc beebs_filter_benchmarks { b f } {
+            return [default_beebs_filter_benchmarks $b $f]
+        }
+        proc beebs_setup_before_all_benchmarks { } {
+            return [default_beebs_setup_before_all_benchmarks]
+        }
+        proc beebs_cleanup_after_all_benchmarks { } {
+            return [default_beebs_cleanup_after_all_benchmarks]
+        }
+        proc beebs_setup_before_benchmark { b } {
+            return [default_beebs_setup_before_benchmark $b]
+        }
+        proc beebs_cleanup_after_benchmark { b } {
+            return [default_beebs_cleanup_after_benchmark $b]
+        }
+        proc beebs_setup_before_benchmark_run { b f } {
+            return [default_beebs_setup_before_benchmark_run $b $f]
+        }
+        proc beebs_cleanup_after_benchmark_run { b f } {
+            return [default_beebs_cleanup_after_benchmark_run $b $f]
+        }
+        proc beebs_announce { d b f } {
+            return [default_beebs_announce $d $b $f]
+        }
+    }
+}
+
+
+proc beebs_init { test_file_name } {
+    beebs_restore_default_procs
+}
+
+proc beebs_finish {} {
+    # ... nothing yet ...
+}

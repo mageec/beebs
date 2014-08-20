@@ -1,3 +1,11 @@
+2014-08-20  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* beebs.test/measure.exp: Deleted.
+	* beebs.test/mageec-wand.exp: New file.
+	* beebs.test/perf-stat.exp: New file.
+	* lib/beebs.exp: New file.
+	* beebs.test/run.exp: Update to use beebs.exp support.
+
 2014-08-14  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* analysis/all_stats.py: Add GPL header.
