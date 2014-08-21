@@ -120,11 +120,11 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = ctl-vector$(EXEEXT) ctl-stack$(EXEEXT)
+bin_PROGRAMS = ctl-vector$(EXEEXT)
 DIST_COMMON = $(top_srcdir)/src/common.mk.am $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/build-aux/depcomp
 @CHIPSUPPORT_C_TRUE@am__append_1 = $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
-subdir = src/ctl
+subdir = src/ctl-vector
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
@@ -138,31 +138,20 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am__ctl_stack_SOURCES_DIST = ctl.c ctl.h stack.h \
+am__ctl_vector_SOURCES_DIST = ../ctl/ctl.c ../ctl/ctl.h \
+	../ctl/vector.h \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
 	$(top_srcdir)/include/support.h \
 	$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
-@CHIPSUPPORT_C_TRUE@am__objects_1 = ctl_stack-chipsupport.$(OBJEXT)
-am__objects_2 = ctl_stack-boardsupport.$(OBJEXT) $(am__objects_1)
-am_ctl_stack_OBJECTS = ctl_stack-ctl.$(OBJEXT) $(am__objects_2)
-ctl_stack_OBJECTS = $(am_ctl_stack_OBJECTS)
-ctl_stack_LDADD = $(LDADD)
+@CHIPSUPPORT_C_TRUE@am__objects_1 = ctl_vector-chipsupport.$(OBJEXT)
+am__objects_2 = ctl_vector-boardsupport.$(OBJEXT) $(am__objects_1)
+am_ctl_vector_OBJECTS = ctl_vector-ctl.$(OBJEXT) $(am__objects_2)
+ctl_vector_OBJECTS = $(am_ctl_vector_OBJECTS)
+ctl_vector_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-ctl_stack_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(ctl_stack_CFLAGS) \
-	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-am__ctl_vector_SOURCES_DIST = ctl.c ctl.h vector.h \
-	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
-	$(top_srcdir)/include/support.h \
-	$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
-@CHIPSUPPORT_C_TRUE@am__objects_3 = ctl_vector-chipsupport.$(OBJEXT)
-am__objects_4 = ctl_vector-boardsupport.$(OBJEXT) $(am__objects_3)
-am_ctl_vector_OBJECTS = ctl_vector-ctl.$(OBJEXT) $(am__objects_4)
-ctl_vector_OBJECTS = $(am_ctl_vector_OBJECTS)
-ctl_vector_LDADD = $(LDADD)
 ctl_vector_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(ctl_vector_CFLAGS) \
 	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
@@ -200,9 +189,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(ctl_stack_SOURCES) $(ctl_vector_SOURCES)
-DIST_SOURCES = $(am__ctl_stack_SOURCES_DIST) \
-	$(am__ctl_vector_SOURCES_DIST)
+SOURCES = $(ctl_vector_SOURCES)
+DIST_SOURCES = $(am__ctl_vector_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -357,8 +345,8 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-ctl_vector_SOURCES = ctl.c ctl.h vector.h ${platform_src}
-ctl_stack_SOURCES = ctl.c ctl.h stack.h ${platform_src}
+ctl_vector_SOURCES = ../ctl/ctl.c ../ctl/ctl.h ../ctl/vector.h \
+	${platform_src}
 platform_src =  \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
 	$(top_srcdir)/include/support.h $(am__append_1)
@@ -380,7 +368,6 @@ AM_CFLAGS = $(WERROR_CFLAGS) $(WARN_CFLAGS) \
 
 AM_LDFLAGS = @CONFIG_LDFLAGS@
 ctl_vector_CFLAGS = -DCTL_VECTOR ${AM_CFLAGS}
-ctl_stack_CFLAGS = -DCTL_STACK ${AM_CFLAGS}
 all: all-am
 
 .SUFFIXES:
@@ -394,9 +381,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(top_srcdir
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/ctl/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/ctl-vector/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu src/ctl/Makefile
+	  $(AUTOMAKE) --gnu src/ctl-vector/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -466,10 +453,6 @@ clean-binPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
-ctl-stack$(EXEEXT): $(ctl_stack_OBJECTS) $(ctl_stack_DEPENDENCIES) $(EXTRA_ctl_stack_DEPENDENCIES) 
-	@rm -f ctl-stack$(EXEEXT)
-	$(AM_V_CCLD)$(ctl_stack_LINK) $(ctl_stack_OBJECTS) $(ctl_stack_LDADD) $(LIBS)
-
 ctl-vector$(EXEEXT): $(ctl_vector_OBJECTS) $(ctl_vector_DEPENDENCIES) $(EXTRA_ctl_vector_DEPENDENCIES) 
 	@rm -f ctl-vector$(EXEEXT)
 	$(AM_V_CCLD)$(ctl_vector_LINK) $(ctl_vector_OBJECTS) $(ctl_vector_LDADD) $(LIBS)
@@ -480,9 +463,6 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ctl_stack-boardsupport.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ctl_stack-chipsupport.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ctl_stack-ctl.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ctl_vector-boardsupport.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ctl_vector-chipsupport.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ctl_vector-ctl.Po@am__quote@
@@ -508,61 +488,19 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
 
-ctl_stack-ctl.o: ctl.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_stack_CFLAGS) $(CFLAGS) -MT ctl_stack-ctl.o -MD -MP -MF $(DEPDIR)/ctl_stack-ctl.Tpo -c -o ctl_stack-ctl.o `test -f 'ctl.c' || echo '$(srcdir)/'`ctl.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ctl_stack-ctl.Tpo $(DEPDIR)/ctl_stack-ctl.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='ctl.c' object='ctl_stack-ctl.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_stack_CFLAGS) $(CFLAGS) -c -o ctl_stack-ctl.o `test -f 'ctl.c' || echo '$(srcdir)/'`ctl.c
-
-ctl_stack-ctl.obj: ctl.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_stack_CFLAGS) $(CFLAGS) -MT ctl_stack-ctl.obj -MD -MP -MF $(DEPDIR)/ctl_stack-ctl.Tpo -c -o ctl_stack-ctl.obj `if test -f 'ctl.c'; then $(CYGPATH_W) 'ctl.c'; else $(CYGPATH_W) '$(srcdir)/ctl.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ctl_stack-ctl.Tpo $(DEPDIR)/ctl_stack-ctl.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='ctl.c' object='ctl_stack-ctl.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_stack_CFLAGS) $(CFLAGS) -c -o ctl_stack-ctl.obj `if test -f 'ctl.c'; then $(CYGPATH_W) 'ctl.c'; else $(CYGPATH_W) '$(srcdir)/ctl.c'; fi`
-
-ctl_stack-boardsupport.o: $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_stack_CFLAGS) $(CFLAGS) -MT ctl_stack-boardsupport.o -MD -MP -MF $(DEPDIR)/ctl_stack-boardsupport.Tpo -c -o ctl_stack-boardsupport.o `test -f '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c' || echo '$(srcdir)/'`$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ctl_stack-boardsupport.Tpo $(DEPDIR)/ctl_stack-boardsupport.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c' object='ctl_stack-boardsupport.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_stack_CFLAGS) $(CFLAGS) -c -o ctl_stack-boardsupport.o `test -f '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c' || echo '$(srcdir)/'`$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
-
-ctl_stack-boardsupport.obj: $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_stack_CFLAGS) $(CFLAGS) -MT ctl_stack-boardsupport.obj -MD -MP -MF $(DEPDIR)/ctl_stack-boardsupport.Tpo -c -o ctl_stack-boardsupport.obj `if test -f '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; then $(CYGPATH_W) '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ctl_stack-boardsupport.Tpo $(DEPDIR)/ctl_stack-boardsupport.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c' object='ctl_stack-boardsupport.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_stack_CFLAGS) $(CFLAGS) -c -o ctl_stack-boardsupport.obj `if test -f '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; then $(CYGPATH_W) '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; fi`
-
-ctl_stack-chipsupport.o: $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_stack_CFLAGS) $(CFLAGS) -MT ctl_stack-chipsupport.o -MD -MP -MF $(DEPDIR)/ctl_stack-chipsupport.Tpo -c -o ctl_stack-chipsupport.o `test -f '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c' || echo '$(srcdir)/'`$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ctl_stack-chipsupport.Tpo $(DEPDIR)/ctl_stack-chipsupport.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c' object='ctl_stack-chipsupport.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_stack_CFLAGS) $(CFLAGS) -c -o ctl_stack-chipsupport.o `test -f '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c' || echo '$(srcdir)/'`$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
-
-ctl_stack-chipsupport.obj: $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_stack_CFLAGS) $(CFLAGS) -MT ctl_stack-chipsupport.obj -MD -MP -MF $(DEPDIR)/ctl_stack-chipsupport.Tpo -c -o ctl_stack-chipsupport.obj `if test -f '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; then $(CYGPATH_W) '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ctl_stack-chipsupport.Tpo $(DEPDIR)/ctl_stack-chipsupport.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c' object='ctl_stack-chipsupport.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_stack_CFLAGS) $(CFLAGS) -c -o ctl_stack-chipsupport.obj `if test -f '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; then $(CYGPATH_W) '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c'; fi`
-
-ctl_vector-ctl.o: ctl.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_vector_CFLAGS) $(CFLAGS) -MT ctl_vector-ctl.o -MD -MP -MF $(DEPDIR)/ctl_vector-ctl.Tpo -c -o ctl_vector-ctl.o `test -f 'ctl.c' || echo '$(srcdir)/'`ctl.c
+ctl_vector-ctl.o: ../ctl/ctl.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_vector_CFLAGS) $(CFLAGS) -MT ctl_vector-ctl.o -MD -MP -MF $(DEPDIR)/ctl_vector-ctl.Tpo -c -o ctl_vector-ctl.o `test -f '../ctl/ctl.c' || echo '$(srcdir)/'`../ctl/ctl.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ctl_vector-ctl.Tpo $(DEPDIR)/ctl_vector-ctl.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='ctl.c' object='ctl_vector-ctl.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='../ctl/ctl.c' object='ctl_vector-ctl.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_vector_CFLAGS) $(CFLAGS) -c -o ctl_vector-ctl.o `test -f 'ctl.c' || echo '$(srcdir)/'`ctl.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_vector_CFLAGS) $(CFLAGS) -c -o ctl_vector-ctl.o `test -f '../ctl/ctl.c' || echo '$(srcdir)/'`../ctl/ctl.c
 
-ctl_vector-ctl.obj: ctl.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_vector_CFLAGS) $(CFLAGS) -MT ctl_vector-ctl.obj -MD -MP -MF $(DEPDIR)/ctl_vector-ctl.Tpo -c -o ctl_vector-ctl.obj `if test -f 'ctl.c'; then $(CYGPATH_W) 'ctl.c'; else $(CYGPATH_W) '$(srcdir)/ctl.c'; fi`
+ctl_vector-ctl.obj: ../ctl/ctl.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_vector_CFLAGS) $(CFLAGS) -MT ctl_vector-ctl.obj -MD -MP -MF $(DEPDIR)/ctl_vector-ctl.Tpo -c -o ctl_vector-ctl.obj `if test -f '../ctl/ctl.c'; then $(CYGPATH_W) '../ctl/ctl.c'; else $(CYGPATH_W) '$(srcdir)/../ctl/ctl.c'; fi`
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ctl_vector-ctl.Tpo $(DEPDIR)/ctl_vector-ctl.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='ctl.c' object='ctl_vector-ctl.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='../ctl/ctl.c' object='ctl_vector-ctl.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_vector_CFLAGS) $(CFLAGS) -c -o ctl_vector-ctl.obj `if test -f 'ctl.c'; then $(CYGPATH_W) 'ctl.c'; else $(CYGPATH_W) '$(srcdir)/ctl.c'; fi`
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_vector_CFLAGS) $(CFLAGS) -c -o ctl_vector-ctl.obj `if test -f '../ctl/ctl.c'; then $(CYGPATH_W) '../ctl/ctl.c'; else $(CYGPATH_W) '$(srcdir)/../ctl/ctl.c'; fi`
 
 ctl_vector-boardsupport.o: $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(ctl_vector_CFLAGS) $(CFLAGS) -MT ctl_vector-boardsupport.o -MD -MP -MF $(DEPDIR)/ctl_vector-boardsupport.Tpo -c -o ctl_vector-boardsupport.o `test -f '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c' || echo '$(srcdir)/'`$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c

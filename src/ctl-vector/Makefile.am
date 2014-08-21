@@ -19,15 +19,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=ctl-vector ctl-stack
+bin_PROGRAMS=ctl-vector
 
-ctl_vector_SOURCES=ctl.c ctl.h vector.h
-ctl_stack_SOURCES=ctl.c ctl.h stack.h
+ctl_vector_SOURCES=../ctl/ctl.c ../ctl/ctl.h ../ctl/vector.h
 
 include $(top_srcdir)/src/common.mk.am
 
 ctl_vector_CFLAGS=-DCTL_VECTOR ${AM_CFLAGS}
-ctl_stack_CFLAGS=-DCTL_STACK ${AM_CFLAGS}
 
 ctl_vector_SOURCES += ${platform_src}
-ctl_stack_SOURCES += ${platform_src}

@@ -1,3 +1,32 @@
+2014-08-21  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* configure.ac: Add split benchmarks to benchmark list.
+	* configure: Regenerate.
+	* src/ctl-stack/Makefile.am: New file.
+	* src/ctl-stack/Makefile.in: New file.
+	* src/ctl-vector/Makefile.am: New file.
+	* src/ctl-vector/Makefile.in: New file.
+	* src/ctl/Makefile.in: Removed.
+	* src/ctl/Makefile.am: Removed.
+	* src/matmult-float/Makefile.am: New file.
+	* src/matmult-float/Makefile.in: New file.
+	* src/matmult-int/Makefile.am: New file.
+	* src/matmult-int/Makefile.in: New file.
+	* src/matmult/Makefile.am: Removed.
+	* src/matmult/Makefile.in: Removed.
+	* src/sglib-arrayheapsort/Makefile.am: New file.
+	* src/sglib-arrayheapsort/Makefile.in: New file.
+	* src/sglib-arrayquicksort/Makefile.am: New file.
+	* src/sglib-arrayquicksort/Makefile.in: New file.
+	* src/sglib-arraysort/Makefile.in: Removed.
+	* src/sglib-arraysort/Makefile.am: Removed.
+	* src/trio-snprintf/Makefile.am: New file.
+	* src/trio-snprintf/Makefile.in: New file.
+	* src/trio-sscanf/Makefile.am: New file.
+	* src/trio-sscanf/Makefile.in: New file.
+	* src/trio/Makefile.in: Removed.
+	* src/trio/Makefile.am: Removed.
+
 2014-08-14  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* analysis/all_stats.py: Add GPL header.

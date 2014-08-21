@@ -12856,6 +12856,22 @@ N_UNCALIBRATED_BENCHMARKS=0
         fi
     fi
 
+    bmark=ctl-stack
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/ctl-stack/Makefile"
+
+        BENCHMARKS+="ctl-stack "
+        BENCHMARKS_SUBDIRS+="src/ctl-stack "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
+    fi
+
     bmark=ctl-string
     if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
         ac_config_files="$ac_config_files src/ctl-string/Makefile"
@@ -12872,12 +12888,12 @@ N_UNCALIBRATED_BENCHMARKS=0
         fi
     fi
 
-    bmark=ctl
+    bmark=ctl-vector
     if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/ctl/Makefile"
+        ac_config_files="$ac_config_files src/ctl-vector/Makefile"
 
-        BENCHMARKS+="ctl "
-        BENCHMARKS_SUBDIRS+="src/ctl "
+        BENCHMARKS+="ctl-vector "
+        BENCHMARKS_SUBDIRS+="src/ctl-vector "
 
         if test x$HAVE_CALIBRATION == xyes; then
             no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
@@ -13240,12 +13256,28 @@ N_UNCALIBRATED_BENCHMARKS=0
         fi
     fi
 
-    bmark=matmult
+    bmark=matmult-int
     if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/matmult/Makefile"
+        ac_config_files="$ac_config_files src/matmult-int/Makefile"
 
-        BENCHMARKS+="matmult "
-        BENCHMARKS_SUBDIRS+="src/matmult "
+        BENCHMARKS+="matmult-int "
+        BENCHMARKS_SUBDIRS+="src/matmult-int "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
+    fi
+
+    bmark=matmult-float
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/matmult-float/Makefile"
+
+        BENCHMARKS+="matmult-float "
+        BENCHMARKS_SUBDIRS+="src/matmult-float "
 
         if test x$HAVE_CALIBRATION == xyes; then
             no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
@@ -13640,12 +13672,28 @@ N_UNCALIBRATED_BENCHMARKS=0
         fi
     fi
 
-    bmark=sglib-arraysort
+    bmark=sglib-arrayheapsort
     if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/sglib-arraysort/Makefile"
+        ac_config_files="$ac_config_files src/sglib-arrayheapsort/Makefile"
 
-        BENCHMARKS+="sglib-arraysort "
-        BENCHMARKS_SUBDIRS+="src/sglib-arraysort "
+        BENCHMARKS+="sglib-arrayheapsort "
+        BENCHMARKS_SUBDIRS+="src/sglib-arrayheapsort "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
+    fi
+
+    bmark=sglib-arrayquicksort
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/sglib-arrayquicksort/Makefile"
+
+        BENCHMARKS+="sglib-arrayquicksort "
+        BENCHMARKS_SUBDIRS+="src/sglib-arrayquicksort "
 
         if test x$HAVE_CALIBRATION == xyes; then
             no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
@@ -13896,12 +13944,28 @@ N_UNCALIBRATED_BENCHMARKS=0
         fi
     fi
 
-    bmark=trio
+    bmark=trio-snprintf
     if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/trio/Makefile"
+        ac_config_files="$ac_config_files src/trio-snprintf/Makefile"
 
-        BENCHMARKS+="trio "
-        BENCHMARKS_SUBDIRS+="src/trio "
+        BENCHMARKS+="trio-snprintf "
+        BENCHMARKS_SUBDIRS+="src/trio-snprintf "
+
+        if test x$HAVE_CALIBRATION == xyes; then
+            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
+            if test x$no_calib == x0; then
+                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
+                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
+            fi
+        fi
+    fi
+
+    bmark=trio-sscanf
+    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
+        ac_config_files="$ac_config_files src/trio-sscanf/Makefile"
+
+        BENCHMARKS+="trio-sscanf "
+        BENCHMARKS_SUBDIRS+="src/trio-sscanf "
 
         if test x$HAVE_CALIBRATION == xyes; then
             no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
@@ -15016,8 +15080,9 @@ do
     "src/cover/Makefile") CONFIG_FILES="$CONFIG_FILES src/cover/Makefile" ;;
     "src/crc/Makefile") CONFIG_FILES="$CONFIG_FILES src/crc/Makefile" ;;
     "src/crc32/Makefile") CONFIG_FILES="$CONFIG_FILES src/crc32/Makefile" ;;
+    "src/ctl-stack/Makefile") CONFIG_FILES="$CONFIG_FILES src/ctl-stack/Makefile" ;;
     "src/ctl-string/Makefile") CONFIG_FILES="$CONFIG_FILES src/ctl-string/Makefile" ;;
-    "src/ctl/Makefile") CONFIG_FILES="$CONFIG_FILES src/ctl/Makefile" ;;
+    "src/ctl-vector/Makefile") CONFIG_FILES="$CONFIG_FILES src/ctl-vector/Makefile" ;;
     "src/cubic/Makefile") CONFIG_FILES="$CONFIG_FILES src/cubic/Makefile" ;;
     "src/dhrystone/Makefile") CONFIG_FILES="$CONFIG_FILES src/dhrystone/Makefile" ;;
     "src/dijkstra/Makefile") CONFIG_FILES="$CONFIG_FILES src/dijkstra/Makefile" ;;
@@ -15040,7 +15105,8 @@ do
     "src/levenshtein/Makefile") CONFIG_FILES="$CONFIG_FILES src/levenshtein/Makefile" ;;
     "src/lms/Makefile") CONFIG_FILES="$CONFIG_FILES src/lms/Makefile" ;;
     "src/ludcmp/Makefile") CONFIG_FILES="$CONFIG_FILES src/ludcmp/Makefile" ;;
-    "src/matmult/Makefile") CONFIG_FILES="$CONFIG_FILES src/matmult/Makefile" ;;
+    "src/matmult-int/Makefile") CONFIG_FILES="$CONFIG_FILES src/matmult-int/Makefile" ;;
+    "src/matmult-float/Makefile") CONFIG_FILES="$CONFIG_FILES src/matmult-float/Makefile" ;;
     "src/mergesort/Makefile") CONFIG_FILES="$CONFIG_FILES src/mergesort/Makefile" ;;
     "src/miniz/Makefile") CONFIG_FILES="$CONFIG_FILES src/miniz/Makefile" ;;
     "src/minver/Makefile") CONFIG_FILES="$CONFIG_FILES src/minver/Makefile" ;;
@@ -15065,7 +15131,8 @@ do
     "src/rijndael/Makefile") CONFIG_FILES="$CONFIG_FILES src/rijndael/Makefile" ;;
     "src/select/Makefile") CONFIG_FILES="$CONFIG_FILES src/select/Makefile" ;;
     "src/sglib-arraybinsearch/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-arraybinsearch/Makefile" ;;
-    "src/sglib-arraysort/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-arraysort/Makefile" ;;
+    "src/sglib-arrayheapsort/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-arrayheapsort/Makefile" ;;
+    "src/sglib-arrayquicksort/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-arrayquicksort/Makefile" ;;
     "src/sglib-dllist/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-dllist/Makefile" ;;
     "src/sglib-hashtable/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-hashtable/Makefile" ;;
     "src/sglib-listinsertsort/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-listinsertsort/Makefile" ;;
@@ -15081,7 +15148,8 @@ do
     "src/statemate/Makefile") CONFIG_FILES="$CONFIG_FILES src/statemate/Makefile" ;;
     "src/stb_perlin/Makefile") CONFIG_FILES="$CONFIG_FILES src/stb_perlin/Makefile" ;;
     "src/tarai/Makefile") CONFIG_FILES="$CONFIG_FILES src/tarai/Makefile" ;;
-    "src/trio/Makefile") CONFIG_FILES="$CONFIG_FILES src/trio/Makefile" ;;
+    "src/trio-snprintf/Makefile") CONFIG_FILES="$CONFIG_FILES src/trio-snprintf/Makefile" ;;
+    "src/trio-sscanf/Makefile") CONFIG_FILES="$CONFIG_FILES src/trio-sscanf/Makefile" ;;
     "src/ud/Makefile") CONFIG_FILES="$CONFIG_FILES src/ud/Makefile" ;;
     "src/wikisort/Makefile") CONFIG_FILES="$CONFIG_FILES src/wikisort/Makefile" ;;
     "src/whetstone/Makefile") CONFIG_FILES="$CONFIG_FILES src/whetstone/Makefile" ;;

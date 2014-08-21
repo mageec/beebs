@@ -19,17 +19,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=matmult-float matmult-int
-matmult_float_SOURCES=matmult.c
-matmult_int_SOURCES=matmult.c
+bin_PROGRAMS=matmult-int
+matmult_int_SOURCES=../matmult/matmult.c
 
 include $(top_srcdir)/src/common.mk.am
 
-matmult_float_CFLAGS=-DMATMULT_FLOAT ${AM_CFLAGS}
 matmult_int_CFLAGS=-DMATMULT_INT ${AM_CFLAGS}
 
-matmult_float_LDFLAGS=-lm ${AM_LDFLAGS}
 matmult_int_LDFLAGS=${AM_LDFLAGS}
 
-matmult_float_SOURCES += ${platform_src}
 matmult_int_SOURCES += ${platform_src}
