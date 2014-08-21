@@ -182,6 +182,9 @@ proc beebs_restore_default_procs {} {
         proc beebs_cleanup_after_benchmark_run { b f } {
             return [default_beebs_cleanup_after_benchmark_run $b $f]
         }
+        proc beebs_run_benchmark { d b f } {
+            return [default_beebs_run_benchmark $d $b $f]
+        }
         proc beebs_announce { d b f } {
             return [default_beebs_announce $d $b $f]
         }

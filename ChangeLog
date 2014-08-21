@@ -1,5 +1,10 @@
 2014-08-21  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* lib/beebs.exp (beebs_restore_default_procs): Restore
+	beebs_run_benchmark too.
+
+2014-08-21  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* beebs.test/mageec-wand.exp (beebs_cleanup_after_all_benchmarks):
 	Pull in global env.
 	(beebs_setup_before_benchmark_run): Likewise.
