@@ -1,4 +1,0 @@
-
-        $SIMULATOR $exec_file --elf 2> $trace
-
-        xz --compress $trace &

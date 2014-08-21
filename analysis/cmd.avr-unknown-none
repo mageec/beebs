@@ -1,4 +1,0 @@
-
-$SIMULATOR --device atmega328 -B stop_trigger -t $SCR_DIR/$d.trace.tmptrace --file $exec_file
-
-cat `ls -t $SCR_DIR/$d.trace*.tmptrace` | xz --compress > $trace.xz && rm $SCR_DIR/$d.trace*.tmptrace &

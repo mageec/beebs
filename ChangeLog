@@ -1,5 +1,15 @@
 2014-08-21  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* analysis/Makefile.am: Deleted.
+	* analysis/Makefile.in: Deleted.
+	* analysis/all_stats.py: Deleted.
+	* analysis/cmd.arm-none-eabi: Deleted.
+	* analysis/cmd.avr-unknown-none: Deleted.
+	* analysis/instruction_stats.py: Deleted.
+	* analysis/simulator.in: Deleted.
+
+2014-08-21  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* configure.ac: Add split benchmarks to benchmark list.
 	* configure: Regenerate.
 	* src/ctl-stack/Makefile.am: New file.
