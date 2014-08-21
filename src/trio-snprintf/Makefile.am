@@ -19,25 +19,19 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=trio-snprintf trio-sscanf
+bin_PROGRAMS=trio-snprintf
 
-SRC=trio.c trio.h trio_test.c triostr.c \
-    triostr.h triodef.h triop.h
+SRC=../trio/trio.c ../trio/trio.h ../trio/trio_test.c \
+    ../trio/triostr.c ../trio/triostr.h ../trio/triodef.h \
+    ../trio/triop.h
 
 trio_snprintf_SOURCES=${SRC}
-trio_sscanf_SOURCES=${SRC}
 
 include $(top_srcdir)/src/common.mk.am
 
-AM_CFLAGS += -DTRIO_EXTENSION=0 -DTRIO_DEPRECATED=0 -DTRIO_MICROSOFT=0 -DTRIO_ERRORS=0 -DTRIO_FEATURE_FLOAT=0
+AM_CFLAGS+=-DTRIO_EXTENSION=0 -DTRIO_DEPRECATED=0 -DTRIO_MICROSOFT=0 \
+           -DTRIO_ERRORS=0 -DTRIO_FEATURE_FLOAT=0
 
 trio_snprintf_CFLAGS=-DTRIO_SNPRINTF -DTRIO_SNPRINTF_ONLY ${AM_CFLAGS}
-trio_sscanf_CFLAGS=-DTRIO_SSCANF ${AM_CFLAGS} \
-                   -DTRIO_FEATURE_FILE=0 -DTRIO_FEATURE_STDIO=0 \
-                   -DTRIO_FEATURE_FD=0 -DTRIO_FEATURE_DYNAMICSTRING=0 \
-                   -DTRIO_FEATURE_CLOSURE=0 -DTRIO_FEATURE_STRERR=0 \
-                   -DTRIO_FEATURE_LOCALE=0 -DTRIO_EMBED_NAN=1 \
-                   -DTRIO_EMBED_STRING=1
 
 trio_snprintf_SOURCES += ${platform_src}
-trio_sscanf_SOURCES += ${platform_src}

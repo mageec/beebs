@@ -1,4 +1,4 @@
-# Analysis Makefile.am, to set up simulation and analysis tools
+# Makefile.am for building a BEEBS benchmark
 #
 # Copyright (C) 2013 Embecosm Limited and University of Bristol
 #
@@ -19,25 +19,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# TODO rename simulator command scripts after platform name, rather than
-# the host triple
+bin_PROGRAMS=sglib-arrayquicksort
 
-ANALYSIS=instruction_stats.py all_stats.py
-EXTRA_DIST= $(ANALYSIS) simulator.in cmd.arm-none-eabi cmd.avr-unknown-none
-bin_SCRIPTS=
+sglib_arrayquicksort_SOURCES=../sglib-arraysort/arraysort.c \
+			     ../sglib-arraysort/sglib.h
 
-do_subst = sed -e '/@simulatorcommands@/{r $(srcdir)/cmd.$(host)'$$'\n''d}' \
-		       -e 's,[@]simulator[@],$(SIMULATORPATH),g'
+include $(top_srcdir)/src/common.mk.am
 
+sglib_arrayquicksort_CFLAGS = -DQUICK_SORT ${AM_CFLAGS}
 
-# If creating script for simulator
-if SIMULATE
-bin_SCRIPTS+=simulate
-
-simulate: $(srcdir)/simulator.in $(srcdir)/cmd.$(host) Makefile
-	$(do_subst) < $(srcdir)/simulator.in > simulate
-	chmod +x simulate
-
-endif
-
-CLEANFILES=$(bin_SCRIPTS)
+sglib_arrayquicksort_SOURCES += ${platform_src}

@@ -1,6 +1,6 @@
 # Makefile.am for building a BEEBS benchmark
 #
-# Copyright (C) 2013 Embecosm Limited and University of Bristol
+# Copyright (C) 2013-2014 Embecosm Limited and University of Bristol
 #
 # This file is part of the Bristol/Embecosm Embedded Benchmark Suite.
 #
@@ -19,15 +19,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=sglib-arrayheapsort sglib-arrayquicksort
-
-sglib_arrayheapsort_SOURCES=arraysort.c sglib.h
-sglib_arrayquicksort_SOURCES=arraysort.c sglib.h
+bin_PROGRAMS=matmult-float
+matmult_float_SOURCES=../matmult/matmult.c
 
 include $(top_srcdir)/src/common.mk.am
 
-sglib_arrayheapsort_CFLAGS = -DHEAP_SORT ${AM_CFLAGS}
-sglib_arrayquicksort_CFLAGS = -DQUICK_SORT ${AM_CFLAGS}
+matmult_float_CFLAGS=-DMATMULT_FLOAT ${AM_CFLAGS}
 
-sglib_arrayheapsort_SOURCES += ${platform_src}
-sglib_arrayquicksort_SOURCES += ${platform_src}
+matmult_float_LDFLAGS=-lm ${AM_LDFLAGS}
+
+matmult_float_SOURCES += ${platform_src}

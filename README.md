@@ -41,21 +41,16 @@ them to be easily hooked up to other tools for time and energy measurements.
 All tests provide the functions initialize\_trigger (), start\_trigger () and
 stop\_trigger () to control measurement of the test execution (performance,
 energy consumed etc). The implementation of these functions should be provided
-in platformcode.c.
+in boardsupport.c.
 
 The number of times each test is run is controlled by the constant
-REPEAT_FACTOR set in the file platformcode.h. This should be edited as
-required.
-
-An example script to run all the tests is provided in run-all.sh. This script
-was written to test the models compiled for the Atmel ATmega128 and running on
-a remote target controlled by GDB. It should be modified as required for other
-platforms.
+REPEAT_FACTOR set in the file include/support.h. This should be edited
+as required.
 
 ## Versions of the tests
 
-Different versions of the tests carry tags, to allow groups to agree on a
-precise version used.
+Different versions of the benchmarks carry tags, to allow groups to
+agree on a precise version used.
 
 release-0.1: This version of BEEBS is described in Pallister, J., Hollis, S.,
 & Bennett, J. (2013). BEEBS: Open Benchmarks for Energy Measurements on
@@ -64,8 +59,6 @@ Embedded Platforms. Available: http://arxiv.org/abs/1308.5174.
 This is also the version used in Pallister, J., Hollis, S., & Bennett J.
 (2013). "Identifying Compiler Options to Minimise Energy Consumption for
 Embedded Platforms". Available http://arxiv.org/abs/1303.6485.
-
-
 
 ## Origin of the tests
 
