@@ -1,3 +1,7 @@
+2014-08-21  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* README.md: Update for latest state of BEEBS.
+
 2014-08-14  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* analysis/all_stats.py: Add GPL header.
