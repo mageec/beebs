@@ -1,5 +1,9 @@
 2014-08-21  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* tools/generate-benchmark.sh
+
+2014-08-21  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* run-all.sh: Deleted.
 
 2014-08-14  Andrew Burgess  <andrew.burgess@embecosm.com>
