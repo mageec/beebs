@@ -52,6 +52,7 @@ proc beebs_cleanup_after_all_benchmarks { } {
 # Called once for each binary within a benchmark directory.
 proc beebs_setup_before_benchmark_run { benchmark filename } {
     global energytool_id
+    global env
 
     # Start the energy tool
     set energytool_id [energytool_spawn "$env(ENERGYTOOL_SERIAL)" "$env(ENERGYTOOL_POINT)" "$env(ENERGYTOOL_PIN)"]
@@ -62,6 +63,7 @@ proc beebs_setup_before_benchmark_run { benchmark filename } {
 proc beebs_cleanup_after_benchmark_run { benchmark filename } {
     global energytool_id
     global energytool_results
+    global env
 
     set energytool_output ""
     set energytool_timeout $env(ENERGYTOOL_TIMEOUT)

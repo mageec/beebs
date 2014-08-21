@@ -1,3 +1,9 @@
+2014-08-21  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* beebs.test/mageec-wand.exp (beebs_cleanup_after_all_benchmarks):
+	Pull in global env.
+	(beebs_setup_before_benchmark_run): Likewise.
+
 2014-08-20  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* beebs.test/measure.exp: Deleted.
