@@ -1,5 +1,9 @@
 2014-08-21  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* README.md: Update for latest state of BEEBS.
+
+2014-08-21  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* analysis/Makefile.am: Deleted.
 	* analysis/Makefile.in: Deleted.
 	* analysis/all_stats.py: Deleted.
