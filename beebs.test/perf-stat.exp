@@ -45,19 +45,19 @@ proc beebs_cleanup_after_all_benchmarks { } {
     return 1
 }
 
-proc beebs_run_benchmark { dir benchmark file } {
+proc beebs_run_benchmark { benchmark filename } {
     global perf_prog
     global perfstats_results
 
     set results_file "[beebs_results_root]/perfstats.tmp"
 
-    beebs_load "${perf_prog}" "stat -r5 -x, \"-o${results_file}\" \"${dir}${file}\""
+    beebs_load "${perf_prog}" "stat -r5 -x, \"-o${results_file}\" \"${filename}\""
 
     set instructions [exec grep ,instructions, ${results_file} | cut -d, -f1]
     set branches [exec grep ,branches, ${results_file} | cut -d, -f1]
     set cycles [exec grep ,cycles, ${results_file} | cut -d, -f1]
 
-    puts $perfstats_results "$file,$instructions,$branches,$cycles"
+    puts $perfstats_results "$benchmark,$instructions,$branches,$cycles"
 
     return 1;
 }

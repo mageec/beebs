@@ -50,7 +50,7 @@ proc beebs_cleanup_after_all_benchmarks { } {
 }
 
 # Called once for each binary within a benchmark directory.
-proc beebs_setup_before_benchmark_run { benchmark filename } {
+proc beebs_setup_before_benchmark { benchmark filename } {
     global energytool_id
     global env
 
@@ -60,7 +60,7 @@ proc beebs_setup_before_benchmark_run { benchmark filename } {
 }
 
 # Called once after each binary within a benchmark directory.
-proc beebs_cleanup_after_benchmark_run { benchmark filename } {
+proc beebs_cleanup_after_benchmark { benchmark filename } {
     global energytool_id
     global energytool_results
     global env
@@ -76,12 +76,12 @@ proc beebs_cleanup_after_benchmark_run { benchmark filename } {
         eof {}
     }
 
-    verbose -log "Energy for $filename: $energytool_output"
+    verbose -log "Energy for $benchmark: $energytool_output"
     if { $energytool_output == "" } {
         # Output zeros if the measurement was unsuccessful.
-        puts $energytool_results "$filename,0,0,0,0,0"
+        puts $energytool_results "$benchmark,0,0,0,0,0"
     } else {
-        puts $energytool_results "$filename,$energytool_output"
+        puts $energytool_results "$benchmark,$energytool_output"
     }
 }
 

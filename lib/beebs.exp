@@ -18,7 +18,7 @@
 # Called for each binary within each benchmark.  Return true
 # (non-zero) if we should run this benchmark, otherwise, return false
 # (zero).
-proc default_beebs_filter_benchmarks { benchmark binary_filename } {
+proc default_beebs_filter_benchmark { benchmark filename } {
     return 1
 }
 
@@ -34,52 +34,27 @@ proc default_beebs_cleanup_after_all_benchmarks { } {
 
 # Called once for every benchmark directory before any tests in that
 # directory are run.
-proc default_beebs_setup_before_benchmark { benchmark } {
+proc default_beebs_setup_before_benchmark { benchmark filename } {
     return 1;
 }
 
 # Called once for every benchmark directory after all the tests in
 # that directory are run.
-proc default_beebs_cleanup_after_benchmark { benchmark } {
-    return 1
-}
-
-# Called once for every binary within a benchmark directory, before
-# the test is run.
-proc default_beebs_setup_before_benchmark_run { benchmark filename } {
-    return 1
-}
-
-# Called once for every binary within a benchmark directory after the
-# benchmark is run.
-proc default_beebs_cleanup_after_benchmark_run { benchmark filename } {
+proc default_beebs_cleanup_after_benchmark { benchmark filename } {
     return 1
 }
 
 # Give an announcement before running a benchmark.
-proc default_beebs_announce { dir benchmark filename } {
-    verbose -log "\n - - - - -     $benchmark : $filename     - - - - -\n"
-}
-
-# Given a directory DIR, return a list of all the binary files within
-# the directory.  Will return a list of paths including the DIR
-# prefix.
-proc beebs_get_benchmark_files { dir } {
-    set files [glob -directory "$dir" -type f -type x *]
-    set res {}
-    foreach file $files {
-        lappend res [file tail $file]
-    }
-    set res
-    return $res;
+proc default_beebs_announce { benchmark filename } {
+    verbose -log "\n - - - - -     $benchmark     - - - - -\n"
 }
 
 # Method called to run benchmarks.  Passed the path to the benchmark
 # directory DIR, the benchmark name BENCHMARK, and the binary to
 # execute FILE.  The parameter FILE will not include the directory
 # suffix, while the path DIR does already include the benchmark name.
-proc default_beebs_run_benchmark { dir benchmark file } {
-    beebs_load "${dir}${file}"
+proc default_beebs_run_benchmark { benchmark filename } {
+    beebs_load "${filename}"
     return 1
 }
 
@@ -100,42 +75,35 @@ proc beebs_run_all_benchmarks { } {
     # within those directories.
     foreach benchmark $benchmarks {
 
-        # Perform any benchmark specific setup required.
-        if { [catch {beebs_setup_before_benchmark $benchmark} msg] } {
-            error "Failed to setup before benchmark '$benchmark'\n$msg"
-        }
-
         # Now find all the executable files to run.
-        set benchmark_dir "$objdir/src/$benchmark/"
-        set files [beebs_get_benchmark_files $benchmark_dir]
-        foreach file $files {
+        set benchmark_dir "$objdir/src/$benchmark"
+        set benchmark_file "${benchmark_dir}/${benchmark}"
+
+        if { [file isfile ${benchmark_file}] && [file executable ${benchmark_file}]} {
 
             # Filter.
-            if { ![beebs_filter_benchmarks $benchmark $file ] } {
+            if { ![beebs_filter_benchmark $benchmark $benchmark_file] } {
                 continue;
             }
 
-            beebs_announce $benchmark_dir $benchmark $file
+            beebs_announce $benchmark $benchmark_file
 
             # Setup.
-            if { [catch {beebs_setup_before_benchmark_run $benchmark $file} msg] } {
-                error "Failed to setup before benchmark run '$benchmark' '$file'\n$msg"
+            if { [catch {beebs_setup_before_benchmark $benchmark $benchmark_file} msg] } {
+                error "Failed to setup before benchmark '$benchmark' ($benchmark_file)\n$msg"
             }
 
             # Run.
-            if { [catch {beebs_run_benchmark $benchmark_dir $benchmark $file} msg] } {
-                error "Failed to run benchmark '$benchmark' '$file'\n$msg"
+            if { [catch {beebs_run_benchmark $benchmark $benchmark_file} msg] } {
+                error "Failed to run benchmark '$benchmark' ($benchmark_file)\n$msg"
             }
 
             # Cleanup.
-            if { [catch {beebs_cleanup_after_benchmark_run $benchmark $file} msg] } {
-                error "Failed to cleanup after benchmark run '$benchmark' '$file'\n$msg"
+            if { [catch {beebs_cleanup_after_benchmark $benchmark $benchmark_file} msg] } {
+                error "Failed to cleanup after benchmark '$benchmark' ($benchmark_file)\n$msg"
             }
-        }
-
-        # Now clean up after we've run all the tests in this benchmark.
-        if { [catch {beebs_cleanup_after_benchmark $benchmark} msg] } {
-            error "Failed to cleanup after benchmark '$benchmark'\n$msg"
+        } else {
+            verbose -log "Missing executable for benchmark '$benchmark' looked at '$benchmark_file'"
         }
     }
 
@@ -161,36 +129,29 @@ proc beebs_results_directory { benchmark file } {
 
 proc beebs_restore_default_procs {} {
     uplevel #0 {
-        proc beebs_filter_benchmarks { b f } {
-            return [default_beebs_filter_benchmarks $b $f]
-        }
         proc beebs_setup_before_all_benchmarks { } {
             return [default_beebs_setup_before_all_benchmarks]
+        }
+        proc beebs_filter_benchmark { b f } {
+            return [default_beebs_filter_benchmark $b $f]
+        }
+        proc beebs_announce { b f } {
+            return [default_beebs_announce $b $f]
+        }
+        proc beebs_setup_before_benchmark { b f } {
+            return [default_beebs_setup_before_benchmark $b $f]
+        }
+        proc beebs_run_benchmark { b f } {
+            return [default_beebs_run_benchmark $b $f]
+        }
+        proc beebs_cleanup_after_benchmark { b f } {
+            return [default_beebs_cleanup_after_benchmark $b $f]
         }
         proc beebs_cleanup_after_all_benchmarks { } {
             return [default_beebs_cleanup_after_all_benchmarks]
         }
-        proc beebs_setup_before_benchmark { b } {
-            return [default_beebs_setup_before_benchmark $b]
-        }
-        proc beebs_cleanup_after_benchmark { b } {
-            return [default_beebs_cleanup_after_benchmark $b]
-        }
-        proc beebs_setup_before_benchmark_run { b f } {
-            return [default_beebs_setup_before_benchmark_run $b $f]
-        }
-        proc beebs_cleanup_after_benchmark_run { b f } {
-            return [default_beebs_cleanup_after_benchmark_run $b $f]
-        }
-        proc beebs_run_benchmark { d b f } {
-            return [default_beebs_run_benchmark $d $b $f]
-        }
-        proc beebs_announce { d b f } {
-            return [default_beebs_announce $d $b $f]
-        }
     }
 }
-
 
 proc beebs_init { test_file_name } {
     beebs_restore_default_procs

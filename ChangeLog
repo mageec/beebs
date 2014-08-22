@@ -1,3 +1,30 @@
+2014-08-22  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* beebs.test/mageec-wand.exp (beebs_setup_before_benchmark_run):
+	Rename to ...
+	(beebs_setup_before_benchmark): ... this.
+	(beebs_cleanup_after_benchmark_run): Rename to ...
+	(beebs_cleanup_after_benchmark): ... this.
+	(beebs_cleanup_after_benchmark_run): Update, use benchmark not
+	filename to identify results.
+	* beebs.test/perf-stat.exp (beebs_run_benchmark): Update
+	parameters.  The filename is now a full path, use as such.  Use
+	benchmark, not directory to identify results.
+	* lib/beebs.exp (default_beebs_filter_benchmarks): Renamed to...
+	(default_beebs_filter_benchmark): ...this. Rename parameters.
+	(default_beebs_setup_before_benchmark): Add filename parameter.
+	(default_beebs_cleanup_after_benchmark): Add filename parameter.
+	(default_beebs_setup_before_benchmark_run): Deleted.
+	(default_beebs_cleanup_after_benchmark_run): Deleted.
+	(beebs_get_benchmark_files): Deleted.
+	(default_beebs_announce): Remove directory parameter.
+	(default_beebs_run_benchmark): Likewise.
+	(beebs_run_all_benchmarks): Remove calls to deleted functions.
+	Assume only one binary in each benchmark directory.  Update
+	parameters on remaining calls.
+	(beebs_restore_default_procs): Reorder procedures.  Update
+	parameters.
+
 2014-08-21  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* lib/beebs.exp (beebs_restore_default_procs): Restore
