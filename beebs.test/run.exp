@@ -15,12 +15,4 @@
 # You should have received a copy of the GNU General Public License along
 # with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# This is the main test procedure for benchmarks.
-
-global benchmarks
-global objdir
-global srcdir
-
-foreach benchmark $benchmarks {
-  beebs_load "$objdir/src/$benchmark/$benchmark" ""
-}
+beebs_run_all_benchmarks
