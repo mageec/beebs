@@ -79,7 +79,13 @@
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
-float          a[5][5], b[5], x[5];
+/* NOTE: These arrays were all originally size 5 in every dimension.
+   However, the code below is either broken, or very smart in how is
+   accesses the data.  The compiler is warnings that there might be
+   accesses beyond the bounds of the arrays, I've increased the array sizes
+   to remove the warnings, but we should investigate the code below to
+   ensure that the algorithm is doing the right thing.  */
+float          a[8][9], b[6], x[6];
 
 int             ludcmp( /* int nmax, */ int n, float eps);
 

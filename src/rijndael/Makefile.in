@@ -354,13 +354,11 @@ platform_src =  \
 @CALIBRATION_TRUE@	        $(top_srcdir)/config/@ARCH@/boards/@BOARD@/calibration \
 @CALIBRATION_TRUE@		|| echo "0 0") | cut -d " " -f 2
 
-AM_CFLAGS = $(WERROR_CFLAGS) $(WARN_CFLAGS) \
-		  -I $(top_srcdir)/include \
-		  -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@/ \
-		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/ \
-		  "-DCALIB_SCALE=$(shell $(calib))" \
-		  @CONFIG_CFLAGS@
-
+AM_CFLAGS = $(WERROR_CFLAGS) $(WARN_CFLAGS) -I $(top_srcdir)/include \
+	-I $(top_srcdir)/config/@ARCH@/boards/@BOARD@/ -I \
+	$(top_srcdir)/config/@ARCH@/chips/@CHIP@/ \
+	"-DCALIB_SCALE=$(shell $(calib))" @CONFIG_CFLAGS@ \
+	-fno-strict-aliasing
 AM_LDFLAGS = @CONFIG_LDFLAGS@
 all: all-am
 

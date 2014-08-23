@@ -1,3 +1,24 @@
+2014-08-23  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/ctl-string/string.c (benchmark): Initialise cnt.
+	* src/dtoa/dtoa.c (strtod): Initialise rv0.
+	* src/expint/expint.c (expint): Initialise ans.
+	* src/frac/frac.c (benchmark): Initialise n.
+	* src/ludcmp/ludcmp.c (a, b, x): Increase array sizes to guard
+	agains out of bounds accesses.  This is a work around rather than
+	a fix.
+	* src/miniz/Makefile.am: Add -fno-strict-aliasing CFLAG.
+	* src/miniz/Makefile.in: Regenerate.
+	* src/minver/minver.c (minver): Initialise r, t, w, and s.
+	* src/rijndael/Makefile.am: Add -fno-strict-aliasing CFLAG.
+	* src/rijndael/Makefile.in: Regenerate.
+	* src/sglib-arraybinsearch/arraybinsearch.c (benchmark):
+	Initialise index.
+	* src/sglib-listsort/listsort.c (benchmark): Initialise cnt.
+	* src/sglib-rbtree/rbtree.c (benchmark): Initialise cnt.
+	* src/wikisort/wikisort.c (WikiSort): Initialise level2, levelA,
+	and levelB.
+
 2014-08-22  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* beebs.test/mageec-wand.exp (beebs_setup_before_all_benchmarks):

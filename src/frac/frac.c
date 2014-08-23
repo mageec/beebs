@@ -122,6 +122,7 @@ int benchmark()
   double error = 1.0e-10;
   int n,d,i;
 
+  n = 0;
   for(i = 0; i < 10; ++i)
     frac(nums[i], &n, &d, error);
 

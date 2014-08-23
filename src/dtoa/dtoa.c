@@ -2394,6 +2394,9 @@ strtod (const char *s00, char **se)
 #ifndef NO_STRTOD_BIGCOMP
 	int req_bigcomp = 0;
 #endif
+
+        memset (&rv0, 0, sizeof (rv0));
+
 #ifdef Honor_FLT_ROUNDS /*{*/
 #ifdef Trust_FLT_ROUNDS /*{{ only define this if FLT_ROUNDS really works! */
 	bc.rounding = Flt_Rounds;

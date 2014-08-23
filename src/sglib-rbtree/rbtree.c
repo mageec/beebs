@@ -53,7 +53,7 @@ int benchmark()
   int                           i;
   struct rbtree                 e, *t, *the_tree, *te;
   struct sglib_rbtree_iterator  it;
-  int cnt;
+  int cnt = 0;
 
   the_tree = NULL;
   for (i=0; i<100; i++) {

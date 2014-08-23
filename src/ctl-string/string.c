@@ -398,7 +398,7 @@ benchmark (void)
 {
   ctl_string *s;
   ctl_string *s2;
-  int cnt;
+  int cnt = 0;
 
   s = ctl_StringInit();
   s2 = ctl_StringInit();

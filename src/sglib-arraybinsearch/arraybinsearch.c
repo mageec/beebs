@@ -48,6 +48,7 @@ int benchmark()
   volatile int cnt=0;
   int tmp, index, i;
 
+  index = 0;
   for(i=0; i< 100; i++) {
     tmp = array[i];
     SGLIB_ARRAY_BINARY_SEARCH(int, array, 0, i, tmp, SGLIB_NUMERIC_COMPARATOR, found, index);

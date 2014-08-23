@@ -121,6 +121,7 @@ int minver(int row, int col, float eps)
 	int work[500], i, j, k, r, iw, s, t, u, v;
 	float w, wmax, pivot, api, w1;
 
+        r = t = w = s = 0;
 	if(row < 2 || row > 500 || eps <= 0.0) return(999);
 	w1 = 1.0;
 	for(i = 0; i < row; i++)

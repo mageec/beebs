@@ -47,7 +47,7 @@ int benchmark()
 {
   int i;
   struct ilist *l, *the_list;
-  int cnt;
+  int cnt = 0;
 
   the_list = NULL;
   for (i=0; i<100; i++) {

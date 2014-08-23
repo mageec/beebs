@@ -24,4 +24,5 @@ miniz_SOURCES=miniz.c miniz_b.c miniz.h
 
 include $(top_srcdir)/src/common.mk.am
 
+AM_CFLAGS+=-fno-strict-aliasing
 miniz_SOURCES += ${platform_src}

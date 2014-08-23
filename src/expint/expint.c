@@ -60,6 +60,7 @@ long int expint(int n, long int x)
       d=3e7;
       h=d;
 
+      ans = 0;
       for (i=1;i<=100;i++)      /* MAXIT is 100 */
         {
           a = -i*(nm1+i);

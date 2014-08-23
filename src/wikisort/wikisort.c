@@ -306,7 +306,10 @@ void WikiSort(Test array[], const long size, const Comparison compare) {
 
 		/* as an optimization, we really only need to pull out an internal buffer once for each level of merges */
 		/* after that we can reuse the same buffer over and over, then redistribute it when we're finished with this level */
-		Range level1 = MakeRange(0, 0), level2, levelA, levelB;
+		Range level1 = MakeRange(0, 0);
+		Range level2 = MakeRange(0, 0);
+		Range levelA = MakeRange(0, 0);
+		Range levelB = MakeRange(0, 0);
 
 		decimal = fractional = 0;
 		while (decimal < size) {

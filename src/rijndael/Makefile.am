@@ -27,4 +27,5 @@ rijndael_SOURCES = aes.c \
 
 include $(top_srcdir)/src/common.mk.am
 
+AM_CFLAGS+=-fno-strict-aliasing
 rijndael_SOURCES += ${platform_src}
