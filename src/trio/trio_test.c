@@ -27,7 +27,7 @@
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
 #ifdef TRIO_SNPRINTF
-void
+int
 benchmark (void)
 {
   char output[50];
@@ -37,6 +37,8 @@ benchmark (void)
   trio_snprintf(output, 50, "%5d", 123);
   trio_snprintf(output, 50, "%05x", 123);
   trio_snprintf(output, 50, "%*d", 5, 10);
+
+  return 0;
 }
 #elif TRIO_SSCANF
 
@@ -44,7 +46,7 @@ benchmark (void)
 volatile int int_dest;
 volatile char char_dest [20];
 
-void
+int
 benchmark (void)
 {
   trio_sscanf("123", "%d", &int_dest);
@@ -53,6 +55,8 @@ benchmark (void)
   trio_sscanf("abcdefg", "%x", &int_dest);
   trio_sscanf("FF", "%x",&int_dest);
   trio_sscanf("abcdefg", "%[^f]%xg", char_dest, &int_dest);
+
+  return 0;
 }
 #else
 #error "Missing a TRIO_SSCANF or TRIO_SNPRINTF macro"

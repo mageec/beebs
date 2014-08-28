@@ -115,13 +115,15 @@ float sqrtfcn(float val)
    return (x);
 }
 
-void benchmark()
+int
+benchmark()
 {
   float i = 0.0;
   volatile float accum = 0.0;
 
   for(i = 0.0; i < 10000.; i += 100.)
     accum += sqrtfcn(i);
+  return 0;
 }
 
 int

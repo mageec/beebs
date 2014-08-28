@@ -150,7 +150,7 @@ ludcmp( /* int nmax, */ int n, float eps)
    BENCHMARK is not optimised away.  */
 volatile int chkerr;
 
-void
+int
 benchmark (void)
 {
   int             i, j/*, nmax = 50*/, n = 5;
@@ -170,6 +170,7 @@ benchmark (void)
   }
 
   chkerr = ludcmp( /* nmax, */ n, eps);
+  return 0;
 }
 
 

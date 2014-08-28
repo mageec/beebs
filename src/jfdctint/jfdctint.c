@@ -329,7 +329,7 @@ jpeg_fdct_islow ()
 
 #endif /* DCT_ISLOW_SUPPORTED */
 
-void
+int
 benchmark (void)
 {
   int i, seed;
@@ -343,6 +343,7 @@ benchmark (void)
   }
 
   jpeg_fdct_islow();
+  return 0;
 }
 
 

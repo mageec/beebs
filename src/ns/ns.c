@@ -1068,8 +1068,8 @@ int foo(int x)
 
 
 
-void benchmark(void)
-
+int
+benchmark(void)
 {
 
 #ifdef TEST
@@ -1082,6 +1082,7 @@ void benchmark(void)
 
 #endif
 
+  return 0;
 }
 
 

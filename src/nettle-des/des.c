@@ -275,11 +275,12 @@ des_decrypt(const struct des_ctx *ctx,
     }
 }
 
-void
+int
 benchmark (void)
 {
   des_encrypt(&des_ctx, 16, result, data);
   des_decrypt(&des_ctx, 16, result, result);
+  return 0;
 }
 
 

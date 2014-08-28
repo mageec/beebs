@@ -65,7 +65,8 @@ double ArrayA[MAX], ArrayB[MAX];
 double SumA, SumB;
 double Coef;
 
-void benchmark()
+int
+benchmark()
 {
 #ifdef POUT
    long StartTime, StopTime;
@@ -102,6 +103,7 @@ void benchmark()
    printf(" Std Dev A = %12.4f, Variance B = %12.4f\n", StddevA, StddevB);
    printf("\nLinear Correlation Coefficient = %f\n", Coef);
 #endif
+   return 0;
 }
 
 

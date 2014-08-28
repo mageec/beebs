@@ -61,7 +61,7 @@ int Postotal, Negtotal, Poscnt, Negcnt;
 
 // The main function
 
-void benchmark (void)
+int benchmark (void)
 
 {
 
@@ -73,6 +73,7 @@ void benchmark (void)
 
    Test(Array);
 
+   return 0;
 }
 
 

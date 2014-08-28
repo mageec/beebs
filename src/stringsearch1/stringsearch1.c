@@ -40,13 +40,14 @@ void exec2(CHARTYPE *base, int n);
 char buf[] = "abacacbabbabbadcabdcabccacacbadbadbcabdcabcbadcbacabadbadcabcbacdcacabacabcabcbadcbacabadbadcabcbac";
 char search[] ="abc";
 
-void
+int
 benchmark (void)
 {
   prep1((CHARTYPE *) search, 3);
   exec1((CHARTYPE *) buf, strlen(buf));
   prep2((CHARTYPE *) search, 3);
   exec2((CHARTYPE *) buf, strlen(buf));
+  return 0;
 }
 
 

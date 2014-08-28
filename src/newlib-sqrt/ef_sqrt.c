@@ -124,7 +124,7 @@ static	const float	one	= 1.0, tiny=1.0e-30;
 /* Tell the compiler not to optimize out calls in BENCHMARK. */
 volatile float result = 0;
 
-void
+int
 benchmark (void)
 {
   result = __ieee754_sqrtf(2);
@@ -133,6 +133,7 @@ benchmark (void)
   result = __ieee754_sqrtf(6);
   result = __ieee754_sqrtf(7);
   result = __ieee754_sqrtf(8);
+  return 0;
 }
 
 

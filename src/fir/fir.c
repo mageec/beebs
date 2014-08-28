@@ -269,12 +269,13 @@ void fir_filter_int(const long* in,long* out,long in_len,
 }
 
 
-void
+int
 benchmark (void)
 {
   long  output[OUTSIZE];
 
   fir_filter_int(in_data,output,700,fir_int,35,285);
+  return 0;
 }
 
 

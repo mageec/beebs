@@ -107,7 +107,7 @@ static double cos(double rad)
   return (sin (PI / 2.0 - rad));
 }
 
-void benchmark()
+int benchmark()
 {
     int  i, n = 8, flag, chkerr;
 
@@ -124,6 +124,7 @@ void benchmark()
     chkerr = fft1(n, flag);
 
     (void) chkerr; /* Silence compiler about unused 'chkerr'.  */
+    return 0;
 }
 
 int main()

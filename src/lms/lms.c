@@ -194,7 +194,7 @@ static float gaussian()
     return(gaus);
 }
 
-void benchmark()
+int benchmark()
 {
     float lms(float,float,float *,int,float,float);
     static float d[N],b[21];
@@ -218,6 +218,7 @@ void benchmark()
     /* delay x one sample */
         x = d[k];
     }
+    return 0;
 }
 
 int main()

@@ -106,10 +106,11 @@ long int expint(int n, long int x)
    the call inside BENCHMARK is not optimised away.  */
 volatile int benchmark_result = 0;
 
-void
+int
 benchmark (void)
 {
   benchmark_result = expint(50,1);
+  return 0;
 }
 
 

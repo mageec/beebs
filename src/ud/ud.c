@@ -119,7 +119,8 @@ int ludcmp(int nmax, int n);
 volatile int chkerr = 0;
 
 
-void benchmark()
+int
+benchmark()
 {
   int      i, j, nmax = 20, n = 5;
   long int /* eps, */ w;
@@ -142,6 +143,7 @@ void benchmark()
 
   /*  chkerr = ludcmp(nmax, n, eps); */
   chkerr = ludcmp(nmax,n);
+  return 0;
 }
 
 int ludcmp(int nmax, int n)

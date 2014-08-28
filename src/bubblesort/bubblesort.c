@@ -46,10 +46,11 @@ int factor;
 void BubbleSort(int Array[]);
 void Initialize(int Array[]);
 
-void benchmark()
+int benchmark()
 {
    Initialize(Array);
    BubbleSort(Array);
+   return 0;
 }
 
 

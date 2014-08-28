@@ -136,7 +136,7 @@ P5   =  4.1381369442e-08; /* 0x3331bb4c */
 /* Tell the compiler not to optimize out calls in BENCHMARK. */
 volatile float result = 0;
 
-void
+int
 benchmark (void)
 {
   result = __ieee754_expf(1);
@@ -144,6 +144,7 @@ benchmark (void)
   result = __ieee754_expf(3);
   result = __ieee754_expf(4);
   result = __ieee754_expf(5);
+  return 0;
 }
 
 

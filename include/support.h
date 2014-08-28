@@ -55,3 +55,5 @@
 void initialise_board();
 void start_trigger();
 void stop_trigger();
+
+int benchmark () __attribute__ ((noinline));

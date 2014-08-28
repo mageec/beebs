@@ -88,7 +88,7 @@ arcfour_crypt(struct arcfour_ctx *ctx,
 }
 
 
-void
+int
 benchmark (void)
 {
   /* Encryption */
@@ -97,6 +97,7 @@ benchmark (void)
   /* Decryption */
   arcfour_set_key(&arcfour_ctx, 16, key);
   arcfour_crypt(&arcfour_ctx, 16, result, result);
+  return 0;
 }
 
 

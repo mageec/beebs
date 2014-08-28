@@ -28,10 +28,11 @@
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
 
-void
+int
 benchmark (void)
 {
   /* Code to benchmark goes here */
+  return 0;
 }
 
 

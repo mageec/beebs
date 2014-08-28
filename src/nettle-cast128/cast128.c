@@ -849,11 +849,12 @@ cast128_set_key(struct cast128_ctx *ctx, int length, const uint8_t *key)
   ctx->rounds = full ? 16 : 12;
 }
 
-void
+int
 benchmark (void)
 {
   cast128_encrypt(&cast128_ctx, CAST128_KEY_SIZE, result, data);
   cast128_decrypt(&cast128_ctx, CAST128_KEY_SIZE, result, result);
+  return 0;
 }
 
 

@@ -80,7 +80,7 @@ unsigned char pjpeg_need_bytes_callback(unsigned char* pBuf, unsigned char buf_s
   return 0;
 }
 
-void
+int
 benchmark (void)
 {
   pjpeg_image_info_t pInfo;
@@ -97,7 +97,7 @@ benchmark (void)
     if(status == PJPG_NO_MORE_BLOCKS)
       break;
   }
-
+  return 0;
 }
 
 

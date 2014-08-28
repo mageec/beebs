@@ -137,10 +137,11 @@ void sort(unsigned long n)
 	}
 }
 
-void
+int
 benchmark()
 {
   sort(20);
+  return 0;
 }
 
 

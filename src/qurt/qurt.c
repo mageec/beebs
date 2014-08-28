@@ -158,7 +158,7 @@ int  qurt()
 /* Write to RESULT in BENCHMARK so call is not optimised out.  */
 volatile int result = 0;
 
-void
+int
 benchmark (void)
 {
   a[0] =  1.0;
@@ -180,6 +180,7 @@ benchmark (void)
   a[2] =  8.0;
 
   result = qurt();
+  return 0;
 }
 
 

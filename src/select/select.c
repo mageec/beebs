@@ -85,10 +85,11 @@ float select(unsigned long k, unsigned long n)
 	return arr[k];
 }
 
-void
+int
 benchmark (void)
 {
   select(10, 20);
+  return 0;
 }
 
 

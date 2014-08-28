@@ -212,7 +212,7 @@ int minver(int row, int col, float eps)
 }
 
 
-void
+int
 benchmark (void)
 {
   int i, j;
@@ -230,6 +230,7 @@ benchmark (void)
       a_i[i][j] = a[i][j];
 
   mmul(3, 3, 3, 3);
+  return 0;
 }
 
 

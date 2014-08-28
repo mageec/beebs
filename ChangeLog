@@ -1,5 +1,46 @@
 2014-08-28  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* include/support.h (benchmark): Add declaration with noinline
+	attribute.
+	* src/bubblesort/bubblesort.c (benchmark): Change signature to
+	return an int, and do actually return an int.
+	* src/cnt/cnt.c (benchmark): Likewise.
+	* src/duff/duff.c (benchmark): Likewise.
+	* src/expint/expint.c (benchmark): Likewise.
+	* src/fac/fac.c (benchmark): Likewise.
+	* src/fft/fft1.c (benchmark): Likewise.
+	* src/fir/fir.c (benchmark): Likewise.
+	* src/insertsort/insertsort.c (benchmark): Likewise.
+	* src/jfdctint/jfdctint.c (benchmark): Likewise.
+	* src/lms/lms.c (benchmark): Likewise.
+	* src/ludcmp/ludcmp.c (benchmark): Likewise.
+	* src/minver/minver.c (benchmark): Likewise.
+	* src/ndes/ndes.c (benchmark): Likewise.
+	* src/nettle-arcfour/arcfour.c (benchmark): Likewise.
+	* src/nettle-cast128/cast128.c (benchmark): Likewise.
+	* src/nettle-des/des.c (benchmark): Likewise.
+	* src/nettle-md5/md5.c (benchmark): Likewise.
+	* src/newlib-exp/ef_exp.c (benchmark): Likewise.
+	* src/newlib-log/ef_log.c (benchmark): Likewise.
+	* src/newlib-mod/ef_mod.c (benchmark): Likewise.
+	* src/newlib-sqrt/ef_sqrt.c (benchmark): Likewise.
+	* src/ns/ns.c (benchmark): Likewise.
+	* src/picojpeg/picojpeg_test.c (benchmark): Likewise.
+	* src/prime/prime.c (benchmark): Likewise.
+	* src/qrduino/qrtest.c (benchmark): Likewise.
+	* src/qsort/qsort.c (benchmark): Likewise.
+	* src/qurt/qurt.c (benchmark): Likewise.
+	* src/recursion/recursion.c (benchmark): Likewise.
+	* src/select/select.c (benchmark): Likewise.
+	* src/sqrt/sqrt.c (benchmark): Likewise.
+	* src/st/st.c (benchmark): Likewise.
+	* src/stringsearch1/stringsearch1.c (benchmark): Likewise.
+	* src/template/template.c (benchmark): Likewise.
+	* src/trio/trio_test.c (benchmark): Likewise.
+	* src/ud/ud.c (benchmark): Likewise.
+
+2014-08-28  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* config/arm/chips/stm32f051/chip.ld: Add __end__ symbol.
 	* config/arm/chips/stm32f100/chip.ld: Add __end__ symbol.
 

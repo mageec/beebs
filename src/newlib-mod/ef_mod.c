@@ -151,7 +151,7 @@ static const float one = 1.0, Zero[] = {0.0, -0.0,};
 /* Tell the compiler not to optimize out calls in BENCHMARK. */
 volatile float result = 0;
 
-void
+int
 benchmark (void)
 {
   result = __ieee754_fmodf(2.2353, 1234.5);
@@ -159,7 +159,7 @@ benchmark (void)
   result = __ieee754_fmodf(4.9346, 3456.7);
   result = __ieee754_fmodf(5.2342, 4567.8);
   result = __ieee754_fmodf(6.2352, 5678.9);
-  /* Code to benchmark goes here */
+  return 0;
 }
 
 

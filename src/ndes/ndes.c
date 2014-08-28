@@ -234,7 +234,7 @@ void cyfun(unsigned long ir, great k, unsigned long * iout) {
    int value = 0;
 #endif
 
-void
+int
 benchmark (void)
 {
    immense inp, key, out;
@@ -249,6 +249,7 @@ benchmark (void)
    isw = value;
 
    des(inp, key, &newkey, isw, &out);
+   return 0;
 }
 
 

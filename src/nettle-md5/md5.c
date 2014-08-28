@@ -152,7 +152,7 @@ _nettle_md5_compress(uint32_t *digest, const uint8_t *input)
 }
 
 
-void
+int
 benchmark (void)
 {
   uint32_t digest[_MD5_DIGEST_LENGTH] =
@@ -163,6 +163,7 @@ benchmark (void)
       0x10325476,
     };
   _nettle_md5_compress(digest, input);
+  return 0;
 }
 
 

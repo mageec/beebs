@@ -109,14 +109,14 @@ char target[ARRAYSIZE];
 
 
 
-void benchmark(void)
+int benchmark(void)
 
 {
 
   initialize( source, ARRAYSIZE );
 
   duffcopy( source, target, INVOCATION_COUNT );
-
+  return 0;
 }
 
 

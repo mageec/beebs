@@ -63,13 +63,14 @@ void swap (ulong* a, ulong* b) {
 /* Write to this so call in BENCHMARK is not optimised away.  */
 volatile int result = 0;
 
-void
+int
 benchmark (void)
 {
   ulong x =  21649L;
   ulong y = 513239L;
   swap (&x, &y);
   result = (!(prime(x) && prime(y)));
+  return 0;
 }
 
 

@@ -124,7 +124,7 @@ static const float zero   =  0.0;
 /* Tell the compiler not to optimize out calls in BENCHMARK. */
 volatile float result = 0;
 
-void
+int
 benchmark (void)
 {
   result = __ieee754_logf(2);
@@ -132,6 +132,7 @@ benchmark (void)
   result = __ieee754_logf(4);
   result = __ieee754_logf(5);
   result = __ieee754_logf(6);
+  return 0;
 }
 
 

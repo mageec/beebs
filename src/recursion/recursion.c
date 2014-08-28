@@ -97,12 +97,11 @@ volatile int In;
 
 
 
-void benchmark(void)
-
+int
+benchmark(void)
 {
-
   In = fib(10);
-
+  return 0;
 }
 
 

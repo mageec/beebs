@@ -35,7 +35,7 @@ int fac (int n)
      return (n * fac (n-1));
 }
 
-void
+int
 benchmark (void)
 {
   int i;
@@ -45,6 +45,7 @@ benchmark (void)
   n = 10;
   for (i = 0;  i <= n; i++)
       s += fac (i);
+  return 0;
 }
 
 

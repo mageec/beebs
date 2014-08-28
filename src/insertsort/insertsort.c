@@ -70,7 +70,7 @@
 
 unsigned int a[11];
 
-void
+int
 benchmark (void)
 {
   int i,j, temp;
@@ -89,6 +89,7 @@ benchmark (void)
       }
       i++;
     }
+  return 0;
 }
 
 
