@@ -1,5 +1,15 @@
 2014-08-28  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* src/qrduino/qrtest.c: Update GPL header to correct benchmark
+	name.
+	* src/qrduino/ecctable.h: Add GPL header.
+	* src/qrduino/qrbits.h: Add GPL header.
+	* src/qrduino/qrencode.c: Add GPL header.
+	* src/qrduino/qrencode.h: Add GPL header.
+	* src/qrduino/qrframe.c: Add GPL header.
+
+2014-08-28  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* include/support.h (benchmark): Add declaration with noinline
 	attribute.
 	* src/bubblesort/bubblesort.c (benchmark): Change signature to
