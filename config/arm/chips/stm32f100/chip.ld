@@ -50,6 +50,7 @@ SECTIONS
     end = .;
     _end = .;
     __end = .;
+    __end__ = .;
     } >ram
 
     .data :

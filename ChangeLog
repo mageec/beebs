@@ -1,5 +1,10 @@
 2014-08-28  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* config/arm/chips/stm32f051/chip.ld: Add __end__ symbol.
+	* config/arm/chips/stm32f100/chip.ld: Add __end__ symbol.
+
+2014-08-28  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* config/avr/chips/atmega328p/chip.cfg (EXCLUDED_BENCHMARKS):
 	Update list.
 
