@@ -42,7 +42,8 @@
         /* Turn on GPIO C Clock */      \
         RCC_APB2ENR |= 1<<4;            \
         /* Turn on GPIO C */            \
-        GPIOC_CRL |= 1 << number;       \
+        GPIOC_CRL &= ~(0xF << (number * 4));  \
+        GPIOC_CRL |= (0x1 << (number * 4));   \
         /* Pull low GPIO C */           \
         GPIOC_BSRR |= 1 << (number+16); \
     } while(0)
