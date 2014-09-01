@@ -4,6 +4,15 @@
 	* config/arm/chips/stm32f100/chipsupport.h: The pin initialisation was
 	    broken, not setting to output correctly.
 
+2014-08-29  James Pallister  <james.pallister@bristol.ac.uk>
+	Added GPL headers to some of the benchmarks for the WCET set.
+
+	* src/cnt/cnt.c: Added GPL header
+	* src/compress/compress.c: Added GPL header
+	* src/duff/duff.c: Added GPL header
+	* src/edn/edn.c: Added GPL header
+	* src/matmult/matmult.c: Added GPL header
+
 2014-08-28  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* src/qrduino/qrtest.c: Update GPL header to correct benchmark
