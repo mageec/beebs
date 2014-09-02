@@ -1,3 +1,11 @@
+2014-09-02  Andrew Burgess  <andrew.burgess@embecosm.com>
+	Fix "make distcheck", include dejagnu library and clean up results
+	directory.
+
+	* Makefile.am (EXTRA_DIST): Add lib directory.
+	(distclean-local): New rule, cleanup results directory.
+	* Makefile.in: Regenerate.
+
 2014-09-01  James Pallister  <james.pallister@bristol.ac.uk>
 	Fix the pin triggering on stm32f100 chip
 

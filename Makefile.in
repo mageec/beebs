@@ -361,7 +361,8 @@ AUTOMAKE_OPTIONS = dejagnu
 SUBDIRS = $(BENCHMARKS_SUBDIRS) src/template doc
 ACLOCAL_AMFLAGS = -I m4
 EXTRA_DEJAGNU_SITE_CONFIG = $(top_builddir)/dejagnu/site.exp
-EXTRA_DIST = beebs.test \
+EXTRA_DIST = lib \
+            beebs.test \
             dejagnu \
             config
 
@@ -810,7 +811,7 @@ distclean: distclean-recursive
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -f Makefile
 distclean-am: clean-am distclean-DEJAGNU distclean-generic \
-	distclean-hdr distclean-libtool distclean-tags
+	distclean-hdr distclean-libtool distclean-local distclean-tags
 
 dvi: dvi-recursive
 
@@ -880,22 +881,27 @@ uninstall-am:
 	ctags-am dist dist-all dist-bzip2 dist-gzip dist-lzip \
 	dist-shar dist-tarZ dist-xz dist-zip distcheck distclean \
 	distclean-DEJAGNU distclean-generic distclean-hdr \
-	distclean-libtool distclean-tags distcleancheck distdir \
-	distuninstallcheck dvi dvi-am html html-am info info-am \
-	install install-am install-data install-data-am install-dvi \
-	install-dvi-am install-exec install-exec-am install-html \
-	install-html-am install-info install-info-am install-man \
-	install-pdf install-pdf-am install-ps install-ps-am \
-	install-strip installcheck installcheck-am installdirs \
-	installdirs-am maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-generic mostlyclean-libtool pdf pdf-am \
-	ps ps-am tags tags-am uninstall uninstall-am
+	distclean-libtool distclean-local distclean-tags \
+	distcleancheck distdir distuninstallcheck dvi dvi-am html \
+	html-am info info-am install install-am install-data \
+	install-data-am install-dvi install-dvi-am install-exec \
+	install-exec-am install-html install-html-am install-info \
+	install-info-am install-man install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs installdirs-am maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-generic \
+	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-am uninstall \
+	uninstall-am
 
 
 # Libtool dependency
 all: libtool
 libtool: $(LIBTOOL_DEPS)
 	$(SHELL) ./config.status libtool
+
+# Clean up any test results
+distclean-local:
+	-rm -fr results/
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

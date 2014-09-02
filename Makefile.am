@@ -29,7 +29,8 @@ ACLOCAL_AMFLAGS= -I m4
 
 EXTRA_DEJAGNU_SITE_CONFIG = $(top_builddir)/dejagnu/site.exp
 
-EXTRA_DIST= beebs.test \
+EXTRA_DIST= lib \
+            beebs.test \
             dejagnu \
             config
 
@@ -37,3 +38,7 @@ EXTRA_DIST= beebs.test \
 all: libtool
 libtool: $(LIBTOOL_DEPS)
 	$(SHELL) ./config.status libtool
+
+# Clean up any test results
+distclean-local:
+	-rm -fr results/
