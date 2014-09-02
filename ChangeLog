@@ -1,4 +1,14 @@
 2014-09-02  Andrew Burgess  <andrew.burgess@embecosm.com>
+	Updates to improve documentation generation.
+
+	* doc/texinfo.tex: Deleted.
+	* doc/beebs.texi: Place line break in long title.  Update email
+	address.  Remove comment about 'make check' not working.
+	* doc/beebs.info: Regenerate.
+	* doc/version.texi: Regenerated with recent date.
+	* doc/Makefile.in: Regenerated.
+
+2014-09-02  Andrew Burgess  <andrew.burgess@embecosm.com>
 	Fix "make distcheck", include dejagnu library and clean up results
 	directory.
 

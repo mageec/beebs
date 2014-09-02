@@ -136,9 +136,7 @@ File: beebs.info,  Node: Known Issues,  Prev: Running,  Up: Building and Running
 =============================
 
 The following problems and issues are known about with BEEBS 1.0.
-Notify other issues by email to <mailto:support@embecosm.com>.
-
-   * 'make check' does not currently work
+Notify other issues by email to <beebs@mageec.org>.
 
    * The configuration files, assume bash.
 
@@ -784,13 +782,13 @@ Node: Configuring the Build2008
 Node: Building2820
 Node: Running3288
 Node: Known Issues3462
-Node: Adding a New Board to BEEBS3830
-Node: Where to add files4145
-Node: Configuration files5314
-Node: Header files6139
-Node: Board specific code6895
-Node: Calibration7719
-Node: GNU Free Documentation License8570
-Node: Index30969
+Node: Adding a New Board to BEEBS3776
+Node: Where to add files4091
+Node: Configuration files5260
+Node: Header files6085
+Node: Board specific code6841
+Node: Calibration7665
+Node: GNU Free Documentation License8516
+Node: Index30915
 
 End Tag Table
