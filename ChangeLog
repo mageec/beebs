@@ -1,3 +1,9 @@
+2014-09-01  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix the pin triggering on stm32f100 chip
+
+	* config/arm/chips/stm32f100/chipsupport.h: The pin initialisation was
+	    broken, not setting to output correctly.
+
 2014-08-29  James Pallister  <james.pallister@bristol.ac.uk>
 	Added GPL headers to some of the benchmarks for the WCET set.
 
