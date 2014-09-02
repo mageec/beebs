@@ -1,3 +1,43 @@
+2016-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	Remove benchmarks that are not licenced under GPL.
+
+	* configure.ac: Update to remove deleted benchmarks.
+	* configure: Regenerated.
+	* src/2dfir/Makefile.am: Deleted.
+	* src/2dfir/Makefile.in: Deleted.
+	* src/2dfir/fir2dim.c: Deleted.
+	* src/adpcm/Makefile.am: Deleted.
+	* src/adpcm/Makefile.in: Deleted.
+	* src/adpcm/adpcm.c: Deleted.
+	* src/blowfish/COPYRIGHT: Deleted.
+	* src/blowfish/LICENSE: Deleted.
+	* src/blowfish/Makefile.am: Deleted.
+	* src/blowfish/Makefile.in: Deleted.
+	* src/blowfish/bf.c: Deleted.
+	* src/blowfish/bf_cfb64.c: Deleted.
+	* src/blowfish/bf_enc.c: Deleted.
+	* src/blowfish/bf_locl.h: Deleted.
+	* src/blowfish/bf_pi.h: Deleted.
+	* src/blowfish/bf_skey.c: Deleted.
+	* src/blowfish/blowfish.h: Deleted.
+	* src/dhrystone/Makefile.am: Deleted.
+	* src/dhrystone/Makefile.in: Deleted.
+	* src/dhrystone/dhry.h: Deleted.
+	* src/dhrystone/dhry_1.c: Deleted.
+	* src/dhrystone/dhry_2.c: Deleted.
+	* src/fft/Makefile.am: Deleted.
+	* src/fft/Makefile.in: Deleted.
+	* src/fft/fft1.c: Deleted.
+	* src/lms/Makefile.am: Deleted.
+	* src/lms/Makefile.in: Deleted.
+	* src/lms/lms.c: Deleted.
+	* src/sha/Makefile.am: Deleted.
+	* src/sha/Makefile.in: Deleted.
+	* src/sha/sha.c: Deleted.
+	* src/sha/sha.h: Deleted.
+	* src/sha/sha_driver.c: Deleted.
+
 2016-07-12  James Pallister  <james.pallister@bristol.ac.uk>
 
 	Calibration update for xmega and board support tweaks
