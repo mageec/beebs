@@ -70,7 +70,7 @@ File: beebs.info,  Node: Preparation,  Next: Configuring the Build,  Up: Buildin
 Unpack the software and create a _separate_ directory in which to build
 it:
 
-     tar jxf beebs-1.0.tar.bz2
+     tar jxf beebs-2.0-prerelease.tar.bz2
      mkdir bd
      cd bd
 
@@ -135,8 +135,9 @@ File: beebs.info,  Node: Known Issues,  Prev: Running,  Up: Building and Running
 2.5 Known Problems and Issues
 =============================
 
-The following problems and issues are known about with BEEBS 1.0.
-Notify other issues by email to <mailto:support@embecosm.com>.
+The following problems and issues are known about with BEEBS
+2.0-prerelease.  Notify other issues by email to
+<mailto:support@embecosm.com>.
 
    * 'make check' does not currently work
 
@@ -780,17 +781,17 @@ Node: Top770
 Node: About1131
 Node: Building and Running BEEBS1428
 Node: Preparation1738
-Node: Configuring the Build2008
-Node: Building2820
-Node: Running3288
-Node: Known Issues3462
-Node: Adding a New Board to BEEBS3830
-Node: Where to add files4145
-Node: Configuration files5314
-Node: Header files6139
-Node: Board specific code6895
-Node: Calibration7719
-Node: GNU Free Documentation License8570
-Node: Index30969
+Node: Configuring the Build2019
+Node: Building2831
+Node: Running3299
+Node: Known Issues3473
+Node: Adding a New Board to BEEBS3853
+Node: Where to add files4168
+Node: Configuration files5337
+Node: Header files6162
+Node: Board specific code6918
+Node: Calibration7742
+Node: GNU Free Documentation License8593
+Node: Index30992
 
 End Tag Table

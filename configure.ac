@@ -24,7 +24,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.68])
-AC_INIT([beebs], [1.0], [beebs@mageec.org])
+AC_INIT([beebs], [2.0-prerelease], [beebs@mageec.org])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
 

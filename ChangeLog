@@ -1,4 +1,12 @@
 2014-09-02  Andrew Burgess  <andrew.burgess@embecosm.com>
+	Update version string in preparation for release.
+
+	* configure.ac: Update version string.
+	* configure: Regenerate.
+	* doc/beebs.info: Regenerate.
+	* doc/version.texi: Regenerate.
+
+2014-09-02  Andrew Burgess  <andrew.burgess@embecosm.com>
 	Fix "make distcheck", include dejagnu library and clean up results
 	directory.
 
