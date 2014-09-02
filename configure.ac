@@ -175,11 +175,8 @@ fi
 # into the makefile, and configures the various makefiles. This allows an
 # individual benchmark to be excluded from the compilation in a easy way.
 m4_define([benchmarklist],[dnl
-[2dfir],
-[adpcm],
 [aha-compress],
 [aha-mont64],
-[blowfish],
 [bs],
 [bubblesort],
 [cnt],
@@ -191,7 +188,6 @@ m4_define([benchmarklist],[dnl
 [ctl-string],
 [ctl-vector],
 [cubic],
-[dhrystone],
 [dijkstra],
 [dtoa],
 [duff],
@@ -200,7 +196,6 @@ m4_define([benchmarklist],[dnl
 [fac],
 [fasta],
 [fdct],
-[fft],
 [fibcall],
 [fir],
 [frac],
@@ -210,7 +205,6 @@ m4_define([benchmarklist],[dnl
 [jfdctint],
 [lcdnum],
 [levenshtein],
-[lms],
 [ludcmp],
 [matmult-int],
 [matmult-float],
@@ -246,7 +240,6 @@ m4_define([benchmarklist],[dnl
 [sglib-listsort],
 [sglib-queue],
 [sglib-rbtree],
-[sha],
 [slre],
 [stringsearch1],
 [strstr],
