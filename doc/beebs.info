@@ -136,10 +136,7 @@ File: beebs.info,  Node: Known Issues,  Prev: Running,  Up: Building and Running
 =============================
 
 The following problems and issues are known about with BEEBS
-2.0-prerelease.  Notify other issues by email to
-<mailto:support@embecosm.com>.
-
-   * 'make check' does not currently work
+2.0-prerelease.  Notify other issues by email to <beebs@mageec.org>.
 
    * The configuration files, assume bash.
 
@@ -785,13 +782,13 @@ Node: Configuring the Build2019
 Node: Building2831
 Node: Running3299
 Node: Known Issues3473
-Node: Adding a New Board to BEEBS3853
-Node: Where to add files4168
-Node: Configuration files5337
-Node: Header files6162
-Node: Board specific code6918
-Node: Calibration7742
-Node: GNU Free Documentation License8593
-Node: Index30992
+Node: Adding a New Board to BEEBS3799
+Node: Where to add files4114
+Node: Configuration files5283
+Node: Header files6108
+Node: Board specific code6864
+Node: Calibration7688
+Node: GNU Free Documentation License8539
+Node: Index30938
 
 End Tag Table
