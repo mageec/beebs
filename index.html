@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Beebs by mageec</title>
+    <title>BEEBS</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -17,8 +17,8 @@
   <body>
 
       <header>
-        <h1>Beebs</h1>
-        <p>A set of benchmarks chosen to show the energy consumption of embedded devices under different conditions</p>
+        <h1>Bristol/Embecosm Embedded Benchmark Suite</h1>
+        <p>A set of benchmarks that are designed to test the performance of deeply embedded systems</p>
       </header>
 
       <div id="banner">
@@ -40,39 +40,55 @@
       </nav>
       <section>
         <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+<a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>BEEBS was developed when, during the course of energy efficiency research, it was discovered that no suitable benchmark suite existed for exploring the relative energy consumptions of embedded systems.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<p>Embedded systems exhibit a wide variety of ISAs, programming paradigms and selections of single- or super-scalar execution, inclusion or lack of floating-point support, and simple or complex memory heirarchies.</p>
+
+<p>BEEBS is explicity designed to support as wide a range of embedded systems as possible, whilst allowing the efficient exploration of their energy efficiency. Since the benchmarks are designed to test the performance of deeply embedded systems they assume the presence of no OS and in particular no output stream.</p>
+
+<p>There is a paper describing the benchmarks and reasoning behind the choice of benchmarks: <a name="BEEBS: Open Benchmarks for Energy Measurements on Embedded Platforms" href="http://arxiv.org/abs/1308.5174">BEEBS: Open Benchmarks for Energy Measurements on Embedded Platforms</a>.</p>
+
+<h3>
+<a name="targets" class="anchor" href="#targets"><span class="octicon octicon-link"></span></a>Targets</h3>
+
+<p>The following targets are currently supported:</p>
+
+<ul><li>STM32F0DISCOVERY</li>
+<li>STM32VLDISCOVERY</li>
+<li>Breadboarded ATMEGA328P (with USB to serial programmer)</li>
+<li>Breadboarded PIC32MX250F128B (with PICKIT2 as a programmer)</li>
+<li>SAM4L Xplained</li>
+<li>XMEGA-A3BU Xplained Pro</li>
+<li>MSP-EXP439F5529LP LaunchPad</li></ul>
+
+<p></p>Compiling for one these boards will produce executables for that board, which toggle a specific pin at the beginning and end of the benchmark. This allows them to be easily hooked up to other tools for time and energy measurements.</p>
+
+<h3>
+<a name="gettingbeebs" class="anchor" href="#getting-beebs"><span class="octicon octicon-link"></span></a>Getting BEEBS</h3>
+
+<p>You can download a ZIP or TAR archive by clicking on one of the above links.</p>
+
+<p></p>To get the source code using git:</p>
+
+<pre><code>$ git clone https://github.com/mageec/beebs.git
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>See the README file for building instructions and notes.</p>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="support" class="anchor" href="#support"><span class="octicon octicon-link"></span></a>Support</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>Questions and feedback should be directed to the <a name="MAGEEC mailing list" href="http://mageec.org/cgi-bin/mailman/listinfo/mageec">MAGEEC mailing list</a>
 
 <h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<a name="contributing" class="anchor" href="contributing"><span class="octicon octicon-link"></span></a>Contributing</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>Contributions may be made via GitHub Pull Requests and issues should be logged to the GitHub Issue Tracker</p>
       </section>
       <footer>
-        <p>Project maintained by <a href="https://github.com/mageec">mageec</a></p>
+        <p>BEEBS is maintained by the <a href="https://github.com/mageec">MAGEEC Project</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
       </footer>
     </div>
