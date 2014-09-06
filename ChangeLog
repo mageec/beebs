@@ -1,3 +1,8 @@
+2014-09-06  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/dhrystone/dhry_1.c: Add start and stop triggers.
+	* src/whetstone/whetstone.c: Likewise.
+
 2014-09-02  Andrew Burgess  <andrew.burgess@embecosm.com>
 	Updates to improve documentation generation.
 

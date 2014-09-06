@@ -104,6 +104,9 @@ int main ()
 
   Number_Of_Runs = SCALE_FACTOR;
 
+  initialise_board();
+  start_trigger();
+
   for (Run_Index = 1; Run_Index <= Number_Of_Runs; ++Run_Index)
   {
 
@@ -150,6 +153,7 @@ int main ()
 
   } /* loop "for Run_Index" */
 
+  stop_trigger();
   return 0;
 }
 
