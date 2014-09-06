@@ -145,6 +145,9 @@ C
 
 	JJ = 1;
 
+        initialise_board();
+        start_trigger();
+
 IILOOP:
 	N1  = 0;
 	N2  = 12 * LOOP;
@@ -367,7 +370,7 @@ C
 C      where TIME is in seconds.
 C--------------------------------------------------------------------
 */
-
+        stop_trigger();
 	return(0);
 }
 
