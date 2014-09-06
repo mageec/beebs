@@ -1,4 +1,4 @@
-@set UPDATED 2 September 2014
+@set UPDATED 6 September 2014
 @set UPDATED-MONTH September 2014
 @set EDITION 2.0-prerelease
 @set VERSION 2.0-prerelease

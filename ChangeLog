@@ -1,5 +1,9 @@
 2014-09-06  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* doc/version.texi: Update date.
+
+2014-09-06  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/dhrystone/dhry_1.c: Add start and stop triggers.
 	* src/whetstone/whetstone.c: Likewise.
 
