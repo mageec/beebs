@@ -215,7 +215,6 @@
 
 	* src/ctl-string/string.c: Cast the string to unsigned char.
 	* src/slre/slre.c: Cast to unsigned char.
->>>>>>> tjteru/master
 
 2014-08-14  Andrew Burgess  <andrew.burgess@embecosm.com>
 
