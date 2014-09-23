@@ -268,17 +268,3 @@ int benchmark() {
    return errors;
 }
 
-int
-main (void)
-{
-  int i, e=0;
-
-  initialise_board ();
-  start_trigger ();
-
-  for (i = 0; i < SCALE_FACTOR; i++)
-    e |= benchmark ();
-
-  stop_trigger ();
-  return e;
-}

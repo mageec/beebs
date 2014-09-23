@@ -416,17 +416,3 @@ POUT(long N, long J, long K, double X1, double X2, double X3, double X4)
 }
 #endif
 
-int
-main (void)
-{
-  int i;
-
-  initialise_board ();
-  start_trigger ();
-
-  for (i = 0; i < SCALE_FACTOR; i++)
-    benchmark ();
-
-  stop_trigger ();
-  return 0;
-}

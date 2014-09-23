@@ -880,19 +880,6 @@ printf("\n%4d %4d %4d %4d %4d",j,compressed[i/2] >> 6,compressed[i/2] & 63,resul
     return result[i]+result[i+1];
 }
 
-int main (void)
-{
-  int i;
-
-  initialise_board ();
-  start_trigger ();
-
-  for (i = 0; i < SCALE_FACTOR; i++)
-    benchmark ();
-
-  stop_trigger ();
-  return 0;
-}
 
 #endif
 

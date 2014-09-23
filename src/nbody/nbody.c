@@ -171,15 +171,3 @@ int benchmark()
    return 0;
 }
 
-int main()
-{
-   int n;
-
-   initialise_board();
-   start_trigger();
-   for(n = 0; n < SCALE_FACTOR; ++n)
-      benchmark();
-   stop_trigger();
-
-   return 0;
-}

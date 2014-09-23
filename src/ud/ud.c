@@ -193,17 +193,3 @@ int ludcmp(int nmax, int n)
 }
 
 
-int
-main (void)
-{
-  int i;
-
-  initialise_board ();
-  start_trigger ();
-
-  for (i = 0; i < SCALE_FACTOR; i++)
-    benchmark ();
-
-  stop_trigger ();
-  return 0;
-}

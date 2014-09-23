@@ -138,19 +138,5 @@ int benchmark()
    return 0;
 }
 
-int
-main (void)
-{
-  int i;
-
-  initialise_board ();
-  start_trigger ();
-
-  for (i = 0; i < SCALE_FACTOR; i++)
-    benchmark ();
-
-  stop_trigger ();
-  return 0;
-}
 
 /* vim: set ts=3 sw=3 et: */

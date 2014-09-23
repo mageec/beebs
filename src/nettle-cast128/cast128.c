@@ -864,18 +864,3 @@ benchmark (void)
 }
 
 
-int
-main (void)
-{
-  int i;
-
-  initialise_board ();
-  initialise_benchmark ();
-  start_trigger ();
-
-  for (i = 0; i < SCALE_FACTOR; i++)
-    benchmark ();
-
-  stop_trigger ();
-  return 0;
-}

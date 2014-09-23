@@ -166,19 +166,5 @@ int benchmark()
   return 0;
 }
 
-int main(int argc, char *argv[])
-{
-   int n;
-
-   initialise_board();
-   start_trigger();
-
-   for(n = 0; n < SCALE_FACTOR; ++n)
-      benchmark();
-
-   stop_trigger();
-
-   return 0;// - (output != check_output);
-}
 
 /* vim: set ts=3 sw=3 et: */
