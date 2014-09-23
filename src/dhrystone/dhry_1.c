@@ -67,24 +67,11 @@ void Proc_8 (Arr_1_Dim, Arr_2_Dim, int, int);
 Enumeration Func_1 (Capital_Letter, Capital_Letter);
 Boolean Func_2 (Str_30, Str_30);
 
-int main ()
-/*****/
+Str_30          Str_1_Loc;
+Str_30          Str_2_Loc;
 
-  /* main program, corresponds to procedures        */
-  /* Main and Proc_0 in the Ada version             */
+int initialise_benchmark()
 {
-        One_Fifty       Int_1_Loc;
-  REG   One_Fifty       Int_2_Loc;
-        One_Fifty       Int_3_Loc;
-  REG   char            Ch_Index;
-        Enumeration     Enum_Loc;
-        Str_30          Str_1_Loc;
-        Str_30          Str_2_Loc;
-  REG   int             Run_Index;
-  REG   int             Number_Of_Runs;
-
-  /* Initializations */
-
   Next_Ptr_Glob = (Rec_Pointer) malloc (sizeof (Rec_Type));
   Ptr_Glob = (Rec_Pointer) malloc (sizeof (Rec_Type));
 
@@ -102,10 +89,27 @@ int main ()
         /* Warning: With 16-Bit processors and Number_Of_Runs > 32000,  */
         /* overflow may occur for this array element.                   */
 
-  Number_Of_Runs = SCALE_FACTOR;
+  return 0;
+}
 
-  initialise_board();
-  start_trigger();
+int benchmark ()
+/*****/
+
+  /* main program, corresponds to procedures        */
+  /* Main and Proc_0 in the Ada version             */
+{
+        One_Fifty       Int_1_Loc;
+  REG   One_Fifty       Int_2_Loc;
+        One_Fifty       Int_3_Loc;
+  REG   char            Ch_Index;
+        Enumeration     Enum_Loc;
+  REG   int             Run_Index;
+  REG   int             Number_Of_Runs;
+
+  /* Initializations */
+
+
+  Number_Of_Runs = 1;
 
   for (Run_Index = 1; Run_Index <= Number_Of_Runs; ++Run_Index)
   {
@@ -153,7 +157,6 @@ int main ()
 
   } /* loop "for Run_Index" */
 
-  stop_trigger();
   return 0;
 }
 
@@ -254,3 +257,20 @@ register int    l;
 #endif
 
 
+
+int
+main (void)
+{
+  int i;
+
+  initialise_board ();
+  initialise_benchmark();
+
+  start_trigger ();
+
+  for (i = 0; i < SCALE_FACTOR; i++)
+    benchmark ();
+
+  stop_trigger ();
+  return 0;
+}

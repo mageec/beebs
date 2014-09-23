@@ -264,54 +264,25 @@ void fdct(short int *blk, int lx)
    }
 }
 
-int main()
+int benchmark()
 {
-   int i;
-   long int n;
-   /* We can only do a check with 1 or 4096 transformations. */
-   short int check_block_1 [64] =
-     { 699, 164, -51,- 16,  31, -15, -19,   8,
-        71,  14, -61,  -2,  11, -12,   7,  12,
-       -58, -55,  13,  28, -20,  -7,  14, -18,
-        29,  22,   3,   3, -11,   7,  11, -22,
-        -1, -28, -27,  10,   0,  -7,  11,   6,
-         7,   6,  21,  21, -10,  -8,   2, -14,
-         1,  -7, -15, -15, -10,  15,  16, -10,
-         0,  -1,   0,  15,   4, -13,  -5,   4 };
-   short int check_block_4096 [64] =
-     { -2480,  -665,  -689,   44,   -350,    26,  -272,  -535,
-        -628, -2044,  -544,   141,   300,  -147,    -1,    89,
-        -676,  -551, -1820,   224,   267,  -154,  -281,  -290,
-          52,   149,   262, -1508,  -228,  -102,    58,   100,
-        -425,   342,   148,  -185, -2485,   802,   227,  -750,
-          34,   -62,  -225,   -84,   829, -1495,  -172,   319,
-        -171,   -14,  -367,    67,   323,  -127, -1400,    28,
-        -546,    38,  -355,   159,  -750,   316,    -4, -1849 };
-   short int *check_block;
-   int to_return;
+  fdct(block, 8);
+  return 0;
+}
 
-   initialise_board ();
-   start_trigger();
+int
+main (void)
+{
+  int i;
 
-   for(n = 0; n < SCALE_FACTOR; ++n)
-      fdct (block, 8);  /* 8x8 Blocks, DC precision value = 0,
-			   Quantization coefficient (mquant) = 64 */
-   stop_trigger();
+  initialise_board ();
+  start_trigger ();
 
-   /* Verify if we can */
-   to_return = 0;
-   check_block = (1 == SCALE_FACTOR) ? check_block_1
-     : (4096 == SCALE_FACTOR) ? check_block_4096 : NULL;
+  for (i = 0; i < SCALE_FACTOR; i++)
+    benchmark ();
 
-   if (NULL != check_block)
-     for (i = 0; i < 64; i++)
-       if (block[i] != check_block[i])
-	 {
-	   to_return = -1;
-	   break;
-	 }
-
-   return to_return;
+  stop_trigger ();
+  return 0;
 }
 
 /* vim: set ts=3 sw=3 et: */

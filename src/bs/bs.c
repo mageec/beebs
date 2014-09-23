@@ -108,6 +108,12 @@ binary_search(int x)
   return fvalue;
 }
 
+int benchmark()
+{
+  binary_search(8);
+  return 0;
+}
+
 int
 main (void)
 {
@@ -117,7 +123,7 @@ main (void)
   start_trigger ();
 
   for (i = 0; i < SCALE_FACTOR; i++)
-    binary_search(8);
+    benchmark();
 
   stop_trigger ();
   return 0;

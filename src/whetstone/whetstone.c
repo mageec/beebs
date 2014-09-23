@@ -108,7 +108,7 @@ double T,T1,T2,E1[5];
 int J,K,L;
 
 int
-main()
+benchmark()
 {
 	/* used in the FORTRAN version */
 	long I;
@@ -140,13 +140,11 @@ C	'II' TIMES TO INCREASE WALL-CLOCK TIMING ACCURACY.
 C
 	LOOP = 1000;
 */
-	LOOP = SCALE_FACTOR;
+	LOOP = 1;
 	II   = 1;
 
 	JJ = 1;
 
-        initialise_board();
-        start_trigger();
 
 IILOOP:
 	N1  = 0;
@@ -370,7 +368,6 @@ C
 C      where TIME is in seconds.
 C--------------------------------------------------------------------
 */
-        stop_trigger();
 	return(0);
 }
 
@@ -418,3 +415,18 @@ POUT(long N, long J, long K, double X1, double X2, double X3, double X4)
 						N, J, K, X1, X2, X3, X4);
 }
 #endif
+
+int
+main (void)
+{
+  int i;
+
+  initialise_board ();
+  start_trigger ();
+
+  for (i = 0; i < SCALE_FACTOR; i++)
+    benchmark ();
+
+  stop_trigger ();
+  return 0;
+}

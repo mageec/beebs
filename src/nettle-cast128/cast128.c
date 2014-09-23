@@ -849,6 +849,12 @@ cast128_set_key(struct cast128_ctx *ctx, int length, const uint8_t *key)
   ctx->rounds = full ? 16 : 12;
 }
 
+int initialise_benchmark()
+{
+  cast128_set_key(&cast128_ctx, CAST128_KEY_SIZE, key);
+  return 0;
+}
+
 int
 benchmark (void)
 {
@@ -863,9 +869,8 @@ main (void)
 {
   int i;
 
-  cast128_set_key(&cast128_ctx, CAST128_KEY_SIZE, key);
-
   initialise_board ();
+  initialise_benchmark ();
   start_trigger ();
 
   for (i = 0; i < SCALE_FACTOR; i++)

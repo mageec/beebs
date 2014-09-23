@@ -148,7 +148,8 @@ static void random_fasta (aminoacid_t const *genelist, size_t count) {
     } while (count);
 }
 
-int benchmark (size_t n) {
+int benchmark () {
+  const int n = 1000;
 
     static aminoacid_t iub[] = {
 	{ 0.27, 'a' },
@@ -201,6 +202,6 @@ int main()
     initialise_board();
     start_trigger();
     for(n = 0; n < SCALE_FACTOR; ++n)
-        benchmark(1000);
+        benchmark();
     stop_trigger();
 }

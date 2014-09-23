@@ -160,34 +160,24 @@ DWORD crc32pseudo()
    return ~oldcrc32;
 }
 
+int benchmark()
+{
+  crc32pseudo();
+  return 0;
+}
+
 int main(int argc, char *argv[])
 {
    int n;
-   DWORD output;
-
-   /* TODO: Check if this difference is because of uninitialised bits in
-    * memory. If so, initialise it to 0. */
-#ifdef __LP64__
-   // DWORD check_output = 18446744069884456117U;
-#else
-   /* Assume 32 bits */
-   // DWORD check_output = 469871797;
-#endif
 
    initialise_board();
    start_trigger();
 
    for(n = 0; n < SCALE_FACTOR; ++n)
-   {
-      output = crc32pseudo();
-   }
+      benchmark();
 
    stop_trigger();
 
-   /* Silence compiler warning about unused variable.  */
-   (void) output;
-
-   /* Verify that we have the correct result. */
    return 0;// - (output != check_output);
 }
 

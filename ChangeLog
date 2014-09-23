@@ -1,3 +1,26 @@
+2014-09-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Refactored several benchmarks to have a consistent structure. All
+	benchmarks now have a main benchmark function, and similar main
+	functions which just initialise the board/triggers and call the
+	benchmark.
+
+	* src/2dfir/fir2dim.c: Refactored code into a benchmark function.
+	* src/blowfish/bf.c: Likewise
+	* src/bs/bs.c: Likewise
+	* src/compress/compress.c: Likewise
+	* src/crc32/crc_32.c: Likewise
+	* src/cubic/basicmath_small.c: Likewise
+	* src/dhrystone/dhry_1.c: Likewise
+	* src/dijkstra/dijkstra_small.c: Likewise
+	* src/fasta/fasta.c: Likewise
+	* src/fdct/fdct.c: Likewise
+	* src/matmult/matmult.c: Likewise
+	* src/nbody/nbody.c: Likewise
+	* src/nettle-cast128/cast128.c: Likewise
+	* src/rijndael/aesxam.c: Likewise
+	* src/sha/sha_driver.c: Likewise
+	* src/whetstone/whetstone.c: Likewise
+
 2014-09-06  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* src/dhrystone/dhry_1.c: Add start and stop triggers.
