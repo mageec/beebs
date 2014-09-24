@@ -1,3 +1,9 @@
+2014-09-24  James Pallister  <james.pallister@bristol.ac.uk>
+	Added calibration values for stm32f0discovery
+
+	* config/arm/boards/stm32f0discovery/calibration: Calibration file for
+	    stm32f0discovery
+
 2014-09-23  James Pallister  <james.pallister@bristol.ac.uk>
 	Moved every main function to a single file. Added the ability for a
 	benchmark initialisation function. Main and initialise_benchmark are
