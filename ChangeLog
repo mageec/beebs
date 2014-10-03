@@ -1,3 +1,9 @@
+2014-10-03  James Pallister  <james.pallister@bristol.ac.uk>
+	Added a calibration file for the STM32VLDISCOVERY benchmarks
+
+	* config/arm/boards/stm32vldiscovery/calibration: Benchmark
+	    calibrations for STM32VLDISCOVERY board
+
 2014-09-06  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* src/dhrystone/dhry_1.c: Add start and stop triggers.
