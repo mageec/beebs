@@ -17,7 +17,9 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
-#include <string.h>
+#include <stddef.h>
+
+void *memcpy(void *, const void *, size_t);
 
 // This file is needed to copy the initialised data from flash to RAM
 
@@ -34,3 +36,16 @@ void software_init_hook()
         (unsigned)&__data_end__ - (unsigned)&__data_start__);
 }
 
+void *__aeabi_memcpy(void *d, void *s, size_t l)
+{
+    while(l-- > 0)
+        ((unsigned char*)d)[l] = ((unsigned char*)s)[l];
+    return d;
+}
+
+void *__aeabi_memset(void *d, int i, size_t l)
+{
+    while(l-- > 0)
+        ((unsigned char*)d)[l] = i;
+    return d;
+}

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2014-09-24  James Pallister  <james.pallister@bristol.ac.uk>
 	Added calibration values for stm32f0discovery
 
@@ -208,6 +209,13 @@
 	* src/rijndael/aesxam.c: Likewise
 	* src/sha/sha_driver.c: Likewise
 	* src/whetstone/whetstone.c: Likewise
+=======
+2014-10-03  James Pallister  <james.pallister@bristol.ac.uk>
+	Added a calibration file for the STM32VLDISCOVERY benchmarks
+
+	* config/arm/boards/stm32vldiscovery/calibration: Benchmark
+	    calibrations for STM32VLDISCOVERY board
+>>>>>>> jpallister/stm32vldiscovery_calibration
 
 2014-09-06  Andrew Burgess  <andrew.burgess@embecosm.com>
 
