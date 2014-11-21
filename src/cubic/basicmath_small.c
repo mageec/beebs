@@ -55,6 +55,9 @@ int main(void)
 
    for(n = 0; n < SCALE_FACTOR; ++n)
    {
+      output_pos = output;
+      output_count = 0;
+
       /* solve some cubic functions */
       /* should get 3 solutions: 2, 6 & 2.5   */
       SolveCubic(a1, b1, c1, d1, &solutions, output);

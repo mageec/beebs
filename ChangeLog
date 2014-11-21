@@ -1,3 +1,9 @@
+2014-11-21  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix for cubic: reset output counting when doing the repeat
+
+	* src/cubic/basicmath_small.c: When repeating the benchmark more than
+	    once we need to reset the output count
+
 2014-09-06  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* src/dhrystone/dhry_1.c: Add start and stop triggers.
