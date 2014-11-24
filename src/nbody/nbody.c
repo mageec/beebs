@@ -160,26 +160,14 @@ double bodies_energy(struct body *bodies, unsigned int nbodies) {
    return e;
 }
 
-int benchmark(int n)
+int benchmark()
 {
    int i;
    offset_momentum(solar_bodies, BODIES_SIZE);
    /*printf("%.9f\n", bodies_energy(solar_bodies, BODIES_SIZE));*/
-   for (i = 0; i < n; ++i)
+   for (i = 0; i < 100; ++i)
        bodies_energy(solar_bodies, BODIES_SIZE);
    /*printf("%.9f\n", bodies_energy(solar_bodies, BODIES_SIZE));*/
    return 0;
 }
 
-int main()
-{
-   int n;
-
-   initialise_board();
-   start_trigger();
-   for(n = 0; n < SCALE_FACTOR; ++n)
-      benchmark(100);
-   stop_trigger();
-
-   return 0;
-}

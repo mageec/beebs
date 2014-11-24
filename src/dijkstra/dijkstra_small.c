@@ -159,49 +159,23 @@ int dijkstra(int chStart, int chEnd)
    return rgnNodes[chEnd].iDist;
 }
 
-int main() {
-   int i,j,n;
+int output[NUM_NODES * NUM_NODES];
+int output_count = 0;
 
-   int output[NUM_NODES * NUM_NODES];
-   int output_count = 0;
-
-   int check_output[NUM_NODES * NUM_NODES] = {
-      0,  7, 38, 23, 14, 36,  3, 29,  7, 14,
-      28,  0, 31, 16,  7, 34, 31, 28,  1, 39,
-      39, 25,  0, 32, 14,  3, 32,  9, 26, 43,
-      12, 14, 40,  0, 21, 43, 15, 12, 15, 26,
-      40, 36, 48, 28,  0, 27, 43, 33, 12, 39,
-      36, 22, 21, 29, 29,  0, 29,  6, 23, 40,
-      8,  4, 35, 20, 11, 33,  0, 26,  5, 11,
-      30, 16, 47, 32, 23, 35, 23,  0, 17, 34,
-      28, 24, 55, 16,  8, 35, 31, 28,  0, 38,
-      23, 19, 41, 16,  8, 35, 15, 28,  0,  0};
-
-   initialise_board();
-   start_trigger();
+int benchmark() {
+   int i,j;
 
    /* finds 10 shortest paths between nodes */
-   for(n = 0; n < SCALE_FACTOR; ++n) {
-      output_count = 0;
-      for(j = 0; j < NUM_NODES; j++) {
-         for (i=0; i < NUM_NODES; i++) {
-            output[output_count] = dijkstra(i,j);
-            output_count++;
-         }
+   for(j = 0; j < NUM_NODES; j++) {
+      for (i=0; i < NUM_NODES; i++) {
+         output[output_count] = dijkstra(i,j);
+         output_count++;
       }
    }
 
-   stop_trigger();
-
-   int to_return = 0;
-   for (i = 0; i < output_count; i++) {
-      if (output[i] != check_output[i]) {
-         to_return = -1;
-         break;
-      }
-   }
-
-   return to_return;
+   return 0;
 }
+
+
 
 /* vim: set ts=3 sw=3 et: */

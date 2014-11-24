@@ -83,6 +83,7 @@ Bristol/Embecosm Embedded Benchmark Suite.
 * About::
 * Building and Running @value{BEEBS}::
 * Adding a New Board to @value{BEEBS}::
+* Adding a New Benchmark to @value{BEEBS}::
 
 * GNU Free Documentation License::  The license for this documentation
 * Index::
@@ -386,6 +387,48 @@ The numbers are used in the following expression to compute the number of runs:
 In this code snippet, @kbd{scale} is the entry in the calibration file, and
 @kbd{extra} is an extra scale factor specified in the source code file. The
 @kbd{extra} allows default scaling for the benchmark to be provided.
+
+@node Adding a New Benchmark to @value{BEEBS}
+@chapter Adding a New Benchmark to @value{BEEBS}
+@cindex Adding a new benchmark
+
+@menu
+* Benchmark structure::
+@end menu
+
+A new benchmark can easily be added to @value{BEEBS} by creating a new
+directory with the benchmark's name under src. A template folder exists under
+src with files which can be modified to compile the benchmark. The makefile.am
+must be changed to reflect the name of the benchmark executable (which should
+be the same as the folder name).
+
+@node Benchmark structure
+@section Benchmark structure
+@cindex Benchmark structure
+
+The main function to execute the benchmark should be called benchmark:
+
+@example
+@kbd{int benchmark(void)}
+@kbd{@{}
+@kbd{    return 0; // exit status}
+@kbd{@}}
+@end example
+
+If necessary, initialisation code for the benchmark can be placed in
+initialise_benchmark:
+
+@example
+@kbd{int initialise_benchmark(void)}
+@kbd{@{}
+@kbd{    return 0; // exit status}
+@kbd{@}}
+@end example
+
+These functions are automatically called by the template main function (in
+@file{src/main.c}). This file weakly links in both main and
+initialise_benchmark, so that they can be overridden in a benchmark specific
+fashion if necessary.
 
 @node  GNU Free Documentation License
 @chapter GNU Free Documentation License

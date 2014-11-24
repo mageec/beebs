@@ -64,20 +64,17 @@
 #define ARRAYDIM      (IMAGEDIM + 2)
 #define COEFFICIENTS  3
 
-int main()
+int benchmark()
 {
 
    static TYPE  coefficients[COEFFICIENTS*COEFFICIENTS];
    static TYPE  array[ARRAYDIM*ARRAYDIM] ={0} ;
    static TYPE  output[IMAGEDIM*IMAGEDIM] ={0};
 
-   static TYPE  check_output[IMAGEDIM*IMAGEDIM] =
-   {4, 6, 6, 4, 6, 9, 9, 6, 6, 9, 9, 6, 4, 6, 6, 4};
-
    STORAGE_CLASS TYPE *parray  = &array[0], *parray2, *parray3 ;
    STORAGE_CLASS TYPE *pcoeff  = &coefficients[0] ;
    STORAGE_CLASS TYPE *poutput = &output[0]       ;
-   int k, f, i, n;
+   int k, f, i;
 
    /* Start in the second row and second column to surround image with zeros */
    parray += ARRAYDIM;
@@ -102,10 +99,6 @@ int main()
    pcoeff  = &coefficients[0] ;
    poutput = &output[0]       ;
 
-   initialise_board();
-   start_trigger();
-
-   for(n = 0; n < SCALE_FACTOR; ++n)
    {
       /* Resets all pointers to the start of their arrays */
       parray  = &array[0]        ;
@@ -142,18 +135,8 @@ int main()
       }
    }
 
-   stop_trigger();
-
-   /* Verify that we have the correct result. */
-   int to_return = 0;
-   for (i = 0; i < IMAGEDIM*IMAGEDIM; i++) {
-      if (output[i] != check_output[i]) {
-         to_return = -1;
-         break;
-      }
-   }
-
-   return to_return;
+   return 0;
 }
+
 
 /* vim: set ts=3 sw=3 et: */

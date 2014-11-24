@@ -165,35 +165,15 @@ int decfile(aes *ctx, byte *outbuf)
 
 char *presetkey="ABCDEF1234567890ABCDEF1234567890";
 
-int main(int argc, char *argv[])
+int benchmark()
 {
-   char    *cp, ch;
-   byte key[32];
-   int     i=0, by=0, key_len=0, err = 0, n;
+   char    *cp=0, ch=0;
+   byte key[32]={0};
+   int     i=0, by=0, key_len=0, err=0;
    byte    encoutbuf[16], decoutbuf[16];
-   int to_return = 0;
 
-   /* TODO: Check if this difference is caused by uninitialised memory,
-    * and if so then initialise it */
-#ifdef __LP64__
-   char check_encoutbuf[16] = {46, 100, 102, -108, 50, -49, 41, -104,
-      36, 73, 123, -53, 14, -8, -40, 120};
-   char check_decoutbuf[16] = {-43, -117, -3, -13, 67, -93, -59, -124,
-      16, 104, -57, 80, 12, 43, 84, 26};
-#else
-   /* Assume 32 bits */
-   char check_encoutbuf[16] = {41, -73, 107, -88, 50, -49, 41, -104,
-      36, 73, 123, -53, 14, -8, -40, 120};
-   char check_decoutbuf[16] = {82, -39, -70, -17, -64, -115, -124, 94,
-      -19, 41, -115, 12, 11, 26, 113, 23};
-#endif
-
-   initialise_board();
-   start_trigger();
-
-   for(n = 0; n < SCALE_FACTOR; n++)
    {
-      aes     ctx[1];
+      aes     ctx = {0};
       by=0; key_len=0; err = 0;
       cp = presetkey;   /* this is a pointer to the hexadecimal key digits  */
       i = 0;          /* this is a count for the input digits processed   */
@@ -226,34 +206,20 @@ int main(int argc, char *argv[])
 
       key_len = i / 2;
 
-      set_key(key, key_len, enc, ctx);
+      set_key(key, key_len, enc, &ctx);
 
-      err = encfile(ctx, encoutbuf);
+      err = encfile(&ctx, encoutbuf);
 
-      set_key(key, key_len, dec, ctx);
+      set_key(key, key_len, dec, &ctx);
 
-      err = decfile(ctx, decoutbuf);
+      err = decfile(&ctx, decoutbuf);
 
    }
 
 exit:
-   stop_trigger();
 
-   /* We can't declare to_return in a label so it's been set above */
-   if (err) {
-      to_return = err;
-   }
-   else {
-      for (i = 0; i < 16; i++) {
-         if ((encoutbuf[i] != check_encoutbuf[i]) ||
-               (decoutbuf[i] != check_decoutbuf[i])) {
-            to_return = -1;
-            break;
-         }
-      }
-   }
-
-   return to_return;
+   return err;
 }
+
 
 /* vim: set ts=3 sw=3 et: */

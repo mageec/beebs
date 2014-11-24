@@ -140,10 +140,10 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__sglib_hashtable_SOURCES_DIST = hashtable.c sglib.h \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
-	$(top_srcdir)/include/support.h \
+	$(top_srcdir)/include/support.h $(top_srcdir)/src/main.c \
 	$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
 @CHIPSUPPORT_C_TRUE@am__objects_1 = chipsupport.$(OBJEXT)
-am__objects_2 = boardsupport.$(OBJEXT) $(am__objects_1)
+am__objects_2 = boardsupport.$(OBJEXT) main.$(OBJEXT) $(am__objects_1)
 am_sglib_hashtable_OBJECTS = hashtable.$(OBJEXT) $(am__objects_2)
 sglib_hashtable_OBJECTS = $(am_sglib_hashtable_OBJECTS)
 sglib_hashtable_LDADD = $(LDADD)
@@ -344,7 +344,8 @@ top_srcdir = @top_srcdir@
 sglib_hashtable_SOURCES = hashtable.c sglib.h ${platform_src}
 platform_src =  \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
-	$(top_srcdir)/include/support.h $(am__append_1)
+	$(top_srcdir)/include/support.h $(top_srcdir)/src/main.c \
+	$(am__append_1)
 @CALIBRATION_FALSE@calib = echo 0
 
 # If there is a benchmark calibration file, this specifies the shifting
@@ -460,6 +461,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/boardsupport.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chipsupport.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hashtable.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -495,6 +497,20 @@ boardsupport.obj: $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c' object='boardsupport.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o boardsupport.obj `if test -f '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; then $(CYGPATH_W) '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; fi`
+
+main.o: $(top_srcdir)/src/main.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT main.o -MD -MP -MF $(DEPDIR)/main.Tpo -c -o main.o `test -f '$(top_srcdir)/src/main.c' || echo '$(srcdir)/'`$(top_srcdir)/src/main.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/main.Tpo $(DEPDIR)/main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/src/main.c' object='main.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o main.o `test -f '$(top_srcdir)/src/main.c' || echo '$(srcdir)/'`$(top_srcdir)/src/main.c
+
+main.obj: $(top_srcdir)/src/main.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT main.obj -MD -MP -MF $(DEPDIR)/main.Tpo -c -o main.obj `if test -f '$(top_srcdir)/src/main.c'; then $(CYGPATH_W) '$(top_srcdir)/src/main.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/src/main.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/main.Tpo $(DEPDIR)/main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/src/main.c' object='main.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o main.obj `if test -f '$(top_srcdir)/src/main.c'; then $(CYGPATH_W) '$(top_srcdir)/src/main.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/src/main.c'; fi`
 
 chipsupport.o: $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT chipsupport.o -MD -MP -MF $(DEPDIR)/chipsupport.Tpo -c -o chipsupport.o `test -f '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c' || echo '$(srcdir)/'`$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c

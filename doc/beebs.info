@@ -31,6 +31,7 @@ Benchmark Suite.
 * About::
 * Building and Running BEEBS::
 * Adding a New Board to BEEBS::
+* Adding a New Benchmark to BEEBS::
 
 * GNU Free Documentation License::  The license for this documentation
 * Index::
@@ -141,7 +142,7 @@ Notify other issues by email to <beebs@mageec.org>.
    * The configuration files, assume bash.
 
 
-File: beebs.info,  Node: Adding a New Board to BEEBS,  Next: GNU Free Documentation License,  Prev: Building and Running BEEBS,  Up: Top
+File: beebs.info,  Node: Adding a New Board to BEEBS,  Next: Adding a New Benchmark to BEEBS,  Prev: Building and Running BEEBS,  Up: Top
 
 3 Adding a New Board to BEEBS
 *****************************
@@ -299,9 +300,51 @@ In this code snippet, 'scale' is the entry in the calibration file, and
 'extra' allows default scaling for the benchmark to be provided.
 
 
-File: beebs.info,  Node: GNU Free Documentation License,  Next: Index,  Prev: Adding a New Board to BEEBS,  Up: Top
+File: beebs.info,  Node: Adding a New Benchmark to BEEBS,  Next: GNU Free Documentation License,  Prev: Adding a New Board to BEEBS,  Up: Top
 
-4 GNU Free Documentation License
+4 Adding a New Benchmark to BEEBS
+*********************************
+
+* Menu:
+
+* Benchmark structure::
+
+A new benchmark can easily be added to BEEBS by creating a new directory
+with the benchmark's name under src.  A template folder exists under src
+with files which can be modified to compile the benchmark.  The
+makefile.am must be changed to reflect the name of the benchmark
+executable (which should be the same as the folder name).
+
+
+File: beebs.info,  Node: Benchmark structure,  Up: Adding a New Benchmark to BEEBS
+
+4.1 Benchmark structure
+=======================
+
+The main function to execute the benchmark should be called benchmark:
+
+     int benchmark(void)
+     {
+         return 0; // exit status
+     }
+
+If necessary, initialisation code for the benchmark can be placed in
+initialise_benchmark:
+
+     int initialise_benchmark(void)
+     {
+         return 0; // exit status
+     }
+
+These functions are automatically called by the template main function
+(in 'src/main.c').  This file weakly links in both main and
+initialise_benchmark, so that they can be overridden in a benchmark
+specific fashion if necessary.
+
+
+File: beebs.info,  Node: GNU Free Documentation License,  Next: Index,  Prev: Adding a New Benchmark to BEEBS,  Up: Top
+
+5 GNU Free Documentation License
 ********************************
 
                       Version 1.2, November 2002
@@ -740,9 +783,12 @@ Index
                                                                (line 18)
 * '--with-chip':                         Configuring the Build.
                                                                (line 21)
+* Adding a new benchmark:                Adding a New Benchmark to BEEBS.
+                                                               (line  6)
 * Adding a new board:                    Adding a New Board to BEEBS.
                                                                (line  6)
 * 'arch.cfg':                            Configuration files.  (line  6)
+* Benchmark structure:                   Benchmark structure.  (line  6)
 * board specific code:                   Board specific code.  (line  6)
 * 'board.cfg':                           Configuration files.  (line  6)
 * 'boardsupport.c':                      Board specific code.  (line  6)
@@ -775,20 +821,22 @@ Index
 
 Tag Table:
 Node: Top770
-Node: About1131
-Node: Building and Running BEEBS1428
-Node: Preparation1738
-Node: Configuring the Build2008
-Node: Building2820
-Node: Running3288
-Node: Known Issues3462
-Node: Adding a New Board to BEEBS3776
-Node: Where to add files4091
-Node: Configuration files5260
-Node: Header files6085
-Node: Board specific code6841
-Node: Calibration7665
-Node: GNU Free Documentation License8516
-Node: Index30915
+Node: About1167
+Node: Building and Running BEEBS1464
+Node: Preparation1774
+Node: Configuring the Build2044
+Node: Building2856
+Node: Running3324
+Node: Known Issues3498
+Node: Adding a New Board to BEEBS3812
+Node: Where to add files4128
+Node: Configuration files5297
+Node: Header files6122
+Node: Board specific code6878
+Node: Calibration7702
+Node: Adding a New Benchmark to BEEBS8553
+Node: Benchmark structure9135
+Node: GNU Free Documentation License9824
+Node: Index32227
 
 End Tag Table

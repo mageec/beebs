@@ -140,10 +140,11 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__matmult_int_SOURCES_DIST = ../matmult/matmult.c \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
-	$(top_srcdir)/include/support.h \
+	$(top_srcdir)/include/support.h $(top_srcdir)/src/main.c \
 	$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
 @CHIPSUPPORT_C_TRUE@am__objects_1 = matmult_int-chipsupport.$(OBJEXT)
-am__objects_2 = matmult_int-boardsupport.$(OBJEXT) $(am__objects_1)
+am__objects_2 = matmult_int-boardsupport.$(OBJEXT) \
+	matmult_int-main.$(OBJEXT) $(am__objects_1)
 am_matmult_int_OBJECTS = matmult_int-matmult.$(OBJEXT) \
 	$(am__objects_2)
 matmult_int_OBJECTS = $(am_matmult_int_OBJECTS)
@@ -348,7 +349,8 @@ top_srcdir = @top_srcdir@
 matmult_int_SOURCES = ../matmult/matmult.c ${platform_src}
 platform_src =  \
 	$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
-	$(top_srcdir)/include/support.h $(am__append_1)
+	$(top_srcdir)/include/support.h $(top_srcdir)/src/main.c \
+	$(am__append_1)
 @CALIBRATION_FALSE@calib = echo 0
 
 # If there is a benchmark calibration file, this specifies the shifting
@@ -465,6 +467,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/matmult_int-boardsupport.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/matmult_int-chipsupport.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/matmult_int-main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/matmult_int-matmult.Po@am__quote@
 
 .c.o:
@@ -515,6 +518,20 @@ matmult_int-boardsupport.obj: $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsu
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c' object='matmult_int-boardsupport.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(matmult_int_CFLAGS) $(CFLAGS) -c -o matmult_int-boardsupport.obj `if test -f '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; then $(CYGPATH_W) '$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c'; fi`
+
+matmult_int-main.o: $(top_srcdir)/src/main.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(matmult_int_CFLAGS) $(CFLAGS) -MT matmult_int-main.o -MD -MP -MF $(DEPDIR)/matmult_int-main.Tpo -c -o matmult_int-main.o `test -f '$(top_srcdir)/src/main.c' || echo '$(srcdir)/'`$(top_srcdir)/src/main.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/matmult_int-main.Tpo $(DEPDIR)/matmult_int-main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/src/main.c' object='matmult_int-main.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(matmult_int_CFLAGS) $(CFLAGS) -c -o matmult_int-main.o `test -f '$(top_srcdir)/src/main.c' || echo '$(srcdir)/'`$(top_srcdir)/src/main.c
+
+matmult_int-main.obj: $(top_srcdir)/src/main.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(matmult_int_CFLAGS) $(CFLAGS) -MT matmult_int-main.obj -MD -MP -MF $(DEPDIR)/matmult_int-main.Tpo -c -o matmult_int-main.obj `if test -f '$(top_srcdir)/src/main.c'; then $(CYGPATH_W) '$(top_srcdir)/src/main.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/src/main.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/matmult_int-main.Tpo $(DEPDIR)/matmult_int-main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/src/main.c' object='matmult_int-main.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(matmult_int_CFLAGS) $(CFLAGS) -c -o matmult_int-main.obj `if test -f '$(top_srcdir)/src/main.c'; then $(CYGPATH_W) '$(top_srcdir)/src/main.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/src/main.c'; fi`
 
 matmult_int-chipsupport.o: $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(matmult_int_CFLAGS) $(CFLAGS) -MT matmult_int-chipsupport.o -MD -MP -MF $(DEPDIR)/matmult_int-chipsupport.Tpo -c -o matmult_int-chipsupport.o `test -f '$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c' || echo '$(srcdir)/'`$(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c

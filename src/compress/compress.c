@@ -223,40 +223,22 @@ void cl_block (void);
 void output( code_int code );
 void writebytes( char *buf, int n );
 
-int main(void)
+int benchmark()
 {
    int count = IN_COUNT;
 
-   int i;
+   maxbits = BITS;
+   maxmaxcode = 1 << maxbits;
 
+   InCnt = count;
+   apsim_InCnt = IN_COUNT + 3;
+   InBuff = (unsigned char *)orig_text_buffer;
+   OutBuff = (unsigned char *)comp_text_buffer;
 
-   initialise_board();
-   start_trigger();
-
-   for(i = 0; i < SCALE_FACTOR; ++i)
-   {
-       // initbuffer();
-
-       /*if(maxbits < INIT_BITS) maxbits = INIT_BITS;*/
-       /* With our setting, maxbits = 16,
-                            INIT_BITS = 9 */
-       /*if (maxbits > BITS) maxbits = BITS;*/
-       maxbits = BITS;
-       maxmaxcode = 1 << maxbits;
-
-       InCnt = count;
-       apsim_InCnt = IN_COUNT + 3;
-       InBuff = (unsigned char *)orig_text_buffer;
-       OutBuff = (unsigned char *)comp_text_buffer;
-
-       compress();
-    }
-
-    stop_trigger();
-
-   return (0);
-
+   compress();
+   return 0;
 }
+
 
 
 static int offset;

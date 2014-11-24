@@ -20,7 +20,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
-               $(top_srcdir)/include/support.h
+               $(top_srcdir)/include/support.h \
+               $(top_srcdir)/src/main.c
 
 if CHIPSUPPORT_C
 platform_src += $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c

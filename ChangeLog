@@ -1,3 +1,214 @@
+2014-09-24  James Pallister  <james.pallister@bristol.ac.uk>
+	Added calibration values for stm32f0discovery
+
+	* config/arm/boards/stm32f0discovery/calibration: Calibration file for
+	    stm32f0discovery
+
+2014-09-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Moved every main function to a single file. Added the ability for a
+	benchmark initialisation function. Main and initialise_benchmark are
+	weakly linked so that individual benchmarks can override them if
+	necessary.
+
+	* doc/beebs.info: Regenerated
+	* doc/beebs.texi: Updated documentation to add a section on benchmarks
+	* doc/version.texi: Regenerated
+	* src/2dfir/Makefile.in: Regenerated
+	* src/2dfir/fir2dim.c: Removed main function
+	* src/adpcm/Makefile.in: Regenerated
+	* src/adpcm/adpcm.c: Removed main function
+	* src/aha-compress/Makefile.in: Regenerated
+	* src/aha-compress/compress_test.c: Removed main function
+	* src/aha-mont64/Makefile.in: Regenerated
+	* src/aha-mont64/mont64.c: Removed main function
+	* src/blowfish/Makefile.in: Regenerated
+	* src/blowfish/bf.c: Removed main function
+	* src/bs/Makefile.in: Regenerated
+	* src/bs/bs.c: Removed main function
+	* src/bubblesort/Makefile.in: Regenerated
+	* src/bubblesort/bubblesort.c: Removed main function
+	* src/cnt/Makefile.in: Regenerated
+	* src/cnt/cnt.c: Removed main function
+	* src/common.mk.am: Added main.c to platform sources so it gets
+	    compiled.
+	* src/compress/Makefile.in: Regenerated
+	* src/compress/compress.c: Removed main function
+	* src/cover/Makefile.in: Regenerated
+	* src/cover/cover.c: Removed main function
+	* src/crc/Makefile.in: Regenerated
+	* src/crc/crc.c: Removed main function
+	* src/crc32/Makefile.in: Regenerated
+	* src/crc32/crc_32.c: Removed main function
+	* src/ctl-stack/Makefile.in: Regenerated
+	* src/ctl-string/Makefile.in: Regenerated
+	* src/ctl-string/string.c: Removed main function
+	* src/ctl-vector/Makefile.in: Regenerated
+	* src/ctl/ctl.c: Removed main function
+	* src/cubic/Makefile.in: Regenerated
+	* src/cubic/basicmath_small.c: Removed main function
+	* src/cubic/cubic.c: Removed main function
+	* src/dhrystone/Makefile.in: Regenerated
+	* src/dhrystone/dhry_1.c: Removed main function
+	* src/dijkstra/Makefile.in: Regenerated
+	* src/dijkstra/dijkstra_small.c: Removed main function
+	* src/dtoa/Makefile.in: Regenerated
+	* src/dtoa/dtoa.c: Removed main function
+	* src/duff/Makefile.in: Regenerated
+	* src/duff/duff.c: Removed main function
+	* src/edn/Makefile.in: Regenerated
+	* src/edn/edn.c: Removed main function
+	* src/expint/Makefile.in: Regenerated
+	* src/expint/expint.c: Removed main function
+	* src/fac/Makefile.in: Regenerated
+	* src/fac/fac.c: Removed main function
+	* src/fasta/Makefile.in: Regenerated
+	* src/fasta/fasta.c: Removed main function
+	* src/fdct/Makefile.in: Regenerated
+	* src/fdct/fdct.c: Removed main function
+	* src/fft/Makefile.in: Regenerated
+	* src/fft/fft1.c: Removed main function
+	* src/fibcall/Makefile.in: Regenerated
+	* src/fibcall/fibcall.c: Removed main function
+	* src/fir/Makefile.in: Regenerated
+	* src/fir/fir.c: Removed main function
+	* src/frac/Makefile.in: Regenerated
+	* src/frac/frac.c: Removed main function
+	* src/huffbench/Makefile.in: Regenerated
+	* src/huffbench/huffbench.c: Removed main function
+	* src/insertsort/Makefile.in: Regenerated
+	* src/insertsort/insertsort.c: Removed main function
+	* src/janne_complex/Makefile.in: Regenerated
+	* src/janne_complex/janne_complex.c: Removed main function
+	* src/jfdctint/Makefile.in: Regenerated
+	* src/jfdctint/jfdctint.c: Removed main function
+	* src/lcdnum/Makefile.in: Regenerated
+	* src/lcdnum/lcdnum.c: Removed main function
+	* src/levenshtein/Makefile.in: Regenerated
+	* src/levenshtein/levenshtein.c: Removed main function
+	* src/lms/Makefile.in: Regenerated
+	* src/lms/lms.c: Removed main function
+	* src/ludcmp/Makefile.in: Regenerated
+	* src/ludcmp/ludcmp.c: Removed main function
+	* src/main.c: Generic main function for all the benchmarks
+	* src/matmult-float/Makefile.in: Regenerated
+	* src/matmult-int/Makefile.in: Regenerated
+	* src/matmult/matmult.c: Removed main function
+	* src/mergesort/Makefile.in: Regenerated
+	* src/mergesort/mergesort.c: Removed main function
+	* src/miniz/Makefile.in: Regenerated
+	* src/miniz/miniz_b.c: Removed main function
+	* src/minver/Makefile.in: Regenerated
+	* src/minver/minver.c: Removed main function
+	* src/nbody/Makefile.in: Regenerated
+	* src/nbody/nbody.c: Removed main function
+	* src/ndes/Makefile.in: Regenerated
+	* src/ndes/ndes.c: Removed main function
+	* src/nettle-arcfour/Makefile.in: Regenerated
+	* src/nettle-arcfour/arcfour.c: Removed main function
+	* src/nettle-cast128/Makefile.in: Regenerated
+	* src/nettle-cast128/cast128.c: Removed main function
+	* src/nettle-des/Makefile.in: Regenerated
+	* src/nettle-des/des.c: Removed main function
+	* src/nettle-md5/Makefile.in: Regenerated
+	* src/nettle-md5/md5.c: Removed main function
+	* src/newlib-exp/Makefile.in: Regenerated
+	* src/newlib-exp/ef_exp.c: Removed main function
+	* src/newlib-log/Makefile.in: Regenerated
+	* src/newlib-log/ef_log.c: Removed main function
+	* src/newlib-mod/Makefile.in: Regenerated
+	* src/newlib-mod/ef_mod.c: Removed main function
+	* src/newlib-sqrt/Makefile.in: Regenerated
+	* src/newlib-sqrt/ef_sqrt.c: Removed main function
+	* src/ns/Makefile.in: Regenerated
+	* src/ns/ns.c: Removed main function
+	* src/nsichneu/Makefile.in: Regenerated
+	* src/nsichneu/nsichneu.c: Removed main function
+	* src/picojpeg/Makefile.in: Regenerated
+	* src/picojpeg/picojpeg_test.c: Removed main function
+	* src/prime/Makefile.in: Regenerated
+	* src/prime/prime.c: Removed main function
+	* src/qrduino/Makefile.in: Regenerated
+	* src/qrduino/qrtest.c: Removed main function
+	* src/qsort/Makefile.in: Regenerated
+	* src/qsort/qsort.c: Removed main function
+	* src/qurt/Makefile.in: Regenerated
+	* src/qurt/qurt.c: Removed main function
+	* src/recursion/Makefile.in: Regenerated
+	* src/recursion/recursion.c: Removed main function
+	* src/rijndael/Makefile.in: Regenerated
+	* src/rijndael/aesxam.c: Removed main function
+	* src/select/Makefile.in: Regenerated
+	* src/select/select.c: Removed main function
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated
+	* src/sglib-arraybinsearch/arraybinsearch.c: Removed main function
+	* src/sglib-arrayheapsort/Makefile.in: Regenerated
+	* src/sglib-arrayquicksort/Makefile.in: Regenerated
+	* src/sglib-arraysort/arraysort.c: Removed main function
+	* src/sglib-dllist/Makefile.in: Regenerated
+	* src/sglib-dllist/dllist.c: Removed main function
+	* src/sglib-hashtable/Makefile.in: Regenerated
+	* src/sglib-hashtable/hashtable.c: Removed main function
+	* src/sglib-listinsertsort/Makefile.in: Regenerated
+	* src/sglib-listinsertsort/listinsertsort.c: Removed main function
+	* src/sglib-listsort/Makefile.in: Regenerated
+	* src/sglib-listsort/listsort.c: Removed main function
+	* src/sglib-queue/Makefile.in: Regenerated
+	* src/sglib-queue/queue.c: Removed main function
+	* src/sglib-rbtree/Makefile.in: Regenerated
+	* src/sglib-rbtree/rbtree.c: Removed main function
+	* src/sha/Makefile.in: Regenerated
+	* src/sha/sha_driver.c: Removed main function
+	* src/slre/Makefile.in: Regenerated
+	* src/slre/slre.c: Removed main function
+	* src/sqrt/Makefile.in: Regenerated
+	* src/sqrt/sqrt.c: Removed main function
+	* src/st/Makefile.in: Regenerated
+	* src/st/st.c: Removed main function
+	* src/statemate/Makefile.in: Regenerated
+	* src/statemate/statemate.c: Removed main function
+	* src/stb_perlin/Makefile.in: Regenerated
+	* src/stb_perlin/stb_perlin.c: Removed main function
+	* src/stringsearch1/Makefile.in: Regenerated
+	* src/stringsearch1/stringsearch1.c: Removed main function
+	* src/strstr/Makefile.in: Regenerated
+	* src/strstr/strstr.c: Removed main function
+	* src/tarai/Makefile.in: Regenerated
+	* src/tarai/tarai.c: Removed main function
+	* src/template/Makefile.in: Regenerated
+	* src/template/template.c: Removed main function
+	* src/trio-snprintf/Makefile.in: Regenerated
+	* src/trio-sscanf/Makefile.in: Regenerated
+	* src/trio/trio_test.c: Removed main function
+	* src/ud/Makefile.in: Regenerated
+	* src/ud/ud.c: Removed main function
+	* src/whetstone/Makefile.in: Regenerated
+	* src/whetstone/whetstone.c: Removed main function
+	* src/wikisort/Makefile.in: Regenerated
+	* src/wikisort/wikisort.c: Removed main function
+
+2014-09-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Refactored several benchmarks to have a consistent structure. All
+	benchmarks now have a main benchmark function, and similar main
+	functions which just initialise the board/triggers and call the
+	benchmark.
+
+	* src/2dfir/fir2dim.c: Refactored code into a benchmark function.
+	* src/blowfish/bf.c: Likewise
+	* src/bs/bs.c: Likewise
+	* src/compress/compress.c: Likewise
+	* src/crc32/crc_32.c: Likewise
+	* src/cubic/basicmath_small.c: Likewise
+	* src/dhrystone/dhry_1.c: Likewise
+	* src/dijkstra/dijkstra_small.c: Likewise
+	* src/fasta/fasta.c: Likewise
+	* src/fdct/fdct.c: Likewise
+	* src/matmult/matmult.c: Likewise
+	* src/nbody/nbody.c: Likewise
+	* src/nettle-cast128/cast128.c: Likewise
+	* src/rijndael/aesxam.c: Likewise
+	* src/sha/sha_driver.c: Likewise
+	* src/whetstone/whetstone.c: Likewise
+
 2014-09-06  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* src/dhrystone/dhry_1.c: Add start and stop triggers.

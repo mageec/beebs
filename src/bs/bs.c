@@ -108,17 +108,9 @@ binary_search(int x)
   return fvalue;
 }
 
-int
-main (void)
+int benchmark()
 {
-  int i;
-
-  initialise_board ();
-  start_trigger ();
-
-  for (i = 0; i < SCALE_FACTOR; i++)
-    binary_search(8);
-
-  stop_trigger ();
+  binary_search(8);
   return 0;
 }
+
