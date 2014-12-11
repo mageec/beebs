@@ -23,12 +23,11 @@
 
 void initialise_board()
 {
-  PIN_INIT(A, 0);
-
   PROTECTED_WRITE(OSC_CTRL, 0x3);
   while((OSC_STATUS & 2) == 0);
   PROTECTED_WRITE(CLK_PSCTRL, 0xC);
   PROTECTED_WRITE(CLK_CTRL, 0x1);
+  PIN_INIT(A, 0);
 }
 
 void start_trigger()

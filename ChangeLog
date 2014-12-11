@@ -1,4 +1,16 @@
 2016-07-12  James Pallister  <james.pallister@bristol.ac.uk>
+
+	Calibration update for xmega and board support tweaks
+
+	* config/avr/boards/xmegaa3buxplained/boardsupport.c: Initialise pin
+	    after clock
+	* config/avr/boards/xmegaa3buxplained/calibration: Correct calibration
+	    for blowfish and dijkstra
+	* config/avr/chips/atxmega256a3bu/chipsupport.h: Clear the port before
+	    initialising direction
+
+2016-07-12  James Pallister  <james.pallister@bristol.ac.uk>
+
 	Added support for the XMEGA A3BU XPLAINED board
 
 	* config/avr/boards/xmegaa3buxplained/boardsupport.c: Trigger and

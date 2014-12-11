@@ -23,8 +23,8 @@
 #define CHIPSUPPORT_H
 
 #define PIN_INIT(port, number)                  \
-  PORT ## port . DIRSET |= (1 << number);       \
-  PORT ## port . OUTCLR |= (1 << number);
+  PORT ## port . OUTCLR |= (1 << number);       \
+  PORT ## port . DIRSET |= (1 << number);
 
 #define PIN_SET(port, number)                   \
   PORT ## port . OUTSET |= (1 << number);
