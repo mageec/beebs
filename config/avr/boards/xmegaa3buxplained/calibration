@@ -2,7 +2,7 @@
 adpcm 5
 aha-compress 6
 aha-mont64 7
-blowfish 2
+blowfish 12
 bubblesort 8
 cnt 4
 compress 3
@@ -14,7 +14,7 @@ ctl-string 4
 ctl-vector 5
 cubic 7
 dhrystone 0
-dijkstra 0
+dijkstra 10
 dtoa 5
 duff 1
 edn 8
