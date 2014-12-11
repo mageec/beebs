@@ -1,4 +1,10 @@
 2014-12-11  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix output validation for dijkstra
+
+	* src/dijkstra/dijkstra_small.c: output_count needs to be
+	    reinitialised for each call to benchmark.
+
+2014-12-11  James Pallister  <james.pallister@bristol.ac.uk>
 	Fix scaling for blowfish
 
 	* src/blowfish/bf.c: Remove scaling from inside the benchmark function

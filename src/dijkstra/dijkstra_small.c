@@ -165,6 +165,8 @@ int output_count = 0;
 int benchmark() {
    int i,j;
 
+   output_count = 0;
+
    /* finds 10 shortest paths between nodes */
    for(j = 0; j < NUM_NODES; j++) {
       for (i=0; i < NUM_NODES; i++) {
