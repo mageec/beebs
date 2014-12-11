@@ -1,4 +1,10 @@
 2014-12-11  James Pallister  <james.pallister@bristol.ac.uk>
+	Fix scaling for blowfish
+
+	* src/blowfish/bf.c: Remove scaling from inside the benchmark function
+	    (performed in main)
+
+2014-12-11  James Pallister  <james.pallister@bristol.ac.uk>
 	Enabled the calibration to accept a wider range of values
 
 	* include/support.h: If the calibration factor is negative, scale up
