@@ -3,10 +3,6 @@
 #include "blowfish.h"
 #include "support.h"
 
-/* This scale factor will be changed to equalise the runtime of the
-   benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 11)
-
 char *ckey= "ABCDEF1234567890";
 BF_KEY key;
 
@@ -20,9 +16,8 @@ int benchmark()
    int by=0,i=0;
    int encordec=-1;
    char *cp,ch;
-   int n, n2;
+   int n2;
 
-   for(n = 0; n < SCALE_FACTOR; ++n)
    {
       encordec = 1;
       num=0;

@@ -42,7 +42,7 @@
 
 // The overall repeat factor is scaled by the command-line given
 // CALIB_SCALE.
-#define REPEAT_FACTOR ((BOARD_REPEAT_FACTOR) >> (CALIB_SCALE))
+#define REPEAT_FACTOR (((CALIB_SCALE) > 0)?(BOARD_REPEAT_FACTOR) >> (CALIB_SCALE):(BOARD_REPEAT_FACTOR) << (-CALIB_SCALE))
 
 #ifdef HAVE_CHIPSUPPORT_H
 // #include "@srcdir@/config/@ARCH@/chips/@CHIP@/chipsupport.h"
