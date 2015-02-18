@@ -1,3 +1,18 @@
+2014-12-23  James Pallister  <james.pallister@bristol.ac.uk>
+	Added support for the stm32l0discovery board, with cortex-m0+
+
+	* config/arm/boards/stm32l0discovery/board.cfg: Board config for
+	    stm32l0discovery
+	* config/arm/boards/stm32l0discovery/boardsupport.c: Board support for
+	    stm32l0discovery
+	* config/arm/boards/stm32l0discovery/calibration: Calibration for
+	    stm32l0discovery
+	* config/arm/chips/stm32l053/chip.cfg: Chip configuration for
+	    stm32l053
+	* config/arm/chips/stm32l053/chip.ld: Linker script for stm32l053
+	* config/arm/chips/stm32l053/chipsupport.c: Chip support for stm32l053
+	* config/arm/chips/stm32l053/chipsupport.h: Chip support for stm32l053
+
 2014-12-11  James Pallister  <james.pallister@bristol.ac.uk>
 	Fix output validation for dijkstra
 
