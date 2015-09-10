@@ -197,11 +197,11 @@ int benchmark() {
    uint64 a, b, m, hr, p1hi, p1lo, p1, p, abar, bbar;
    uint64 phi, plo;
    volatile uint64 rinv, mprime;
-   int errors;
+   int errors = 0;
 
-   m = 0xfae849273928f89eLL;
-   b = 0x14736defb9330573LL;
-   a = 0x0549372187237fefLL;
+   m = 0xfae849273928f89fLL;             // Must be odd.
+   b = 0x14736defb9330573LL;             // Must be smaller than m.
+   a = 0x0549372187237fefLL;             // Must be smaller than m.
 
    /* The simple calculation: This computes (a*b)**4 (mod m) correctly for all a,
    b, m < 2**64. */
@@ -263,7 +263,8 @@ int benchmark() {
 
    mulul64(p, rinv, &phi, &plo);
    p = modul64(phi, plo, m);
-   if (p != p1) errors = 1;
+   if (p != p1) 
+	   errors = 1;
 
    return errors;
 }
