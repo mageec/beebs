@@ -23,7 +23,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define SCALE_FACTOR    (REPEAT_FACTOR << 5))
 
 /* $Id: fibcall.c,v 1.2 2005/04/04 11:34:58 csg Exp $ */
 
@@ -70,7 +70,6 @@
 /*************************************************************************/
 
 
-
 int fib(int n)
 {
   int  i, Fnew, Fold, temp,ans;
@@ -91,12 +90,20 @@ int fib(int n)
 int benchmark()
 {
   int a;
+  int r;
 
   a = 30;
-  fib(a);
-  return a;
+  r = fib(a);
+  return verify_benchmark(r);
 }
 
+int verify_benchmark(int r)
+{
+  int exp = 832040;
+  if (r != exp)
+    return 0;
+  return 1;
+}
 
 
 

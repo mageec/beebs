@@ -863,4 +863,14 @@ benchmark (void)
   return 0;
 }
 
+int verify_benchmark()
+{
+  int i;
+  //int expected_e = {221, 92, 251, 152, 155, 78, 241, 216, 80, 153, 123, 164, 171, 75, 220, 168};
+  int expected[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
 
+  for (i=0; i<16; i++)
+    if (result[i] != expected[i])
+      return 0;
+  return 1;
+}

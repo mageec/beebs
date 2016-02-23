@@ -126,6 +126,14 @@ int benchmark()
   for(i = 0; i < 10; ++i)
     frac(nums[i], &n, &d, error);
 
-  return n;
+  return d;
+}
+
+int verify_benchmark(int r)
+{
+  int expected = 1000000;
+  if (r != expected)
+    return 0;
+  return 1;
 }
 

@@ -234,10 +234,12 @@ void cyfun(unsigned long ir, great k, unsigned long * iout) {
    int value = 0;
 #endif
 
+immense out;
+
 int
 benchmark (void)
 {
-   immense inp, key, out;
+   immense inp, key;
    int newkey, isw;
 
    inp.l = KNOWN_VALUE * 35;
@@ -252,4 +254,14 @@ benchmark (void)
    return 0;
 }
 
-
+int verify_benchmark() {
+  // #include <stdio.h>
+  // printf("%lu %lu\n", out.l, out.r);
+  unsigned long int exp_l = 2489587893;
+  unsigned long int exp_r = 1806503748;
+  if (out.l != exp_l)
+    return 0;
+  if (out.r != exp_r)
+    return 0;
+  return 1;
+}

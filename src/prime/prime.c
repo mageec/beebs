@@ -73,4 +73,9 @@ benchmark (void)
   return 0;
 }
 
-
+int verify_benchmark() {
+  int expected = 0;
+  if (result != expected)
+    return 0;
+  return 1;
+}

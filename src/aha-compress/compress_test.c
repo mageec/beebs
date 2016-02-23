@@ -153,7 +153,8 @@ benchmark (void)
       0x12345678, 0xF0035555, 0x000004ec,
       0x80000000, 0xF0035555, 0x00002000,
    };
-   int errors = 0,  n, r, i;
+   int errors = 0,  n, i;
+   unsigned int r;
 
    n = sizeof(test)/sizeof(test[0]);
 
@@ -184,4 +185,10 @@ benchmark (void)
    return errors;
 }
 
-
+// r is the number of errors therefore if r = 0 then output a 1 for correct
+int verify_benchmark(int r)
+{
+   if (r != 0)
+      return 0;
+   return 1;
+}

@@ -145,6 +145,17 @@ int benchmark(void)
   return 0;
 }
 
+int verify_benchmark()
+{
+  int i;
+  // check source and target equal up to INVOCATION_COUNT bytes
+  for (i=0; i<INVOCATION_COUNT; i++) {
+    //printf("%c,%c\n",source[i],target[i]);
+    if (source[i] != target[i])
+      return 0;
+  }
+  return 1;
+}
 
 
 

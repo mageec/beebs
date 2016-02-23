@@ -53,6 +53,7 @@
 #endif
 
 void initialise_board();
+int verify_benchmark();
 void start_trigger();
 void stop_trigger();
 

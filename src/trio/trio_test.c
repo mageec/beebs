@@ -58,7 +58,15 @@ benchmark (void)
 
   return 0;
 }
+
+int verify_benchmark() {
+  int expected = 15;
+  if (int_dest != expected)
+    return 0;
+  return 1;
+}
 #else
 #error "Missing a TRIO_SSCANF or TRIO_SNPRINTF macro"
 #endif
+
 

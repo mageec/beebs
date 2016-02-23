@@ -151,19 +151,30 @@ _nettle_md5_compress(uint32_t *digest, const uint8_t *input)
   digest[3] += d;
 }
 
+uint32_t digest[_MD5_DIGEST_LENGTH] =
+{
+  0x67452301,
+  0xefcdab89,
+  0x98badcfe,
+  0x10325476,
+};
 
 int
 benchmark (void)
 {
-  uint32_t digest[_MD5_DIGEST_LENGTH] =
-    {
-      0x67452301,
-      0xefcdab89,
-      0x98badcfe,
-      0x10325476,
-    };
   _nettle_md5_compress(digest, input);
   return 0;
 }
 
-
+int verify_benchmark() {
+  int i;
+  // #include <stdio.h>
+  // for (i=0; i<_MD5_DIGEST_LENGTH; i++)
+  //   printf("%x, ", digest[i]);
+  uint32_t expected[_MD5_DIGEST_LENGTH] =
+    {0x4d54e9fe, 0x2b838af9, 0xeed5c36, 0xa7d79fed};
+  for (i=0; i<_MD5_DIGEST_LENGTH; i++)
+    if (digest[i] != expected[i])
+      return 0;
+  return 1;
+}

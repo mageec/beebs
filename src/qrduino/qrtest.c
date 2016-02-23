@@ -46,5 +46,18 @@ benchmark (void)
   return 0;
 }
 
-
+int verify_benchmark() {
+  int i;
+  // #include <stdio.h>
+  // for (i=0; i<22; i++)
+  //   printf("%d,", strinbuf[i]);
+  // maybe should be a char
+  int expected[22] =
+    {254,101,63,128,130,110,160,128,186,65,46,
+     128,186,38,46,128,186,9,174,128,130,20};
+  for (i=0; i<22; i++)
+    if (strinbuf[i] != expected[i])
+      return 0;
+  return 1;
+}
 

@@ -1,3 +1,62 @@
+2016-07-21  Craig Blackmore  <craig.blackmore@bristol.ac.uk>
+	Added verify_benchmark function to implement self-tests.
+	Initialised output_count in dijkstra.
+	newlib-sqrt added result array so that the function calls are not
+	    optimised out
+
+	* include/support.h : added verify_benchmark function prototype
+	* src/2dfir/fir2dim.c : added verify_benchmark
+	* src/adpcm/adpcm.c : added verify_benchmark
+	* src/aha-compress/compress_test.c : added verify_benchmark
+	* src/aha-mont64/mont64.c : added verify_benchmark
+	* src/bubblesort/bubblesort.c : added verify_benchmark
+	* src/cnt/cnt.c : added verify_benchmark
+	* src/cover/cover.c : added verify_benchmark
+	* src/crc32/crc_32.c : added verify_benchmark
+	* src/ctl-string/string.c : added verify_benchmark
+	* src/ctl/ctl.c : added verify_benchmark
+	* src/dijkstra/dijkstra_small.c : added verify_benchmark and initialised output_count
+	* src/dtoa/dtoa.c : added verify_benchmark
+	* src/duff/duff.c : added verify_benchmark
+	* src/edn/edn.c : added verify_benchmark
+	* src/expint/expint.c : added verify_benchmark
+	* src/fac/fac.c : added verify_benchmark
+	* src/fdct/fdct.c : added verify_benchmark
+	* src/fft/fft1.c : scale up repeat factor
+	* src/fibcall/fibcall.c : added verify_benchmark and scaled up repeat factor
+	* src/frac/frac.c : added verify_benchmark
+	* src/insertsort/insertsort.c : added verify_benchmark
+	* src/janne_complex/janne_complex.c : added verify_benchmark
+	* src/jfdctint/jfdctint.c : added verify_benchmark
+	* src/levenshtein/levenshtein.c : added verify_benchmark
+	* src/ludcmp/ludcmp.c : added verify_benchmark
+	* src/main.c : added call to verify_benchmark and now returns exit code
+	* src/matmult/matmult.c : added verify_benchmark
+	* src/mergesort/mergesort.c : added verify_benchmark
+	* src/nbody/nbody.c : added verify_benchmark
+	* src/ndes/ndes.c : added verify_benchmark
+	* src/nettle-arcfour/arcfour.c : added verify_benchmark
+	* src/nettle-cast128/cast128.c : added verify_benchmark
+	* src/nettle-des/des.c : added verify_benchmark
+	* src/nettle-md5/md5.c : added verify_benchmark
+	* src/newlib-sqrt/ef_sqrt.c : added verify_benchmark and result array
+	* src/nsichneu/nsichneu.c : added verify_benchmark
+	* src/prime/prime.c : added verify_benchmark
+	* src/qrduino/qrtest.c : added verify_benchmark
+	* src/recursion/recursion.c : added verify_benchmark
+	* src/sglib-arraybinsearch/arraybinsearch.c : added verify_benchmark
+	* src/sglib-listinsertsort/listinsertsort.c : added verify_benchmark
+	* src/sglib-listsort/listsort.c : added verify_benchmark
+	* src/sglib-queue/queue.c : added verify_benchmark
+	* src/sglib-rbtree/rbtree.c : added verify_benchmark
+	* src/slre/slre.c : added verify_benchmark
+	* src/sqrt/sqrt.c : added verify_benchmark
+	* src/st/st.c : added verify_benchmark
+	* src/stringsearch1/stringsearch1.c : added verify_benchmark
+	* src/strstr/strstr.c : added verify_benchmark
+	* src/tarai/tarai.c : added verify_benchmark
+	* src/trio/trio_test.c : added verify_benchmark
+
 2016-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	Remove benchmarks that are not licenced under GPL.

@@ -110,7 +110,13 @@ int
 benchmark (void)
 {
   benchmark_result = expint(50,1);
-  return 0;
+  return benchmark_result;
 }
 
-
+int verify_benchmark(int r)
+{
+  int expected = 3883;
+  if (r != expected)
+    return 0;
+  return 1;
+}

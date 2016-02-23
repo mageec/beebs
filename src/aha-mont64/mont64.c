@@ -269,3 +269,10 @@ int benchmark() {
    return errors;
 }
 
+// r is the number of errors therefore if r = 0 then output a 1 for correct
+int verify_benchmark(int r)
+{
+   if (r != 0)
+      return 0;
+   return 1;
+}

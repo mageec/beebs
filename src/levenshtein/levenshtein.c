@@ -93,3 +93,11 @@ int benchmark()
 
 }
 
+int verify_benchmark(int r)
+{
+  int exp = 122;
+  if (r != exp)
+    return 0;
+  return 1;
+}
+

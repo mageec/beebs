@@ -142,3 +142,9 @@ int benchmark()
 
 }
 
+int verify_benchmark(int r) {
+  int expected = 8;
+  if (r != expected)
+    return 0;
+  return 1;
+}

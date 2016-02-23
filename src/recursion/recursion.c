@@ -101,7 +101,15 @@ int
 benchmark(void)
 {
   In = fib(10);
-  return 0;
+  return In;
+}
+
+int verify_benchmark(int r)
+{
+  int expected = 89;
+  if (r != expected)
+    return 0;
+  return 1;
 }
 
 

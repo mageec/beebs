@@ -392,7 +392,6 @@ size_t ctl_StringFindNextStr(ctl_string* s, size_t pos, const char* string)
   return temp-s->string;
 }
 
-
 int
 benchmark (void)
 {
@@ -416,7 +415,14 @@ benchmark (void)
 
   ctl_StringFree(s);
   ctl_StringFree(s2);
+
   return cnt;
 }
 
-
+int verify_benchmark(int r)
+{
+  int expected = 21;
+  if (r != expected)
+    return 0;
+  return 1;
+}

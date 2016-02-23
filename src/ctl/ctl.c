@@ -71,7 +71,7 @@ typedef ctl_pairStack pair_container;
 #error "Expected CTL_VECTOR or CTL_STACK to be defined"
 #endif
 
-
+#include <stdio.h>
 int
 benchmark (void)
 {
@@ -120,6 +120,20 @@ benchmark (void)
   CTL_FREE (pair, v2);
 
   return cnt;
+}
+
+int verify_benchmark(int r)
+{
+#ifdef CTL_VECTOR
+  int expected = 25542939;
+#elif defined CTL_STACK
+  int expected = 25558050;
+#else
+#error "Expected CTL_VECTOR or CTL_STACK to be defined"
+#endif
+  if (r != expected)
+    return 0;
+  return 1;
 }
 
 

@@ -33,9 +33,9 @@
 #endif
 
 void prep1(CHARTYPE *base, int m);
-void exec1(CHARTYPE *base, int n);
+int exec1(CHARTYPE *base, int n);
 void prep2(CHARTYPE *base, int m);
-void exec2(CHARTYPE *base, int n);
+int exec2(CHARTYPE *base, int n);
 
 char buf[] = "abacacbabbabbadcabdcabccacacbadbadbcabdcabcbadcbacabadbadcabcbacdcacabacabcabcbadcbacabadbadcabcbac";
 char search[] ="abc";
@@ -43,11 +43,16 @@ char search[] ="abc";
 int
 benchmark (void)
 {
+  int r;
   prep1((CHARTYPE *) search, 3);
-  exec1((CHARTYPE *) buf, strlen(buf));
+  r = exec1((CHARTYPE *) buf, strlen(buf));
   prep2((CHARTYPE *) search, 3);
-  exec2((CHARTYPE *) buf, strlen(buf));
-  return 0;
+  return exec2((CHARTYPE *) buf, strlen(buf)) * r;
 }
 
-
+int verify_benchmark(int r) {
+  int expected = 36;
+  if (r != expected)
+    return 0;
+  return 1;
+}

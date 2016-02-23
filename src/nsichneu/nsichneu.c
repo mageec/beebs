@@ -4279,3 +4279,46 @@ int benchmark()
  ***************************************************************************/
 
 
+int verify_benchmark() {
+  int  expP1_is_marked = 3;
+  long expP1_marking_member_0[3] = {0,0,0};
+  int  expP2_is_marked = 5;
+  long expP2_marking_member_0[5] = {0,0,0,0,0};
+  int  expP3_is_marked = 0;
+  long expP3_marking_member_0[6] = {0,0,0,0,0,0};
+  int i;
+  if (expP1_is_marked != P1_is_marked ||
+    expP2_is_marked != P2_is_marked ||
+    expP3_is_marked != P3_is_marked) {
+    return 0;
+  }
+  // for (i=0; i<3; i++)
+  //   printf("%ld, ", P1_marking_member_0[i]);
+  // printf("\n");
+  // for (i=0; i<5; i++)
+  //   printf("%ld, ", P2_marking_member_0[i]);
+  // printf("\n");
+  // for (i=0; i<6; i++)
+  //   printf("%ld, ", P3_marking_member_0[i]);
+  // printf("\n");
+  for (i=0; i<3; i++) {
+    if (expP1_marking_member_0[i] != P1_marking_member_0[i] ||
+        expP2_marking_member_0[i] != P2_marking_member_0[i] ||
+        expP3_marking_member_0[i] != P3_marking_member_0[i]) {
+      return 0;
+    }
+  }
+  for (i=3; i<5; i++){
+    if (expP2_marking_member_0[i] != P2_marking_member_0[i] ||
+        expP3_marking_member_0[i] != P3_marking_member_0[i]) {
+      return 0;
+    }
+  }
+  for (i=5; i<6; i++){
+    if (expP3_marking_member_0[i] != P3_marking_member_0[i]) {
+      return 0;
+    }
+  }
+
+  return 1;
+}

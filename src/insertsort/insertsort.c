@@ -92,4 +92,11 @@ benchmark (void)
   return 0;
 }
 
-
+int verify_benchmark() {
+  int i;
+  int expected[] = {0,2,3,4,5,6,7,8,9,10,11};
+  for (i=0; i<11; i++)
+    if (a[i] != expected[i])
+      return 0;
+  return 1;
+}

@@ -69,7 +69,7 @@ int Initialize(matrix);
 
 int InitSeed(void);
 
-void Sum(matrix);
+int Sum(matrix);
 
 int RandomInteger(void);
 
@@ -97,9 +97,8 @@ int benchmark (void)
 
    //printf("RESULTS OF THE TEST:\n");
 
-   Test(Array);
+   return Test(Array);
 
-   return 0;
 }
 
 
@@ -108,9 +107,8 @@ int Test(matrix Array)
 {
    Initialize(Array);
 
-   Sum(Array);
+   return Sum(Array);
 
-   return 0;
 }
 
 
@@ -157,7 +155,7 @@ int InitSeed (void)
 
 
 
-void Sum(matrix Array)
+int Sum(matrix Array)
 
 {
 
@@ -204,7 +202,6 @@ void Sum(matrix Array)
 	}
 
 
-
   Postotal = Ptotal;
 
   Poscnt = Pcnt;
@@ -213,6 +210,7 @@ void Sum(matrix Array)
 
   Negcnt = Ncnt;
 
+  return Negtotal;
 }
 
 
@@ -255,7 +253,13 @@ int RandomInteger(void)
 
 }
 
+int verify_benchmark(int nt) {
+  int expected_negtotal = 396675;
+  if (expected_negtotal != nt)
+    return 0;
+  return 1;
 
+}
 
 
 

@@ -162,8 +162,18 @@ DWORD crc32pseudo()
 
 int benchmark()
 {
-  crc32pseudo();
-  return 0;
+  DWORD r;
+  r = crc32pseudo();
+  return (int)r;
+}
+
+int verify_benchmark(int r)
+{
+  // int expected = 134629500;
+  int expected = 1425391793;
+  if (r != expected)
+    return 0;
+  return 1;
 }
 
 
