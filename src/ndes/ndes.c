@@ -235,23 +235,23 @@ void cyfun(unsigned long ir, great k, unsigned long * iout) {
 #endif
 
 immense out;
+static immense inp, key;
+static int newkey, isw;
 
 int
 benchmark (void)
 {
-   immense inp, key;
-   int newkey, isw;
+   des(inp, key, &newkey, isw, &out);
+   return 0;
+}
 
+void initialise_benchmark() {
    inp.l = KNOWN_VALUE * 35;
    inp.r = KNOWN_VALUE * 26;
    key.l = KNOWN_VALUE * 2;
    key.r = KNOWN_VALUE * 16;
-
    newkey = value;
    isw = value;
-
-   des(inp, key, &newkey, isw, &out);
-   return 0;
 }
 
 int verify_benchmark() {

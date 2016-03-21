@@ -29,21 +29,28 @@
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 8)
 
+static const char *encode;
+static int size;
 
 int
 benchmark (void)
 {
-  const char *encode="http://www.mageec.com";
 
-  initeccsize(1, 22);
+  initeccsize(1, size);
 
-  memcpy(strinbuf, encode, 22);
+  memcpy(strinbuf, encode, size);
 
   initframe();
   qrencode();
   freeframe();
   freeecc();
   return 0;
+}
+
+void initialise_benchmark() {
+  static const char *in_encode = "http://www.mageec.com";
+  encode = in_encode;
+  size = 22;
 }
 
 int verify_benchmark() {

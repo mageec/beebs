@@ -71,7 +71,13 @@ typedef ctl_pairStack pair_container;
 #error "Expected CTL_VECTOR or CTL_STACK to be defined"
 #endif
 
-#include <stdio.h>
+static int init;
+static int lim;
+static int fact;
+static int begin;
+static int end;
+static int end2;
+
 int
 benchmark (void)
 {
@@ -82,10 +88,10 @@ benchmark (void)
 
   v = CTL_INIT (int);
 
-  for (i = 1; i <= 100; ++i)
-    CTL_PUSH (int, v, i * 11);
+  for (i = init; i <= lim; ++i)
+    CTL_PUSH (int, v, i * fact);
 
-  CTL_DELETE (int, v, 4, 50);
+  CTL_DELETE (int, v, begin, end);
 
   while(v->size > 0)
   {
@@ -100,13 +106,13 @@ benchmark (void)
 
   v2 = CTL_INIT (pair);
 
-  for (i = 1; i <= 100; ++i)
+  for (i = init; i <= lim; ++i)
   {
     pair p = {i, i*i};
     CTL_PUSH (pair, v2, p);
   }
 
-  CTL_DELETE (pair, v2, 4, 8);
+  CTL_DELETE (pair, v2, begin, end2);
 
   while(v2->size > 0)
   {
@@ -120,6 +126,15 @@ benchmark (void)
   CTL_FREE (pair, v2);
 
   return cnt;
+}
+
+int initialise_benchmark() {
+  init = 1;
+  lim = 100;
+  fact = 11;
+  begin = 4;
+  end = 50;
+  end2 = 8;
 }
 
 int verify_benchmark(int r)

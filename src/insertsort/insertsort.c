@@ -68,15 +68,12 @@
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
-unsigned int a[11];
+unsigned int a[11];    /* assume all data is positive */
 
 int
 benchmark (void)
 {
   int i,j, temp;
-  a[0] = 0;   /* assume all data is positive */
-  a[1] = 11; a[2]=10;a[3]=9; a[4]=8; a[5]=7; a[6]=6; a[7]=5;
-  a[8] =4; a[9]=3; a[10]=2;
   i = 2;
   while(i <= 10){
       j = i;
@@ -90,6 +87,20 @@ benchmark (void)
       i++;
     }
   return 0;
+}
+
+void initialise_benchmark() {
+  a[0] = 0;
+  a[1] = 11;
+  a[2] = 10;
+  a[3] = 9;
+  a[4] = 8;
+  a[5] = 7;
+  a[6] = 6;
+  a[7] = 5;
+  a[8] = 4;
+  a[9] = 3;
+  a[10]= 2;
 }
 
 int verify_benchmark() {

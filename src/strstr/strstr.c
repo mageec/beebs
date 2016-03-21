@@ -126,7 +126,7 @@ ret0:
 
 
 char *text = "abbaabbaababadcsdabbacasdaabbbaabbadabbacbbbaabbadabbacasdaabbbaabba";
-
+char *substr = "abba";
 int benchmark()
 {
   char *f = text;
@@ -134,7 +134,7 @@ int benchmark()
 
   do
   {
-    f = strstr(f+1, "abba");
+    f = strstr(f+1, substr);
     n++;
   } while(f);
 

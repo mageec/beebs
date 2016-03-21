@@ -31,7 +31,7 @@
 #define NUMELEMS 100
 #define MAXDIM   (NUMELEMS+1)
 
-void Initialize(int Array []);
+// void Initialize(int Array []);
 void BubbleSort(int Array []);
 
 /* BUBBLESORT BENCHMARK PROGRAM:
@@ -44,17 +44,16 @@ int Array[MAXDIM], Seed;
 int factor;
 
 void BubbleSort(int Array[]);
-void Initialize(int Array[]);
+// void Initialize(int Array[]);
 
 int benchmark()
 {
-   Initialize(Array);
    BubbleSort(Array);
    return 0;
 }
 
 
-void Initialize(int Array[])
+void initialise_benchmark()
 /*
  * Initializes given array with randomly generated integers.
  */
@@ -68,7 +67,7 @@ void Initialize(int Array[])
 #endif
 
 fact = factor;
-for (Index = 1; Index <= NUMELEMS; Index ++)
+for (Index = 0; Index < NUMELEMS; Index ++)
     Array[Index] = Index*fact;
 }
 
@@ -82,15 +81,11 @@ void BubbleSort(int Array[])
    int Sorted = FALSE;
    int Temp, Index, i;
 
-   for (i = 1;
-	i <= NUMELEMS-1;           /* apsim_loop 1 0 */
-	i++)
+   for (i = 0; i < NUMELEMS; i++)
    {
       Sorted = TRUE;
-      for (Index = 1;
-	   Index <= NUMELEMS-1;      /* apsim_loop 10 1 */
-	   Index ++) {
-         if (Index > NUMELEMS-i)
+      for (Index = 0; Index < NUMELEMS; Index ++) {
+         if (Index >= NUMELEMS-i)
             break;
          if (Array[Index] > Array[Index + 1])
          {
@@ -107,7 +102,7 @@ void BubbleSort(int Array[])
 }
 
 int verify_benchmark(int result) {
-   int expected[NUMELEMS] = {0, -100, -99, -98, -97, -96, -95, -94, -93, -92,
+   int expected[NUMELEMS] = {-99, -98, -97, -96, -95, -94, -93, -92,
                              -91, -90, -89, -88, -87, -86, -85, -84, -83, -82,
                              -81, -80, -79, -78, -77, -76, -75, -74, -73, -72,
                              -71, -70, -69, -68, -67, -66, -65, -64, -63, -62,
@@ -116,7 +111,7 @@ int verify_benchmark(int result) {
                              -41, -40, -39, -38, -37, -36, -35, -34, -33, -32,
                              -31, -30, -29, -28, -27, -26, -25, -24, -23, -22,
                              -21, -20, -19, -18, -17, -16, -15, -14, -13, -12,
-                             -11, -10, -9, -8, -7, -6, -5, -4, -3, -2};
+                             -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0};
    int i;
    for (i=0; i<NUMELEMS; i++) {
       if (Array[i] != expected[i])

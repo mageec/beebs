@@ -48,8 +48,10 @@ main (void)
   initialise_benchmark ();
   start_trigger ();
 
-  for (i = 0; i < REPEAT_FACTOR; i++)
+  for (i = 0; i < REPEAT_FACTOR; i++) {
+    initialise_benchmark ();
     result = benchmark ();
+  }
 
   stop_trigger ();
 

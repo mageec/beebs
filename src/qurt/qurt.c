@@ -157,28 +157,18 @@ int  qurt()
 
 /* Write to RESULT in BENCHMARK so call is not optimised out.  */
 volatile int result = 0;
+static float in1[] = {1.0, -3.0, 2.0}
+static float in2[] = {1.0, -2.0, 1.0}
+static float in3[] = {1.0, -4.0, 8.0}
 
 int
 benchmark (void)
 {
-  a[0] =  1.0;
-  a[1] = -3.0;
-  a[2] =  2.0;
-
+  a = in1;
   result = qurt();
-
-
-  a[0] =  1.0;
-  a[1] = -2.0;
-  a[2] =  1.0;
-
+  a = in2;
   result = qurt();
-
-
-  a[0] =  1.0;
-  a[1] = -4.0;
-  a[2] =  8.0;
-
+  a = in3;
   result = qurt();
   return 0;
 }

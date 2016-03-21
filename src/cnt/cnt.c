@@ -91,7 +91,6 @@ int benchmark (void)
 
 {
 
-   InitSeed();
 
    //printf("\n   *** MATRIX SUM AND COUNT BENCHMARK TEST ***\n\n");
 
@@ -105,7 +104,6 @@ int benchmark (void)
 int Test(matrix Array)
 
 {
-   Initialize(Array);
 
    return Sum(Array);
 
@@ -251,6 +249,11 @@ int RandomInteger(void)
 
    return Seed;
 
+}
+
+void initialise_benchmark() {
+   InitSeed();
+   Initialize(Array);
 }
 
 int verify_benchmark(int nt) {

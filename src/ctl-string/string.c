@@ -392,6 +392,12 @@ size_t ctl_StringFindNextStr(ctl_string* s, size_t pos, const char* string)
   return temp-s->string;
 }
 
+static const char *in1;
+static const char *in2;
+static const char *in3;
+static const char *in4;
+static const char *in5;
+
 int
 benchmark (void)
 {
@@ -402,14 +408,14 @@ benchmark (void)
   s = ctl_StringInit();
   s2 = ctl_StringInit();
 
-  ctl_StringSet(s, "This is a string");
-  ctl_StringAppend(s, "This is a string2");
-  ctl_StringSet(s2, "aaa");
+  ctl_StringSet(s, in1);
+  ctl_StringAppend(s, in2);
+  ctl_StringSet(s2, in3);
   ctl_StringSetString(s, s2);
 
-  while(ctl_StringCmpNoCase(s, "AaaAaAaaaaaAAaaaAAaaAaA"))
+  while(ctl_StringCmpNoCase(s, in4))
   {
-    ctl_StringAppend(s, "a");
+    ctl_StringAppend(s, in5);
     cnt++;
   }
 
@@ -417,6 +423,19 @@ benchmark (void)
   ctl_StringFree(s2);
 
   return cnt;
+}
+
+void initialise_benchmark() {
+  static const char a[] = "This is a string";
+  static const char b[] = "This is a str2";
+  static const char c[] = "aaa";
+  static const char d[] = "AaaAaAaaaaaAAaaaAAaaAaA";
+  static const char e[] = "a";
+  in1 = a;
+  in2 = b;
+  in3 = c;
+  in4 = d;
+  in5 = e;
 }
 
 int verify_benchmark(int r)

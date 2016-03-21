@@ -39,15 +39,20 @@ int exec2(CHARTYPE *base, int n);
 
 char buf[] = "abacacbabbabbadcabdcabccacacbadbadbcabdcabcbadcbacabadbadcabcbacdcacabacabcabcbadcbacabadbadcabcbac";
 char search[] ="abc";
+static int size;
 
 int
 benchmark (void)
 {
   int r;
-  prep1((CHARTYPE *) search, 3);
+  prep1((CHARTYPE *) search, size);
   r = exec1((CHARTYPE *) buf, strlen(buf));
-  prep2((CHARTYPE *) search, 3);
+  prep2((CHARTYPE *) search, size);
   return exec2((CHARTYPE *) buf, strlen(buf)) * r;
+}
+
+void initialise_benchmark() {
+  size = 3
 }
 
 int verify_benchmark(int r) {

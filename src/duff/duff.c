@@ -105,44 +105,24 @@ void duffcopy( char *to, char *from, int count)
 
 }
 
-
-
-
-
-void initialize( char *arr, int length)
-
-{
-
-  int i;
-
-  for(i=0;i<length;i++)
-
-    {
-
-      arr[i] = length-i;
-
-    }
-
-}
-
-
-
-
-
 char source[ARRAYSIZE];
 
 char target[ARRAYSIZE];
 
-
-
 int benchmark(void)
-
 {
-
-  initialize( source, ARRAYSIZE );
-
   duffcopy( source, target, INVOCATION_COUNT );
   return 0;
+}
+
+void initialise_benchmark()
+{
+  int i;
+
+  for(i=0;i<ARRAYSIZE;i++)
+  {
+    source[i] = ARRAYSIZE-i;
+  }
 }
 
 int verify_benchmark()

@@ -47,14 +47,22 @@ int tarai(int x, int y, int z)
     return y;
 }
 
+int x, y, z;
+
 int benchmark()
 {
     volatile int cnt=0;
 
-    cnt = tarai(9, 6, 3);
+    cnt = tarai(x, y, z);
 
     return cnt;
 
+}
+
+void initialise_benchmark() {
+  x = 9;
+  y = 6;
+  z = 3;
 }
 
 int verify_benchmark(int r) {

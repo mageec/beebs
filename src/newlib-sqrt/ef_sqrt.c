@@ -123,17 +123,27 @@ static	const float	one	= 1.0, tiny=1.0e-30;
 
 /* Tell the compiler not to optimize out calls in BENCHMARK. */
 volatile float result[6];
+static int a, b, c, d, e, f;
 
 int
 benchmark (void)
 {
-  result[0] = __ieee754_sqrtf(2);
-  result[1] = __ieee754_sqrtf(3);
-  result[2] = __ieee754_sqrtf(5);
-  result[3] = __ieee754_sqrtf(6);
-  result[4] = __ieee754_sqrtf(7);
-  result[5] = __ieee754_sqrtf(8);
+  result[0] = __ieee754_sqrtf(a);
+  result[1] = __ieee754_sqrtf(b);
+  result[2] = __ieee754_sqrtf(c);
+  result[3] = __ieee754_sqrtf(d);
+  result[4] = __ieee754_sqrtf(e);
+  result[5] = __ieee754_sqrtf(f);
   return 0;
+}
+
+void initialise_benchmark() {
+  a = 2;
+  b = 3;
+  c = 5;
+  d = 6;
+  e = 7;
+  f = 8;
 }
 
 int verify_benchmark()

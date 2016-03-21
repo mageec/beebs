@@ -74,16 +74,23 @@ int complex(int a, int b)
   return 1;
 }
 
+static int a, b;
+
 int benchmark()
 {
   /* a = [1..30] b = [1..30] */
-  int a = 1, b = 1, answer = 0;
+  int answer = 0;
   /* if(answer)
      {a = 1; b = 1;}
      else
      {a = 30; b = 30;} */
   answer = complex(a, b);
   return answer;
+}
+
+void initialise_benchmark() {
+  a = 1;
+  b = 1;
 }
 
 int verify_benchmark(int r)

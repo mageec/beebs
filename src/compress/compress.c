@@ -198,7 +198,7 @@ int apsim_InCnt;
 unsigned char *InBuff;
 unsigned char *OutBuff;
 
-const unsigned char orig_text_buffer[BUFFERSIZE]={214, 162, 160, 241, 211, 0, 221, 149, 99, 223, 24, 22, 4, 79, 46, 168, 39, 115, 50, 31, 42, 96, 240, 36, 195, 8, 110, 205, 66, 92, 203, 188, 117, 173, 211, 77, 14, 140, 80, 0, 180, 253, 15, 6, 89, 228, 199, 36, 217, 110};
+const unsigned char *orig_text_buffer;
 char comp_text_buffer[BUFFERSIZE+5];
 
 count_int htab [HSIZE];
@@ -519,4 +519,9 @@ void output( code_int code )
       bytes_out += (offset + 7) / 8;
       offset = 0;
    }
+}
+
+void initialise_benchmark() {
+   const unsigned char data[BUFFERSIZE]={214, 162, 160, 241, 211, 0, 221, 149, 99, 223, 24, 22, 4, 79, 46, 168, 39, 115, 50, 31, 42, 96, 240, 36, 195, 8, 110, 205, 66, 92, 203, 188, 117, 173, 211, 77, 14, 140, 80, 0, 180, 253, 15, 6, 89, 228, 199, 36, 217, 110};
+   orig_text_buffer = data;
 }

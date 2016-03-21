@@ -332,6 +332,11 @@ jpeg_fdct_islow ()
 int
 benchmark (void)
 {
+  jpeg_fdct_islow();
+  return 0;
+}
+
+void initialise_benchmark() {
   int i, seed;
 
   /* Worst case settings */
@@ -341,9 +346,6 @@ benchmark (void)
     seed = ((seed * 133) + 81) % 65535;
     data[i] = seed;
   }
-
-  jpeg_fdct_islow();
-  return 0;
 }
 
 int verify_benchmark()

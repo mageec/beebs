@@ -118,8 +118,6 @@ int RandomInteger(void);
 
 int benchmark()
 {
-   InitSeed();
-
    Test(ArrayA, ArrayB, ResultArray);
 
    return 0;
@@ -140,15 +138,6 @@ void InitSeed(void)
  */
 void Test(matrix A, matrix B, matrix Res)
 {
-   int OuterIndex, InnerIndex;
-
-   for (OuterIndex = 0; OuterIndex < UPPERLIMIT; OuterIndex++)
-      for (InnerIndex = 0; InnerIndex < UPPERLIMIT; InnerIndex++)
-         A[OuterIndex][InnerIndex] = RANDOM_VALUE;
-   for (OuterIndex = 0; OuterIndex < UPPERLIMIT; OuterIndex++)
-      for (InnerIndex = 0; InnerIndex < UPPERLIMIT; InnerIndex++)
-         B[OuterIndex][InnerIndex] = RANDOM_VALUE;
-
    Multiply(A, B, Res);
 }
 
@@ -175,6 +164,18 @@ void Multiply(matrix A, matrix B, matrix Res)
          for (Index = 0; Index < UPPERLIMIT; Index++)
             Res[Outer][Inner] += A[Outer][Index] * B[Index][Inner];
       }
+}
+
+void initialise_benchmark() {
+   InitSeed();
+   int OuterIndex, InnerIndex;
+
+   for (OuterIndex = 0; OuterIndex < UPPERLIMIT; OuterIndex++)
+      for (InnerIndex = 0; InnerIndex < UPPERLIMIT; InnerIndex++)
+         ArrayA[OuterIndex][InnerIndex] = RANDOM_VALUE;
+   for (OuterIndex = 0; OuterIndex < UPPERLIMIT; OuterIndex++)
+      for (InnerIndex = 0; InnerIndex < UPPERLIMIT; InnerIndex++)
+         ArrayB[OuterIndex][InnerIndex] = RANDOM_VALUE;
 }
 
 int verify_benchmark()

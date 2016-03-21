@@ -127,36 +127,14 @@ unsigned compress4(unsigned x, unsigned m) {
    return x;
 }
 
-
+static const unsigned int *test;
+int n;
 
 int
 benchmark (void)
 {
-  static const unsigned long test[] = {
-//       Data        Mask       Result
-      0xFFFFFFFF, 0x80000000, 0x00000001,
-      0xFFFFFFFF, 0x0010084A, 0x0000001F,
-      0xFFFFFFFF, 0x55555555, 0x0000FFFF,
-      0xFFFFFFFF, 0x88E00F55, 0x00001FFF,
-      0x01234567, 0x0000FFFF, 0x00004567,
-      0x01234567, 0xFFFF0000, 0x00000123,
-      0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-      0,          0,          0,
-      0,          0xFFFFFFFF, 0,
-      0xFFFFFFFF, 0,          0,
-      0x80000000, 0x80000000, 1,
-      0x55555555, 0x55555555, 0x0000FFFF,
-      0x55555555, 0xAAAAAAAA, 0,
-      0x789ABCDE, 0x0F0F0F0F, 0x00008ACE,
-      0x789ABCDE, 0xF0F0F0F0, 0x000079BD,
-      0x92345678, 0x80000000, 0x00000001,
-      0x12345678, 0xF0035555, 0x000004ec,
-      0x80000000, 0xF0035555, 0x00002000,
-   };
-   int errors = 0,  n, i;
+   int errors = 0, i;
    unsigned int r;
-
-   n = sizeof(test)/sizeof(test[0]);
 
    for (i = 0; i < n; i += 3) {
       r = compress1(test[i], test[i+1]);
@@ -185,6 +163,31 @@ benchmark (void)
    return errors;
 }
 
+void initialise_benchmark() {
+  static const unsigned long input[] = {
+//       Data        Mask       Result
+      0xFFFFFFFF, 0x80000000, 0x00000001,
+      0xFFFFFFFF, 0x0010084A, 0x0000001F,
+      0xFFFFFFFF, 0x55555555, 0x0000FFFF,
+      0xFFFFFFFF, 0x88E00F55, 0x00001FFF,
+      0x01234567, 0x0000FFFF, 0x00004567,
+      0x01234567, 0xFFFF0000, 0x00000123,
+      0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
+      0,          0,          0,
+      0,          0xFFFFFFFF, 0,
+      0xFFFFFFFF, 0,          0,
+      0x80000000, 0x80000000, 1,
+      0x55555555, 0x55555555, 0x0000FFFF,
+      0x55555555, 0xAAAAAAAA, 0,
+      0x789ABCDE, 0x0F0F0F0F, 0x00008ACE,
+      0x789ABCDE, 0xF0F0F0F0, 0x000079BD,
+      0x92345678, 0x80000000, 0x00000001,
+      0x12345678, 0xF0035555, 0x000004ec,
+      0x80000000, 0xF0035555, 0x00002000,
+   };
+   test = input;
+   n = sizeof(input)/sizeof(input[0]);
+ }
 // r is the number of errors therefore if r = 0 then output a 1 for correct
 int verify_benchmark(int r)
 {
