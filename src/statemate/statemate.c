@@ -54,7 +54,7 @@
  *
  *----------------------------------------------------------
  */
- 
+
 
 /*
 ** actually, we don't really need floating point here
@@ -80,15 +80,15 @@ static char Bitlist[64];
 #define active_BLOCK_ERKENNUNG_CTRL_IDX 19
 #define active_BLOCK_ERKENNUNG_CTRL_copy_IDX 20
 #define active_BLOCK_ERKENNUNG_CTRL_old_IDX 21
-#define entered_EINSCHALTSTROM_MESSEN_BLOCK_ERKENNUNG_CTRL_IDX 0 
-#define entered_EINSCHALTSTROM_MESSEN_BLOCK_ERKENNUNG_CTRL_copy_IDX 1 
-unsigned long tm_entered_EINSCHALTSTROM_MESSEN_BLOCK_ERKENNUNG_CTRLch_BLOCK_ERKENNUNG_CTRL__N_copy; 
-#define entered_WIEDERHOLSPERRE_FH_TUERMODUL_CTRL_IDX 4 
-#define entered_WIEDERHOLSPERRE_FH_TUERMODUL_CTRL_copy_IDX 5 
-#define exited_BEREIT_FH_TUERMODUL_CTRL_IDX 6 
-#define exited_BEREIT_FH_TUERMODUL_CTRL_copy_IDX 7 
-unsigned long tm_entered_WIEDERHOLSPERRE_FH_TUERMODUL_CTRLexited_BEREIT_FH_TUERMODUL_CTRL; 
-unsigned long tm_entered_WIEDERHOLSPERRE_FH_TUERMODUL_CTRL; 
+#define entered_EINSCHALTSTROM_MESSEN_BLOCK_ERKENNUNG_CTRL_IDX 0
+#define entered_EINSCHALTSTROM_MESSEN_BLOCK_ERKENNUNG_CTRL_copy_IDX 1
+unsigned long tm_entered_EINSCHALTSTROM_MESSEN_BLOCK_ERKENNUNG_CTRLch_BLOCK_ERKENNUNG_CTRL__N_copy;
+#define entered_WIEDERHOLSPERRE_FH_TUERMODUL_CTRL_IDX 4
+#define entered_WIEDERHOLSPERRE_FH_TUERMODUL_CTRL_copy_IDX 5
+#define exited_BEREIT_FH_TUERMODUL_CTRL_IDX 6
+#define exited_BEREIT_FH_TUERMODUL_CTRL_copy_IDX 7
+unsigned long tm_entered_WIEDERHOLSPERRE_FH_TUERMODUL_CTRLexited_BEREIT_FH_TUERMODUL_CTRL;
+unsigned long tm_entered_WIEDERHOLSPERRE_FH_TUERMODUL_CTRL;
 unsigned long   sc_FH_TUERMODUL_CTRL_2375_2 ;
 unsigned long   sc_FH_TUERMODUL_CTRL_2352_1 ;
 unsigned long   sc_FH_TUERMODUL_CTRL_2329_1 ;
@@ -208,34 +208,34 @@ void interface(void)
    {
       FH_TUERMODUL__MFHA_copy = 0;
       sc_FH_TUERMODUL_CTRL_2375_2 = 0;
-      
+
    }
    if ((sc_FH_TUERMODUL_CTRL_2352_1 != 0) && (time - sc_FH_TUERMODUL_CTRL_2352_1 >= 0.5))
    {
       FH_TUERMODUL__MFHZ_copy = 0;
       sc_FH_TUERMODUL_CTRL_2352_1 = 0;
-      
+
    }
    if ((sc_FH_TUERMODUL_CTRL_2329_1 != 0) && (time - sc_FH_TUERMODUL_CTRL_2329_1 >= 0.5))
    {
       FH_TUERMODUL__MFHZ_copy = 0;
       sc_FH_TUERMODUL_CTRL_2329_1 = 0;
-      
+
    }
    if ((sc_FH_TUERMODUL_CTRL_1781_10 != 0) && (time - sc_FH_TUERMODUL_CTRL_1781_10 >= 0.5))
    {
       sc_FH_TUERMODUL_CTRL_1781_10 = 0;
-      
+
    }
    if ((sc_FH_TUERMODUL_CTRL_1739_10 != 0) && (time - sc_FH_TUERMODUL_CTRL_1739_10 >= 0.5))
    {
       sc_FH_TUERMODUL_CTRL_1739_10 = 0;
-      
+
    }
    if ((SYS_bit_get(Bitlist, entered_EINSCHALTSTROM_MESSEN_BLOCK_ERKENNUNG_CTRL_IDX) || BLOCK_ERKENNUNG_CTRL__N != BLOCK_ERKENNUNG_CTRL__N_old))
    tm_entered_EINSCHALTSTROM_MESSEN_BLOCK_ERKENNUNG_CTRLch_BLOCK_ERKENNUNG_CTRL__N_copy = time;
-   
-   
+
+
 }/** interface **/
 
 
@@ -260,8 +260,8 @@ void init(void)
    EINKLEMMSCHUTZ_CTRL_EINKLEMMSCHUTZ_CTRL_next_state = 0;
    BEWEGUNG_BLOCK_ERKENNUNG_CTRL_next_state = 0;
    BLOCK_ERKENNUNG_CTRL_BLOCK_ERKENNUNG_CTRL_next_state = 0;
-   
-   
+
+
 }/** init **/
 
 
@@ -279,7 +279,7 @@ void generic_KINDERSICHERUNG_CTRL(void)
                stable = 0;
                 FH_TUERMODUL__SFHZ_copy = 0;
                  FH_TUERMODUL__SFHA_copy = 0;
-               
+
                KINDERSICHERUNG_CTRL_KINDERSICHERUNG_CTRL_next_state = 3;
                ZENTRAL_KINDERSICHERUNG_CTRL_next_state = 0;
                break;
@@ -292,7 +292,7 @@ void generic_KINDERSICHERUNG_CTRL(void)
                   {
                      stable = 0;
                       FH_TUERMODUL__SFHA_copy = 1;
-                     
+
                      ZENTRAL_KINDERSICHERUNG_CTRL_next_state = 1;
                      break;
                   }
@@ -300,7 +300,7 @@ void generic_KINDERSICHERUNG_CTRL(void)
                   {
                      stable = 0;
                       FH_TUERMODUL__SFHZ_copy = 1;
-                     
+
                      ZENTRAL_KINDERSICHERUNG_CTRL_next_state = 1;
                      break;
                   }
@@ -308,7 +308,7 @@ void generic_KINDERSICHERUNG_CTRL(void)
                   {
                      stable = 0;
                       FH_TUERMODUL__SFHA_copy = 0;
-                     
+
                      ZENTRAL_KINDERSICHERUNG_CTRL_next_state = 1;
                      break;
                   }
@@ -316,7 +316,7 @@ void generic_KINDERSICHERUNG_CTRL(void)
                   {
                      stable = 0;
                       FH_TUERMODUL__SFHZ_copy = 0;
-                     
+
                      ZENTRAL_KINDERSICHERUNG_CTRL_next_state = 1;
                      break;
                   }
@@ -337,7 +337,7 @@ void generic_KINDERSICHERUNG_CTRL(void)
                stable = 0;
                 FH_TUERMODUL__SFHZ_copy = 0;
                  FH_TUERMODUL__SFHA_copy = 0;
-               
+
                KINDERSICHERUNG_CTRL_KINDERSICHERUNG_CTRL_next_state = 3;
                MEC_KINDERSICHERUNG_CTRL_next_state = 0;
                break;
@@ -350,7 +350,7 @@ void generic_KINDERSICHERUNG_CTRL(void)
                   {
                      stable = 0;
                       FH_TUERMODUL__SFHA_copy = 1;
-                     
+
                      MEC_KINDERSICHERUNG_CTRL_next_state = 1;
                      break;
                   }
@@ -358,7 +358,7 @@ void generic_KINDERSICHERUNG_CTRL(void)
                   {
                      stable = 0;
                       FH_TUERMODUL__SFHZ_copy = 1;
-                     
+
                      MEC_KINDERSICHERUNG_CTRL_next_state = 1;
                      break;
                   }
@@ -366,7 +366,7 @@ void generic_KINDERSICHERUNG_CTRL(void)
                   {
                      stable = 0;
                       FH_TUERMODUL__SFHA_copy = 0;
-                     
+
                      MEC_KINDERSICHERUNG_CTRL_next_state = 1;
                      break;
                   }
@@ -374,7 +374,7 @@ void generic_KINDERSICHERUNG_CTRL(void)
                   {
                      stable = 0;
                       FH_TUERMODUL__SFHZ_copy = 0;
-                     
+
                      MEC_KINDERSICHERUNG_CTRL_next_state = 1;
                      break;
                   }
@@ -395,7 +395,7 @@ void generic_KINDERSICHERUNG_CTRL(void)
                stable = 0;
                  FH_TUERMODUL__SFHZ_copy = 1;
                  FH_TUERMODUL__SFHA_copy = 1;
-               
+
                KINDERSICHERUNG_CTRL_KINDERSICHERUNG_CTRL_next_state = 2;
                break;
             }
@@ -403,7 +403,7 @@ void generic_KINDERSICHERUNG_CTRL(void)
             {
                stable = 0;
                  FH_TUERMODUL__SFHZ_copy = 1;
-               
+
                KINDERSICHERUNG_CTRL_KINDERSICHERUNG_CTRL_next_state = 2;
                break;
             }
@@ -411,7 +411,7 @@ void generic_KINDERSICHERUNG_CTRL(void)
             {
                stable = 0;
                  FH_TUERMODUL__SFHA_copy = 1;
-               
+
                KINDERSICHERUNG_CTRL_KINDERSICHERUNG_CTRL_next_state = 2;
                break;
             }
@@ -419,7 +419,7 @@ void generic_KINDERSICHERUNG_CTRL(void)
             {
                stable = 0;
                 FH_TUERMODUL__SFHA_copy = 1;
-               
+
                KINDERSICHERUNG_CTRL_KINDERSICHERUNG_CTRL_next_state = 1;
                break;
             }
@@ -428,7 +428,7 @@ void generic_KINDERSICHERUNG_CTRL(void)
                stable = 0;
                 FH_TUERMODUL__SFHA_copy = 1;
                  FH_TUERMODUL__SFHZ_copy = 1;
-               
+
                KINDERSICHERUNG_CTRL_KINDERSICHERUNG_CTRL_next_state = 1;
                break;
             }
@@ -436,7 +436,7 @@ void generic_KINDERSICHERUNG_CTRL(void)
             {
                stable = 0;
                 FH_TUERMODUL__SFHZ_copy = 1;
-               
+
                KINDERSICHERUNG_CTRL_KINDERSICHERUNG_CTRL_next_state = 1;
                break;
             }
@@ -481,7 +481,7 @@ void generic_FH_TUERMODUL_CTRL(void)
             if ((FH_TUERMODUL_CTRL__N == 59 && !(FH_TUERMODUL_CTRL__N_old == 59)))
             {
                stable = 0;
-               
+
                B_FH_TUERMODUL_CTRL_next_state = 3;
                INITIALISIERT_FH_TUERMODUL_CTRL_next_state = 3;
                break;
@@ -495,7 +495,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                stable = 0;
                FH_TUERMODUL__MFHZ_copy = 0;
                sc_FH_TUERMODUL_CTRL_2329_1 = time;
-               
+
                B_FH_TUERMODUL_CTRL_next_state = 3;
                INITIALISIERT_FH_TUERMODUL_CTRL_next_state = 3;
                break;
@@ -508,7 +508,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                   {
                      stable = 0;
                      FH_TUERMODUL__MFHZ_copy = 0;
-                     
+
                      NICHT_INITIALISIERT_NICHT_INITIALISIERT_next_state = 3;
                      break;
                   }
@@ -520,7 +520,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                   {
                      stable = 0;
                      FH_TUERMODUL__MFHA_copy = 0;
-                     
+
                      NICHT_INITIALISIERT_NICHT_INITIALISIERT_next_state = 3;
                      break;
                   }
@@ -532,7 +532,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                   {
                      stable = 0;
                      FH_TUERMODUL__MFHA_copy = 1;
-                     
+
                      NICHT_INITIALISIERT_NICHT_INITIALISIERT_next_state = 2;
                      break;
                   }
@@ -540,7 +540,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                   {
                      stable = 0;
                      FH_TUERMODUL__MFHZ_copy = 1;
-                     
+
                      NICHT_INITIALISIERT_NICHT_INITIALISIERT_next_state = 1;
                      break;
                   }
@@ -562,7 +562,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                stable = 0;
                FH_TUERMODUL__MFHZ_copy = 0;
                FH_TUERMODUL__MFHA_copy = 0;
-               
+
                B_FH_TUERMODUL_CTRL_next_state = 1;
                break;
             }
@@ -571,7 +571,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                stable = 0;
                FH_TUERMODUL__MFHA_copy = 0;
                sc_FH_TUERMODUL_CTRL_2375_2 = time;
-               
+
                B_FH_TUERMODUL_CTRL_next_state = 2;
                NICHT_INITIALISIERT_NICHT_INITIALISIERT_next_state = 3;
                break;
@@ -581,7 +581,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                stable = 0;
                FH_TUERMODUL__MFHZ_copy = 0;
                sc_FH_TUERMODUL_CTRL_2352_1 = time;
-               
+
                B_FH_TUERMODUL_CTRL_next_state = 2;
                NICHT_INITIALISIERT_NICHT_INITIALISIERT_next_state = 3;
                break;
@@ -594,7 +594,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                   {
                      stable = 0;
                      FH_TUERMODUL__MFHA_copy = 0;
-                     
+
                      INITIALISIERT_FH_TUERMODUL_CTRL_next_state = 3;
                      break;
                   }
@@ -606,7 +606,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                         {
                            stable = 0;
                            FH_TUERMODUL__MFHA_copy = 0;
-                           
+
                            INITIALISIERT_FH_TUERMODUL_CTRL_next_state = 3;
                            OEFFNEN_FH_TUERMODUL_CTRL_next_state = 0;
                            break;
@@ -618,7 +618,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                         if ((FH_TUERMODUL__SFHZ && !(FH_TUERMODUL__SFHZ_old)))
                         {
                            stable = 0;
-                           
+
                            OEFFNEN_FH_TUERMODUL_CTRL_next_state = 1;
                            break;
                         }
@@ -626,7 +626,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                         {
                            stable = 0;
                            FH_TUERMODUL__MFHA_copy = 0;
-                           
+
                            INITIALISIERT_FH_TUERMODUL_CTRL_next_state = 3;
                            OEFFNEN_FH_TUERMODUL_CTRL_next_state = 0;
                            break;
@@ -648,7 +648,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                   {
                      stable = 0;
                      FH_TUERMODUL__MFHZ_copy = 0;
-                     
+
                      INITIALISIERT_FH_TUERMODUL_CTRL_next_state = 3;
                      break;
                   }
@@ -660,7 +660,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                         {
                            stable = 0;
                            FH_TUERMODUL__MFHZ_copy = 0;
-                           
+
                            INITIALISIERT_FH_TUERMODUL_CTRL_next_state = 3;
                            break;
                         }
@@ -674,10 +674,10 @@ void generic_FH_TUERMODUL_CTRL(void)
                                  stable = 0;
                                  FH_TUERMODUL__MFHZ_copy = 1;
                                  FH_TUERMODUL_CTRL__INREVERS2_copy = 0;
-                                 
+
                                  TIPP_SCHLIESSEN_FH_TUERMODUL_CTRL_next_state = 2;
                                   FH_TUERMODUL__MFHA_copy = 0;
-                                  
+
                                  SYS_bit_set(Bitlist, active_EINKLEMMSCHUTZ_CTRL_copy_IDX);
                                  break;
                               }
@@ -689,12 +689,12 @@ void generic_FH_TUERMODUL_CTRL(void)
                               {
                                  stable = 0;
                                  FH_TUERMODUL_CTRL__INREVERS2_copy = 1;
-                                 
+
                                  SYS_bit_set (Bitlist, FH_TUERMODUL_CTRL__END_REVERS_copy_IDX);
                                  TIPP_SCHLIESSEN_FH_TUERMODUL_CTRL_next_state = 1;
                                   SYS_bit_clr(Bitlist, active_EINKLEMMSCHUTZ_CTRL_copy_IDX);
                                  FH_TUERMODUL__MFHZ_copy = 0;
-                                  
+
                                  sc_FH_TUERMODUL_CTRL_1781_10 = time;
                                  FH_TUERMODUL__MFHA_copy = 1;
                                  break;
@@ -717,7 +717,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                         {
                            stable = 0;
                            FH_TUERMODUL__MFHZ_copy = 0;
-                           
+
                            INITIALISIERT_FH_TUERMODUL_CTRL_next_state = 3;
                            break;
                         }
@@ -730,10 +730,10 @@ void generic_FH_TUERMODUL_CTRL(void)
                               {
                                  stable = 0;
                                  FH_TUERMODUL_CTRL__INREVERS1_copy = 0;
-                                 
+
                                  MANUELL_SCHLIESSEN_FH_TUERMODUL_CTRL_next_state = 2;
                                   FH_TUERMODUL__MFHA_copy = 0;
-                                  
+
                                  SYS_bit_set(Bitlist, active_EINKLEMMSCHUTZ_CTRL_copy_IDX);
                                  FH_TUERMODUL__MFHZ_copy = 1;
                                  break;
@@ -747,11 +747,11 @@ void generic_FH_TUERMODUL_CTRL(void)
                                  stable = 0;
                                  FH_TUERMODUL__MFHZ_copy = 0;
                                  FH_TUERMODUL_CTRL__INREVERS1_copy = 1;
-                                 
+
                                  SYS_bit_set (Bitlist, FH_TUERMODUL_CTRL__END_REVERS_copy_IDX);
                                  MANUELL_SCHLIESSEN_FH_TUERMODUL_CTRL_next_state = 1;
                                   SYS_bit_clr(Bitlist, active_EINKLEMMSCHUTZ_CTRL_copy_IDX);
-                                  
+
                                  sc_FH_TUERMODUL_CTRL_1739_10 = time;
                                  FH_TUERMODUL__MFHA_copy = 1;
                                  break;
@@ -759,7 +759,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                               if ((FH_TUERMODUL__SFHA && !(FH_TUERMODUL__SFHA_old)))
                               {
                                  stable = 0;
-                                 
+
                                  SCHLIESSEN_FH_TUERMODUL_CTRL_next_state = 1;
                                  MANUELL_SCHLIESSEN_FH_TUERMODUL_CTRL_next_state = 0;
                                  break;
@@ -794,7 +794,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                   if (((FH_TUERMODUL__SFHZ && !(FH_TUERMODUL__SFHZ_old))) && ((FH_TUERMODUL__POSITION > 0)))
                   {
                      stable = 0;
-                     
+
                      INITIALISIERT_FH_TUERMODUL_CTRL_next_state = 2;
                      SCHLIESSEN_FH_TUERMODUL_CTRL_next_state = 2;
                      MANUELL_SCHLIESSEN_FH_TUERMODUL_CTRL_next_state = 2;
@@ -806,7 +806,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                   {
                      stable = 0;
                      FH_TUERMODUL__MFHA_copy = 1;
-                     
+
                      INITIALISIERT_FH_TUERMODUL_CTRL_next_state = 1;
                      OEFFNEN_FH_TUERMODUL_CTRL_next_state = 2;
                      break;
@@ -838,7 +838,7 @@ void generic_FH_TUERMODUL_CTRL(void)
             {
                stable = 0;
                FH_TUERMODUL_CTRL__N = FH_TUERMODUL_CTRL__N + 1;
-               
+
                A_FH_TUERMODUL_CTRL_next_state = 1;
                SYS_bit_set (Bitlist, entered_WIEDERHOLSPERRE_FH_TUERMODUL_CTRL_copy_IDX);
                WIEDERHOLSPERRE_FH_TUERMODUL_CTRL_next_state = 1;
@@ -852,7 +852,7 @@ void generic_FH_TUERMODUL_CTRL(void)
                   {
                      stable = 0;
                      FH_TUERMODUL_CTRL__N = FH_TUERMODUL_CTRL__N - 1;
-                     
+
                      WIEDERHOLSPERRE_FH_TUERMODUL_CTRL_next_state = 1;
                      break;
                   }
@@ -894,7 +894,7 @@ void generic_EINKLEMMSCHUTZ_CTRL(void)
             if (((FH_TUERMODUL__EKS_LEISTE_AKTIV && !(FH_TUERMODUL__EKS_LEISTE_AKTIV_old))) && ((!(FH_TUERMODUL__SFHZ && FH_TUERMODUL__SFHA))))
             {
                stable = 0;
-                
+
                SYS_bit_set (Bitlist, FH_TUERMODUL__EINKLEMMUNG_IDX);
                EINKLEMMSCHUTZ_CTRL_EINKLEMMSCHUTZ_CTRL_next_state = 2;
                break;
@@ -907,7 +907,7 @@ void generic_EINKLEMMSCHUTZ_CTRL(void)
             if ((!(FH_TUERMODUL__EKS_LEISTE_AKTIV) && FH_TUERMODUL__EKS_LEISTE_AKTIV_old))
             {
                stable = 0;
-               
+
                EINKLEMMSCHUTZ_CTRL_EINKLEMMSCHUTZ_CTRL_next_state = 1;
                break;
             }
@@ -939,7 +939,7 @@ void generic_BLOCK_ERKENNUNG_CTRL(void)
             {
                stable = 0;
                 FH_TUERMODUL__BLOCK_copy = 0;
-               
+
                BLOCK_ERKENNUNG_CTRL_BLOCK_ERKENNUNG_CTRL_next_state = 2;
                 BLOCK_ERKENNUNG_CTRL__N = 0;
                  BLOCK_ERKENNUNG_CTRL__I_EIN_MAX = 2;
@@ -954,7 +954,7 @@ void generic_BLOCK_ERKENNUNG_CTRL(void)
             if ((!(FH_TUERMODUL__MFHA) && FH_TUERMODUL__MFHA_old) || (!(FH_TUERMODUL__MFHZ) && FH_TUERMODUL__MFHZ_old))
             {
                stable = 0;
-               
+
                BLOCK_ERKENNUNG_CTRL_BLOCK_ERKENNUNG_CTRL_next_state = 1;
                BEWEGUNG_BLOCK_ERKENNUNG_CTRL_next_state = 0;
                break;
@@ -971,7 +971,7 @@ void generic_BLOCK_ERKENNUNG_CTRL(void)
                   {
                      stable = 0;
                       FH_TUERMODUL__BLOCK_copy = 1;
-                     
+
                      BEWEGUNG_BLOCK_ERKENNUNG_CTRL_next_state = 1;
                      break;
                   }
@@ -983,7 +983,7 @@ void generic_BLOCK_ERKENNUNG_CTRL(void)
                   if ((BLOCK_ERKENNUNG_CTRL__N == 11 && !(BLOCK_ERKENNUNG_CTRL__N_old == 11)))
                   {
                      stable = 0;
-                     
+
                      BEWEGUNG_BLOCK_ERKENNUNG_CTRL_next_state = 2;
                      break;
                   }
@@ -996,9 +996,9 @@ void generic_BLOCK_ERKENNUNG_CTRL(void)
                           if ((FH_TUERMODUL__I_EIN > BLOCK_ERKENNUNG_CTRL__I_EIN_MAX))
                         {
                            BLOCK_ERKENNUNG_CTRL__I_EIN_MAX = FH_TUERMODUL__I_EIN;
-                           
+
                         }
-                        
+
                      }
                   }
                   /** end static reactions **/
@@ -1046,7 +1046,7 @@ void FH_DU(void)
                {
                   stable = 0;
                   FH_DU__MFH = 0;
-                  
+
                   FH_STEUERUNG_DUMMY_FH_STEUERUNG_DUMMY_next_state = 2;
                   break;
                }
@@ -1058,7 +1058,7 @@ void FH_DU(void)
                {
                   stable = 0;
                   FH_DU__MFH = -100;
-                  
+
                   FH_STEUERUNG_DUMMY_FH_STEUERUNG_DUMMY_next_state = 1;
                   break;
                }
@@ -1066,7 +1066,7 @@ void FH_DU(void)
                {
                   stable = 0;
                   FH_DU__MFH = 100;
-                  
+
                   FH_STEUERUNG_DUMMY_FH_STEUERUNG_DUMMY_next_state = 3;
                   break;
                }
@@ -1078,7 +1078,7 @@ void FH_DU(void)
                {
                   stable = 0;
                   FH_DU__MFH = 0;
-                  
+
                   FH_STEUERUNG_DUMMY_FH_STEUERUNG_DUMMY_next_state = 2;
                   break;
                }
@@ -1132,36 +1132,36 @@ void FH_DU(void)
                 if ((!FH_DU__DOOR_ID))
                {
                   FH_DU__S_FH_FTZU = FH_DU__S_FH_TMBFZUCAN;
-                  
+
                }
-               
+
             }
             if (FH_DU__S_FH_TMBFZUDISC != FH_DU__S_FH_TMBFZUDISC_old)
             {
                 if (FH_DU__DOOR_ID)
                {
                   FH_DU__S_FH_TMBFZUCAN = FH_DU__S_FH_TMBFZUDISC;
-                  
+
                }
-               
+
             }
             if (FH_DU__S_FH_TMBFAUFCAN != FH_DU__S_FH_TMBFAUFCAN_old)
             {
                 if ((!FH_DU__DOOR_ID))
                {
                   FH_DU__S_FH_FTAUF = FH_DU__S_FH_TMBFAUFCAN;
-                  
+
                }
-               
+
             }
             if (FH_DU__S_FH_TMBFAUFDISC != FH_DU__S_FH_TMBFAUFDISC_old)
             {
                 if (FH_DU__DOOR_ID)
                {
                   FH_DU__S_FH_TMBFAUFCAN = FH_DU__S_FH_TMBFAUFDISC;
-                  
+
                }
-               
+
             }
             /** end static reactions **/
          }
@@ -1174,9 +1174,9 @@ void FH_DU(void)
        FH_TUERMODUL__SFHA_ZENTRAL = FH_DU__S_FH_FTAUF;
        FH_TUERMODUL__SFHZ_MEC = FH_DU__S_FH_ZUDISC;
        FH_TUERMODUL__SFHZ_ZENTRAL = FH_DU__S_FH_FTZU;
-      
+
       generic_KINDERSICHERUNG_CTRL();
-      
+
        FH_DU__MFHA = FH_TUERMODUL__MFHA;
        FH_DU__MFHZ = FH_TUERMODUL__MFHZ;
        FH_DU__I_EIN = FH_TUERMODUL__I_EIN;
@@ -1189,14 +1189,14 @@ void FH_DU(void)
        FH_DU__S_FH_FTZU = FH_TUERMODUL__SFHZ_ZENTRAL;
        FH_DU__KL_50 = FH_TUERMODUL__KL_50;
        FH_DU__BLOCK = FH_TUERMODUL__BLOCK;
-      
+
        FH_TUERMODUL__SFHA_MEC = FH_DU__S_FH_AUFDISC;
        FH_TUERMODUL__SFHA_ZENTRAL = FH_DU__S_FH_FTAUF;
        FH_TUERMODUL__SFHZ_MEC = FH_DU__S_FH_ZUDISC;
        FH_TUERMODUL__SFHZ_ZENTRAL = FH_DU__S_FH_FTZU;
-      
+
       generic_FH_TUERMODUL_CTRL();
-      
+
        FH_DU__MFHA = FH_TUERMODUL__MFHA;
        FH_DU__MFHZ = FH_TUERMODUL__MFHZ;
        FH_DU__I_EIN = FH_TUERMODUL__I_EIN;
@@ -1209,14 +1209,14 @@ void FH_DU(void)
        FH_DU__S_FH_FTZU = FH_TUERMODUL__SFHZ_ZENTRAL;
        FH_DU__KL_50 = FH_TUERMODUL__KL_50;
        FH_DU__BLOCK = FH_TUERMODUL__BLOCK;
-      
+
        FH_TUERMODUL__SFHA_MEC = FH_DU__S_FH_AUFDISC;
        FH_TUERMODUL__SFHA_ZENTRAL = FH_DU__S_FH_FTAUF;
        FH_TUERMODUL__SFHZ_MEC = FH_DU__S_FH_ZUDISC;
        FH_TUERMODUL__SFHZ_ZENTRAL = FH_DU__S_FH_FTZU;
-      
+
       generic_EINKLEMMSCHUTZ_CTRL();
-      
+
        FH_DU__MFHA = FH_TUERMODUL__MFHA;
        FH_DU__MFHZ = FH_TUERMODUL__MFHZ;
        FH_DU__I_EIN = FH_TUERMODUL__I_EIN;
@@ -1229,14 +1229,14 @@ void FH_DU(void)
        FH_DU__S_FH_FTZU = FH_TUERMODUL__SFHZ_ZENTRAL;
        FH_DU__KL_50 = FH_TUERMODUL__KL_50;
        FH_DU__BLOCK = FH_TUERMODUL__BLOCK;
-      
+
        FH_TUERMODUL__SFHA_MEC = FH_DU__S_FH_AUFDISC;
        FH_TUERMODUL__SFHA_ZENTRAL = FH_DU__S_FH_FTAUF;
        FH_TUERMODUL__SFHZ_MEC = FH_DU__S_FH_ZUDISC;
        FH_TUERMODUL__SFHZ_ZENTRAL = FH_DU__S_FH_FTZU;
-      
+
       generic_BLOCK_ERKENNUNG_CTRL();
-      
+
        FH_DU__MFHA = FH_TUERMODUL__MFHA;
        FH_DU__MFHZ = FH_TUERMODUL__MFHZ;
        FH_DU__I_EIN = FH_TUERMODUL__I_EIN;
@@ -1249,7 +1249,7 @@ void FH_DU(void)
        FH_DU__S_FH_FTZU = FH_TUERMODUL__SFHZ_ZENTRAL;
        FH_DU__KL_50 = FH_TUERMODUL__KL_50;
        FH_DU__BLOCK = FH_TUERMODUL__BLOCK;
-      
+
       SYS_bit_cpy(Bitlist, active_KINDERSICHERUNG_CTRL_copy_IDX, Bitlist, active_KINDERSICHERUNG_CTRL_IDX);
       SYS_bit_cpy(Bitlist, active_FH_TUERMODUL_CTRL_copy_IDX, Bitlist, active_FH_TUERMODUL_CTRL_IDX);
       SYS_bit_cpy(Bitlist, active_EINKLEMMSCHUTZ_CTRL_copy_IDX, Bitlist, active_EINKLEMMSCHUTZ_CTRL_IDX);
@@ -1285,19 +1285,55 @@ void FH_DU(void)
       FH_DU__MFHZ_old = FH_DU__MFHZ;
       FH_DU__MFHA = FH_DU__MFHA_copy;
       FH_DU__MFHA_old = FH_DU__MFHA;
-      
+
    }/** while(!stable) **/
-   
+
 }/** FH_DU **/
 
 
 
 int benchmark(void)
 {
-  init();
   interface();
   FH_DU();
 
   return 0;
 }
 
+void initialise_benchmark() {
+   int i;
+   for (i=0; i<64; i++) {
+      Bitlist[i] = 0;
+   }
+   init();
+}
+
+int verify_benchmark() {
+   char expected[64] = {0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+   int i;
+   for (i=0; i<64; i++) {
+      if (Bitlist[i] != expected[i])
+         return 0;
+   }
+   if (tm_entered_EINSCHALTSTROM_MESSEN_BLOCK_ERKENNUNG_CTRLch_BLOCK_ERKENNUNG_CTRL__N_copy !=0 ||
+      tm_entered_WIEDERHOLSPERRE_FH_TUERMODUL_CTRLexited_BEREIT_FH_TUERMODUL_CTRL != 0 ||
+      tm_entered_WIEDERHOLSPERRE_FH_TUERMODUL_CTRL != 0 ||
+      NICHT_INITIALISIERT_NICHT_INITIALISIERT_next_state != 0 ||
+      ZENTRAL_KINDERSICHERUNG_CTRL_next_state != 0 ||
+      MEC_KINDERSICHERUNG_CTRL_next_state != 0 ||
+      KINDERSICHERUNG_CTRL_KINDERSICHERUNG_CTRL_next_state != 3 ||
+      B_FH_TUERMODUL_CTRL_next_state != 2 ||
+      A_FH_TUERMODUL_CTRL_next_state != 1 ||
+      WIEDERHOLSPERRE_FH_TUERMODUL_CTRL_next_state != 1 ||
+      INITIALISIERT_FH_TUERMODUL_CTRL_next_state != 0 ||
+      TIPP_SCHLIESSEN_FH_TUERMODUL_CTRL_next_state != 0 ||
+      MANUELL_SCHLIESSEN_FH_TUERMODUL_CTRL_next_state != 0 ||
+      OEFFNEN_FH_TUERMODUL_CTRL_next_state != 0 ||
+      SCHLIESSEN_FH_TUERMODUL_CTRL_next_state != 0 ||
+      FH_STEUERUNG_DUMMY_FH_STEUERUNG_DUMMY_next_state != 2 ||
+      EINKLEMMSCHUTZ_CTRL_EINKLEMMSCHUTZ_CTRL_next_state != 1 ||
+      BEWEGUNG_BLOCK_ERKENNUNG_CTRL_next_state != 0 ||
+      BLOCK_ERKENNUNG_CTRL_BLOCK_ERKENNUNG_CTRL_next_state != 1)
+      return 0;
+   return 1;
+}
