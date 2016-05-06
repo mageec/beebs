@@ -52,7 +52,7 @@ benchmark (void)
 }
 
 void initialise_benchmark() {
-  size = 3
+  size = 3;
 }
 
 int verify_benchmark(int r) {

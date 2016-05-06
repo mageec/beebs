@@ -104,7 +104,7 @@ benchmark(void)
   return In;
 }
 
-int initialise_benchmark() {
+void initialise_benchmark() {
   n = 10;
 }
 

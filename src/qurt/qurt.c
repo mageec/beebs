@@ -74,7 +74,7 @@
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
-float a[3], x1[2], x2[2];
+float *a, x1[2], x2[2];
 int flag;
 
 int  qurt();
@@ -157,9 +157,9 @@ int  qurt()
 
 /* Write to RESULT in BENCHMARK so call is not optimised out.  */
 volatile int result = 0;
-static float in1[] = {1.0, -3.0, 2.0}
-static float in2[] = {1.0, -2.0, 1.0}
-static float in3[] = {1.0, -4.0, 8.0}
+static float in1[] = {1.0, -3.0, 2.0};
+static float in2[] = {1.0, -2.0, 1.0};
+static float in3[] = {1.0, -4.0, 8.0};
 
 int
 benchmark (void)
