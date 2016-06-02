@@ -128,12 +128,12 @@ build it:
 Configure the software using the @command{configure} script in the
 main directory.
 
-There several options available, most of which are standard
-to GNU @command{configure} scripts. Use @kbd{configure --help} to see
-all the options.  The most useful is @code{--host} to specify the
-host on which the test will be run.  @code{--prefix} can be used to
-specify an installation location, although generally only the
-documentation is ever installed.
+There several options available, most of which are standard to GNU
+@command{configure} scripts. Use @kbd{configure --help} to see all the options.
+The most useful is @code{--host} to specify the host triple for the board on
+which the test will be run.  @code{--prefix} can be used to specify an
+installation location, although generally only the documentation is ever
+installed.
 
 There are two configuration options, which are specific to
 @value{BEEBS}.
@@ -148,6 +148,14 @@ Specifies the board on which the tests will be run.
 Specifies the particular chip used with the tests.
 
 @end table
+
+The board and chip names should match those of board or chip subdirectories
+within the config folder of the source tree, and the chip name should be the
+appropriate one for the chosen board. For example, to build for the
+STM32F0DISCOVERY board, on may invoke the configure script as:
+
+@code{../beebs/configure  --host=arm-none-eabi --with-chip=stm32f051 \
+                          --with-board=stm32f0discovery}
 
 @node Building
 @section Building

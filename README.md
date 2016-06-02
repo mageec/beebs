@@ -36,6 +36,18 @@ Compiling for one these boards will produce executables for that board, which
 toggle a specific pin at the beginning and end of the benchmark. This allows
 them to be easily hooked up to other tools for time and energy measurements.
 
+In order to compile for a given board, configure must be invoked with the
+following options:
+
+    $ ./configure --host=<host> --with-chip=<chip> --with-board=<board>
+
+Where `<host>` is the host triple, and `<chip` and `<board>` are the names of
+the chip and board directories under the `config` folder in the source tree. For
+example, to configure for the STM32F0DISCOVERY:
+
+    $ ./configure --host=arm-none-eabi --with-chip=stm32f051 \
+                  --with-board=stm32f0discovery
+
 ## Using the tests
 
 All tests provide the functions initialize\_trigger (), start\_trigger () and
