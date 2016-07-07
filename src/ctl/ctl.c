@@ -128,7 +128,7 @@ benchmark (void)
   return cnt;
 }
 
-int initialise_benchmark() {
+void initialise_benchmark() {
   init = 1;
   lim = 100;
   fact = 11;
