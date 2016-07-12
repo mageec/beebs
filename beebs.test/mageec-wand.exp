@@ -31,6 +31,19 @@ proc energytool_spawn { serial point pin } {
     return [eval remote_spawn host \{ "$srcdir/tools/energytool.py $serial $point $pin" \} ]
 }
 
+# Called before any setup attempted
+proc beebs_filter_benchmark { benchmark benchmark_file } {
+
+    # If the energy tool environment variables are not set we can't run these tests
+    if { ! [info exists env(ENERGYTOOL_SERIAL)] ||
+         ! [info exists env(ENERGYTOOL_POINT)] ||
+         ! [info exists env(ENERYTOOL_PIN)] } {
+        return 0
+    }
+
+    return 1
+}
+
 # Called once before any tests are run.
 proc beebs_setup_before_all_benchmarks { } {
     global energytool_results
