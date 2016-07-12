@@ -35,6 +35,7 @@ main (void)
   int i;
 
   initialise_board ();
+  initialise_benchmark ();
   start_trigger ();
 
   for (i = 0; i < REPEAT_FACTOR; i++)
