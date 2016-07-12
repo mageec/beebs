@@ -1,5 +1,9 @@
 2016-07-12  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* tools/generate-benchmark.sh: Deleted.
+
+2016-07-12  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/platformcode/Makefile.am: Deleted.
 	* src/platformcode/Makefile.in: Deleted.
 	* src/platformcode/msp430.s: Deleted.
