@@ -83,6 +83,7 @@ proc beebs_run_all_benchmarks { } {
 
             # Filter.
             if { ![beebs_filter_benchmark $benchmark $benchmark_file] } {
+                unsupported "$benchmark"
                 continue;
             }
 
@@ -90,12 +91,16 @@ proc beebs_run_all_benchmarks { } {
 
             # Setup.
             if { [catch {beebs_setup_before_benchmark $benchmark $benchmark_file} msg] } {
-                error "Failed to setup before benchmark '$benchmark' ($benchmark_file)\n$msg"
+                verbose -log "Failed to setup before benchmark '$benchmark' ($benchmark_file)\n$msg"
+                unresolved "$benchmark"
             }
 
             # Run.
             if { [catch {beebs_run_benchmark $benchmark $benchmark_file} msg] } {
+                fail "$benchmark"
                 error "Failed to run benchmark '$benchmark' ($benchmark_file)\n$msg"
+            } {
+                pass "$benchmark"
             }
 
             # Cleanup.
@@ -104,6 +109,7 @@ proc beebs_run_all_benchmarks { } {
             }
         } else {
             verbose -log "Missing executable for benchmark '$benchmark' looked at '$benchmark_file'"
+            unresolved "$benchmark"
         }
     }
 
