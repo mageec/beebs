@@ -1,3 +1,26 @@
+2016-07-12  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* run-all.sh: Deleted.
+
+2016-07-12  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* tools/generate-benchmark.sh: Deleted.
+
+2016-07-12  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/platformcode/Makefile.am: Deleted.
+	* src/platformcode/Makefile.in: Deleted.
+	* src/platformcode/msp430.s: Deleted.
+	* src/platformcode/pic32mx.ld: Deleted.
+	* src/platformcode/pic32mx_startup.s: Deleted.
+	* src/platformcode/platformcode.c: Deleted.
+	* src/platformcode/platformcode.h: Deleted.
+	* src/platformcode/sam4lxplained.ld: Deleted.
+	* src/platformcode/startup.S: Deleted.
+	* src/platformcode/startup.c: Deleted.
+	* src/platformcode/stm32f05_flash.ld: Deleted.
+	* src/platformcode/stm32vl_flash.ld: Deleted.
+
 2014-12-23  James Pallister  <james.pallister@bristol.ac.uk>
 	Added support for the stm32l0discovery board, with cortex-m0+
 
