@@ -3,4 +3,4 @@ compiler: gcc
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install dejagnu
-script: ./configure --disable-maintainer-mode && make && make check
+script: ./travis_test.sh
