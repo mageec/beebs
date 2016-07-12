@@ -54,12 +54,14 @@ proc default_beebs_announce { benchmark filename } {
 # execute FILE.  The parameter FILE will not include the directory
 # suffix, while the path DIR does already include the benchmark name.
 proc default_beebs_run_benchmark { benchmark filename } {
-    beebs_load "${filename}"
+    global beebs_run_benchmark_result
+    set beebs_run_benchmark_result [beebs_load "${filename}"]
     return 1
 }
 
 # Main loop to run all benchmarks.
 proc beebs_run_all_benchmarks { } {
+    global beebs_run_benchmark_result
     global benchmarks
     global objdir
     global srcdir
@@ -83,6 +85,7 @@ proc beebs_run_all_benchmarks { } {
 
             # Filter.
             if { ![beebs_filter_benchmark $benchmark $benchmark_file] } {
+                unsupported "$benchmark"
                 continue;
             }
 
@@ -90,12 +93,21 @@ proc beebs_run_all_benchmarks { } {
 
             # Setup.
             if { [catch {beebs_setup_before_benchmark $benchmark $benchmark_file} msg] } {
-                error "Failed to setup before benchmark '$benchmark' ($benchmark_file)\n$msg"
+                verbose -log "Failed to setup before benchmark '$benchmark' ($benchmark_file)\n$msg"
+                unresolved "$benchmark"
             }
 
             # Run.
             if { [catch {beebs_run_benchmark $benchmark $benchmark_file} msg] } {
+                fail "$benchmark"
                 error "Failed to run benchmark '$benchmark' ($benchmark_file)\n$msg"
+            } {
+                if { [lindex $beebs_run_benchmark_result 0 ] == "pass" } {
+                    pass "$benchmark"
+                } {
+                    verbose -log "Fail $benchmark: $beebs_run_benchmark_result"
+                    fail "$benchmark"
+                }
             }
 
             # Cleanup.
@@ -104,6 +116,7 @@ proc beebs_run_all_benchmarks { } {
             }
         } else {
             verbose -log "Missing executable for benchmark '$benchmark' looked at '$benchmark_file'"
+            unresolved "$benchmark"
         }
     }
 
