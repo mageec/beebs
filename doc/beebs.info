@@ -1,4 +1,4 @@
-This is beebs.info, produced by makeinfo version 5.2 from beebs.texi.
+This is beebs.info, produced by makeinfo version 6.0 from beebs.texi.
 
 This file documents the Bristol/Embecosm Embedded Benchmark Suite,
 BEEBS.
@@ -86,9 +86,10 @@ directory.
 
 There several options available, most of which are standard to GNU
 'configure' scripts.  Use 'configure --help' to see all the options.
-The most useful is '--host' to specify the host on which the test will
-be run.  '--prefix' can be used to specify an installation location,
-although generally only the documentation is ever installed.
+The most useful is '--host' to specify the host triple for the board on
+which the test will be run.  '--prefix' can be used to specify an
+installation location, although generally only the documentation is ever
+installed.
 
 There are two configuration options, which are specific to BEEBS.
 
@@ -97,6 +98,15 @@ There are two configuration options, which are specific to BEEBS.
 
 '--with-chip=DIR'
      Specifies the particular chip used with the tests.
+
+The board and chip names should match those of board or chip
+subdirectories within the config folder of the source tree, and the chip
+name should be the appropriate one for the chosen board.  For example,
+to build for the STM32F0DISCOVERY board, on may invoke the configure
+script as:
+
+'../beebs/configure --host=arm-none-eabi --with-chip=stm32f051 \
+--with-board=stm32f0discovery'
 
 
 File: beebs.info,  Node: Building,  Next: Running,  Prev: Configuring the Build,  Up: Building and Running BEEBS
@@ -780,9 +790,9 @@ Index
 * Menu:
 
 * '--with-board':                        Configuring the Build.
-                                                               (line 18)
+                                                               (line 19)
 * '--with-chip':                         Configuring the Build.
-                                                               (line 21)
+                                                               (line 22)
 * Adding a new benchmark:                Adding a New Benchmark to BEEBS.
                                                                (line  6)
 * Adding a new board:                    Adding a New Board to BEEBS.
@@ -825,18 +835,18 @@ Node: About1167
 Node: Building and Running BEEBS1464
 Node: Preparation1774
 Node: Configuring the Build2044
-Node: Building2856
-Node: Running3324
-Node: Known Issues3498
-Node: Adding a New Board to BEEBS3812
-Node: Where to add files4128
-Node: Configuration files5297
-Node: Header files6122
-Node: Board specific code6878
-Node: Calibration7702
-Node: Adding a New Benchmark to BEEBS8553
-Node: Benchmark structure9135
-Node: GNU Free Documentation License9824
-Node: Index32227
+Node: Building3260
+Node: Running3728
+Node: Known Issues3902
+Node: Adding a New Board to BEEBS4216
+Node: Where to add files4532
+Node: Configuration files5701
+Node: Header files6526
+Node: Board specific code7282
+Node: Calibration8106
+Node: Adding a New Benchmark to BEEBS8957
+Node: Benchmark structure9539
+Node: GNU Free Documentation License10228
+Node: Index32631
 
 End Tag Table
