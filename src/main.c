@@ -58,6 +58,6 @@ main (void)
   // bmarks that use arrays will check a global array rather than int result
   correct = verify_benchmark(result);
 
-  return correct;
+  return (!correct);
 }
 
