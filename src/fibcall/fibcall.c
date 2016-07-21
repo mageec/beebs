@@ -94,7 +94,7 @@ int benchmark()
 
   a = 30;
   r = fib(a);
-  return verify_benchmark(r);
+  return r;
 }
 
 int verify_benchmark(int r)
