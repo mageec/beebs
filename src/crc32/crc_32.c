@@ -169,8 +169,11 @@ int benchmark()
 
 int verify_benchmark(int r)
 {
-  // int expected = 134629500;
+#if defined(__i386__) || defined(__x86_64__)
+  int expected = 134629500;
+#else
   int expected = 1425391793;
+#endif
   if (r != expected)
     return 0;
   return 1;
