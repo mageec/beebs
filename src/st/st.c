@@ -186,7 +186,7 @@ int RandomInteger()
    return (Seed);
 }
 
-int verify_benchmark() {
+int verify_benchmark(int unused) {
   double expSumA = 4999.002470660901963128708302974700927734375;
   double expSumB = 4996.843113032735345768742263317108154296875;
   double expCoef = 0.99990005485361932446863875156850554049015045166016;

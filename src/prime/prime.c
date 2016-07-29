@@ -78,7 +78,7 @@ void initialise_benchmark() {
   y = 513239L;
 }
 
-int verify_benchmark() {
+int verify_benchmark(int unused) {
   int expected = 0;
   if (result != expected)
     return 0;

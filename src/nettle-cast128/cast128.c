@@ -863,7 +863,7 @@ benchmark (void)
   return 0;
 }
 
-int verify_benchmark()
+int verify_benchmark(int unused)
 {
   int i;
   //int expected_e = {221, 92, 251, 152, 155, 78, 241, 216, 80, 153, 123, 164, 171, 75, 220, 168};

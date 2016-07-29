@@ -4279,7 +4279,7 @@ int benchmark()
  ***************************************************************************/
 
 
-int verify_benchmark() {
+int verify_benchmark(int unused) {
   int  expP1_is_marked = 3;
   long expP1_marking_member_0[3] = {0,0,0};
   int  expP2_is_marked = 5;

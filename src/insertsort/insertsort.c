@@ -103,7 +103,7 @@ void initialise_benchmark() {
   a[10]= 2;
 }
 
-int verify_benchmark() {
+int verify_benchmark(int unused) {
   int i;
   int expected[] = {0,2,3,4,5,6,7,8,9,10,11};
   for (i=0; i<11; i++)

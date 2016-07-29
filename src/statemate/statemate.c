@@ -1308,7 +1308,7 @@ void initialise_benchmark() {
    init();
 }
 
-int verify_benchmark() {
+int verify_benchmark(int unused) {
    char expected[64] = {0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
    int i;
    for (i=0; i<64; i++) {

@@ -279,7 +279,7 @@ benchmark (void)
   return 0;
 }
 
-int verify_benchmark() {
+int verify_benchmark(int unused) {
   int i;
   // #include <stdio.h>
   // for (i=0; i<16; i++)

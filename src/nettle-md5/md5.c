@@ -166,7 +166,7 @@ benchmark (void)
   return 0;
 }
 
-int verify_benchmark() {
+int verify_benchmark(int unused) {
   int i;
   // #include <stdio.h>
   // for (i=0; i<_MD5_DIGEST_LENGTH; i++)

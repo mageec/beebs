@@ -146,7 +146,7 @@ void initialise_benchmark() {
   f = 8;
 }
 
-int verify_benchmark()
+int verify_benchmark(int unused)
 {
   float exp[] = {1.41421353816986083984375,
                 1.73205077648162841796875,

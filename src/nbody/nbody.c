@@ -171,7 +171,7 @@ int benchmark()
    return 0;
 }
 
-int verify_benchmark() {
+int verify_benchmark(int unused) {
    int i, j;
    /* print expected values */
    // printf("static struct body solar_bodies[] = {\n");

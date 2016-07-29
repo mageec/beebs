@@ -254,7 +254,7 @@ void initialise_benchmark() {
    isw = value;
 }
 
-int verify_benchmark() {
+int verify_benchmark(int unused) {
   // #include <stdio.h>
   // printf("%lu %lu\n", out.l, out.r);
   unsigned long int exp_l = 2489587893;

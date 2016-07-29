@@ -125,7 +125,7 @@ void initialise_benchmark()
   }
 }
 
-int verify_benchmark()
+int verify_benchmark(int unused)
 {
   int i;
   // check source and target equal up to INVOCATION_COUNT bytes

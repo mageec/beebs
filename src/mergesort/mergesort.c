@@ -232,7 +232,7 @@ int benchmark() {
 	return 0;
 }
 
-int verify_benchmark()
+int verify_benchmark(int unused)
 {
 	int i;
 	// x86

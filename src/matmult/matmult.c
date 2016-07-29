@@ -178,7 +178,7 @@ void initialise_benchmark() {
          ArrayB[OuterIndex][InnerIndex] = RANDOM_VALUE;
 }
 
-int verify_benchmark()
+int verify_benchmark(int unused)
 {
   int i, j;
 #ifdef MATMULT_FLOAT

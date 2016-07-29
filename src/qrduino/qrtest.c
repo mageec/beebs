@@ -53,7 +53,7 @@ void initialise_benchmark() {
   size = 22;
 }
 
-int verify_benchmark() {
+int verify_benchmark(int unused) {
   int i;
   // #include <stdio.h>
   // for (i=0; i<22; i++)

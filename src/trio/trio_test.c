@@ -59,7 +59,7 @@ benchmark (void)
   return 0;
 }
 
-int verify_benchmark() {
+int verify_benchmark(int unused) {
   int expected = 15;
   if (int_dest != expected)
     return 0;

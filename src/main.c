@@ -32,7 +32,7 @@ int initialise_benchmark()
 
 // each benchmark will need to override this function
 // otherwise this function returns -1 to indicate no verification done
-int verify_benchmark()
+int verify_benchmark(int unused)
 {
     return -1;
 }
