@@ -12664,38 +12664,6 @@ UNCALIBRATED_BENCHMARKS=""
 N_UNCALIBRATED_BENCHMARKS=0
 
 
-    bmark=2dfir
-    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/2dfir/Makefile"
-
-        BENCHMARKS+="2dfir "
-        BENCHMARKS_SUBDIRS+="src/2dfir "
-
-        if test x$HAVE_CALIBRATION == xyes; then
-            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
-            if test x$no_calib == x0; then
-                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
-                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
-            fi
-        fi
-    fi
-
-    bmark=adpcm
-    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/adpcm/Makefile"
-
-        BENCHMARKS+="adpcm "
-        BENCHMARKS_SUBDIRS+="src/adpcm "
-
-        if test x$HAVE_CALIBRATION == xyes; then
-            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
-            if test x$no_calib == x0; then
-                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
-                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
-            fi
-        fi
-    fi
-
     bmark=aha-compress
     if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
         ac_config_files="$ac_config_files src/aha-compress/Makefile"
@@ -12718,22 +12686,6 @@ N_UNCALIBRATED_BENCHMARKS=0
 
         BENCHMARKS+="aha-mont64 "
         BENCHMARKS_SUBDIRS+="src/aha-mont64 "
-
-        if test x$HAVE_CALIBRATION == xyes; then
-            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
-            if test x$no_calib == x0; then
-                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
-                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
-            fi
-        fi
-    fi
-
-    bmark=blowfish
-    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/blowfish/Makefile"
-
-        BENCHMARKS+="blowfish "
-        BENCHMARKS_SUBDIRS+="src/blowfish "
 
         if test x$HAVE_CALIBRATION == xyes; then
             no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
@@ -12920,22 +12872,6 @@ N_UNCALIBRATED_BENCHMARKS=0
         fi
     fi
 
-    bmark=dhrystone
-    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/dhrystone/Makefile"
-
-        BENCHMARKS+="dhrystone "
-        BENCHMARKS_SUBDIRS+="src/dhrystone "
-
-        if test x$HAVE_CALIBRATION == xyes; then
-            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
-            if test x$no_calib == x0; then
-                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
-                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
-            fi
-        fi
-    fi
-
     bmark=dijkstra
     if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
         ac_config_files="$ac_config_files src/dijkstra/Makefile"
@@ -13054,22 +12990,6 @@ N_UNCALIBRATED_BENCHMARKS=0
 
         BENCHMARKS+="fdct "
         BENCHMARKS_SUBDIRS+="src/fdct "
-
-        if test x$HAVE_CALIBRATION == xyes; then
-            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
-            if test x$no_calib == x0; then
-                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
-                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
-            fi
-        fi
-    fi
-
-    bmark=fft
-    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/fft/Makefile"
-
-        BENCHMARKS+="fft "
-        BENCHMARKS_SUBDIRS+="src/fft "
 
         if test x$HAVE_CALIBRATION == xyes; then
             no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
@@ -13214,22 +13134,6 @@ N_UNCALIBRATED_BENCHMARKS=0
 
         BENCHMARKS+="levenshtein "
         BENCHMARKS_SUBDIRS+="src/levenshtein "
-
-        if test x$HAVE_CALIBRATION == xyes; then
-            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
-            if test x$no_calib == x0; then
-                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
-                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
-            fi
-        fi
-    fi
-
-    bmark=lms
-    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/lms/Makefile"
-
-        BENCHMARKS+="lms "
-        BENCHMARKS_SUBDIRS+="src/lms "
 
         if test x$HAVE_CALIBRATION == xyes; then
             no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
@@ -13790,22 +13694,6 @@ N_UNCALIBRATED_BENCHMARKS=0
 
         BENCHMARKS+="sglib-rbtree "
         BENCHMARKS_SUBDIRS+="src/sglib-rbtree "
-
-        if test x$HAVE_CALIBRATION == xyes; then
-            no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
-            if test x$no_calib == x0; then
-                UNCALIBRATED_BENCHMARKS="$UNCALIBRATED_BENCHMARKS$bmark "
-                N_UNCALIBRATED_BENCHMARKS=$((N_UNCALIBRATED_BENCHMARKS+1))
-            fi
-        fi
-    fi
-
-    bmark=sha
-    if ! echo "$EXCLUDED_BENCHMARKS" | egrep -q "\b$bmark\b" ; then
-        ac_config_files="$ac_config_files src/sha/Makefile"
-
-        BENCHMARKS+="sha "
-        BENCHMARKS_SUBDIRS+="src/sha "
 
         if test x$HAVE_CALIBRATION == xyes; then
             no_calib=`egrep -c "\b$bmark\b" $srcdir/config/$arch/boards/$board/calibration`
@@ -15068,11 +14956,8 @@ do
   case $ac_config_target in
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "libtool") CONFIG_COMMANDS="$CONFIG_COMMANDS libtool" ;;
-    "src/2dfir/Makefile") CONFIG_FILES="$CONFIG_FILES src/2dfir/Makefile" ;;
-    "src/adpcm/Makefile") CONFIG_FILES="$CONFIG_FILES src/adpcm/Makefile" ;;
     "src/aha-compress/Makefile") CONFIG_FILES="$CONFIG_FILES src/aha-compress/Makefile" ;;
     "src/aha-mont64/Makefile") CONFIG_FILES="$CONFIG_FILES src/aha-mont64/Makefile" ;;
-    "src/blowfish/Makefile") CONFIG_FILES="$CONFIG_FILES src/blowfish/Makefile" ;;
     "src/bs/Makefile") CONFIG_FILES="$CONFIG_FILES src/bs/Makefile" ;;
     "src/bubblesort/Makefile") CONFIG_FILES="$CONFIG_FILES src/bubblesort/Makefile" ;;
     "src/cnt/Makefile") CONFIG_FILES="$CONFIG_FILES src/cnt/Makefile" ;;
@@ -15084,7 +14969,6 @@ do
     "src/ctl-string/Makefile") CONFIG_FILES="$CONFIG_FILES src/ctl-string/Makefile" ;;
     "src/ctl-vector/Makefile") CONFIG_FILES="$CONFIG_FILES src/ctl-vector/Makefile" ;;
     "src/cubic/Makefile") CONFIG_FILES="$CONFIG_FILES src/cubic/Makefile" ;;
-    "src/dhrystone/Makefile") CONFIG_FILES="$CONFIG_FILES src/dhrystone/Makefile" ;;
     "src/dijkstra/Makefile") CONFIG_FILES="$CONFIG_FILES src/dijkstra/Makefile" ;;
     "src/dtoa/Makefile") CONFIG_FILES="$CONFIG_FILES src/dtoa/Makefile" ;;
     "src/duff/Makefile") CONFIG_FILES="$CONFIG_FILES src/duff/Makefile" ;;
@@ -15093,7 +14977,6 @@ do
     "src/fac/Makefile") CONFIG_FILES="$CONFIG_FILES src/fac/Makefile" ;;
     "src/fasta/Makefile") CONFIG_FILES="$CONFIG_FILES src/fasta/Makefile" ;;
     "src/fdct/Makefile") CONFIG_FILES="$CONFIG_FILES src/fdct/Makefile" ;;
-    "src/fft/Makefile") CONFIG_FILES="$CONFIG_FILES src/fft/Makefile" ;;
     "src/fibcall/Makefile") CONFIG_FILES="$CONFIG_FILES src/fibcall/Makefile" ;;
     "src/fir/Makefile") CONFIG_FILES="$CONFIG_FILES src/fir/Makefile" ;;
     "src/frac/Makefile") CONFIG_FILES="$CONFIG_FILES src/frac/Makefile" ;;
@@ -15103,7 +14986,6 @@ do
     "src/jfdctint/Makefile") CONFIG_FILES="$CONFIG_FILES src/jfdctint/Makefile" ;;
     "src/lcdnum/Makefile") CONFIG_FILES="$CONFIG_FILES src/lcdnum/Makefile" ;;
     "src/levenshtein/Makefile") CONFIG_FILES="$CONFIG_FILES src/levenshtein/Makefile" ;;
-    "src/lms/Makefile") CONFIG_FILES="$CONFIG_FILES src/lms/Makefile" ;;
     "src/ludcmp/Makefile") CONFIG_FILES="$CONFIG_FILES src/ludcmp/Makefile" ;;
     "src/matmult-int/Makefile") CONFIG_FILES="$CONFIG_FILES src/matmult-int/Makefile" ;;
     "src/matmult-float/Makefile") CONFIG_FILES="$CONFIG_FILES src/matmult-float/Makefile" ;;
@@ -15139,7 +15021,6 @@ do
     "src/sglib-listsort/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-listsort/Makefile" ;;
     "src/sglib-queue/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-queue/Makefile" ;;
     "src/sglib-rbtree/Makefile") CONFIG_FILES="$CONFIG_FILES src/sglib-rbtree/Makefile" ;;
-    "src/sha/Makefile") CONFIG_FILES="$CONFIG_FILES src/sha/Makefile" ;;
     "src/slre/Makefile") CONFIG_FILES="$CONFIG_FILES src/slre/Makefile" ;;
     "src/stringsearch1/Makefile") CONFIG_FILES="$CONFIG_FILES src/stringsearch1/Makefile" ;;
     "src/strstr/Makefile") CONFIG_FILES="$CONFIG_FILES src/strstr/Makefile" ;;
