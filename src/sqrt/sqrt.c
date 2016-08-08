@@ -123,11 +123,11 @@ benchmark()
 
   for(i = 0.0; i < 10000.; i += 100.)
     accum += sqrtfcn(i);
-  return (int)(accum*1000000);
+  return (int)(accum*100000);
 }
 
 int verify_benchmark(int r) {
-  int expected = -2147483648;
+  int expected = 661462912;
   if (r != expected)
     return 0;
   return 1;
