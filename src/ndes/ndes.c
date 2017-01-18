@@ -234,22 +234,34 @@ void cyfun(unsigned long ir, great k, unsigned long * iout) {
    int value = 0;
 #endif
 
+immense out;
+static immense inp, key;
+static int newkey, isw;
+
 int
 benchmark (void)
 {
-   immense inp, key, out;
-   int newkey, isw;
-
-   inp.l = KNOWN_VALUE * 35;
-   inp.r = KNOWN_VALUE * 26;
-   key.l = KNOWN_VALUE * 2;
-   key.r = KNOWN_VALUE * 16;
-
-   newkey = value;
-   isw = value;
-
    des(inp, key, &newkey, isw, &out);
    return 0;
 }
 
+void initialise_benchmark() {
+   inp.l = KNOWN_VALUE * 35;
+   inp.r = KNOWN_VALUE * 26;
+   key.l = KNOWN_VALUE * 2;
+   key.r = KNOWN_VALUE * 16;
+   newkey = value;
+   isw = value;
+}
 
+int verify_benchmark(int unused) {
+  // #include <stdio.h>
+  // printf("%lu %lu\n", out.l, out.r);
+  unsigned long int exp_l = 2489587893;
+  unsigned long int exp_r = 1806503748;
+  if (out.l != exp_l)
+    return 0;
+  if (out.r != exp_r)
+    return 0;
+  return 1;
+}

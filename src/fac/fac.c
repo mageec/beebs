@@ -45,7 +45,13 @@ benchmark (void)
   n = 10;
   for (i = 0;  i <= n; i++)
       s += fac (i);
-  return 0;
+  return s;
 }
 
-
+int verify_benchmark(int r)
+{
+  int expected = 4037914;
+  if (r != expected)
+    return 0;
+  return 1;
+}

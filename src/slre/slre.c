@@ -470,3 +470,9 @@ int benchmark()
   return ret;
 }
 
+int verify_benchmark(int r) {
+  int expected = 102;
+  if (r != expected)
+    return 0;
+  return 1;
+}

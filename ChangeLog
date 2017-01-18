@@ -1,3 +1,179 @@
+2016-03-16  Craig Blackmore  <craig.blackmore@bristol.ac.uk>
+	Updated calibration for aha-mont64
+
+	* config/arm/boards/stm32vldiscovery/calibration : updated aha-mont64 calibration
+
+2016-07-21  Craig Blackmore  <craig.blackmore@bristol.ac.uk>
+	Fixed aha-compress timeout
+
+	* ChangeLog: added missing entries for previous four commits
+	* src/aha-compress/compress_test.c (benchmark): initialisation of
+	    input array causing timeout. Changed from initialise_benchmark
+	    to global array
+	* src/ctl/ctl.c (int initialise_benchmark): change return type to void
+
+2016-07-21  Craig Blackmore  <craig.blackmore@bristol.ac.uk>
+	statemate initialisation
+
+	Added initialise_benchmark and verify_benchmark to statemate
+
+	* src/statemate/statemate.c: input array Bitlist now initialised in
+	    initialise_benchmark. Added self-test
+
+2016-07-21  Craig Blackmore  <craig.blackmore@bristol.ac.uk>
+	fixed minor errors in initialisation of 3 benchmarks
+
+	* src/qurt/qurt.c: changed float array to pointer
+	* src/recursion/recursion.c: changed return type of
+	    initialise_benchmark from int to void
+	* src/stringsearch1/stringsearch1.c: added semicolon
+
+2016-07-21  Craig Blackmore  <craig.blackmore@bristol.ac.uk>
+	remove new initialise_benchmark from compress.c due to timeout
+
+	The input string is now a global variable which, with link-time
+	optimisation disabled, should be enough to prevent the compiler from
+	optimising it out.
+
+	* src/compress/compress.c: remove initialise_benchmark
+
+2016-07-21  Craig Blackmore  <craig.blackmore@bristol.ac.uk>
+	initialise input data pt1
+
+	Began editing benchmarks to prevent the compiler from optimising based
+	on input data which, for real programs, would often be unknown at
+	compile time. Link-time optimisation must be disabled for this to
+	work.
+
+	initialise_benchmark (in benchmark.c) is called by main (in main.c)
+	before calling benchmark (in benchmark.c). Without LTO, the compiler
+	cannot assume that initialise_benchmark has been called before the
+	benchmark function executes, thus protecting the input data from
+	optimisation.
+
+	Where using initialise_benchmark is impractical or overly convoluted,
+	inputs are made into global variables which should be enough to
+	prevent the compiler from optimising based on them - as it cannot
+	assume they are not changed by another object file.
+
+	Also fixed incorrect index ranges in bubblesort.c
+
+	* src/2dfir/fir2dim.c: removed confusing #defines. Input array now
+	    initialised in initialise_benchmark 
+	* src/adpcm/adpcm.c: amplitude and frequency now initialised in
+	    initialised in initialise_benchmark 
+	* src/aha-compress/compress_test.c: input array now initialised in
+	    initialise_benchmark 
+	* src/aha-mont64/mont64.c: input variables now initialised in
+	    initialise_benchmark 
+	* src/bubblesort/bubblesort.c: fixed incorrect index ranges. Changed
+	    existing Initialize function to initialise_benchmark
+	* src/cnt/cnt.c: moved InitSeed and Initialize calls to
+	    initialise_benchmark 
+	* src/compress/compress.c: input array now initialised in
+	    initialise_benchmark 
+	* src/ctl-string/string.c: inputs now initialised in
+	    initialise_benchmark 
+	* src/ctl/ctl.c: inputs now initialised in initialise_benchmark and
+	    replaced hard coded constants with variables as, realistically,
+	    they may vary and their values should not be assumed at compile
+	    time
+	* src/duff/duff.c: initialize replace with initialise_benchmark 
+	* src/edn/edn.c: inputs now initialised in initialise_benchmark 
+	* src/expint/expint.c: inputs now initialised in initialise_benchmark 
+	* src/insertsort/insertsort.c: input array now initialised in
+	    initialise_benchmark 
+	* src/janne_complex/janne_complex.c: inputs now initialised in
+	    initialise_benchmark 
+	* src/jfdctint/jfdctint.c: initialisation preamble moved to
+	    initialise_benchmark 
+	* src/main.c: added call to initialise_benchmark before each
+	    benchmark call - some benchmarks need to be initialised before
+	    each repeat
+	* src/matmult/matmult.c: initialisation parts moved to
+	    initialise_benchmark 
+	* src/ndes/ndes.c: input and key now initialised in
+	    initialise_benchmark 
+	* src/newlib-sqrt/ef_sqrt.c: constant function args now initialised
+	    in initialise_benchmark 
+	* src/prime/prime.c: inputs now initialised in initialise_benchmark
+	* src/qrduino/qrtest.c: input string and size now initialised in
+	    initialise_benchmark 
+	* src/qurt/qurt.c: input data moved to global floats
+	* src/recursion/recursion.c: constant function input now initialised
+	    in initialise_benchmark 
+	* src/select/select.c: constant function inputs now initialised
+	    in initialise_benchmark 
+	* src/stringsearch1/stringsearch1.c: string sizes now initialised in
+	    initialise_benchmark 
+	* src/strstr/strstr.c: search string now global
+	* src/tarai/tarai.c: constant function inputs now initialised in
+	    initialise_benchmark
+
+2016-07-21  Craig Blackmore  <craig.blackmore@bristol.ac.uk>
+	Updated calibration for aha-mont64
+
+	* config/arm/boards/stm32vldiscovery/calibration: updated aha-mont64
+	    calibration
+2016-07-21  Craig Blackmore  <craig.blackmore@bristol.ac.uk>
+	Added verify_benchmark function to implement self-tests.
+	Initialised output_count in dijkstra.
+	newlib-sqrt added result array so that the function calls are not
+	    optimised out
+
+	* include/support.h : added verify_benchmark function prototype
+	* src/2dfir/fir2dim.c : added verify_benchmark
+	* src/adpcm/adpcm.c : added verify_benchmark
+	* src/aha-compress/compress_test.c : added verify_benchmark
+	* src/aha-mont64/mont64.c : added verify_benchmark
+	* src/bubblesort/bubblesort.c : added verify_benchmark
+	* src/cnt/cnt.c : added verify_benchmark
+	* src/cover/cover.c : added verify_benchmark
+	* src/crc32/crc_32.c : added verify_benchmark
+	* src/ctl-string/string.c : added verify_benchmark
+	* src/ctl/ctl.c : added verify_benchmark
+	* src/dijkstra/dijkstra_small.c : added verify_benchmark and initialised output_count
+	* src/dtoa/dtoa.c : added verify_benchmark
+	* src/duff/duff.c : added verify_benchmark
+	* src/edn/edn.c : added verify_benchmark
+	* src/expint/expint.c : added verify_benchmark
+	* src/fac/fac.c : added verify_benchmark
+	* src/fdct/fdct.c : added verify_benchmark
+	* src/fft/fft1.c : scale up repeat factor
+	* src/fibcall/fibcall.c : added verify_benchmark and scaled up repeat factor
+	* src/frac/frac.c : added verify_benchmark
+	* src/insertsort/insertsort.c : added verify_benchmark
+	* src/janne_complex/janne_complex.c : added verify_benchmark
+	* src/jfdctint/jfdctint.c : added verify_benchmark
+	* src/levenshtein/levenshtein.c : added verify_benchmark
+	* src/ludcmp/ludcmp.c : added verify_benchmark
+	* src/main.c : added call to verify_benchmark and now returns exit code
+	* src/matmult/matmult.c : added verify_benchmark
+	* src/mergesort/mergesort.c : added verify_benchmark
+	* src/nbody/nbody.c : added verify_benchmark
+	* src/ndes/ndes.c : added verify_benchmark
+	* src/nettle-arcfour/arcfour.c : added verify_benchmark
+	* src/nettle-cast128/cast128.c : added verify_benchmark
+	* src/nettle-des/des.c : added verify_benchmark
+	* src/nettle-md5/md5.c : added verify_benchmark
+	* src/newlib-sqrt/ef_sqrt.c : added verify_benchmark and result array
+	* src/nsichneu/nsichneu.c : added verify_benchmark
+	* src/prime/prime.c : added verify_benchmark
+	* src/qrduino/qrtest.c : added verify_benchmark
+	* src/recursion/recursion.c : added verify_benchmark
+	* src/sglib-arraybinsearch/arraybinsearch.c : added verify_benchmark
+	* src/sglib-listinsertsort/listinsertsort.c : added verify_benchmark
+	* src/sglib-listsort/listsort.c : added verify_benchmark
+	* src/sglib-queue/queue.c : added verify_benchmark
+	* src/sglib-rbtree/rbtree.c : added verify_benchmark
+	* src/slre/slre.c : added verify_benchmark
+	* src/sqrt/sqrt.c : added verify_benchmark
+	* src/st/st.c : added verify_benchmark
+	* src/stringsearch1/stringsearch1.c : added verify_benchmark
+	* src/strstr/strstr.c : added verify_benchmark
+	* src/tarai/tarai.c : added verify_benchmark
+	* src/trio/trio_test.c : added verify_benchmark
+
 2016-08-01  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	Remove benchmarks that are not licenced under GPL.

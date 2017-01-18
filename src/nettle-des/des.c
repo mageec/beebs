@@ -67,7 +67,7 @@ static DECRYPT(DesSmallFipsDecrypt,TEMPSMALL, LOADFIPS,KEYMAPSMALL,SAVEFIPS)
 /* Weak and semiweak keys, excluding parity:
  *
  * 00 00 00 00  00 00 00 00
- * 7f 7f 7f 7f  7f 7f 7f 7f 
+ * 7f 7f 7f 7f  7f 7f 7f 7f
  * 0f 0f 0f 0f  07 07 07 07
  * 70 70 70 70  78 78 78 78
  *
@@ -152,7 +152,7 @@ des_weak_p(const uint8_t *key)
   if (k0 != candidate[0]
       || k1 != candidate[1])
     return 0;
-  
+
   if ( (key[2] >> 1) != k0
        || (key[3] >> 1) != k1)
     return 0;
@@ -197,7 +197,7 @@ des_set_key(struct des_ctx *ctx, const uint8_t *key)
   n = 16;
   k = rotors;
   method = ctx->key;
-  
+
   do {
     w   = (b1[k[ 0   ]] | b0[k[ 1   ]]) << 4;
     w  |= (b1[k[ 2   ]] | b0[k[ 3   ]]) << 2;
@@ -279,4 +279,15 @@ benchmark (void)
   return 0;
 }
 
-
+int verify_benchmark(int unused) {
+  int i;
+  // #include <stdio.h>
+  // for (i=0; i<16; i++)
+  //   printf("%d, ", result[i]);
+  uint8_t expected[16] =
+    {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+  for (i=0; i<16; i++)
+    if (result[i] != expected[i])
+      return 0;
+  return 1;
+}

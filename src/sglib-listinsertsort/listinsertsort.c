@@ -73,3 +73,9 @@ int benchmark()
   return cnt;
 }
 
+int verify_benchmark(int r) {
+  int expected = 4936;
+  if (r != expected)
+    return 0;
+  return 1;
+}

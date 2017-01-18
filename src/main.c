@@ -23,25 +23,41 @@
 
 #pragma weak main
 #pragma weak initialise_benchmark
+#pragma weak verify_benchmark
 
 int initialise_benchmark()
 {
     return 0;
 }
 
+// each benchmark will need to override this function
+// otherwise this function returns -1 to indicate no verification done
+int verify_benchmark(int unused)
+{
+    return -1;
+}
+
 int
 main (void)
 {
   int i;
+  volatile int result;
+  int correct;
 
   initialise_board ();
   initialise_benchmark ();
   start_trigger ();
 
-  for (i = 0; i < REPEAT_FACTOR; i++)
-    benchmark ();
+  for (i = 0; i < REPEAT_FACTOR; i++) {
+    initialise_benchmark ();
+    result = benchmark ();
+  }
 
   stop_trigger ();
-  return 0;
+
+  // bmarks that use arrays will check a global array rather than int result
+  correct = verify_benchmark(result);
+
+  return (!correct);
 }
 

@@ -52,8 +52,9 @@
 #warning No chipsupport.h
 #endif
 
-void initialise_board();
-void start_trigger();
-void stop_trigger();
+void initialise_board(void);
+int verify_benchmark(int result);
+void start_trigger(void);
+void stop_trigger(void);
 
-int benchmark () __attribute__ ((noinline));
+int benchmark (void) __attribute__ ((noinline));

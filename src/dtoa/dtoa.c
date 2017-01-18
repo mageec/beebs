@@ -4251,3 +4251,12 @@ int benchmark()
 
 }
 
+int verify_benchmark(int r)
+{
+  int expected = 267945;
+  if (r != expected)
+    return 0;
+  else {
+    return 1;
+  }
+}

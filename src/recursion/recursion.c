@@ -95,13 +95,25 @@ int anka(int i)
 
 volatile int In;
 
-
+static int n;
 
 int
 benchmark(void)
 {
-  In = fib(10);
-  return 0;
+  In = fib(n);
+  return In;
+}
+
+void initialise_benchmark() {
+  n = 10;
+}
+
+int verify_benchmark(int r)
+{
+  int expected = 89;
+  if (r != expected)
+    return 0;
+  return 1;
 }
 
 

@@ -29,15 +29,16 @@
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 8)
 
+static const char *encode;
+static int size;
 
 int
 benchmark (void)
 {
-  const char *encode="http://www.mageec.com";
 
-  initeccsize(1, 22);
+  initeccsize(1, size);
 
-  memcpy(strinbuf, encode, 22);
+  memcpy(strinbuf, encode, size);
 
   initframe();
   qrencode();
@@ -46,5 +47,24 @@ benchmark (void)
   return 0;
 }
 
+void initialise_benchmark() {
+  static const char *in_encode = "http://www.mageec.com";
+  encode = in_encode;
+  size = 22;
+}
 
+int verify_benchmark(int unused) {
+  int i;
+  // #include <stdio.h>
+  // for (i=0; i<22; i++)
+  //   printf("%d,", strinbuf[i]);
+  // maybe should be a char
+  int expected[22] =
+    {254,101,63,128,130,110,160,128,186,65,46,
+     128,186,38,46,128,186,9,174,128,130,20};
+  for (i=0; i<22; i++)
+    if (strinbuf[i] != expected[i])
+      return 0;
+  return 1;
+}
 

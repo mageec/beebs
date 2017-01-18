@@ -250,7 +250,7 @@ int swi10(int c)
 	return c;
 }
 
-int benchmark() 
+int benchmark()
 {
 	volatile int cnt=0;
 
@@ -264,3 +264,10 @@ int benchmark()
 
 }
 
+int verify_benchmark(int r)
+{
+	int expected = 180;
+	if (r != expected)
+		return 0;
+	return 1;
+}
