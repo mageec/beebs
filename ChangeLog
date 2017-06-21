@@ -1,7 +1,27 @@
+2017-09-08  Graham Markall  <graham.markall@embecosm.com>
+
+	* picorv32count.py: New file.
+	* ri5cycount.py: New file.
+	* config/riscv32/boards/picorv32verilator/boardsupport.c: New file.
+	* config/riscv32/boards/picorv32verilator/boardsupport.h: New file.
+	* config/riscv32/boards/ri5cyverilator/boardsupport.c: New file.
+	* config/riscv32/boards/ri5cyverilator/boardsupport.h: New file.
+	* config/riscv32/chips/picorv32/chip.cfg: New file.
+	* config/riscv32/chips/picorv32/chipsupport.c: New file.
+	* config/riscv32/chips/picorv32/chipsupport.h: New file.
+	* config/riscv32/chips/picorv32/picorv32.ld: New file.
+	* config/riscv32/chips/picorv32/picorv32.spec: New file.
+	* config/riscv32/chips/ri5cy/chip.cfg: New file.
+	* config/riscv32/chips/ri5cy/chipsupport.c: New file.
+	* config/riscv32/chips/ri5cy/chipsupport.h: New file.
+	* src/miniz/miniz.c (tdefl_find_match): Fix layout.
+
 2016-03-16  Craig Blackmore  <craig.blackmore@bristol.ac.uk>
+
 	Updated calibration for aha-mont64
 
-	* config/arm/boards/stm32vldiscovery/calibration : updated aha-mont64 calibration
+	* config/arm/boards/stm32vldiscovery/calibration : updated
+	aha-mont64 calibration
 
 2016-07-21  Craig Blackmore  <craig.blackmore@bristol.ac.uk>
 	Fixed aha-compress timeout
