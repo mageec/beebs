@@ -74,16 +74,58 @@ def execute(executable, commands):
     log.debug('gdbserver return code %s' % gdbserver.returncode)
     stdout, stderr = gdbserver.communicate(input='', timeout=10)
 
+    gdbserver_output = stdout.decode()
+
     log.debug('\nStandard output from gdbserver:\n')
-    log.debug(stdout.decode())
+    log.debug(gdbserver_output)
     log.debug('\nStandard error from gdbserver:\n')
     log.debug(stderr.decode())
 
-    return None
+    return gdbserver_output
+
+def parse_output(output):
+    seen_start = False
+    seen_stop = False
+    seen_exit = False
+    for line in output.split('\n'):
+        if not seen_start:
+            if "Start" in line:
+                start = int(line.split()[4].strip())
+                seen_start = True
+
+        if not seen_stop:
+            if "Stop" in line:
+                stop = int(line.split()[4].strip())
+                seen_stop = True
+
+        if not seen_exit:
+            if "Exit" in line:
+                exit_code = int(line.split()[4].strip())
+                seen_exit = True
+
+    if not seen_start:
+        raise GdbParsingError('Did not find start trigger cycle count')
+
+    if not seen_stop:
+        raise GdbParsingError('Did not find stop trigger cycle count')
+
+    if not seen_exit:
+        raise GdbParsingError('Did not find exit code')
+
+    cycle_count = stop - start
+    return cycle_count, exit_code
 
 def run_benchmark(bm):
     executable = os.path.join('src', bm, bm)
-    execute(executable, commands)
+    try:
+        output = execute(executable, commands)
+        cycle_count, exit_code = parse_output(output)
+    except GdbParsingError as gpe:
+        log.debug('Error parsing output from GDB for %s: %s' % (bm, gpe.message))
+        cycle_count = -1
+        exit_code = -1
+
+    print('%s\t%s\t%s' % (bm, cycle_count, exit_code))
 
 def run_benchmarks():
     setup_logging('beebs-riscv32.log')
