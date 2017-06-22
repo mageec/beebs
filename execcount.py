@@ -8,7 +8,7 @@ import sys
 
 benchmarks = (
     'aha-compress', 'aha-mont64', 'bs', 'bubblesort', 'cnt', 'compress',
-    'cover', 'crc', 'crc32', 'ctl', 'ctl-stack', 'ctl-string', 'ctl-vector',
+    'cover', 'crc', 'crc32', 'ctl-stack', 'ctl-string', 'ctl-vector',
     'cubic', 'dijkstra', 'dtoa', 'duff', 'edn', 'expint', 'fac', 'fasta',
     'fdct', 'fibcall', 'fir', 'frac', 'huffbench', 'insertsort',
     'janne_complex', 'jfdctint', 'lcdnum', 'levenshtein', 'ludcmp', 'matmult',
@@ -72,7 +72,7 @@ def execute(executable, commands):
     # https://docs.python.org/3/library/subprocess.html#subprocess.Popen.communicate
     try:
         stdout, stderr = debugger.communicate(input=b'\n'.join(commands),
-            timeout=10)
+            timeout=60)
         log.debug('\n... Finished communicating with gdb.')
     except TimeoutExpired:
         log.debug('\nExecution failed - timeout reached.')
