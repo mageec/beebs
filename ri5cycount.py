@@ -6,25 +6,23 @@ import logging
 import os
 import sys
 
-# benchmarks = (
-#     'aha-compress', 'aha-mont64', 'bs', 'bubblesort', 'cnt', 'compress',
-#     'cover', 'crc', 'crc32', 'ctl-stack', 'ctl-string', 'ctl-vector',
-#     'cubic', 'dijkstra', 'dtoa', 'duff', 'edn', 'expint', 'fac', 'fasta',
-#     'fdct', 'fibcall', 'fir', 'frac', 'huffbench', 'insertsort',
-#     'janne_complex', 'jfdctint', 'lcdnum', 'levenshtein', 'ludcmp', 'matmult',
-#     'matmult-float', 'matmult-int', 'mergesort', 'miniz', 'minver', 'nbody',
-#     'ndes', 'nettle-arcfour', 'nettle-cast128', 'nettle-des', 'nettle-md5',
-#     'newlib-exp', 'newlib-log', 'newlib-mod', 'newlib-sqrt', 'ns', 'nsichneu',
-#     'picojpeg', 'prime', 'qrduino', 'qsort', 'qurt', 'recursion', 'rijndael',
-#     'select', 'sglib-arraybinsearch', 'sglib-arrayheapsort',
-#     'sglib-arrayquicksort', 'sglib-arraysort', 'sglib-dllist',
-#     'sglib-hashtable', 'sglib-listinsertsort', 'sglib-listsort', 'sglib-queue',
-#     'sglib-rbtree', 'slre', 'sqrt', 'st', 'statemate', 'stb_perlin',
-#     'stringsearch1', 'strstr', 'tarai', 'template', 'trio', 'trio-snprintf',
-#     'trio-sscanf', 'ud', 'whetstone', 'wikisort'
-# )
-
-benchmarks = ['newlib-log']
+benchmarks = (
+     'aha-compress', 'aha-mont64', 'bs', 'bubblesort', 'cnt', 'compress',
+     'cover', 'crc', 'crc32', 'ctl-stack', 'ctl-string', 'ctl-vector',
+     'cubic', 'dijkstra', 'dtoa', 'duff', 'edn', 'expint', 'fac', 'fasta',
+     'fdct', 'fibcall', 'fir', 'frac', 'huffbench', 'insertsort',
+     'janne_complex', 'jfdctint', 'lcdnum', 'levenshtein', 'ludcmp', 'matmult',
+     'matmult-float', 'matmult-int', 'mergesort', 'miniz', 'minver', 'nbody',
+     'ndes', 'nettle-arcfour', 'nettle-cast128', 'nettle-des', 'nettle-md5',
+     'newlib-exp', 'newlib-log', 'newlib-mod', 'newlib-sqrt', 'ns', 'nsichneu',
+     'picojpeg', 'prime', 'qrduino', 'qsort', 'qurt', 'recursion', 'rijndael',
+     'select', 'sglib-arraybinsearch', 'sglib-arrayheapsort',
+     'sglib-arrayquicksort', 'sglib-arraysort', 'sglib-dllist',
+     'sglib-hashtable', 'sglib-listinsertsort', 'sglib-listsort', 'sglib-queue',
+     'sglib-rbtree', 'slre', 'sqrt', 'st', 'statemate', 'stb_perlin',
+     'stringsearch1', 'strstr', 'tarai', 'template', 'trio', 'trio-snprintf',
+     'trio-sscanf', 'ud', 'whetstone', 'wikisort'
+)
 
 # Commands sent to GDB. In order to avoid complicated interaction with GDB,
 # we just shove everything into the buffer and then read everything out
@@ -84,7 +82,7 @@ def execute(executable, commands):
     # https://docs.python.org/3/library/subprocess.html#subprocess.Popen.communicate
     try:
         stdout, stderr = debugger.communicate(input=b'\n'.join(commands),
-            timeout=60)
+            timeout=20)
         log.debug('\n... Finished communicating with gdb.')
     except TimeoutExpired:
         log.debug('\nExecution failed - timeout reached.')
