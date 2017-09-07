@@ -58,7 +58,7 @@ class GdbParsingError(RuntimeError):
         super().__init__(message)
 
 def execute(executable, commands):
-    gdbservercmd = ['riscv32-gdbserver', '51000']
+    gdbservercmd = ['riscv32-gdbserver', '-c', 'picorv32', '51000']
     log.debug('\nLaunching GDB server...')
     gdbserver = Popen(gdbservercmd, stdout=PIPE, stderr=PIPE, stdin=PIPE)
 
@@ -88,7 +88,11 @@ def execute(executable, commands):
 
     log.debug('\nKilling gdbserver...')
     log.debug('gdbserver return code %s' % gdbserver.returncode)
-    stdout, stderr = gdbserver.communicate(input='', timeout=10)
+    try:
+        stdout, stderr = gdbserver.communicate(input='', timeout=10)
+    except TimeoutExpired:
+        gdbserver.kill()
+        stdout, stderr = gdbserver.communicate()
 
     gdbserver_output = stdout.decode()
 
