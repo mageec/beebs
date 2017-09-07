@@ -88,6 +88,8 @@ def execute(executable, commands):
     log.debug('\nStandard error from gdb:\n')
     log.debug(codecs.decode(stderr, 'utf-8'))
 
+    gdb_output = stdout.decode()
+
     log.debug('\nKilling gdbserver...')
     log.debug('gdbserver return code %s' % gdbserver.returncode)
     try:
@@ -103,12 +105,26 @@ def execute(executable, commands):
     log.debug('\nStandard error from gdbserver:\n')
     log.debug(stderr.decode())
 
-    return gdbserver_output
+    return gdb_output, gdbserver_output
+
+def parse_gdb_output(output):
+    seen_exit = False
+
+    for line in output.split('\n'):
+        if not seen_exit:
+            if "exit_status=exit_status" in line:
+                exit_code = int(line.split()[3].split('=')[2].split(')')[0])
+                seen_exit = True
+
+    if not seen_exit:
+        raise GdbParsingError('Did not find exit code')
+
+    return exit_code
+
 
 def parse_output(output):
     seen_start = False
     seen_stop = False
-    #seen_exit = False
     for line in output.split('\n'):
         if not seen_start:
             if "Start" in line:
@@ -120,29 +136,21 @@ def parse_output(output):
                 stop = int(line.split()[4].strip())
                 seen_stop = True
 
-     #   if not seen_exit:
-     #       if "Exit" in line:
-     #           exit_code = int(line.split()[4].strip())
-     #           seen_exit = True
-
     if not seen_start:
         raise GdbParsingError('Did not find start trigger cycle count')
 
     if not seen_stop:
         raise GdbParsingError('Did not find stop trigger cycle count')
 
-    #if not seen_exit:
-    #    raise GdbParsingError('Did not find exit code')
-
-    exit_code = 999
     cycle_count = stop - start
-    return cycle_count, exit_code
+    return cycle_count
 
 def run_benchmark(bm):
     executable = os.path.join('src', bm, bm)
     try:
-        output = execute(executable, commands)
-        cycle_count, exit_code = parse_output(output)
+        gdb_output, output = execute(executable, commands)
+        exit_code = parse_gdb_output(gdb_output)
+        cycle_count = parse_output(output)
     except GdbParsingError as gpe:
         log.debug('Error parsing output from GDB for %s: %s' % (bm, gpe.message))
         cycle_count = -1
