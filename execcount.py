@@ -34,7 +34,9 @@ benchmarks = (
 commands = [
     b'-target-select remote :51000',
     b'load',
+    b'break _exit',
     b'cont',
+    b'monitor exit',
     b'quit'
 ]
 
@@ -106,7 +108,7 @@ def execute(executable, commands):
 def parse_output(output):
     seen_start = False
     seen_stop = False
-    seen_exit = False
+    #seen_exit = False
     for line in output.split('\n'):
         if not seen_start:
             if "Start" in line:
@@ -118,10 +120,10 @@ def parse_output(output):
                 stop = int(line.split()[4].strip())
                 seen_stop = True
 
-        if not seen_exit:
-            if "Exit" in line:
-                exit_code = int(line.split()[4].strip())
-                seen_exit = True
+     #   if not seen_exit:
+     #       if "Exit" in line:
+     #           exit_code = int(line.split()[4].strip())
+     #           seen_exit = True
 
     if not seen_start:
         raise GdbParsingError('Did not find start trigger cycle count')
@@ -129,9 +131,10 @@ def parse_output(output):
     if not seen_stop:
         raise GdbParsingError('Did not find stop trigger cycle count')
 
-    if not seen_exit:
-        raise GdbParsingError('Did not find exit code')
+    #if not seen_exit:
+    #    raise GdbParsingError('Did not find exit code')
 
+    exit_code = 999
     cycle_count = stop - start
     return cycle_count, exit_code
 
