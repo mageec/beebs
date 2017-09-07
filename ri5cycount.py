@@ -82,7 +82,7 @@ def execute(executable, commands):
     # https://docs.python.org/3/library/subprocess.html#subprocess.Popen.communicate
     try:
         stdout, stderr = debugger.communicate(input=b'\n'.join(commands),
-            timeout=20)
+            timeout=60)
         log.debug('\n... Finished communicating with gdb.')
     except TimeoutExpired:
         log.debug('\nExecution failed - timeout reached.')
@@ -121,16 +121,18 @@ def parse_output(output):
         if not seen_start:
             if "in start_trigger" in line:
                 start = lines[i+4]
+                start = int(start.split('"')[1].strip('\\n'))
                 seen_start = True
 
         if not seen_stop:
             if "in stop_trigger" in line:
                 stop = lines[i+4]
+                stop = int(stop.split('"')[1].strip('\\n'))
                 seen_stop = True
 
         if not seen_exit:
             if "exit (code=" in line:
-                exit_code = line.split()[3].strip()
+                exit_code = line.split()[3].strip().split('=')[1].split(')')[0]
                 seen_exit = True
 
     if not seen_start:
@@ -142,27 +144,25 @@ def parse_output(output):
     if not seen_exit:
         raise GdbParsingError('Did not find exit code')
 
-    #cycle_count = stop - start
-    return start, stop, exit_code
+    cycle_count = stop - start
+    return cycle_count, exit_code
 
 def run_benchmark(bm):
     executable = os.path.join('src', bm, bm)
     try:
         output = execute(executable, commands)
         #print(output)
-        start, stop, exit_code = parse_output(output)
+        cycle_count, exit_code = parse_output(output)
     except GdbParsingError as gpe:
         log.debug('Error parsing output from GDB for %s: %s' % (bm, gpe.message))
-        start = -1
-        stop = -1
+        cycle_count = -1
         exit_code = -1
     except TimeoutExpired:
         log.debug('Timeout expired for %s' % bm)
-        start = -2
-        stop = -2
+        cycle_count = -2
         exit_code = -2
 
-    print('%s,%s,%s,%s' % (bm, start, stop, exit_code))
+    print('%s,%s,%s' % (bm, cycle_count, exit_code))
 
 def run_benchmarks():
     setup_logging('beebs-riscv32.log')
