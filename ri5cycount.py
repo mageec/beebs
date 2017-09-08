@@ -82,7 +82,7 @@ def execute(executable, commands):
     # https://docs.python.org/3/library/subprocess.html#subprocess.Popen.communicate
     try:
         stdout, stderr = debugger.communicate(input=b'\n'.join(commands),
-            timeout=60)
+            timeout=240)
         log.debug('\n... Finished communicating with gdb.')
     except TimeoutExpired:
         log.debug('\nExecution failed - timeout reached.')
