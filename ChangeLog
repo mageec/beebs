@@ -1,7 +1,136 @@
+2017-09-08  Graham Markall  <graham.markall@embecosm.com>
+
+	Up RI5CY timeout to 240.
+
+	* ri5cycount.py (execute): Increase timeout to 240 seconds.
+
+2017-09-07  Graham Markall  <graham.markall@embecosm.com>
+
+	Make ri5cycount output a bit nicer, timeout inc to 60.
+
+	* ri5cycount.py (execute): Increase timeout to 60 seconds.
+	(parse_output): Nicer output, return cycle count, rather than
+	start and stop count.
+	(run_benchmark): Use cycle count, rather than start and stop count.
+
+2017-09-07  Graham Markall  <graham.markall@embecosm.com>
+
+	Rename execcount as its picorv32-specific.
+
+	* execcount.py: Renamed as picorv32count.
+	* picorv32count.py: Renamed from execcount.py.
+
+2017-09-07  Graham Markall  <graham.markall@embecosm.com>
+
+	Working measurement of picorv32.
+
+	* execcount.py (execute): Return gdb_output as well as
+	gdbserver_output.
+	(parse_gdb_output): Created.
+	(parse_output): Remove seen_exit code which had been commented
+	out, return just the cycle_count, not the exit_code.
+	(run_benchmark): Get the exit code from parse_gdb_output.
+
+2017-09-07  Graham Markall  <graham.markall@embecosm.com>
+
+	Picorv32 running, need to check exit code properly.
+
+	* execcount.py (commands): Add breakpoints on exit.
+	(parse_output): Comment out seen_exit code.
+
+2017-09-07  Graham Markall  <graham.markall@embecosm.com>
+
+	Some changes towards picorv32 working again.
+
+	* config/riscv32/chips/picorv32/chip.cfg: Export CHIP_LDFLAGS.
+	* config/riscv32/chips/picorv32/picorv32.ld: Created.
+	* config/riscv32/chips/picorv32/picorv32.spec: Created.
+	* execcount.py
+
+2017-07-04  Graham Markall  <graham.markall@embecosm.com>
+
+	Run all benchmarks on RI5CY.
+
+	* ri5cycount.py: Change benchmark list
+	(run_benchmark): Reduce timeout to 20 seconds.
+
+2017-07-04  Graham Markall  <graham.markall@embecosm.com>
+
+	Rudimentary parse of ri5cy cycle counts.
+
+	* ri5cycount.py: Created.
+
+2017-07-04  Graham Markall  <graham.markall@embecosm.com>
+
+	Initial add of support for RI5CY.
+
+	* config/riscv32/boards/ri5cyverilator/boardsupport.c: Created.
+	* config/riscv32/boards/ri5cyverilator/boardsupport.h: Created.
+	* config/riscv32/chips/ri5cy/chip.cfg: Created.
+	* config/riscv32/chips/ri5cy/chipsupport.c: Created.
+	* config/riscv32/chips/ri5cy/chipsupport.h: Created.
+
+2017-06-22  Graham Markall  <graham.markall@embecosm.com>
+
+	Remove erroneous benchmark name, increase timeout.
+
+	* execcount.py: Remove ctl as a benchmark.
+	(run_benchmark): Increase timeout to 60 seconds.
+
+2017-06-22  Graham Markall  <graham.markall@embecosm.com>
+
+	Add all benchmarks and don't die on timeout.
+
+	* execcount.py: Define list of benchmarks
+	(run_benchmark): Add timeout
+
+2017-06-22  Graham Markall  <graham.markall@embecosm.com>
+
+	Use syscalls for triggers, compile with -O2
+
+	* config/riscv32/boards/picorv32verilator/boardsupport.c
+	(initialize_board): Initialize a0 to zero.
+	(start_trigger, stop_trigger): Use syscall to print clock on each
+	trigger.
+	* config/riscv32/chips/picorv32/chip.cfg: Add -g to CHIP_CFLAGS.
+
+2017-06-22  Graham Markall  <graham.markall@embecosm.com>
+
+	Parse output and print result to stdout
+
+	* execount.py: Make log output configurable.
+	(parse_output): Created.
+	(run_benchmark): Parse output and catch errors.
+
+2017-06-22  Graham Markall  <graham.markall@embecosm.com>
+
+	Prototype of benchmark function.
+
+	* config/riscv32/chips/picorv32/chip.cfg: export CHIP_CFLAGS.
+	* execcount.py: Created.
+
+2017-06-21  Graham Markall  <graham.markall@embecosm.com>
+
+	Correct misleading indentation (compile fail).
+
+	* src/miniz/miniz.c (tdefl_find_match): Fix layout.
+
+2017-06-21  Graham Markall  <graham.markall@embecosm.com>
+
+	Template config for PicoRV32.
+
+	* config/riscv32/boards/picorv32verilator/boardsupport.c: Created.
+	* config/riscv32/boards/picorv32verilator/boardsupport.h: Created.
+	* config/riscv32/chips/picorv32/chip.cfg: Created.
+	* config/riscv32/chips/picorv32/chipsupport.c: Created.
+	* config/riscv32/chips/picorv32/chipsupport.h: Created.
+
 2016-03-16  Craig Blackmore  <craig.blackmore@bristol.ac.uk>
+
 	Updated calibration for aha-mont64
 
-	* config/arm/boards/stm32vldiscovery/calibration : updated aha-mont64 calibration
+	* config/arm/boards/stm32vldiscovery/calibration : updated
+	aha-mont64 calibration
 
 2016-07-21  Craig Blackmore  <craig.blackmore@bristol.ac.uk>
 	Fixed aha-compress timeout
