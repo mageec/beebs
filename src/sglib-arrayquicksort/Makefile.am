@@ -19,13 +19,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=sglib-arrayquicksort
+# SPDX-License-Identifier: GPL-3.0-or-later
 
-sglib_arrayquicksort_SOURCES=../sglib-arraysort/arraysort.c \
-			     ../sglib-arraysort/sglib.h
+if ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT
 
 include $(top_srcdir)/src/common.mk.am
 
-sglib_arrayquicksort_CFLAGS = -DQUICK_SORT ${AM_CFLAGS}
+bin_PROGRAMS = sglib-arrayquicksort
 
-sglib_arrayquicksort_SOURCES += ${platform_src}
+sglib_arrayquicksort_SOURCES  = arraysort.c sglib.h
+sglib_arrayquicksort_CPPFLAGS = -DQUICK_SORT ${AM_CPPFLAGS}
+
+endif

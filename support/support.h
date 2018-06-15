@@ -17,44 +17,67 @@
    You should have received a copy of the GNU General Public License along with
    this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-#define SUPPORT_H 1
+#ifndef SUPPORT_H
+#define SUPPORT_H
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
+/* Include board support header if we have one */
+
 #ifdef HAVE_BOARDSUPPORT_H
-// #include "@srcdir@/config/@ARCH@/boards/@BOARD@/boardsupport.h"
 #include "boardsupport.h"
-#else
-// Default board support is here
-#define BOARD_REPEAT_FACTOR   4096
 #endif
+
+/* Board repeat factor may be set in the board support header, if not, we
+   define a default */
 
 #ifndef BOARD_REPEAT_FACTOR
 #define BOARD_REPEAT_FACTOR 4096
 #endif
 
-// If we don't define a default scaling value for the benchmark, define
+/* Include chip support header if we have one */
+
+#ifdef HAVE_CHIPSUPPORT_H
+#include "chipsupport.h"
+#endif
+
+/* Scaling factors may defined when compiling benchmarks. If not we set it to
+   zero, which means no scaling and then leads to the REPEAT_FACTOR for the
+   program. */
+
 #ifndef CALIB_SCALE
 #define CALIB_SCALE 0
 #endif
 
 // The overall repeat factor is scaled by the command-line given
 // CALIB_SCALE.
-#define REPEAT_FACTOR (((CALIB_SCALE) > 0)?(BOARD_REPEAT_FACTOR) >> (CALIB_SCALE):(BOARD_REPEAT_FACTOR) << (-CALIB_SCALE))
 
-#ifdef HAVE_CHIPSUPPORT_H
-// #include "@srcdir@/config/@ARCH@/chips/@CHIP@/chipsupport.h"
-#include "chipsupport.h"
-#else
-// Default chip support is here
-#warning No chipsupport.h
-#endif
+#define REPEAT_FACTOR (((CALIB_SCALE) > 0)                         \
+                       ? (BOARD_REPEAT_FACTOR) >> (CALIB_SCALE)    \
+		       : (BOARD_REPEAT_FACTOR) << (-CALIB_SCALE))
 
-void initialise_board(void);
-int verify_benchmark(int result);
-void start_trigger(void);
-void stop_trigger(void);
+/* Benchmarks must implement verify_benchmark, which must return -1 if no
+   verification is done. */
+
+int verify_benchmark (int result);
+
+/* Standard functions implemented for each board */
+
+void initialise_board (void);
+void start_trigger (void);
+void stop_trigger (void);
+
+/* Every benchmark implements this as its entry point. Don't allow it to be
+   inlined! */
 
 int benchmark (void) __attribute__ ((noinline));
+
+
+/*
+   Local Variables:
+   mode: C++
+   c-file-style: "gnu"
+   End:
+*/

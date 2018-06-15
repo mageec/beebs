@@ -19,22 +19,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# SPDX-License-Identifier: GPL-3.0-or-later
 
-# Change every instance of mont64 to the name of your benchmark
-
-# To get automake to use this file, add the following to toplevel configure.ac
-#   AC_CONFIG_FILES([src/mont64/Makefile])
-# and add the following line to toplevel Makefile.am
-#   SUBDIRS+=src/mont64
-
-
-# Make sure your sources include the headers as well as the C/C++ source
-# files, so they go into the distribution. If there are other files that are
-# needed, they should go in EXTRA_SOURCES.
-
-bin_PROGRAMS=aha-mont64
-aha_mont64_SOURCES=mont64.c
+if ENABLED_BENCHMARK_AHA_MONT64
 
 include $(top_srcdir)/src/common.mk.am
 
-aha_mont64_SOURCES += ${platform_src}
+bin_PROGRAMS = aha-mont64
+
+aha_mont64_SOURCES = mont64.c
+aha_mont64_LDADD   = $(top_srcdir)/support/libsupport.la
+
+endif

@@ -19,12 +19,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=ctl-stack
+# SPDX-License-Identifier: GPL-3.0-or-later
 
-ctl_stack_SOURCES=../ctl/ctl.c ../ctl/ctl.h ../ctl/stack.h
+if ENABLED_BENCHMARK_CTL_STACK
 
 include $(top_srcdir)/src/common.mk.am
 
-ctl_stack_CFLAGS=-DCTL_STACK ${AM_CFLAGS}
+bin_PROGRAMS = ctl-stack
 
-ctl_stack_SOURCES += ${platform_src}
+ctl_stack_SOURCES  = ctl.c ctl.h stack.h
+ctl_stack_LDADD    = $(top_srcdir)/support/libsupport.la
+ctl_stack_CPPFLAGS = -DCTL_STACK ${AM_CPPFLAGS}
+
+endif

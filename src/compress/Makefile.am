@@ -19,6 +19,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 # Change every instance of template to the name of your benchmark
 
 # To get automake to use this file, add the following to toplevel configure.ac
@@ -27,10 +29,15 @@
 #   SUBDIRS+=src/template
 
 
-bin_PROGRAMS=compress
-compress_SOURCES=compress.c
+if ENABLED_BENCHMARK_COMPRESS
 
 include $(top_srcdir)/src/common.mk.am
 
-compress_SOURCES += ${platform_src}
+bin_PROGRAMS = compress
+compress_SOURCES = compress.c
+compress_LDADD   = $(top_srcdir)/support/libsupport.la
 
+
+
+
+endif

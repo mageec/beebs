@@ -19,9 +19,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=aha-compress
-aha_compress_SOURCES=compress_test.c
+if ENABLED_BENCHMARK_AHA_COMPRESS
 
 include $(top_srcdir)/src/common.mk.am
 
-aha_compress_SOURCES += ${platform_src}
+bin_PROGRAMS = aha-compress
+
+aha_compress_SOURCES = compress_test.c
+aha_compress_LDADD   = $(top_srcdir)/support/libsupport.la
+
+endif

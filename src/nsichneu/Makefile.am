@@ -19,9 +19,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=nsichneu
-nsichneu_SOURCES=nsichneu.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_NSICHNEU
 
 include $(top_srcdir)/src/common.mk.am
 
-nsichneu_SOURCES += ${platform_src}
+bin_PROGRAMS = nsichneu
+nsichneu_SOURCES = nsichneu.c
+nsichneu_LDADD   = $(top_srcdir)/support/libsupport.la
+
+
+
+endif
