@@ -19,11 +19,18 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=whetstone
-whetstone_SOURCES=whetstone.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_WHETSTONE
 
 include $(top_srcdir)/src/common.mk.am
 
+bin_PROGRAMS = whetstone
+whetstone_SOURCES = whetstone.c
+whetstone_LDADD   = $(top_srcdir)/support/libsupport.la
+
+
+
 AM_LDFLAGS += "-lm"
 
-whetstone_SOURCES += ${platform_src}
+endif

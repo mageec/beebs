@@ -1,3 +1,333 @@
+2018-06-15  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Note. This is work in progress.
+
+	Major restructuring to make everything work more cleanly with
+	autotools, including building out-of-tree. The most significant
+	change is that we do not rely on source files in
+	subdirectories. Everything is built simply in its own
+	directory. For benchmarks which are using common sources, we use
+	symbolic links to that source into the correct directory.
+
+	* Makefile.am: Rewritten and simplified.
+	* Makefile.in: Regenerated.
+	* aclocal.m4: Likewise.
+	* build-aux/compile: Moved to top level directory and regenerated.
+	* build-aux/config.guess: Likewise.
+	* build-aux/config.sub:
+	* build-aux/depcomp
+	* build-aux/install-sh -> install-sh
+	* build-aux/ltmain.sh -> ltmain.sh
+	* build-aux/mdate-sh -> doc/mdate-sh
+	* build-aux/missing -> missing
+	* build-aux/texinfo.tex -> doc/texinfo.tex
+	* compile: Moved from build-aux directory and regenerated.
+	* config.h.in: Regenerated.
+	* config/riscv64/boards/none/boardsupport.c: Created.
+	* config/riscv64/chips/generic/chip.cfg: Created.
+	* config/riscv64/chips/generic/chipsupport.c: Created.
+	* config/riscv64/chips/generic/chipsupport.h: Created.
+	* config.guess: Moved from build-aux directory and regenerated.
+	* config.sub: Likewise.
+	* configure: Regenerated.
+	* configure.ac: Rewritten and simplified.
+	* dejagnu/site.exp.in: Moved to top level directory as site.exp.
+	* depcomp: Moved from build-aux directory and regenerated.
+	* doc/Makefile.in: Regenerated.
+	* doc/mdate-sh: Moved from build-aux directory and regenerated.
+	* doc/texinfo.tex: Likewise
+	* genmacros.sh: Created.
+	* include/support.h: Moved to support directory.
+	* install-sh: Moved from build-aux directory and regenerated.
+	* ltmain.sh: Likewise.
+	* m4/libtool.m4: Regenerated.
+	* m4/ltoptions.m4: Likewise.
+	* m4/ltsugar.m4: Likewise.
+	* m4/ltversion.m4: Likewise.
+	* m4/lt~obsolete.m4: Likewise.
+	* missing: Moved from build-aux directory and regenerated.
+	* site.exp: Moved from dejagnu/site.exp.in.
+	* src/Makefile.am: Created.
+	* src/aha-compress/Makefile.am: Made conditional, flags made
+	program specific and central library linked.
+	* src/aha-compress/Makefile.in: Regenerated.
+	* src/aha-mont64/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/aha-mont64/Makefile.in: Regenerated.
+	* src/bs/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/bs/Makefile.in: Regenerated.
+	* src/bubblesort/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/bubblesort/Makefile.in: Regenerated.
+	* src/cnt/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/cnt/Makefile.in: Regenerated.
+	* src/common.mk.am
+	* src/compress/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/compress/Makefile.in: Regenerated.
+	* src/cover/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/cover/Makefile.in: Regenerated.
+	* src/crc/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/crc/Makefile.in: Regenerated.
+	* src/crc32/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/crc32/Makefile.in: Regenerated.
+	* src/ctl-stack/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/ctl-stack/Makefile.in: Regenerated.
+	* src/ctl-stack/ctl.c: Created.
+	* src/ctl-stack/ctl.h: Created.
+	* src/ctl-stack/stack.h: Created.
+	* src/ctl-string/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/ctl-string/Makefile.in: Regenerated.
+	* src/ctl-vector/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/ctl-vector/Makefile.in: Regenerated.
+	* src/ctl-vector/ctl.c: Created.
+	* src/ctl-vector/ctl.h: Created.
+	* src/ctl-vector/stack.h: Created.
+	* src/ctl/Makefile.am: Created.
+	* src/ctl/Makefile.in: Generated.
+	* src/cubic/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/cubic/Makefile.in: Regenerated.
+	* src/dijkstra/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/dijkstra/Makefile.in: Regenerated.
+	* src/dtoa/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/dtoa/Makefile.in: Regenerated.
+	* src/duff/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/duff/Makefile.in: Regenerated.
+	* src/edn/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/edn/Makefile.in: Regenerated.
+	* src/expint/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/expint/Makefile.in: Regenerated.
+	* src/fac/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/fac/Makefile.in: Regenerated.
+	* src/fasta/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/fasta/Makefile.in: Regenerated.
+	* src/fdct/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/fdct/Makefile.in: Regenerated.
+	* src/fibcall/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/fibcall/Makefile.in: Regenerated.
+	* src/fir/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/fir/Makefile.in: Regenerated.
+	* src/frac/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/frac/Makefile.in: Regenerated.
+	* src/huffbench/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/huffbench/Makefile.in: Regenerated.
+	* src/insertsort/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/insertsort/Makefile.in: Regenerated.
+	* src/janne_complex/Makefile.am: Made conditional, flags made
+	program specific and central library linked.
+	* src/janne_complex/Makefile.in: Regenerated.
+	* src/jfdctint/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/jfdctint/Makefile.in: Regenerated.
+	* src/lcdnum/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/lcdnum/Makefile.in: Regenerated.
+	* src/levenshtein/Makefile.am: Made conditional, flags made
+	program specific and central library linked.
+	* src/levenshtein/Makefile.in: Regenerated.
+	* src/ludcmp/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/ludcmp/Makefile.in: Regenerated.
+	* src/main.c: Moved to support directory.
+	* src/matmult-float/Makefile.am: Made conditional, flags made
+	program specific and central library linked.
+	* src/matmult-float/Makefile.in: Regenerated.
+	* src/matmult-float/matmult.c: Created.
+	* src/matmult-int/Makefile.am: Made conditional, flags made
+	program specific and central library linked.
+	* src/matmult-int/Makefile.in: Regenerated.
+	* src/matmult-int/matmult.c: Created.
+	* src/matmult/Makefile.am: Created.
+	* src/matmult/Makefile.in: Generated.
+	* src/mergesort/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/mergesort/Makefile.in: Regenerated.
+	* src/miniz/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/miniz/Makefile.in: Regenerated.
+	* src/minver/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/minver/Makefile.in: Regenerated.
+	* src/nbody/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/nbody/Makefile.in: Regenerated.
+	* src/ndes/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/ndes/Makefile.in: Regenerated.
+	* src/nettle-arcfour/Makefile.am: Made conditional, flags made
+	program specific and central library linked.
+	* src/nettle-arcfour/Makefile.in: Regenerated.
+	* src/nettle-cast128/Makefile.am: Made conditional, flags made
+	program specific and central library linked.
+	* src/nettle-cast128/Makefile.in: Regenerated.
+	* src/nettle-des/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/nettle-des/Makefile.in: Regenerated.
+	* src/nettle-md5/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/nettle-md5/Makefile.in: Regenerated.
+	* src/newlib-exp/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/newlib-exp/Makefile.in: Regenerated.
+	* src/newlib-log/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/newlib-log/Makefile.in: Regenerated.
+	* src/newlib-mod/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/newlib-mod/Makefile.in: Regenerated.
+	* src/newlib-sqrt/Makefile.am: Made conditional, flags made
+	program specific and central library linked.
+	* src/newlib-sqrt/Makefile.in: Regenerated.
+	* src/ns/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/ns/Makefile.in: Regenerated.
+	* src/nsichneu/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/nsichneu/Makefile.in: Regenerated.
+	* src/picojpeg/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/picojpeg/Makefile.in: Regenerated.
+	* src/prime/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/prime/Makefile.in: Regenerated.
+	* src/qrduino/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/qrduino/Makefile.in: Regenerated.
+	* src/qsort/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/qsort/Makefile.in: Regenerated.
+	* src/qurt/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/qurt/Makefile.in: Regenerated.
+	* src/recursion/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/recursion/Makefile.in: Regenerated.
+	* src/rijndael/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/rijndael/Makefile.in: Regenerated.
+	* src/select/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/select/Makefile.in: Regenerated.
+	* src/sglib-arraybinsearch/Makefile.am: Made conditional, flags
+	made program specific and central library linked.
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated.
+	* src/sglib-arrayheapsort/Makefile.am: Made conditional, flags
+	made program specific and central library linked.
+	* src/sglib-arrayheapsort/Makefile.in: Regenerated.
+	* src/sglib-arrayheapsort/arraysort.c: Created.
+	* src/sglib-arrayheapsort/sglib.h: Created.
+	* src/sglib-arrayquicksort/Makefile.am: Made conditional, flags
+	made program specific and central library linked.
+	* src/sglib-arrayquicksort/Makefile.in: Regenerated.
+	* src/sglib-arrayquicksort/arraysort.c: Created.
+	* src/sglib-arrayquicksort/sglib.h: Created.
+	* src/sglib-arraysort/Makefile.am: Created.
+	* src/sglib-arraysort/Makefile.in: Generated.
+	* src/sglib-dllist/Makefile.am: Made conditional, flags made
+	program specific and central library linked.
+	* src/sglib-dllist/Makefile.in: Regenerated.
+	* src/sglib-hashtable/Makefile.am: Made conditional, flags made
+	program specific and central library linked.
+	* src/sglib-hashtable/Makefile.in: Regenerated.
+	* src/sglib-listinsertsort/Makefile.am: Made conditional, flags
+	made program specific and central library linked.
+	* src/sglib-listinsertsort/Makefile.in: Regenerated.
+	* src/sglib-listsort/Makefile.am: Made conditional, flags made
+	program specific and central library linked.
+	* src/sglib-listsort/Makefile.in: Regenerated.
+	* src/sglib-queue/Makefile.am: Made conditional, flags made
+	program specific and central library linked.
+	* src/sglib-queue/Makefile.in: Regenerated.
+	* src/sglib-rbtree/Makefile.am: Made conditional, flags made
+	program specific and central library linked.
+	* src/sglib-rbtree/Makefile.in: Regenerated.
+	* src/slre/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/slre/Makefile.in: Regenerated.
+	* src/sqrt/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/sqrt/Makefile.in: Regenerated.
+	* src/st/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/st/Makefile.in: Regenerated.
+	* src/statemate/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/statemate/Makefile.in: Regenerated.
+	* src/stb_perlin/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/stb_perlin/Makefile.in: Regenerated.
+	* src/stringsearch1/Makefile.am: Made conditional, flags made
+	program specific and central library linked.
+	* src/stringsearch1/Makefile.in: Regenerated.
+	* src/strstr/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/strstr/Makefile.in: Regenerated.
+	* src/tarai/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/tarai/Makefile.in: Regenerated.
+	* src/template/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/template/Makefile.in: Regenerated.
+	* src/trio-snprintf/Makefile.am: Made conditional, flags made
+	program specific and central library linked.
+	* src/trio-snprintf/Makefile.in: Regenerated.
+	* src/trio-snprintf/trio.c: Created.
+	* src/trio-snprintf/trio.h: Created.
+	* src/trio-snprintf/trio_test.c: Created.
+	* src/trio-snprintf/triodef.h: Created.
+	* src/trio-snprintf/triop.h: Created.
+	* src/trio-snprintf/triostr.c: Created.
+	* src/trio-snprintf/triostr.h: Created.
+	* src/trio-sscanf/Makefile.am: Made conditional, flags made
+	program specific and central library linked.
+	* src/trio-sscanf/Makefile.in: Regenerated.
+	* src/trio-sscanf/trio.c: Created.
+	* src/trio-sscanf/trio.h: Created.
+	* src/trio-sscanf/trio_test.c: Created.
+	* src/trio-sscanf/triodef.h: Created.
+	* src/trio-sscanf/triop.h: Created.
+	* src/trio-sscanf/triostr.c: Created.
+	* src/trio-sscanf/triostr.h: Created.
+	* src/trio/Makefile.am: Created.
+	* src/trio/Makefile.in: Generated.
+	* src/ud/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/ud/Makefile.in: Regenerated.
+	* src/whetstone/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/whetstone/Makefile.in: Regenerated.
+	* src/wikisort/Makefile.am: Made conditional, flags made program
+	specific and central library linked.
+	* src/wikisort/Makefile.in: Regenerated.
+	* support/Makefile.am: Created.
+	* support/Makefile.in: Generated.
+	* support/board.c: Created.
+	* support/chip.c: Created.
+	* support/main.c: Moved from src directory.
+	* support/support.h: Moved from include directory.
+
 2017-09-08  Graham Markall  <graham.markall@embecosm.com>
 
 	* picorv32count.py: New file.

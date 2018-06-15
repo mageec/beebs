@@ -19,10 +19,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=bubblesort
+# SPDX-License-Identifier: GPL-3.0-or-later
 
-bubblesort_SOURCES=bubblesort.c
+if ENABLED_BENCHMARK_BUBBLESORT
 
 include $(top_srcdir)/src/common.mk.am
 
-bubblesort_SOURCES += ${platform_src}
+bin_PROGRAMS=bubblesort
+
+bubblesort_SOURCES = bubblesort.c
+bubblesort_LDADD   = $(top_srcdir)/support/libsupport.la
+
+endif

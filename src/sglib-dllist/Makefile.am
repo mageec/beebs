@@ -19,9 +19,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=sglib-dllist
-sglib_dllist_SOURCES=dllist.c sglib.h
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_SGLIB_DLLIST
 
 include $(top_srcdir)/src/common.mk.am
 
-sglib_dllist_SOURCES += ${platform_src}
+bin_PROGRAMS = sglib-dllist
+sglib_dllist_SOURCES = dllist.c sglib.h
+sglib_dllist_LDADD   = $(top_srcdir)/support/libsupport.la
+
+
+
+endif

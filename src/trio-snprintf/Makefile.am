@@ -19,19 +19,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=trio-snprintf
+# SPDX-License-Identifier: GPL-3.0-or-later
 
-SRC=../trio/trio.c ../trio/trio.h ../trio/trio_test.c \
-    ../trio/triostr.c ../trio/triostr.h ../trio/triodef.h \
-    ../trio/triop.h
-
-trio_snprintf_SOURCES=${SRC}
+if ENABLED_BENCHMARK_TRIO_SNPRINTF
 
 include $(top_srcdir)/src/common.mk.am
 
-AM_CFLAGS+=-DTRIO_EXTENSION=0 -DTRIO_DEPRECATED=0 -DTRIO_MICROSOFT=0 \
-           -DTRIO_ERRORS=0 -DTRIO_FEATURE_FLOAT=0
+bin_PROGRAMS = trio-snprintf
 
-trio_snprintf_CFLAGS=-DTRIO_SNPRINTF -DTRIO_SNPRINTF_ONLY ${AM_CFLAGS}
+trio_snprintf_SOURCES  = trio.c trio.h trio_test.c triostr.c triostr.h \
+                         triodef.h triop.h
+trio_snprintf_LDADD    = $(top_srcdir)/support/libsupport.la
+trio_snprintf_CPPFLAGS = -DTRIO_EXTENSION=0 -DTRIO_DEPRECATED=0 \
+                         -DTRIO_MICROSOFT=0 -DTRIO_ERRORS=0     \
+                         -DTRIO_FEATURE_FLOAT=0 -DTRIO_SNPRINTF \
+                         -DTRIO_SNPRINTF_ONLY ${AM_CPPFLAGS}
 
-trio_snprintf_SOURCES += ${platform_src}
+endif

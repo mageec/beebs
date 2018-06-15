@@ -19,9 +19,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=picojpeg
-picojpeg_SOURCES=picojpeg.c picojpeg_test.c picojpeg.h
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_PICOJPEG
 
 include $(top_srcdir)/src/common.mk.am
 
-picojpeg_SOURCES += ${platform_src}
+bin_PROGRAMS = picojpeg
+picojpeg_SOURCES = picojpeg.c picojpeg_test.c picojpeg.h
+picojpeg_LDADD   = $(top_srcdir)/support/libsupport.la
+
+
+
+endif

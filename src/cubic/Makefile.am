@@ -19,15 +19,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS = cubic
-cubic_SOURCES = cubic.c \
-	        basicmath_small.c \
-		pi.h \
-		snipmath.h \
-		sniptype.h
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_CUBIC
 
 include $(top_srcdir)/src/common.mk.am
 
-AM_LDFLAGS += "-lm"
+bin_PROGRAMS = cubic
 
-cubic_SOURCES += ${platform_src}
+cubic_SOURCES = cubic.c basicmath_small.c pi.h snipmath.h sniptype.h
+cubic_LDADD   = $(top_srcdir)/support/libsupport.la
+cubic_LDFLAGS = ${AM_LDFLAGS} "-lm"
+
+endif
