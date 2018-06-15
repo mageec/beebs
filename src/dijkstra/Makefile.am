@@ -19,9 +19,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=dijkstra
-dijkstra_SOURCES=dijkstra_small.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_DIJKSTRA
 
 include $(top_srcdir)/src/common.mk.am
 
-dijkstra_SOURCES += ${platform_src}
+bin_PROGRAMS = dijkstra
+dijkstra_SOURCES = dijkstra_small.c
+dijkstra_LDADD   = $(top_srcdir)/support/libsupport.la
+
+
+
+endif

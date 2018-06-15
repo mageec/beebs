@@ -19,11 +19,18 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=wikisort
-wikisort_SOURCES=wikisort.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_WIKISORT
 
 include $(top_srcdir)/src/common.mk.am
 
+bin_PROGRAMS = wikisort
+wikisort_SOURCES = wikisort.c
+wikisort_LDADD   = $(top_srcdir)/support/libsupport.la
+
+
+
 AM_LDFLAGS += "-lm"
 
-wikisort_SOURCES += ${platform_src}
+endif

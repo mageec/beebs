@@ -19,9 +19,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=duff
-duff_SOURCES=duff.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_DUFF
 
 include $(top_srcdir)/src/common.mk.am
 
-duff_SOURCES += ${platform_src}
+bin_PROGRAMS = duff
+duff_SOURCES = duff.c
+duff_LDADD   = $(top_srcdir)/support/libsupport.la
+
+
+
+endif

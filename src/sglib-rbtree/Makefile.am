@@ -19,9 +19,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=sglib-rbtree
-sglib_rbtree_SOURCES=rbtree.c sglib.h
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_SGLIB_RBTREE
 
 include $(top_srcdir)/src/common.mk.am
 
-sglib_rbtree_SOURCES += ${platform_src}
+bin_PROGRAMS = sglib-rbtree
+sglib_rbtree_SOURCES = rbtree.c sglib.h
+sglib_rbtree_LDADD   = $(top_srcdir)/support/libsupport.la
+
+
+
+endif
