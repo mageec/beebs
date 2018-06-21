@@ -32,10 +32,11 @@ AC_CONFIG_MACRO_DIR([m4])
 
 AC_CANONICAL_BUILD
 AC_CANONICAL_HOST
+AC_CANONICAL_TARGET
 
 AM_INIT_AUTOMAKE([1.11 -Wno-portability])
 AM_MAINTAINER_MODE([enable])
-AM_SILENT_RULES([yes])
+AM_SILENT_RULES([no])
 
 LT_INIT
 AC_SUBST([LIBTOOL_DEPS])
@@ -60,7 +61,7 @@ AC_ARG_ENABLE([benchmark-aha-compress],
    esac],
   [benchmark_aha_compress=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_AHA_COMPRESS],
-               [test xaha_compress = xtrue])
+               [test x$benchmark_aha_compress = xtrue])
 
 AC_ARG_ENABLE([benchmark-aha-mont64],
   [AS_HELP_STRING([--enable-benchmark-aha-mont64],
@@ -72,7 +73,7 @@ AC_ARG_ENABLE([benchmark-aha-mont64],
    esac],
   [benchmark_aha_mont64=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_AHA_MONT64],
-               [test xaha_mont64 = xtrue])
+               [test x$benchmark_aha_mont64 = xtrue])
 
 AC_ARG_ENABLE([benchmark-bs],
   [AS_HELP_STRING([--enable-benchmark-bs],
@@ -84,7 +85,7 @@ AC_ARG_ENABLE([benchmark-bs],
    esac],
   [benchmark_bs=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_BS],
-               [test xbs = xtrue])
+               [test x$benchmark_bs = xtrue])
 
 AC_ARG_ENABLE([benchmark-bubblesort],
   [AS_HELP_STRING([--enable-benchmark-bubblesort],
@@ -96,7 +97,7 @@ AC_ARG_ENABLE([benchmark-bubblesort],
    esac],
   [benchmark_bubblesort=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_BUBBLESORT],
-               [test xbubblesort = xtrue])
+               [test x$benchmark_bubblesort = xtrue])
 
 AC_ARG_ENABLE([benchmark-cnt],
   [AS_HELP_STRING([--enable-benchmark-cnt],
@@ -108,7 +109,7 @@ AC_ARG_ENABLE([benchmark-cnt],
    esac],
   [benchmark_cnt=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_CNT],
-               [test xcnt = xtrue])
+               [test x$benchmark_cnt = xtrue])
 
 AC_ARG_ENABLE([benchmark-compress],
   [AS_HELP_STRING([--enable-benchmark-compress],
@@ -120,7 +121,7 @@ AC_ARG_ENABLE([benchmark-compress],
    esac],
   [benchmark_compress=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_COMPRESS],
-               [test xcompress = xtrue])
+               [test x$benchmark_compress = xtrue])
 
 AC_ARG_ENABLE([benchmark-cover],
   [AS_HELP_STRING([--enable-benchmark-cover],
@@ -132,7 +133,7 @@ AC_ARG_ENABLE([benchmark-cover],
    esac],
   [benchmark_cover=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_COVER],
-               [test xcover = xtrue])
+               [test x$benchmark_cover = xtrue])
 
 AC_ARG_ENABLE([benchmark-crc],
   [AS_HELP_STRING([--enable-benchmark-crc],
@@ -144,7 +145,7 @@ AC_ARG_ENABLE([benchmark-crc],
    esac],
   [benchmark_crc=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_CRC],
-               [test xcrc = xtrue])
+               [test x$benchmark_crc = xtrue])
 
 AC_ARG_ENABLE([benchmark-crc32],
   [AS_HELP_STRING([--enable-benchmark-crc32],
@@ -156,7 +157,7 @@ AC_ARG_ENABLE([benchmark-crc32],
    esac],
   [benchmark_crc32=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_CRC32],
-               [test xcrc32 = xtrue])
+               [test x$benchmark_crc32 = xtrue])
 
 AC_ARG_ENABLE([benchmark-ctl],
   [AS_HELP_STRING([--enable-benchmark-ctl],
@@ -168,7 +169,7 @@ AC_ARG_ENABLE([benchmark-ctl],
    esac],
   [benchmark_ctl=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_CTL],
-               [test xctl = xtrue])
+               [test x$benchmark_ctl = xtrue])
 
 AC_ARG_ENABLE([benchmark-ctl-stack],
   [AS_HELP_STRING([--enable-benchmark-ctl-stack],
@@ -180,7 +181,7 @@ AC_ARG_ENABLE([benchmark-ctl-stack],
    esac],
   [benchmark_ctl_stack=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_CTL_STACK],
-               [test xctl_stack = xtrue])
+               [test x$benchmark_ctl_stack = xtrue])
 
 AC_ARG_ENABLE([benchmark-ctl-string],
   [AS_HELP_STRING([--enable-benchmark-ctl-string],
@@ -192,7 +193,7 @@ AC_ARG_ENABLE([benchmark-ctl-string],
    esac],
   [benchmark_ctl_string=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_CTL_STRING],
-               [test xctl_string = xtrue])
+               [test x$benchmark_ctl_string = xtrue])
 
 AC_ARG_ENABLE([benchmark-ctl-vector],
   [AS_HELP_STRING([--enable-benchmark-ctl-vector],
@@ -204,7 +205,7 @@ AC_ARG_ENABLE([benchmark-ctl-vector],
    esac],
   [benchmark_ctl_vector=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_CTL_VECTOR],
-               [test xctl_vector = xtrue])
+               [test x$benchmark_ctl_vector = xtrue])
 
 AC_ARG_ENABLE([benchmark-cubic],
   [AS_HELP_STRING([--enable-benchmark-cubic],
@@ -216,7 +217,7 @@ AC_ARG_ENABLE([benchmark-cubic],
    esac],
   [benchmark_cubic=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_CUBIC],
-               [test xcubic = xtrue])
+               [test x$benchmark_cubic = xtrue])
 
 AC_ARG_ENABLE([benchmark-dijkstra],
   [AS_HELP_STRING([--enable-benchmark-dijkstra],
@@ -228,7 +229,7 @@ AC_ARG_ENABLE([benchmark-dijkstra],
    esac],
   [benchmark_dijkstra=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_DIJKSTRA],
-               [test xdijkstra = xtrue])
+               [test x$benchmark_dijkstra = xtrue])
 
 AC_ARG_ENABLE([benchmark-dtoa],
   [AS_HELP_STRING([--enable-benchmark-dtoa],
@@ -240,7 +241,7 @@ AC_ARG_ENABLE([benchmark-dtoa],
    esac],
   [benchmark_dtoa=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_DTOA],
-               [test xdtoa = xtrue])
+               [test x$benchmark_dtoa = xtrue])
 
 AC_ARG_ENABLE([benchmark-duff],
   [AS_HELP_STRING([--enable-benchmark-duff],
@@ -252,7 +253,7 @@ AC_ARG_ENABLE([benchmark-duff],
    esac],
   [benchmark_duff=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_DUFF],
-               [test xduff = xtrue])
+               [test x$benchmark_duff = xtrue])
 
 AC_ARG_ENABLE([benchmark-edn],
   [AS_HELP_STRING([--enable-benchmark-edn],
@@ -264,7 +265,7 @@ AC_ARG_ENABLE([benchmark-edn],
    esac],
   [benchmark_edn=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_EDN],
-               [test xedn = xtrue])
+               [test x$benchmark_edn = xtrue])
 
 AC_ARG_ENABLE([benchmark-expint],
   [AS_HELP_STRING([--enable-benchmark-expint],
@@ -276,7 +277,7 @@ AC_ARG_ENABLE([benchmark-expint],
    esac],
   [benchmark_expint=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_EXPINT],
-               [test xexpint = xtrue])
+               [test x$benchmark_expint = xtrue])
 
 AC_ARG_ENABLE([benchmark-fac],
   [AS_HELP_STRING([--enable-benchmark-fac],
@@ -288,7 +289,7 @@ AC_ARG_ENABLE([benchmark-fac],
    esac],
   [benchmark_fac=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_FAC],
-               [test xfac = xtrue])
+               [test x$benchmark_fac = xtrue])
 
 AC_ARG_ENABLE([benchmark-fasta],
   [AS_HELP_STRING([--enable-benchmark-fasta],
@@ -300,7 +301,7 @@ AC_ARG_ENABLE([benchmark-fasta],
    esac],
   [benchmark_fasta=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_FASTA],
-               [test xfasta = xtrue])
+               [test x$benchmark_fasta = xtrue])
 
 AC_ARG_ENABLE([benchmark-fdct],
   [AS_HELP_STRING([--enable-benchmark-fdct],
@@ -312,7 +313,7 @@ AC_ARG_ENABLE([benchmark-fdct],
    esac],
   [benchmark_fdct=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_FDCT],
-               [test xfdct = xtrue])
+               [test x$benchmark_fdct = xtrue])
 
 AC_ARG_ENABLE([benchmark-fibcall],
   [AS_HELP_STRING([--enable-benchmark-fibcall],
@@ -324,7 +325,7 @@ AC_ARG_ENABLE([benchmark-fibcall],
    esac],
   [benchmark_fibcall=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_FIBCALL],
-               [test xfibcall = xtrue])
+               [test x$benchmark_fibcall = xtrue])
 
 AC_ARG_ENABLE([benchmark-fir],
   [AS_HELP_STRING([--enable-benchmark-fir],
@@ -336,7 +337,7 @@ AC_ARG_ENABLE([benchmark-fir],
    esac],
   [benchmark_fir=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_FIR],
-               [test xfir = xtrue])
+               [test x$benchmark_fir = xtrue])
 
 AC_ARG_ENABLE([benchmark-frac],
   [AS_HELP_STRING([--enable-benchmark-frac],
@@ -348,7 +349,7 @@ AC_ARG_ENABLE([benchmark-frac],
    esac],
   [benchmark_frac=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_FRAC],
-               [test xfrac = xtrue])
+               [test x$benchmark_frac = xtrue])
 
 AC_ARG_ENABLE([benchmark-huffbench],
   [AS_HELP_STRING([--enable-benchmark-huffbench],
@@ -360,7 +361,7 @@ AC_ARG_ENABLE([benchmark-huffbench],
    esac],
   [benchmark_huffbench=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_HUFFBENCH],
-               [test xhuffbench = xtrue])
+               [test x$benchmark_huffbench = xtrue])
 
 AC_ARG_ENABLE([benchmark-insertsort],
   [AS_HELP_STRING([--enable-benchmark-insertsort],
@@ -372,7 +373,7 @@ AC_ARG_ENABLE([benchmark-insertsort],
    esac],
   [benchmark_insertsort=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_INSERTSORT],
-               [test xinsertsort = xtrue])
+               [test x$benchmark_insertsort = xtrue])
 
 AC_ARG_ENABLE([benchmark-janne_complex],
   [AS_HELP_STRING([--enable-benchmark-janne_complex],
@@ -384,7 +385,7 @@ AC_ARG_ENABLE([benchmark-janne_complex],
    esac],
   [benchmark_janne_complex=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_JANNE_COMPLEX],
-               [test xjanne_complex = xtrue])
+               [test x$benchmark_janne_complex = xtrue])
 
 AC_ARG_ENABLE([benchmark-jfdctint],
   [AS_HELP_STRING([--enable-benchmark-jfdctint],
@@ -396,7 +397,7 @@ AC_ARG_ENABLE([benchmark-jfdctint],
    esac],
   [benchmark_jfdctint=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_JFDCTINT],
-               [test xjfdctint = xtrue])
+               [test x$benchmark_jfdctint = xtrue])
 
 AC_ARG_ENABLE([benchmark-lcdnum],
   [AS_HELP_STRING([--enable-benchmark-lcdnum],
@@ -408,7 +409,7 @@ AC_ARG_ENABLE([benchmark-lcdnum],
    esac],
   [benchmark_lcdnum=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_LCDNUM],
-               [test xlcdnum = xtrue])
+               [test x$benchmark_lcdnum = xtrue])
 
 AC_ARG_ENABLE([benchmark-levenshtein],
   [AS_HELP_STRING([--enable-benchmark-levenshtein],
@@ -420,7 +421,7 @@ AC_ARG_ENABLE([benchmark-levenshtein],
    esac],
   [benchmark_levenshtein=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_LEVENSHTEIN],
-               [test xlevenshtein = xtrue])
+               [test x$benchmark_levenshtein = xtrue])
 
 AC_ARG_ENABLE([benchmark-ludcmp],
   [AS_HELP_STRING([--enable-benchmark-ludcmp],
@@ -432,7 +433,7 @@ AC_ARG_ENABLE([benchmark-ludcmp],
    esac],
   [benchmark_ludcmp=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_LUDCMP],
-               [test xludcmp = xtrue])
+               [test x$benchmark_ludcmp = xtrue])
 
 AC_ARG_ENABLE([benchmark-matmult],
   [AS_HELP_STRING([--enable-benchmark-matmult],
@@ -444,7 +445,7 @@ AC_ARG_ENABLE([benchmark-matmult],
    esac],
   [benchmark_matmult=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_MATMULT],
-               [test xmatmult = xtrue])
+               [test x$benchmark_matmult = xtrue])
 
 AC_ARG_ENABLE([benchmark-matmult-float],
   [AS_HELP_STRING([--enable-benchmark-matmult-float],
@@ -456,7 +457,7 @@ AC_ARG_ENABLE([benchmark-matmult-float],
    esac],
   [benchmark_matmult_float=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_MATMULT_FLOAT],
-               [test xmatmult_float = xtrue])
+               [test x$benchmark_matmult_float = xtrue])
 
 AC_ARG_ENABLE([benchmark-matmult-int],
   [AS_HELP_STRING([--enable-benchmark-matmult-int],
@@ -468,7 +469,7 @@ AC_ARG_ENABLE([benchmark-matmult-int],
    esac],
   [benchmark_matmult_int=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_MATMULT_INT],
-               [test xmatmult_int = xtrue])
+               [test x$benchmark_matmult_int = xtrue])
 
 AC_ARG_ENABLE([benchmark-mergesort],
   [AS_HELP_STRING([--enable-benchmark-mergesort],
@@ -480,7 +481,7 @@ AC_ARG_ENABLE([benchmark-mergesort],
    esac],
   [benchmark_mergesort=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_MERGESORT],
-               [test xmergesort = xtrue])
+               [test x$benchmark_mergesort = xtrue])
 
 AC_ARG_ENABLE([benchmark-miniz],
   [AS_HELP_STRING([--enable-benchmark-miniz],
@@ -492,7 +493,7 @@ AC_ARG_ENABLE([benchmark-miniz],
    esac],
   [benchmark_miniz=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_MINIZ],
-               [test xminiz = xtrue])
+               [test x$benchmark_miniz = xtrue])
 
 AC_ARG_ENABLE([benchmark-minver],
   [AS_HELP_STRING([--enable-benchmark-minver],
@@ -504,7 +505,7 @@ AC_ARG_ENABLE([benchmark-minver],
    esac],
   [benchmark_minver=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_MINVER],
-               [test xminver = xtrue])
+               [test x$benchmark_minver = xtrue])
 
 AC_ARG_ENABLE([benchmark-nbody],
   [AS_HELP_STRING([--enable-benchmark-nbody],
@@ -516,7 +517,7 @@ AC_ARG_ENABLE([benchmark-nbody],
    esac],
   [benchmark_nbody=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_NBODY],
-               [test xnbody = xtrue])
+               [test x$benchmark_nbody = xtrue])
 
 AC_ARG_ENABLE([benchmark-ndes],
   [AS_HELP_STRING([--enable-benchmark-ndes],
@@ -528,7 +529,7 @@ AC_ARG_ENABLE([benchmark-ndes],
    esac],
   [benchmark_ndes=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_NDES],
-               [test xndes = xtrue])
+               [test x$benchmark_ndes = xtrue])
 
 AC_ARG_ENABLE([benchmark-nettle-arcfour],
   [AS_HELP_STRING([--enable-benchmark-nettle-arcfour],
@@ -540,7 +541,7 @@ AC_ARG_ENABLE([benchmark-nettle-arcfour],
    esac],
   [benchmark_nettle_arcfour=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_NETTLE_ARCFOUR],
-               [test xnettle_arcfour = xtrue])
+               [test x$benchmark_nettle_arcfour = xtrue])
 
 AC_ARG_ENABLE([benchmark-nettle-cast128],
   [AS_HELP_STRING([--enable-benchmark-nettle-cast128],
@@ -552,7 +553,7 @@ AC_ARG_ENABLE([benchmark-nettle-cast128],
    esac],
   [benchmark_nettle_cast128=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_NETTLE_CAST128],
-               [test xnettle_cast128 = xtrue])
+               [test x$benchmark_nettle_cast128 = xtrue])
 
 AC_ARG_ENABLE([benchmark-nettle-des],
   [AS_HELP_STRING([--enable-benchmark-nettle-des],
@@ -564,7 +565,7 @@ AC_ARG_ENABLE([benchmark-nettle-des],
    esac],
   [benchmark_nettle_des=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_NETTLE_DES],
-               [test xnettle_des = xtrue])
+               [test x$benchmark_nettle_des = xtrue])
 
 AC_ARG_ENABLE([benchmark-nettle-md5],
   [AS_HELP_STRING([--enable-benchmark-nettle-md5],
@@ -576,7 +577,7 @@ AC_ARG_ENABLE([benchmark-nettle-md5],
    esac],
   [benchmark_nettle_md5=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_NETTLE_MD5],
-               [test xnettle_md5 = xtrue])
+               [test x$benchmark_nettle_md5 = xtrue])
 
 AC_ARG_ENABLE([benchmark-newlib-exp],
   [AS_HELP_STRING([--enable-benchmark-newlib-exp],
@@ -588,7 +589,7 @@ AC_ARG_ENABLE([benchmark-newlib-exp],
    esac],
   [benchmark_newlib_exp=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_NEWLIB_EXP],
-               [test xnewlib_exp = xtrue])
+               [test x$benchmark_newlib_exp = xtrue])
 
 AC_ARG_ENABLE([benchmark-newlib-log],
   [AS_HELP_STRING([--enable-benchmark-newlib-log],
@@ -600,7 +601,7 @@ AC_ARG_ENABLE([benchmark-newlib-log],
    esac],
   [benchmark_newlib_log=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_NEWLIB_LOG],
-               [test xnewlib_log = xtrue])
+               [test x$benchmark_newlib_log = xtrue])
 
 AC_ARG_ENABLE([benchmark-newlib-mod],
   [AS_HELP_STRING([--enable-benchmark-newlib-mod],
@@ -612,7 +613,7 @@ AC_ARG_ENABLE([benchmark-newlib-mod],
    esac],
   [benchmark_newlib_mod=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_NEWLIB_MOD],
-               [test xnewlib_mod = xtrue])
+               [test x$benchmark_newlib_mod = xtrue])
 
 AC_ARG_ENABLE([benchmark-newlib-sqrt],
   [AS_HELP_STRING([--enable-benchmark-newlib-sqrt],
@@ -624,7 +625,7 @@ AC_ARG_ENABLE([benchmark-newlib-sqrt],
    esac],
   [benchmark_newlib_sqrt=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_NEWLIB_SQRT],
-               [test xnewlib_sqrt = xtrue])
+               [test x$benchmark_newlib_sqrt = xtrue])
 
 AC_ARG_ENABLE([benchmark-ns],
   [AS_HELP_STRING([--enable-benchmark-ns],
@@ -636,7 +637,7 @@ AC_ARG_ENABLE([benchmark-ns],
    esac],
   [benchmark_ns=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_NS],
-               [test xns = xtrue])
+               [test x$benchmark_ns = xtrue])
 
 AC_ARG_ENABLE([benchmark-nsichneu],
   [AS_HELP_STRING([--enable-benchmark-nsichneu],
@@ -648,7 +649,7 @@ AC_ARG_ENABLE([benchmark-nsichneu],
    esac],
   [benchmark_nsichneu=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_NSICHNEU],
-               [test xnsichneu = xtrue])
+               [test x$benchmark_nsichneu = xtrue])
 
 AC_ARG_ENABLE([benchmark-picojpeg],
   [AS_HELP_STRING([--enable-benchmark-picojpeg],
@@ -660,7 +661,7 @@ AC_ARG_ENABLE([benchmark-picojpeg],
    esac],
   [benchmark_picojpeg=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_PICOJPEG],
-               [test xpicojpeg = xtrue])
+               [test x$benchmark_picojpeg = xtrue])
 
 AC_ARG_ENABLE([benchmark-prime],
   [AS_HELP_STRING([--enable-benchmark-prime],
@@ -672,7 +673,7 @@ AC_ARG_ENABLE([benchmark-prime],
    esac],
   [benchmark_prime=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_PRIME],
-               [test xprime = xtrue])
+               [test x$benchmark_prime = xtrue])
 
 AC_ARG_ENABLE([benchmark-qrduino],
   [AS_HELP_STRING([--enable-benchmark-qrduino],
@@ -684,7 +685,7 @@ AC_ARG_ENABLE([benchmark-qrduino],
    esac],
   [benchmark_qrduino=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_QRDUINO],
-               [test xqrduino = xtrue])
+               [test x$benchmark_qrduino = xtrue])
 
 AC_ARG_ENABLE([benchmark-qsort],
   [AS_HELP_STRING([--enable-benchmark-qsort],
@@ -696,7 +697,7 @@ AC_ARG_ENABLE([benchmark-qsort],
    esac],
   [benchmark_qsort=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_QSORT],
-               [test xqsort = xtrue])
+               [test x$benchmark_qsort = xtrue])
 
 AC_ARG_ENABLE([benchmark-qurt],
   [AS_HELP_STRING([--enable-benchmark-qurt],
@@ -708,7 +709,7 @@ AC_ARG_ENABLE([benchmark-qurt],
    esac],
   [benchmark_qurt=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_QURT],
-               [test xqurt = xtrue])
+               [test x$benchmark_qurt = xtrue])
 
 AC_ARG_ENABLE([benchmark-recursion],
   [AS_HELP_STRING([--enable-benchmark-recursion],
@@ -720,7 +721,7 @@ AC_ARG_ENABLE([benchmark-recursion],
    esac],
   [benchmark_recursion=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_RECURSION],
-               [test xrecursion = xtrue])
+               [test x$benchmark_recursion = xtrue])
 
 AC_ARG_ENABLE([benchmark-rijndael],
   [AS_HELP_STRING([--enable-benchmark-rijndael],
@@ -732,7 +733,7 @@ AC_ARG_ENABLE([benchmark-rijndael],
    esac],
   [benchmark_rijndael=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_RIJNDAEL],
-               [test xrijndael = xtrue])
+               [test x$benchmark_rijndael = xtrue])
 
 AC_ARG_ENABLE([benchmark-select],
   [AS_HELP_STRING([--enable-benchmark-select],
@@ -744,7 +745,7 @@ AC_ARG_ENABLE([benchmark-select],
    esac],
   [benchmark_select=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_SELECT],
-               [test xselect = xtrue])
+               [test x$benchmark_select = xtrue])
 
 AC_ARG_ENABLE([benchmark-sglib-arraybinsearch],
   [AS_HELP_STRING([--enable-benchmark-sglib-arraybinsearch],
@@ -756,7 +757,7 @@ AC_ARG_ENABLE([benchmark-sglib-arraybinsearch],
    esac],
   [benchmark_sglib_arraybinsearch=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH],
-               [test xsglib_arraybinsearch = xtrue])
+               [test x$benchmark_sglib_arraybinsearch = xtrue])
 
 AC_ARG_ENABLE([benchmark-sglib-arrayheapsort],
   [AS_HELP_STRING([--enable-benchmark-sglib-arrayheapsort],
@@ -768,7 +769,7 @@ AC_ARG_ENABLE([benchmark-sglib-arrayheapsort],
    esac],
   [benchmark_sglib_arrayheapsort=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT],
-               [test xsglib_arrayheapsort = xtrue])
+               [test x$benchmark_sglib_arrayheapsort = xtrue])
 
 AC_ARG_ENABLE([benchmark-sglib-arrayquicksort],
   [AS_HELP_STRING([--enable-benchmark-sglib-arrayquicksort],
@@ -780,7 +781,7 @@ AC_ARG_ENABLE([benchmark-sglib-arrayquicksort],
    esac],
   [benchmark_sglib_arrayquicksort=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT],
-               [test xsglib_arrayquicksort = xtrue])
+               [test x$benchmark_sglib_arrayquicksort = xtrue])
 
 AC_ARG_ENABLE([benchmark-sglib-arraysort],
   [AS_HELP_STRING([--enable-benchmark-sglib-arraysort],
@@ -792,7 +793,7 @@ AC_ARG_ENABLE([benchmark-sglib-arraysort],
    esac],
   [benchmark_sglib_arraysort=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_SGLIB_ARRAYSORT],
-               [test xsglib_arraysort = xtrue])
+               [test x$benchmark_sglib_arraysort = xtrue])
 
 AC_ARG_ENABLE([benchmark-sglib-dllist],
   [AS_HELP_STRING([--enable-benchmark-sglib-dllist],
@@ -804,7 +805,7 @@ AC_ARG_ENABLE([benchmark-sglib-dllist],
    esac],
   [benchmark_sglib_dllist=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_SGLIB_DLLIST],
-               [test xsglib_dllist = xtrue])
+               [test x$benchmark_sglib_dllist = xtrue])
 
 AC_ARG_ENABLE([benchmark-sglib-hashtable],
   [AS_HELP_STRING([--enable-benchmark-sglib-hashtable],
@@ -816,7 +817,7 @@ AC_ARG_ENABLE([benchmark-sglib-hashtable],
    esac],
   [benchmark_sglib_hashtable=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_SGLIB_HASHTABLE],
-               [test xsglib_hashtable = xtrue])
+               [test x$benchmark_sglib_hashtable = xtrue])
 
 AC_ARG_ENABLE([benchmark-sglib-listinsertsort],
   [AS_HELP_STRING([--enable-benchmark-sglib-listinsertsort],
@@ -828,7 +829,7 @@ AC_ARG_ENABLE([benchmark-sglib-listinsertsort],
    esac],
   [benchmark_sglib_listinsertsort=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_SGLIB_LISTINSERTSORT],
-               [test xsglib_listinsertsort = xtrue])
+               [test x$benchmark_sglib_listinsertsort = xtrue])
 
 AC_ARG_ENABLE([benchmark-sglib-listsort],
   [AS_HELP_STRING([--enable-benchmark-sglib-listsort],
@@ -840,7 +841,7 @@ AC_ARG_ENABLE([benchmark-sglib-listsort],
    esac],
   [benchmark_sglib_listsort=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_SGLIB_LISTSORT],
-               [test xsglib_listsort = xtrue])
+               [test x$benchmark_sglib_listsort = xtrue])
 
 AC_ARG_ENABLE([benchmark-sglib-queue],
   [AS_HELP_STRING([--enable-benchmark-sglib-queue],
@@ -852,7 +853,7 @@ AC_ARG_ENABLE([benchmark-sglib-queue],
    esac],
   [benchmark_sglib_queue=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_SGLIB_QUEUE],
-               [test xsglib_queue = xtrue])
+               [test x$benchmark_sglib_queue = xtrue])
 
 AC_ARG_ENABLE([benchmark-sglib-rbtree],
   [AS_HELP_STRING([--enable-benchmark-sglib-rbtree],
@@ -864,7 +865,7 @@ AC_ARG_ENABLE([benchmark-sglib-rbtree],
    esac],
   [benchmark_sglib_rbtree=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_SGLIB_RBTREE],
-               [test xsglib_rbtree = xtrue])
+               [test x$benchmark_sglib_rbtree = xtrue])
 
 AC_ARG_ENABLE([benchmark-slre],
   [AS_HELP_STRING([--enable-benchmark-slre],
@@ -876,7 +877,7 @@ AC_ARG_ENABLE([benchmark-slre],
    esac],
   [benchmark_slre=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_SLRE],
-               [test xslre = xtrue])
+               [test x$benchmark_slre = xtrue])
 
 AC_ARG_ENABLE([benchmark-sqrt],
   [AS_HELP_STRING([--enable-benchmark-sqrt],
@@ -888,7 +889,7 @@ AC_ARG_ENABLE([benchmark-sqrt],
    esac],
   [benchmark_sqrt=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_SQRT],
-               [test xsqrt = xtrue])
+               [test x$benchmark_sqrt = xtrue])
 
 AC_ARG_ENABLE([benchmark-st],
   [AS_HELP_STRING([--enable-benchmark-st],
@@ -900,7 +901,7 @@ AC_ARG_ENABLE([benchmark-st],
    esac],
   [benchmark_st=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_ST],
-               [test xst = xtrue])
+               [test x$benchmark_st = xtrue])
 
 AC_ARG_ENABLE([benchmark-statemate],
   [AS_HELP_STRING([--enable-benchmark-statemate],
@@ -912,7 +913,7 @@ AC_ARG_ENABLE([benchmark-statemate],
    esac],
   [benchmark_statemate=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_STATEMATE],
-               [test xstatemate = xtrue])
+               [test x$benchmark_statemate = xtrue])
 
 AC_ARG_ENABLE([benchmark-stb_perlin],
   [AS_HELP_STRING([--enable-benchmark-stb_perlin],
@@ -924,7 +925,7 @@ AC_ARG_ENABLE([benchmark-stb_perlin],
    esac],
   [benchmark_stb_perlin=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_STB_PERLIN],
-               [test xstb_perlin = xtrue])
+               [test x$benchmark_stb_perlin = xtrue])
 
 AC_ARG_ENABLE([benchmark-stringsearch1],
   [AS_HELP_STRING([--enable-benchmark-stringsearch1],
@@ -936,7 +937,7 @@ AC_ARG_ENABLE([benchmark-stringsearch1],
    esac],
   [benchmark_stringsearch1=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_STRINGSEARCH1],
-               [test xstringsearch1 = xtrue])
+               [test x$benchmark_stringsearch1 = xtrue])
 
 AC_ARG_ENABLE([benchmark-strstr],
   [AS_HELP_STRING([--enable-benchmark-strstr],
@@ -948,7 +949,7 @@ AC_ARG_ENABLE([benchmark-strstr],
    esac],
   [benchmark_strstr=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_STRSTR],
-               [test xstrstr = xtrue])
+               [test x$benchmark_strstr = xtrue])
 
 AC_ARG_ENABLE([benchmark-tarai],
   [AS_HELP_STRING([--enable-benchmark-tarai],
@@ -960,7 +961,7 @@ AC_ARG_ENABLE([benchmark-tarai],
    esac],
   [benchmark_tarai=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_TARAI],
-               [test xtarai = xtrue])
+               [test x$benchmark_tarai = xtrue])
 
 AC_ARG_ENABLE([benchmark-template],
   [AS_HELP_STRING([--enable-benchmark-template],
@@ -972,7 +973,7 @@ AC_ARG_ENABLE([benchmark-template],
    esac],
   [benchmark_template=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_TEMPLATE],
-               [test xtemplate = xtrue])
+               [test x$benchmark_template = xtrue])
 
 AC_ARG_ENABLE([benchmark-trio],
   [AS_HELP_STRING([--enable-benchmark-trio],
@@ -984,7 +985,7 @@ AC_ARG_ENABLE([benchmark-trio],
    esac],
   [benchmark_trio=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_TRIO],
-               [test xtrio = xtrue])
+               [test x$benchmark_trio = xtrue])
 
 AC_ARG_ENABLE([benchmark-trio-snprintf],
   [AS_HELP_STRING([--enable-benchmark-trio-snprintf],
@@ -996,7 +997,7 @@ AC_ARG_ENABLE([benchmark-trio-snprintf],
    esac],
   [benchmark_trio_snprintf=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_TRIO_SNPRINTF],
-               [test xtrio_snprintf = xtrue])
+               [test x$benchmark_trio_snprintf = xtrue])
 
 AC_ARG_ENABLE([benchmark-trio-sscanf],
   [AS_HELP_STRING([--enable-benchmark-trio-sscanf],
@@ -1008,7 +1009,7 @@ AC_ARG_ENABLE([benchmark-trio-sscanf],
    esac],
   [benchmark_trio_sscanf=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_TRIO_SSCANF],
-               [test xtrio_sscanf = xtrue])
+               [test x$benchmark_trio_sscanf = xtrue])
 
 AC_ARG_ENABLE([benchmark-ud],
   [AS_HELP_STRING([--enable-benchmark-ud],
@@ -1020,7 +1021,7 @@ AC_ARG_ENABLE([benchmark-ud],
    esac],
   [benchmark_ud=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_UD],
-               [test xud = xtrue])
+               [test x$benchmark_ud = xtrue])
 
 AC_ARG_ENABLE([benchmark-whetstone],
   [AS_HELP_STRING([--enable-benchmark-whetstone],
@@ -1032,7 +1033,7 @@ AC_ARG_ENABLE([benchmark-whetstone],
    esac],
   [benchmark_whetstone=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_WHETSTONE],
-               [test xwhetstone = xtrue])
+               [test x$benchmark_whetstone = xtrue])
 
 AC_ARG_ENABLE([benchmark-wikisort],
   [AS_HELP_STRING([--enable-benchmark-wikisort],
@@ -1044,102 +1045,81 @@ AC_ARG_ENABLE([benchmark-wikisort],
    esac],
   [benchmark_wikisort=true])
 AM_CONDITIONAL([ENABLED_BENCHMARK_WIKISORT],
-               [test xwikisort = xtrue])
+               [test x$benchmark_wikisort = xtrue])
 
-# Work out which architecture we need
+
+
+# Work out which architecture we are targeting
 # Also pass this through to be substituted
 
 arch=$host_cpu
 
-# Option for selecting the target board and check if it exists
+# Option for selecting the target board
 
 AC_ARG_WITH([board],
     [AS_HELP_STRING([--with-board], [Select the board to target])],
-    [],
-    [with_board=none]
-    )
-board=$with_board
+    [board=$with_board],
+    [board=none])
 
-AC_CHECK_FILE($srcdir/config/$arch/boards/$board,
-              [],
-	      AC_MSG_ERROR(["$board" board config directory not found])
-
-# Option for selecting the target chip and echeck if it exists
+# Option for selecting the target chip
 
 AC_ARG_WITH([chip],
 [AS_HELP_STRING([--with-chip], [Select the chip to target])],
-    [],
-    [with_chip=generic]
-    )
-chip=$with_chip
-
-AC_CHECK_FILE($srcdir/config/$arch/chips/$chip; then
-              [],
-	      AC_MSG_ERROR(["$chip" chip config directory not found])
+    [chip=$with_chip],
+    [chip=generic])
 
 # Execute any architecture, board or chip specific configuration. These can
 # set architecture, chip and board CPPFLAGS, CFLAGS and LDFLAGS and exclude
-# individual tests by undefining HAVE_BENCHMARK_<bm>.
+# individual tests by undefining HAVE_BENCHMARK_<bm>. We can't use
+# AC_CHECK_FILE, because we are cross-compiling, and that prohibits use of
+# AC_CHECK_FILE.
 
-AC_CHECK_FILE($srcdir/config/$arch/arch.cfg,
-              [source $srcdir/config/$arch/arch.cfg],
-	      [])
-AC_CHECK_FILE($srcdir/config/$arch/boards/$board/board.cfg,
-              [source $srcdir/config/$arch/boards/$board/board.cfg],
-	      [])
-AC_CHECK_FILE($srcdir/config/$arch/chips/$chip/chip.cfg,
-              [source $srcdir/config/$arch/chips/$chip/chip.cfg]
-	      [])
+AS_IF([test -f $srcdir/config/$arch/arch.cfg],
+      [source $srcdir/config/$arch/arch.cfg], [])
+
+AS_IF([test -d $srcdir/config/$arch/boards/$board],
+      [], [AC_MSG_ERROR([Board config directory "$board" does not exist])])
+
+AS_IF([test -f $srcdir/config/$arch/boards/$board/board.cfg ],
+      [source $srcdir/config/$arch/boards/$board/board.cfg], [])
+
+AS_IF([test -d $srcdir/config/$arch/chips/$chip],
+      [], [AC_MSG_ERROR([Chip config directory "$chip" does not exist])])
+
+AS_IF([test -f $srcdir/config/$arch/chips/$chip/chip.cfg],
+      [source $srcdir/config/$arch/chips/$chip/chip.cfg], [])
 
 AM_CONDITIONAL([CHIPSUPPORT_C],
 	       [test -f $srcdir/config/$arch/chips/$chip/chipsupport.c])
 
 # Check for support headers
 
-AC_CHECK_FILE($srcdir/config/$arch/boards/$board/boardsupport.h,
-              [AC_DEFINE([HAVE_BOARDSUPPORT_H], [1],
-	                 [Board support header is present])],
-	      [])
+test -f $srcdir/config/$arch/boards/$board/boardsupport.h && \
+    AC_DEFINE([HAVE_BOARDSUPPORT_H], [1], [Board support header is present])
 
-AC_CHECK_FILE($srcdir/config/$arch/chips/$chip/chipsupport.h,
-              [AC_DEFINE([HAVE_CHIPSUPPORT_H], [1],
-	                 [Chip support header is present])],
-	      [])
+test -f $srcdir/config/$arch/chips/$chip/chipsupport.h && \
+    AC_DEFINE([HAVE_CHIPSUPPORT_H], [1], [Chip support header is present])
 
 # Test whether we have a calibration file
 
-AC_CHECK_FILE($srcdir/config/$arch/boards/$board/calibration,
-              [AC_DEFINE([HAVE_CALIBRATION], [1], [Calibration file is present])
-               HAVE_CALIBRATION=yes],
-	      [])
+test -f $srcdir/config/$arch/boards/$board/calibration && \
+    HAVE_CALIBRATION=yes && \
+    AC_DEFINE([HAVE_CALIBRATION], [1], [Calibration file is present])
+
 AM_CONDITIONAL([CALIBRATION], [test x$HAVE_CALIBRATION == xyes])
 
 # Architecture, board and chip specific CFLAGS and LDFLAGS
 
-# Sometimes we need to have the CFLAGS and LDFLAGS set so that
-# the config test pass. We save them first so we can restore them later
-confsave_CFLAGS=$CFLAGS
-confsave_LDFLAGS=$LDFLAGS
+# If we pass the --host option, then AC_PROG_CC will select the correct
+# cross-compiler for us.
 
-CFLAGS="$CFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
-LDFLAGS="$LDFLAGS $ARCH_LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"
-
-# If we pass the --host option, then AC_PROG_CC will select the
-# correct cross-compiler for us.
-
-AC_PROG_CC
+AC_PROG_CC([${target}-gcc ${target}-cc])
 AM_PROG_AS
 AC_PROG_CC_C99
 
-# Our custom flags
-
-CPPFLAGS="-I $(top_srcdir)/include $CPPFLAGS"
-CPPFLAGS="-I $(top_srcdir)/config/@ARCH@/boards/@BOARD@ $CPPFLAGS"
-CPPFLAGS="-I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ $CPPFLAGS"
-
 # Add in the architecture, board and chip specific CPPFLAGS, CFLAGS and LDFLAGS
 
-CPPFLAGS="$CPPFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
+CPPFLAGS="$CPPFLAGS $ARCH_CPPFLAGS $CHIP_CPPFLAGS $BOARD_CPPFLAGS"
 CFLAGS="$CFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
 LDFLAGS="$LDFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
 
@@ -1165,6 +1145,7 @@ AC_CONFIG_HEADERS([config.h])
 
 AC_CONFIG_FILES([Makefile                          \
                  doc/Makefile                      \
+                 src/Makefile                      \
                  src/aha-compress/Makefile         \
 		 src/aha-mont64/Makefile           \
                  src/bs/Makefile                   \
