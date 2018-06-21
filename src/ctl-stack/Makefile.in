@@ -155,7 +155,8 @@ CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 libctl_stack_la_LIBADD =
 am__libctl_stack_la_SOURCES_DIST = ctl.c ctl.h stack.h
-@ENABLED_BENCHMARK_CTL_STACK_TRUE@am_libctl_stack_la_OBJECTS = ctl.lo
+@ENABLED_BENCHMARK_CTL_STACK_TRUE@am_libctl_stack_la_OBJECTS =  \
+@ENABLED_BENCHMARK_CTL_STACK_TRUE@	libctl_stack_la-ctl.lo
 libctl_stack_la_OBJECTS = $(am_libctl_stack_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -380,7 +381,7 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_CTL_STACK_TRUE@                          libctl-stack.la \
 @ENABLED_BENCHMARK_CTL_STACK_TRUE@                          $(top_builddir)/support/libsupport.la
 
-@ENABLED_BENCHMARK_CTL_STACK_TRUE@ctl_stack_CPPFLAGS = -DCTL_STACK ${AM_CPPFLAGS}
+@ENABLED_BENCHMARK_CTL_STACK_TRUE@libctl_stack_la_CPPFLAGS = -DCTL_STACK ${AM_CPPFLAGS}
 all: all-am
 
 .SUFFIXES:
@@ -489,7 +490,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ctl.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libctl_stack_la-ctl.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -511,6 +512,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
+
+libctl_stack_la-ctl.lo: ctl.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libctl_stack_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libctl_stack_la-ctl.lo -MD -MP -MF $(DEPDIR)/libctl_stack_la-ctl.Tpo -c -o libctl_stack_la-ctl.lo `test -f 'ctl.c' || echo '$(srcdir)/'`ctl.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libctl_stack_la-ctl.Tpo $(DEPDIR)/libctl_stack_la-ctl.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='ctl.c' object='libctl_stack_la-ctl.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libctl_stack_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libctl_stack_la-ctl.lo `test -f 'ctl.c' || echo '$(srcdir)/'`ctl.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

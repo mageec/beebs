@@ -167,7 +167,9 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_nettle_cast128_OBJECTS =
 nettle_cast128_OBJECTS = $(am_nettle_cast128_OBJECTS)
-nettle_cast128_LDADD = $(LDADD)
+@ENABLED_BENCHMARK_NETTLE_CAST128_TRUE@nettle_cast128_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_NETTLE_CAST128_TRUE@	libnettle-cast128.la \
+@ENABLED_BENCHMARK_NETTLE_CAST128_TRUE@	$(top_builddir)/support/libsupport.la
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -373,9 +375,12 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_NETTLE_CAST128_TRUE@AM_CFLAGS = @CFLAGS@
 @ENABLED_BENCHMARK_NETTLE_CAST128_TRUE@AM_LDFLAGS = @LDFLAGS@
 @ENABLED_BENCHMARK_NETTLE_CAST128_TRUE@noinst_LTLIBRARIES = libnettle-cast128.la
-@ENABLED_BENCHMARK_NETTLE_CAST128_TRUE@nettle_cast128_SOURCES =  \
-@ENABLED_BENCHMARK_NETTLE_CAST128_TRUE@	${platform_src}
+@ENABLED_BENCHMARK_NETTLE_CAST128_TRUE@nettle_cast128_SOURCES = 
 @ENABLED_BENCHMARK_NETTLE_CAST128_TRUE@libnettle_cast128_la_SOURCES = cast128.c
+@ENABLED_BENCHMARK_NETTLE_CAST128_TRUE@nettle_cast128_LDADD = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_NETTLE_CAST128_TRUE@                               libnettle-cast128.la \
+@ENABLED_BENCHMARK_NETTLE_CAST128_TRUE@                               $(top_builddir)/support/libsupport.la
+
 all: all-am
 
 .SUFFIXES:

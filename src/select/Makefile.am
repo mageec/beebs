@@ -35,6 +35,4 @@ select_LDADD         = $(top_builddir)/support/libmain.la \
                        libselect.la \
                        $(top_builddir)/support/libsupport.la
 
-
-
 endif

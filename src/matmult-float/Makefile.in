@@ -156,8 +156,7 @@ CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 libmatmult_float_la_LIBADD =
 am__libmatmult_float_la_SOURCES_DIST = matmult.c
-@ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE@am_libmatmult_float_la_OBJECTS =  \
-@ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE@	matmult.lo
+@ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE@am_libmatmult_float_la_OBJECTS = libmatmult_float_la-matmult.lo
 libmatmult_float_la_OBJECTS = $(am_libmatmult_float_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -171,9 +170,6 @@ matmult_float_OBJECTS = $(am_matmult_float_OBJECTS)
 @ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE@matmult_float_DEPENDENCIES = $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE@	libmatmult-float.la \
 @ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE@	$(top_builddir)/support/libsupport.la
-matmult_float_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(matmult_float_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -382,11 +378,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE@matmult_float_SOURCES = 
 @ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE@libmatmult_float_la_SOURCES = matmult.c
 @ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE@matmult_float_LDADD = $(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE@                              libmatmult-float.la \
-@ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE@                              $(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE@                               libmatmult-float.la \
+@ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE@                               $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE@                               -lm
 
-@ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE@matmult_float_CPPFLAGS = -DMATMULT_FLOAT ${AM_CPPFLAGS}
-@ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE@matmult_float_LDFLAGS = -lm ${AM_LDFLAGS}
+@ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE@libmatmult_float_la_CPPFLAGS = -DMATMULT_FLOAT ${AM_CPPFLAGS}
 all: all-am
 
 .SUFFIXES:
@@ -487,7 +483,7 @@ clean-binPROGRAMS:
 
 matmult-float$(EXEEXT): $(matmult_float_OBJECTS) $(matmult_float_DEPENDENCIES) $(EXTRA_matmult_float_DEPENDENCIES) 
 	@rm -f matmult-float$(EXEEXT)
-	$(AM_V_CCLD)$(matmult_float_LINK) $(matmult_float_OBJECTS) $(matmult_float_LDADD) $(LIBS)
+	$(AM_V_CCLD)$(LINK) $(matmult_float_OBJECTS) $(matmult_float_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -495,7 +491,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/matmult.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmatmult_float_la-matmult.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -517,6 +513,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
+
+libmatmult_float_la-matmult.lo: matmult.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmatmult_float_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libmatmult_float_la-matmult.lo -MD -MP -MF $(DEPDIR)/libmatmult_float_la-matmult.Tpo -c -o libmatmult_float_la-matmult.lo `test -f 'matmult.c' || echo '$(srcdir)/'`matmult.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libmatmult_float_la-matmult.Tpo $(DEPDIR)/libmatmult_float_la-matmult.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='matmult.c' object='libmatmult_float_la-matmult.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmatmult_float_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libmatmult_float_la-matmult.lo `test -f 'matmult.c' || echo '$(srcdir)/'`matmult.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

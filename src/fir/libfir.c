@@ -1,4 +1,5 @@
 
+
 /* BEEBS fir benchmark
 
    MDH WCET BENCHMARK SUITE.
@@ -269,6 +270,16 @@ void fir_filter_int(const long* in,long* out,long in_len,
   }
 }
 
+
+
+
+/* This benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
+}
 
 
 void

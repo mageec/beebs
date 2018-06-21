@@ -1,4 +1,5 @@
 
+
 /* -*- mode: C++; c-file-style: "gnu-mode" -*- */
 /* BEEBS template benchmark
 
@@ -28,6 +29,16 @@
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
+
+
+
+/* This benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
+}
 
 
 void

@@ -1,5 +1,84 @@
 2018-06-21  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	Tests now all build with the new structure.
+
+	In many cases we had to add a default VERIFY_BENCHMARK function
+	and in several cases the automatic editing of Makefiles had gone
+	horribly wrong.
+
+	* src/bs/libbs.c (verify_benchmark, initialise_benchmark): Created.
+	* src/cnt/Makefile.am: Add missing LDADD line.
+	* src/cnt/Makefile.in: Regenerated.
+	* src/compress/libcompress.c (verify_benchmark): Created.
+	* src/crc/libcrc.c (verify_benchmark): Created.
+	* src/ctl-stack/Makefile.am: Add CPPFLAGS to library, not program.
+	* src/ctl-stack/Makefile.in: Regenerated.
+	* src/ctl-string/Makefile.am: Tidy up layout.
+	* src/ctl-vector/Makefile.am: Add CPPFLAGS to library, not program.
+	* src/ctl-vector/Makefile.in: Regenerated.
+	* src/ctl-vector/stack.h: Deleted.
+	* src/ctl-vector/vector.h: Created as symbolic link.
+	* src/cubic/Makefile.am: Remove LDFLAGS and add -lm to LDADD line.
+	* src/cubic/Makefile.in: Regnerated.
+	* src/cubic/basicmath_small.c (verify_benchmark): Created.
+	* src/fasta/libfasta.c (verify_benchmark): Created.
+	* src/fir/libfir.c (verify_benchmark): Created.
+	* src/huffbench/libhuffbench.c (verify_benchmark): Created.
+	* src/lcdnum/liblcdnum.c (verify_benchmark): Created.
+	* src/matmult-float/Makefile.am: Add -lm flag to LDADD line
+	instead of LDFLAGS and apply CPPFLAGS to library, not final binary.
+	* src/matmult-float/Makefile.in: Regnerated.
+	* src/matmult-int/Makefile.am: Remove unnecesary LDFLAGS and apply
+	CPPFLAGS to library, not final binary.
+	* src/matmult-int/Makefile.in: Regenerated.
+	* src/miniz/Makefile.am: Add missing LDADD line.
+	* src/miniz/Makefile.in: Regenerated.
+	* src/miniz/miniz_b.c: Restore block of string deleted.
+	* src/minver/libminver.c (verify_benchmark): Created.
+	* src/nbody/Makefile.am: Add missing LDADD line.
+	* src/nbody/Makefile.in: Regenerated.
+	* src/nettle-cast128/Makefile.am: Add missing LDADD line.
+	* src/nettle-cast128/Makefile.in: Regenerated.
+	* src/nettle-md5/Makefile.am: Add missing LDADD line.
+	* src/nettle-md5/Makefile.in: Regenerated.
+	* src/newlib-exp/ef_exp.c (verify_benchmark): Created.
+	* src/newlib-log/ef_log.c (verify_benchmark): Created.
+	* src/newlib-mod/ef_mod.c (verify_benchmark): Created.
+	* src/ns/libns.c (verify_benchmark): Created.
+	* src/picojpeg/picojpeg_test.c (verify_benchmark): Created.
+	* src/qsort/libqsort.c (verify_benchmark): Created.
+	* src/qurt/libqurt.c (verify_benchmark): Created.
+	* src/rijndael/aesxam.c (verify_benchmark): Created.
+	* src/select/Makefile.am: Small tidy up of layout.
+	* src/select/libselect.c (verify_benchmark): Created.
+	* src/sglib-arraybinsearch/Makefile.am: Add missing LDADD line.
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated.
+	* src/sglib-arrayheapsort/Makefile.am: Apply CPPFLAGS to the
+	library and add missing LDADD line.
+	* src/sglib-arrayheapsort/Makefile.in: Regenerated.
+	* src/sglib-arrayquicksort/Makefile.am: Apply CPPFLAGS to the
+	library and add missing LDADD line.
+	* src/sglib-arrayquicksort/Makefile.in: Regenerated.
+	* src/sglib-arraysort/arraysort.c (verify_benchmark): Created.
+	* src/sglib-dllist/dllist.c (verify_benchmark): Created.
+	* src/sglib-hashtable/hashtable.c (verify_benchmark): Created.
+	* src/stb_perlin/libstb_perlin.c (verify_benchmark): Created.
+	* src/stringsearch1/Makefile.am: Add missing LDADD line.
+	* src/stringsearch1/Makefile.in: Regenerated.
+	* src/template/libtemplate.c (verify_benchmark): Created.
+	* src/trio-snprintf/Makefile.am: Apply CPPFLAGS to the
+	library and add missing LDADD line.
+	* src/trio-snprintf/Makefile.in: Regenerated.
+	* src/trio-sscanf/Makefile.am: Apply CPPFLAGS to the
+	library and add missing LDADD line.
+	* src/trio-sscanf/Makefile.in: Regenerated.
+	* src/trio/trio_test.c (verify_benchmark): Created.
+	* src/ud/libud.c (verify_benchmark): Created.
+	* src/whetstone/libwhetstone.c (verify_benchmark): Created.
+	* src/wikisort/libwikisort.c (verify_benchmark): Created.
+
+2018-06-21  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	This is still work in progress.
 
 	Each benchmark is generated as a library.  This allows us to

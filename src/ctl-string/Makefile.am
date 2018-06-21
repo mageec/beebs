@@ -35,6 +35,4 @@ ctl_string_LDADD         = $(top_builddir)/support/libmain.la \
                            libctl-string.la \
                            $(top_builddir)/support/libsupport.la
 
-
-
 endif

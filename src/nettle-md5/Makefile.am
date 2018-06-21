@@ -29,8 +29,10 @@ bin_PROGRAMS             = nettle-md5
 noinst_LTLIBRARIES       = libnettle-md5.la
 
 nettle_md5_SOURCES       =
-libnettle_md5_la_SOURCES=md5.c
+libnettle_md5_la_SOURCES = md5.c
 
+nettle_md5_LDADD         = $(top_builddir)/support/libmain.la \
+                           libnettle-md5.la \
+                           $(top_builddir)/support/libsupport.la
 
-nettle_md5_SOURCES += ${platform_src}
 endif

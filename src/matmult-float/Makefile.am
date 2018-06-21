@@ -25,17 +25,18 @@ if ENABLED_BENCHMARK_MATMULT_FLOAT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS                = matmult-float
-noinst_LTLIBRARIES          = libmatmult-float.la
+bin_PROGRAMS                 = matmult-float
+noinst_LTLIBRARIES           = libmatmult-float.la
 
-matmult_float_SOURCES       =
+matmult_float_SOURCES        =
 
 libmatmult_float_la_SOURCES  = matmult.c
 
-matmult_float_LDADD         = $(top_builddir)/support/libmain.la \
-                              libmatmult-float.la \
-                              $(top_builddir)/support/libsupport.la
-matmult_float_CPPFLAGS = -DMATMULT_FLOAT ${AM_CPPFLAGS}
-matmult_float_LDFLAGS  = -lm ${AM_LDFLAGS}
+matmult_float_LDADD          = $(top_builddir)/support/libmain.la \
+                               libmatmult-float.la \
+                               $(top_builddir)/support/libsupport.la \
+                               -lm
+
+libmatmult_float_la_CPPFLAGS = -DMATMULT_FLOAT ${AM_CPPFLAGS}
 
 endif

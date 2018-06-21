@@ -1,4 +1,5 @@
 
+
 /* BEEBS arraysort benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -34,6 +35,16 @@ int array[100] = {14, 66, 12, 41, 86, 69, 19, 77, 68, 38, 26, 42, 37, 23, 17, 29
   27, 47, 34, 35, 62, 97, 2, 79, 98, 25, 22, 65, 71, 0};
 
 int array2[100];
+
+
+/* This benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
+}
+
 
 void
 initialise_benchmark (void)

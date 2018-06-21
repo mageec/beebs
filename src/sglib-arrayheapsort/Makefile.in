@@ -155,8 +155,7 @@ CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 libsglib_arrayheapsort_la_LIBADD =
 am__libsglib_arrayheapsort_la_SOURCES_DIST = arraysort.c sglib.h
-@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@am_libsglib_arrayheapsort_la_OBJECTS =  \
-@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@	arraysort.lo
+@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@am_libsglib_arrayheapsort_la_OBJECTS = libsglib_arrayheapsort_la-arraysort.lo
 libsglib_arrayheapsort_la_OBJECTS =  \
 	$(am_libsglib_arrayheapsort_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -168,7 +167,9 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_sglib_arrayheapsort_OBJECTS =
 sglib_arrayheapsort_OBJECTS = $(am_sglib_arrayheapsort_OBJECTS)
-sglib_arrayheapsort_LDADD = $(LDADD)
+@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@sglib_arrayheapsort_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@	libsglib-arrayheapsort.la \
+@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@	$(top_builddir)/support/libsupport.la
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -377,7 +378,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@noinst_LTLIBRARIES = libsglib-arrayheapsort.la
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@sglib_arrayheapsort_SOURCES = 
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@libsglib_arrayheapsort_la_SOURCES = arraysort.c sglib.h
-@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@sglib_arrayheapsort_CPPFLAGS = -DHEAP_SORT ${AM_CPPFLAGS}
+@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@libsglib_arrayheapsort_la_CPPFLAGS = -DHEAP_SORT ${AM_CPPFLAGS}
+@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@sglib_arrayheapsort_LDADD = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@                                     libsglib-arrayheapsort.la \
+@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@                                     $(top_builddir)/support/libsupport.la
+
 all: all-am
 
 .SUFFIXES:
@@ -486,7 +491,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/arraysort.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libsglib_arrayheapsort_la-arraysort.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -508,6 +513,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
+
+libsglib_arrayheapsort_la-arraysort.lo: arraysort.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libsglib_arrayheapsort_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libsglib_arrayheapsort_la-arraysort.lo -MD -MP -MF $(DEPDIR)/libsglib_arrayheapsort_la-arraysort.Tpo -c -o libsglib_arrayheapsort_la-arraysort.lo `test -f 'arraysort.c' || echo '$(srcdir)/'`arraysort.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libsglib_arrayheapsort_la-arraysort.Tpo $(DEPDIR)/libsglib_arrayheapsort_la-arraysort.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='arraysort.c' object='libsglib_arrayheapsort_la-arraysort.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libsglib_arrayheapsort_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libsglib_arrayheapsort_la-arraysort.lo `test -f 'arraysort.c' || echo '$(srcdir)/'`arraysort.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

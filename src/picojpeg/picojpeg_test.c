@@ -1,4 +1,5 @@
 
+
 /* BEEBS picobenchmark benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -79,6 +80,16 @@ unsigned char pjpeg_need_bytes_callback(unsigned char* pBuf, unsigned char buf_s
   *pBytes_actually_read = (unsigned char)n;
   jpeg_off += n;
   return 0;
+}
+
+
+
+/* This benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
 }
 
 
