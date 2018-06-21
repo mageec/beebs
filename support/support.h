@@ -74,6 +74,7 @@ void stop_trigger (void);
 
 int benchmark (void) __attribute__ ((noinline));
 
+#endif	/* SUPPORT_H */
 
 /*
    Local Variables:

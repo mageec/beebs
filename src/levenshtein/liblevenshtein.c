@@ -1,3 +1,4 @@
+
 /* BEEBS levenshtein benchmark
 
    c: levenhstein.c
@@ -79,6 +80,13 @@ int levenshtein_distance(const char *s, const char *t) {
 
 const char *strings[] = {"srrjngre", "asfcjnsdkj", "string", "msd",
     "strings"};
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark()
 {

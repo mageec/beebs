@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_DIJKSTRA
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = dijkstra
-dijkstra_SOURCES = dijkstra_small.c
-dijkstra_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS           = dijkstra
+noinst_LTLIBRARIES     = libdijkstra.la
+
+dijkstra_SOURCES       =
+libdijkstra_la_SOURCES = dijkstra_small.c
+
+dijkstra_LDADD         = $(top_builddir)/support/libmain.la \
+                         libdijkstra.la \
+                         $(top_builddir)/support/libsupport.la
 
 
 

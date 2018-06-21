@@ -1,3 +1,4 @@
+
 /* BEEBS st benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -64,6 +65,13 @@ int Seed;
 double ArrayA[MAX], ArrayB[MAX];
 double SumA, SumB;
 double Coef;
+
+
+void
+initialise_benchmark (void)
+{
+}
+
 
 int
 benchmark()

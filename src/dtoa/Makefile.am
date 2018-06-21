@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_DTOA
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = dtoa
-dtoa_SOURCES = dtoa.c
-dtoa_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS       = dtoa
+noinst_LTLIBRARIES = libdtoa.la
+
+dtoa_SOURCES       =
+libdtoa_la_SOURCES = libdtoa.c
+
+dtoa_LDADD         = $(top_builddir)/support/libmain.la \
+                     libdtoa.la \
+                     $(top_builddir)/support/libsupport.la
 
 
 

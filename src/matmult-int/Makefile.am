@@ -25,10 +25,16 @@ if ENABLED_BENCHMARK_MATMULT_INT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = matmult-int
+bin_PROGRAMS              = matmult-int
+noinst_LTLIBRARIES        = libmatmult-int.la
 
-matmult_int_SOURCES  = matmult.c
-matmult_int_LDADD    = $(top_srcdir)/support/libsupport.la
+matmult_int_SOURCES       =
+
+libmatmult_int_la_SOURCES  = matmult.c
+
+matmult_int_LDADD         = $(top_builddir)/support/libmain.la \
+                            libmatmult-int.la \
+                            $(top_builddir)/support/libsupport.la
 matmult_int_CPPFLAGS = -DMATMULT_INT ${AM_CPPFLAGS}
 matmult_int_LDFLAGS  = ${AM_LDFLAGS}
 

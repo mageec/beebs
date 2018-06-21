@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_SLRE
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = slre
-slre_SOURCES = slre.c slre.h
-slre_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS       = slre
+noinst_LTLIBRARIES = libslre.la
+
+slre_SOURCES       =
+libslre_la_SOURCES = libslre.c slre.h
+
+slre_LDADD         = $(top_builddir)/support/libmain.la \
+                     libslre.la \
+                     $(top_builddir)/support/libsupport.la
 
 
 

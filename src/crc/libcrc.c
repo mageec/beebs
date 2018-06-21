@@ -1,3 +1,4 @@
+
 /* BEEBS crc benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -137,6 +138,13 @@ unsigned short icrc(unsigned short crc, unsigned long len,
   }
   return (tmp2 );
 }
+
+
+void
+initialise_benchmark (void)
+{
+}
+
 
 
 int benchmark(void)

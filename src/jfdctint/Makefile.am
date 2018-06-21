@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_JFDCTINT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = jfdctint
-jfdctint_SOURCES = jfdctint.c
-jfdctint_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS           = jfdctint
+noinst_LTLIBRARIES     = libjfdctint.la
+
+jfdctint_SOURCES       =
+libjfdctint_la_SOURCES = libjfdctint.c
+
+jfdctint_LDADD         = $(top_builddir)/support/libmain.la \
+                         libjfdctint.la \
+                         $(top_builddir)/support/libsupport.la
 
 
 

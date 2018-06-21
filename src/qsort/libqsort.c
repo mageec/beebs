@@ -1,3 +1,4 @@
+
 /* BEEBS qsort-exam benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -136,6 +137,13 @@ void sort(unsigned long n)
 		}
 	}
 }
+
+
+void
+initialise_benchmark (void)
+{
+}
+
 
 int
 benchmark()

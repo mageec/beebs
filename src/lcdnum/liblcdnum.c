@@ -1,3 +1,4 @@
+
 /* BEEBS lcdnum benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -76,6 +77,13 @@ unsigned char num_to_lcd(unsigned char a)
 
 volatile unsigned char IN;
 volatile unsigned char OUT;
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark(void)
 {

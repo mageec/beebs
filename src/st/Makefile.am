@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_ST
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = st
-st_SOURCES = st.c
-st_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS       = st
+noinst_LTLIBRARIES = libst.la
+
+st_SOURCES         =
+libst_la_SOURCES = libst.c
+
+st_LDADD           = $(top_builddir)/support/libmain.la \
+                     libst.la \
+                     $(top_builddir)/support/libsupport.la
 
 
 

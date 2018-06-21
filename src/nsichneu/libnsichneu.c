@@ -1,3 +1,4 @@
+
 /* BEEBS nsichneu benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -76,6 +77,13 @@ volatile long	P2_marking_member_0[5];
 volatile int	P3_is_marked = 0;
 volatile long	P3_marking_member_0[6];
 
+
+
+
+void
+initialise_benchmark (void)
+{
+}
 
 
 /**void NSicherNeu()**/

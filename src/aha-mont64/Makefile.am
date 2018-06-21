@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_AHA_MONT64
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = aha-mont64
+bin_PROGRAMS             = aha-mont64
+noinst_LTLIBRARIES       = libaha-mont64.la
 
-aha_mont64_SOURCES = mont64.c
-aha_mont64_LDADD   = $(top_srcdir)/support/libsupport.la
+aha_mont64_SOURCES       =
+
+libaha_mont64_la_SOURCES = mont64.c
+
+aha_mont64_LDADD         = $(top_builddir)/support/libmain.la \
+                           libaha-mont64.la \
+                           $(top_builddir)/support/libsupport.la
 
 endif

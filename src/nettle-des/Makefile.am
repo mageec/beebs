@@ -25,13 +25,18 @@ if ENABLED_BENCHMARK_NETTLE_DES
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = nettle-des
-nettle_des_SOURCES = des.c \
-nettle_des_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS             = nettle-des
+noinst_LTLIBRARIES       = libnettle-des.la
 
-	    rotors.h \
-	    keymap.h \
-	    desCode.h
+nettle_des_SOURCES       =
+libnettle_des_la_SOURCES = des.c \
+	                   rotors.h \
+	                   keymap.h \
+	                   desCode.h
+
+nettle_des_LDADD         = $(top_builddir)/support/libmain.la \
+                           libnettle-des.la \
+                           $(top_builddir)/support/libsupport.la
 
 EXTRA_DIST = descore.README
 

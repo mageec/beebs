@@ -1,3 +1,4 @@
+
 /* BEEBS compress benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -222,6 +223,13 @@ void putbyte( char c );
 void cl_block (void);
 void output( code_int code );
 void writebytes( char *buf, int n );
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark()
 {

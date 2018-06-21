@@ -136,6 +136,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
+target_triplet = @target@
 @ENABLED_BENCHMARK_CNT_TRUE@bin_PROGRAMS = cnt$(EXEEXT)
 subdir = src/cnt
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -342,7 +343,11 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 srcdir = @srcdir@
 sysconfdir = @sysconfdir@
+target = @target@
 target_alias = @target_alias@
+target_cpu = @target_cpu@
+target_os = @target_os@
+target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
@@ -352,7 +357,12 @@ top_srcdir = @top_srcdir@
 @CALIBRATION_TRUE@@ENABLED_BENCHMARK_CNT_TRUE@	        $(top_srcdir)/config/@ARCH@/boards/@BOARD@/calibration \
 @CALIBRATION_TRUE@@ENABLED_BENCHMARK_CNT_TRUE@		|| echo "0 0") | cut -d " " -f 2
 
-@ENABLED_BENCHMARK_CNT_TRUE@AM_CPPFLAGS = "-DCALIB_SCALE=$(shell $(calib))" @CPPFLAGS@
+@ENABLED_BENCHMARK_CNT_TRUE@AM_CPPFLAGS = "-DCALIB_SCALE=$(shell $(calib))" \
+@ENABLED_BENCHMARK_CNT_TRUE@              -I $(top_srcdir)/support \
+@ENABLED_BENCHMARK_CNT_TRUE@              -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@ \
+@ENABLED_BENCHMARK_CNT_TRUE@              -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ \
+@ENABLED_BENCHMARK_CNT_TRUE@              @CPPFLAGS@
+
 @ENABLED_BENCHMARK_CNT_TRUE@AM_CFLAGS = @CFLAGS@
 @ENABLED_BENCHMARK_CNT_TRUE@AM_LDFLAGS = @LDFLAGS@
 all: all-am

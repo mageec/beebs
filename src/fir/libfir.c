@@ -1,3 +1,4 @@
+
 /* BEEBS fir benchmark
 
    MDH WCET BENCHMARK SUITE.
@@ -266,6 +267,13 @@ void fir_filter_int(const long* in,long* out,long in_len,
       in_ptr++;
     }
   }
+}
+
+
+
+void
+initialise_benchmark (void)
+{
 }
 
 

@@ -25,10 +25,16 @@ if ENABLED_BENCHMARK_CUBIC
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = cubic
+bin_PROGRAMS        = cubic
+noinst_LTLIBRARIES  = libcubic.la
 
-cubic_SOURCES = cubic.c basicmath_small.c pi.h snipmath.h sniptype.h
-cubic_LDADD   = $(top_srcdir)/support/libsupport.la
+cubic_SOURCES       =
+
+libcubic_la_SOURCES = libcubic.c basicmath_small.c pi.h snipmath.h sniptype.h
+
+cubic_LDADD         = $(top_builddir)/support/libmain.la \
+                      libcubic.la \
+                      $(top_builddir)/support/libsupport.la
 cubic_LDFLAGS = ${AM_LDFLAGS} "-lm"
 
 endif

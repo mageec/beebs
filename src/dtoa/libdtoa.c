@@ -1,3 +1,4 @@
+
 /* BEEBS dtoa benchmark
 
     ****************************************************************
@@ -4238,6 +4239,13 @@ dtoa (double dd, int mode, int ndigits, int *decpt, int *sign, char **rve)
 #endif
 
 char *nums[] = {"238434.3459823", "23955.0", "0.01000000023123", "1.0", "5555.5555555555555555"};
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark()
 {

@@ -124,6 +124,6 @@ do
     echo "   esac],"
     echo "  [benchmark_${bm_var}=true])"
     echo "AM_CONDITIONAL([ENABLED_BENCHMARK_${bm_uc}],"
-    echo "               [test x$benchmark_${bm_var} = xtrue])"
+    echo "               [test x\$benchmark_${bm_var} = xtrue])"
     echo
 done

@@ -1,3 +1,4 @@
+
 /* BEEBS nettle-arcfour benchmark
 
    Copyright (C) 2001, 2004 Niels Möller
@@ -85,6 +86,13 @@ arcfour_crypt(struct arcfour_ctx *ctx,
       *dst++ = *src++ ^ ctx->S[ (si + sj) & 0xff ];
     }
   ctx->i = i; ctx->j = j;
+}
+
+
+
+void
+initialise_benchmark (void)
+{
 }
 
 

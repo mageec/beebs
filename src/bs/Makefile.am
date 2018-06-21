@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_BS
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS=bs
+bin_PROGRAMS       = bs
+noinst_LTLIBRARIES = libbs.la
 
-bs_SOURCES = bs.c
-bs_LDADD   = $(top_srcdir)/support/libsupport.la
+bs_SOURCES         =
+
+libbs_la_SOURCES = libbs.c
+
+bs_LDADD           = $(top_builddir)/support/libmain.la \
+                     libbs.la \
+                     $(top_builddir)/support/libsupport.la
 
 endif

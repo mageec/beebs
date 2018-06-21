@@ -25,10 +25,16 @@ if ENABLED_BENCHMARK_CTL_VECTOR
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = ctl-vector
+bin_PROGRAMS             = ctl-vector
+noinst_LTLIBRARIES       = libctl-vector.la
 
-ctl_vector_SOURCES  = ctl.c ctl.h vector.h
-ctl_vector_LDADD    = $(top_srcdir)/support/libsupport.la
+ctl_vector_SOURCES       =
+
+libctl_vector_la_SOURCES  = ctl.c ctl.h vector.h
+
+ctl_vector_LDADD         = $(top_builddir)/support/libmain.la \
+                           libctl-vector.la \
+                           $(top_builddir)/support/libsupport.la
 ctl_vector_CPPFLAGS = -DCTL_VECTOR ${AM_CFLAGS}
 
 endif

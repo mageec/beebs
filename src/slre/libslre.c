@@ -1,3 +1,4 @@
+
 /* BEEBS slre benchmark
 
    Copyright (c) 2004-2013 Sergey Lyubka <valenok@gmail.com>
@@ -454,6 +455,13 @@ int slre_match(const char *regexp, const char *s, int s_len,
 
 char text[] = "abbbababaabccababcacbcbcbabbabcbabcabcbbcbbac";
 char *regexes[] = {"(ab)+", "(b.+)+", "a[ab]*", "([ab^c][ab^c])+"};
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark()
 {

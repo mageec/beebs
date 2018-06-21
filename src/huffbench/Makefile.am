@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_HUFFBENCH
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = huffbench
-huffbench_SOURCES = huffbench.c
-huffbench_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS            = huffbench
+noinst_LTLIBRARIES      = libhuffbench.la
+
+huffbench_SOURCES       =
+libhuffbench_la_SOURCES = libhuffbench.c
+
+huffbench_LDADD         = $(top_builddir)/support/libmain.la \
+                          libhuffbench.la \
+                          $(top_builddir)/support/libsupport.la
 
 
 

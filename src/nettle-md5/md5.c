@@ -1,3 +1,4 @@
+
 /* BEEBS nettle-md5 benchmark
 
    Copyright (C) 2001, 2005 Niels Möller
@@ -158,6 +159,13 @@ uint32_t digest[_MD5_DIGEST_LENGTH] =
   0x98badcfe,
   0x10325476,
 };
+
+
+void
+initialise_benchmark (void)
+{
+}
+
 
 int
 benchmark (void)

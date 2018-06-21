@@ -1,3 +1,4 @@
+
 /* BEEBS edn benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -262,6 +263,13 @@ static short c;
 static long int d;
 static int e;
 static long int output[200];
+
+
+void
+initialise_benchmark (void)
+{
+}
+
 
 int
 benchmark(void)

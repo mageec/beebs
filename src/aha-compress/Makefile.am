@@ -23,9 +23,15 @@ if ENABLED_BENCHMARK_AHA_COMPRESS
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = aha-compress
+bin_PROGRAMS               = aha-compress
+noinst_LTLIBRARIES         = libaha-compress.la
 
-aha_compress_SOURCES = compress_test.c
-aha_compress_LDADD   = $(top_srcdir)/support/libsupport.la
+aha_compress_SOURCES       =
+
+libaha_compress_la_SOURCES = compress_test.c
+
+aha_compress_LDADD         = $(top_builddir)/support/libmain.la \
+                             libaha-compress.la \
+                             $(top_builddir)/support/libsupport.la
 
 endif

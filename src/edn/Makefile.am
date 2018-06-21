@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_EDN
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = edn
-edn_SOURCES = edn.c
-edn_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS       = edn
+noinst_LTLIBRARIES = libedn.la
+
+edn_SOURCES        =
+libedn_la_SOURCES = libedn.c
+
+edn_LDADD          = $(top_builddir)/support/libmain.la \
+                     libedn.la \
+                     $(top_builddir)/support/libsupport.la
 
 
 

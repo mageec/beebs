@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_MINVER
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = minver
-minver_SOURCES = minver.c
-minver_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS         = minver
+noinst_LTLIBRARIES   = libminver.la
+
+minver_SOURCES       =
+libminver_la_SOURCES = libminver.c
+
+minver_LDADD         = $(top_builddir)/support/libmain.la \
+                       libminver.la \
+                       $(top_builddir)/support/libsupport.la
 
 
 

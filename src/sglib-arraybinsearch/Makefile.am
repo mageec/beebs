@@ -25,8 +25,11 @@ if ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = sglib-arraybinsearch
-sglib_arraybinsearch_SOURCES=arraybinsearch.c sglib.h
+bin_PROGRAMS                       = sglib-arraybinsearch
+noinst_LTLIBRARIES                 = libsglib-arraybinsearch.la
+
+sglib_arraybinsearch_SOURCES       =
+libsglib_arraybinsearch_la_SOURCES=arraybinsearch.c sglib.h
 
 
 sglib_arraybinsearch_SOURCES += ${platform_src}

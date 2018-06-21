@@ -1,3 +1,4 @@
+
 /* BEEBS frac benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -116,6 +117,13 @@ six:
 }
 
 double nums[10] = {0.0, 1.12312, 10000.2, 1200, 3.1415, 3.1415926, 9.9999999, 12.1212, 0.0000012, 1.000001};
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark()
 {

@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_SGLIB_QUEUE
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = sglib-queue
-sglib_queue_SOURCES = queue.c sglib.h
-sglib_queue_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS              = sglib-queue
+noinst_LTLIBRARIES        = libsglib-queue.la
+
+sglib_queue_SOURCES       =
+libsglib_queue_la_SOURCES = queue.c sglib.h
+
+sglib_queue_LDADD         = $(top_builddir)/support/libmain.la \
+                            libsglib-queue.la \
+                            $(top_builddir)/support/libsupport.la
 
 
 

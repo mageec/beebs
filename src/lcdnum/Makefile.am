@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_LCDNUM
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = lcdnum
-lcdnum_SOURCES = lcdnum.c
-lcdnum_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS         = lcdnum
+noinst_LTLIBRARIES   = liblcdnum.la
+
+lcdnum_SOURCES       =
+liblcdnum_la_SOURCES = liblcdnum.c
+
+lcdnum_LDADD         = $(top_builddir)/support/libmain.la \
+                       liblcdnum.la \
+                       $(top_builddir)/support/libsupport.la
 
 
 

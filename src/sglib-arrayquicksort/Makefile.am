@@ -25,9 +25,12 @@ if ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = sglib-arrayquicksort
+bin_PROGRAMS                       = sglib-arrayquicksort
+noinst_LTLIBRARIES                 = libsglib-arrayquicksort.la
 
-sglib_arrayquicksort_SOURCES  = arraysort.c sglib.h
+sglib_arrayquicksort_SOURCES       =
+
+libsglib_arrayquicksort_la_SOURCES  = arraysort.c sglib.h
 sglib_arrayquicksort_CPPFLAGS = -DQUICK_SORT ${AM_CPPFLAGS}
 
 endif

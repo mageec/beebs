@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_NEWLIB_EXP
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = newlib-exp
-newlib_exp_SOURCES = ef_exp.c
-newlib_exp_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS             = newlib-exp
+noinst_LTLIBRARIES       = libnewlib-exp.la
+
+newlib_exp_SOURCES       =
+libnewlib_exp_la_SOURCES = ef_exp.c
+
+newlib_exp_LDADD         = $(top_builddir)/support/libmain.la \
+                           libnewlib-exp.la \
+                           $(top_builddir)/support/libsupport.la
 
 
 

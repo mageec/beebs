@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_NEWLIB_SQRT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = newlib-sqrt
-newlib_sqrt_SOURCES = ef_sqrt.c
-newlib_sqrt_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS              = newlib-sqrt
+noinst_LTLIBRARIES        = libnewlib-sqrt.la
+
+newlib_sqrt_SOURCES       =
+libnewlib_sqrt_la_SOURCES = ef_sqrt.c
+
+newlib_sqrt_LDADD         = $(top_builddir)/support/libmain.la \
+                            libnewlib-sqrt.la \
+                            $(top_builddir)/support/libsupport.la
 
 
 

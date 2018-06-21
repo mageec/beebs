@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_WIKISORT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = wikisort
-wikisort_SOURCES = wikisort.c
-wikisort_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS           = wikisort
+noinst_LTLIBRARIES     = libwikisort.la
+
+wikisort_SOURCES       =
+libwikisort_la_SOURCES = libwikisort.c
+
+wikisort_LDADD         = $(top_builddir)/support/libmain.la \
+                         libwikisort.la \
+                         $(top_builddir)/support/libsupport.la
 
 
 

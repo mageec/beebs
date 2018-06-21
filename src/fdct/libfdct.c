@@ -1,3 +1,4 @@
+
 /* Forward discrete cosine transform
 
    Copyright (C) 2014 Embecosm Limited
@@ -263,6 +264,13 @@ void fdct(short int *blk, int lx)
       block++;
    }
 }
+
+
+void
+initialise_benchmark (void)
+{
+}
+
 
 #include <stdio.h>
 int benchmark()

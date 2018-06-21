@@ -1,3 +1,4 @@
+
 /* BEEBS ludcmp benchmark
 
    MDH WCET BENCHMARK SUITE.
@@ -149,6 +150,13 @@ ludcmp( /* int nmax, */ int n, float eps)
 /* Write to CHKERR from BENCHMARK to ensure that the core call within
    BENCHMARK is not optimised away.  */
 volatile int chkerr;
+
+
+void
+initialise_benchmark (void)
+{
+}
+
 
 int
 benchmark (void)

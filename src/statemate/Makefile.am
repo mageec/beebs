@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_STATEMATE
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = statemate
-statemate_SOURCES = statemate.c
-statemate_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS            = statemate
+noinst_LTLIBRARIES      = libstatemate.la
+
+statemate_SOURCES       =
+libstatemate_la_SOURCES = libstatemate.c
+
+statemate_LDADD         = $(top_builddir)/support/libmain.la \
+                          libstatemate.la \
+                          $(top_builddir)/support/libsupport.la
 
 
 

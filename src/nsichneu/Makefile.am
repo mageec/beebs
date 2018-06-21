@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_NSICHNEU
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = nsichneu
-nsichneu_SOURCES = nsichneu.c
-nsichneu_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS           = nsichneu
+noinst_LTLIBRARIES     = libnsichneu.la
+
+nsichneu_SOURCES       =
+libnsichneu_la_SOURCES = libnsichneu.c
+
+nsichneu_LDADD         = $(top_builddir)/support/libmain.la \
+                         libnsichneu.la \
+                         $(top_builddir)/support/libsupport.la
 
 
 

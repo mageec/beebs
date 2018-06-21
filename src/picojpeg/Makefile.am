@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_PICOJPEG
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = picojpeg
-picojpeg_SOURCES = picojpeg.c picojpeg_test.c picojpeg.h
-picojpeg_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS           = picojpeg
+noinst_LTLIBRARIES     = libpicojpeg.la
+
+picojpeg_SOURCES       =
+libpicojpeg_la_SOURCES = libpicojpeg.c picojpeg_test.c picojpeg.h
+
+picojpeg_LDADD         = $(top_builddir)/support/libmain.la \
+                         libpicojpeg.la \
+                         $(top_builddir)/support/libsupport.la
 
 
 

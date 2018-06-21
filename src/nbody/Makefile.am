@@ -25,8 +25,11 @@ if ENABLED_BENCHMARK_NBODY
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = nbody
-nbody_SOURCES=nbody.c
+bin_PROGRAMS        = nbody
+noinst_LTLIBRARIES  = libnbody.la
+
+nbody_SOURCES       =
+libnbody_la_SOURCES=nbody.c
 
 
 AM_LDFLAGS += "-lm"
