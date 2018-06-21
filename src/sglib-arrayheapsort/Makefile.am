@@ -25,9 +25,12 @@ if ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = sglib-arrayheapsort
+bin_PROGRAMS                      = sglib-arrayheapsort
+noinst_LTLIBRARIES                = libsglib-arrayheapsort.la
 
-sglib_arrayheapsort_SOURCES  = arraysort.c sglib.h
+sglib_arrayheapsort_SOURCES       =
+
+libsglib_arrayheapsort_la_SOURCES  = arraysort.c sglib.h
 sglib_arrayheapsort_CPPFLAGS = -DHEAP_SORT ${AM_CPPFLAGS}
 
 endif

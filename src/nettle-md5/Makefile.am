@@ -25,8 +25,11 @@ if ENABLED_BENCHMARK_NETTLE_MD5
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = nettle-md5
-nettle_md5_SOURCES=md5.c
+bin_PROGRAMS             = nettle-md5
+noinst_LTLIBRARIES       = libnettle-md5.la
+
+nettle_md5_SOURCES       =
+libnettle_md5_la_SOURCES=md5.c
 
 
 nettle_md5_SOURCES += ${platform_src}

@@ -25,11 +25,17 @@ if ENABLED_BENCHMARK_TRIO_SSCANF
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = trio-sscanf
+bin_PROGRAMS              = trio-sscanf
+noinst_LTLIBRARIES        = libtrio-sscanf.la
 
-trio_sscanf_SOURCES  = trio.c trio.h trio_test.c triostr.c triostr.h \
+trio_sscanf_SOURCES       =
+
+libtrio_sscanf_la_SOURCES  = trio.c trio.h trio_test.c triostr.c triostr.h \
                        triodef.h triop.h
-trio_sscanf_LDADD    = $(top_srcdir)/support/libsupport.la
+
+trio_sscanf_LDADD         = $(top_builddir)/support/libmain.la \
+                            libtrio-sscanf.la \
+                            $(top_builddir)/support/libsupport.la
 trio_sscanf_CPPFLAGS = -DTRIO_SSCANF -DTRIO_EXTENSION=0 -DTRIO_DEPRECATED=0 \
                        -DTRIO_MICROSOFT=0 -DTRIO_ERRORS=0 \
                        -DTRIO_FEATURE_FLOAT=0 -DTRIO_FEATURE_FILE=0 \

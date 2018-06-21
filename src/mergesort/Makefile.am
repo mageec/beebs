@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_MERGESORT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = mergesort
-mergesort_SOURCES = mergesort.c
-mergesort_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS            = mergesort
+noinst_LTLIBRARIES      = libmergesort.la
+
+mergesort_SOURCES       =
+libmergesort_la_SOURCES = libmergesort.c
+
+mergesort_LDADD         = $(top_builddir)/support/libmain.la \
+                          libmergesort.la \
+                          $(top_builddir)/support/libsupport.la
 
 
 

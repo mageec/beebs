@@ -1,3 +1,4 @@
+
 /* BEEBS fac benchmark
 
    MDH WCET BENCHMARK SUITE
@@ -34,6 +35,13 @@ int fac (int n)
   else
      return (n * fac (n-1));
 }
+
+
+void
+initialise_benchmark (void)
+{
+}
+
 
 int
 benchmark (void)

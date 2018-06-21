@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_FDCT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = fdct
-fdct_SOURCES = fdct.c
-fdct_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS       = fdct
+noinst_LTLIBRARIES = libfdct.la
+
+fdct_SOURCES       =
+libfdct_la_SOURCES = libfdct.c
+
+fdct_LDADD         = $(top_builddir)/support/libmain.la \
+                     libfdct.la \
+                     $(top_builddir)/support/libsupport.la
 
 
 

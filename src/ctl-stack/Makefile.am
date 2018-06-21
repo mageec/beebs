@@ -25,10 +25,16 @@ if ENABLED_BENCHMARK_CTL_STACK
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = ctl-stack
+bin_PROGRAMS            = ctl-stack
+noinst_LTLIBRARIES      = libctl-stack.la
 
-ctl_stack_SOURCES  = ctl.c ctl.h stack.h
-ctl_stack_LDADD    = $(top_srcdir)/support/libsupport.la
+ctl_stack_SOURCES       =
+
+libctl_stack_la_SOURCES  = ctl.c ctl.h stack.h
+
+ctl_stack_LDADD         = $(top_builddir)/support/libmain.la \
+                          libctl-stack.la \
+                          $(top_builddir)/support/libsupport.la
 ctl_stack_CPPFLAGS = -DCTL_STACK ${AM_CPPFLAGS}
 
 endif

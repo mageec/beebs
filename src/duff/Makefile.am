@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_DUFF
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = duff
-duff_SOURCES = duff.c
-duff_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS       = duff
+noinst_LTLIBRARIES = libduff.la
+
+duff_SOURCES       =
+libduff_la_SOURCES = libduff.c
+
+duff_LDADD         = $(top_builddir)/support/libmain.la \
+                     libduff.la \
+                     $(top_builddir)/support/libsupport.la
 
 
 

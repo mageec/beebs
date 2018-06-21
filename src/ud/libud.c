@@ -1,3 +1,4 @@
+
 /* BEEBS ud benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -117,6 +118,13 @@ int ludcmp(int nmax, int n);
 
 /* Write to CHKERR from BENCHMARK to ensure calls are not optimised away.  */
 volatile int chkerr = 0;
+
+
+
+void
+initialise_benchmark (void)
+{
+}
 
 
 int

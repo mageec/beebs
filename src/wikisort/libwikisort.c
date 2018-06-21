@@ -1,3 +1,4 @@
+
 /* BEEBS wikisort benchmark
 
    Originally from https://github.com/BonzaiThePenguin/WikiSort
@@ -685,6 +686,13 @@ long TestingMostlyEqual(long index, long total) {
 
 const long max_size = 400;
 Test array1[400];
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark() {
 	long total, index, test_case;

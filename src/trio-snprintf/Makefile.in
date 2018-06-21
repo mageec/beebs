@@ -62,6 +62,7 @@
 # of the repeat factor. If grep doesn't find the program, then we specify
 # 0 as the default. This is the default if a calibration file is not found
 
+
 VPATH = @srcdir@
 am__is_gnu_make = { \
   if test -z '$(MAKELEVEL)'; then \
@@ -136,6 +137,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
+target_triplet = @target@
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@bin_PROGRAMS =  \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	trio-snprintf$(EXEEXT)
 subdir = src/trio-snprintf
@@ -151,19 +153,26 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-am__installdirs = "$(DESTDIR)$(bindir)"
-PROGRAMS = $(bin_PROGRAMS)
-am__trio_snprintf_SOURCES_DIST = trio.c trio.h trio_test.c triostr.c \
-	triostr.h triodef.h triop.h
-@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@am_trio_snprintf_OBJECTS = trio_snprintf-trio.$(OBJEXT) \
-@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	trio_snprintf-trio_test.$(OBJEXT) \
-@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	trio_snprintf-triostr.$(OBJEXT)
-trio_snprintf_OBJECTS = $(am_trio_snprintf_OBJECTS)
-@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@trio_snprintf_DEPENDENCIES = $(top_srcdir)/support/libsupport.la
+LTLIBRARIES = $(noinst_LTLIBRARIES)
+libtrio_snprintf_la_LIBADD =
+am__libtrio_snprintf_la_SOURCES_DIST = trio.c trio.h trio_test.c \
+	triostr.c triostr.h triodef.h triop.h
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@am_libtrio_snprintf_la_OBJECTS =  \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	trio.lo trio_test.lo \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	triostr.lo
+libtrio_snprintf_la_OBJECTS = $(am_libtrio_snprintf_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@am_libtrio_snprintf_la_rpath =
+am__installdirs = "$(DESTDIR)$(bindir)"
+PROGRAMS = $(bin_PROGRAMS)
+am_trio_snprintf_OBJECTS =
+trio_snprintf_OBJECTS = $(am_trio_snprintf_OBJECTS)
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@trio_snprintf_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	libtrio-snprintf.la \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	$(top_builddir)/support/libsupport.la
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -198,8 +207,9 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(trio_snprintf_SOURCES)
-DIST_SOURCES = $(am__trio_snprintf_SOURCES_DIST)
+SOURCES = $(libtrio_snprintf_la_SOURCES) $(trio_snprintf_SOURCES)
+DIST_SOURCES = $(am__libtrio_snprintf_la_SOURCES_DIST) \
+	$(trio_snprintf_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -346,7 +356,11 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 srcdir = @srcdir@
 sysconfdir = @sysconfdir@
+target = @target@
 target_alias = @target_alias@
+target_cpu = @target_cpu@
+target_os = @target_os@
+target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
@@ -355,13 +369,23 @@ top_srcdir = @top_srcdir@
 @CALIBRATION_TRUE@@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	        $(top_srcdir)/config/@ARCH@/boards/@BOARD@/calibration \
 @CALIBRATION_TRUE@@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@		|| echo "0 0") | cut -d " " -f 2
 
-@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@AM_CPPFLAGS = "-DCALIB_SCALE=$(shell $(calib))" @CPPFLAGS@
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@AM_CPPFLAGS = "-DCALIB_SCALE=$(shell $(calib))" \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@              -I $(top_srcdir)/support \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@              -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@ \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@              -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@              @CPPFLAGS@
+
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@AM_CFLAGS = @CFLAGS@
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@AM_LDFLAGS = @LDFLAGS@
-@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@trio_snprintf_SOURCES = trio.c trio.h trio_test.c triostr.c triostr.h \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@noinst_LTLIBRARIES = libtrio-snprintf.la
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@trio_snprintf_SOURCES = 
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@libtrio_snprintf_la_SOURCES = trio.c trio.h trio_test.c triostr.c triostr.h \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                         triodef.h triop.h
 
-@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@trio_snprintf_LDADD = $(top_srcdir)/support/libsupport.la
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@trio_snprintf_LDADD = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                              libtrio-snprintf.la \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                              $(top_builddir)/support/libsupport.la
+
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@trio_snprintf_CPPFLAGS = -DTRIO_EXTENSION=0 -DTRIO_DEPRECATED=0 \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                         -DTRIO_MICROSOFT=0 -DTRIO_ERRORS=0     \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                         -DTRIO_FEATURE_FLOAT=0 -DTRIO_SNPRINTF \
@@ -401,6 +425,20 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
+
+clean-noinstLTLIBRARIES:
+	-test -z "$(noinst_LTLIBRARIES)" || rm -f $(noinst_LTLIBRARIES)
+	@list='$(noinst_LTLIBRARIES)'; \
+	locs=`for p in $$list; do echo $$p; done | \
+	      sed 's|^[^/]*$$|.|; s|/[^/]*$$||; s|$$|/so_locations|' | \
+	      sort -u`; \
+	test -z "$$locs" || { \
+	  echo rm -f $${locs}; \
+	  rm -f $${locs}; \
+	}
+
+libtrio-snprintf.la: $(libtrio_snprintf_la_OBJECTS) $(libtrio_snprintf_la_DEPENDENCIES) $(EXTRA_libtrio_snprintf_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(LINK) $(am_libtrio_snprintf_la_rpath) $(libtrio_snprintf_la_OBJECTS) $(libtrio_snprintf_la_LIBADD) $(LIBS)
 install-binPROGRAMS: $(bin_PROGRAMS)
 	@$(NORMAL_INSTALL)
 	@list='$(bin_PROGRAMS)'; test -n "$(bindir)" || list=; \
@@ -461,9 +499,9 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/trio_snprintf-trio.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/trio_snprintf-trio_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/trio_snprintf-triostr.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/trio.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/trio_test.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/triostr.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -485,48 +523,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
-
-trio_snprintf-trio.o: trio.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(trio_snprintf_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT trio_snprintf-trio.o -MD -MP -MF $(DEPDIR)/trio_snprintf-trio.Tpo -c -o trio_snprintf-trio.o `test -f 'trio.c' || echo '$(srcdir)/'`trio.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/trio_snprintf-trio.Tpo $(DEPDIR)/trio_snprintf-trio.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='trio.c' object='trio_snprintf-trio.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(trio_snprintf_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o trio_snprintf-trio.o `test -f 'trio.c' || echo '$(srcdir)/'`trio.c
-
-trio_snprintf-trio.obj: trio.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(trio_snprintf_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT trio_snprintf-trio.obj -MD -MP -MF $(DEPDIR)/trio_snprintf-trio.Tpo -c -o trio_snprintf-trio.obj `if test -f 'trio.c'; then $(CYGPATH_W) 'trio.c'; else $(CYGPATH_W) '$(srcdir)/trio.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/trio_snprintf-trio.Tpo $(DEPDIR)/trio_snprintf-trio.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='trio.c' object='trio_snprintf-trio.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(trio_snprintf_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o trio_snprintf-trio.obj `if test -f 'trio.c'; then $(CYGPATH_W) 'trio.c'; else $(CYGPATH_W) '$(srcdir)/trio.c'; fi`
-
-trio_snprintf-trio_test.o: trio_test.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(trio_snprintf_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT trio_snprintf-trio_test.o -MD -MP -MF $(DEPDIR)/trio_snprintf-trio_test.Tpo -c -o trio_snprintf-trio_test.o `test -f 'trio_test.c' || echo '$(srcdir)/'`trio_test.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/trio_snprintf-trio_test.Tpo $(DEPDIR)/trio_snprintf-trio_test.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='trio_test.c' object='trio_snprintf-trio_test.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(trio_snprintf_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o trio_snprintf-trio_test.o `test -f 'trio_test.c' || echo '$(srcdir)/'`trio_test.c
-
-trio_snprintf-trio_test.obj: trio_test.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(trio_snprintf_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT trio_snprintf-trio_test.obj -MD -MP -MF $(DEPDIR)/trio_snprintf-trio_test.Tpo -c -o trio_snprintf-trio_test.obj `if test -f 'trio_test.c'; then $(CYGPATH_W) 'trio_test.c'; else $(CYGPATH_W) '$(srcdir)/trio_test.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/trio_snprintf-trio_test.Tpo $(DEPDIR)/trio_snprintf-trio_test.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='trio_test.c' object='trio_snprintf-trio_test.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(trio_snprintf_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o trio_snprintf-trio_test.obj `if test -f 'trio_test.c'; then $(CYGPATH_W) 'trio_test.c'; else $(CYGPATH_W) '$(srcdir)/trio_test.c'; fi`
-
-trio_snprintf-triostr.o: triostr.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(trio_snprintf_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT trio_snprintf-triostr.o -MD -MP -MF $(DEPDIR)/trio_snprintf-triostr.Tpo -c -o trio_snprintf-triostr.o `test -f 'triostr.c' || echo '$(srcdir)/'`triostr.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/trio_snprintf-triostr.Tpo $(DEPDIR)/trio_snprintf-triostr.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='triostr.c' object='trio_snprintf-triostr.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(trio_snprintf_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o trio_snprintf-triostr.o `test -f 'triostr.c' || echo '$(srcdir)/'`triostr.c
-
-trio_snprintf-triostr.obj: triostr.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(trio_snprintf_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT trio_snprintf-triostr.obj -MD -MP -MF $(DEPDIR)/trio_snprintf-triostr.Tpo -c -o trio_snprintf-triostr.obj `if test -f 'triostr.c'; then $(CYGPATH_W) 'triostr.c'; else $(CYGPATH_W) '$(srcdir)/triostr.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/trio_snprintf-triostr.Tpo $(DEPDIR)/trio_snprintf-triostr.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='triostr.c' object='trio_snprintf-triostr.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(trio_snprintf_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o trio_snprintf-triostr.obj `if test -f 'triostr.c'; then $(CYGPATH_W) 'triostr.c'; else $(CYGPATH_W) '$(srcdir)/triostr.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -618,7 +614,7 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(PROGRAMS)
+all-am: Makefile $(LTLIBRARIES) $(PROGRAMS)
 installdirs:
 	for dir in "$(DESTDIR)$(bindir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
@@ -655,7 +651,8 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-am
 
-clean-am: clean-binPROGRAMS clean-generic clean-libtool mostlyclean-am
+clean-am: clean-binPROGRAMS clean-generic clean-libtool \
+	clean-noinstLTLIBRARIES mostlyclean-am
 
 distclean: distclean-am
 	-rm -rf ./$(DEPDIR)
@@ -726,15 +723,16 @@ uninstall-am: uninstall-binPROGRAMS
 .MAKE: install-am install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am check check-am clean \
-	clean-binPROGRAMS clean-generic clean-libtool cscopelist-am \
-	ctags ctags-am distclean distclean-compile distclean-generic \
-	distclean-libtool distclean-tags distdir dvi dvi-am html \
-	html-am info info-am install install-am install-binPROGRAMS \
-	install-data install-data-am install-dvi install-dvi-am \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-man install-pdf \
-	install-pdf-am install-ps install-ps-am install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
+	clean-binPROGRAMS clean-generic clean-libtool \
+	clean-noinstLTLIBRARIES cscopelist-am ctags ctags-am distclean \
+	distclean-compile distclean-generic distclean-libtool \
+	distclean-tags distdir dvi dvi-am html html-am info info-am \
+	install install-am install-binPROGRAMS install-data \
+	install-data-am install-dvi install-dvi-am install-exec \
+	install-exec-am install-html install-html-am install-info \
+	install-info-am install-man install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-compile \
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	tags tags-am uninstall uninstall-am uninstall-binPROGRAMS

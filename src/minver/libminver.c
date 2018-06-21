@@ -1,3 +1,4 @@
+
 /* BEEBS minver benchmark
 
    *************************************************************************
@@ -209,6 +210,13 @@ int minver(int row, int col, float eps)
 	data_sink = s;
 
 	return(0);
+}
+
+
+
+void
+initialise_benchmark (void)
+{
 }
 
 

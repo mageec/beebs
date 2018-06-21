@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_LUDCMP
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = ludcmp
-ludcmp_SOURCES = ludcmp.c
-ludcmp_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS         = ludcmp
+noinst_LTLIBRARIES   = libludcmp.la
+
+ludcmp_SOURCES       =
+libludcmp_la_SOURCES = libludcmp.c
+
+ludcmp_LDADD         = $(top_builddir)/support/libmain.la \
+                       libludcmp.la \
+                       $(top_builddir)/support/libsupport.la
 
 
 

@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_FRAC
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = frac
-frac_SOURCES = frac.c
-frac_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS       = frac
+noinst_LTLIBRARIES = libfrac.la
+
+frac_SOURCES       =
+libfrac_la_SOURCES = libfrac.c
+
+frac_LDADD         = $(top_builddir)/support/libmain.la \
+                     libfrac.la \
+                     $(top_builddir)/support/libsupport.la
 
 
 

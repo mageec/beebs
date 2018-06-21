@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_STRSTR
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = strstr
-strstr_SOURCES = strstr.c
-strstr_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS         = strstr
+noinst_LTLIBRARIES   = libstrstr.la
+
+strstr_SOURCES       =
+libstrstr_la_SOURCES = libstrstr.c
+
+strstr_LDADD         = $(top_builddir)/support/libmain.la \
+                       libstrstr.la \
+                       $(top_builddir)/support/libsupport.la
 
 
 

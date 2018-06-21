@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_NS
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = ns
-ns_SOURCES = ns.c
-ns_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS       = ns
+noinst_LTLIBRARIES = libns.la
+
+ns_SOURCES         =
+libns_la_SOURCES = libns.c
+
+ns_LDADD           = $(top_builddir)/support/libmain.la \
+                     libns.la \
+                     $(top_builddir)/support/libsupport.la
 
 
 

@@ -1,3 +1,4 @@
+
 /* BEEBS fibcall benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -86,6 +87,13 @@ int fib(int n)
     ans = Fnew;
   return ans;
 }
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark()
 {

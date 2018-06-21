@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_LEVENSHTEIN
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = levenshtein
-levenshtein_SOURCES = levenshtein.c
-levenshtein_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS              = levenshtein
+noinst_LTLIBRARIES        = liblevenshtein.la
+
+levenshtein_SOURCES       =
+liblevenshtein_la_SOURCES = liblevenshtein.c
+
+levenshtein_LDADD         = $(top_builddir)/support/libmain.la \
+                            liblevenshtein.la \
+                            $(top_builddir)/support/libsupport.la
 
 
 

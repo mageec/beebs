@@ -25,8 +25,11 @@ if ENABLED_BENCHMARK_MINIZ
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = miniz
-miniz_SOURCES=miniz.c miniz_b.c miniz.h
+bin_PROGRAMS        = miniz
+noinst_LTLIBRARIES  = libminiz.la
+
+miniz_SOURCES       =
+libminiz_la_SOURCES=miniz.c miniz_b.c miniz.h
 
 
 AM_CFLAGS+=-fno-strict-aliasing

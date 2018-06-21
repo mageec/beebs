@@ -37,9 +37,15 @@ if ENABLED_BENCHMARK_TEMPLATE
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = template
-template_SOURCES = template.c
-template_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS           = template
+noinst_LTLIBRARIES     = libtemplate.la
+
+template_SOURCES       =
+libtemplate_la_SOURCES = libtemplate.c
+
+template_LDADD         = $(top_builddir)/support/libmain.la \
+                         libtemplate.la \
+                         $(top_builddir)/support/libsupport.la
 
 
 

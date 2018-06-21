@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_SQRT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = sqrt
-sqrt_SOURCES = sqrt.c
-sqrt_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS       = sqrt
+noinst_LTLIBRARIES = libsqrt.la
+
+sqrt_SOURCES       =
+libsqrt_la_SOURCES = libsqrt.c
+
+sqrt_LDADD         = $(top_builddir)/support/libmain.la \
+                     libsqrt.la \
+                     $(top_builddir)/support/libsupport.la
 
 
 

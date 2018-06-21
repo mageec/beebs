@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_INSERTSORT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = insertsort
-insertsort_SOURCES = insertsort.c
-insertsort_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS             = insertsort
+noinst_LTLIBRARIES       = libinsertsort.la
+
+insertsort_SOURCES       =
+libinsertsort_la_SOURCES = libinsertsort.c
+
+insertsort_LDADD         = $(top_builddir)/support/libmain.la \
+                           libinsertsort.la \
+                           $(top_builddir)/support/libsupport.la
 
 
 

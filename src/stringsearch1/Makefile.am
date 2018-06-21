@@ -25,8 +25,11 @@ if ENABLED_BENCHMARK_STRINGSEARCH1
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = stringsearch1
-stringsearch1_SOURCES=stringsearch1.c fast.fwd.inc.c fast.rev.d12.c
+bin_PROGRAMS                = stringsearch1
+noinst_LTLIBRARIES          = libstringsearch1.la
+
+stringsearch1_SOURCES       =
+libstringsearch1_la_SOURCES=stringsearch1.c fast.fwd.inc.c fast.rev.d12.c
 
 
 stringsearch1_SOURCES += ${platform_src}

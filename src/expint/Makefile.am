@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_EXPINT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = expint
-expint_SOURCES = expint.c
-expint_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS         = expint
+noinst_LTLIBRARIES   = libexpint.la
+
+expint_SOURCES       =
+libexpint_la_SOURCES = libexpint.c
+
+expint_LDADD         = $(top_builddir)/support/libmain.la \
+                       libexpint.la \
+                       $(top_builddir)/support/libsupport.la
 
 
 

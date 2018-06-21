@@ -25,10 +25,16 @@ if ENABLED_BENCHMARK_RIJNDAEL
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = rijndael
+bin_PROGRAMS           = rijndael
+noinst_LTLIBRARIES     = librijndael.la
 
-rijndael_SOURCES = aes.c aes.h aestab.h aesxam.c
-rijndael_LDADD   = $(top_srcdir)/support/libsupport.la
+rijndael_SOURCES       =
+
+librijndael_la_SOURCES = aes.c aes.h aestab.h aesxam.c
+
+rijndael_LDADD         = $(top_builddir)/support/libmain.la \
+                         librijndael.la \
+                         $(top_builddir)/support/libsupport.la
 rijndael_CFLAGS  = -fno-strict-aliasing ${AM_CFLAGS}
 
 endif

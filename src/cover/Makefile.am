@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_COVER
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = cover
-cover_SOURCES = cover.c
-cover_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS        = cover
+noinst_LTLIBRARIES  = libcover.la
+
+cover_SOURCES       =
+libcover_la_SOURCES = libcover.c
+
+cover_LDADD         = $(top_builddir)/support/libmain.la \
+                      libcover.la \
+                      $(top_builddir)/support/libsupport.la
 
 
 

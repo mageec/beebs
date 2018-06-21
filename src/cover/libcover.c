@@ -1,3 +1,4 @@
+
 /* BEEBS cover benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -249,6 +250,13 @@ int swi10(int c)
 	}
 	return c;
 }
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark()
 {

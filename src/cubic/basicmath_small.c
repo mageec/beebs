@@ -1,3 +1,4 @@
+
 /* BEEBS cubic benchmark
 
    Contributor: James Pallister <james.pallister@bristol.ac.uk>
@@ -23,6 +24,13 @@
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 13)
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark(void)
 {

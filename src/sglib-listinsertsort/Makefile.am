@@ -30,9 +30,15 @@ if ENABLED_BENCHMARK_SGLIB_LISTINSERTSORT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = sglib-listinsertsort
-sglib_listinsertsort_SOURCES = listinsertsort.c sglib.h
-sglib_listinsertsort_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS                       = sglib-listinsertsort
+noinst_LTLIBRARIES                 = libsglib-listinsertsort.la
+
+sglib_listinsertsort_SOURCES       =
+libsglib_listinsertsort_la_SOURCES = listinsertsort.c sglib.h
+
+sglib_listinsertsort_LDADD         = $(top_builddir)/support/libmain.la \
+                                     libsglib-listinsertsort.la \
+                                     $(top_builddir)/support/libsupport.la
 
 
 

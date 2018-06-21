@@ -1,3 +1,4 @@
+
 /* BEEBS cover benchmark
 
     huffbench
@@ -438,6 +439,13 @@ void compdecomp(byte * data, size_t data_len)
     // remove work areas
     free(comp);
 }
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark()
 {

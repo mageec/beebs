@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_NEWLIB_MOD
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = newlib-mod
-newlib_mod_SOURCES = ef_mod.c
-newlib_mod_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS             = newlib-mod
+noinst_LTLIBRARIES       = libnewlib-mod.la
+
+newlib_mod_SOURCES       =
+libnewlib_mod_la_SOURCES = ef_mod.c
+
+newlib_mod_LDADD         = $(top_builddir)/support/libmain.la \
+                           libnewlib-mod.la \
+                           $(top_builddir)/support/libsupport.la
 
 
 

@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_CTL_STRING
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = ctl-string
-ctl_string_SOURCES = string.c
-ctl_string_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS             = ctl-string
+noinst_LTLIBRARIES       = libctl-string.la
+
+ctl_string_SOURCES       =
+libctl_string_la_SOURCES = string.c
+
+ctl_string_LDADD         = $(top_builddir)/support/libmain.la \
+                           libctl-string.la \
+                           $(top_builddir)/support/libsupport.la
 
 
 

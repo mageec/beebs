@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_FAC
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = fac
-fac_SOURCES = fac.c
-fac_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS       = fac
+noinst_LTLIBRARIES = libfac.la
+
+fac_SOURCES        =
+libfac_la_SOURCES = libfac.c
+
+fac_LDADD          = $(top_builddir)/support/libmain.la \
+                     libfac.la \
+                     $(top_builddir)/support/libsupport.la
 
 
 

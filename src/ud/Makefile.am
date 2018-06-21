@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_UD
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = ud
-ud_SOURCES = ud.c
-ud_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS       = ud
+noinst_LTLIBRARIES = libud.la
+
+ud_SOURCES         =
+libud_la_SOURCES = libud.c
+
+ud_LDADD           = $(top_builddir)/support/libmain.la \
+                     libud.la \
+                     $(top_builddir)/support/libsupport.la
 
 
 

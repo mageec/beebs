@@ -26,7 +26,7 @@
 ACLOCAL_AMFLAGS = -I m4
 AUTOMAKE_OPTIONS = dejagnu
 
-SUBDIRS = doc src support
+SUBDIRS = doc support src
 
 EXTRA_DIST= lib \
             beebs.test \
