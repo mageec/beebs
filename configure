@@ -885,6 +885,10 @@ am__isrc
 INSTALL_DATA
 INSTALL_SCRIPT
 INSTALL_PROGRAM
+target_os
+target_vendor
+target_cpu
+target
 host_os
 host_vendor
 host_cpu
@@ -1648,6 +1652,7 @@ Program names:
 System types:
   --build=BUILD     configure for building on BUILD [guessed]
   --host=HOST       cross-compile to build programs to run on HOST [BUILD]
+  --target=TARGET   configure for building compilers for TARGET [HOST]
 _ACEOF
 fi
 
@@ -1835,6 +1840,7 @@ Optional Packages:
   --with-sysroot[=DIR]    Search for dependent libraries within DIR (or the
                           compiler's sysroot if not specified).
   --with-board            Select the board to target
+  --with-chip             Select the chip to target
 
 Some influential environment variables:
   CC          C compiler command
@@ -2644,6 +2650,45 @@ IFS=$ac_save_IFS
 case $host_os in *\ *) host_os=`echo "$host_os" | sed 's/ /-/g'`;; esac
 
 
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking target system type" >&5
+$as_echo_n "checking target system type... " >&6; }
+if ${ac_cv_target+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  if test "x$target_alias" = x; then
+  ac_cv_target=$ac_cv_host
+else
+  ac_cv_target=`$SHELL "$ac_aux_dir/config.sub" $target_alias` ||
+    as_fn_error $? "$SHELL $ac_aux_dir/config.sub $target_alias failed" "$LINENO" 5
+fi
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_target" >&5
+$as_echo "$ac_cv_target" >&6; }
+case $ac_cv_target in
+*-*-*) ;;
+*) as_fn_error $? "invalid value of canonical target" "$LINENO" 5;;
+esac
+target=$ac_cv_target
+ac_save_IFS=$IFS; IFS='-'
+set x $ac_cv_target
+shift
+target_cpu=$1
+target_vendor=$2
+shift; shift
+# Remember, the first character of IFS is used to create $*,
+# except with old shells:
+target_os=$*
+IFS=$ac_save_IFS
+case $target_os in *\ *) target_os=`echo "$target_os" | sed 's/ /-/g'`;; esac
+
+
+# The aliases save the names the user supplied, while $host etc.
+# will get canonicalized.
+test -n "$target_alias" &&
+  test "$program_prefix$program_suffix$program_transform_name" = \
+    NONENONEs,x,x, &&
+  program_prefix=${target_alias}-
 
 am__api_version='1.15'
 
@@ -3255,7 +3300,7 @@ fi
 case $enable_silent_rules in # (((
   yes) AM_DEFAULT_VERBOSITY=0;;
    no) AM_DEFAULT_VERBOSITY=1;;
-    *) AM_DEFAULT_VERBOSITY=0;;
+    *) AM_DEFAULT_VERBOSITY=1;;
 esac
 am_make=${MAKE-make}
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether $am_make supports nested variables" >&5
@@ -12363,7 +12408,7 @@ else
   benchmark_aha_compress=true
 fi
 
- if test xaha_compress = xtrue; then
+ if test x$benchmark_aha_compress = xtrue; then
   ENABLED_BENCHMARK_AHA_COMPRESS_TRUE=
   ENABLED_BENCHMARK_AHA_COMPRESS_FALSE='#'
 else
@@ -12383,7 +12428,7 @@ else
   benchmark_aha_mont64=true
 fi
 
- if test xaha_mont64 = xtrue; then
+ if test x$benchmark_aha_mont64 = xtrue; then
   ENABLED_BENCHMARK_AHA_MONT64_TRUE=
   ENABLED_BENCHMARK_AHA_MONT64_FALSE='#'
 else
@@ -12403,7 +12448,7 @@ else
   benchmark_bs=true
 fi
 
- if test xbs = xtrue; then
+ if test x$benchmark_bs = xtrue; then
   ENABLED_BENCHMARK_BS_TRUE=
   ENABLED_BENCHMARK_BS_FALSE='#'
 else
@@ -12423,7 +12468,7 @@ else
   benchmark_bubblesort=true
 fi
 
- if test xbubblesort = xtrue; then
+ if test x$benchmark_bubblesort = xtrue; then
   ENABLED_BENCHMARK_BUBBLESORT_TRUE=
   ENABLED_BENCHMARK_BUBBLESORT_FALSE='#'
 else
@@ -12443,7 +12488,7 @@ else
   benchmark_cnt=true
 fi
 
- if test xcnt = xtrue; then
+ if test x$benchmark_cnt = xtrue; then
   ENABLED_BENCHMARK_CNT_TRUE=
   ENABLED_BENCHMARK_CNT_FALSE='#'
 else
@@ -12463,7 +12508,7 @@ else
   benchmark_compress=true
 fi
 
- if test xcompress = xtrue; then
+ if test x$benchmark_compress = xtrue; then
   ENABLED_BENCHMARK_COMPRESS_TRUE=
   ENABLED_BENCHMARK_COMPRESS_FALSE='#'
 else
@@ -12483,7 +12528,7 @@ else
   benchmark_cover=true
 fi
 
- if test xcover = xtrue; then
+ if test x$benchmark_cover = xtrue; then
   ENABLED_BENCHMARK_COVER_TRUE=
   ENABLED_BENCHMARK_COVER_FALSE='#'
 else
@@ -12503,7 +12548,7 @@ else
   benchmark_crc=true
 fi
 
- if test xcrc = xtrue; then
+ if test x$benchmark_crc = xtrue; then
   ENABLED_BENCHMARK_CRC_TRUE=
   ENABLED_BENCHMARK_CRC_FALSE='#'
 else
@@ -12523,7 +12568,7 @@ else
   benchmark_crc32=true
 fi
 
- if test xcrc32 = xtrue; then
+ if test x$benchmark_crc32 = xtrue; then
   ENABLED_BENCHMARK_CRC32_TRUE=
   ENABLED_BENCHMARK_CRC32_FALSE='#'
 else
@@ -12543,7 +12588,7 @@ else
   benchmark_ctl=true
 fi
 
- if test xctl = xtrue; then
+ if test x$benchmark_ctl = xtrue; then
   ENABLED_BENCHMARK_CTL_TRUE=
   ENABLED_BENCHMARK_CTL_FALSE='#'
 else
@@ -12563,7 +12608,7 @@ else
   benchmark_ctl_stack=true
 fi
 
- if test xctl_stack = xtrue; then
+ if test x$benchmark_ctl_stack = xtrue; then
   ENABLED_BENCHMARK_CTL_STACK_TRUE=
   ENABLED_BENCHMARK_CTL_STACK_FALSE='#'
 else
@@ -12583,7 +12628,7 @@ else
   benchmark_ctl_string=true
 fi
 
- if test xctl_string = xtrue; then
+ if test x$benchmark_ctl_string = xtrue; then
   ENABLED_BENCHMARK_CTL_STRING_TRUE=
   ENABLED_BENCHMARK_CTL_STRING_FALSE='#'
 else
@@ -12603,7 +12648,7 @@ else
   benchmark_ctl_vector=true
 fi
 
- if test xctl_vector = xtrue; then
+ if test x$benchmark_ctl_vector = xtrue; then
   ENABLED_BENCHMARK_CTL_VECTOR_TRUE=
   ENABLED_BENCHMARK_CTL_VECTOR_FALSE='#'
 else
@@ -12623,7 +12668,7 @@ else
   benchmark_cubic=true
 fi
 
- if test xcubic = xtrue; then
+ if test x$benchmark_cubic = xtrue; then
   ENABLED_BENCHMARK_CUBIC_TRUE=
   ENABLED_BENCHMARK_CUBIC_FALSE='#'
 else
@@ -12643,7 +12688,7 @@ else
   benchmark_dijkstra=true
 fi
 
- if test xdijkstra = xtrue; then
+ if test x$benchmark_dijkstra = xtrue; then
   ENABLED_BENCHMARK_DIJKSTRA_TRUE=
   ENABLED_BENCHMARK_DIJKSTRA_FALSE='#'
 else
@@ -12663,7 +12708,7 @@ else
   benchmark_dtoa=true
 fi
 
- if test xdtoa = xtrue; then
+ if test x$benchmark_dtoa = xtrue; then
   ENABLED_BENCHMARK_DTOA_TRUE=
   ENABLED_BENCHMARK_DTOA_FALSE='#'
 else
@@ -12683,7 +12728,7 @@ else
   benchmark_duff=true
 fi
 
- if test xduff = xtrue; then
+ if test x$benchmark_duff = xtrue; then
   ENABLED_BENCHMARK_DUFF_TRUE=
   ENABLED_BENCHMARK_DUFF_FALSE='#'
 else
@@ -12703,7 +12748,7 @@ else
   benchmark_edn=true
 fi
 
- if test xedn = xtrue; then
+ if test x$benchmark_edn = xtrue; then
   ENABLED_BENCHMARK_EDN_TRUE=
   ENABLED_BENCHMARK_EDN_FALSE='#'
 else
@@ -12723,7 +12768,7 @@ else
   benchmark_expint=true
 fi
 
- if test xexpint = xtrue; then
+ if test x$benchmark_expint = xtrue; then
   ENABLED_BENCHMARK_EXPINT_TRUE=
   ENABLED_BENCHMARK_EXPINT_FALSE='#'
 else
@@ -12743,7 +12788,7 @@ else
   benchmark_fac=true
 fi
 
- if test xfac = xtrue; then
+ if test x$benchmark_fac = xtrue; then
   ENABLED_BENCHMARK_FAC_TRUE=
   ENABLED_BENCHMARK_FAC_FALSE='#'
 else
@@ -12763,7 +12808,7 @@ else
   benchmark_fasta=true
 fi
 
- if test xfasta = xtrue; then
+ if test x$benchmark_fasta = xtrue; then
   ENABLED_BENCHMARK_FASTA_TRUE=
   ENABLED_BENCHMARK_FASTA_FALSE='#'
 else
@@ -12783,7 +12828,7 @@ else
   benchmark_fdct=true
 fi
 
- if test xfdct = xtrue; then
+ if test x$benchmark_fdct = xtrue; then
   ENABLED_BENCHMARK_FDCT_TRUE=
   ENABLED_BENCHMARK_FDCT_FALSE='#'
 else
@@ -12803,7 +12848,7 @@ else
   benchmark_fibcall=true
 fi
 
- if test xfibcall = xtrue; then
+ if test x$benchmark_fibcall = xtrue; then
   ENABLED_BENCHMARK_FIBCALL_TRUE=
   ENABLED_BENCHMARK_FIBCALL_FALSE='#'
 else
@@ -12823,7 +12868,7 @@ else
   benchmark_fir=true
 fi
 
- if test xfir = xtrue; then
+ if test x$benchmark_fir = xtrue; then
   ENABLED_BENCHMARK_FIR_TRUE=
   ENABLED_BENCHMARK_FIR_FALSE='#'
 else
@@ -12843,7 +12888,7 @@ else
   benchmark_frac=true
 fi
 
- if test xfrac = xtrue; then
+ if test x$benchmark_frac = xtrue; then
   ENABLED_BENCHMARK_FRAC_TRUE=
   ENABLED_BENCHMARK_FRAC_FALSE='#'
 else
@@ -12863,7 +12908,7 @@ else
   benchmark_huffbench=true
 fi
 
- if test xhuffbench = xtrue; then
+ if test x$benchmark_huffbench = xtrue; then
   ENABLED_BENCHMARK_HUFFBENCH_TRUE=
   ENABLED_BENCHMARK_HUFFBENCH_FALSE='#'
 else
@@ -12883,7 +12928,7 @@ else
   benchmark_insertsort=true
 fi
 
- if test xinsertsort = xtrue; then
+ if test x$benchmark_insertsort = xtrue; then
   ENABLED_BENCHMARK_INSERTSORT_TRUE=
   ENABLED_BENCHMARK_INSERTSORT_FALSE='#'
 else
@@ -12903,7 +12948,7 @@ else
   benchmark_janne_complex=true
 fi
 
- if test xjanne_complex = xtrue; then
+ if test x$benchmark_janne_complex = xtrue; then
   ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE=
   ENABLED_BENCHMARK_JANNE_COMPLEX_FALSE='#'
 else
@@ -12923,7 +12968,7 @@ else
   benchmark_jfdctint=true
 fi
 
- if test xjfdctint = xtrue; then
+ if test x$benchmark_jfdctint = xtrue; then
   ENABLED_BENCHMARK_JFDCTINT_TRUE=
   ENABLED_BENCHMARK_JFDCTINT_FALSE='#'
 else
@@ -12943,7 +12988,7 @@ else
   benchmark_lcdnum=true
 fi
 
- if test xlcdnum = xtrue; then
+ if test x$benchmark_lcdnum = xtrue; then
   ENABLED_BENCHMARK_LCDNUM_TRUE=
   ENABLED_BENCHMARK_LCDNUM_FALSE='#'
 else
@@ -12963,7 +13008,7 @@ else
   benchmark_levenshtein=true
 fi
 
- if test xlevenshtein = xtrue; then
+ if test x$benchmark_levenshtein = xtrue; then
   ENABLED_BENCHMARK_LEVENSHTEIN_TRUE=
   ENABLED_BENCHMARK_LEVENSHTEIN_FALSE='#'
 else
@@ -12983,7 +13028,7 @@ else
   benchmark_ludcmp=true
 fi
 
- if test xludcmp = xtrue; then
+ if test x$benchmark_ludcmp = xtrue; then
   ENABLED_BENCHMARK_LUDCMP_TRUE=
   ENABLED_BENCHMARK_LUDCMP_FALSE='#'
 else
@@ -13003,7 +13048,7 @@ else
   benchmark_matmult=true
 fi
 
- if test xmatmult = xtrue; then
+ if test x$benchmark_matmult = xtrue; then
   ENABLED_BENCHMARK_MATMULT_TRUE=
   ENABLED_BENCHMARK_MATMULT_FALSE='#'
 else
@@ -13023,7 +13068,7 @@ else
   benchmark_matmult_float=true
 fi
 
- if test xmatmult_float = xtrue; then
+ if test x$benchmark_matmult_float = xtrue; then
   ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE=
   ENABLED_BENCHMARK_MATMULT_FLOAT_FALSE='#'
 else
@@ -13043,7 +13088,7 @@ else
   benchmark_matmult_int=true
 fi
 
- if test xmatmult_int = xtrue; then
+ if test x$benchmark_matmult_int = xtrue; then
   ENABLED_BENCHMARK_MATMULT_INT_TRUE=
   ENABLED_BENCHMARK_MATMULT_INT_FALSE='#'
 else
@@ -13063,7 +13108,7 @@ else
   benchmark_mergesort=true
 fi
 
- if test xmergesort = xtrue; then
+ if test x$benchmark_mergesort = xtrue; then
   ENABLED_BENCHMARK_MERGESORT_TRUE=
   ENABLED_BENCHMARK_MERGESORT_FALSE='#'
 else
@@ -13083,7 +13128,7 @@ else
   benchmark_miniz=true
 fi
 
- if test xminiz = xtrue; then
+ if test x$benchmark_miniz = xtrue; then
   ENABLED_BENCHMARK_MINIZ_TRUE=
   ENABLED_BENCHMARK_MINIZ_FALSE='#'
 else
@@ -13103,7 +13148,7 @@ else
   benchmark_minver=true
 fi
 
- if test xminver = xtrue; then
+ if test x$benchmark_minver = xtrue; then
   ENABLED_BENCHMARK_MINVER_TRUE=
   ENABLED_BENCHMARK_MINVER_FALSE='#'
 else
@@ -13123,7 +13168,7 @@ else
   benchmark_nbody=true
 fi
 
- if test xnbody = xtrue; then
+ if test x$benchmark_nbody = xtrue; then
   ENABLED_BENCHMARK_NBODY_TRUE=
   ENABLED_BENCHMARK_NBODY_FALSE='#'
 else
@@ -13143,7 +13188,7 @@ else
   benchmark_ndes=true
 fi
 
- if test xndes = xtrue; then
+ if test x$benchmark_ndes = xtrue; then
   ENABLED_BENCHMARK_NDES_TRUE=
   ENABLED_BENCHMARK_NDES_FALSE='#'
 else
@@ -13163,7 +13208,7 @@ else
   benchmark_nettle_arcfour=true
 fi
 
- if test xnettle_arcfour = xtrue; then
+ if test x$benchmark_nettle_arcfour = xtrue; then
   ENABLED_BENCHMARK_NETTLE_ARCFOUR_TRUE=
   ENABLED_BENCHMARK_NETTLE_ARCFOUR_FALSE='#'
 else
@@ -13183,7 +13228,7 @@ else
   benchmark_nettle_cast128=true
 fi
 
- if test xnettle_cast128 = xtrue; then
+ if test x$benchmark_nettle_cast128 = xtrue; then
   ENABLED_BENCHMARK_NETTLE_CAST128_TRUE=
   ENABLED_BENCHMARK_NETTLE_CAST128_FALSE='#'
 else
@@ -13203,7 +13248,7 @@ else
   benchmark_nettle_des=true
 fi
 
- if test xnettle_des = xtrue; then
+ if test x$benchmark_nettle_des = xtrue; then
   ENABLED_BENCHMARK_NETTLE_DES_TRUE=
   ENABLED_BENCHMARK_NETTLE_DES_FALSE='#'
 else
@@ -13223,7 +13268,7 @@ else
   benchmark_nettle_md5=true
 fi
 
- if test xnettle_md5 = xtrue; then
+ if test x$benchmark_nettle_md5 = xtrue; then
   ENABLED_BENCHMARK_NETTLE_MD5_TRUE=
   ENABLED_BENCHMARK_NETTLE_MD5_FALSE='#'
 else
@@ -13243,7 +13288,7 @@ else
   benchmark_newlib_exp=true
 fi
 
- if test xnewlib_exp = xtrue; then
+ if test x$benchmark_newlib_exp = xtrue; then
   ENABLED_BENCHMARK_NEWLIB_EXP_TRUE=
   ENABLED_BENCHMARK_NEWLIB_EXP_FALSE='#'
 else
@@ -13263,7 +13308,7 @@ else
   benchmark_newlib_log=true
 fi
 
- if test xnewlib_log = xtrue; then
+ if test x$benchmark_newlib_log = xtrue; then
   ENABLED_BENCHMARK_NEWLIB_LOG_TRUE=
   ENABLED_BENCHMARK_NEWLIB_LOG_FALSE='#'
 else
@@ -13283,7 +13328,7 @@ else
   benchmark_newlib_mod=true
 fi
 
- if test xnewlib_mod = xtrue; then
+ if test x$benchmark_newlib_mod = xtrue; then
   ENABLED_BENCHMARK_NEWLIB_MOD_TRUE=
   ENABLED_BENCHMARK_NEWLIB_MOD_FALSE='#'
 else
@@ -13303,7 +13348,7 @@ else
   benchmark_newlib_sqrt=true
 fi
 
- if test xnewlib_sqrt = xtrue; then
+ if test x$benchmark_newlib_sqrt = xtrue; then
   ENABLED_BENCHMARK_NEWLIB_SQRT_TRUE=
   ENABLED_BENCHMARK_NEWLIB_SQRT_FALSE='#'
 else
@@ -13323,7 +13368,7 @@ else
   benchmark_ns=true
 fi
 
- if test xns = xtrue; then
+ if test x$benchmark_ns = xtrue; then
   ENABLED_BENCHMARK_NS_TRUE=
   ENABLED_BENCHMARK_NS_FALSE='#'
 else
@@ -13343,7 +13388,7 @@ else
   benchmark_nsichneu=true
 fi
 
- if test xnsichneu = xtrue; then
+ if test x$benchmark_nsichneu = xtrue; then
   ENABLED_BENCHMARK_NSICHNEU_TRUE=
   ENABLED_BENCHMARK_NSICHNEU_FALSE='#'
 else
@@ -13363,7 +13408,7 @@ else
   benchmark_picojpeg=true
 fi
 
- if test xpicojpeg = xtrue; then
+ if test x$benchmark_picojpeg = xtrue; then
   ENABLED_BENCHMARK_PICOJPEG_TRUE=
   ENABLED_BENCHMARK_PICOJPEG_FALSE='#'
 else
@@ -13383,7 +13428,7 @@ else
   benchmark_prime=true
 fi
 
- if test xprime = xtrue; then
+ if test x$benchmark_prime = xtrue; then
   ENABLED_BENCHMARK_PRIME_TRUE=
   ENABLED_BENCHMARK_PRIME_FALSE='#'
 else
@@ -13403,7 +13448,7 @@ else
   benchmark_qrduino=true
 fi
 
- if test xqrduino = xtrue; then
+ if test x$benchmark_qrduino = xtrue; then
   ENABLED_BENCHMARK_QRDUINO_TRUE=
   ENABLED_BENCHMARK_QRDUINO_FALSE='#'
 else
@@ -13423,7 +13468,7 @@ else
   benchmark_qsort=true
 fi
 
- if test xqsort = xtrue; then
+ if test x$benchmark_qsort = xtrue; then
   ENABLED_BENCHMARK_QSORT_TRUE=
   ENABLED_BENCHMARK_QSORT_FALSE='#'
 else
@@ -13443,7 +13488,7 @@ else
   benchmark_qurt=true
 fi
 
- if test xqurt = xtrue; then
+ if test x$benchmark_qurt = xtrue; then
   ENABLED_BENCHMARK_QURT_TRUE=
   ENABLED_BENCHMARK_QURT_FALSE='#'
 else
@@ -13463,7 +13508,7 @@ else
   benchmark_recursion=true
 fi
 
- if test xrecursion = xtrue; then
+ if test x$benchmark_recursion = xtrue; then
   ENABLED_BENCHMARK_RECURSION_TRUE=
   ENABLED_BENCHMARK_RECURSION_FALSE='#'
 else
@@ -13483,7 +13528,7 @@ else
   benchmark_rijndael=true
 fi
 
- if test xrijndael = xtrue; then
+ if test x$benchmark_rijndael = xtrue; then
   ENABLED_BENCHMARK_RIJNDAEL_TRUE=
   ENABLED_BENCHMARK_RIJNDAEL_FALSE='#'
 else
@@ -13503,7 +13548,7 @@ else
   benchmark_select=true
 fi
 
- if test xselect = xtrue; then
+ if test x$benchmark_select = xtrue; then
   ENABLED_BENCHMARK_SELECT_TRUE=
   ENABLED_BENCHMARK_SELECT_FALSE='#'
 else
@@ -13523,7 +13568,7 @@ else
   benchmark_sglib_arraybinsearch=true
 fi
 
- if test xsglib_arraybinsearch = xtrue; then
+ if test x$benchmark_sglib_arraybinsearch = xtrue; then
   ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE=
   ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_FALSE='#'
 else
@@ -13543,7 +13588,7 @@ else
   benchmark_sglib_arrayheapsort=true
 fi
 
- if test xsglib_arrayheapsort = xtrue; then
+ if test x$benchmark_sglib_arrayheapsort = xtrue; then
   ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE=
   ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_FALSE='#'
 else
@@ -13563,7 +13608,7 @@ else
   benchmark_sglib_arrayquicksort=true
 fi
 
- if test xsglib_arrayquicksort = xtrue; then
+ if test x$benchmark_sglib_arrayquicksort = xtrue; then
   ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT_TRUE=
   ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT_FALSE='#'
 else
@@ -13583,7 +13628,7 @@ else
   benchmark_sglib_arraysort=true
 fi
 
- if test xsglib_arraysort = xtrue; then
+ if test x$benchmark_sglib_arraysort = xtrue; then
   ENABLED_BENCHMARK_SGLIB_ARRAYSORT_TRUE=
   ENABLED_BENCHMARK_SGLIB_ARRAYSORT_FALSE='#'
 else
@@ -13603,7 +13648,7 @@ else
   benchmark_sglib_dllist=true
 fi
 
- if test xsglib_dllist = xtrue; then
+ if test x$benchmark_sglib_dllist = xtrue; then
   ENABLED_BENCHMARK_SGLIB_DLLIST_TRUE=
   ENABLED_BENCHMARK_SGLIB_DLLIST_FALSE='#'
 else
@@ -13623,7 +13668,7 @@ else
   benchmark_sglib_hashtable=true
 fi
 
- if test xsglib_hashtable = xtrue; then
+ if test x$benchmark_sglib_hashtable = xtrue; then
   ENABLED_BENCHMARK_SGLIB_HASHTABLE_TRUE=
   ENABLED_BENCHMARK_SGLIB_HASHTABLE_FALSE='#'
 else
@@ -13643,7 +13688,7 @@ else
   benchmark_sglib_listinsertsort=true
 fi
 
- if test xsglib_listinsertsort = xtrue; then
+ if test x$benchmark_sglib_listinsertsort = xtrue; then
   ENABLED_BENCHMARK_SGLIB_LISTINSERTSORT_TRUE=
   ENABLED_BENCHMARK_SGLIB_LISTINSERTSORT_FALSE='#'
 else
@@ -13663,7 +13708,7 @@ else
   benchmark_sglib_listsort=true
 fi
 
- if test xsglib_listsort = xtrue; then
+ if test x$benchmark_sglib_listsort = xtrue; then
   ENABLED_BENCHMARK_SGLIB_LISTSORT_TRUE=
   ENABLED_BENCHMARK_SGLIB_LISTSORT_FALSE='#'
 else
@@ -13683,7 +13728,7 @@ else
   benchmark_sglib_queue=true
 fi
 
- if test xsglib_queue = xtrue; then
+ if test x$benchmark_sglib_queue = xtrue; then
   ENABLED_BENCHMARK_SGLIB_QUEUE_TRUE=
   ENABLED_BENCHMARK_SGLIB_QUEUE_FALSE='#'
 else
@@ -13703,7 +13748,7 @@ else
   benchmark_sglib_rbtree=true
 fi
 
- if test xsglib_rbtree = xtrue; then
+ if test x$benchmark_sglib_rbtree = xtrue; then
   ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE=
   ENABLED_BENCHMARK_SGLIB_RBTREE_FALSE='#'
 else
@@ -13723,7 +13768,7 @@ else
   benchmark_slre=true
 fi
 
- if test xslre = xtrue; then
+ if test x$benchmark_slre = xtrue; then
   ENABLED_BENCHMARK_SLRE_TRUE=
   ENABLED_BENCHMARK_SLRE_FALSE='#'
 else
@@ -13743,7 +13788,7 @@ else
   benchmark_sqrt=true
 fi
 
- if test xsqrt = xtrue; then
+ if test x$benchmark_sqrt = xtrue; then
   ENABLED_BENCHMARK_SQRT_TRUE=
   ENABLED_BENCHMARK_SQRT_FALSE='#'
 else
@@ -13763,7 +13808,7 @@ else
   benchmark_st=true
 fi
 
- if test xst = xtrue; then
+ if test x$benchmark_st = xtrue; then
   ENABLED_BENCHMARK_ST_TRUE=
   ENABLED_BENCHMARK_ST_FALSE='#'
 else
@@ -13783,7 +13828,7 @@ else
   benchmark_statemate=true
 fi
 
- if test xstatemate = xtrue; then
+ if test x$benchmark_statemate = xtrue; then
   ENABLED_BENCHMARK_STATEMATE_TRUE=
   ENABLED_BENCHMARK_STATEMATE_FALSE='#'
 else
@@ -13803,7 +13848,7 @@ else
   benchmark_stb_perlin=true
 fi
 
- if test xstb_perlin = xtrue; then
+ if test x$benchmark_stb_perlin = xtrue; then
   ENABLED_BENCHMARK_STB_PERLIN_TRUE=
   ENABLED_BENCHMARK_STB_PERLIN_FALSE='#'
 else
@@ -13823,7 +13868,7 @@ else
   benchmark_stringsearch1=true
 fi
 
- if test xstringsearch1 = xtrue; then
+ if test x$benchmark_stringsearch1 = xtrue; then
   ENABLED_BENCHMARK_STRINGSEARCH1_TRUE=
   ENABLED_BENCHMARK_STRINGSEARCH1_FALSE='#'
 else
@@ -13843,7 +13888,7 @@ else
   benchmark_strstr=true
 fi
 
- if test xstrstr = xtrue; then
+ if test x$benchmark_strstr = xtrue; then
   ENABLED_BENCHMARK_STRSTR_TRUE=
   ENABLED_BENCHMARK_STRSTR_FALSE='#'
 else
@@ -13863,7 +13908,7 @@ else
   benchmark_tarai=true
 fi
 
- if test xtarai = xtrue; then
+ if test x$benchmark_tarai = xtrue; then
   ENABLED_BENCHMARK_TARAI_TRUE=
   ENABLED_BENCHMARK_TARAI_FALSE='#'
 else
@@ -13883,7 +13928,7 @@ else
   benchmark_template=true
 fi
 
- if test xtemplate = xtrue; then
+ if test x$benchmark_template = xtrue; then
   ENABLED_BENCHMARK_TEMPLATE_TRUE=
   ENABLED_BENCHMARK_TEMPLATE_FALSE='#'
 else
@@ -13903,7 +13948,7 @@ else
   benchmark_trio=true
 fi
 
- if test xtrio = xtrue; then
+ if test x$benchmark_trio = xtrue; then
   ENABLED_BENCHMARK_TRIO_TRUE=
   ENABLED_BENCHMARK_TRIO_FALSE='#'
 else
@@ -13923,7 +13968,7 @@ else
   benchmark_trio_snprintf=true
 fi
 
- if test xtrio_snprintf = xtrue; then
+ if test x$benchmark_trio_snprintf = xtrue; then
   ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE=
   ENABLED_BENCHMARK_TRIO_SNPRINTF_FALSE='#'
 else
@@ -13943,7 +13988,7 @@ else
   benchmark_trio_sscanf=true
 fi
 
- if test xtrio_sscanf = xtrue; then
+ if test x$benchmark_trio_sscanf = xtrue; then
   ENABLED_BENCHMARK_TRIO_SSCANF_TRUE=
   ENABLED_BENCHMARK_TRIO_SSCANF_FALSE='#'
 else
@@ -13963,7 +14008,7 @@ else
   benchmark_ud=true
 fi
 
- if test xud = xtrue; then
+ if test x$benchmark_ud = xtrue; then
   ENABLED_BENCHMARK_UD_TRUE=
   ENABLED_BENCHMARK_UD_FALSE='#'
 else
@@ -13983,7 +14028,7 @@ else
   benchmark_whetstone=true
 fi
 
- if test xwhetstone = xtrue; then
+ if test x$benchmark_whetstone = xtrue; then
   ENABLED_BENCHMARK_WHETSTONE_TRUE=
   ENABLED_BENCHMARK_WHETSTONE_FALSE='#'
 else
@@ -14003,7 +14048,7 @@ else
   benchmark_wikisort=true
 fi
 
- if test xwikisort = xtrue; then
+ if test x$benchmark_wikisort = xtrue; then
   ENABLED_BENCHMARK_WIKISORT_TRUE=
   ENABLED_BENCHMARK_WIKISORT_FALSE='#'
 else
@@ -14012,152 +14057,64 @@ else
 fi
 
 
-# Work out which architecture we need
+
+
+# Work out which architecture we are targeting
 # Also pass this through to be substituted
 
 arch=$host_cpu
 
-# Option for selecting the target board and check if it exists
+# Option for selecting the target board
 
 
 # Check whether --with-board was given.
 if test "${with_board+set}" = set; then :
-  withval=$with_board;
+  withval=$with_board; board=$with_board
 else
-  with_board=none
-
+  board=none
 fi
 
-board=$with_board
 
-as_ac_File=`$as_echo "ac_cv_file_$srcdir/config/$arch/boards/$board" | $as_tr_sh`
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $srcdir/config/$arch/boards/$board" >&5
-$as_echo_n "checking for $srcdir/config/$arch/boards/$board... " >&6; }
-if eval \${$as_ac_File+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  test "$cross_compiling" = yes &&
-  as_fn_error $? "cannot check for file existence when cross compiling" "$LINENO" 5
-if test -r "$srcdir/config/$arch/boards/$board"; then
-  eval "$as_ac_File=yes"
-else
-  eval "$as_ac_File=no"
-fi
-fi
-eval ac_res=\$$as_ac_File
-	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
-$as_echo "$ac_res" >&6; }
-if eval test \"x\$"$as_ac_File"\" = x"yes"; then :
-
-else
-  as_fn_error $? "\"$board\" board config directory not found" "$LINENO" 5
-
-# Option for selecting the target chip and echeck if it exists
+# Option for selecting the target chip
 
 
-  --with-chip             Select the chip to target
 # Check whether --with-chip was given.
 if test "${with_chip+set}" = set; then :
-  withval=$with_chip;
+  withval=$with_chip; chip=$with_chip
 else
-  with_chip=generic
-
+  chip=generic
 fi
 
-chip=$with_chip
-
-as_ac_File=`$as_echo "ac_cv_file_$srcdir/config/$arch/chips/$chip; then
-              " | $as_tr_sh`
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $srcdir/config/$arch/chips/$chip; then
-              " >&5
-$as_echo_n "checking for $srcdir/config/$arch/chips/$chip; then
-              ... " >&6; }
-if eval \${$as_ac_File+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  test "$cross_compiling" = yes &&
-  as_fn_error $? "cannot check for file existence when cross compiling" "$LINENO" 5
-if test -r "$srcdir/config/$arch/chips/$chip; then
-              "; then
-  eval "$as_ac_File=yes"
-else
-  eval "$as_ac_File=no"
-fi
-fi
-eval ac_res=\$$as_ac_File
-	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
-$as_echo "$ac_res" >&6; }
-if eval test \"x\$"$as_ac_File"\" = x"yes"; then :
-  as_fn_error $? "\"$chip\" chip config directory not found" "$LINENO" 5
 
 # Execute any architecture, board or chip specific configuration. These can
 # set architecture, chip and board CPPFLAGS, CFLAGS and LDFLAGS and exclude
-# individual tests by undefining HAVE_BENCHMARK_<bm>.
+# individual tests by undefining HAVE_BENCHMARK_<bm>. We can't use
+# AC_CHECK_FILE, because we are cross-compiling, and that prohibits use of
+# AC_CHECK_FILE.
 
-as_ac_File=`$as_echo "ac_cv_file_$srcdir/config/$arch/arch.cfg" | $as_tr_sh`
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $srcdir/config/$arch/arch.cfg" >&5
-$as_echo_n "checking for $srcdir/config/$arch/arch.cfg... " >&6; }
-if eval \${$as_ac_File+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  test "$cross_compiling" = yes &&
-  as_fn_error $? "cannot check for file existence when cross compiling" "$LINENO" 5
-if test -r "$srcdir/config/$arch/arch.cfg"; then
-  eval "$as_ac_File=yes"
-else
-  eval "$as_ac_File=no"
-fi
-fi
-eval ac_res=\$$as_ac_File
-	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
-$as_echo "$ac_res" >&6; }
-if eval test \"x\$"$as_ac_File"\" = x"yes"; then :
+if test -f $srcdir/config/$arch/arch.cfg; then :
   source $srcdir/config/$arch/arch.cfg
 fi
 
-as_ac_File=`$as_echo "ac_cv_file_$srcdir/config/$arch/boards/$board/board.cfg" | $as_tr_sh`
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $srcdir/config/$arch/boards/$board/board.cfg" >&5
-$as_echo_n "checking for $srcdir/config/$arch/boards/$board/board.cfg... " >&6; }
-if eval \${$as_ac_File+:} false; then :
-  $as_echo_n "(cached) " >&6
+if test -d $srcdir/config/$arch/boards/$board; then :
+
 else
-  test "$cross_compiling" = yes &&
-  as_fn_error $? "cannot check for file existence when cross compiling" "$LINENO" 5
-if test -r "$srcdir/config/$arch/boards/$board/board.cfg"; then
-  eval "$as_ac_File=yes"
-else
-  eval "$as_ac_File=no"
+  as_fn_error $? "Board config directory \"$board\" does not exist" "$LINENO" 5
 fi
-fi
-eval ac_res=\$$as_ac_File
-	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
-$as_echo "$ac_res" >&6; }
-if eval test \"x\$"$as_ac_File"\" = x"yes"; then :
+
+if test -f $srcdir/config/$arch/boards/$board/board.cfg ; then :
   source $srcdir/config/$arch/boards/$board/board.cfg
 fi
 
-as_ac_File=`$as_echo "ac_cv_file_$srcdir/config/$arch/chips/$chip/chip.cfg" | $as_tr_sh`
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $srcdir/config/$arch/chips/$chip/chip.cfg" >&5
-$as_echo_n "checking for $srcdir/config/$arch/chips/$chip/chip.cfg... " >&6; }
-if eval \${$as_ac_File+:} false; then :
-  $as_echo_n "(cached) " >&6
+if test -d $srcdir/config/$arch/chips/$chip; then :
+
 else
-  test "$cross_compiling" = yes &&
-  as_fn_error $? "cannot check for file existence when cross compiling" "$LINENO" 5
-if test -r "$srcdir/config/$arch/chips/$chip/chip.cfg"; then
-  eval "$as_ac_File=yes"
-else
-  eval "$as_ac_File=no"
+  as_fn_error $? "Chip config directory \"$chip\" does not exist" "$LINENO" 5
 fi
-fi
-eval ac_res=\$$as_ac_File
-	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
-$as_echo "$ac_res" >&6; }
-if eval test \"x\$"$as_ac_File"\" = x"yes"; then :
+
+if test -f $srcdir/config/$arch/chips/$chip/chip.cfg; then :
   source $srcdir/config/$arch/chips/$chip/chip.cfg
-
 fi
-
 
  if test -f $srcdir/config/$arch/chips/$chip/chipsupport.c; then
   CHIPSUPPORT_C_TRUE=
@@ -14170,79 +14127,23 @@ fi
 
 # Check for support headers
 
-as_ac_File=`$as_echo "ac_cv_file_$srcdir/config/$arch/boards/$board/boardsupport.h" | $as_tr_sh`
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $srcdir/config/$arch/boards/$board/boardsupport.h" >&5
-$as_echo_n "checking for $srcdir/config/$arch/boards/$board/boardsupport.h... " >&6; }
-if eval \${$as_ac_File+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  test "$cross_compiling" = yes &&
-  as_fn_error $? "cannot check for file existence when cross compiling" "$LINENO" 5
-if test -r "$srcdir/config/$arch/boards/$board/boardsupport.h"; then
-  eval "$as_ac_File=yes"
-else
-  eval "$as_ac_File=no"
-fi
-fi
-eval ac_res=\$$as_ac_File
-	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
-$as_echo "$ac_res" >&6; }
-if eval test \"x\$"$as_ac_File"\" = x"yes"; then :
+test -f $srcdir/config/$arch/boards/$board/boardsupport.h && \
 
 $as_echo "#define HAVE_BOARDSUPPORT_H 1" >>confdefs.h
 
-fi
 
-
-as_ac_File=`$as_echo "ac_cv_file_$srcdir/config/$arch/chips/$chip/chipsupport.h" | $as_tr_sh`
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $srcdir/config/$arch/chips/$chip/chipsupport.h" >&5
-$as_echo_n "checking for $srcdir/config/$arch/chips/$chip/chipsupport.h... " >&6; }
-if eval \${$as_ac_File+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  test "$cross_compiling" = yes &&
-  as_fn_error $? "cannot check for file existence when cross compiling" "$LINENO" 5
-if test -r "$srcdir/config/$arch/chips/$chip/chipsupport.h"; then
-  eval "$as_ac_File=yes"
-else
-  eval "$as_ac_File=no"
-fi
-fi
-eval ac_res=\$$as_ac_File
-	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
-$as_echo "$ac_res" >&6; }
-if eval test \"x\$"$as_ac_File"\" = x"yes"; then :
+test -f $srcdir/config/$arch/chips/$chip/chipsupport.h && \
 
 $as_echo "#define HAVE_CHIPSUPPORT_H 1" >>confdefs.h
-
-fi
 
 
 # Test whether we have a calibration file
 
-as_ac_File=`$as_echo "ac_cv_file_$srcdir/config/$arch/boards/$board/calibration" | $as_tr_sh`
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $srcdir/config/$arch/boards/$board/calibration" >&5
-$as_echo_n "checking for $srcdir/config/$arch/boards/$board/calibration... " >&6; }
-if eval \${$as_ac_File+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  test "$cross_compiling" = yes &&
-  as_fn_error $? "cannot check for file existence when cross compiling" "$LINENO" 5
-if test -r "$srcdir/config/$arch/boards/$board/calibration"; then
-  eval "$as_ac_File=yes"
-else
-  eval "$as_ac_File=no"
-fi
-fi
-eval ac_res=\$$as_ac_File
-	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
-$as_echo "$ac_res" >&6; }
-if eval test \"x\$"$as_ac_File"\" = x"yes"; then :
+test -f $srcdir/config/$arch/boards/$board/calibration && \
+    HAVE_CALIBRATION=yes && \
 
 $as_echo "#define HAVE_CALIBRATION 1" >>confdefs.h
 
-               HAVE_CALIBRATION=yes
-fi
 
  if test x$HAVE_CALIBRATION == xyes; then
   CALIBRATION_TRUE=
@@ -14255,16 +14156,8 @@ fi
 
 # Architecture, board and chip specific CFLAGS and LDFLAGS
 
-# Sometimes we need to have the CFLAGS and LDFLAGS set so that
-# the config test pass. We save them first so we can restore them later
-confsave_CFLAGS=$CFLAGS
-confsave_LDFLAGS=$LDFLAGS
-
-CFLAGS="$CFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
-LDFLAGS="$LDFLAGS $ARCH_LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"
-
-# If we pass the --host option, then AC_PROG_CC will select the
-# correct cross-compiler for us.
+# If we pass the --host option, then AC_PROG_CC will select the correct
+# cross-compiler for us.
 
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
@@ -14272,199 +14165,7 @@ ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 if test -n "$ac_tool_prefix"; then
-  # Extract the first word of "${ac_tool_prefix}gcc", so it can be a program name with args.
-set dummy ${ac_tool_prefix}gcc; ac_word=$2
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-$as_echo_n "checking for $ac_word... " >&6; }
-if ${ac_cv_prog_CC+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  if test -n "$CC"; then
-  ac_cv_prog_CC="$CC" # Let the user override the test.
-else
-as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-    for ac_exec_ext in '' $ac_executable_extensions; do
-  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_prog_CC="${ac_tool_prefix}gcc"
-    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-  done
-IFS=$as_save_IFS
-
-fi
-fi
-CC=$ac_cv_prog_CC
-if test -n "$CC"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $CC" >&5
-$as_echo "$CC" >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-fi
-
-
-fi
-if test -z "$ac_cv_prog_CC"; then
-  ac_ct_CC=$CC
-  # Extract the first word of "gcc", so it can be a program name with args.
-set dummy gcc; ac_word=$2
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-$as_echo_n "checking for $ac_word... " >&6; }
-if ${ac_cv_prog_ac_ct_CC+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  if test -n "$ac_ct_CC"; then
-  ac_cv_prog_ac_ct_CC="$ac_ct_CC" # Let the user override the test.
-else
-as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-    for ac_exec_ext in '' $ac_executable_extensions; do
-  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_prog_ac_ct_CC="gcc"
-    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-  done
-IFS=$as_save_IFS
-
-fi
-fi
-ac_ct_CC=$ac_cv_prog_ac_ct_CC
-if test -n "$ac_ct_CC"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_ct_CC" >&5
-$as_echo "$ac_ct_CC" >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-fi
-
-  if test "x$ac_ct_CC" = x; then
-    CC=""
-  else
-    case $cross_compiling:$ac_tool_warned in
-yes:
-fi
-
-{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: using cross tools not prefixed with host triplet" >&5
-$as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
-ac_tool_warned=yes ;;
-esac
-    CC=$ac_ct_CC
-  fi
-else
-  CC="$ac_cv_prog_CC"
-fi
-
-if test -z "$CC"; then
-          if test -n "$ac_tool_prefix"; then
-    # Extract the first word of "${ac_tool_prefix}cc", so it can be a program name with args.
-set dummy ${ac_tool_prefix}cc; ac_word=$2
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-$as_echo_n "checking for $ac_word... " >&6; }
-if ${ac_cv_prog_CC+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  if test -n "$CC"; then
-  ac_cv_prog_CC="$CC" # Let the user override the test.
-else
-as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-    for ac_exec_ext in '' $ac_executable_extensions; do
-  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_prog_CC="${ac_tool_prefix}cc"
-    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-  done
-IFS=$as_save_IFS
-
-fi
-fi
-CC=$ac_cv_prog_CC
-if test -n "$CC"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $CC" >&5
-$as_echo "$CC" >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-fi
-
-
-  fi
-fi
-if test -z "$CC"; then
-  # Extract the first word of "cc", so it can be a program name with args.
-set dummy cc; ac_word=$2
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-$as_echo_n "checking for $ac_word... " >&6; }
-if ${ac_cv_prog_CC+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  if test -n "$CC"; then
-  ac_cv_prog_CC="$CC" # Let the user override the test.
-else
-  ac_prog_rejected=no
-as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-    for ac_exec_ext in '' $ac_executable_extensions; do
-  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    if test "$as_dir/$ac_word$ac_exec_ext" = "/usr/ucb/cc"; then
-       ac_prog_rejected=yes
-       continue
-     fi
-    ac_cv_prog_CC="cc"
-    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-  done
-IFS=$as_save_IFS
-
-if test $ac_prog_rejected = yes; then
-  # We found a bogon in the path, so make sure we never use it.
-  set dummy $ac_cv_prog_CC
-  shift
-  if test $# != 0; then
-    # We chose a different compiler from the bogus one.
-    # However, it has the same basename, so the bogon will be chosen
-    # first if we set CC to just the basename; use the full file name.
-    shift
-    ac_cv_prog_CC="$as_dir/$ac_word${1+' '}$@"
-  fi
-fi
-fi
-fi
-CC=$ac_cv_prog_CC
-if test -n "$CC"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $CC" >&5
-$as_echo "$CC" >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-fi
-
-
-fi
-if test -z "$CC"; then
-  if test -n "$ac_tool_prefix"; then
-  for ac_prog in cl.exe
+  for ac_prog in ${target}-gcc ${target}-cc
   do
     # Extract the first word of "$ac_tool_prefix$ac_prog", so it can be a program name with args.
 set dummy $ac_tool_prefix$ac_prog; ac_word=$2
@@ -14508,7 +14209,7 @@ fi
 fi
 if test -z "$CC"; then
   ac_ct_CC=$CC
-  for ac_prog in cl.exe
+  for ac_prog in ${target}-gcc ${target}-cc
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
 set dummy $ac_prog; ac_word=$2
@@ -14554,17 +14255,13 @@ done
     CC=""
   else
     case $cross_compiling:$ac_tool_warned in
-yes:
-fi
-
+yes:)
 { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: using cross tools not prefixed with host triplet" >&5
 $as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
 ac_tool_warned=yes ;;
 esac
     CC=$ac_ct_CC
   fi
-fi
-
 fi
 
 
@@ -15307,15 +15004,9 @@ fi
 
 
 
-# Our custom flags
-
-CPPFLAGS="-I $(top_srcdir)/include $CPPFLAGS"
-CPPFLAGS="-I $(top_srcdir)/config/@ARCH@/boards/@BOARD@ $CPPFLAGS"
-CPPFLAGS="-I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ $CPPFLAGS"
-
 # Add in the architecture, board and chip specific CPPFLAGS, CFLAGS and LDFLAGS
 
-CPPFLAGS="$CPPFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
+CPPFLAGS="$CPPFLAGS $ARCH_CPPFLAGS $CHIP_CPPFLAGS $BOARD_CPPFLAGS"
 CFLAGS="$CFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
 LDFLAGS="$LDFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
 
@@ -15343,7 +15034,7 @@ ac_config_headers="$ac_config_headers config.h"
 
 # Generate makefiles
 
-ac_config_files="$ac_config_files Makefile doc/Makefile src/aha-compress/Makefile src/aha-mont64/Makefile src/bs/Makefile src/bubblesort/Makefile src/cnt/Makefile src/compress/Makefile src/cover/Makefile src/crc/Makefile src/crc32/Makefile src/ctl/Makefile src/ctl-stack/Makefile src/ctl-string/Makefile src/ctl-vector/Makefile src/cubic/Makefile src/dijkstra/Makefile src/dtoa/Makefile src/duff/Makefile src/edn/Makefile src/expint/Makefile src/fac/Makefile src/fasta/Makefile src/fdct/Makefile src/fibcall/Makefile src/fir/Makefile src/frac/Makefile src/huffbench/Makefile src/insertsort/Makefile src/janne_complex/Makefile src/jfdctint/Makefile src/lcdnum/Makefile src/levenshtein/Makefile src/ludcmp/Makefile src/matmult/Makefile src/matmult-float/Makefile src/matmult-int/Makefile src/mergesort/Makefile src/miniz/Makefile src/minver/Makefile src/nbody/Makefile src/ndes/Makefile src/nettle-arcfour/Makefile src/nettle-cast128/Makefile src/nettle-des/Makefile src/nettle-md5/Makefile src/newlib-exp/Makefile src/newlib-log/Makefile src/newlib-mod/Makefile src/newlib-sqrt/Makefile src/ns/Makefile src/nsichneu/Makefile src/picojpeg/Makefile src/prime/Makefile src/qrduino/Makefile src/qsort/Makefile src/qurt/Makefile src/recursion/Makefile src/rijndael/Makefile src/select/Makefile src/sglib-arraybinsearch/Makefile src/sglib-arrayheapsort/Makefile src/sglib-arrayquicksort/Makefile src/sglib-arraysort/Makefile src/sglib-dllist/Makefile src/sglib-hashtable/Makefile src/sglib-listinsertsort/Makefile src/sglib-listsort/Makefile src/sglib-queue/Makefile src/sglib-rbtree/Makefile src/slre/Makefile src/sqrt/Makefile src/st/Makefile src/statemate/Makefile src/stb_perlin/Makefile src/stringsearch1/Makefile src/strstr/Makefile src/tarai/Makefile src/template/Makefile src/trio/Makefile src/trio-snprintf/Makefile src/trio-sscanf/Makefile src/ud/Makefile src/whetstone/Makefile src/wikisort/Makefile support/Makefile"
+ac_config_files="$ac_config_files Makefile doc/Makefile src/Makefile src/aha-compress/Makefile src/aha-mont64/Makefile src/bs/Makefile src/bubblesort/Makefile src/cnt/Makefile src/compress/Makefile src/cover/Makefile src/crc/Makefile src/crc32/Makefile src/ctl/Makefile src/ctl-stack/Makefile src/ctl-string/Makefile src/ctl-vector/Makefile src/cubic/Makefile src/dijkstra/Makefile src/dtoa/Makefile src/duff/Makefile src/edn/Makefile src/expint/Makefile src/fac/Makefile src/fasta/Makefile src/fdct/Makefile src/fibcall/Makefile src/fir/Makefile src/frac/Makefile src/huffbench/Makefile src/insertsort/Makefile src/janne_complex/Makefile src/jfdctint/Makefile src/lcdnum/Makefile src/levenshtein/Makefile src/ludcmp/Makefile src/matmult/Makefile src/matmult-float/Makefile src/matmult-int/Makefile src/mergesort/Makefile src/miniz/Makefile src/minver/Makefile src/nbody/Makefile src/ndes/Makefile src/nettle-arcfour/Makefile src/nettle-cast128/Makefile src/nettle-des/Makefile src/nettle-md5/Makefile src/newlib-exp/Makefile src/newlib-log/Makefile src/newlib-mod/Makefile src/newlib-sqrt/Makefile src/ns/Makefile src/nsichneu/Makefile src/picojpeg/Makefile src/prime/Makefile src/qrduino/Makefile src/qsort/Makefile src/qurt/Makefile src/recursion/Makefile src/rijndael/Makefile src/select/Makefile src/sglib-arraybinsearch/Makefile src/sglib-arrayheapsort/Makefile src/sglib-arrayquicksort/Makefile src/sglib-arraysort/Makefile src/sglib-dllist/Makefile src/sglib-hashtable/Makefile src/sglib-listinsertsort/Makefile src/sglib-listsort/Makefile src/sglib-queue/Makefile src/sglib-rbtree/Makefile src/slre/Makefile src/sqrt/Makefile src/st/Makefile src/statemate/Makefile src/stb_perlin/Makefile src/stringsearch1/Makefile src/strstr/Makefile src/tarai/Makefile src/template/Makefile src/trio/Makefile src/trio-snprintf/Makefile src/trio-sscanf/Makefile src/ud/Makefile src/whetstone/Makefile src/wikisort/Makefile support/Makefile"
 
 
 # And spit it all out
@@ -16713,6 +16404,7 @@ do
     "config.h") CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
+    "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
     "src/aha-compress/Makefile") CONFIG_FILES="$CONFIG_FILES src/aha-compress/Makefile" ;;
     "src/aha-mont64/Makefile") CONFIG_FILES="$CONFIG_FILES src/aha-mont64/Makefile" ;;
     "src/bs/Makefile") CONFIG_FILES="$CONFIG_FILES src/bs/Makefile" ;;
