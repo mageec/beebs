@@ -1,5 +1,11 @@
 2018-06-21  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* src/ctl/Makefile.am: Correct spelling of two source files and
+	add missing header file.
+	* src/ctl/Makefile.in: Regenerated.
+
+2018-06-21  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	Tests now all build with the new structure.
 
 	In many cases we had to add a default VERIFY_BENCHMARK function
