@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_RECURSION
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = recursion
-recursion_SOURCES = recursion.c
-recursion_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS            = recursion
+noinst_LTLIBRARIES      = librecursion.la
+
+recursion_SOURCES       =
+librecursion_la_SOURCES = librecursion.c
+
+recursion_LDADD         = $(top_builddir)/support/libmain.la \
+                          librecursion.la \
+                          $(top_builddir)/support/libsupport.la
 
 
 

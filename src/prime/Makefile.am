@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_PRIME
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = prime
-prime_SOURCES = prime.c
-prime_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS        = prime
+noinst_LTLIBRARIES  = libprime.la
+
+prime_SOURCES       =
+libprime_la_SOURCES = libprime.c
+
+prime_LDADD         = $(top_builddir)/support/libmain.la \
+                      libprime.la \
+                      $(top_builddir)/support/libsupport.la
 
 
 

@@ -1,3 +1,4 @@
+
 /* BEEBS strstr benchmark
 
    Copyright (C) 1994,1996,1997,2000,2001,2003 Free Software Foundation, Inc.
@@ -126,6 +127,13 @@ ret0:
 
 
 char *text = "abbaabbaababadcsdabbacasdaabbbaabbadabbacbbbaabbadabbacasdaabbbaabba";
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 char *substr = "abba";
 int benchmark()
 {

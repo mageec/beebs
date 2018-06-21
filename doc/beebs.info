@@ -1,4 +1,4 @@
-This is beebs.info, produced by makeinfo version 6.0 from beebs.texi.
+This is beebs.info, produced by makeinfo version 6.4.90 from beebs.texi.
 
 This file documents the Bristol/Embecosm Embedded Benchmark Suite,
 BEEBS.
@@ -71,7 +71,7 @@ File: beebs.info,  Node: Preparation,  Next: Configuring the Build,  Up: Buildin
 Unpack the software and create a _separate_ directory in which to build
 it:
 
-     tar jxf beebs-1.0.tar.bz2
+     tar jxf beebs-3.0.tar.bz2
      mkdir bd
      cd bd
 
@@ -146,7 +146,7 @@ File: beebs.info,  Node: Known Issues,  Prev: Running,  Up: Building and Running
 2.5 Known Problems and Issues
 =============================
 
-The following problems and issues are known about with BEEBS 1.0.
+The following problems and issues are known about with BEEBS 3.0.
 Notify other issues by email to <beebs@mageec.org>.
 
    * The configuration files, assume bash.
@@ -789,64 +789,64 @@ Index
  [index ]
 * Menu:
 
-* '--with-board':                        Configuring the Build.
+* --with-board:                          Configuring the Build.
                                                                (line 19)
-* '--with-chip':                         Configuring the Build.
+* --with-chip:                           Configuring the Build.
                                                                (line 22)
 * Adding a new benchmark:                Adding a New Benchmark to BEEBS.
                                                                (line  6)
 * Adding a new board:                    Adding a New Board to BEEBS.
                                                                (line  6)
-* 'arch.cfg':                            Configuration files.  (line  6)
+* arch.cfg:                              Configuration files.  (line  6)
 * Benchmark structure:                   Benchmark structure.  (line  6)
 * board specific code:                   Board specific code.  (line  6)
-* 'board.cfg':                           Configuration files.  (line  6)
-* 'boardsupport.c':                      Board specific code.  (line  6)
-* 'boardsupport.h':                      Header files.         (line  6)
-* 'BOARD_CFLAGS':                        Configuration files.  (line 17)
-* 'BOARD_CFLAGS' <1>:                    Configuration files.  (line 23)
-* 'BOARD_REPEAT_FACTOR':                 Header files.         (line 16)
+* board.cfg:                             Configuration files.  (line  6)
+* boardsupport.c:                        Board specific code.  (line  6)
+* boardsupport.h:                        Header files.         (line  6)
+* BOARD_CFLAGS:                          Configuration files.  (line 17)
+* BOARD_CFLAGS <1>:                      Configuration files.  (line 23)
+* BOARD_REPEAT_FACTOR:                   Header files.         (line 16)
 * bugs:                                  Known Issues.         (line  6)
 * building BEEBS:                        Building.             (line  6)
 * Calibration:                           Calibration.          (line  6)
-* 'calibration':                         Calibration.          (line  6)
-* 'chip.cfg':                            Configuration files.  (line  6)
-* 'chipsupport.h':                       Header files.         (line  6)
-* 'CHIP_CFLAGS':                         Configuration files.  (line 20)
+* calibration:                           Calibration.          (line  6)
+* chip.cfg:                              Configuration files.  (line  6)
+* chipsupport.h:                         Header files.         (line  6)
+* CHIP_CFLAGS:                           Configuration files.  (line 20)
 * configuration files:                   Configuration files.  (line  6)
 * configuring BEEBS:                     Configuring the Build.
                                                                (line  6)
 * header files:                          Header files.         (line  6)
-* 'initialize_board':                    Board specific code.  (line 11)
+* initialize_board:                      Board specific code.  (line 11)
 * known issues:                          Known Issues.         (line  6)
 * license for beebs:                     GNU Free Documentation License.
                                                                (line  6)
 * problems:                              Known Issues.         (line  6)
 * Running BEEBS:                         Running.              (line  6)
-* 'start_trigger':                       Board specific code.  (line 15)
-* 'stop_trigger':                        Board specific code.  (line 19)
+* start_trigger:                         Board specific code.  (line 15)
+* stop_trigger:                          Board specific code.  (line 19)
 * where to add files:                    Where to add files.   (line  6)
 
 
 
 Tag Table:
-Node: Top770
-Node: About1167
-Node: Building and Running BEEBS1464
-Node: Preparation1774
-Node: Configuring the Build2044
-Node: Building3260
-Node: Running3728
-Node: Known Issues3902
-Node: Adding a New Board to BEEBS4216
-Node: Where to add files4532
-Node: Configuration files5701
-Node: Header files6526
-Node: Board specific code7282
-Node: Calibration8106
-Node: Adding a New Benchmark to BEEBS8957
-Node: Benchmark structure9539
-Node: GNU Free Documentation License10228
-Node: Index32631
+Node: Top773
+Node: About1170
+Node: Building and Running BEEBS1467
+Node: Preparation1777
+Node: Configuring the Build2047
+Node: Building3263
+Node: Running3731
+Node: Known Issues3905
+Node: Adding a New Board to BEEBS4219
+Node: Where to add files4535
+Node: Configuration files5704
+Node: Header files6529
+Node: Board specific code7285
+Node: Calibration8109
+Node: Adding a New Benchmark to BEEBS8960
+Node: Benchmark structure9542
+Node: GNU Free Documentation License10231
+Node: Index32634
 
 End Tag Table

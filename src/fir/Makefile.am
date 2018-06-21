@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_FIR
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = fir
-fir_SOURCES = fir.c
-fir_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS       = fir
+noinst_LTLIBRARIES = libfir.la
+
+fir_SOURCES        =
+libfir_la_SOURCES = libfir.c
+
+fir_LDADD          = $(top_builddir)/support/libmain.la \
+                     libfir.la \
+                     $(top_builddir)/support/libsupport.la
 
 
 

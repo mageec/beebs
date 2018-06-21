@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_CRC32
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS  = crc32
+bin_PROGRAMS        = crc32
+noinst_LTLIBRARIES  = libcrc32.la
 
-crc32_SOURCES = crc_32.c
-crc32_LDADD   = $(top_srcdir)/support/libsupport.la
+crc32_SOURCES       =
+
+libcrc32_la_SOURCES = crc_32.c
+
+crc32_LDADD         = $(top_builddir)/support/libmain.la \
+                      libcrc32.la \
+                      $(top_builddir)/support/libsupport.la
 
 endif

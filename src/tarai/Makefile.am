@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_TARAI
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = tarai
-tarai_SOURCES = tarai.c
-tarai_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS        = tarai
+noinst_LTLIBRARIES  = libtarai.la
+
+tarai_SOURCES       =
+libtarai_la_SOURCES = libtarai.c
+
+tarai_LDADD         = $(top_builddir)/support/libmain.la \
+                      libtarai.la \
+                      $(top_builddir)/support/libsupport.la
 
 
 

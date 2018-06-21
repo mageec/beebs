@@ -25,8 +25,11 @@ if ENABLED_BENCHMARK_NETTLE_CAST128
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = nettle-cast128
-nettle_cast128_SOURCES=cast128.c
+bin_PROGRAMS                 = nettle-cast128
+noinst_LTLIBRARIES           = libnettle-cast128.la
+
+nettle_cast128_SOURCES       =
+libnettle_cast128_la_SOURCES=cast128.c
 
 
 nettle_cast128_SOURCES += ${platform_src}

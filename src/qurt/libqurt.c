@@ -1,3 +1,4 @@
+
 /* BEEBS qurt benchmark
 
    *************************************************************************
@@ -160,6 +161,13 @@ volatile int result = 0;
 static float in1[] = {1.0, -3.0, 2.0};
 static float in2[] = {1.0, -2.0, 1.0};
 static float in3[] = {1.0, -4.0, 8.0};
+
+
+void
+initialise_benchmark (void)
+{
+}
+
 
 int
 benchmark (void)

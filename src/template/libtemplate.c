@@ -1,3 +1,4 @@
+
 /* -*- mode: C++; c-file-style: "gnu-mode" -*- */
 /* BEEBS template benchmark
 
@@ -26,6 +27,13 @@
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+
+
+
+void
+initialise_benchmark (void)
+{
+}
 
 
 int

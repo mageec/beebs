@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_SGLIB_LISTSORT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = sglib-listsort
-sglib_listsort_SOURCES = listsort.c sglib.h
-sglib_listsort_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS                 = sglib-listsort
+noinst_LTLIBRARIES           = libsglib-listsort.la
+
+sglib_listsort_SOURCES       =
+libsglib_listsort_la_SOURCES = listsort.c sglib.h
+
+sglib_listsort_LDADD         = $(top_builddir)/support/libmain.la \
+                               libsglib-listsort.la \
+                               $(top_builddir)/support/libsupport.la
 
 
 

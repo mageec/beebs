@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_SGLIB_HASHTABLE
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = sglib-hashtable
-sglib_hashtable_SOURCES = hashtable.c sglib.h
-sglib_hashtable_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS                  = sglib-hashtable
+noinst_LTLIBRARIES            = libsglib-hashtable.la
+
+sglib_hashtable_SOURCES       =
+libsglib_hashtable_la_SOURCES = hashtable.c sglib.h
+
+sglib_hashtable_LDADD         = $(top_builddir)/support/libmain.la \
+                                libsglib-hashtable.la \
+                                $(top_builddir)/support/libsupport.la
 
 
 

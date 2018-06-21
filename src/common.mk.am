@@ -31,6 +31,10 @@ else
 calib = echo 0
 endif
 
-AM_CPPFLAGS = "-DCALIB_SCALE=$(shell $(calib))" @CPPFLAGS@
+AM_CPPFLAGS = "-DCALIB_SCALE=$(shell $(calib))" \
+              -I $(top_srcdir)/support \
+              -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@ \
+              -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ \
+              @CPPFLAGS@
 AM_CFLAGS   = @CFLAGS@
 AM_LDFLAGS  = @LDFLAGS@

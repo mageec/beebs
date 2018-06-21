@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_QURT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = qurt
-qurt_SOURCES = qurt.c
-qurt_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS       = qurt
+noinst_LTLIBRARIES = libqurt.la
+
+qurt_SOURCES       =
+libqurt_la_SOURCES = libqurt.c
+
+qurt_LDADD         = $(top_builddir)/support/libmain.la \
+                     libqurt.la \
+                     $(top_builddir)/support/libsupport.la
 
 
 

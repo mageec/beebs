@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_STB_PERLIN
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = stb_perlin
-stb_perlin_SOURCES = stb_perlin.c
-stb_perlin_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS             = stb_perlin
+noinst_LTLIBRARIES       = libstb_perlin.la
+
+stb_perlin_SOURCES       =
+libstb_perlin_la_SOURCES = libstb_perlin.c
+
+stb_perlin_LDADD         = $(top_builddir)/support/libmain.la \
+                           libstb_perlin.la \
+                           $(top_builddir)/support/libsupport.la
 
 
 

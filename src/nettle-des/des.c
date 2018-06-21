@@ -1,3 +1,4 @@
+
 /* BEEBS nettle-des benchmark
 
    Copyright (C) 1992  Dana L. How
@@ -270,6 +271,13 @@ des_decrypt(const struct des_ctx *ctx,
       dst += DES_BLOCK_SIZE;
     }
 }
+
+
+void
+initialise_benchmark (void)
+{
+}
+
 
 int
 benchmark (void)

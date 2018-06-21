@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_QRDUINO
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = qrduino
-qrduino_SOURCES = qrtest.c qrencode.c qrencode.h qrframe.c ecctable.h qrbits.h
-qrduino_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS          = qrduino
+noinst_LTLIBRARIES    = libqrduino.la
+
+qrduino_SOURCES       =
+libqrduino_la_SOURCES = qrtest.c qrencode.c qrencode.h qrframe.c ecctable.h qrbits.h
+
+qrduino_LDADD         = $(top_builddir)/support/libmain.la \
+                        libqrduino.la \
+                        $(top_builddir)/support/libsupport.la
 
 
 

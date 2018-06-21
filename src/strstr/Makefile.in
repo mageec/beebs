@@ -62,6 +62,7 @@
 # of the repeat factor. If grep doesn't find the program, then we specify
 # 0 as the default. This is the default if a calibration file is not found
 
+
 VPATH = @srcdir@
 am__is_gnu_make = { \
   if test -z '$(MAKELEVEL)'; then \
@@ -136,6 +137,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
+target_triplet = @target@
 @ENABLED_BENCHMARK_STRSTR_TRUE@bin_PROGRAMS = strstr$(EXEEXT)
 subdir = src/strstr
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -150,16 +152,23 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-am__installdirs = "$(DESTDIR)$(bindir)"
-PROGRAMS = $(bin_PROGRAMS)
-am__strstr_SOURCES_DIST = strstr.c
-@ENABLED_BENCHMARK_STRSTR_TRUE@am_strstr_OBJECTS = strstr.$(OBJEXT)
-strstr_OBJECTS = $(am_strstr_OBJECTS)
-@ENABLED_BENCHMARK_STRSTR_TRUE@strstr_DEPENDENCIES = $(top_srcdir)/support/libsupport.la
+LTLIBRARIES = $(noinst_LTLIBRARIES)
+libstrstr_la_LIBADD =
+am__libstrstr_la_SOURCES_DIST = libstrstr.c
+@ENABLED_BENCHMARK_STRSTR_TRUE@am_libstrstr_la_OBJECTS = libstrstr.lo
+libstrstr_la_OBJECTS = $(am_libstrstr_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
+@ENABLED_BENCHMARK_STRSTR_TRUE@am_libstrstr_la_rpath =
+am__installdirs = "$(DESTDIR)$(bindir)"
+PROGRAMS = $(bin_PROGRAMS)
+am_strstr_OBJECTS =
+strstr_OBJECTS = $(am_strstr_OBJECTS)
+@ENABLED_BENCHMARK_STRSTR_TRUE@strstr_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_STRSTR_TRUE@	libstrstr.la \
+@ENABLED_BENCHMARK_STRSTR_TRUE@	$(top_builddir)/support/libsupport.la
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -194,8 +203,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(strstr_SOURCES)
-DIST_SOURCES = $(am__strstr_SOURCES_DIST)
+SOURCES = $(libstrstr_la_SOURCES) $(strstr_SOURCES)
+DIST_SOURCES = $(am__libstrstr_la_SOURCES_DIST) $(strstr_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -342,7 +351,11 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 srcdir = @srcdir@
 sysconfdir = @sysconfdir@
+target = @target@
 target_alias = @target_alias@
+target_cpu = @target_cpu@
+target_os = @target_os@
+target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
@@ -351,11 +364,21 @@ top_srcdir = @top_srcdir@
 @CALIBRATION_TRUE@@ENABLED_BENCHMARK_STRSTR_TRUE@	        $(top_srcdir)/config/@ARCH@/boards/@BOARD@/calibration \
 @CALIBRATION_TRUE@@ENABLED_BENCHMARK_STRSTR_TRUE@		|| echo "0 0") | cut -d " " -f 2
 
-@ENABLED_BENCHMARK_STRSTR_TRUE@AM_CPPFLAGS = "-DCALIB_SCALE=$(shell $(calib))" @CPPFLAGS@
+@ENABLED_BENCHMARK_STRSTR_TRUE@AM_CPPFLAGS = "-DCALIB_SCALE=$(shell $(calib))" \
+@ENABLED_BENCHMARK_STRSTR_TRUE@              -I $(top_srcdir)/support \
+@ENABLED_BENCHMARK_STRSTR_TRUE@              -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@ \
+@ENABLED_BENCHMARK_STRSTR_TRUE@              -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ \
+@ENABLED_BENCHMARK_STRSTR_TRUE@              @CPPFLAGS@
+
 @ENABLED_BENCHMARK_STRSTR_TRUE@AM_CFLAGS = @CFLAGS@
 @ENABLED_BENCHMARK_STRSTR_TRUE@AM_LDFLAGS = @LDFLAGS@
-@ENABLED_BENCHMARK_STRSTR_TRUE@strstr_SOURCES = strstr.c
-@ENABLED_BENCHMARK_STRSTR_TRUE@strstr_LDADD = $(top_srcdir)/support/libsupport.la
+@ENABLED_BENCHMARK_STRSTR_TRUE@noinst_LTLIBRARIES = libstrstr.la
+@ENABLED_BENCHMARK_STRSTR_TRUE@strstr_SOURCES = 
+@ENABLED_BENCHMARK_STRSTR_TRUE@libstrstr_la_SOURCES = libstrstr.c
+@ENABLED_BENCHMARK_STRSTR_TRUE@strstr_LDADD = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_STRSTR_TRUE@                       libstrstr.la \
+@ENABLED_BENCHMARK_STRSTR_TRUE@                       $(top_builddir)/support/libsupport.la
+
 all: all-am
 
 .SUFFIXES:
@@ -390,6 +413,20 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
+
+clean-noinstLTLIBRARIES:
+	-test -z "$(noinst_LTLIBRARIES)" || rm -f $(noinst_LTLIBRARIES)
+	@list='$(noinst_LTLIBRARIES)'; \
+	locs=`for p in $$list; do echo $$p; done | \
+	      sed 's|^[^/]*$$|.|; s|/[^/]*$$||; s|$$|/so_locations|' | \
+	      sort -u`; \
+	test -z "$$locs" || { \
+	  echo rm -f $${locs}; \
+	  rm -f $${locs}; \
+	}
+
+libstrstr.la: $(libstrstr_la_OBJECTS) $(libstrstr_la_DEPENDENCIES) $(EXTRA_libstrstr_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(LINK) $(am_libstrstr_la_rpath) $(libstrstr_la_OBJECTS) $(libstrstr_la_LIBADD) $(LIBS)
 install-binPROGRAMS: $(bin_PROGRAMS)
 	@$(NORMAL_INSTALL)
 	@list='$(bin_PROGRAMS)'; test -n "$(bindir)" || list=; \
@@ -450,7 +487,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/strstr.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libstrstr.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -563,7 +600,7 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(PROGRAMS)
+all-am: Makefile $(LTLIBRARIES) $(PROGRAMS)
 installdirs:
 	for dir in "$(DESTDIR)$(bindir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
@@ -600,7 +637,8 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-am
 
-clean-am: clean-binPROGRAMS clean-generic clean-libtool mostlyclean-am
+clean-am: clean-binPROGRAMS clean-generic clean-libtool \
+	clean-noinstLTLIBRARIES mostlyclean-am
 
 distclean: distclean-am
 	-rm -rf ./$(DEPDIR)
@@ -671,15 +709,16 @@ uninstall-am: uninstall-binPROGRAMS
 .MAKE: install-am install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am check check-am clean \
-	clean-binPROGRAMS clean-generic clean-libtool cscopelist-am \
-	ctags ctags-am distclean distclean-compile distclean-generic \
-	distclean-libtool distclean-tags distdir dvi dvi-am html \
-	html-am info info-am install install-am install-binPROGRAMS \
-	install-data install-data-am install-dvi install-dvi-am \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-man install-pdf \
-	install-pdf-am install-ps install-ps-am install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
+	clean-binPROGRAMS clean-generic clean-libtool \
+	clean-noinstLTLIBRARIES cscopelist-am ctags ctags-am distclean \
+	distclean-compile distclean-generic distclean-libtool \
+	distclean-tags distdir dvi dvi-am html html-am info info-am \
+	install install-am install-binPROGRAMS install-data \
+	install-data-am install-dvi install-dvi-am install-exec \
+	install-exec-am install-html install-html-am install-info \
+	install-info-am install-man install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-compile \
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	tags tags-am uninstall uninstall-am uninstall-binPROGRAMS

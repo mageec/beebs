@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_JANNE_COMPLEX
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = janne_complex
-janne_complex_SOURCES = janne_complex.c
-janne_complex_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS                = janne_complex
+noinst_LTLIBRARIES          = libjanne_complex.la
+
+janne_complex_SOURCES       =
+libjanne_complex_la_SOURCES = libjanne_complex.c
+
+janne_complex_LDADD         = $(top_builddir)/support/libmain.la \
+                              libjanne_complex.la \
+                              $(top_builddir)/support/libsupport.la
 
 
 

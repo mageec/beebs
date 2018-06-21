@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_BUBBLESORT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS=bubblesort
+bin_PROGRAMS             = bubblesort
+noinst_LTLIBRARIES       = libbubblesort.la
 
-bubblesort_SOURCES = bubblesort.c
-bubblesort_LDADD   = $(top_srcdir)/support/libsupport.la
+bubblesort_SOURCES       =
+
+libbubblesort_la_SOURCES = libbubblesort.c
+
+bubblesort_LDADD         = $(top_builddir)/support/libmain.la \
+                           libbubblesort.la \
+                           $(top_builddir)/support/libsupport.la
 
 endif

@@ -25,11 +25,17 @@ if ENABLED_BENCHMARK_TRIO_SNPRINTF
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = trio-snprintf
+bin_PROGRAMS                = trio-snprintf
+noinst_LTLIBRARIES          = libtrio-snprintf.la
 
-trio_snprintf_SOURCES  = trio.c trio.h trio_test.c triostr.c triostr.h \
+trio_snprintf_SOURCES       =
+
+libtrio_snprintf_la_SOURCES  = trio.c trio.h trio_test.c triostr.c triostr.h \
                          triodef.h triop.h
-trio_snprintf_LDADD    = $(top_srcdir)/support/libsupport.la
+
+trio_snprintf_LDADD         = $(top_builddir)/support/libmain.la \
+                              libtrio-snprintf.la \
+                              $(top_builddir)/support/libsupport.la
 trio_snprintf_CPPFLAGS = -DTRIO_EXTENSION=0 -DTRIO_DEPRECATED=0 \
                          -DTRIO_MICROSOFT=0 -DTRIO_ERRORS=0     \
                          -DTRIO_FEATURE_FLOAT=0 -DTRIO_SNPRINTF \

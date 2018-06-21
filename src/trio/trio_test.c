@@ -1,3 +1,4 @@
+
 /* BEEBS template benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -27,6 +28,13 @@
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
 #ifdef TRIO_SNPRINTF
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 int
 benchmark (void)
 {
@@ -45,6 +53,13 @@ benchmark (void)
 /* Global variables, so calls in BENCHMARK are not optimised away.  */
 volatile int int_dest;
 volatile char char_dest [20];
+
+
+void
+initialise_benchmark (void)
+{
+}
+
 
 int
 benchmark (void)

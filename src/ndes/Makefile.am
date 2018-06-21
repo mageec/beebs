@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_NDES
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = ndes
-ndes_SOURCES = ndes.c
-ndes_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS       = ndes
+noinst_LTLIBRARIES = libndes.la
+
+ndes_SOURCES       =
+libndes_la_SOURCES = libndes.c
+
+ndes_LDADD         = $(top_builddir)/support/libmain.la \
+                     libndes.la \
+                     $(top_builddir)/support/libsupport.la
 
 
 

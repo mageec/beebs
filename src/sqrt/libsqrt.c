@@ -1,3 +1,4 @@
+
 /* BEEBS sqrt benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -114,6 +115,13 @@ float sqrtfcn(float val)
    }
    return (x);
 }
+
+
+void
+initialise_benchmark (void)
+{
+}
+
 
 int
 benchmark()

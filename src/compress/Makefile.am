@@ -33,9 +33,15 @@ if ENABLED_BENCHMARK_COMPRESS
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = compress
-compress_SOURCES = compress.c
-compress_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS           = compress
+noinst_LTLIBRARIES     = libcompress.la
+
+compress_SOURCES       =
+libcompress_la_SOURCES = libcompress.c
+
+compress_LDADD         = $(top_builddir)/support/libmain.la \
+                         libcompress.la \
+                         $(top_builddir)/support/libsupport.la
 
 
 

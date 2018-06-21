@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_QSORT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = qsort
-qsort_SOURCES = qsort.c
-qsort_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS        = qsort
+noinst_LTLIBRARIES  = libqsort.la
+
+qsort_SOURCES       =
+libqsort_la_SOURCES = libqsort.c
+
+qsort_LDADD         = $(top_builddir)/support/libmain.la \
+                      libqsort.la \
+                      $(top_builddir)/support/libsupport.la
 
 
 

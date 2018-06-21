@@ -1,3 +1,4 @@
+
 /* BEEBS whetstone benchmark
 
  * C Converted Whetstone Double Precision Benchmark
@@ -106,6 +107,13 @@ void P3(double X, double Y, double *Z);
 */
 double T,T1,T2,E1[5];
 int J,K,L;
+
+
+void
+initialise_benchmark (void)
+{
+}
+
 
 int
 benchmark()

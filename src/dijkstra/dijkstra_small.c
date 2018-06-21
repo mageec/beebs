@@ -1,3 +1,4 @@
+
 /* This file is part of the Bristol/Embecosm Embedded Benchmark Suite.
 
    This program is free software: you can redistribute it and/or modify
@@ -161,6 +162,13 @@ int dijkstra(int chStart, int chEnd)
 
 int output[NUM_NODES * NUM_NODES];
 int output_count = 0;
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark() {
    int i,j;

@@ -1,3 +1,4 @@
+
 /* This file is part of the Bristol/Embecosm Embedded Benchmark Suite.
 
    This program is free software: you can redistribute it and/or modify
@@ -107,6 +108,13 @@ binary_search(int x)
   }
   return fvalue;
 }
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark()
 {

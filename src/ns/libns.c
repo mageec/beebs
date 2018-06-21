@@ -1,3 +1,4 @@
+
 /* BEEBS ns benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -1066,6 +1067,13 @@ int foo(int x)
 
 
 
+
+
+
+void
+initialise_benchmark (void)
+{
+}
 
 
 int

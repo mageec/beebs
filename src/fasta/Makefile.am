@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_FASTA
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = fasta
-fasta_SOURCES = fasta.c
-fasta_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS        = fasta
+noinst_LTLIBRARIES  = libfasta.la
+
+fasta_SOURCES       =
+libfasta_la_SOURCES = libfasta.c
+
+fasta_LDADD         = $(top_builddir)/support/libmain.la \
+                      libfasta.la \
+                      $(top_builddir)/support/libsupport.la
 
 
 

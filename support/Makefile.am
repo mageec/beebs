@@ -21,15 +21,17 @@
 
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-noinst_LTLIBRARIES = libsupport.la
+noinst_LTLIBRARIES = libmain.la libsupport.la
 
+libmain_la_SOURCES    = main.c
 libsupport_la_SOURCES = board.c   \
-                        main.c    \
                         support.h
 
 if CHIPSUPPORT_C
 libsupport_la_SOURCES += chip.c
 endif
 
+libmain_la_CPPFLAGS    = -I$(top_srcdir)/config/@ARCH@/boards/@BOARD@ \
+                         -I$(top_srcdir)/config/@ARCH@/chips/@CHIP@
 libsupport_la_CPPFLAGS = -I$(top_srcdir)/config/@ARCH@/boards/@BOARD@ \
                          -I$(top_srcdir)/config/@ARCH@/chips/@CHIP@

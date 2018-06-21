@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_SGLIB_DLLIST
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = sglib-dllist
-sglib_dllist_SOURCES = dllist.c sglib.h
-sglib_dllist_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS               = sglib-dllist
+noinst_LTLIBRARIES         = libsglib-dllist.la
+
+sglib_dllist_SOURCES       =
+libsglib_dllist_la_SOURCES = dllist.c sglib.h
+
+sglib_dllist_LDADD         = $(top_builddir)/support/libmain.la \
+                             libsglib-dllist.la \
+                             $(top_builddir)/support/libsupport.la
 
 
 

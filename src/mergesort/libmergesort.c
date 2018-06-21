@@ -1,3 +1,4 @@
+
 /* BEEBS mergesort benchmark
 
    Originally from https://github.com/BonzaiThePenguin/WikiSort
@@ -192,6 +193,13 @@ long TestingMostlyEqual(long index, long total) {
 
 const long max_size = 100;
 Test array1[100];
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark() {
 	long total, index, test_case;

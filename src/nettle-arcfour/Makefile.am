@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_NETTLE_ARCFOUR
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = nettle-arcfour
-nettle_arcfour_SOURCES = arcfour.c
-nettle_arcfour_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS                 = nettle-arcfour
+noinst_LTLIBRARIES           = libnettle-arcfour.la
+
+nettle_arcfour_SOURCES       =
+libnettle_arcfour_la_SOURCES = arcfour.c
+
+nettle_arcfour_LDADD         = $(top_builddir)/support/libmain.la \
+                               libnettle-arcfour.la \
+                               $(top_builddir)/support/libsupport.la
 
 
 

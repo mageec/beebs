@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_CRC
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = crc
-crc_SOURCES = crc.c
-crc_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS       = crc
+noinst_LTLIBRARIES = libcrc.la
+
+crc_SOURCES        =
+libcrc_la_SOURCES = libcrc.c
+
+crc_LDADD          = $(top_builddir)/support/libmain.la \
+                     libcrc.la \
+                     $(top_builddir)/support/libsupport.la
 
 
 

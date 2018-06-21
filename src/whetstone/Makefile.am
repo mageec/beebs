@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_WHETSTONE
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = whetstone
-whetstone_SOURCES = whetstone.c
-whetstone_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS            = whetstone
+noinst_LTLIBRARIES      = libwhetstone.la
+
+whetstone_SOURCES       =
+libwhetstone_la_SOURCES = libwhetstone.c
+
+whetstone_LDADD         = $(top_builddir)/support/libmain.la \
+                          libwhetstone.la \
+                          $(top_builddir)/support/libsupport.la
 
 
 

@@ -25,9 +25,15 @@ if ENABLED_BENCHMARK_SELECT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS = select
-select_SOURCES = select.c
-select_LDADD   = $(top_srcdir)/support/libsupport.la
+bin_PROGRAMS         = select
+noinst_LTLIBRARIES   = libselect.la
+
+select_SOURCES       =
+libselect_la_SOURCES = libselect.c
+
+select_LDADD         = $(top_builddir)/support/libmain.la \
+                       libselect.la \
+                       $(top_builddir)/support/libsupport.la
 
 
 
