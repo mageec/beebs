@@ -25,12 +25,16 @@ if ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT
 
 include $(top_srcdir)/src/common.mk.am
 
-bin_PROGRAMS                      = sglib-arrayheapsort
-noinst_LTLIBRARIES                = libsglib-arrayheapsort.la
+bin_PROGRAMS                       = sglib-arrayheapsort
+noinst_LTLIBRARIES                 = libsglib-arrayheapsort.la
 
-sglib_arrayheapsort_SOURCES       =
+sglib_arrayheapsort_SOURCES        =
 
 libsglib_arrayheapsort_la_SOURCES  = arraysort.c sglib.h
-sglib_arrayheapsort_CPPFLAGS = -DHEAP_SORT ${AM_CPPFLAGS}
+libsglib_arrayheapsort_la_CPPFLAGS = -DHEAP_SORT ${AM_CPPFLAGS}
+
+sglib_arrayheapsort_LDADD          = $(top_builddir)/support/libmain.la \
+                                     libsglib-arrayheapsort.la \
+                                     $(top_builddir)/support/libsupport.la
 
 endif

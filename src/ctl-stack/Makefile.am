@@ -35,6 +35,6 @@ libctl_stack_la_SOURCES  = ctl.c ctl.h stack.h
 ctl_stack_LDADD         = $(top_builddir)/support/libmain.la \
                           libctl-stack.la \
                           $(top_builddir)/support/libsupport.la
-ctl_stack_CPPFLAGS = -DCTL_STACK ${AM_CPPFLAGS}
+libctl_stack_la_CPPFLAGS = -DCTL_STACK ${AM_CPPFLAGS}
 
 endif

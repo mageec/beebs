@@ -1,4 +1,5 @@
 
+
 /* BEEBS fasta benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -148,6 +149,16 @@ static void random_fasta (aminoacid_t const *genelist, size_t count) {
 	count -= line;
     } while (count);
 }
+
+
+/* This benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
+}
+
 
 void
 initialise_benchmark (void)

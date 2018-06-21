@@ -167,7 +167,9 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_sglib_arraybinsearch_OBJECTS =
 sglib_arraybinsearch_OBJECTS = $(am_sglib_arraybinsearch_OBJECTS)
-sglib_arraybinsearch_LDADD = $(LDADD)
+@ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE@sglib_arraybinsearch_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE@	libsglib-arraybinsearch.la \
+@ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE@	$(top_builddir)/support/libsupport.la
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -374,9 +376,12 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE@AM_CFLAGS = @CFLAGS@
 @ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE@AM_LDFLAGS = @LDFLAGS@
 @ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE@noinst_LTLIBRARIES = libsglib-arraybinsearch.la
-@ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE@sglib_arraybinsearch_SOURCES =  \
-@ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE@	${platform_src}
+@ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE@sglib_arraybinsearch_SOURCES = 
 @ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE@libsglib_arraybinsearch_la_SOURCES = arraybinsearch.c sglib.h
+@ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE@sglib_arraybinsearch_LDADD = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE@                                     libsglib-arraybinsearch.la \
+@ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE@                                     $(top_builddir)/support/libsupport.la
+
 all: all-am
 
 .SUFFIXES:

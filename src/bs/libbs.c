@@ -1,4 +1,5 @@
 
+
 /* This file is part of the Bristol/Embecosm Embedded Benchmark Suite.
 
    This program is free software: you can redistribute it and/or modify
@@ -108,6 +109,16 @@ binary_search(int x)
   }
   return fvalue;
 }
+
+
+/* This benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
+}
+
 
 void
 initialise_benchmark (void)

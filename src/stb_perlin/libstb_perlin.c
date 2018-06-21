@@ -1,4 +1,5 @@
 
+
 /* -*- mode: C++; c-file-style: "gnu-mode" -*- */
 /* BEEBS perlin noise benchmark
 
@@ -188,6 +189,16 @@ static const float expected[PX_LIM][PX_LIM] =
     {0.0463357568, 0.137281597, 0.207558081, 0.237974346, 0.217995077, 0.150000095, 0.0497227311, -0.0571305752, -0.142080128, -0.184891045},
     {0.00770395994, 0.105018653, 0.187921703, 0.238228887, 0.242842719, 0.200000048, 0.121270508, 0.0293106437, -0.0486289859, -0.0914399624}
 };
+
+
+/* This benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
+}
+
 
 void
 initialise_benchmark (void)

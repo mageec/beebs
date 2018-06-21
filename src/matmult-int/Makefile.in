@@ -156,8 +156,7 @@ CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 libmatmult_int_la_LIBADD =
 am__libmatmult_int_la_SOURCES_DIST = matmult.c
-@ENABLED_BENCHMARK_MATMULT_INT_TRUE@am_libmatmult_int_la_OBJECTS =  \
-@ENABLED_BENCHMARK_MATMULT_INT_TRUE@	matmult.lo
+@ENABLED_BENCHMARK_MATMULT_INT_TRUE@am_libmatmult_int_la_OBJECTS = libmatmult_int_la-matmult.lo
 libmatmult_int_la_OBJECTS = $(am_libmatmult_int_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -171,9 +170,6 @@ matmult_int_OBJECTS = $(am_matmult_int_OBJECTS)
 @ENABLED_BENCHMARK_MATMULT_INT_TRUE@matmult_int_DEPENDENCIES = $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_MATMULT_INT_TRUE@	libmatmult-int.la \
 @ENABLED_BENCHMARK_MATMULT_INT_TRUE@	$(top_builddir)/support/libsupport.la
-matmult_int_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(matmult_int_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -382,11 +378,10 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_MATMULT_INT_TRUE@matmult_int_SOURCES = 
 @ENABLED_BENCHMARK_MATMULT_INT_TRUE@libmatmult_int_la_SOURCES = matmult.c
 @ENABLED_BENCHMARK_MATMULT_INT_TRUE@matmult_int_LDADD = $(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_MATMULT_INT_TRUE@                            libmatmult-int.la \
-@ENABLED_BENCHMARK_MATMULT_INT_TRUE@                            $(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_MATMULT_INT_TRUE@                             libmatmult-int.la \
+@ENABLED_BENCHMARK_MATMULT_INT_TRUE@                             $(top_builddir)/support/libsupport.la
 
-@ENABLED_BENCHMARK_MATMULT_INT_TRUE@matmult_int_CPPFLAGS = -DMATMULT_INT ${AM_CPPFLAGS}
-@ENABLED_BENCHMARK_MATMULT_INT_TRUE@matmult_int_LDFLAGS = ${AM_LDFLAGS}
+@ENABLED_BENCHMARK_MATMULT_INT_TRUE@libmatmult_int_la_CPPFLAGS = -DMATMULT_INT ${AM_CPPFLAGS}
 all: all-am
 
 .SUFFIXES:
@@ -487,7 +482,7 @@ clean-binPROGRAMS:
 
 matmult-int$(EXEEXT): $(matmult_int_OBJECTS) $(matmult_int_DEPENDENCIES) $(EXTRA_matmult_int_DEPENDENCIES) 
 	@rm -f matmult-int$(EXEEXT)
-	$(AM_V_CCLD)$(matmult_int_LINK) $(matmult_int_OBJECTS) $(matmult_int_LDADD) $(LIBS)
+	$(AM_V_CCLD)$(LINK) $(matmult_int_OBJECTS) $(matmult_int_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -495,7 +490,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/matmult.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmatmult_int_la-matmult.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -517,6 +512,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
+
+libmatmult_int_la-matmult.lo: matmult.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmatmult_int_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libmatmult_int_la-matmult.lo -MD -MP -MF $(DEPDIR)/libmatmult_int_la-matmult.Tpo -c -o libmatmult_int_la-matmult.lo `test -f 'matmult.c' || echo '$(srcdir)/'`matmult.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libmatmult_int_la-matmult.Tpo $(DEPDIR)/libmatmult_int_la-matmult.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='matmult.c' object='libmatmult_int_la-matmult.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmatmult_int_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libmatmult_int_la-matmult.lo `test -f 'matmult.c' || echo '$(srcdir)/'`matmult.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

@@ -23,10 +23,16 @@
 
 if ENABLED_BENCHMARK_CNT
 
-bin_PROGRAMS=cnt
-cnt_SOURCES=cnt.c
-
 include $(top_srcdir)/src/common.mk.am
 
-cnt_SOURCES += ${platform_src}
+bin_PROGRAMS       = cnt
+noinst_LTLIBRARIES = libcnt.la
+
+cnt_SOURCES        =
+libcnt_la_SOURCES  = cnt.c
+
+cnt_LDADD          = $(top_builddir)/support/libmain.la \
+                     libcnt.la \
+                     $(top_builddir)/support/libsupport.la
+
 endif

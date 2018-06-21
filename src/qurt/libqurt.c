@@ -1,4 +1,5 @@
 
+
 /* BEEBS qurt benchmark
 
    *************************************************************************
@@ -161,6 +162,16 @@ volatile int result = 0;
 static float in1[] = {1.0, -3.0, 2.0};
 static float in2[] = {1.0, -2.0, 1.0};
 static float in3[] = {1.0, -4.0, 8.0};
+
+
+
+/* This benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
+}
 
 
 void

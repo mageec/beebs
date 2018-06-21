@@ -158,8 +158,9 @@ libtrio_sscanf_la_LIBADD =
 am__libtrio_sscanf_la_SOURCES_DIST = trio.c trio.h trio_test.c \
 	triostr.c triostr.h triodef.h triop.h
 @ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@am_libtrio_sscanf_la_OBJECTS =  \
-@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@	trio.lo trio_test.lo \
-@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@	triostr.lo
+@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@	libtrio_sscanf_la-trio.lo \
+@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@	libtrio_sscanf_la-trio_test.lo \
+@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@	libtrio_sscanf_la-triostr.lo
 libtrio_sscanf_la_OBJECTS = $(am_libtrio_sscanf_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -380,20 +381,20 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@noinst_LTLIBRARIES = libtrio-sscanf.la
 @ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@trio_sscanf_SOURCES = 
 @ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@libtrio_sscanf_la_SOURCES = trio.c trio.h trio_test.c triostr.c triostr.h \
-@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                       triodef.h triop.h
+@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                             triodef.h triop.h
 
 @ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@trio_sscanf_LDADD = $(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                            libtrio-sscanf.la \
-@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                            $(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                             libtrio-sscanf.la \
+@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                             $(top_builddir)/support/libsupport.la
 
-@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@trio_sscanf_CPPFLAGS = -DTRIO_SSCANF -DTRIO_EXTENSION=0 -DTRIO_DEPRECATED=0 \
-@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                       -DTRIO_MICROSOFT=0 -DTRIO_ERRORS=0 \
-@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                       -DTRIO_FEATURE_FLOAT=0 -DTRIO_FEATURE_FILE=0 \
-@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                       -DTRIO_FEATURE_STDIO=0 -DTRIO_FEATURE_FD=0 \
-@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                       -DTRIO_FEATURE_DYNAMICSTRING=0 \
-@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                       -DTRIO_FEATURE_CLOSURE=0 -DTRIO_FEATURE_STRERR=0 \
-@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                       -DTRIO_FEATURE_LOCALE=0 -DTRIO_EMBED_NAN=1 \
-@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                       -DTRIO_EMBED_STRING=1 ${AM_CPPFLAGS}
+@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@libtrio_sscanf_la_CPPFLAGS = -DTRIO_SSCANF -DTRIO_EXTENSION=0 \
+@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                             -DTRIO_DEPRECATED=0 -DTRIO_MICROSOFT=0 \
+@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                             -DTRIO_ERRORS=0 -DTRIO_FEATURE_FLOAT=0 \
+@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                             -DTRIO_FEATURE_FILE=0 -DTRIO_FEATURE_STDIO=0 \
+@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                             -DTRIO_FEATURE_FD=0 -DTRIO_FEATURE_DYNAMICSTRING=0 \
+@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                             -DTRIO_FEATURE_CLOSURE=0 -DTRIO_FEATURE_STRERR=0 \
+@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                             -DTRIO_FEATURE_LOCALE=0 -DTRIO_EMBED_NAN=1 \
+@ENABLED_BENCHMARK_TRIO_SSCANF_TRUE@                             -DTRIO_EMBED_STRING=1 ${AM_CPPFLAGS}
 
 all: all-am
 
@@ -503,9 +504,9 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/trio.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/trio_test.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/triostr.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtrio_sscanf_la-trio.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtrio_sscanf_la-trio_test.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtrio_sscanf_la-triostr.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -527,6 +528,27 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
+
+libtrio_sscanf_la-trio.lo: trio.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtrio_sscanf_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libtrio_sscanf_la-trio.lo -MD -MP -MF $(DEPDIR)/libtrio_sscanf_la-trio.Tpo -c -o libtrio_sscanf_la-trio.lo `test -f 'trio.c' || echo '$(srcdir)/'`trio.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtrio_sscanf_la-trio.Tpo $(DEPDIR)/libtrio_sscanf_la-trio.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='trio.c' object='libtrio_sscanf_la-trio.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtrio_sscanf_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libtrio_sscanf_la-trio.lo `test -f 'trio.c' || echo '$(srcdir)/'`trio.c
+
+libtrio_sscanf_la-trio_test.lo: trio_test.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtrio_sscanf_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libtrio_sscanf_la-trio_test.lo -MD -MP -MF $(DEPDIR)/libtrio_sscanf_la-trio_test.Tpo -c -o libtrio_sscanf_la-trio_test.lo `test -f 'trio_test.c' || echo '$(srcdir)/'`trio_test.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtrio_sscanf_la-trio_test.Tpo $(DEPDIR)/libtrio_sscanf_la-trio_test.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='trio_test.c' object='libtrio_sscanf_la-trio_test.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtrio_sscanf_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libtrio_sscanf_la-trio_test.lo `test -f 'trio_test.c' || echo '$(srcdir)/'`trio_test.c
+
+libtrio_sscanf_la-triostr.lo: triostr.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtrio_sscanf_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libtrio_sscanf_la-triostr.lo -MD -MP -MF $(DEPDIR)/libtrio_sscanf_la-triostr.Tpo -c -o libtrio_sscanf_la-triostr.lo `test -f 'triostr.c' || echo '$(srcdir)/'`triostr.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtrio_sscanf_la-triostr.Tpo $(DEPDIR)/libtrio_sscanf_la-triostr.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='triostr.c' object='libtrio_sscanf_la-triostr.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtrio_sscanf_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libtrio_sscanf_la-triostr.lo `test -f 'triostr.c' || echo '$(srcdir)/'`triostr.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

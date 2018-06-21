@@ -29,8 +29,11 @@ bin_PROGRAMS                 = nettle-cast128
 noinst_LTLIBRARIES           = libnettle-cast128.la
 
 nettle_cast128_SOURCES       =
-libnettle_cast128_la_SOURCES=cast128.c
+libnettle_cast128_la_SOURCES = cast128.c
+
+nettle_cast128_LDADD         = $(top_builddir)/support/libmain.la \
+                               libnettle-cast128.la \
+                               $(top_builddir)/support/libsupport.la
 
 
-nettle_cast128_SOURCES += ${platform_src}
 endif

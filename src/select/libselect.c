@@ -1,3 +1,4 @@
+
 /* BEEBS select benchmark
 
    SOURCE : Numerical Recipes in C - The Second Edition
@@ -102,4 +103,13 @@ benchmark (void)
 void initialise_benchmark() {
   x = 10;
   y = 20;
+}
+
+
+/* This benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
 }

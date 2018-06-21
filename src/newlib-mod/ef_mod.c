@@ -1,4 +1,5 @@
 
+
 /* BEEBS newlib ef_fmod implementation
 
    ====================================================
@@ -151,6 +152,16 @@ static const float one = 1.0, Zero[] = {0.0, -0.0,};
 
 /* Tell the compiler not to optimize out calls in BENCHMARK. */
 volatile float result = 0;
+
+
+
+/* This benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
+}
 
 
 void

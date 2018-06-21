@@ -29,10 +29,11 @@ bin_PROGRAMS        = nbody
 noinst_LTLIBRARIES  = libnbody.la
 
 nbody_SOURCES       =
-libnbody_la_SOURCES=nbody.c
+libnbody_la_SOURCES = nbody.c
 
+nbody_LDADD         = $(top_builddir)/support/libmain.la \
+                      libnbody.la \
+                      $(top_builddir)/support/libsupport.la \
+                      -lm
 
-AM_LDFLAGS += "-lm"
-
-nbody_SOURCES += ${platform_src}
 endif

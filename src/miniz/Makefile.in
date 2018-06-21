@@ -155,19 +155,25 @@ CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 libminiz_la_LIBADD =
 am__libminiz_la_SOURCES_DIST = miniz.c miniz_b.c miniz.h
-@ENABLED_BENCHMARK_MINIZ_TRUE@am_libminiz_la_OBJECTS = miniz.lo \
-@ENABLED_BENCHMARK_MINIZ_TRUE@	miniz_b.lo
+@ENABLED_BENCHMARK_MINIZ_TRUE@am_libminiz_la_OBJECTS =  \
+@ENABLED_BENCHMARK_MINIZ_TRUE@	libminiz_la-miniz.lo \
+@ENABLED_BENCHMARK_MINIZ_TRUE@	libminiz_la-miniz_b.lo
 libminiz_la_OBJECTS = $(am_libminiz_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
+libminiz_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(libminiz_la_CFLAGS) \
+	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 @ENABLED_BENCHMARK_MINIZ_TRUE@am_libminiz_la_rpath =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_miniz_OBJECTS =
 miniz_OBJECTS = $(am_miniz_OBJECTS)
-miniz_LDADD = $(LDADD)
+@ENABLED_BENCHMARK_MINIZ_TRUE@miniz_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_MINIZ_TRUE@	libminiz.la \
+@ENABLED_BENCHMARK_MINIZ_TRUE@	$(top_builddir)/support/libsupport.la
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -369,12 +375,16 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_MINIZ_TRUE@              -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ \
 @ENABLED_BENCHMARK_MINIZ_TRUE@              @CPPFLAGS@
 
-@ENABLED_BENCHMARK_MINIZ_TRUE@AM_CFLAGS = @CFLAGS@ \
-@ENABLED_BENCHMARK_MINIZ_TRUE@	-fno-strict-aliasing
+@ENABLED_BENCHMARK_MINIZ_TRUE@AM_CFLAGS = @CFLAGS@
 @ENABLED_BENCHMARK_MINIZ_TRUE@AM_LDFLAGS = @LDFLAGS@
 @ENABLED_BENCHMARK_MINIZ_TRUE@noinst_LTLIBRARIES = libminiz.la
-@ENABLED_BENCHMARK_MINIZ_TRUE@miniz_SOURCES = ${platform_src}
+@ENABLED_BENCHMARK_MINIZ_TRUE@miniz_SOURCES = 
 @ENABLED_BENCHMARK_MINIZ_TRUE@libminiz_la_SOURCES = miniz.c miniz_b.c miniz.h
+@ENABLED_BENCHMARK_MINIZ_TRUE@libminiz_la_CFLAGS = -fno-strict-aliasing ${AM_CFLAGS}
+@ENABLED_BENCHMARK_MINIZ_TRUE@miniz_LDADD = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_MINIZ_TRUE@                      libminiz.la \
+@ENABLED_BENCHMARK_MINIZ_TRUE@                      $(top_builddir)/support/libsupport.la
+
 all: all-am
 
 .SUFFIXES:
@@ -422,7 +432,7 @@ clean-noinstLTLIBRARIES:
 	}
 
 libminiz.la: $(libminiz_la_OBJECTS) $(libminiz_la_DEPENDENCIES) $(EXTRA_libminiz_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(LINK) $(am_libminiz_la_rpath) $(libminiz_la_OBJECTS) $(libminiz_la_LIBADD) $(LIBS)
+	$(AM_V_CCLD)$(libminiz_la_LINK) $(am_libminiz_la_rpath) $(libminiz_la_OBJECTS) $(libminiz_la_LIBADD) $(LIBS)
 install-binPROGRAMS: $(bin_PROGRAMS)
 	@$(NORMAL_INSTALL)
 	@list='$(bin_PROGRAMS)'; test -n "$(bindir)" || list=; \
@@ -483,8 +493,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/miniz.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/miniz_b.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminiz_la-miniz.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminiz_la-miniz_b.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -506,6 +516,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
+
+libminiz_la-miniz.lo: miniz.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libminiz_la_CFLAGS) $(CFLAGS) -MT libminiz_la-miniz.lo -MD -MP -MF $(DEPDIR)/libminiz_la-miniz.Tpo -c -o libminiz_la-miniz.lo `test -f 'miniz.c' || echo '$(srcdir)/'`miniz.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libminiz_la-miniz.Tpo $(DEPDIR)/libminiz_la-miniz.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='miniz.c' object='libminiz_la-miniz.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libminiz_la_CFLAGS) $(CFLAGS) -c -o libminiz_la-miniz.lo `test -f 'miniz.c' || echo '$(srcdir)/'`miniz.c
+
+libminiz_la-miniz_b.lo: miniz_b.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libminiz_la_CFLAGS) $(CFLAGS) -MT libminiz_la-miniz_b.lo -MD -MP -MF $(DEPDIR)/libminiz_la-miniz_b.Tpo -c -o libminiz_la-miniz_b.lo `test -f 'miniz_b.c' || echo '$(srcdir)/'`miniz_b.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libminiz_la-miniz_b.Tpo $(DEPDIR)/libminiz_la-miniz_b.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='miniz_b.c' object='libminiz_la-miniz_b.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libminiz_la_CFLAGS) $(CFLAGS) -c -o libminiz_la-miniz_b.lo `test -f 'miniz_b.c' || echo '$(srcdir)/'`miniz_b.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
