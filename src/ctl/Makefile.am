@@ -23,4 +23,4 @@
 
 # Not a benchmark per se, but the base software for other benchmarks.
 
-EXTRA_DIST = ctrl.c ctrl.h stack.h
+EXTRA_DIST = ctl.c ctl.h stack.h vector.h
