@@ -1,4 +1,5 @@
 
+
 /* BEEBS ns benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -1068,6 +1069,16 @@ int foo(int x)
 
 
 
+
+
+
+/* This benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
+}
 
 
 void

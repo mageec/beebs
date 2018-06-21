@@ -1,4 +1,5 @@
 
+
 /* BEEBS newlib ef_log implementation
 
    ====================================================
@@ -124,6 +125,16 @@ static const float zero   =  0.0;
 
 /* Tell the compiler not to optimize out calls in BENCHMARK. */
 volatile float result = 0;
+
+
+
+/* This benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
+}
 
 
 void

@@ -29,8 +29,10 @@ bin_PROGRAMS                       = sglib-arraybinsearch
 noinst_LTLIBRARIES                 = libsglib-arraybinsearch.la
 
 sglib_arraybinsearch_SOURCES       =
-libsglib_arraybinsearch_la_SOURCES=arraybinsearch.c sglib.h
+libsglib_arraybinsearch_la_SOURCES = arraybinsearch.c sglib.h
 
+sglib_arraybinsearch_LDADD         = $(top_builddir)/support/libmain.la \
+                                     libsglib-arraybinsearch.la \
+                                     $(top_builddir)/support/libsupport.la
 
-sglib_arraybinsearch_SOURCES += ${platform_src}
 endif

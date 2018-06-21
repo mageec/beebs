@@ -34,7 +34,7 @@ libcubic_la_SOURCES = libcubic.c basicmath_small.c pi.h snipmath.h sniptype.h
 
 cubic_LDADD         = $(top_builddir)/support/libmain.la \
                       libcubic.la \
-                      $(top_builddir)/support/libsupport.la
-cubic_LDFLAGS = ${AM_LDFLAGS} "-lm"
+                      $(top_builddir)/support/libsupport.la \
+                      -lm
 
 endif

@@ -29,8 +29,10 @@ bin_PROGRAMS                = stringsearch1
 noinst_LTLIBRARIES          = libstringsearch1.la
 
 stringsearch1_SOURCES       =
-libstringsearch1_la_SOURCES=stringsearch1.c fast.fwd.inc.c fast.rev.d12.c
+libstringsearch1_la_SOURCES = stringsearch1.c fast.fwd.inc.c fast.rev.d12.c
 
+stringsearch1_LDADD         = $(top_builddir)/support/libmain.la \
+                              libstringsearch1.la \
+                              $(top_builddir)/support/libsupport.la
 
-stringsearch1_SOURCES += ${platform_src}
 endif

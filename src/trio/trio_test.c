@@ -29,6 +29,15 @@
 
 #ifdef TRIO_SNPRINTF
 
+/* This version of the benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
+}
+
+
 void
 initialise_benchmark (void)
 {

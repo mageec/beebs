@@ -1,4 +1,5 @@
 
+
 /* BEEBS minver benchmark
 
    *************************************************************************
@@ -212,6 +213,16 @@ int minver(int row, int col, float eps)
 	return(0);
 }
 
+
+
+
+/* This benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
+}
 
 
 void

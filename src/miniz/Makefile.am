@@ -29,9 +29,11 @@ bin_PROGRAMS        = miniz
 noinst_LTLIBRARIES  = libminiz.la
 
 miniz_SOURCES       =
-libminiz_la_SOURCES=miniz.c miniz_b.c miniz.h
+libminiz_la_SOURCES = miniz.c miniz_b.c miniz.h
+libminiz_la_CFLAGS  = -fno-strict-aliasing ${AM_CFLAGS}
 
+miniz_LDADD         = $(top_builddir)/support/libmain.la \
+                      libminiz.la \
+                      $(top_builddir)/support/libsupport.la
 
-AM_CFLAGS+=-fno-strict-aliasing
-miniz_SOURCES += ${platform_src}
 endif

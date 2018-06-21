@@ -171,9 +171,6 @@ cubic_OBJECTS = $(am_cubic_OBJECTS)
 @ENABLED_BENCHMARK_CUBIC_TRUE@cubic_DEPENDENCIES = $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_CUBIC_TRUE@	libcubic.la \
 @ENABLED_BENCHMARK_CUBIC_TRUE@	$(top_builddir)/support/libsupport.la
-cubic_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(cubic_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -382,9 +379,9 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_CUBIC_TRUE@libcubic_la_SOURCES = libcubic.c basicmath_small.c pi.h snipmath.h sniptype.h
 @ENABLED_BENCHMARK_CUBIC_TRUE@cubic_LDADD = $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_CUBIC_TRUE@                      libcubic.la \
-@ENABLED_BENCHMARK_CUBIC_TRUE@                      $(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_CUBIC_TRUE@                      $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_CUBIC_TRUE@                      -lm
 
-@ENABLED_BENCHMARK_CUBIC_TRUE@cubic_LDFLAGS = ${AM_LDFLAGS} "-lm"
 all: all-am
 
 .SUFFIXES:
@@ -485,7 +482,7 @@ clean-binPROGRAMS:
 
 cubic$(EXEEXT): $(cubic_OBJECTS) $(cubic_DEPENDENCIES) $(EXTRA_cubic_DEPENDENCIES) 
 	@rm -f cubic$(EXEEXT)
-	$(AM_V_CCLD)$(cubic_LINK) $(cubic_OBJECTS) $(cubic_LDADD) $(LIBS)
+	$(AM_V_CCLD)$(LINK) $(cubic_OBJECTS) $(cubic_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

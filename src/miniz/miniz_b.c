@@ -1,4 +1,3 @@
-
 /* BEEBS miniz benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -35,10 +34,20 @@ int mz_compress2(unsigned char *pDest, unsigned long *pDest_len, const unsigned 
 // Returns Z_OK on success, or one of the error codes from inflate() on failure.
 int uncompresmz_s(unsigned char *pDest, unsigned long *pDest_len, const unsigned char *pSource, unsigned long source_len);
 
-const char *text="Since the ancients (as we are told by Pappas), made great account of the science of mechanics in the investigation of natural things; and the moderns, lying aside substantial forms and occult qualities, have endeavoured to subject the phï¿½nomena of nature to the laws of mathematics, I have in this treatise cultivated mathematics so far as it regards philosophy. The ancients considered mechanics in a twofold respect; as rational, which proceeds accurately by demonstration; and practical. To practical mechanics all the manual arts belong, from which mechanics took its name. But as artificers do not work with perfect accuracy, it comes to pass that mechanics is so distinguished from geometry, that what is perfectly accurate is called geometrical; what is less so, is called mechanical. But the errors are not in the art, but in the artificers. He that works with less accuracy is an imperfect mechanic; and if any could work with perfect accuracy, he would be the most perfect mechanic of all; f
+const char *text="Since the ancients (as we are told by Pappas), made great account of the science of mechanics in the investigation of natural things; and the moderns, lying aside substantial forms and occult qualities, have endeavoured to subject the phï¿½nomena of nature to the laws of mathematics, I have in this treatise cultivated mathematics so far as it regards philosophy. The ancients considered mechanics in a twofold respect; as rational, which proceeds accurately by demonstration; and practical. To practical mechanics all the manual arts belong, from which mechanics took its name. But as artificers do not work with perfect accuracy, it comes to pass that mechanics is so distinguished from geometry, that what is perfectly accurate is called geometrical; what is less so, is called mechanical. But the errors are not in the art, but in the artificers. He that works with less accuracy is an imperfect mechanic; and if any could work with perfect accuracy, he would be the most perfect mechanic of all; for the description of right lines and circles, upon which geometry is founded, belongs to mechanics.";
 
 unsigned char tocompress[1200];
 unsigned char compressed[1200];
+
+
+/* This benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
+}
+
 
 void
 initialise_benchmark (void)
