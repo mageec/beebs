@@ -122,7 +122,7 @@ do
     echo "      no)  benchmark_${bm_var}=false ;;"
     echo "      *)   AC_MSG_ERROR([bad value \${enableval} for --enable-benchmark-${bm}]) ;;"
     echo "   esac],"
-    echo "  [benchmark_${bm_var}=true])"
+    echo "  [])"
     echo "AM_CONDITIONAL([ENABLED_BENCHMARK_${bm_uc}],"
     echo "               [test x\$benchmark_${bm_var} = xtrue])"
     echo

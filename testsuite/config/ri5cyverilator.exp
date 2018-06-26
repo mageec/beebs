@@ -1,8 +1,6 @@
-# Configure input file for DejaGnu site.exp
+# Copyright (C) 2018 Embecosm Limited.
 
-# Copyright (C) 2013-2014 Embecosm Limited and the University of Bristol
-
-# Contributor Pierre Langlois <pierre.langlois@embecosm.com>
+# Contributor Jeremy Bennett <jeremy.bennett@embecosm.com>
 
 # This file is part of BEEBS
 
@@ -19,10 +17,6 @@
 # You should have received a copy of the GNU General Public License along
 # with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-if ![info exists boards_dir] {
-  lappend boards_dir "$srcdir/dejagnu"
-} else {
-  set boards_dir "$srcdir/dejagnu"
-}
-lappend boards_dir "$srcdir/dejagnu/baseboards"
-lappend boards_dir "$srcdir/dejagnu/config"
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+set_board_info beebs,benchmarks "$env(BENCHMARKS)"

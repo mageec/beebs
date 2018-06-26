@@ -2,6 +2,8 @@
 
 # Contributor Andrew Burgess <andrew.burgess@embecosm.com>
 
+# This file is part of BEEBS
+
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the Free
 # Software Foundation; either version 3 of the License, or (at your option)
@@ -14,6 +16,8 @@
 
 # You should have received a copy of the GNU General Public License along
 # with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 # Called for each binary within each benchmark.  Return true
 # (non-zero) if we should run this benchmark, otherwise, return false
@@ -173,3 +177,82 @@ proc beebs_init { test_file_name } {
 proc beebs_finish {} {
     # ... nothing yet ...
 }
+
+
+# Main loop to size all benchmarks.
+
+# Return 1 if successful, 0 otherwise.
+
+proc beebs_size_all_benchmarks { board objdir } {
+
+    # First, need to find all of the benchmark files.  The BENCHMARKS
+    # variable contains all the directories that can contain
+    # benchmarks, the benchmarks themselves are the executable files
+    # within those directories.
+
+    if {[board_info ${board} exists beebs,benchmarks]} {
+	set benchmarks [board_info ${board} beebs,benchmarks]
+    } else {
+	return 0
+    }
+
+    foreach benchmark [regexp -all -inline {\S+} ${benchmarks}] {
+
+        # Now find the executable and check it is valid. It is OK not to find
+        # the file - that just implies it was not one of the ones built.
+
+        set benchmark_file "${objdir}/${benchmark}/${benchmark}"
+
+        if { [file isfile ${benchmark_file}] &&
+	     [file executable ${benchmark_file}]} {
+
+	    set timeout 1
+	    spawn size ${benchmark_file}
+
+	    expect {
+		-re {\s*(\d+)\s+(\d+)\s+(\d+)\s+\d+\s+[[:xdigit:]]+\s+[[:alnum:]_/.-]+} {
+		    set text_val $expect_out(1,string)
+		    set data_val $expect_out(2,string)
+		    set bss_val  $expect_out(3,string)
+		    set results($benchmark) [list $text_val $data_val $bss_val]
+		    pass "$benchmark\n"
+		}
+
+		eof {
+		    fail "$benchmark: EOF\n"
+		}
+
+		timeout {
+		    unresolved "$benchmark: timeout\n"
+		}
+	    }
+	}
+    }
+
+    send_user "\n"
+    send_user "\t\t=== Size table ===\n"
+    send_user "\n"
+    send_user [format "%-19s  %6s %6s %6s\n" "Benchmark" "Text" "Data" "BSS"]
+    send_user -- [format "%-19s  %6s %6s %6s\n" "---------" "----" "----" "---"]
+
+    set text_tot [expr {0}]
+    set data_tot [expr {0}]
+    set bss_tot  [expr {0}]
+
+    foreach r [lsort [array names results]] {
+	set l $results($r)
+	set text_val [lindex $l 0]
+	set data_val [lindex $l 1]
+	set bss_val  [lindex $l 2]
+
+	set text_tot [expr {$text_tot + $text_val}]
+	set data_tot [expr {$data_tot + $data_val}]
+	set bss_tot  [expr {$bss_tot  + $bss_val}]
+
+	send_user [format "%-19s  %6d %6d %6d\n" $r $text_val $data_val $bss_val]
+    }
+
+    send_user -- [format "%-19s  %6s %6s %6s\n" "---------" "----" "----" "---"]
+    send_user [format "%-19s  %6d %6d %6d\n" "Total" $text_tot $data_tot $bss_tot]
+}
+
