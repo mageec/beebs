@@ -24,14 +24,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 ACLOCAL_AMFLAGS = -I m4
-AUTOMAKE_OPTIONS = dejagnu
 
-SUBDIRS = doc support src
+SUBDIRS = doc support src testsuite
 
-EXTRA_DIST= lib \
-            beebs.test \
-            dejagnu \
-            config
+EXTRA_DIST= config
 
 # Clean up any test results
 distclean-local:
