@@ -21,4 +21,4 @@
 
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-EXTRA_DIST = avrdude.exp ri5cyverilator.exp
+EXTRA_DIST = avrdude.exp none.exp ri5cyverilator.exp

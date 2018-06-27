@@ -21,4 +21,4 @@
 
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-EXTRA_DIST = beebs.exp mageed-wand.exp perf-stat.exp
+EXTRA_DIST = beebs.exp mageec-wand.exp perf-stat.exp
