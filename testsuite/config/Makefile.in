@@ -275,7 +275,7 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-EXTRA_DIST = avrdude.exp ri5cyverilator.exp
+EXTRA_DIST = avrdude.exp none.exp ri5cyverilator.exp
 all: all-am
 
 .SUFFIXES:

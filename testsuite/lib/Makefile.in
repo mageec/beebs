@@ -275,7 +275,7 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-EXTRA_DIST = beebs.exp mageed-wand.exp perf-stat.exp
+EXTRA_DIST = beebs.exp mageec-wand.exp perf-stat.exp
 all: all-am
 
 .SUFFIXES:
