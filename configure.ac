@@ -1260,6 +1260,58 @@ AC_ARG_ENABLE([benchmark-wikisort],
 AM_CONDITIONAL([ENABLED_BENCHMARK_WIKISORT],
                [test x$benchmark_wikisort = xtrue])
 
+# Enable dummy libraries
+
+AC_ARG_ENABLE([dummy-crt0],
+  [AS_HELP_STRING([--enable-dummy-crt0],
+     [Use dummy crt0 startup code])],
+  [case "${enableval}" in
+     yes) DUMMY_CRT0="\$(top_builddir)/support/libdummycrt0.la" ;;
+     no)  DUMMY_CRT0= ;;
+     *)   DUMMY_CRT0=${enableval} ;;
+   esac],
+  [DUMMY_CRT0=""])
+
+AC_ARG_ENABLE([dummy-libgcc],
+  [AS_HELP_STRING([--enable-dummy-libgcc],
+     [Use dummy libgcc library])],
+  [case "${enableval}" in
+     yes) DUMMY_LIBGCC="\$(top_builddir)/support/libdummygcc.la" ;;
+     no)  DUMMY_LIBGCC= ;;
+     *)   DUMMY_LIBGCC=${enableval} ;;
+   esac],
+  [DUMMY_LIBGCC=""])
+
+AC_ARG_ENABLE([dummy-compilerrt],
+  [AS_HELP_STRING([--enable-dummy-compilerrt],
+     [Use dummy CompilerRT library])],
+  [case "${enableval}" in
+     yes) DUMMY_COMPILERRT="\$(top_builddir)/support/libdummycompilerrt.la" ;;
+     no)  DUMMY_COMPILERRT= ;;
+     *)   DUMMY_COMPILERRT=${enableval} ;;
+   esac],
+  [DUMMY_COMPILERRT=""])
+
+AC_ARG_ENABLE([dummy-libc],
+  [AS_HELP_STRING([--enable-dummy-libc],
+     [Use dummy Standard C library])],
+  [case "${enableval}" in
+     yes) DUMMY_LIBC="\$(top_builddir)/support/libdummyc.la" ;;
+     no)  DUMMY_LIBC= ;;
+     *)   DUMMY_LIBC=${enableval} ;;
+   esac],
+  [DUMMY_LIBC=""])
+
+AC_ARG_ENABLE([dummy-libm],
+  [AS_HELP_STRING([--enable-dummy-libm],
+     [Use dummy Standard C math library])],
+  [case "${enableval}" in
+     yes) DUMMY_LIBM="\$(top_builddir)/support/libdummym.la" ;;
+     no)  DUMMY_LIBM="-lm" ;;
+     *)   DUMMY_LIBM=${enableval} ;;
+   esac],
+  [DUMMY_LIBM=""])
+
 # Check for support code
 
 AM_CONDITIONAL([CHIPSUPPORT_C],
@@ -1302,6 +1354,14 @@ if test x"$DEJAGNU" = x
 then
     DEJAGNU="\$(top_srcdir)/testsuite/beebs-conf.exp"
 fi
+
+# Substitute dummy libraries
+
+AC_SUBST([DUMMY_CRT0])
+AC_SUBST([DUMMY_LIBGCC])
+AC_SUBST([DUMMY_COMPILERRT])
+AC_SUBST([DUMMY_LIBC])
+AC_SUBST([DUMMY_LIBM])
 
 # Substitute architecture, board and chip
 

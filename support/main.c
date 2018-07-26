@@ -30,7 +30,8 @@ extern int initialise_benchmark (void);
 extern int verify_benchmark (int unused);
 
 int
-main (void)
+main (int   argc __attribute__ ((unused)),
+      char *argv[] __attribute__ ((unused)) )
 {
   int i;
   volatile int result;
@@ -55,7 +56,6 @@ main (void)
   return (!correct);
 
 }	/* main () */
-
 
 /*
    Local Variables:

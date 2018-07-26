@@ -30,7 +30,7 @@
 
 /*
    Local Variables:
-   mode: C++
+   mode: C
    c-file-style: "gnu"
    End:
 */

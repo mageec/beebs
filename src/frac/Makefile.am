@@ -31,9 +31,11 @@ noinst_LTLIBRARIES = libfrac.la
 frac_SOURCES       =
 libfrac_la_SOURCES = libfrac.c
 
-frac_LDADD         = $(top_builddir)/support/libmain.la \
+frac_LDADD         = @DUMMY_CRT0@ \
+                     $(top_builddir)/support/libmain.la \
                      libfrac.la \
-                     $(top_builddir)/support/libsupport.la
+                     $(top_builddir)/support/libsupport.la \
+                     @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 
 

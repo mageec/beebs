@@ -261,6 +261,11 @@ DEJAGNU = @DEJAGNU@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
+DUMMY_COMPILERRT = @DUMMY_COMPILERRT@
+DUMMY_CRT0 = @DUMMY_CRT0@
+DUMMY_LIBC = @DUMMY_LIBC@
+DUMMY_LIBGCC = @DUMMY_LIBGCC@
+DUMMY_LIBM = @DUMMY_LIBM@
 DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
@@ -380,9 +385,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@noinst_LTLIBRARIES = liblevenshtein.la
 @ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@levenshtein_SOURCES = 
 @ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@liblevenshtein_la_SOURCES = liblevenshtein.c
-@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@levenshtein_LDADD = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@levenshtein_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@                            $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@                            liblevenshtein.la \
-@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@                            $(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@                            $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@                            @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 all: all-am
 

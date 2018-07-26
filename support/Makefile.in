@@ -127,13 +127,25 @@ CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
-libmain_la_LIBADD =
-am_libmain_la_OBJECTS = libmain_la-main.lo
-libmain_la_OBJECTS = $(am_libmain_la_OBJECTS)
+libdummyc_la_LIBADD =
+am_libdummyc_la_OBJECTS = dummy-libc.lo
+libdummyc_la_OBJECTS = $(am_libdummyc_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
+libdummycrt0_la_LIBADD =
+am_libdummycrt0_la_OBJECTS = dummy-crt0.lo
+libdummycrt0_la_OBJECTS = $(am_libdummycrt0_la_OBJECTS)
+libdummygcc_la_LIBADD =
+am_libdummygcc_la_OBJECTS = dummy-libgcc.lo
+libdummygcc_la_OBJECTS = $(am_libdummygcc_la_OBJECTS)
+libdummym_la_LIBADD =
+am_libdummym_la_OBJECTS = dummy-libm.lo
+libdummym_la_OBJECTS = $(am_libdummym_la_OBJECTS)
+libmain_la_LIBADD =
+am_libmain_la_OBJECTS = libmain_la-main.lo
+libmain_la_OBJECTS = $(am_libmain_la_OBJECTS)
 libsupport_la_LIBADD =
 am__libsupport_la_SOURCES_DIST = board.c support.h chip.c
 @CHIPSUPPORT_C_TRUE@am__objects_1 = libsupport_la-chip.lo
@@ -173,8 +185,12 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(libmain_la_SOURCES) $(libsupport_la_SOURCES)
-DIST_SOURCES = $(libmain_la_SOURCES) $(am__libsupport_la_SOURCES_DIST)
+SOURCES = $(libdummyc_la_SOURCES) $(libdummycrt0_la_SOURCES) \
+	$(libdummygcc_la_SOURCES) $(libdummym_la_SOURCES) \
+	$(libmain_la_SOURCES) $(libsupport_la_SOURCES)
+DIST_SOURCES = $(libdummyc_la_SOURCES) $(libdummycrt0_la_SOURCES) \
+	$(libdummygcc_la_SOURCES) $(libdummym_la_SOURCES) \
+	$(libmain_la_SOURCES) $(am__libsupport_la_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -227,6 +243,11 @@ DEJAGNU = @DEJAGNU@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
+DUMMY_COMPILERRT = @DUMMY_COMPILERRT@
+DUMMY_CRT0 = @DUMMY_CRT0@
+DUMMY_LIBC = @DUMMY_LIBC@
+DUMMY_LIBGCC = @DUMMY_LIBGCC@
+DUMMY_LIBM = @DUMMY_LIBM@
 DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
@@ -330,9 +351,19 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-noinst_LTLIBRARIES = libmain.la libsupport.la
+noinst_LTLIBRARIES = libdummycrt0.la \
+                     libmain.la      \
+                     libsupport.la   \
+                     libdummygcc.la  \
+                     libdummyc.la    \
+                     libdummym.la
+
+libdummycrt0_la_SOURCES = dummy-crt0.c
 libmain_la_SOURCES = main.c
 libsupport_la_SOURCES = board.c support.h $(am__append_1)
+libdummygcc_la_SOURCES = dummy-libgcc.c
+libdummyc_la_SOURCES = dummy-libc.c
+libdummym_la_SOURCES = dummy-libm.c
 libmain_la_CPPFLAGS = -I$(top_srcdir)/config/@ARCH@/boards/@BOARD@ \
                          -I$(top_srcdir)/config/@ARCH@/chips/@CHIP@
 
@@ -384,6 +415,18 @@ clean-noinstLTLIBRARIES:
 	  rm -f $${locs}; \
 	}
 
+libdummyc.la: $(libdummyc_la_OBJECTS) $(libdummyc_la_DEPENDENCIES) $(EXTRA_libdummyc_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(LINK)  $(libdummyc_la_OBJECTS) $(libdummyc_la_LIBADD) $(LIBS)
+
+libdummycrt0.la: $(libdummycrt0_la_OBJECTS) $(libdummycrt0_la_DEPENDENCIES) $(EXTRA_libdummycrt0_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(LINK)  $(libdummycrt0_la_OBJECTS) $(libdummycrt0_la_LIBADD) $(LIBS)
+
+libdummygcc.la: $(libdummygcc_la_OBJECTS) $(libdummygcc_la_DEPENDENCIES) $(EXTRA_libdummygcc_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(LINK)  $(libdummygcc_la_OBJECTS) $(libdummygcc_la_LIBADD) $(LIBS)
+
+libdummym.la: $(libdummym_la_OBJECTS) $(libdummym_la_DEPENDENCIES) $(EXTRA_libdummym_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(LINK)  $(libdummym_la_OBJECTS) $(libdummym_la_LIBADD) $(LIBS)
+
 libmain.la: $(libmain_la_OBJECTS) $(libmain_la_DEPENDENCIES) $(EXTRA_libmain_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(LINK)  $(libmain_la_OBJECTS) $(libmain_la_LIBADD) $(LIBS)
 
@@ -396,6 +439,10 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dummy-crt0.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dummy-libc.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dummy-libgcc.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dummy-libm.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmain_la-main.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libsupport_la-board.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libsupport_la-chip.Plo@am__quote@
