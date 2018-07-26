@@ -261,6 +261,11 @@ DEJAGNU = @DEJAGNU@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
+DUMMY_COMPILERRT = @DUMMY_COMPILERRT@
+DUMMY_CRT0 = @DUMMY_CRT0@
+DUMMY_LIBC = @DUMMY_LIBC@
+DUMMY_LIBGCC = @DUMMY_LIBGCC@
+DUMMY_LIBM = @DUMMY_LIBM@
 DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
@@ -381,9 +386,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@sglib_arrayheapsort_SOURCES = 
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@libsglib_arrayheapsort_la_SOURCES = arraysort.c sglib.h
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@libsglib_arrayheapsort_la_CPPFLAGS = -DHEAP_SORT ${AM_CPPFLAGS}
-@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@sglib_arrayheapsort_LDADD = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@sglib_arrayheapsort_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@                                     $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@                                     libsglib-arrayheapsort.la \
-@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@                                     $(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@                                     $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@                                     @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 all: all-am
 

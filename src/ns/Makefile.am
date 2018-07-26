@@ -31,9 +31,11 @@ noinst_LTLIBRARIES = libns.la
 ns_SOURCES         =
 libns_la_SOURCES = libns.c
 
-ns_LDADD           = $(top_builddir)/support/libmain.la \
+ns_LDADD           = @DUMMY_CRT0@ \
+                     $(top_builddir)/support/libmain.la \
                      libns.la \
-                     $(top_builddir)/support/libsupport.la
+                     $(top_builddir)/support/libsupport.la \
+                     @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 
 

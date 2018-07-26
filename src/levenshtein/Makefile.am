@@ -31,9 +31,11 @@ noinst_LTLIBRARIES        = liblevenshtein.la
 levenshtein_SOURCES       =
 liblevenshtein_la_SOURCES = liblevenshtein.c
 
-levenshtein_LDADD         = $(top_builddir)/support/libmain.la \
+levenshtein_LDADD         = @DUMMY_CRT0@ \
+                            $(top_builddir)/support/libmain.la \
                             liblevenshtein.la \
-                            $(top_builddir)/support/libsupport.la
+                            $(top_builddir)/support/libsupport.la \
+                            @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 
 

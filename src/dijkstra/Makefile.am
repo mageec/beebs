@@ -31,9 +31,11 @@ noinst_LTLIBRARIES     = libdijkstra.la
 dijkstra_SOURCES       =
 libdijkstra_la_SOURCES = dijkstra_small.c
 
-dijkstra_LDADD         = $(top_builddir)/support/libmain.la \
+dijkstra_LDADD         = @DUMMY_CRT0@ \
+                         $(top_builddir)/support/libmain.la \
                          libdijkstra.la \
-                         $(top_builddir)/support/libsupport.la
+                         $(top_builddir)/support/libsupport.la \
+                         @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 
 

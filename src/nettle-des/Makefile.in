@@ -260,6 +260,11 @@ DEJAGNU = @DEJAGNU@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
+DUMMY_COMPILERRT = @DUMMY_COMPILERRT@
+DUMMY_CRT0 = @DUMMY_CRT0@
+DUMMY_LIBC = @DUMMY_LIBC@
+DUMMY_LIBGCC = @DUMMY_LIBGCC@
+DUMMY_LIBM = @DUMMY_LIBM@
 DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
@@ -383,9 +388,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@	                   keymap.h \
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@	                   desCode.h
 
-@ENABLED_BENCHMARK_NETTLE_DES_TRUE@nettle_des_LDADD = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_NETTLE_DES_TRUE@nettle_des_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_NETTLE_DES_TRUE@                           $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@                           libnettle-des.la \
-@ENABLED_BENCHMARK_NETTLE_DES_TRUE@                           $(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_NETTLE_DES_TRUE@                           $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_NETTLE_DES_TRUE@                           @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@EXTRA_DIST = descore.README
 all: all-am

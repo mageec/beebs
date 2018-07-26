@@ -31,9 +31,11 @@ noinst_LTLIBRARIES           = libnettle-cast128.la
 nettle_cast128_SOURCES       =
 libnettle_cast128_la_SOURCES = cast128.c
 
-nettle_cast128_LDADD         = $(top_builddir)/support/libmain.la \
+nettle_cast128_LDADD         = @DUMMY_CRT0@ \
+                               $(top_builddir)/support/libmain.la \
                                libnettle-cast128.la \
-                               $(top_builddir)/support/libsupport.la
+                               $(top_builddir)/support/libsupport.la \
+                               @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 
 endif

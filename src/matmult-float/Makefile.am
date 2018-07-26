@@ -32,10 +32,12 @@ matmult_float_SOURCES        =
 
 libmatmult_float_la_SOURCES  = matmult.c
 
-matmult_float_LDADD          = $(top_builddir)/support/libmain.la \
+matmult_float_LDADD          = @DUMMY_CRT0@ \
+                               $(top_builddir)/support/libmain.la \
                                libmatmult-float.la \
                                $(top_builddir)/support/libsupport.la \
-                               -lm
+                               @DUMMY_LIBM@ \
+                               @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 libmatmult_float_la_CPPFLAGS = -DMATMULT_FLOAT ${AM_CPPFLAGS}
 

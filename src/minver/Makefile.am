@@ -31,9 +31,11 @@ noinst_LTLIBRARIES   = libminver.la
 minver_SOURCES       =
 libminver_la_SOURCES = libminver.c
 
-minver_LDADD         = $(top_builddir)/support/libmain.la \
+minver_LDADD         = @DUMMY_CRT0@ \
+                       $(top_builddir)/support/libmain.la \
                        libminver.la \
-                       $(top_builddir)/support/libsupport.la
+                       $(top_builddir)/support/libsupport.la \
+                       @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 
 

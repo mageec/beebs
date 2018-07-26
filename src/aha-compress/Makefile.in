@@ -259,6 +259,11 @@ DEJAGNU = @DEJAGNU@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
+DUMMY_COMPILERRT = @DUMMY_COMPILERRT@
+DUMMY_CRT0 = @DUMMY_CRT0@
+DUMMY_LIBC = @DUMMY_LIBC@
+DUMMY_LIBGCC = @DUMMY_LIBGCC@
+DUMMY_LIBM = @DUMMY_LIBM@
 DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
@@ -378,9 +383,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_AHA_COMPRESS_TRUE@noinst_LTLIBRARIES = libaha-compress.la
 @ENABLED_BENCHMARK_AHA_COMPRESS_TRUE@aha_compress_SOURCES = 
 @ENABLED_BENCHMARK_AHA_COMPRESS_TRUE@libaha_compress_la_SOURCES = compress_test.c
-@ENABLED_BENCHMARK_AHA_COMPRESS_TRUE@aha_compress_LDADD = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_AHA_COMPRESS_TRUE@aha_compress_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_AHA_COMPRESS_TRUE@                             $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_AHA_COMPRESS_TRUE@                             libaha-compress.la \
-@ENABLED_BENCHMARK_AHA_COMPRESS_TRUE@                             $(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_AHA_COMPRESS_TRUE@                             $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_AHA_COMPRESS_TRUE@                             @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 all: all-am
 

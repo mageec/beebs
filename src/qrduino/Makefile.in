@@ -260,6 +260,11 @@ DEJAGNU = @DEJAGNU@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
+DUMMY_COMPILERRT = @DUMMY_COMPILERRT@
+DUMMY_CRT0 = @DUMMY_CRT0@
+DUMMY_LIBC = @DUMMY_LIBC@
+DUMMY_LIBGCC = @DUMMY_LIBGCC@
+DUMMY_LIBM = @DUMMY_LIBM@
 DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
@@ -379,9 +384,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_QRDUINO_TRUE@noinst_LTLIBRARIES = libqrduino.la
 @ENABLED_BENCHMARK_QRDUINO_TRUE@qrduino_SOURCES = 
 @ENABLED_BENCHMARK_QRDUINO_TRUE@libqrduino_la_SOURCES = qrtest.c qrencode.c qrencode.h qrframe.c ecctable.h qrbits.h
-@ENABLED_BENCHMARK_QRDUINO_TRUE@qrduino_LDADD = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_QRDUINO_TRUE@qrduino_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_QRDUINO_TRUE@                        $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_QRDUINO_TRUE@                        libqrduino.la \
-@ENABLED_BENCHMARK_QRDUINO_TRUE@                        $(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_QRDUINO_TRUE@                        $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_QRDUINO_TRUE@                        @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 all: all-am
 

@@ -31,9 +31,11 @@ noinst_LTLIBRARIES    = libfibcall.la
 fibcall_SOURCES       =
 libfibcall_la_SOURCES = libfibcall.c
 
-fibcall_LDADD         = $(top_builddir)/support/libmain.la \
+fibcall_LDADD         = @DUMMY_CRT0@ \
+                        $(top_builddir)/support/libmain.la \
                         libfibcall.la \
-                        $(top_builddir)/support/libsupport.la
+                        $(top_builddir)/support/libsupport.la \
+                        @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 
 

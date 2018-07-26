@@ -31,9 +31,11 @@ noinst_LTLIBRARIES = libdtoa.la
 dtoa_SOURCES       =
 libdtoa_la_SOURCES = libdtoa.c
 
-dtoa_LDADD         = $(top_builddir)/support/libmain.la \
+dtoa_LDADD         = @DUMMY_CRT0@ \
+                     $(top_builddir)/support/libmain.la \
                      libdtoa.la \
-                     $(top_builddir)/support/libsupport.la
+                     $(top_builddir)/support/libsupport.la \
+                     @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 
 
