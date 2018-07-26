@@ -31,9 +31,11 @@ noinst_LTLIBRARIES = libfac.la
 fac_SOURCES        =
 libfac_la_SOURCES = libfac.c
 
-fac_LDADD          = $(top_builddir)/support/libmain.la \
+fac_LDADD          = @DUMMY_CRT0@ \
+                     $(top_builddir)/support/libmain.la \
                      libfac.la \
-                     $(top_builddir)/support/libsupport.la
+                     $(top_builddir)/support/libsupport.la \
+                     @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 
 

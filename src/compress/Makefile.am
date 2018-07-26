@@ -39,9 +39,11 @@ noinst_LTLIBRARIES     = libcompress.la
 compress_SOURCES       =
 libcompress_la_SOURCES = libcompress.c
 
-compress_LDADD         = $(top_builddir)/support/libmain.la \
+compress_LDADD         = @DUMMY_CRT0@ \
+                         $(top_builddir)/support/libmain.la \
                          libcompress.la \
-                         $(top_builddir)/support/libsupport.la
+                         $(top_builddir)/support/libsupport.la \
+                         @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 
 

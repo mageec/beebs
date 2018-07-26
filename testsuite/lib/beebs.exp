@@ -232,8 +232,8 @@ proc beebs_size_all_benchmarks { board objdir } {
     send_user "\n"
     send_user "\t\t=== Size table ===\n"
     send_user "\n"
-    send_user [format "%-19s  %6s %6s %6s\n" "Benchmark" "Text" "Data" "BSS"]
-    send_user -- [format "%-19s  %6s %6s %6s\n" "---------" "----" "----" "---"]
+    send_user [format "%-20s  %6s %6s %6s\n" "Benchmark" "Text" "Data" "BSS"]
+    send_user -- [format "%-20s  %6s %6s %6s\n" "---------" "----" "----" "---"]
 
     set text_tot [expr {0}]
     set data_tot [expr {0}]
@@ -249,10 +249,10 @@ proc beebs_size_all_benchmarks { board objdir } {
 	set data_tot [expr {$data_tot + $data_val}]
 	set bss_tot  [expr {$bss_tot  + $bss_val}]
 
-	send_user [format "%-19s  %6d %6d %6d\n" $r $text_val $data_val $bss_val]
+	send_user [format "%-20s  %6d %6d %6d\n" $r $text_val $data_val $bss_val]
     }
 
-    send_user -- [format "%-19s  %6s %6s %6s\n" "---------" "----" "----" "---"]
-    send_user [format "%-19s  %6d %6d %6d\n" "Total" $text_tot $data_tot $bss_tot]
+    send_user -- [format "%-20s  %6s %6s %6s\n" "---------" "----" "----" "---"]
+    send_user [format "%-20s  %6d %6d %6d\n" "Total" $text_tot $data_tot $bss_tot]
 }
 

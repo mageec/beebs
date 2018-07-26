@@ -34,9 +34,11 @@ libnettle_des_la_SOURCES = des.c \
 	                   keymap.h \
 	                   desCode.h
 
-nettle_des_LDADD         = $(top_builddir)/support/libmain.la \
+nettle_des_LDADD         = @DUMMY_CRT0@ \
+                           $(top_builddir)/support/libmain.la \
                            libnettle-des.la \
-                           $(top_builddir)/support/libsupport.la
+                           $(top_builddir)/support/libsupport.la \
+                           @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 EXTRA_DIST = descore.README
 

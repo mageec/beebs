@@ -21,11 +21,20 @@
 
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-noinst_LTLIBRARIES = libmain.la libsupport.la
+noinst_LTLIBRARIES = libdummycrt0.la \
+                     libmain.la      \
+                     libsupport.la   \
+                     libdummygcc.la  \
+                     libdummyc.la    \
+                     libdummym.la
 
-libmain_la_SOURCES    = main.c
-libsupport_la_SOURCES = board.c   \
-                        support.h
+libdummycrt0_la_SOURCES = dummy-crt0.c
+libmain_la_SOURCES      = main.c
+libsupport_la_SOURCES   = board.c   \
+                          support.h
+libdummygcc_la_SOURCES  = dummy-libgcc.c
+libdummyc_la_SOURCES    = dummy-libc.c
+libdummym_la_SOURCES    = dummy-libm.c
 
 if CHIPSUPPORT_C
 libsupport_la_SOURCES += chip.c

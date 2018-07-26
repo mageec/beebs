@@ -264,6 +264,11 @@ DEJAGNU = @DEJAGNU@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
+DUMMY_COMPILERRT = @DUMMY_COMPILERRT@
+DUMMY_CRT0 = @DUMMY_CRT0@
+DUMMY_LIBC = @DUMMY_LIBC@
+DUMMY_LIBGCC = @DUMMY_LIBGCC@
+DUMMY_LIBM = @DUMMY_LIBM@
 DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
@@ -383,9 +388,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@noinst_LTLIBRARIES = libstringsearch1.la
 @ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@stringsearch1_SOURCES = 
 @ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@libstringsearch1_la_SOURCES = stringsearch1.c fast.fwd.inc.c fast.rev.d12.c
-@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@stringsearch1_LDADD = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@stringsearch1_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@                              $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@                              libstringsearch1.la \
-@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@                              $(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@                              $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@                              @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 all: all-am
 

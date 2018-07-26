@@ -260,6 +260,11 @@ DEJAGNU = @DEJAGNU@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
+DUMMY_COMPILERRT = @DUMMY_COMPILERRT@
+DUMMY_CRT0 = @DUMMY_CRT0@
+DUMMY_LIBC = @DUMMY_LIBC@
+DUMMY_LIBGCC = @DUMMY_LIBGCC@
+DUMMY_LIBM = @DUMMY_LIBM@
 DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
@@ -379,9 +384,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_CTL_STACK_TRUE@noinst_LTLIBRARIES = libctl-stack.la
 @ENABLED_BENCHMARK_CTL_STACK_TRUE@ctl_stack_SOURCES = 
 @ENABLED_BENCHMARK_CTL_STACK_TRUE@libctl_stack_la_SOURCES = ctl.c ctl.h stack.h
-@ENABLED_BENCHMARK_CTL_STACK_TRUE@ctl_stack_LDADD = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_CTL_STACK_TRUE@ctl_stack_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_CTL_STACK_TRUE@                          $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_CTL_STACK_TRUE@                          libctl-stack.la \
-@ENABLED_BENCHMARK_CTL_STACK_TRUE@                          $(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_CTL_STACK_TRUE@                          $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_CTL_STACK_TRUE@                          @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 @ENABLED_BENCHMARK_CTL_STACK_TRUE@libctl_stack_la_CPPFLAGS = -DCTL_STACK ${AM_CPPFLAGS}
 all: all-am

@@ -31,9 +31,11 @@ noinst_LTLIBRARIES        = libnewlib-sqrt.la
 newlib_sqrt_SOURCES       =
 libnewlib_sqrt_la_SOURCES = ef_sqrt.c
 
-newlib_sqrt_LDADD         = $(top_builddir)/support/libmain.la \
+newlib_sqrt_LDADD         = @DUMMY_CRT0@ \
+                            $(top_builddir)/support/libmain.la \
                             libnewlib-sqrt.la \
-                            $(top_builddir)/support/libsupport.la
+                            $(top_builddir)/support/libsupport.la \
+                            @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 
 

@@ -31,9 +31,11 @@ noinst_LTLIBRARIES   = libstrstr.la
 strstr_SOURCES       =
 libstrstr_la_SOURCES = libstrstr.c
 
-strstr_LDADD         = $(top_builddir)/support/libmain.la \
+strstr_LDADD         = @DUMMY_CRT0@ \
+                       $(top_builddir)/support/libmain.la \
                        libstrstr.la \
-                       $(top_builddir)/support/libsupport.la
+                       $(top_builddir)/support/libsupport.la \
+                       @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 
 

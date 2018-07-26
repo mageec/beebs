@@ -261,6 +261,11 @@ DEJAGNU = @DEJAGNU@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
+DUMMY_COMPILERRT = @DUMMY_COMPILERRT@
+DUMMY_CRT0 = @DUMMY_CRT0@
+DUMMY_LIBC = @DUMMY_LIBC@
+DUMMY_LIBGCC = @DUMMY_LIBGCC@
+DUMMY_LIBM = @DUMMY_LIBM@
 DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
@@ -380,9 +385,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_SGLIB_QUEUE_TRUE@noinst_LTLIBRARIES = libsglib-queue.la
 @ENABLED_BENCHMARK_SGLIB_QUEUE_TRUE@sglib_queue_SOURCES = 
 @ENABLED_BENCHMARK_SGLIB_QUEUE_TRUE@libsglib_queue_la_SOURCES = queue.c sglib.h
-@ENABLED_BENCHMARK_SGLIB_QUEUE_TRUE@sglib_queue_LDADD = $(top_builddir)/support/libmain.la \
+@ENABLED_BENCHMARK_SGLIB_QUEUE_TRUE@sglib_queue_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_SGLIB_QUEUE_TRUE@                            $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_SGLIB_QUEUE_TRUE@                            libsglib-queue.la \
-@ENABLED_BENCHMARK_SGLIB_QUEUE_TRUE@                            $(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_SGLIB_QUEUE_TRUE@                            $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_SGLIB_QUEUE_TRUE@                            @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
 
 all: all-am
 
