@@ -14197,7 +14197,7 @@ if test "${enable_dummy_libm+set}" = set; then :
      *)   DUMMY_LIBM=${enableval} ;;
    esac
 else
-  DUMMY_LIBM=""
+  DUMMY_LIBM="-lm"
 fi
 
 
@@ -15339,7 +15339,7 @@ ac_config_headers="$ac_config_headers config.h"
 
 # Generate makefiles
 
-ac_config_files="$ac_config_files Makefile doc/Makefile src/Makefile src/aha-compress/Makefile src/aha-mont64/Makefile src/bs/Makefile src/bubblesort/Makefile src/cnt/Makefile src/compress/Makefile src/cover/Makefile src/crc/Makefile src/crc32/Makefile src/ctl/Makefile src/ctl-stack/Makefile src/ctl-string/Makefile src/ctl-vector/Makefile src/cubic/Makefile src/dijkstra/Makefile src/dtoa/Makefile src/duff/Makefile src/edn/Makefile src/expint/Makefile src/fac/Makefile src/fasta/Makefile src/fdct/Makefile src/fibcall/Makefile src/fir/Makefile src/frac/Makefile src/huffbench/Makefile src/insertsort/Makefile src/janne_complex/Makefile src/jfdctint/Makefile src/lcdnum/Makefile src/levenshtein/Makefile src/ludcmp/Makefile src/matmult/Makefile src/matmult-float/Makefile src/matmult-int/Makefile src/mergesort/Makefile src/miniz/Makefile src/minver/Makefile src/nbody/Makefile src/ndes/Makefile src/nettle-arcfour/Makefile src/nettle-cast128/Makefile src/nettle-des/Makefile src/nettle-md5/Makefile src/newlib-exp/Makefile src/newlib-log/Makefile src/newlib-mod/Makefile src/newlib-sqrt/Makefile src/ns/Makefile src/nsichneu/Makefile src/picojpeg/Makefile src/prime/Makefile src/qrduino/Makefile src/qsort/Makefile src/qurt/Makefile src/recursion/Makefile src/rijndael/Makefile src/select/Makefile src/sglib-arraybinsearch/Makefile src/sglib-arrayheapsort/Makefile src/sglib-arrayquicksort/Makefile src/sglib-arraysort/Makefile src/sglib-dllist/Makefile src/sglib-hashtable/Makefile src/sglib-listinsertsort/Makefile src/sglib-listsort/Makefile src/sglib-queue/Makefile src/sglib-rbtree/Makefile src/slre/Makefile src/sqrt/Makefile src/st/Makefile src/statemate/Makefile src/stb_perlin/Makefile src/stringsearch1/Makefile src/strstr/Makefile src/tarai/Makefile src/template/Makefile src/trio/Makefile src/trio-snprintf/Makefile src/trio-sscanf/Makefile src/ud/Makefile src/whetstone/Makefile src/wikisort/Makefile support/Makefile testsuite/Makefile testsuite/beebs.test/Makefile testsuite/config/Makefile testsuite/lib/Makefile"
+ac_config_files="$ac_config_files Makefile doc/Makefile report-rv32imc/Makefile src/Makefile src/aha-compress/Makefile src/aha-mont64/Makefile src/bs/Makefile src/bubblesort/Makefile src/cnt/Makefile src/compress/Makefile src/cover/Makefile src/crc/Makefile src/crc32/Makefile src/ctl/Makefile src/ctl-stack/Makefile src/ctl-string/Makefile src/ctl-vector/Makefile src/cubic/Makefile src/dijkstra/Makefile src/dtoa/Makefile src/duff/Makefile src/edn/Makefile src/expint/Makefile src/fac/Makefile src/fasta/Makefile src/fdct/Makefile src/fibcall/Makefile src/fir/Makefile src/frac/Makefile src/huffbench/Makefile src/insertsort/Makefile src/janne_complex/Makefile src/jfdctint/Makefile src/lcdnum/Makefile src/levenshtein/Makefile src/ludcmp/Makefile src/matmult/Makefile src/matmult-float/Makefile src/matmult-int/Makefile src/mergesort/Makefile src/miniz/Makefile src/minver/Makefile src/nbody/Makefile src/ndes/Makefile src/nettle-arcfour/Makefile src/nettle-cast128/Makefile src/nettle-des/Makefile src/nettle-md5/Makefile src/newlib-exp/Makefile src/newlib-log/Makefile src/newlib-mod/Makefile src/newlib-sqrt/Makefile src/ns/Makefile src/nsichneu/Makefile src/picojpeg/Makefile src/prime/Makefile src/qrduino/Makefile src/qsort/Makefile src/qurt/Makefile src/recursion/Makefile src/rijndael/Makefile src/select/Makefile src/sglib-arraybinsearch/Makefile src/sglib-arrayheapsort/Makefile src/sglib-arrayquicksort/Makefile src/sglib-arraysort/Makefile src/sglib-dllist/Makefile src/sglib-hashtable/Makefile src/sglib-listinsertsort/Makefile src/sglib-listsort/Makefile src/sglib-queue/Makefile src/sglib-rbtree/Makefile src/slre/Makefile src/sqrt/Makefile src/st/Makefile src/statemate/Makefile src/stb_perlin/Makefile src/stringsearch1/Makefile src/strstr/Makefile src/tarai/Makefile src/template/Makefile src/trio/Makefile src/trio-snprintf/Makefile src/trio-sscanf/Makefile src/ud/Makefile src/whetstone/Makefile src/wikisort/Makefile support/Makefile testsuite/Makefile testsuite/beebs.test/Makefile testsuite/config/Makefile testsuite/lib/Makefile"
 
 
 # And spit it all out
@@ -16709,6 +16709,7 @@ do
     "config.h") CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
+    "report-rv32imc/Makefile") CONFIG_FILES="$CONFIG_FILES report-rv32imc/Makefile" ;;
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
     "src/aha-compress/Makefile") CONFIG_FILES="$CONFIG_FILES src/aha-compress/Makefile" ;;
     "src/aha-mont64/Makefile") CONFIG_FILES="$CONFIG_FILES src/aha-mont64/Makefile" ;;

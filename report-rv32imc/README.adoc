@@ -1,0 +1,849 @@
+= RV32IMC BEEBS analysis =
+Jeremy Bennett <jeremy.bennett@embecosm.com>
+Issue 0.1 Draft
+:toc:
+:icons: font
+:numbered:
+:source-highlighter: rouge
+
+////
+SPDX-License-Identifier: CC-BY-SA-4.0
+
+Document conventions:
+- one line per paragraph (don't fill lines - this makes changes clearer)
+- Wikipedia heading conventions (First word only capitalized)
+- US spelling throughout.
+- Run "make spell" before committing changes.
+- Build the HTML and commit it with any changed source.
+- Do not commit the PDF!
+////
+
+== Introduction
+=== About
+
+This document provides an analysis of BEEBS benchmark results for the RISC-V RV32IMC instruction set.
+
+=== Target audience
+
+This document is intended for two audiences:
+1. for those contemplating a design based on the RISC-V RV32IMC insturction set; and
+2. for those improving the GCC and Clang/LLVM compiler tool chains.
+
+=== Further information
+
+The source code used for all the benchmarks described here is freely available on https://github.com/embecosm/riscv-beebs[GitHub].
+
+=== About Embecosm application notes
+
+Embecosm is a consultancy specializing in hardware modeling and open source tool chains for the embedded market. If we can ever be of help, please get in touch at info@embecosm.com
+
+As part of its commitment to the open source community, Embecosm publishes a series of free and open source application notes, designed to help working engineers with practical problems.
+
+Feedback is always welcome, which should be sent to info@embecosm.com.
+
+=== Document history
+[cols="<1,<2,<3,<4",options="header,pagewidth",]
+|================================================================================
+| _Revision_ | _Date_            | _Author_ | _Modification_
+| 0.1 Draft  | 27 July 2018     |
+
+Jeremy Bennett |
+
+First draft of the document.
+
+|================================================================================
+
+=== Licensing
+
+This document is made freely available under a <<app_cc_by_sa_4.0>>.
+
+You are free to:
+
+* *Share* — copy and redistribute the material in any medium or format
+
+* *Adapt* — remix, transform, and build upon the material for any purpose, even commercially.
+
+The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+
+* *Attribution* — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+* *ShareAlike* — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
+
+* *No additional restrictions* — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+
+Notices:
+
+* You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable exception or limitation.
+
+* No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+
+== About BEEBS
+
+The http://beebs.eu/[Bristol/Embecosm Embedded Benchmark Suite] was created by Bristol University and Embecosm under the http://mageec.org/[MAGEEC project].  It is a set of 79 open source programs particularly suited to evaluating deeply embedded systems by minimizing use of library code, particularly for I/O.  The code is freely available and licensed under the GNU //www.gnu.org/licenses/gpl-3.0.en.html[General Public License].
+
+The set of programs offers a broad spectrum of code types based on the
+followig criteria:
+
+* integer arithmetic
+* floating point arithmetic
+* branch frequency
+* memory bandwidth
+
+== GCC benchmark results
+
+=== Tool chain components tested
+
+The tool chain is built using the following components, all taken from their official upstream repositories.
+
+[cols="<1,<1m,<1",options="header",]
+|=================================================
+| _Repository_ | _Commit_      | _Date_
+| binutils-gdb | cbb09508e4   |  8 July 2018
+| gcc          | 3052e4ec519  | 20 July 2018
+| newlib       | 46ba1675c    | 20 July 2018
+|=================================================
+
+The RISC-V GCC tool chain was built for the `riscv32-unknown-elf` target for the `rv32imc` architecture.
+
+For comparison an ARM GCC tool chain was built for the `arm-none-eabi` target for the `cortex-m4` target with Thumb 2 instructions and soft floating point.
+
+Both tool chains used the same source tree.
+
+==== RISC-V GCC full configuration
+[source,shell]
+----
+$ riscv32-unknown-elf-gcc -vUsing built-in specs.
+COLLECT_GCC=riscv32-unknown-elf-gcc
+COLLECT_LTO_WRAPPER=${installdir}/libexec/gcc/riscv32-unknown-elf/9.0.0/lto-wrapper
+Target: riscv32-unknown-elf
+Configured with: ${srcdir}/configure --prefix=${installdir} --sysconfdir=${installdir}/etc --localstatedir=${installdir}/var --disable-shared --enable-static --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --target=riscv32-unknown-elf --with-sysroot=${installdir}/riscv32-unknown-elf/sysroot --disable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --enable-target-optspace --disable-libsanitizer --disable-tls --disable-libmudflap --disable-threads --disable-libquadmath --disable-libgomp --without-isl --without-cloog --disable-decimal-float --with-arch=rv32imc --with-abi=ilp32 --enable-languages=c,c++ --with-newlib --disable-largefile --disable-nls --enable-checking=yes --with-build-time-tools=${installdir}/riscv32-unknown-elf/bin : (reconfigured) ${srcdir}/configure --prefix=${installdir} --sysconfdir=${installdir}/etc --localstatedir=${installdir}/var --disable-shared --enable-static --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --target=riscv32-unknown-elf --with-sysroot=${installdir}/riscv32-unknown-elf/sysroot --disable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --enable-target-optspace --disable-libsanitizer --disable-tls --disable-libmudflap --disable-threads --disable-libquadmath --disable-libgomp --without-isl --without-cloog --disable-decimal-float --with-arch=rv32imc --with-abi=ilp32 --enable-languages=c,c++ --with-newlib --disable-largefile --disable-nls --enable-checking=yes --with-build-time-tools=${installdir}/riscv32-unknown-elf/bin
+Thread model: single
+gcc version 9.0.0 20180720 (experimental) (GCC)
+----
+
+==== ARM GCC full configuration
+[source,shell]
+----
+$ arm-none-eabi-gcc -v
+Using built-in specs.
+COLLECT_GCC=arm-none-eabi-gcc
+COLLECT_LTO_WRAPPER=${installdir}/libexec/gcc/arm-none-eabi/9.0.0/lto-wrapper
+Target: arm-none-eabi
+Configured with: ${srcdir}/configure --prefix=${installdir} --sysconfdir=${installdir}/etc --localstatedir=${installdir}/var --disable-shared --enable-static --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --target=arm-none-eabi --with-sysroot=${installdir}/arm-none-eabi/sysroot --disable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --enable-target-optspace --disable-libsanitizer --disable-tls --disable-libmudflap --disable-threads --disable-libquadmath --disable-libgomp --without-isl --without-cloog --disable-decimal-float --with-cpu=cortex-m4 --with-fpu=fpv4-sp-d16 --with-float=soft --with-mode=thumb --enable-languages=c,c++ --with-newlib --disable-largefile --disable-nls --enable-checking=yes --with-build-time-tools=${installdir}/arm-none-eabi/bin : (reconfigured) ${srcdir}/configure --prefix=${installdir} --sysconfdir=${installdir}/etc --localstatedir=${installdir}/var --disable-shared --enable-static --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --target=arm-none-eabi --with-sysroot=${installdir}/arm-none-eabi/sysroot --disable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --enable-target-optspace --disable-libsanitizer --disable-tls --disable-libmudflap --disable-threads --disable-libquadmath --disable-libgomp --without-isl --without-cloog --disable-decimal-float --with-cpu=cortex-m4 --with-fpu=fpv4-sp-d16 --with-float=soft --with-mode=thumb --enable-languages=c,c++ --with-newlib --disable-largefile --disable-nls --enable-checking=yes --with-build-time-tools=${installdir}/arm-none-eabi/bin : (reconfigured) ${srcdir}/configure --prefix=${installdir} --sysconfdir=${installdir}/etc --localstatedir=${installdir}/var --disable-shared --enable-static --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --target=arm-none-eabi --with-sysroot=${installdir}/arm-none-eabi/sysroot --disable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --enable-target-optspace --disable-libsanitizer --disable-tls --disable-libmudflap --disable-threads --disable-libquadmath --disable-libgomp --without-isl --without-cloog --disable-decimal-float --with-cpu=cortex-m4 --with-fpu=fpv4-sp-d16 --with-float=soft --with-mode=thumb --enable-languages=c,c++ --with-newlib --disable-largefile --disable-nls --enable-checking=yes --with-build-time-tools=${installdir}/arm-none-eabi/bin
+Thread model: single
+gcc version 9.0.0 20180720 (experimental) (GCC)
+----
+
+=== Compiled code size
+
+The raw data for all these results can be found in <<raw_data>>
+
+We focus initially on just the size of the code. We look later at read only data, initialized data and uninitialized (BSS) data.
+
+==== Methodology ====
+
+For each benchmark program we use the size program to find the size of text (code), initialized data and uninitialized data (BSS) sections.
+
+We summarize the results by totalling the values in each category.  This has the drawback of causing the summary results to be dominated by large programs. We therefore also record the ARM results in each category as a percentage of the corresponding RISC-V results. We summarize these relative sizes as a percentage.
+
+==== Baseline code size
+
+Results from a straightforward compilation of each benchmark using the following options for RISC-V.
+
+[source,shell]
+----
+-Os -march=rv32imc -fdata-sections -ffunction-sections -Wl,-gc-sections
+----
+
+And for comparison the following options for ARM
+
+[source,shell]
+----
+-Os -mcpu=cortex-m4+nofp -mfloat-abi=soft -mthumb \
+-fdata-sections -ffunction-sections -Wl,-gc-sections
+----
+
+.Baseline RISC-V RV32IMC v ARM text size (bytes)
+image::abs-rv32imc-arm.png[]
+
+The data are summarized in the following table.
+
+[cols="<3,>1,>1,>1",options="header,pagewidth",]
+[[abs-rv32imc-arm-summary]]
+.Summary data for RISC-V RV32IMC v ARM text size (bytes)
+|=====================================================================================
+|                       | _RISC-V absolute_ | _ARM absolute_  | _ARM relative_
+| Total (average for %)	| 413,085          | 550,434         |  220%
+| Minimum               | 1,026            | 4,224           |  50%
+| Maximum               | 35,168           | 24,638          |  412%
+|=====================================================================================
+
+Superficially it would appear that the compiled code for ARM is larger.  However the graph shows that the larger programs are generally smaller for ARM, while it is smaller programs which are relatively large.
+
+An examination of the symbols in one binary shows the problem.  Taking the smallest program (`ns`) we see 43 symbols defined in the binary are as follows.
+[source,shell]
+----
+$ riscv32-unknown-elf-nm src/ns/ns
+00011478 d 
+00010196 T atexit
+00010186 T benchmark
+0001157c B __bss_start
+0001037e T __call_exitprocs
+0001157c b completed.3211
+000100ce t deregister_tm_clones
+0001011e t __do_global_dtors_aux
+00011480 t __do_global_dtors_aux_fini_array_entry
+0001157c G _edata
+00011598 B _end
+0001046e T __errno
+000101a0 T exit
+00010444 T _exit
+000100cc T _fini
+00011484 t __fini_array_end
+00011480 t __fini_array_start
+00010158 t frame_dummy
+0001147c t __frame_dummy_init_array_entry
+00011478 d __FRAME_END__
+00011574 G _global_impure_ptr
+00011d74 G __global_pointer$
+00011484 d impure_data
+00011578 G _impure_ptr
+000100cc T _init
+00011480 t __init_array_end
+0001147c t __init_array_start
+00010184 T initialise_benchmark
+0001018a T initialise_board
+000101bc T __libc_fini_array
+000101f2 T __libc_init_array
+00010074 T main
+0001025a T memset
+00011580 b object.3216
+0001147c t __preinit_array_end
+0001147c t __preinit_array_start
+00010302 T __register_exitproc
+000100f2 t register_tm_clones
+000100a0 T _start
+0001018e T start_trigger
+00010192 T stop_trigger
+00011574 G __TMC_END__
+00010180 T verify_benchmark
+----
+
+By contrast for ARM we see 130 symbols defined:
+[source,shell]
+----
+$ arm-none-eabi-nm src/ns/ns 
+0000907c r 
+000081ae T atexit
+000081a4 T benchmark
+00019364 B __bss_end__
+00019364 B _bss_end__
+0001928c B __bss_start
+0001928c B __bss_start__
+00008830 T __call_exitprocs
+000089a8 T _cleanup
+0000896c T _cleanup_r
+00008580 T _close
+00008cc0 T _close_r
+00019098 d CommandLine
+0001928c b completed.6622
+00019088 D __data_start
+00008040 t deregister_tm_clones
+00008080 t __do_global_dtors_aux
+00019084 t __do_global_dtors_aux_fini_array_entry
+0001928c D _edata
+00019364 B end
+00019364 B _end
+00019364 B __end__
+00019360 B errno
+00008914 T __errno
+00008278 t error
+000081bc T exit
+000085b4 T _exit
+00008d84 T fclose
+00008ce0 T _fclose_r
+00008ef4 T fflush
+00008ea0 T _fflush_r
+0000825c t findslot
+00009000 T _fini
+00019088 t __fini_array_end
+00019084 t __fini_array_start
+00008920 t __fp_lock
+00008a98 T __fp_lock_all
+00008978 t __fp_unlock
+00008aac T __fp_unlock_all
+000080a8 t frame_dummy
+00019080 t __frame_dummy_init_array_entry
+0000907c r __FRAME_END__
+00008f40 T _free_r
+000085fc T _fstat
+00008ac0 T _fwalk
+00008af8 T _fwalk_reent
+000085be T _getpid
+0000868c T _gettimeofday
+0000900c R _global_impure_ptr
+00019088 d HeapBase
+00019354 b heap_end.5755
+0001908c d HeapLimit
+0001919c d impure_data
+00019198 D _impure_ptr
+00008000 T _init
+00019084 t __init_array_end
+00019080 t __init_array_start
+000081a2 T initialise_benchmark
+000081a8 T initialise_board
+000082da T initialise_monitor_handles
+000086d4 T _isatty
+00008592 T _kill
+000081dc T __libc_fini_array
+00008204 T __libc_init_array
+0000864e T _link
+00008430 T _lseek
+00008f18 T _lseek_r
+0000800c T main
+000080c8 T _mainCRTStartup
+00019358 B __malloc_free_list
+00008f3c T __malloc_lock
+00008b34 T _malloc_r
+0001935c B __malloc_sbrk_start
+00008f3e T __malloc_unlock
+0000824c T memset
+00019350 b monitor_stderr
+00019348 b monitor_stdin
+0001934c b monitor_stdout
+00019290 b object.6627
+00008534 T _open
+000192a8 b openfiles
+00019080 t __preinit_array_end
+00019080 t __preinit_array_start
+0000868a T _raise
+00008370 W _read
+00008fdc T _read_r
+00008774 T __register_exitproc
+0000805c t register_tm_clones
+00008294 t remap_handle
+00008738 T _rename
+000085c2 W _sbrk
+00008be0 T _sbrk_r
+00008c82 T __sclose
+00008c22 T __seofread
+00009014 R __sf_fake_stderr
+00009054 R __sf_fake_stdin
+00009034 R __sf_fake_stdout
+00008d94 T __sflush_r
+0000897c T __sfmoreglue
+00008a18 T __sfp
+00008a90 T __sfp_lock_acquire
+00008a92 T __sfp_lock_release
+000089b4 T __sinit
+00008a94 T __sinit_lock_acquire
+00008a96 T __sinit_lock_release
+00008c00 T __sread
+00008c5e T __sseek
+00080000 N _stack
+00019090 D __stack_base__
+00019094 d StackLimit
+000080c8 T _start
+000081aa T start_trigger
+0000861a T _stat
+00008924 t std
+000081ac T stop_trigger
+00008c8a T strlen
+0000854e T _swiclose
+000083b4 T _swilseek
+000084b0 T _swiopen
+0000834c T _swiread
+00008442 T _swiwrite
+00008c26 T __swrite
+000086f6 T _system
+000086b6 T _times
+0001928c D __TMC_END__
+0000865e T _unlink
+0000819c T verify_benchmark
+000082d4 t wrap.part.1
+00008466 W _write
+00008c9c T _write_r
+----
+
+The ARM code includes a large number of standard C library symbols, while the RISC-V code includes almost none.  The symbols have been pulled in by the standard C start up code.
+
+==== Code size without C runtime startup
+
+We reconfigure to use a dummy C runtime startup function, which just calls main.  This should be the same size for both RISC-V and ARM and should only pull in library functions actually needed by the program.
+
+The compile time options add the option `-nostartfiles` to omit the standard C runtime startup, which is replaced by a dummy version, the change is to configure to use a dummy C run-time for RISC-V. For RISC-V the compiler options are as follows.
+
+[source,shell]
+----
+-Os -march=rv32imc -fdata-sections -ffunction-sections \
+-Wl,-gc-sections -nostartfiles
+----
+
+And for comparison the following options for ARM
+
+[source,shell]
+----
+-Os -mcpu=cortex-m4+nofp -mfloat-abi=soft -mthumb \
+-fdata-sections -ffunction-sections -Wl,-gc-sections \
+-nostartfiles
+----
+
+.RISC-V RV32IMC v ARM text size (bytes) with no C runtime startup
+image::abs-rv32imc-arm-nocrt0.png[]
+
+The data are summarized in the following table.
+
+[cols="<3,>1,>1,>1",options="header,pagewidth",]
+[[abs-rv32imc-arm-nocrt0-summary]]
+.Summary data for RISC-V RV32IMC v ARM text size (bytes) with no C runtime startup
+|=====================================================================================
+|                       | _RISC-V absolute_ | _ARM absolute_  | _ARM relative_
+| Total (average for %)	| 339,329          | 280,666         |  108%
+| Minimum               | 72               | 78              |  40%
+| Maximum               | 34,386           | 23,690          |  406%
+|=====================================================================================
+
+We see the ARM and RISC-V figures have become closer.  When we look at the smallest program again (`ns`) we see that the two programs are now almost the same size (72 bytes for RISC-V, compared to 78 bytes for ARM). We see a total of just 12 symbols defined for RISC-V.
+
+[source,shell]
+----
+$ riscv32-unknown-elf-nm src/ns/ns
+0001008c T benchmark
+0001109c T __bss_start
+0001109c T _edata
+0001109c T _end
+0001189c T __global_pointer$
+0001008a T initialise_benchmark
+00010090 T initialise_board
+00010054 T main
+00010080 T _start
+00010094 T start_trigger
+00010098 T stop_trigger
+00010086 T verify_benchmark
+----
+
+And just 17 symbols defined for ARM.
+
+[source,shell]
+----
+00008044 T benchmark
+0001804e T __bss_end__
+0001804e T _bss_end__
+0001804e T __bss_start
+0001804e T __bss_start__
+0001804e T __data_start
+0001804e T _edata
+00018050 T _end
+00018050 T __end__
+00008042 T initialise_benchmark
+00008048 T initialise_board
+00008000 T main
+00080000 T _stack
+00008034 T _start
+0000804a T start_trigger
+0000804c T stop_trigger
+0000803c T verify_benchmark
+----
+
+No standard C library code has been included.
+
+However, while BEEBS minimizes its use of library functions, it still has some benchmarks which do need the standard C library and for these we see the ARM code is still much bigger.  It seems the ARM newlib library is compiled with several functions per file, so that linking in one function can pull in many more functions.
+
+==== Code size without the standard C library
+
+We reconfigure to use both a dummy C runtime startup function and a dummy standard C library.  This library has functions which either do nothing (if they have a `void` return type) or return constant zero.  They have no dependencies, and because the benchmarks are built using garbage collection of sections only those functions referenced will be included.  This should eliminate all differences that are due to the implementation of the C library.
+
+The compile time options add the option `-nostartfiles` to omit the standard C runtime startup, which is replaced by a dummy version and `-nostdlib`, which omits the standard C library, which is replaced by a dummy version.  This has the effect of also excluding the standard emulation libary (`libgcc`), so we manually add this back on the command line.  For RISC-V the compiler options are as follows.
+
+[source,shell]
+----
+-Os -march=rv32imc -fdata-sections -ffunction-sections \
+-Wl,-gc-sections -nostartfiles -nostdlib -lgcc
+----
+
+And for comparison the following options for ARM
+
+[source,shell]
+----
+-Os -mcpu=cortex-m4+nofp -mfloat-abi=soft -mthumb \
+-fdata-sections -ffunction-sections -Wl,-gc-sections \
+-nostartfiles -nostdlib -lgcc
+----
+
+.RISC-V RV32IMC v ARM text size (bytes) with dummy standard C library
+image::abs-rv32imc-arm-nolibc.png[]
+
+The data are summarized in the following table.
+
+[cols="<3,>1,>1,>1",options="header,pagewidth",]
+[[abs-rv32imc-arm-nolibc-summary]]
+.Summary data for RISC-V RV32IMC v ARM text size (bytes) with dummy standard C library
+|=====================================================================================
+|                       | _RISC-V absolute_ | _ARM absolute_  | _ARM relative_
+| Total (average for %)	| 310,670          | 214,170         |  82%
+| Minimum               | 72               | 78              |  40%
+| Maximum               | 34,216           | 16,721          |  118%
+|=====================================================================================
+
+We now see the ARM code is on average smaller than RISC-V. In particular the maximum code difference is just 118%, so the largest programs have got much smaller, suggesting that the ARM standard C libary implementation is the problem.
+
+We now identify some programs where ARM is very much smaller than RISC-V, such as `cubic` (40%) and `frac` (41%). A clue to why this is comes from looking at `matmult-float` (54%) and `matmult-int` (98%).  These are the same program, but one uses floating point arithmetic and the other uses integer arithmetic.  It suggests that ARM might have very efficient maths routines, particularly for floating point.
+
+This could be down to either the maths routines themselves, or since these are integer machines, the floating point emulation code in `libgcc`.
+
+==== Code size without the floating point emulation
+
+We reconfigure to use a dummy C runtime startup function, a dummy standard C library and a dummy floating point emulation.  As with the dummy standard C library, the dummy floating point emulation has functions which either do nothing (if they have a `void` return type) or return constant zero.  They have no dependencies, and because the benchmarks are built using garbage collection of sections only those functions referenced will be included.  This should eliminate all remaining differences that are due to the implementation of the floating point emulation library.
+
+The compile time options add the option `-nostartfiles` to omit the standard C runtime startup, which is replaced by a dummy version and `-nostdlib`, which omits the standard C library and emulation libraries, which are replaced by dummy versions.  For RISC-V the compiler options are as follows.
+
+[source,shell]
+----
+-Os -march=rv32imc -fdata-sections -ffunction-sections \
+-Wl,-gc-sections -nostartfiles -nostdlib
+----
+
+And for comparison the following options for ARM
+
+[source,shell]
+----
+-Os -mcpu=cortex-m4+nofp -mfloat-abi=soft -mthumb \
+-fdata-sections -ffunction-sections -Wl,-gc-sections \
+-nostartfiles -nostdlib
+----
+
+Note that we are still using the standard math library, `libm`.
+
+.RISC-V RV32IMC v ARM text size (bytes) with dummy standard C and emulation libraries.
+image::abs-rv32imc-arm-nolibgcc.png[]
+
+The data are summarized in the following table.
+
+[cols="<3,>1,>1,>1",options="header,pagewidth",]
+[[abs-rv32imc-arm-nolibgcc-summary]]
+.Summary data for RISC-V RV32IMC v ARM text size (bytes) with dummy standard C and emulation libraries
+|=====================================================================================
+|                       | _RISC-V absolute_ | _ARM absolute_  | _ARM relative_
+| Total (average for %)	| 194,733          | 170,336         |  91%
+| Minimum               | 72               | 78              |  67%
+| Maximum               | 18,868           | 16,721          |  118%
+|=====================================================================================
+
+We see that the sizes are now closer. The programs which previously had the greatest difference, `cubic` (83%) and `frac` (95%) are now much closer in size.  Similarly `matmult-float`(88%) and `matmult-int` (98%) are much closer.
+
+The remaining question is over the impact of the math library implementation.
+
+==== Code size without the standard math library
+
+We reconfigure to use a dummy C runtime startup function, a dummy standard C library, a dummy standard math library and a dummy floating point emulation.  As with the dummy standard C library, the dummy standard math library has functions which either do nothing (if they have a `void` return type) or return constant zero.  They have no dependencies, and because the benchmarks are built using garbage collection of sections only those functions referenced will be included.  This should eliminate all remaining differences that are due to the implementation of the floating point emulation library.
+
+The compile time options are unchanged - the substitute math library is configured for those benchmarks which need it.  For RISC-V the compiler options are as follows.
+
+[source,shell]
+----
+-Os -march=rv32imc -fdata-sections -ffunction-sections \
+-Wl,-gc-sections -nostartfiles -nostdlib
+----
+
+And for comparison the following options for ARM
+
+[source,shell]
+----
+-Os -mcpu=cortex-m4+nofp -mfloat-abi=soft -mthumb \
+-fdata-sections -ffunction-sections -Wl,-gc-sections \
+-nostartfiles -nostdlib
+----
+
+.RISC-V RV32IMC v ARM text size (bytes) with dummy standard C, math and emulation libraries.
+image::abs-rv32imc-arm-nolibm.png[]
+
+The data are summarized in the following table.
+
+[cols="<3,>1,>1,>1",options="header,pagewidth",]
+[[abs-rv32imc-arm-nolibm-summary]]
+.Summary data for RISC-V RV32IMC v ARM text size (bytes) with dummy standard C, math and emulation libraries
+|=====================================================================================
+|                       | _RISC-V absolute_ | _ARM absolute_  | _ARM relative_
+| Total (average for %)	| 183,235          | 159,759         |  91%
+| Minimum               | 72               | 78              |  67%
+| Maximum               | 18,868           | 16,721          |  118%
+|=====================================================================================
+
+The change of math library has made little difference. Absolute figures are lower, but the ratios are unchanged. This is perhaps not surprising, since the standard math library is generic compiled C.
+
+==== Summary and analysis of code size results
+
+We can summarize the results as follows
+
+[cols="<3,>1,>1,>1",options="header,pagewidth",]
+[[abs-rv32imc-arm-combined-summary]]
+.Summary data for RISC-V RV32IMC v ARM text size (bytes) with dummy standard C, math and emulation libraries
+|=====================================================================================
+|                              | _RISC-V absolute_ | _ARM absolute_  | _ARM relative_
+| default  	               | 413,085          | 550,434         |  220%
+| +dummy startup code          | 339,329          | 280,666         |  108%
+| +dummy standard C libary     | 310,670          | 214,170         |  82%
+| +dummy FP emulation          | 194,733          | 170,336         |  91%
+| +dummy standard math library | 183,235          | 159,759         |  91%
+|=====================================================================================
+
+With all external factors removed, we can see that on average compiled ARM code is 91% of the size of compiled RISC-V code, when compiled with the standard size minimization options (`-Os` and garbage collection of sections when linking).  This is the basic comparison of the qualify of code compiled to minimize size.
+
+Over 79 benchmarks we found some variation, the best gain for ARM was with the `cubic` benchmark (67%), with the worst loss being `statemate` (118%).  Detailed analysis of the code should prove a fruitful source of optimizations for RISC-V.
+
+We see two system factors which can be addressed.
+
+1. The ARM C runtime startup code is large and pulls in some library functions which may not be needed.  The standard C library implementation (_newlib_) also seems inefficient for ARM, although part of this appears to be due to placing many functions in one object file, causing unneeded code to be linked.
+
+2. The ARM floating point emulation is by comparison blisteringly efficient compared to RISC-V.  Investment in hand-coded assembler floating point emulation would seem to be a quick win.  This comes with the caveat that most deeply embedded applications do not use floating point.  Those that do would tend to specify a hardware floating point unit, rather than using emulation.
+
+==== Next steps
+
+We identify two further steps needed in this analysis.
+
+1. Evaluate the impact of global interprocedural optimization (commonly known as link-time optimization).  Experience suggests this can be a very powerful technique.
+
+2. Investigate in detail those benchmarks for which the largest variation was seen, in order to determine potential optimizations.
+
+
+[[raw_data]]
+[appendix]
+== Raw data
+=== Code size
+==== Baseline
+
+[cols="<3,>1,>1,>1,>1,>1,>1,>1,>1,>1",options="header,pagewidth",]
+|==============================================================================================================================
+| _Benchmark_           3+| _RISC-V absolute_          3+| _ARM absolute__            3+| _ARM relative_
+|aha-compress            | 1,692   | 260     | 28      | 4,848   | 524     | 216     | 287%    | 202%    | 771%
+|aha-mont64              | 2,028   | 260     | 52      | 5,128   | 524     | 244     | 253%    | 202%    | 469%
+|bs                      | 1,100   | 380     | 28      | 4,288   | 644     | 216     | 390%    | 169%    | 771%
+|bubblesort              | 1,798   | 260     | 440     | 4,796   | 524     | 628     | 267%    | 202%    | 143%
+|cnt                     | 1,208   | 260     | 448     | 4,416   | 524     | 636     | 366%    | 202%    | 142%
+|compress                | 2,256   | 308     | 2,656   | 5,428   | 572     | 2,844   | 241%    | 186%    | 107%
+|cover                   | 1,076   | 260     | 28      | 4,272   | 524     | 216     | 397%    | 202%    | 771%
+|crc                     | 1,684   | 260     | 798     | 4,768   | 524     | 988     | 283%    | 202%    | 124%
+|crc32                   | 2,908   | 260     | 44      | 5,512   | 524     | 216     | 190%    | 202%    | 491%
+|ctl-stack               | 2,152   | 260     | 64      | 4,812   | 524     | 236     | 224%    | 202%    | 369%
+|ctl-string              | 6,777   | 624     | 72      | 7,684   | 888     | 244     | 113%    | 142%    | 339%
+|ctl-vector              | 5,990   | 260     | 76      | 7,224   | 524     | 248     | 121%    | 202%    | 326%
+|cubic                   | 35,168  | 880     | 28      | 17,752  | 528     | 216     | 50%     | 60%     | 771%
+|dijkstra                | 2,712   | 660     | 560     | 5,140   | 924     | 732     | 190%    | 140%    | 131%
+|dtoa                    | 14,880  | 284     | 2,388   | 12,344  | 548     | 2,556   | 83%     | 193%    | 107%
+|duff                    | 1,288   | 260     | 228     | 4,412   | 524     | 416     | 343%    | 202%    | 182%
+|edn                     | 4,164   | 260     | 1,640   | 6,944   | 524     | 1,828   | 167%    | 202%    | 111%
+|expint                  | 1,340   | 260     | 40      | 4,488   | 524     | 228     | 335%    | 202%    | 570%
+|fac                     | 1,094   | 260     | 28      | 4,284   | 524     | 216     | 392%    | 202%    | 771%
+|fasta                   | 2,298   | 416     | 28      | 4,932   | 680     | 216     | 215%    | 163%    | 771%
+|fdct                    | 2,234   | 388     | 28      | 5,092   | 652     | 216     | 228%    | 168%    | 771%
+|fibcall                 | 1,072   | 260     | 28      | 4,272   | 524     | 216     | 399%    | 202%    | 771%
+|fir                     | 4,166   | 260     | 28      | 7,328   | 524     | 216     | 176%    | 202%    | 771%
+|frac                    | 8,414   | 340     | 28      | 7,204   | 604     | 216     | 86%     | 178%    | 771%
+|huffbench               | 3,306   | 264     | 44      | 5,376   | 528     | 216     | 163%    | 200%    | 491%
+|insertsort              | 1,430   | 260     | 72      | 4,420   | 524     | 260     | 309%    | 202%    | 361%
+|janne_complex           | 1,082   | 260     | 36      | 4,292   | 524     | 224     | 397%    | 202%    | 622%
+|jfdctint                | 2,302   | 260     | 284     | 5,196   | 524     | 472     | 226%    | 202%    | 166%
+|lcdnum                  | 1,131   | 260     | 32      | 4,300   | 524     | 220     | 380%    | 202%    | 688%
+|levenshtein             | 1,416   | 280     | 28      | 4,532   | 544     | 216     | 320%    | 194%    | 771%
+|ludcmp                  | 6,032   | 260     | 368     | 6,792   | 524     | 556     | 113%    | 202%    | 151%
+|matmult-float           | 4,708   | 260     | 1,232   | 6,428   | 524     | 1,420   | 137%    | 202%    | 115%
+|matmult-int             | 3,172   | 260     | 4,832   | 6,132   | 524     | 5,020   | 193%    | 202%    | 104%
+|mergesort               | 10,470  | 260     | 844     | 8,648   | 524     | 1,016   | 83%     | 202%    | 120%
+|miniz                   | 26,918  | 264     | 2,444   | 24,638  | 528     | 2,616   | 92%     | 200%    | 107%
+|minver                  | 5,606   | 296     | 216     | 6,568   | 560     | 404     | 117%    | 189%    | 187%
+|nbody                   | 8,940   | 584     | 28      | 7,892   | 848     | 216     | 88%     | 145%    | 771%
+|ndes                    | 3,560   | 268     | 404     | 6,448   | 532     | 592     | 181%    | 199%    | 147%
+|nettle-arcfour          | 1,664   | 260     | 304     | 4,592   | 524     | 492     | 276%    | 202%    | 162%
+|nettle-cast128          | 17,358  | 260     | 128     | 18,356  | 524     | 316     | 106%    | 202%    | 247%
+|nettle-des              | 9,652   | 260     | 172     | 11,324  | 524     | 360     | 117%    | 202%    | 209%
+|nettle-md5              | 3,700   | 340     | 28      | 5,972   | 604     | 216     | 161%    | 178%    | 771%
+|newlib-exp              | 5,298   | 260     | 32      | 6,312   | 524     | 220     | 119%    | 202%    | 688%
+|newlib-log              | 1,098   | 260     | 32      | 4,272   | 524     | 220     | 389%    | 202%    | 688%
+|newlib-mod              | 3,068   | 260     | 32      | 5,268   | 524     | 220     | 172%    | 202%    | 688%
+|newlib-sqrt             | 5,060   | 260     | 76      | 6,084   | 524     | 264     | 120%    | 202%    | 347%
+|ns                      | 1,026   | 260     | 28      | 4,224   | 524     | 216     | 412%    | 202%    | 771%
+|nsichneu                | 16,494  | 268     | 88      | 19,540  | 532     | 276     | 118%    | 199%    | 314%
+|picojpeg                | 10,648  | 260     | 2,396   | 12,108  | 524     | 2,572   | 114%    | 202%    | 107%
+|prime                   | 1,144   | 260     | 40      | 4,364   | 524     | 228     | 381%    | 202%    | 570%
+|qrduino                 | 9,428   | 260     | 92      | 11,408  | 524     | 264     | 121%    | 202%    | 287%
+|qsort                   | 1,770   | 340     | 428     | 4,856   | 604     | 616     | 274%    | 178%    | 144%
+|qurt                    | 8,522   | 296     | 56      | 8,280   | 560     | 244     | 97%     | 189%    | 436%
+|recursion               | 1,104   | 260     | 36      | 4,288   | 524     | 224     | 388%    | 202%    | 622%
+|rijndael                | 20,090  | 272     | 56      | 16,592  | 536     | 228     | 83%     | 197%    | 407%
+|select                  | 1,702   | 340     | 36      | 4,776   | 604     | 224     | 281%    | 178%    | 622%
+|sglib-arraybinsearch    | 1,132   | 660     | 32      | 4,312   | 924     | 220     | 381%    | 140%    | 688%
+|sglib-arrayheapsort     | 1,336   | 660     | 428     | 4,440   | 924     | 616     | 332%    | 140%    | 144%
+|sglib-arrayquicksort    | 1,354   | 660     | 428     | 4,504   | 924     | 616     | 333%    | 140%    | 144%
+|sglib-dllist            | 2,086   | 660     | 44      | 4,724   | 924     | 216     | 226%    | 140%    | 491%
+|sglib-hashtable         | 1,988   | 660     | 124     | 4,604   | 924     | 296     | 232%    | 140%    | 239%
+|sglib-listinsertsort    | 1,806   | 660     | 44      | 4,448   | 924     | 216     | 246%    | 140%    | 491%
+|sglib-listsort          | 1,824   | 660     | 44      | 4,476   | 924     | 216     | 245%    | 140%    | 491%
+|sglib-queue             | 1,342   | 660     | 28      | 4,440   | 924     | 216     | 331%    | 140%    | 771%
+|sglib-rbtree            | 2,474   | 660     | 44      | 5,028   | 924     | 216     | 203%    | 140%    | 491%
+|slre                    | 4,629   | 688     | 28      | 7,008   | 952     | 216     | 151%    | 138%    | 771%
+|sqrt                    | 8,384   | 260     | 28      | 8,392   | 524     | 216     | 100%    | 202%    | 771%
+|st                      | 8,850   | 264     | 1,664   | 7,720   | 528     | 1,852   | 87%     | 200%    | 111%
+|statemate               | 4,682   | 260     | 320     | 8,532   | 524     | 508     | 182%    | 202%    | 159%
+|stb_perlin              | 11,164  | 460     | 28      | 11,856  | 716     | 216     | 106%    | 156%    | 771%
+|stringsearch1           | 2,996   | 364     | 4,676   | 5,380   | 628     | 4,848   | 180%    | 173%    | 104%
+|strstr                  | 1,288   | 268     | 28      | 4,464   | 532     | 216     | 347%    | 199%    | 771%
+|tarai                   | 1,164   | 260     | 40      | 4,364   | 524     | 228     | 375%    | 202%    | 570%
+|template                | 1,026   | 260     | 28      | 4,224   | 524     | 216     | 412%    | 202%    | 771%
+|trio-snprintf           | 8,891   | 684     | 28      | 9,556   | 888     | 216     | 107%    | 130%    | 771%
+|trio-sscanf             | 7,443   | 628     | 564     | 9,176   | 892     | 752     | 123%    | 142%    | 133%
+|ud                      | 3,638   | 260     | 1,792   | 5,648   | 524     | 1,980   | 155%    | 202%    | 110%
+|whetstone               | 11,760  | 504     | 116     | 10,152  | 528     | 304     | 86%     | 105%    | 262%
+|wikisort                | 13,430  | 264     | 3,244   | 11,340  | 528     | 3,416   | 84%     | 200%    | 105%
+|==============================================================================================================================
+
+[appendix]
+== Creative Commons Attribution 4.0 International License
+
+Creative Commons Corporation ("Creative Commons") is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an "as-is" basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.
+
+=== Using Creative Commons Public Licenses
+
+Creative Commons public licenses provide a standard set of terms and conditions that creators and other rights holders may use to share original works of authorship and other material subject to copyright and certain other rights specified in the public license below. The following considerations are for informational purposes only, are not exhaustive, and do not form part of our licenses.
+
+[horizontal]
+*Considerations for licensors*::  Our public licenses are intended for use by those authorized to give the public permission to use material in ways otherwise restricted by copyright and certain other rights. Our licenses are irrevocable. Licensors should read and understand the terms and conditions of the license they choose before applying it. Licensors should also secure all rights necessary before applying our licenses so that the public can reuse the material as expected. Licensors should clearly mark any material not subject to the license. This includes other CC-licensed material, or material used under an exception or limitation to copyright: https://wiki.creativecommons.org/wiki/Considerations_for_licensors_and_licensees#Considerations_for_licensors[More considerations for licensors].
+
+*Considerations for the public*::Considerations for the public: By using one of our public licenses, a licensor grants the public permission to use the licensed material under specified terms and conditions. If the licensor's permission is not necessary for any reason–for example, because of any applicable exception or limitation to copyright–then that use is not regulated by the license. Our licenses grant only permissions under copyright and certain other rights that a licensor has authority to grant. Use of the licensed material may still be restricted for other reasons, including because others have copyright or other rights in the material. A licensor may make special requests, such as asking that all changes be marked or described.
+
+Although not required by our licenses, you are encouraged to respect those requests where reasonable: https://wiki.creativecommons.org/Considerations_for_licensors_and_licensees#Considerations_for_licensees[More considerations for the public].
+
+[[app_cc_by_sa_4.0]]
+=== Creative Commons Attribution-ShareAlike 4.0 International Public License
+
+By exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-ShareAlike 4.0 International Public License ("Public License").  To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.  By exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution 4.0 International Public License ("Public License").  To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.
+
+:numbered!:
+==== Section 1--Definitions.
+
+a. *Adapted Material* means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.
+
+b. *Adapter's License* means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.
+
+c. *BY-SA Compatible License* means a license listed at creativecommons.org/compatiblelicenses, approved by Creative Commons as essentially the equivalent of this Public License.
+
+d. *Copyright and Similar Rights* means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.
+
+e. *Effective Technological Measures* means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.
+
+f. *Exceptions and Limitations* means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.
+
+g. *License Elements* means the license attributes listed in the name of a Creative Commons Public License. The License Elements of this Public License are Attribution and ShareAlike.
+
+h. *Licensed Material* means the artistic or literary work, database, or other material to which the Licensor applied this Public License.
+
+i. *Licensed Rights* means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.
+
+j. *Licensor* means the individual(s) or entity(ies) granting rights under this Public License.
+
+k. *Share* means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.
+
+l. *Sui Generis Database Rights* means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.
+
+m. *You* means the individual or entity exercising the Licensed Rights under this Public License.  *Your* has a corresponding meaning.
+
+==== Section 2 – Scope
+
+a. *License grant*.
+   1. Subject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:
+      A. reproduce and Share the Licensed Material, in whole or in part; and
+      B. produce, reproduce, and Share Adapted Material.
+   2. _Exceptions and Limitations_. Exceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.
+   3. _Term_. The term of this Public License is specified in Section 6(a).
+   4. _Media and formats; technical modifications allowed_. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)(4) never produces Adapted Material.
+   5. _Downstream recipients_.
+      A. _Offer from the Licensor – Licensed Material_. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.
+      B. _Additional offer from the Licensor – Adapted Material_. Every recipient of Adapted Material from You automatically receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of the Adapter's License You apply.
+      C. _No downstream restrictions_. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.
+   6. _No endorsement_. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).
+
+b. *Other rights*.
+   1. Moral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.
+   2. Patent and trademark rights are not licensed under this Public License.
+   3. To the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.
+
+
+==== Section 3 -- License Conditions.
+
+Your exercise of the Licensed Rights is expressly made subject to the
+following conditions.
+
+a. *Attribution.*
+   1. If You Share the Licensed Material (including in modified form), You must:
+      A. retain the following if it is supplied by the Licensor with the Licensed Material:
+      	 i) identification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);
+	 ii) a copyright notice;
+	 iii) a notice that refers to this Public License;
+	 iv) a notice that refers to the disclaimer of warranties;
+	 v) a URI or hyperlink to the Licensed Material to the extent reasonably practicable;
+      B. indicate if You modified the Licensed Material and retain an indication of any previous modifications; and
+      C. indicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.
+   2. You may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.
+   3. If requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.
+
+b. *ShareAlike.*  In addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.
+   1. The Adapter's License You apply must be a Creative Commons license with the same License Elements, this version or later, or a BY-SA Compatible License.
+   2. You must include the text of, or the URI or hyperlink to, the Adapter's License You apply. You may satisfy this condition in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.
+   3. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter's License You apply.
+
+==== Section 4 -- Sui Generis Database Rights.
+
+Where the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:
+
+a. for the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;
+
+b. if You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material, including for purposes of Section 3(b); and
+
+c. You must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.
+
+For the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.
+
+==== Section 5 -- Disclaimer of Warranties and Limitation of Liability.
+
+a. Unless otherwise separately undertaken by the Licensor, to the extent possible, the Licensor offers the Licensed Material as-is and as-available, and makes no representations or warranties of any kind concerning the Licensed Material, whether express, implied, statutory, or other. This includes, without limitation, warranties of title, merchantability, fitness for a particular purpose, non-infringement, absence of latent or other defects, accuracy, or the presence or absence of errors, whether or not known or discoverable. Where disclaimers of warranties are not allowed in full or in part, this disclaimer may not apply to You.
+
+b. To the extent possible, in no event will the Licensor be liable to You on any legal theory (including, without limitation, negligence) or otherwise for any direct, special, indirect, incidental, consequential, punitive, exemplary, or other losses, costs, expenses, or damages arising out of this Public License or use of the Licensed Material, even if the Licensor has been advised of the possibility of such losses, costs, expenses, or damages. Where a limitation of liability is not allowed in full or in part, this limitation may not apply to You.
+
+c. The disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.
+
+==== Section 6 -- Term and Termination.
+
+a. This Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.
+
+b. Where Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:
+   1. automatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or
+   2. upon express reinstatement by the Licensor.
+
+c. For the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.
+
+d. For the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.
+
+e. Sections 1, 5, 6, 7, and 8 survive termination of this Public License.
+
+==== Section 7 -- Other Terms and Conditions.
+
+a. The Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.
+
+b. Any arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.
+
+==== Section 8 -- Interpretation.
+
+a. For the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.
+
+b. To the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.
+
+c. No term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.
+
+d. Nothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.
+
+=== Supplementary
+
+Creative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the "Licensor."  *_The text of the Creative Commons public licenses is dedicated to the public domain under the https://creativecommons.org/publicdomain/zero/1.0/legalcode[CC0 Public Domain Dedication]._*  Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at https://creativecommons.org/policies[creativecommons.org/policies], Creative Commons does not authorize the use of the trademark "Creative Commons" or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.
+
+Creative Commons may be contacted at https://creativecommons.org/[creativecommons.org].

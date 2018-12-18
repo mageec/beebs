@@ -1,3 +1,19 @@
+2018-12-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* Makefile.am: Add documentation.
+	* Makefile.in: Regenerated.
+	* configure: Regenerated.
+	* configure.ac: Add documentation.
+	* report-rv32imc/Makefile.am: Created.
+	* report-rv32imc/Makefile.in: Created.
+	* report-rv32imc/README.adoc: Created.
+	* report-rv32imc/arm-v-riscv.ods: Created.
+	* report-rv32imc/images/abs-rv32imc-arm-nocrt0.png: Created.
+	* report-rv32imc/images/abs-rv32imc-arm-nolibc.png: Created.
+	* report-rv32imc/images/abs-rv32imc-arm-nolibgcc.png: Created.
+	* report-rv32imc/images/abs-rv32imc-arm-nolibm.png: Created.
+	* report-rv32imc/images/abs-rv32imc-arm.png: Created.
+
 2018-07-26  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	We create dummy versions of C runtime startup, libgcc, libm and

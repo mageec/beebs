@@ -1310,7 +1310,7 @@ AC_ARG_ENABLE([dummy-libm],
      no)  DUMMY_LIBM="-lm" ;;
      *)   DUMMY_LIBM=${enableval} ;;
    esac],
-  [DUMMY_LIBM=""])
+  [DUMMY_LIBM="-lm"])
 
 # Check for support code
 
@@ -1395,6 +1395,7 @@ AC_CONFIG_HEADERS([config.h])
 
 AC_CONFIG_FILES([Makefile                          \
                  doc/Makefile                      \
+		 report-rv32imc/Makefile           \
                  src/Makefile                      \
                  src/aha-compress/Makefile         \
 		 src/aha-mont64/Makefile           \
