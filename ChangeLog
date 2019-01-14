@@ -1,5 +1,12 @@
 2019-01-14  Graham Markall  <graham.markall@embecosm.com>
 
+	* config/riscv32/chips/compare-nolibc/chip.cfg: New file.
+	* config/riscv32/chips/compare-nolibc/chipsupport.c: New file.
+	* config/riscv32/chips/compare-nolibc/chipsupport.h: New file.
+	* support/dummy-libc.c: Add _ctype_.
+
+2019-01-14  Graham Markall  <graham.markall@embecosm.com>
+
 	* config/riscv32/chips/compare-baseline/chip.cfg: Add -Os.
 	* config/riscv32/chips/compare-nocrt/chip.cfg: New file.
 	* config/riscv32/chips/compare-nocrt/chipsupport.c: New file.

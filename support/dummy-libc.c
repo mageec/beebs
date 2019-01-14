@@ -29,6 +29,7 @@ void * __locale_ctype_ptr;
 
 int __errno;
 
+char *_ctype_;
 
 void __attribute__ ((noreturn))
 abort (void)
