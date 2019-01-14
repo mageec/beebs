@@ -1,5 +1,10 @@
 2019-01-14  Graham Markall  <graham.markall@embecosm.com>
 
+	* config/arm/boards/generic/boardsupport.c: New file.
+	* config/arm/chips/compare-baseline/chip.cfg: New file.
+
+2019-01-14  Graham Markall  <graham.markall@embecosm.com>
+
 	* config/riscv32/chips/compare-nolibc-nolibgcc/chip.cfg: New file.
 	* config/riscv32/chips/compare-nolibc-nolibgcc/chipsupport.c: New file.
 	* config/riscv32/chips/compare-nolibc-nolibgcc/chipsupport.h: New file.
