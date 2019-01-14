@@ -1,5 +1,9 @@
 2019-01-14  Graham Markall  <graham.markall@embecosm.com>
 
+	* config/arm/chips/compare-nolibc-nolibgcc/chip.cfg: New file.
+
+2019-01-14  Graham Markall  <graham.markall@embecosm.com>
+
 	* config/arm/chips/compare-nolibc/chip.cfg: New file.
 
 2019-01-14  Graham Markall  <graham.markall@embecosm.com>
