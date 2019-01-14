@@ -1,5 +1,9 @@
 2019-01-14  Graham Markall  <graham.markall@embecosm.com>
 
+	* config/arm/chips/compare-nocrt/chip.cfg: New file.
+
+2019-01-14  Graham Markall  <graham.markall@embecosm.com>
+
 	* config/arm/boards/generic/boardsupport.c: New file.
 	* config/arm/chips/compare-baseline/chip.cfg: New file.
 
