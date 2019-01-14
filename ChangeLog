@@ -1,3 +1,12 @@
+2019-01-14  Graham Markall  <graham.markall@embecosm.com>
+
+	* config/riscv32/boards/generic/boardsupport.c: New file.
+	* config/riscv32/boards/generic/boardsupport.h: New file.
+	* config/riscv32/chips/compare-baseline/chip.cfg: New file.
+	* config/riscv32/chips/compare-baseline/chipsupport.c: New file.
+	* config/riscv32/chips/compare-baseline/chipsupport.h: New file.
+	* testsuite/config/generic.exp: New file.
+
 2018-07-26  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	We create dummy versions of C runtime startup, libgcc, libm and
