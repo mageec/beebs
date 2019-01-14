@@ -1,5 +1,96 @@
 2019-01-14  Graham Markall  <graham.markall@embecosm.com>
 
+	* .gitignore: Add generated files.
+	* doc/.gitignore: Add beebs.info.
+	* doc/beebs.info: Deleted.
+	* libtool: Deleted.
+	* src/aha-compress/.gitignore: New file.
+	* src/aha-mont64/.gitignore: New file.
+	* src/bs/.gitignore: New file.
+	* src/bubblesort/.gitignore: New file.
+	* src/cnt/.gitignore: New file.
+	* src/compress/.gitignore: New file.
+	* src/cover/.gitignore: New file.
+	* src/crc/.gitignore: New file.
+	* src/crc32/.gitignore: New file.
+	* src/ctl-stack/.gitignore: New file.
+	* src/ctl-string/.gitignore: New file.
+	* src/ctl-vector/.gitignore: New file.
+	* src/ctl/.gitignore: New file.
+	* src/cubic/.gitignore: New file.
+	* src/dijkstra/.gitignore: New file.
+	* src/dtoa/.gitignore: New file.
+	* src/duff/.gitignore: New file.
+	* src/edn/.gitignore: New file.
+	* src/expint/.gitignore: New file.
+	* src/fac/.gitignore: New file.
+	* src/fasta/.gitignore: New file.
+	* src/fdct/.gitignore: New file.
+	* src/fibcall/.gitignore: New file.
+	* src/fir/.gitignore: New file.
+	* src/frac/.gitignore: New file.
+	* src/huffbench/.gitignore: New file.
+	* src/insertsort/.gitignore: New file.
+	* src/janne_complex/.gitignore: New file.
+	* src/jfdctint/.gitignore: New file.
+	* src/lcdnum/.gitignore: New file.
+	* src/levenshtein/.gitignore: New file.
+	* src/ludcmp/.gitignore: New file.
+	* src/matmult-float/.gitignore: New file.
+	* src/matmult-int/.gitignore: New file.
+	* src/matmult/.gitignore: New file.
+	* src/mergesort/.gitignore: New file.
+	* src/miniz/.gitignore: New file.
+	* src/minver/.gitignore: New file.
+	* src/nbody/.gitignore: New file.
+	* src/ndes/.gitignore: New file.
+	* src/nettle-arcfour/.gitignore: New file.
+	* src/nettle-cast128/.gitignore: New file.
+	* src/nettle-des/.gitignore: New file.
+	* src/nettle-md5/.gitignore: New file.
+	* src/newlib-exp/.gitignore: New file.
+	* src/newlib-log/.gitignore: New file.
+	* src/newlib-mod/.gitignore: New file.
+	* src/newlib-sqrt/.gitignore: New file.
+	* src/ns/.gitignore: New file.
+	* src/nsichneu/.gitignore: New file.
+	* src/picojpeg/.gitignore: New file.
+	* src/prime/.gitignore: New file.
+	* src/qrduino/.gitignore: New file.
+	* src/qsort/.gitignore: New file.
+	* src/qurt/.gitignore: New file.
+	* src/recursion/.gitignore: New file.
+	* src/rijndael/.gitignore: New file.
+	* src/select/.gitignore: New file.
+	* src/sglib-arraybinsearch/.gitignore: New file.
+	* src/sglib-arrayheapsort/.gitignore: New file.
+	* src/sglib-arrayquicksort/.gitignore: New file.
+	* src/sglib-arraysort/.gitignore: New file.
+	* src/sglib-dllist/.gitignore: New file.
+	* src/sglib-hashtable/.gitignore: New file.
+	* src/sglib-listinsertsort/.gitignore: New file.
+	* src/sglib-listsort/.gitignore: New file.
+	* src/sglib-queue/.gitignore: New file.
+	* src/sglib-rbtree/.gitignore: New file.
+	* src/slre/.gitignore: New file.
+	* src/sqrt/.gitignore: New file.
+	* src/st/.gitignore: New file.
+	* src/statemate/.gitignore: New file.
+	* src/stb_perlin/.gitignore: New file.
+	* src/stringsearch1/.gitignore: New file.
+	* src/strstr/.gitignore: New file.
+	* src/tarai/.gitignore: New file.
+	* src/template/.gitignore: New file.
+	* src/trio-snprintf/.gitignore: New file.
+	* src/trio-sscanf/.gitignore: New file.
+	* src/trio/.gitignore: New file.
+	* src/ud/.gitignore: New file.
+	* src/whetstone/.gitignore: New file.
+	* src/wikisort/.gitignore: New file.
+	* testsuite/.gitignore: New file.
+
+2019-01-14  Graham Markall  <graham.markall@embecosm.com>
+
 	* config/riscv32/boards/generic/boardsupport.c: New file.
 	* config/riscv32/boards/generic/boardsupport.h: New file.
 	* config/riscv32/chips/compare-baseline/chip.cfg: New file.

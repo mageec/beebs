@@ -16,3 +16,14 @@ results
 autom4te.cache
 
 # Build / configure outputs
+*.la
+*.lo
+*.o
+stamp-h1
+.deps
+.libs
+Makefile
+config.h
+config.log
+config.status
+libtool
