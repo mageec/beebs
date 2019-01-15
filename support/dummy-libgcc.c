@@ -295,6 +295,22 @@ __divsf3 (float a __attribute__ ((unused)),
 }
 
 
+int
+__divsi3 (int a __attribute__ ((unused)),
+	  int b __attribute__ ((unused)) )
+{
+  return  0;
+}
+
+
+int
+__mulsi3 (int a __attribute__ ((unused)),
+	  int b __attribute__ ((unused)) )
+{
+  return  0;
+}
+
+
 long double
 __divtf3 (long double a __attribute__ ((unused)),
 	  long double b __attribute__ ((unused)) )

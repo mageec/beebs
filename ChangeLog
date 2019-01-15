@@ -1,3 +1,23 @@
+2019-01-15  Graham Markall  <graham.markall@embecosm.com>
+
+	* Makefile.in: Regenerate.
+	* configure: Regenerate.
+	* configure.ac: Set ARC conditional. Add -Wl,--start-group to dummy
+	libc.
+	* ltmain.sh: Regenerate.
+	* config/arc/boards/generic/boardsupport.c: New file.
+	* config/arc/chips/compare-baseline/chip.cfg: New file.
+	* config/arc/chips/compare-nocrt/chip.cfg: New file.
+	* config/arc/chips/compare-nolibc-nolibgcc/chip.cfg: New file.
+	* config/arc/chips/compare-nolibc/chip.cfg: New file.
+	* m4/libtool.m4: Regenerate.
+	* support/Makefile.am: Build arc-millicode on ARC.
+	* support/Makefile.in: Regenerate.
+	* support/arc-millicode.S: New file.
+	* support/dummy-crt0.c (__start): New function.
+	* support/dummy-libgcc.c (__divsi3): New function.
+	(__mulsi3): New function.
+
 2019-01-14  Graham Markall  <graham.markall@embecosm.com>
 
 	* config/arm/chips/compare-nolibc-nolibgcc/chip.cfg: New file.
