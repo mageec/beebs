@@ -28,11 +28,15 @@ noinst_LTLIBRARIES = libdummycrt0.la \
                      libdummyc.la    \
                      libdummym.la
 
+if ARC
+  MAYBE_ARC_MILLICODE=arc-millicode.S
+endif
+
 libdummycrt0_la_SOURCES = dummy-crt0.c
 libmain_la_SOURCES      = main.c
 libsupport_la_SOURCES   = board.c   \
                           support.h
-libdummygcc_la_SOURCES  = dummy-libgcc.c
+libdummygcc_la_SOURCES  = dummy-libgcc.c $(MAYBE_ARC_MILLICODE)
 libdummyc_la_SOURCES    = dummy-libc.c
 libdummym_la_SOURCES    = dummy-libm.c
 
