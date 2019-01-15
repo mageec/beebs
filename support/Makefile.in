@@ -138,7 +138,9 @@ libdummycrt0_la_LIBADD =
 am_libdummycrt0_la_OBJECTS = dummy-crt0.lo
 libdummycrt0_la_OBJECTS = $(am_libdummycrt0_la_OBJECTS)
 libdummygcc_la_LIBADD =
-am_libdummygcc_la_OBJECTS = dummy-libgcc.lo
+am__libdummygcc_la_SOURCES_DIST = dummy-libgcc.c arc-millicode.S
+@ARC_TRUE@am__objects_1 = arc-millicode.lo
+am_libdummygcc_la_OBJECTS = dummy-libgcc.lo $(am__objects_1)
 libdummygcc_la_OBJECTS = $(am_libdummygcc_la_OBJECTS)
 libdummym_la_LIBADD =
 am_libdummym_la_OBJECTS = dummy-libm.lo
@@ -148,8 +150,8 @@ am_libmain_la_OBJECTS = libmain_la-main.lo
 libmain_la_OBJECTS = $(am_libmain_la_OBJECTS)
 libsupport_la_LIBADD =
 am__libsupport_la_SOURCES_DIST = board.c support.h chip.c
-@CHIPSUPPORT_C_TRUE@am__objects_1 = libsupport_la-chip.lo
-am_libsupport_la_OBJECTS = libsupport_la-board.lo $(am__objects_1)
+@CHIPSUPPORT_C_TRUE@am__objects_2 = libsupport_la-chip.lo
+am_libsupport_la_OBJECTS = libsupport_la-board.lo $(am__objects_2)
 libsupport_la_OBJECTS = $(am_libsupport_la_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -167,6 +169,16 @@ DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
+CPPASCOMPILE = $(CCAS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CCASFLAGS) $(CCASFLAGS)
+LTCPPASCOMPILE = $(LIBTOOL) $(AM_V_lt) $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=compile $(CCAS) $(DEFS) \
+	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
+	$(AM_CCASFLAGS) $(CCASFLAGS)
+AM_V_CPPAS = $(am__v_CPPAS_@AM_V@)
+am__v_CPPAS_ = $(am__v_CPPAS_@AM_DEFAULT_V@)
+am__v_CPPAS_0 = @echo "  CPPAS   " $@;
+am__v_CPPAS_1 = 
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
@@ -189,7 +201,7 @@ SOURCES = $(libdummyc_la_SOURCES) $(libdummycrt0_la_SOURCES) \
 	$(libdummygcc_la_SOURCES) $(libdummym_la_SOURCES) \
 	$(libmain_la_SOURCES) $(libsupport_la_SOURCES)
 DIST_SOURCES = $(libdummyc_la_SOURCES) $(libdummycrt0_la_SOURCES) \
-	$(libdummygcc_la_SOURCES) $(libdummym_la_SOURCES) \
+	$(am__libdummygcc_la_SOURCES_DIST) $(libdummym_la_SOURCES) \
 	$(libmain_la_SOURCES) $(am__libsupport_la_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
@@ -358,10 +370,11 @@ noinst_LTLIBRARIES = libdummycrt0.la \
                      libdummyc.la    \
                      libdummym.la
 
+@ARC_TRUE@MAYBE_ARC_MILLICODE = arc-millicode.S
 libdummycrt0_la_SOURCES = dummy-crt0.c
 libmain_la_SOURCES = main.c
 libsupport_la_SOURCES = board.c support.h $(am__append_1)
-libdummygcc_la_SOURCES = dummy-libgcc.c
+libdummygcc_la_SOURCES = dummy-libgcc.c $(MAYBE_ARC_MILLICODE)
 libdummyc_la_SOURCES = dummy-libc.c
 libdummym_la_SOURCES = dummy-libm.c
 libmain_la_CPPFLAGS = -I$(top_srcdir)/config/@ARCH@/boards/@BOARD@ \
@@ -373,7 +386,7 @@ libsupport_la_CPPFLAGS = -I$(top_srcdir)/config/@ARCH@/boards/@BOARD@ \
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .c .lo .o .obj
+.SUFFIXES: .S .c .lo .o .obj
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -439,6 +452,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/arc-millicode.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dummy-crt0.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dummy-libc.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dummy-libgcc.Plo@am__quote@
@@ -446,6 +460,27 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmain_la-main.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libsupport_la-board.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libsupport_la-chip.Plo@am__quote@
+
+.S.o:
+@am__fastdepCCAS_TRUE@	$(AM_V_CPPAS)$(CPPASCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCCAS_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCCAS_FALSE@	$(AM_V_CPPAS)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCCAS_FALSE@	DEPDIR=$(DEPDIR) $(CCASDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCCAS_FALSE@	$(AM_V_CPPAS@am__nodep@)$(CPPASCOMPILE) -c -o $@ $<
+
+.S.obj:
+@am__fastdepCCAS_TRUE@	$(AM_V_CPPAS)$(CPPASCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
+@am__fastdepCCAS_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCCAS_FALSE@	$(AM_V_CPPAS)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCCAS_FALSE@	DEPDIR=$(DEPDIR) $(CCASDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCCAS_FALSE@	$(AM_V_CPPAS@am__nodep@)$(CPPASCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+.S.lo:
+@am__fastdepCCAS_TRUE@	$(AM_V_CPPAS)$(LTCPPASCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCCAS_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+@AMDEP_TRUE@@am__fastdepCCAS_FALSE@	$(AM_V_CPPAS)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCCAS_FALSE@	DEPDIR=$(DEPDIR) $(CCASDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCCAS_FALSE@	$(AM_V_CPPAS@am__nodep@)$(LTCPPASCOMPILE) -c -o $@ $<
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

@@ -1296,7 +1296,7 @@ AC_ARG_ENABLE([dummy-libc],
   [AS_HELP_STRING([--enable-dummy-libc],
      [Use dummy Standard C library])],
   [case "${enableval}" in
-     yes) DUMMY_LIBC="\$(top_builddir)/support/libdummyc.la" ;;
+     yes) DUMMY_LIBC="-Wl,--start-group \$(top_builddir)/support/libdummyc.la" ;;
      no)  DUMMY_LIBC= ;;
      *)   DUMMY_LIBC=${enableval} ;;
    esac],
@@ -1368,6 +1368,8 @@ AC_SUBST([DUMMY_LIBM])
 AC_SUBST(ARCH, $arch)
 AC_SUBST(BOARD, $board)
 AC_SUBST(CHIP, $chip)
+
+AM_CONDITIONAL([ARC], [test x$arch = xarc])
 
 # Substitute flags
 
