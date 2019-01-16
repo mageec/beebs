@@ -35,7 +35,7 @@ AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
 
 AM_INIT_AUTOMAKE([-Wno-portability])
-AM_MAINTAINER_MODE([enable])
+AM_MAINTAINER_MODE([disable])
 AM_SILENT_RULES([yes])
 
 LT_INIT
@@ -231,6 +231,19 @@ AC_ARG_WITH([chip],
 [AS_HELP_STRING([--with-chip], [Select the chip to target])],
     [chip=$with_chip],
     [chip=generic])
+
+# Default settings for dummy libraries. These can be overridden by the
+# chip configuration or configure flags. We default to having them all
+# off because we expect the default setup to produce compiled code that
+# can actually be executed - however, the dummy libraries are helpful
+# for analysing code size without library code inclusion confounding
+# things.
+
+USE_DUMMY_CRT0=no
+USE_DUMMY_LIBGCC=no
+USE_DUMMY_COMPILERRT=no
+USE_DUMMY_LIBC=no
+USE_DUMMY_LIBM=no
 
 # Execute any architecture, board or chip specific configuration. These can
 # set architecture, chip and board CPPFLAGS, CFLAGS and LDFLAGS and exclude
@@ -1260,57 +1273,46 @@ AC_ARG_ENABLE([benchmark-wikisort],
 AM_CONDITIONAL([ENABLED_BENCHMARK_WIKISORT],
                [test x$benchmark_wikisort = xtrue])
 
+
+# What to set DUMMY_* to if the dummy libraries are enabled.
+
+DUMMY_CRT0_YES="\$(top_builddir)/support/libdummycrt0.la"
+DUMMY_LIBGCC_YES="\$(top_builddir)/support/libdummygcc.la"
+DUMMY_COMPILERRT_YES="\$(top_builddir)/support/libdummycompilerrt.la"
+DUMMY_LIBC_YES="-Wl,--start-group \$(top_builddir)/support/libdummyc.la"
+DUMMY_LIBM_YES="\$(top_builddir)/support/libdummym.la"
+
 # Enable dummy libraries
 
-AC_ARG_ENABLE([dummy-crt0],
-  [AS_HELP_STRING([--enable-dummy-crt0],
-     [Use dummy crt0 startup code])],
-  [case "${enableval}" in
-     yes) DUMMY_CRT0="\$(top_builddir)/support/libdummycrt0.la" ;;
-     no)  DUMMY_CRT0= ;;
-     *)   DUMMY_CRT0=${enableval} ;;
-   esac],
-  [DUMMY_CRT0=""])
+case "${USE_DUMMY_CRT0}" in
+   yes) DUMMY_CRT0=${DUMMY_CRT0_YES} ;;
+   no)  DUMMY_CRT0= ;;
+   *)   DUMMY_CRT0=${USE_DUMMY_CRT0} ;;
+esac
 
-AC_ARG_ENABLE([dummy-libgcc],
-  [AS_HELP_STRING([--enable-dummy-libgcc],
-     [Use dummy libgcc library])],
-  [case "${enableval}" in
-     yes) DUMMY_LIBGCC="\$(top_builddir)/support/libdummygcc.la" ;;
-     no)  DUMMY_LIBGCC= ;;
-     *)   DUMMY_LIBGCC=${enableval} ;;
-   esac],
-  [DUMMY_LIBGCC=""])
+case "${USE_DUMMY_LIBGCC}" in
+   yes) DUMMY_LIBGCC=${DUMMY_LIBGCC_YES} ;;
+   no)  DUMMY_LIBGCC= ;;
+   *)   DUMMY_LIBGCC=${USE_DUMMY_LIBGCC} ;;
+esac
 
-AC_ARG_ENABLE([dummy-compilerrt],
-  [AS_HELP_STRING([--enable-dummy-compilerrt],
-     [Use dummy CompilerRT library])],
-  [case "${enableval}" in
-     yes) DUMMY_COMPILERRT="\$(top_builddir)/support/libdummycompilerrt.la" ;;
-     no)  DUMMY_COMPILERRT= ;;
-     *)   DUMMY_COMPILERRT=${enableval} ;;
-   esac],
-  [DUMMY_COMPILERRT=""])
+case "${USE_DUMMY_COMPILERRT}" in
+   yes) DUMMY_COMPILERRT=${DUMMY_COMPILERRT_YES} ;;
+   no)  DUMMY_COMPILERRT= ;;
+   *)   DUMMY_COMPILERRT=${USE_DUMMY_COMPILERRT} ;;
+esac
 
-AC_ARG_ENABLE([dummy-libc],
-  [AS_HELP_STRING([--enable-dummy-libc],
-     [Use dummy Standard C library])],
-  [case "${enableval}" in
-     yes) DUMMY_LIBC="-Wl,--start-group \$(top_builddir)/support/libdummyc.la" ;;
-     no)  DUMMY_LIBC= ;;
-     *)   DUMMY_LIBC=${enableval} ;;
-   esac],
-  [DUMMY_LIBC=""])
+case "${USE_DUMMY_LIBC}" in
+   yes) DUMMY_LIBC=${DUMMY_LIBC_YES} ;;
+   no)  DUMMY_LIBC= ;;
+   *)   DUMMY_LIBC=${USE_DUMMY_LIBC} ;;
+esac
 
-AC_ARG_ENABLE([dummy-libm],
-  [AS_HELP_STRING([--enable-dummy-libm],
-     [Use dummy Standard C math library])],
-  [case "${enableval}" in
-     yes) DUMMY_LIBM="\$(top_builddir)/support/libdummym.la" ;;
-     no)  DUMMY_LIBM="-lm" ;;
-     *)   DUMMY_LIBM=${enableval} ;;
-   esac],
-  [DUMMY_LIBM=""])
+case "${USE_DUMMY_LIBM}" in
+   yes) DUMMY_LIBM=${DUMMY_LIBM_YES} ;;
+   no)  DUMMY_LIBM="-lm" ;;
+   *)   DUMMY_LIBM=${USE_DUMMY_LIBM} ;;
+esac
 
 # Check for support code
 
