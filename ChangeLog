@@ -1,3 +1,23 @@
+2019-01-16  Graham Markall  <graham.markall@embecosm.com>
+
+	* configure: Regenerate.
+	* configure.ac: Disable maintainer mode by default. Replace
+	--enable-dummy arguments with USE_DUMMY_ variables.
+	* config/arc/chips/compare-nocrt/chip.cfg: Add USE_DUMMY settings.
+	* config/arc/chips/compare-nolibc-nolibgcc-nolibm/chip.cfg: New file.
+	* config/arc/chips/compare-nolibc-nolibgcc/chip.cfg: Add USE_DUMMY settings.
+	* config/arc/chips/compare-nolibc/chip.cfg: Add USE_DUMMY settings.
+	* config/arm/chips/compare-nocrt/chip.cfg: Add USE_DUMMY settings.
+	* config/arm/chips/compare-nolibc-nolibgcc-nolibm/chip.cfg: New file.
+	* config/arm/chips/compare-nolibc-nolibgcc/chip.cfg: Add USE_DUMMY settings.
+	* config/arm/chips/compare-nolibc/chip.cfg: Add USE_DUMMY settings.
+	* config/riscv32/chips/compare-nocrt/chip.cfg: Add USE_DUMMY settings.
+	* config/riscv32/chips/compare-nolibc-nolibgcc-nolibm/chip.cfg: New file.
+	* config/riscv32/chips/compare-nolibc-nolibgcc-nolibm/chipsupport.c: New file.
+	* config/riscv32/chips/compare-nolibc-nolibgcc-nolibm/chipsupport.h: New file.
+	* config/riscv32/chips/compare-nolibc-nolibgcc/chip.cfg: Add USE_DUMMY settings.
+	* config/riscv32/chips/compare-nolibc/chip.cfg: Add USE_DUMMY settings.
+
 2019-01-15  Graham Markall  <graham.markall@embecosm.com>
 
 	* Makefile.in: Regenerate.
