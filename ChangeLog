@@ -1,3 +1,55 @@
+2019-01-20  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Draft 0.2 of the report on code size.
+
+	Updates existing data for RISC-V and ARM and adds new data for
+	ARC.  Analysis updated to reflect this.  Raw data removed from
+	the document and added to the repository as CSV files.
+
+	* Makefile.in: Regenerated.
+	* doc/version.texi: Likewise.
+	* report-rv32imc/README.adoc: Updated data for RISC-V and ARM and
+	new data for ARC and reworked throughout. Raw data appendix
+	replaced by reference to raw data in the repository.
+	* report-rv32imc/arm-v-riscv.ods: Renamed as size-comp.ods.
+	* report-rv32imc/images/abs-rv32imc-arm-arc-baseline.png: Renamed
+	from abs-rv32imc-arm.png.
+	* report-rv32imc/images/abs-rv32imc-arm-arc-nocrt0.png: Renamed
+	from abs-rv32imc-arm-nocrt0.png.
+	* report-rv32imc/images/abs-rv32imc-arm-arc-nolibc.png: Renamed
+	from abs-rv32imc-arm-nolibc.png.
+	* report-rv32imc/images/abs-rv32imc-arm-arc-nolibgcc.png: Renamed
+	from abs-rv32imc-arm-nolibgcc.png.
+	* report-rv32imc/images/abs-rv32imc-arm-arc-nolibm.png: Renamed
+	from abs-rv32imc-arm-nolibm.png.
+	* report-rv32imc/images/abs-rv32imc-arm-nocrt0.png: Renamed to
+	abs-rv32imc-arm-arc-nocrt0.png.
+	* report-rv32imc/images/abs-rv32imc-arm-nolibc.png: Renamed to
+	abs-rv32imc-arm-arc-nolibc.png.
+	* report-rv32imc/images/abs-rv32imc-arm-nolibgcc.png: Renamed to
+	abs-rv32imc-arm-arc-nolibgcc.png.
+	* report-rv32imc/images/abs-rv32imc-arm-nolibm.png: Renamed to
+	abs-rv32imc-arm-arc-nolibm.png.
+	* report-rv32imc/images/abs-rv32imc-arm.png: Renamed to
+	abs-rv32imc-arm-arc-baseline.png.
+	* report-rv32imc/raw/README.md: Created.
+	* report-rv32imc/raw/arc-baseline.csv: Created.
+	* report-rv32imc/raw/arc-nocrt.csv: Created.
+	* report-rv32imc/raw/arc-nolibc-nolibgcc-nolibm.csv: Created.
+	* report-rv32imc/raw/arc-nolibc-nolibgcc.csv: Created.
+	* report-rv32imc/raw/arc-nolibc.csv: Created.
+	* report-rv32imc/raw/arm-baseline.csv: Created.
+	* report-rv32imc/raw/arm-nocrt.csv: Created.
+	* report-rv32imc/raw/arm-nolibc-nolibgcc-nolibm.csv: Created.
+	* report-rv32imc/raw/arm-nolibc-nolibgcc.csv: Created.
+	* report-rv32imc/raw/arm-nolibc.csv: Created.
+	* report-rv32imc/raw/riscv-baseline.csv: Created.
+	* report-rv32imc/raw/riscv-nocrt.csv: Created.
+	* report-rv32imc/raw/riscv-nolibc-nolibgcc-nolibm.csv: Created.
+	* report-rv32imc/raw/riscv-nolibc-nolibgcc.csv: Created.
+	* report-rv32imc/raw/riscv-nolibc.csv: Created.
+	* report-rv32imc/size-comp.ods: Renamed from arm-v-riscv.ods.
+
 2019-01-16  Graham Markall  <graham.markall@embecosm.com>
 
 	* configure: Regenerate.

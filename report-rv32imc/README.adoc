@@ -1,6 +1,6 @@
 = RV32IMC BEEBS analysis =
 Jeremy Bennett <jeremy.bennett@embecosm.com>
-Issue 0.1 Draft
+Issue 0.2 Draft
 :toc:
 :icons: font
 :numbered:
@@ -45,6 +45,11 @@ Feedback is always welcome, which should be sent to info@embecosm.com.
 [cols="<1,<2,<3,<4",options="header,pagewidth",]
 |================================================================================
 | _Revision_ | _Date_            | _Author_ | _Modification_
+| 0.2 Draft  | 20 January 2019     |
+
+Jeremy Bennett |
+
+Update all data and add ARC HS target.
 | 0.1 Draft  | 27 July 2018     |
 
 Jeremy Bennett |
@@ -99,22 +104,25 @@ The tool chain is built using the following components, all taken from their off
 
 [cols="<1,<1m,<1",options="header",]
 |=================================================
-| _Repository_ | _Commit_      | _Date_
-| binutils-gdb | cbb09508e4   |  8 July 2018
-| gcc          | 3052e4ec519  | 20 July 2018
-| newlib       | 46ba1675c    | 20 July 2018
+| _Repository_ | _Commit_     | _Date_
+| binutils-gdb | d63f2be21b   | 14 January 2019
+| gcc          | 0764f7c0c7c  | 14 January 2019
+| newlib       | 19b7c7ab2    | 13 January 2019
 |=================================================
 
 The RISC-V GCC tool chain was built for the `riscv32-unknown-elf` target for the `rv32imc` architecture.
 
-For comparison an ARM GCC tool chain was built for the `arm-none-eabi` target for the `cortex-m4` target with Thumb 2 instructions and soft floating point.
+For comparison two other tool chains were built
+* an ARM GCC tool chain for the `arm-none-eabi` target for the `cortex-m4` target with Thumb 2 instructions and soft floating point.
+* an ARC GCC tool chain for the `arc-elf32` target for the `archs` target.
 
-Both tool chains used the same source tree.
+All tool chains used the same source tree.
 
 ==== RISC-V GCC full configuration
 [source,shell]
 ----
-$ riscv32-unknown-elf-gcc -vUsing built-in specs.
+$ riscv32-unknown-elf-gcc -v
+Using built-in specs.
 COLLECT_GCC=riscv32-unknown-elf-gcc
 COLLECT_LTO_WRAPPER=${installdir}/libexec/gcc/riscv32-unknown-elf/9.0.0/lto-wrapper
 Target: riscv32-unknown-elf
@@ -134,6 +142,19 @@ Target: arm-none-eabi
 Configured with: ${srcdir}/configure --prefix=${installdir} --sysconfdir=${installdir}/etc --localstatedir=${installdir}/var --disable-shared --enable-static --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --target=arm-none-eabi --with-sysroot=${installdir}/arm-none-eabi/sysroot --disable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --enable-target-optspace --disable-libsanitizer --disable-tls --disable-libmudflap --disable-threads --disable-libquadmath --disable-libgomp --without-isl --without-cloog --disable-decimal-float --with-cpu=cortex-m4 --with-fpu=fpv4-sp-d16 --with-float=soft --with-mode=thumb --enable-languages=c,c++ --with-newlib --disable-largefile --disable-nls --enable-checking=yes --with-build-time-tools=${installdir}/arm-none-eabi/bin : (reconfigured) ${srcdir}/configure --prefix=${installdir} --sysconfdir=${installdir}/etc --localstatedir=${installdir}/var --disable-shared --enable-static --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --target=arm-none-eabi --with-sysroot=${installdir}/arm-none-eabi/sysroot --disable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --enable-target-optspace --disable-libsanitizer --disable-tls --disable-libmudflap --disable-threads --disable-libquadmath --disable-libgomp --without-isl --without-cloog --disable-decimal-float --with-cpu=cortex-m4 --with-fpu=fpv4-sp-d16 --with-float=soft --with-mode=thumb --enable-languages=c,c++ --with-newlib --disable-largefile --disable-nls --enable-checking=yes --with-build-time-tools=${installdir}/arm-none-eabi/bin : (reconfigured) ${srcdir}/configure --prefix=${installdir} --sysconfdir=${installdir}/etc --localstatedir=${installdir}/var --disable-shared --enable-static --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --target=arm-none-eabi --with-sysroot=${installdir}/arm-none-eabi/sysroot --disable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --enable-target-optspace --disable-libsanitizer --disable-tls --disable-libmudflap --disable-threads --disable-libquadmath --disable-libgomp --without-isl --without-cloog --disable-decimal-float --with-cpu=cortex-m4 --with-fpu=fpv4-sp-d16 --with-float=soft --with-mode=thumb --enable-languages=c,c++ --with-newlib --disable-largefile --disable-nls --enable-checking=yes --with-build-time-tools=${installdir}/arm-none-eabi/bin
 Thread model: single
 gcc version 9.0.0 20180720 (experimental) (GCC)
+----
+
+==== ARC GCC full configuration
+[source,shell]
+----
+$ arc-elf32-gcc -v
+Using built-in specs.
+COLLECT_GCC=./arc-elf32-gcc
+COLLECT_LTO_WRAPPER=/home/jeremy/gittrees/risc-v/tools/upstream/install-arc/libexec/gcc/arc-elf32/9.0.0/lto-wrapper
+Target: arc-elf32
+Configured with: /home/jeremy/gittrees/risc-v/tools/upstream/gcc/configure --prefix=/home/jeremy/gittrees/risc-v/tools/upstream/install-arc --sysconfdir=/home/jeremy/gittrees/risc-v/tools/upstream/install-arc/etc --localstatedir=/home/jeremy/gittrees/risc-v/tools/upstream/install-arc/var --disable-shared --enable-static --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --target=arc-elf32 --with-sysroot=/home/jeremy/gittrees/risc-v/tools/upstream/install-arc/arc-elf32/sysroot --disable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --enable-target-optspace --disable-libsanitizer --disable-tls --disable-libmudflap --disable-threads --disable-libquadmath --disable-libgomp --without-isl --without-cloog --disable-decimal-float --with-cpu=archs --enable-languages=c,c++ --with-newlib --disable-largefile --disable-nls --enable-checking=yes --with-build-time-tools=/home/jeremy/gittrees/risc-v/tools/upstream/install-arc/arc-elf32/bin
+Thread model: single
+gcc version 9.0.0 20190114 (experimental) (GCC) 
 ----
 
 === Compiled code size
@@ -165,24 +186,39 @@ And for comparison the following options for ARM
 -fdata-sections -ffunction-sections -Wl,-gc-sections
 ----
 
-.Baseline RISC-V RV32IMC v ARM text size (bytes)
-image::abs-rv32imc-arm.png[]
+and ARC
+
+[source,shell]
+----
+-Os -mcpu=archs -fdata-sections -ffunction-sections -Wl,-gc-sections
+----
+
+.Baseline RISC-V RV32IMC v ARM v ARC text size (bytes)
+image::abs-rv32imc-arm-arc-baseline.png[]
 
 The data are summarized in the following table.
 
-[cols="<3,>1,>1,>1",options="header,pagewidth",]
-[[abs-rv32imc-arm-summary]]
-.Summary data for RISC-V RV32IMC v ARM text size (bytes)
+[cols="<3,>1,>1,>1,>1,>1",options="header,pagewidth",]
+[[abs-rv32imc-arm-arc-summary]]
+.Summary data for RISC-V RV32IMC v ARM v ARC text size (bytes)
 |=====================================================================================
-|                       | _RISC-V absolute_ | _ARM absolute_  | _ARM relative_
-| Total (average for %)	| 413,085          | 550,434         |  220%
-| Minimum               | 1,026            | 4,224           |  50%
-| Maximum               | 35,168           | 24,638          |  412%
+|                       | _RISC-V absolute_ |
+_ARM absolute_          | _ARM relative_    |
+_ARC absolute_          | _ARC relative_
+| Total (average for %)	| 407,693           |
+543,290                 |     222%          |
+357,048                 |      96%
+| Minimum               |     994           |
+4,168                   |      50%          |
+780                     |      49%
+| Maximum               |  35,168           |
+24,638                  |     419%          |
+24,068                  |     347%
 |=====================================================================================
 
 Superficially it would appear that the compiled code for ARM is larger.  However the graph shows that the larger programs are generally smaller for ARM, while it is smaller programs which are relatively large.
 
-An examination of the symbols in one binary shows the problem.  Taking the smallest program (`ns`) we see 43 symbols defined in the binary are as follows.
+An examination of the symbols in one binary shows the problem.  Taking the smallest program (`ns`) we see 43 symbols defined in the binary for RISC-V are as follows.
 [source,shell]
 ----
 $ riscv32-unknown-elf-nm src/ns/ns
@@ -229,6 +265,73 @@ $ riscv32-unknown-elf-nm src/ns/ns
 00010192 T stop_trigger
 00011574 G __TMC_END__
 00010180 T verify_benchmark
+----
+
+For ARC we see 61 symbols defined:
+[source,shell]
+----
+$ arc-elf32-nm src/ns/ns 
+00000294 T benchmark
+00002514 G __bss_start
+000002c8 T __call_exitprocs
+00002514 b completed.3536
+00002504 d __CTOR_END__
+00002500 d __CTOR_LIST__
+000001a4 t deregister_tm_clones
+000003d0 t __do_global_ctors_aux
+000001f0 t __do_global_dtors_aux
+0000250c D __DTOR_END__
+00002518 b dtor_idx.3538
+00002508 d __DTOR_LIST__
+00002514 G _edata
+0000251c B _end
+0000751c B __end_heap
+000002a4 T exit
+00000360 T _exit
+000003f8 T _fini
+00000248 t frame_dummy
+0000040c R _global_impure_ptr
+00002410 d impure_data
+00002510 G _impure_ptr
+00000104 T _init
+00000290 T initialise_benchmark
+00000298 T initialise_board
+00000122 T __JLI_TABLE__
+000003c0 T __ld_r13_to_r14_ret
+000003bc T __ld_r13_to_r15_ret
+000003b8 T __ld_r13_to_r16_ret
+000003b4 T __ld_r13_to_r17_ret
+000003b0 T __ld_r13_to_r18_ret
+000003ac T __ld_r13_to_r19_ret
+000003a8 T __ld_r13_to_r20_ret
+000003a4 T __ld_r13_to_r21_ret
+000003a0 T __ld_r13_to_r22_ret
+0000039c T __ld_r13_to_r23_ret
+00000398 T __ld_r13_to_r24_ret
+00000394 T __ld_r13_to_r25_ret
+0000024c T main
+000001c4 t register_tm_clones
+00002514 G __sbss_start
+00002610 G __SDATA_BEGIN__
+00007520 B __stack
+00017520 B __stack_top
+00000124 T __start
+0000251c B __start_heap
+0000029c T start_trigger
+000002a0 T stop_trigger
+0000038c T __st_r13_to_r15
+00000388 T __st_r13_to_r16
+00000384 T __st_r13_to_r17
+00000380 T __st_r13_to_r18
+0000037c T __st_r13_to_r19
+00000378 T __st_r13_to_r20
+00000374 T __st_r13_to_r21
+00000370 T __st_r13_to_r22
+0000036c T __st_r13_to_r23
+00000368 T __st_r13_to_r24
+00000364 T __st_r13_to_r25
+00002500 D __TMC_END__
+0000028c T verify_benchmark
 ----
 
 By contrast for ARM we see 130 symbols defined:
@@ -367,7 +470,10 @@ $ arm-none-eabi-nm src/ns/ns
 00008c9c T _write_r
 ----
 
-The ARM code includes a large number of standard C library symbols, while the RISC-V code includes almost none.  The symbols have been pulled in by the standard C start up code.
+The ARM code includes a large number of standard C library symbols, while the
+RISC-V code includes almost none.  The ARC code is slightly larger than the
+RISC-C code with a small number of additional symbols.  The ARM symbols in
+particular have been pulled in by the standard C start up code.
 
 ==== Code size without C runtime startup
 
@@ -390,22 +496,38 @@ And for comparison the following options for ARM
 -nostartfiles
 ----
 
-.RISC-V RV32IMC v ARM text size (bytes) with no C runtime startup
-image::abs-rv32imc-arm-nocrt0.png[]
+and ARC
+
+[source,shell]
+----
+-Os -mcpu=archs -fdata-sections -ffunction-sections \
+-Wl,-gc-sections -nostartfiles
+----
+
+.RISC-V RV32IMC v ARM v ARC text size (bytes) with no C runtime startup
+image::abs-rv32imc-arm-arc-nocrt0.png[]
 
 The data are summarized in the following table.
 
-[cols="<3,>1,>1,>1",options="header,pagewidth",]
-[[abs-rv32imc-arm-nocrt0-summary]]
-.Summary data for RISC-V RV32IMC v ARM text size (bytes) with no C runtime startup
+[cols="<3,>1,>1,>1,>1,>1",options="header,pagewidth",]
+[[abs-rv32imc-arm-arc-nocrt0-summary]]
+.Summary data for RISC-V RV32IMC v ARM v ARC text size (bytes) with no C runtime startup
 |=====================================================================================
-|                       | _RISC-V absolute_ | _ARM absolute_  | _ARM relative_
-| Total (average for %)	| 339,329          | 280,666         |  108%
-| Minimum               | 72               | 78              |  40%
-| Maximum               | 34,386           | 23,690          |  406%
+|                       | _RISC-V absolute_ |
+_ARM absolute_          | _ARM relative_    |
+_ARC absolute_          | _ARC relative_
+| Total (average for %)	| 335,673           |
+278,598                 |     111%          |
+309,387                 |     125%
+| Minimum               |      66           |
+     78                 |      40%          |
+    100                 |      48%
+| Maximum               |  34,442           |
+ 23,770                 |  433%             |
+ 23,504                 |  715%
 |=====================================================================================
 
-We see the ARM and RISC-V figures have become closer.  When we look at the smallest program again (`ns`) we see that the two programs are now almost the same size (72 bytes for RISC-V, compared to 78 bytes for ARM). We see a total of just 12 symbols defined for RISC-V.
+We see the figures have become closer.  When we look at the smallest program again (`ns`) we see that the programs are are much more similar in size (72 bytes for RISC-V, compared to 78 bytes for ARM and 100 bytes for ARC). We see a total of just 12 symbols defined for RISC-V.
 
 [source,shell]
 ----
@@ -447,9 +569,35 @@ And just 17 symbols defined for ARM.
 0000803c T verify_benchmark
 ----
 
+And just 18 symbols defined for ARC.
+
+[source,shell]
+----
+00000154 T benchmark
+00002164 T __bss_start
+00002164 T _edata
+00002164 T _end
+00007164 B __end_heap
+00000150 T initialise_benchmark
+00000158 T initialise_board
+00000100 T __JLI_TABLE__
+0000010c T main
+00002264 T __SDATA_BEGIN__
+00007168 B __stack
+00017168 B __stack_top
+00000100 T _start
+00000108 T __start
+00002164 B __start_heap
+0000015c T start_trigger
+00000160 T stop_trigger
+0000014c T verify_benchmark
+----
+
 No standard C library code has been included.
 
-However, while BEEBS minimizes its use of library functions, it still has some benchmarks which do need the standard C library and for these we see the ARM code is still much bigger.  It seems the ARM newlib library is compiled with several functions per file, so that linking in one function can pull in many more functions.
+However, while BEEBS minimizes its use of library functions, it still has some benchmarks which do need the standard C library and for these we see the ARM and ARC code is still much bigger.  It seems the ARM and ARC newlib libraries are compiled with several functions per file, so that linking in one function can pull in many more functions.
+
+This does not explain all the differences. Why for example is the ARM code for `select` 88% the size of RISC-V, but the ARC code is 715% of the size of RISC-V?
 
 ==== Code size without the standard C library
 
@@ -472,19 +620,35 @@ And for comparison the following options for ARM
 -nostartfiles -nostdlib -lgcc
 ----
 
-.RISC-V RV32IMC v ARM text size (bytes) with dummy standard C library
-image::abs-rv32imc-arm-nolibc.png[]
+and ARC
+
+[source,shell]
+----
+-Os -mcpu=archs -fdata-sections -ffunction-sections \
+-Wl,-gc-sections -nostartfiles -nostdlib -lgcc
+----
+
+.RISC-V RV32IMC v ARM v ARC text size (bytes) with dummy standard C library
+image::abs-rv32imc-arm-arc-nolibc.png[]
 
 The data are summarized in the following table.
 
-[cols="<3,>1,>1,>1",options="header,pagewidth",]
-[[abs-rv32imc-arm-nolibc-summary]]
-.Summary data for RISC-V RV32IMC v ARM text size (bytes) with dummy standard C library
+[cols="<3,>1,>1,>1,>1,>1",options="header,pagewidth",]
+[[abs-rv32imc-arm-arc-nolibc-summary]]
+.Summary data for RISC-V RV32IMC v ARM v ARC text size (bytes) with dummy standard C library
 |=====================================================================================
-|                       | _RISC-V absolute_ | _ARM absolute_  | _ARM relative_
-| Total (average for %)	| 310,670          | 214,170         |  82%
-| Minimum               | 72               | 78              |  40%
-| Maximum               | 34,216           | 16,721          |  118%
+|                       | _RISC-V absolute_ |
+_ARM absolute_          | _ARM relative_    |
+_ARC absolute_          | _ARC relative_
+| Total (average for %)	| 309,774           |
+212,839                 |      83%          |
+291,735                 |     130%
+| Minimum               |      66           |
+     78                 |      40%          |
+    100                 |      48%
+| Maximum               |  34,272           |
+ 16,822                 |  118%             |
+ 17,572                 |  712%
 |=====================================================================================
 
 We now see the ARM code is on average smaller than RISC-V. In particular the maximum code difference is just 118%, so the largest programs have got much smaller, suggesting that the ARM standard C libary implementation is the problem.
@@ -492,6 +656,8 @@ We now see the ARM code is on average smaller than RISC-V. In particular the max
 We now identify some programs where ARM is very much smaller than RISC-V, such as `cubic` (40%) and `frac` (41%). A clue to why this is comes from looking at `matmult-float` (54%) and `matmult-int` (98%).  These are the same program, but one uses floating point arithmetic and the other uses integer arithmetic.  It suggests that ARM might have very efficient maths routines, particularly for floating point.
 
 This could be down to either the maths routines themselves, or since these are integer machines, the floating point emulation code in `libgcc`.
+
+The difference is much less marked for ARC, suggesting this processor might have less optimized maths routines.
 
 ==== Code size without the floating point emulation
 
@@ -514,24 +680,42 @@ And for comparison the following options for ARM
 -nostartfiles -nostdlib
 ----
 
+and ARC
+
+[source,shell]
+----
+-Os -mcpu=archs -fdata-sections -ffunction-sections \
+-Wl,-gc-sections -nostartfiles -nostdlib
+----
+
 Note that we are still using the standard math library, `libm`.
 
-.RISC-V RV32IMC v ARM text size (bytes) with dummy standard C and emulation libraries.
-image::abs-rv32imc-arm-nolibgcc.png[]
+.RISC-V RV32IMC v ARM v ARC text size (bytes) with dummy standard C and emulation libraries.
+image::abs-rv32imc-arm-arc-nolibgcc.png[]
 
 The data are summarized in the following table.
 
-[cols="<3,>1,>1,>1",options="header,pagewidth",]
+[cols="<3,>1,>1,>1,>1,>1",options="header,pagewidth",]
 [[abs-rv32imc-arm-nolibgcc-summary]]
-.Summary data for RISC-V RV32IMC v ARM text size (bytes) with dummy standard C and emulation libraries
+.Summary data for RISC-V RV32IMC v ARM v ARC text size (bytes) with dummy standard C and emulation libraries
 |=====================================================================================
-|                       | _RISC-V absolute_ | _ARM absolute_  | _ARM relative_
-| Total (average for %)	| 194,733          | 170,336         |  91%
-| Minimum               | 72               | 78              |  67%
-| Maximum               | 18,868           | 16,721          |  118%
+|                       | _RISC-V absolute_ |
+_ARM absolute_          | _ARM relative_    |
+_ARC absolute_          | _ARC relative_
+| Total (average for %)	| 192,961           |
+170,717                 |      93%          |
+188,787                 |     115%
+| Minimum               |      66           |
+     78                 |      67%          |
+    100                 |      80%
+| Maximum               |  18,820           |
+ 16,822                 |  118%             |
+ 17,620                 |  194%
 |=====================================================================================
 
-We see that the sizes are now closer. The programs which previously had the greatest difference, `cubic` (83%) and `frac` (95%) are now much closer in size.  Similarly `matmult-float`(88%) and `matmult-int` (98%) are much closer.
+We see that the sizes are now closer. The ARM programs which previously had the greatest difference, `cubic` (83%) and `frac` (95%) are now much closer in size.  Similarly `matmult-float`(88%) and `matmult-int` (98%) are much closer.
+
+Interesting the ARC data is now also closer, but since it was worse than RISC-V previously, this suggests it too does not have a good floating point emulation library.
 
 The remaining question is over the impact of the math library implementation.
 
@@ -556,19 +740,35 @@ And for comparison the following options for ARM
 -nostartfiles -nostdlib
 ----
 
-.RISC-V RV32IMC v ARM text size (bytes) with dummy standard C, math and emulation libraries.
-image::abs-rv32imc-arm-nolibm.png[]
+and ARC
+
+[source,shell]
+----
+-Os -mcpu=archs -fdata-sections -ffunction-sections \
+-Wl,-gc-sections -nostartfiles -nostdlib
+----
+
+.RISC-V RV32IMC v ARM v ARC text size (bytes) with dummy standard C, math and emulation libraries.
+image::abs-rv32imc-arm-arc-nolibm.png[]
 
 The data are summarized in the following table.
 
-[cols="<3,>1,>1,>1",options="header,pagewidth",]
-[[abs-rv32imc-arm-nolibm-summary]]
-.Summary data for RISC-V RV32IMC v ARM text size (bytes) with dummy standard C, math and emulation libraries
+[cols="<3,>1,>1,>1,>1,>1",options="header,pagewidth",]
+[[abs-rv32imc-arm-arc-nolibm-summary]]
+.Summary data for RISC-V RV32IMC v ARM v ARC text size (bytes) with dummy standard C, math and emulation libraries
 |=====================================================================================
-|                       | _RISC-V absolute_ | _ARM absolute_  | _ARM relative_
-| Total (average for %)	| 183,235          | 159,759         |  91%
-| Minimum               | 72               | 78              |  67%
-| Maximum               | 18,868           | 16,721          |  118%
+|                       | _RISC-V absolute_ |
+_ARM absolute_          | _ARM relative_    |
+_ARC absolute_          | _ARC relative_
+| Total (average for %)	| 182,439           |
+160,092                 |      92%          |
+177,779                 |     114%
+| Minimum               |      66           |
+     78                 |      48%          |
+    100                 |      59%
+| Maximum               |  18,820           |
+ 16,822                 |  118%             |
+ 17,620                 |  194%
 |=====================================================================================
 
 The change of math library has made little difference. Absolute figures are lower, but the ratios are unchanged. This is perhaps not surprising, since the standard math library is generic compiled C.
@@ -577,21 +777,35 @@ The change of math library has made little difference. Absolute figures are lowe
 
 We can summarize the results as follows
 
-[cols="<3,>1,>1,>1",options="header,pagewidth",]
+[cols="<3,>1,>1,>1,>1,>1",options="header,pagewidth",]
 [[abs-rv32imc-arm-combined-summary]]
-.Summary data for RISC-V RV32IMC v ARM text size (bytes) with dummy standard C, math and emulation libraries
+.Summary data for RISC-V RV32IMC v ARM v ARC text size (bytes) with dummy standard C, math and emulation libraries
 |=====================================================================================
-|                              | _RISC-V absolute_ | _ARM absolute_  | _ARM relative_
-| default  	               | 413,085          | 550,434         |  220%
-| +dummy startup code          | 339,329          | 280,666         |  108%
-| +dummy standard C libary     | 310,670          | 214,170         |  82%
-| +dummy FP emulation          | 194,733          | 170,336         |  91%
-| +dummy standard math library | 183,235          | 159,759         |  91%
+|                              | _RISC-V absolute_ |
+_ARM absolute_                 | _ARM relative_    |
+_ARC absolute_                 | _ARC relative_
+| default  	               | 407,693           |
+543,290                        |     222%          |
+357,048                        |      96%
+| +dummy startup code          | 335,673           |
+278,598                        |     111%          |
+309,387                        |     125%
+| +dummy standard C libary     | 309,774           |
+212,839                        |      83%          |
+291,735                        |     130%
+| +dummy FP emulation          | 192,961           |
+170,717                        |      93%          |
+188,787                        |     115%
+| +dummy standard math library | 182,439           |
+160,092                        |      92%          |
+177,779                        |     114%
 |=====================================================================================
 
-With all external factors removed, we can see that on average compiled ARM code is 91% of the size of compiled RISC-V code, when compiled with the standard size minimization options (`-Os` and garbage collection of sections when linking).  This is the basic comparison of the qualify of code compiled to minimize size.
+With all external factors removed, we can see that on average compiled ARM code is 92% of the size of compiled RISC-V code and compiled ARC code is 115% of the size of compiled RISC-V code, when compiled with the standard size minimization options (`-Os` and garbage collection of sections when linking).  This is the basic comparison of the qualify of code compiled to minimize size.
 
-Over 79 benchmarks we found some variation, the best gain for ARM was with the `cubic` benchmark (67%), with the worst loss being `statemate` (118%).  Detailed analysis of the code should prove a fruitful source of optimizations for RISC-V.
+Over 79 benchmarks we found some variation.  The best gain for ARM was with the `cubic` benchmark (48%), with the worst loss being `statemate` (118%).  The best gain for ARC was also the cubic benchmark (59%), with the worst being `tarai` (194%).
+
+`cubic` should be a particularly interesting case to study, since it is one of the few benchmarks where the relative data changed when using a dummy math library.  More generally, detailed analysis of the code should prove a fruitful source of optimizations for RISC-V.
 
 We see two system factors which can be addressed.
 
@@ -611,92 +825,7 @@ We identify two further steps needed in this analysis.
 [[raw_data]]
 [appendix]
 == Raw data
-=== Code size
-==== Baseline
-
-[cols="<3,>1,>1,>1,>1,>1,>1,>1,>1,>1",options="header,pagewidth",]
-|==============================================================================================================================
-| _Benchmark_           3+| _RISC-V absolute_          3+| _ARM absolute__            3+| _ARM relative_
-|aha-compress            | 1,692   | 260     | 28      | 4,848   | 524     | 216     | 287%    | 202%    | 771%
-|aha-mont64              | 2,028   | 260     | 52      | 5,128   | 524     | 244     | 253%    | 202%    | 469%
-|bs                      | 1,100   | 380     | 28      | 4,288   | 644     | 216     | 390%    | 169%    | 771%
-|bubblesort              | 1,798   | 260     | 440     | 4,796   | 524     | 628     | 267%    | 202%    | 143%
-|cnt                     | 1,208   | 260     | 448     | 4,416   | 524     | 636     | 366%    | 202%    | 142%
-|compress                | 2,256   | 308     | 2,656   | 5,428   | 572     | 2,844   | 241%    | 186%    | 107%
-|cover                   | 1,076   | 260     | 28      | 4,272   | 524     | 216     | 397%    | 202%    | 771%
-|crc                     | 1,684   | 260     | 798     | 4,768   | 524     | 988     | 283%    | 202%    | 124%
-|crc32                   | 2,908   | 260     | 44      | 5,512   | 524     | 216     | 190%    | 202%    | 491%
-|ctl-stack               | 2,152   | 260     | 64      | 4,812   | 524     | 236     | 224%    | 202%    | 369%
-|ctl-string              | 6,777   | 624     | 72      | 7,684   | 888     | 244     | 113%    | 142%    | 339%
-|ctl-vector              | 5,990   | 260     | 76      | 7,224   | 524     | 248     | 121%    | 202%    | 326%
-|cubic                   | 35,168  | 880     | 28      | 17,752  | 528     | 216     | 50%     | 60%     | 771%
-|dijkstra                | 2,712   | 660     | 560     | 5,140   | 924     | 732     | 190%    | 140%    | 131%
-|dtoa                    | 14,880  | 284     | 2,388   | 12,344  | 548     | 2,556   | 83%     | 193%    | 107%
-|duff                    | 1,288   | 260     | 228     | 4,412   | 524     | 416     | 343%    | 202%    | 182%
-|edn                     | 4,164   | 260     | 1,640   | 6,944   | 524     | 1,828   | 167%    | 202%    | 111%
-|expint                  | 1,340   | 260     | 40      | 4,488   | 524     | 228     | 335%    | 202%    | 570%
-|fac                     | 1,094   | 260     | 28      | 4,284   | 524     | 216     | 392%    | 202%    | 771%
-|fasta                   | 2,298   | 416     | 28      | 4,932   | 680     | 216     | 215%    | 163%    | 771%
-|fdct                    | 2,234   | 388     | 28      | 5,092   | 652     | 216     | 228%    | 168%    | 771%
-|fibcall                 | 1,072   | 260     | 28      | 4,272   | 524     | 216     | 399%    | 202%    | 771%
-|fir                     | 4,166   | 260     | 28      | 7,328   | 524     | 216     | 176%    | 202%    | 771%
-|frac                    | 8,414   | 340     | 28      | 7,204   | 604     | 216     | 86%     | 178%    | 771%
-|huffbench               | 3,306   | 264     | 44      | 5,376   | 528     | 216     | 163%    | 200%    | 491%
-|insertsort              | 1,430   | 260     | 72      | 4,420   | 524     | 260     | 309%    | 202%    | 361%
-|janne_complex           | 1,082   | 260     | 36      | 4,292   | 524     | 224     | 397%    | 202%    | 622%
-|jfdctint                | 2,302   | 260     | 284     | 5,196   | 524     | 472     | 226%    | 202%    | 166%
-|lcdnum                  | 1,131   | 260     | 32      | 4,300   | 524     | 220     | 380%    | 202%    | 688%
-|levenshtein             | 1,416   | 280     | 28      | 4,532   | 544     | 216     | 320%    | 194%    | 771%
-|ludcmp                  | 6,032   | 260     | 368     | 6,792   | 524     | 556     | 113%    | 202%    | 151%
-|matmult-float           | 4,708   | 260     | 1,232   | 6,428   | 524     | 1,420   | 137%    | 202%    | 115%
-|matmult-int             | 3,172   | 260     | 4,832   | 6,132   | 524     | 5,020   | 193%    | 202%    | 104%
-|mergesort               | 10,470  | 260     | 844     | 8,648   | 524     | 1,016   | 83%     | 202%    | 120%
-|miniz                   | 26,918  | 264     | 2,444   | 24,638  | 528     | 2,616   | 92%     | 200%    | 107%
-|minver                  | 5,606   | 296     | 216     | 6,568   | 560     | 404     | 117%    | 189%    | 187%
-|nbody                   | 8,940   | 584     | 28      | 7,892   | 848     | 216     | 88%     | 145%    | 771%
-|ndes                    | 3,560   | 268     | 404     | 6,448   | 532     | 592     | 181%    | 199%    | 147%
-|nettle-arcfour          | 1,664   | 260     | 304     | 4,592   | 524     | 492     | 276%    | 202%    | 162%
-|nettle-cast128          | 17,358  | 260     | 128     | 18,356  | 524     | 316     | 106%    | 202%    | 247%
-|nettle-des              | 9,652   | 260     | 172     | 11,324  | 524     | 360     | 117%    | 202%    | 209%
-|nettle-md5              | 3,700   | 340     | 28      | 5,972   | 604     | 216     | 161%    | 178%    | 771%
-|newlib-exp              | 5,298   | 260     | 32      | 6,312   | 524     | 220     | 119%    | 202%    | 688%
-|newlib-log              | 1,098   | 260     | 32      | 4,272   | 524     | 220     | 389%    | 202%    | 688%
-|newlib-mod              | 3,068   | 260     | 32      | 5,268   | 524     | 220     | 172%    | 202%    | 688%
-|newlib-sqrt             | 5,060   | 260     | 76      | 6,084   | 524     | 264     | 120%    | 202%    | 347%
-|ns                      | 1,026   | 260     | 28      | 4,224   | 524     | 216     | 412%    | 202%    | 771%
-|nsichneu                | 16,494  | 268     | 88      | 19,540  | 532     | 276     | 118%    | 199%    | 314%
-|picojpeg                | 10,648  | 260     | 2,396   | 12,108  | 524     | 2,572   | 114%    | 202%    | 107%
-|prime                   | 1,144   | 260     | 40      | 4,364   | 524     | 228     | 381%    | 202%    | 570%
-|qrduino                 | 9,428   | 260     | 92      | 11,408  | 524     | 264     | 121%    | 202%    | 287%
-|qsort                   | 1,770   | 340     | 428     | 4,856   | 604     | 616     | 274%    | 178%    | 144%
-|qurt                    | 8,522   | 296     | 56      | 8,280   | 560     | 244     | 97%     | 189%    | 436%
-|recursion               | 1,104   | 260     | 36      | 4,288   | 524     | 224     | 388%    | 202%    | 622%
-|rijndael                | 20,090  | 272     | 56      | 16,592  | 536     | 228     | 83%     | 197%    | 407%
-|select                  | 1,702   | 340     | 36      | 4,776   | 604     | 224     | 281%    | 178%    | 622%
-|sglib-arraybinsearch    | 1,132   | 660     | 32      | 4,312   | 924     | 220     | 381%    | 140%    | 688%
-|sglib-arrayheapsort     | 1,336   | 660     | 428     | 4,440   | 924     | 616     | 332%    | 140%    | 144%
-|sglib-arrayquicksort    | 1,354   | 660     | 428     | 4,504   | 924     | 616     | 333%    | 140%    | 144%
-|sglib-dllist            | 2,086   | 660     | 44      | 4,724   | 924     | 216     | 226%    | 140%    | 491%
-|sglib-hashtable         | 1,988   | 660     | 124     | 4,604   | 924     | 296     | 232%    | 140%    | 239%
-|sglib-listinsertsort    | 1,806   | 660     | 44      | 4,448   | 924     | 216     | 246%    | 140%    | 491%
-|sglib-listsort          | 1,824   | 660     | 44      | 4,476   | 924     | 216     | 245%    | 140%    | 491%
-|sglib-queue             | 1,342   | 660     | 28      | 4,440   | 924     | 216     | 331%    | 140%    | 771%
-|sglib-rbtree            | 2,474   | 660     | 44      | 5,028   | 924     | 216     | 203%    | 140%    | 491%
-|slre                    | 4,629   | 688     | 28      | 7,008   | 952     | 216     | 151%    | 138%    | 771%
-|sqrt                    | 8,384   | 260     | 28      | 8,392   | 524     | 216     | 100%    | 202%    | 771%
-|st                      | 8,850   | 264     | 1,664   | 7,720   | 528     | 1,852   | 87%     | 200%    | 111%
-|statemate               | 4,682   | 260     | 320     | 8,532   | 524     | 508     | 182%    | 202%    | 159%
-|stb_perlin              | 11,164  | 460     | 28      | 11,856  | 716     | 216     | 106%    | 156%    | 771%
-|stringsearch1           | 2,996   | 364     | 4,676   | 5,380   | 628     | 4,848   | 180%    | 173%    | 104%
-|strstr                  | 1,288   | 268     | 28      | 4,464   | 532     | 216     | 347%    | 199%    | 771%
-|tarai                   | 1,164   | 260     | 40      | 4,364   | 524     | 228     | 375%    | 202%    | 570%
-|template                | 1,026   | 260     | 28      | 4,224   | 524     | 216     | 412%    | 202%    | 771%
-|trio-snprintf           | 8,891   | 684     | 28      | 9,556   | 888     | 216     | 107%    | 130%    | 771%
-|trio-sscanf             | 7,443   | 628     | 564     | 9,176   | 892     | 752     | 123%    | 142%    | 133%
-|ud                      | 3,638   | 260     | 1,792   | 5,648   | 524     | 1,980   | 155%    | 202%    | 110%
-|whetstone               | 11,760  | 504     | 116     | 10,152  | 528     | 304     | 86%     | 105%    | 262%
-|wikisort                | 13,430  | 264     | 3,244   | 11,340  | 528     | 3,416   | 84%     | 200%    | 105%
-|==============================================================================================================================
+The raw data are saved in the repository with this paper in the `raw` subdirectory.
 
 [appendix]
 == Creative Commons Attribution 4.0 International License
