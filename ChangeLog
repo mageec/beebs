@@ -1,5 +1,25 @@
 2019-01-20  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	Draft 0.2.1 of the report on code size.
+
+	The report clarifies copyright ownership. The spreadsheet is
+	updated with charts of relative code size between the three
+	architectures. These are captured for convenience in a
+	spreadsheet.
+
+	* report-rv32imc/.gitignore: Ignore PDF of charts.
+	* report-rv32imc/Makefile.am: Add docbook target.
+	* report-rv32imc/Makefile.in: Regenerated.
+	* report-rv32imc/README.adoc: Clarify copyright ownership.
+	* report-rv32imc/code-size-charts.odp: Created.
+	* report-rv32imc/images/rel-arc-arm-nolibm.png: Created.
+	* report-rv32imc/images/rel-arc-riscv-nolibm.png: Created.
+	* report-rv32imc/images/rel-arm-riscv-nolibm.png: Created.
+	* report-rv32imc/size-comp.ods: Provide relative charts for final
+	worksheet only.
+
+2019-01-20  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	Draft 0.2 of the report on code size.
 
 	Updates existing data for RISC-V and ARM and adds new data for

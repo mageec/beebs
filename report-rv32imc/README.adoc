@@ -1,6 +1,6 @@
 = RV32IMC BEEBS analysis =
 Jeremy Bennett <jeremy.bennett@embecosm.com>
-Issue 0.2 Draft
+Issue 0.2.1 Draft
 :toc:
 :icons: font
 :numbered:
@@ -45,6 +45,11 @@ Feedback is always welcome, which should be sent to info@embecosm.com.
 [cols="<1,<2,<3,<4",options="header,pagewidth",]
 |================================================================================
 | _Revision_ | _Date_            | _Author_ | _Modification_
+| 0.2.1 Draft  | 20 January 2019     |
+
+Jeremy Bennett |
+
+Clarify copyright ownership.
 | 0.2 Draft  | 20 January 2019     |
 
 Jeremy Bennett |
@@ -60,7 +65,7 @@ First draft of the document.
 
 === Licensing
 
-This document is made freely available under a <<app_cc_by_sa_4.0>>.
+This document is copyright (C) 2019 Embecosm Limited. It is made freely available under a <<app_cc_by_sa_4.0>>.
 
 You are free to:
 

@@ -26,7 +26,7 @@ SRC = $(srcdir)/$(ROOT).adoc
 SRC_STRIPPED = $(builddir)/$(ROOT)-stripped.adoc
 
 .PHONY: all
-all: pdf html
+all: pdf html docbook latex
 
 .PHONY: pdf
 pdf: $(builddir)/$(ROOT).pdf
@@ -38,7 +38,19 @@ $(builddir)/$(ROOT).pdf: sanity-check $(SRC)
 html: $(builddir)/$(ROOT).html
 
 $(builddir)/$(ROOT).html: sanity-check $(SRC)
-	asciidoctor -a imagesdir=images -d article -b html $(SRC) -o $@
+	asciidoctor -a imagesdir=${srcdir}/images -d article -b html \
+	    $(SRC) -o $@
+
+.PHONY: docbook
+docbook: $(builddir)/$(ROOT).docbook
+
+$(builddir)/$(ROOT).docbook: sanity-check $(SRC)
+	asciidoctor -a imagesdir=${srcdir}/images -d article -b docbook \
+	    $(SRC) -o $@
+
+$(builddir)/$(ROOT).latex: sanity-check $(SRC)
+	asciidoctor -a imagesdir=${srcdir}/images -d article -b latex \
+	    $(SRC) -o $@
 
 # It is all too easy for the document history and title page to have diverging
 # version numbers.  This target checks first.
@@ -66,5 +78,6 @@ spell: $(builddir)/custom.dict $(SRC)
 	$(RM) $(SRC_STRIPPED)
 
 clean:
-	rm -f $(SRC_STRIPPED) $(builddir)/$(ROOT).pdf $(builddir)/$(ROOT).html \
+	$(RM) $(SRC_STRIPPED) $(builddir)/$(ROOT).pdf $(builddir)/$(ROOT).html \
+	      $(builddir)/$(ROOT).docbook $(builddir)/$(ROOT).latex \
 	      $(builddir)/custom.dict
