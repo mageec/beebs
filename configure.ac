@@ -1399,7 +1399,6 @@ AC_CONFIG_HEADERS([config.h])
 
 AC_CONFIG_FILES([Makefile                          \
                  doc/Makefile                      \
-		 report-rv32imc/Makefile           \
                  src/Makefile                      \
                  src/aha-compress/Makefile         \
 		 src/aha-mont64/Makefile           \

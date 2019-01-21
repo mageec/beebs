@@ -1,3 +1,31 @@
+2019-01-21  Graham Markall  <graham.markall@embecosm.com>
+
+	* Makefile.am: Remove report-rv32imc subdir.
+	* Makefile.in: Regenerate.
+	* configure: Regenerate.
+	* configure.ac: Remote report-rv32imc-subdir.
+	* report-rv32imc/.gitignore: Remove.
+	* report-rv32imc/Makefile.am: Remove.
+	* report-rv32imc/Makefile.in: Remove.
+	* report-rv32imc/README.adoc: Remove.
+	* report-rv32imc/raw/README.md: Remove.
+	* report-rv32imc/raw/arc-baseline.csv: Remove.
+	* report-rv32imc/raw/arc-nocrt.csv: Remove.
+	* report-rv32imc/raw/arc-nolibc-nolibgcc-nolibm.csv: Remove.
+	* report-rv32imc/raw/arc-nolibc-nolibgcc.csv: Remove.
+	* report-rv32imc/raw/arc-nolibc.csv: Remove.
+	* report-rv32imc/raw/arm-baseline.csv: Remove.
+	* report-rv32imc/raw/arm-nocrt.csv: Remove.
+	* report-rv32imc/raw/arm-nolibc-nolibgcc-nolibm.csv: Remove.
+	* report-rv32imc/raw/arm-nolibc-nolibgcc.csv: Remove.
+	* report-rv32imc/raw/arm-nolibc.csv: Remove.
+	* report-rv32imc/raw/riscv-baseline.csv: Remove.
+	* report-rv32imc/raw/riscv-nocrt.csv: Remove.
+	* report-rv32imc/raw/riscv-nolibc-nolibgcc-nolibm.csv: Remove.
+	* report-rv32imc/raw/riscv-nolibc-nolibgcc.csv: Remove.
+	* report-rv32imc/raw/riscv-nolibc.csv: Remove.
+
+
 2019-01-20  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	Draft 0.2.1 of the report on code size.

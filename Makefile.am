@@ -25,7 +25,7 @@
 
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = doc support src testsuite report-rv32imc
+SUBDIRS = doc support src testsuite
 
 EXTRA_DIST= config
 
