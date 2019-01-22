@@ -567,6 +567,35 @@ __unorddf2 (double a __attribute__ ((unused)),
 
 #endif	/* __arm__ */
 
+#ifdef __riscv
+void __riscv_save_0 () {}
+void __riscv_save_1 () {}
+void __riscv_save_2 () {}
+void __riscv_save_3 () {}
+void __riscv_save_4 () {}
+void __riscv_save_5 () {}
+void __riscv_save_6 () {}
+void __riscv_save_7 () {}
+void __riscv_save_8 () {}
+void __riscv_save_9 () {}
+void __riscv_save_10 () {}
+void __riscv_save_11 () {}
+void __riscv_save_12 () {}
+void __riscv_restore_0 () {}
+void __riscv_restore_1 () {}
+void __riscv_restore_2 () {}
+void __riscv_restore_3 () {}
+void __riscv_restore_4 () {}
+void __riscv_restore_5 () {}
+void __riscv_restore_6 () {}
+void __riscv_restore_7 () {}
+void __riscv_restore_8 () {}
+void __riscv_restore_9 () {}
+void __riscv_restore_10 () {}
+void __riscv_restore_11 () {}
+void __riscv_restore_12 () {}
+#endif
+
 /*
    Local Variables:
    mode: C++
