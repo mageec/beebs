@@ -1,3 +1,10 @@
+2019-02-06  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* configure: Regenerate.
+	* configure.ac: Remove unneeded control flags.
+	* genmacros.sh: Only generate flags for directories that contain
+	benchmark programs.
+
 2019-02-11  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* testsuite/lib/beebs.exp (beebs_size_all_benchmarks): Use 'size

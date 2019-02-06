@@ -667,8 +667,6 @@ ENABLED_BENCHMARK_TRIO_SSCANF_FALSE
 ENABLED_BENCHMARK_TRIO_SSCANF_TRUE
 ENABLED_BENCHMARK_TRIO_SNPRINTF_FALSE
 ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE
-ENABLED_BENCHMARK_TRIO_FALSE
-ENABLED_BENCHMARK_TRIO_TRUE
 ENABLED_BENCHMARK_TEMPLATE_FALSE
 ENABLED_BENCHMARK_TEMPLATE_TRUE
 ENABLED_BENCHMARK_TARAI_FALSE
@@ -699,8 +697,6 @@ ENABLED_BENCHMARK_SGLIB_HASHTABLE_FALSE
 ENABLED_BENCHMARK_SGLIB_HASHTABLE_TRUE
 ENABLED_BENCHMARK_SGLIB_DLLIST_FALSE
 ENABLED_BENCHMARK_SGLIB_DLLIST_TRUE
-ENABLED_BENCHMARK_SGLIB_ARRAYSORT_FALSE
-ENABLED_BENCHMARK_SGLIB_ARRAYSORT_TRUE
 ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT_FALSE
 ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT_TRUE
 ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_FALSE
@@ -757,8 +753,6 @@ ENABLED_BENCHMARK_MATMULT_INT_FALSE
 ENABLED_BENCHMARK_MATMULT_INT_TRUE
 ENABLED_BENCHMARK_MATMULT_FLOAT_FALSE
 ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE
-ENABLED_BENCHMARK_MATMULT_FALSE
-ENABLED_BENCHMARK_MATMULT_TRUE
 ENABLED_BENCHMARK_LUDCMP_FALSE
 ENABLED_BENCHMARK_LUDCMP_TRUE
 ENABLED_BENCHMARK_LEVENSHTEIN_FALSE
@@ -803,8 +797,6 @@ ENABLED_BENCHMARK_CTL_STRING_FALSE
 ENABLED_BENCHMARK_CTL_STRING_TRUE
 ENABLED_BENCHMARK_CTL_STACK_FALSE
 ENABLED_BENCHMARK_CTL_STACK_TRUE
-ENABLED_BENCHMARK_CTL_FALSE
-ENABLED_BENCHMARK_CTL_TRUE
 ENABLED_BENCHMARK_CRC32_FALSE
 ENABLED_BENCHMARK_CRC32_TRUE
 ENABLED_BENCHMARK_CRC_FALSE
@@ -969,7 +961,6 @@ enable_benchmark_compress
 enable_benchmark_cover
 enable_benchmark_crc
 enable_benchmark_crc32
-enable_benchmark_ctl
 enable_benchmark_ctl_stack
 enable_benchmark_ctl_string
 enable_benchmark_ctl_vector
@@ -992,7 +983,6 @@ enable_benchmark_jfdctint
 enable_benchmark_lcdnum
 enable_benchmark_levenshtein
 enable_benchmark_ludcmp
-enable_benchmark_matmult
 enable_benchmark_matmult_float
 enable_benchmark_matmult_int
 enable_benchmark_mergesort
@@ -1021,7 +1011,6 @@ enable_benchmark_select
 enable_benchmark_sglib_arraybinsearch
 enable_benchmark_sglib_arrayheapsort
 enable_benchmark_sglib_arrayquicksort
-enable_benchmark_sglib_arraysort
 enable_benchmark_sglib_dllist
 enable_benchmark_sglib_hashtable
 enable_benchmark_sglib_listinsertsort
@@ -1037,7 +1026,6 @@ enable_benchmark_stringsearch1
 enable_benchmark_strstr
 enable_benchmark_tarai
 enable_benchmark_template
-enable_benchmark_trio
 enable_benchmark_trio_snprintf
 enable_benchmark_trio_sscanf
 enable_benchmark_ud
@@ -1704,7 +1692,6 @@ Optional Features:
   --enable-benchmark-crc  Enable benchmark crc
   --enable-benchmark-crc32
                           Enable benchmark crc32
-  --enable-benchmark-ctl  Enable benchmark ctl
   --enable-benchmark-ctl-stack
                           Enable benchmark ctl-stack
   --enable-benchmark-ctl-string
@@ -1742,8 +1729,6 @@ Optional Features:
                           Enable benchmark levenshtein
   --enable-benchmark-ludcmp
                           Enable benchmark ludcmp
-  --enable-benchmark-matmult
-                          Enable benchmark matmult
   --enable-benchmark-matmult-float
                           Enable benchmark matmult-float
   --enable-benchmark-matmult-int
@@ -1797,8 +1782,6 @@ Optional Features:
                           Enable benchmark sglib-arrayheapsort
   --enable-benchmark-sglib-arrayquicksort
                           Enable benchmark sglib-arrayquicksort
-  --enable-benchmark-sglib-arraysort
-                          Enable benchmark sglib-arraysort
   --enable-benchmark-sglib-dllist
                           Enable benchmark sglib-dllist
   --enable-benchmark-sglib-hashtable
@@ -1826,7 +1809,6 @@ Optional Features:
                           Enable benchmark tarai
   --enable-benchmark-template
                           Enable benchmark template
-  --enable-benchmark-trio Enable benchmark trio
   --enable-benchmark-trio-snprintf
                           Enable benchmark trio-snprintf
   --enable-benchmark-trio-sscanf
@@ -12480,7 +12462,6 @@ benchmark_compress=true
 benchmark_cover=true
 benchmark_crc=true
 benchmark_crc32=true
-benchmark_ctl=true
 benchmark_ctl_stack=true
 benchmark_ctl_string=true
 benchmark_ctl_vector=true
@@ -12503,7 +12484,6 @@ benchmark_jfdctint=true
 benchmark_lcdnum=true
 benchmark_levenshtein=true
 benchmark_ludcmp=true
-benchmark_matmult=true
 benchmark_matmult_float=true
 benchmark_matmult_int=true
 benchmark_mergesort=true
@@ -12532,7 +12512,6 @@ benchmark_select=true
 benchmark_sglib_arraybinsearch=true
 benchmark_sglib_arrayheapsort=true
 benchmark_sglib_arrayquicksort=true
-benchmark_sglib_arraysort=true
 benchmark_sglib_dllist=true
 benchmark_sglib_hashtable=true
 benchmark_sglib_listinsertsort=true
@@ -12548,7 +12527,6 @@ benchmark_stringsearch1=true
 benchmark_strstr=true
 benchmark_tarai=true
 benchmark_template=true
-benchmark_trio=true
 benchmark_trio_snprintf=true
 benchmark_trio_sscanf=true
 benchmark_ud=true
@@ -12795,24 +12773,6 @@ fi
 else
   ENABLED_BENCHMARK_CRC32_TRUE='#'
   ENABLED_BENCHMARK_CRC32_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-ctl was given.
-if test "${enable_benchmark_ctl+set}" = set; then :
-  enableval=$enable_benchmark_ctl; case "${enableval}" in
-      yes) benchmark_ctl=true ;;
-      no)  benchmark_ctl=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-ctl" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_ctl = xtrue; then
-  ENABLED_BENCHMARK_CTL_TRUE=
-  ENABLED_BENCHMARK_CTL_FALSE='#'
-else
-  ENABLED_BENCHMARK_CTL_TRUE='#'
-  ENABLED_BENCHMARK_CTL_FALSE=
 fi
 
 
@@ -13209,24 +13169,6 @@ fi
 else
   ENABLED_BENCHMARK_LUDCMP_TRUE='#'
   ENABLED_BENCHMARK_LUDCMP_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-matmult was given.
-if test "${enable_benchmark_matmult+set}" = set; then :
-  enableval=$enable_benchmark_matmult; case "${enableval}" in
-      yes) benchmark_matmult=true ;;
-      no)  benchmark_matmult=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-matmult" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_matmult = xtrue; then
-  ENABLED_BENCHMARK_MATMULT_TRUE=
-  ENABLED_BENCHMARK_MATMULT_FALSE='#'
-else
-  ENABLED_BENCHMARK_MATMULT_TRUE='#'
-  ENABLED_BENCHMARK_MATMULT_FALSE=
 fi
 
 
@@ -13734,24 +13676,6 @@ else
 fi
 
 
-# Check whether --enable-benchmark-sglib-arraysort was given.
-if test "${enable_benchmark_sglib_arraysort+set}" = set; then :
-  enableval=$enable_benchmark_sglib_arraysort; case "${enableval}" in
-      yes) benchmark_sglib_arraysort=true ;;
-      no)  benchmark_sglib_arraysort=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-arraysort" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_sglib_arraysort = xtrue; then
-  ENABLED_BENCHMARK_SGLIB_ARRAYSORT_TRUE=
-  ENABLED_BENCHMARK_SGLIB_ARRAYSORT_FALSE='#'
-else
-  ENABLED_BENCHMARK_SGLIB_ARRAYSORT_TRUE='#'
-  ENABLED_BENCHMARK_SGLIB_ARRAYSORT_FALSE=
-fi
-
-
 # Check whether --enable-benchmark-sglib-dllist was given.
 if test "${enable_benchmark_sglib_dllist+set}" = set; then :
   enableval=$enable_benchmark_sglib_dllist; case "${enableval}" in
@@ -14019,24 +13943,6 @@ fi
 else
   ENABLED_BENCHMARK_TEMPLATE_TRUE='#'
   ENABLED_BENCHMARK_TEMPLATE_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-trio was given.
-if test "${enable_benchmark_trio+set}" = set; then :
-  enableval=$enable_benchmark_trio; case "${enableval}" in
-      yes) benchmark_trio=true ;;
-      no)  benchmark_trio=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-trio" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_trio = xtrue; then
-  ENABLED_BENCHMARK_TRIO_TRUE=
-  ENABLED_BENCHMARK_TRIO_FALSE='#'
-else
-  ENABLED_BENCHMARK_TRIO_TRUE='#'
-  ENABLED_BENCHMARK_TRIO_FALSE=
 fi
 
 
@@ -15496,10 +15402,6 @@ if test -z "${ENABLED_BENCHMARK_CRC32_TRUE}" && test -z "${ENABLED_BENCHMARK_CRC
   as_fn_error $? "conditional \"ENABLED_BENCHMARK_CRC32\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${ENABLED_BENCHMARK_CTL_TRUE}" && test -z "${ENABLED_BENCHMARK_CTL_FALSE}"; then
-  as_fn_error $? "conditional \"ENABLED_BENCHMARK_CTL\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
 if test -z "${ENABLED_BENCHMARK_CTL_STACK_TRUE}" && test -z "${ENABLED_BENCHMARK_CTL_STACK_FALSE}"; then
   as_fn_error $? "conditional \"ENABLED_BENCHMARK_CTL_STACK\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -15586,10 +15488,6 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ENABLED_BENCHMARK_LUDCMP_TRUE}" && test -z "${ENABLED_BENCHMARK_LUDCMP_FALSE}"; then
   as_fn_error $? "conditional \"ENABLED_BENCHMARK_LUDCMP\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${ENABLED_BENCHMARK_MATMULT_TRUE}" && test -z "${ENABLED_BENCHMARK_MATMULT_FALSE}"; then
-  as_fn_error $? "conditional \"ENABLED_BENCHMARK_MATMULT\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE}" && test -z "${ENABLED_BENCHMARK_MATMULT_FLOAT_FALSE}"; then
@@ -15704,10 +15602,6 @@ if test -z "${ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT_TRUE}" && test -z "${ENABLE
   as_fn_error $? "conditional \"ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${ENABLED_BENCHMARK_SGLIB_ARRAYSORT_TRUE}" && test -z "${ENABLED_BENCHMARK_SGLIB_ARRAYSORT_FALSE}"; then
-  as_fn_error $? "conditional \"ENABLED_BENCHMARK_SGLIB_ARRAYSORT\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
 if test -z "${ENABLED_BENCHMARK_SGLIB_DLLIST_TRUE}" && test -z "${ENABLED_BENCHMARK_SGLIB_DLLIST_FALSE}"; then
   as_fn_error $? "conditional \"ENABLED_BENCHMARK_SGLIB_DLLIST\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -15766,10 +15660,6 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ENABLED_BENCHMARK_TEMPLATE_TRUE}" && test -z "${ENABLED_BENCHMARK_TEMPLATE_FALSE}"; then
   as_fn_error $? "conditional \"ENABLED_BENCHMARK_TEMPLATE\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${ENABLED_BENCHMARK_TRIO_TRUE}" && test -z "${ENABLED_BENCHMARK_TRIO_FALSE}"; then
-  as_fn_error $? "conditional \"ENABLED_BENCHMARK_TRIO\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE}" && test -z "${ENABLED_BENCHMARK_TRIO_SNPRINTF_FALSE}"; then

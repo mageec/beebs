@@ -138,7 +138,6 @@ benchmark_compress=true
 benchmark_cover=true
 benchmark_crc=true
 benchmark_crc32=true
-benchmark_ctl=true
 benchmark_ctl_stack=true
 benchmark_ctl_string=true
 benchmark_ctl_vector=true
@@ -161,7 +160,6 @@ benchmark_jfdctint=true
 benchmark_lcdnum=true
 benchmark_levenshtein=true
 benchmark_ludcmp=true
-benchmark_matmult=true
 benchmark_matmult_float=true
 benchmark_matmult_int=true
 benchmark_mergesort=true
@@ -190,7 +188,6 @@ benchmark_select=true
 benchmark_sglib_arraybinsearch=true
 benchmark_sglib_arrayheapsort=true
 benchmark_sglib_arrayquicksort=true
-benchmark_sglib_arraysort=true
 benchmark_sglib_dllist=true
 benchmark_sglib_hashtable=true
 benchmark_sglib_listinsertsort=true
@@ -206,7 +203,6 @@ benchmark_stringsearch1=true
 benchmark_strstr=true
 benchmark_tarai=true
 benchmark_template=true
-benchmark_trio=true
 benchmark_trio_snprintf=true
 benchmark_trio_sscanf=true
 benchmark_ud=true
@@ -384,18 +380,6 @@ AC_ARG_ENABLE([benchmark-crc32],
   [])
 AM_CONDITIONAL([ENABLED_BENCHMARK_CRC32],
                [test x$benchmark_crc32 = xtrue])
-
-AC_ARG_ENABLE([benchmark-ctl],
-  [AS_HELP_STRING([--enable-benchmark-ctl],
-     [Enable benchmark ctl])],
-  [case "${enableval}" in
-      yes) benchmark_ctl=true ;;
-      no)  benchmark_ctl=false ;;
-      *)   AC_MSG_ERROR([bad value ${enableval} for --enable-benchmark-ctl]) ;;
-   esac],
-  [])
-AM_CONDITIONAL([ENABLED_BENCHMARK_CTL],
-               [test x$benchmark_ctl = xtrue])
 
 AC_ARG_ENABLE([benchmark-ctl-stack],
   [AS_HELP_STRING([--enable-benchmark-ctl-stack],
@@ -660,18 +644,6 @@ AC_ARG_ENABLE([benchmark-ludcmp],
   [])
 AM_CONDITIONAL([ENABLED_BENCHMARK_LUDCMP],
                [test x$benchmark_ludcmp = xtrue])
-
-AC_ARG_ENABLE([benchmark-matmult],
-  [AS_HELP_STRING([--enable-benchmark-matmult],
-     [Enable benchmark matmult])],
-  [case "${enableval}" in
-      yes) benchmark_matmult=true ;;
-      no)  benchmark_matmult=false ;;
-      *)   AC_MSG_ERROR([bad value ${enableval} for --enable-benchmark-matmult]) ;;
-   esac],
-  [])
-AM_CONDITIONAL([ENABLED_BENCHMARK_MATMULT],
-               [test x$benchmark_matmult = xtrue])
 
 AC_ARG_ENABLE([benchmark-matmult-float],
   [AS_HELP_STRING([--enable-benchmark-matmult-float],
@@ -1009,18 +981,6 @@ AC_ARG_ENABLE([benchmark-sglib-arrayquicksort],
 AM_CONDITIONAL([ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT],
                [test x$benchmark_sglib_arrayquicksort = xtrue])
 
-AC_ARG_ENABLE([benchmark-sglib-arraysort],
-  [AS_HELP_STRING([--enable-benchmark-sglib-arraysort],
-     [Enable benchmark sglib-arraysort])],
-  [case "${enableval}" in
-      yes) benchmark_sglib_arraysort=true ;;
-      no)  benchmark_sglib_arraysort=false ;;
-      *)   AC_MSG_ERROR([bad value ${enableval} for --enable-benchmark-sglib-arraysort]) ;;
-   esac],
-  [])
-AM_CONDITIONAL([ENABLED_BENCHMARK_SGLIB_ARRAYSORT],
-               [test x$benchmark_sglib_arraysort = xtrue])
-
 AC_ARG_ENABLE([benchmark-sglib-dllist],
   [AS_HELP_STRING([--enable-benchmark-sglib-dllist],
      [Enable benchmark sglib-dllist])],
@@ -1200,18 +1160,6 @@ AC_ARG_ENABLE([benchmark-template],
   [])
 AM_CONDITIONAL([ENABLED_BENCHMARK_TEMPLATE],
                [test x$benchmark_template = xtrue])
-
-AC_ARG_ENABLE([benchmark-trio],
-  [AS_HELP_STRING([--enable-benchmark-trio],
-     [Enable benchmark trio])],
-  [case "${enableval}" in
-      yes) benchmark_trio=true ;;
-      no)  benchmark_trio=false ;;
-      *)   AC_MSG_ERROR([bad value ${enableval} for --enable-benchmark-trio]) ;;
-   esac],
-  [])
-AM_CONDITIONAL([ENABLED_BENCHMARK_TRIO],
-               [test x$benchmark_trio = xtrue])
 
 AC_ARG_ENABLE([benchmark-trio-snprintf],
   [AS_HELP_STRING([--enable-benchmark-trio-snprintf],

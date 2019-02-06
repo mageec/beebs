@@ -26,92 +26,17 @@
 # This is a convenience script to generate repeat text in various
 # files. Should never really need to be used.
 
-bmlist="aha-compress          \
-        aha-mont64            \
-        bs                    \
-        bubblesort            \
-        cnt                   \
-        compress              \
-        cover                 \
-        crc                   \
-        crc32                 \
-        ctl                   \
-        ctl-stack             \
-        ctl-string            \
-        ctl-vector            \
-        cubic                 \
-        dijkstra              \
-        dtoa                  \
-        duff                  \
-        edn                   \
-        expint                \
-        fac                   \
-        fasta                 \
-        fdct                  \
-        fibcall               \
-        fir                   \
-        frac                  \
-        huffbench             \
-        insertsort            \
-        janne_complex         \
-        jfdctint              \
-        lcdnum                \
-        levenshtein           \
-        ludcmp                \
-        matmult               \
-        matmult-float         \
-        matmult-int           \
-        mergesort             \
-        miniz                 \
-        minver                \
-        nbody                 \
-        ndes                  \
-        nettle-arcfour        \
-        nettle-cast128        \
-        nettle-des            \
-        nettle-md5            \
-        newlib-exp            \
-        newlib-log            \
-        newlib-mod            \
-        newlib-sqrt           \
-        ns                    \
-        nsichneu              \
-        picojpeg              \
-        prime                 \
-        qrduino               \
-        qsort                 \
-        qurt                  \
-        recursion             \
-        rijndael              \
-        select                \
-        sglib-arraybinsearch  \
-        sglib-arrayheapsort   \
-        sglib-arrayquicksort  \
-        sglib-arraysort       \
-        sglib-dllist          \
-        sglib-hashtable       \
-        sglib-listinsertsort  \
-        sglib-listsort        \
-        sglib-queue           \
-        sglib-rbtree          \
-        slre                  \
-        sqrt                  \
-        st                    \
-        statemate             \
-        stb_perlin            \
-        stringsearch1         \
-        strstr                \
-        tarai                 \
-        template              \
-        trio                  \
-        trio-snprintf         \
-        trio-sscanf           \
-        ud                    \
-        whetstone             \
-        wikisort"
+bmlist=$(cd src && find . -maxdepth 1 -type d -not -name ".*" | sed 's/.\///' | sort)
 
 for bm in ${bmlist}
 do
+    [ -f src/$bm/Makefile.am ] || continue
+
+    if ! grep --silent "bin_PROGRAMS" src/$bm/Makefile.am
+    then
+        continue
+    fi
+
     bm_var=$(echo $bm | tr "-" "_")
     bm_uc=$(echo $bm_var | tr "[:lower:]" "[:upper:]")
     echo "AC_ARG_ENABLE([benchmark-${bm}],"
