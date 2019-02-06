@@ -1,5 +1,10 @@
 2019-02-11  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* testsuite/lib/beebs.exp (beebs_size_all_benchmarks): Use 'size
+	--format=GNU' where possible.
+
+2019-02-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* support/dummy-libc.c: Add 'time.h' and 'stdio.h' includes.
 	(_impure_ptr): Define.
 	(memmove): Fix whitespace.

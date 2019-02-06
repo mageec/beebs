@@ -196,6 +196,37 @@ proc beebs_size_all_benchmarks { board objdir } {
 	return 0
     }
 
+    # The default 'size' program as shipped in the latest GNU binutils
+    # release (as of Feb 2019) counts read only data as text.  A
+    # change has been proposed that would count read only data as
+    # data, but this has not yet been merged.
+    #
+    # The following block probes size to see if it supports the new
+    # format, and if it does it makes use of it, otherwise it uses the
+    # old version of size.
+    #
+    # The obvious problem here is that people using the same toolchain
+    # and beebs could get different results if they have a different
+    # version of size installed.  That's a risk, but for now, allowing
+    # accurate results seems worth it.
+    set use_size_gnu_format 0
+    set size_args ""
+    verbose -log "Check if 'size --format=GNU' is supported"
+    spawn size --format=GNU
+    expect {
+        -re {: invalid argument to --format:} {
+            verbose -log "GNU format not supported"
+            set use_size_gnu_format 0
+            set size_args "--format=Berkeley --common"
+            warning "The version of 'size' found counts read only data as text"
+        }
+        -re {: 'a.out': No such file} {
+            verbose -log "GNU format is supported"
+            set use_size_gnu_format 1
+            set size_args "--format=GNU --common"
+        }
+    }
+
     foreach benchmark [regexp -all -inline {\S+} ${benchmarks}] {
 
         # Now find the executable and check it is valid. It is OK not to find
@@ -205,12 +236,11 @@ proc beebs_size_all_benchmarks { board objdir } {
 
         if { [file isfile ${benchmark_file}] &&
 	     [file executable ${benchmark_file}]} {
-
 	    set timeout 1
-	    spawn size ${benchmark_file}
+	    spawn size ${size_args} ${benchmark_file}
 
 	    expect {
-		-re {\s*(\d+)\s+(\d+)\s+(\d+)\s+\d+\s+[[:xdigit:]]+\s+[[:alnum:]_/.-]+} {
+		-re {\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+\s+[[:xdigit:]]+\s+)?[[:alnum:]_/.-]+} {
 		    set text_val $expect_out(1,string)
 		    set data_val $expect_out(2,string)
 		    set bss_val  $expect_out(3,string)
