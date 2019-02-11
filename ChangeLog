@@ -1,3 +1,8 @@
+2019-02-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* support/dummy-crt0.c (main): Update argument type in
+	declaration.
+
 2019-01-16  Graham Markall  <graham.markall@embecosm.com>
 
 	* configure: Regenerate.

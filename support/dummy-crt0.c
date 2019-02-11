@@ -28,7 +28,7 @@
    others (e.g. ARC) use __start.  */
 
 extern int main (int   argc,
-		 char *argv);
+		 char *argv[]);
 
 
 void
