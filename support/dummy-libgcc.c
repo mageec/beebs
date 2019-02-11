@@ -36,6 +36,11 @@ __aeabi_ui2d (unsigned int value __attribute__ ((unused)) )
   return 0;
 }
 
+float
+__aeabi_ui2f (unsigned int value __attribute__ ((unused)) )
+{
+  return 0;
+}
 
 double
 __aeabi_dmul (double FirstValue __attribute__ ((unused)) ,
@@ -225,6 +230,13 @@ __aeabi_f2iz (float Value __attribute__ ((unused)) )
 }
 
 
+unsigned int
+__aeabi_f2uiz (float Value __attribute__ ((unused)) )
+{
+  return 0;
+}
+
+
 float
 __aeabi_d2f (double Value __attribute__ ((unused)) )
 {
@@ -370,6 +382,13 @@ __fixunsdfsi (double a __attribute__ ((unused)) )
 }
 
 
+unsigned int
+__fixunssfsi (float a __attribute__ ((unused)) )
+{
+  return  0;
+}
+
+
 double
 __floatsidf (int i __attribute__ ((unused)) )
 {
@@ -386,6 +405,13 @@ __floatsisf (int i __attribute__ ((unused)) )
 
 double
 __floatunsidf (unsigned int i __attribute__ ((unused)) )
+{
+  return  0.0;
+}
+
+
+float
+__floatunsisf (unsigned int i __attribute__ ((unused)) )
 {
   return  0.0;
 }
@@ -560,6 +586,14 @@ __umoddi3 (unsigned long a __attribute__ ((unused)),
 int
 __unorddf2 (double a __attribute__ ((unused)),
 	    double b __attribute__ ((unused)) )
+{
+  return  0;
+}
+
+
+int
+__unordsf2 (float a __attribute__ ((unused)),
+	    float b __attribute__ ((unused)) )
 {
   return  0;
 }

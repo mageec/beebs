@@ -1,5 +1,13 @@
 2019-02-11  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* support/dummy-libgcc.c (__aeabi_ui2f): New function.
+	(__floatunsisf): New function.
+	(__unordsf2): New function.
+	(__aeabi_f2uiz): New function.
+	(__fixunssfsi): New function.
+
+2019-02-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* support/dummy-libm.c (atan): New function.
 
 2019-02-11  Andrew Burgess  <andrew.burgess@embecosm.com>
