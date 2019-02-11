@@ -1,5 +1,45 @@
 2019-02-11  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* support/dummy-libc.c: Add 'time.h' and 'stdio.h' includes.
+	(_impure_ptr): Define.
+	(memmove): Fix whitespace.
+	(memset): Fix whitespace.
+	(memcmp): Fix whitespace.
+	(strlen): Fix whitespace.
+	(strchr): Fix whitespace.
+	(strcmp): Fix whitespace.
+	(strncmp): New function.
+	(strcat): New function.
+	(printf): New function.
+	(fprintf): New function.
+	(sprintf): New function.
+	(putchar): New function.
+	(puts): New function.
+	(clock):New function.
+	(atoi):New function.
+	(atof):New function.
+	(fopen):New function.
+	(fflush): New function.
+	(ferror): New function.
+	(fileno): New function.
+	(fscanf):New function.
+	(qsort):New function.
+	(fgetc):New function.
+	(getc): New function.
+	(ungetc): New function.
+	(fputc): New function.
+	(putc): New function.
+	(fgets):New function.
+	(fclose):New function.
+	(fwrite):New function.
+	(fputs):New function.
+	(fread):New function.
+	(exit):New function.
+	(getenv): New function.
+	(memchr): New function.
+
+2019-02-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* support/dummy-libgcc.c (__aeabi_ui2f): New function.
 	(__floatunsisf): New function.
 	(__unordsf2): New function.
