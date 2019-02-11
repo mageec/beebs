@@ -33,6 +33,13 @@ acos (double x __attribute__ ((unused)) )
 
 
 double
+atan (double x __attribute__ ((unused)) )
+{
+  return 0.0;
+}
+
+
+double
 cos (double x __attribute__ ((unused)) )
 {
   return  0.0;

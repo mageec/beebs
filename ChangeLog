@@ -1,5 +1,9 @@
 2019-02-11  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* support/dummy-libm.c (atan): New function.
+
+2019-02-11  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* support/dummy-crt0.c (main): Update argument type in
 	declaration.
 
