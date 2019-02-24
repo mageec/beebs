@@ -390,6 +390,11 @@ top_srcdir = @top_srcdir@
 
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@AM_CFLAGS = @CFLAGS@
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@AM_LDFLAGS = @LDFLAGS@
+
+# Setup a $(LIBM) variable that we can use instead of either
+# $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in
+# parts of the real libm if we want to use $(DUMMY_LIBM).
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@LIBM = $(if $(DUMMY_LIBM),$(DUMMY_LIBM),-lm)
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@noinst_LTLIBRARIES = libtrio-snprintf.la
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@trio_snprintf_SOURCES = 
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@libtrio_snprintf_la_SOURCES = trio.c trio.h trio_test.c triostr.c triostr.h \

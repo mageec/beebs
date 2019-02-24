@@ -38,3 +38,8 @@ AM_CPPFLAGS = "-DCALIB_SCALE=$(shell $(calib))" \
               @CPPFLAGS@
 AM_CFLAGS   = @CFLAGS@
 AM_LDFLAGS  = @LDFLAGS@
+
+# Setup a $(LIBM) variable that we can use instead of either
+# $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in
+# parts of the real libm if we want to use $(DUMMY_LIBM).
+LIBM=$(if $(DUMMY_LIBM),$(DUMMY_LIBM),-lm)

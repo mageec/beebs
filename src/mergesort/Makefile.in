@@ -387,6 +387,11 @@ top_srcdir = @top_srcdir@
 
 @ENABLED_BENCHMARK_MERGESORT_TRUE@AM_CFLAGS = @CFLAGS@
 @ENABLED_BENCHMARK_MERGESORT_TRUE@AM_LDFLAGS = @LDFLAGS@
+
+# Setup a $(LIBM) variable that we can use instead of either
+# $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in
+# parts of the real libm if we want to use $(DUMMY_LIBM).
+@ENABLED_BENCHMARK_MERGESORT_TRUE@LIBM = $(if $(DUMMY_LIBM),$(DUMMY_LIBM),-lm)
 @ENABLED_BENCHMARK_MERGESORT_TRUE@noinst_LTLIBRARIES = libmergesort.la
 @ENABLED_BENCHMARK_MERGESORT_TRUE@mergesort_SOURCES = 
 @ENABLED_BENCHMARK_MERGESORT_TRUE@libmergesort_la_SOURCES = libmergesort.c

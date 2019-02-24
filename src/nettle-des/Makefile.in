@@ -387,6 +387,11 @@ top_srcdir = @top_srcdir@
 
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@AM_CFLAGS = @CFLAGS@
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@AM_LDFLAGS = @LDFLAGS@
+
+# Setup a $(LIBM) variable that we can use instead of either
+# $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in
+# parts of the real libm if we want to use $(DUMMY_LIBM).
+@ENABLED_BENCHMARK_NETTLE_DES_TRUE@LIBM = $(if $(DUMMY_LIBM),$(DUMMY_LIBM),-lm)
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@noinst_LTLIBRARIES = libnettle-des.la
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@nettle_des_SOURCES = 
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@libnettle_des_la_SOURCES = des.c \

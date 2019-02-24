@@ -387,6 +387,11 @@ top_srcdir = @top_srcdir@
 
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@AM_CFLAGS = @CFLAGS@
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@AM_LDFLAGS = @LDFLAGS@
+
+# Setup a $(LIBM) variable that we can use instead of either
+# $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in
+# parts of the real libm if we want to use $(DUMMY_LIBM).
+@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@LIBM = $(if $(DUMMY_LIBM),$(DUMMY_LIBM),-lm)
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@noinst_LTLIBRARIES = libsglib-arrayheapsort.la
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@sglib_arrayheapsort_SOURCES = 
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@libsglib_arrayheapsort_la_SOURCES = arraysort.c sglib.h

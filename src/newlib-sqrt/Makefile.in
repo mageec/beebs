@@ -388,6 +388,11 @@ top_srcdir = @top_srcdir@
 
 @ENABLED_BENCHMARK_NEWLIB_SQRT_TRUE@AM_CFLAGS = @CFLAGS@
 @ENABLED_BENCHMARK_NEWLIB_SQRT_TRUE@AM_LDFLAGS = @LDFLAGS@
+
+# Setup a $(LIBM) variable that we can use instead of either
+# $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in
+# parts of the real libm if we want to use $(DUMMY_LIBM).
+@ENABLED_BENCHMARK_NEWLIB_SQRT_TRUE@LIBM = $(if $(DUMMY_LIBM),$(DUMMY_LIBM),-lm)
 @ENABLED_BENCHMARK_NEWLIB_SQRT_TRUE@noinst_LTLIBRARIES = libnewlib-sqrt.la
 @ENABLED_BENCHMARK_NEWLIB_SQRT_TRUE@newlib_sqrt_SOURCES = 
 @ENABLED_BENCHMARK_NEWLIB_SQRT_TRUE@libnewlib_sqrt_la_SOURCES = ef_sqrt.c

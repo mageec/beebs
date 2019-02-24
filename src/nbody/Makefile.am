@@ -35,7 +35,6 @@ nbody_LDADD         = $(DUMMY_CRT0) \
                       $(top_builddir)/support/libmain.la \
                       libnbody.la \
                       $(top_builddir)/support/libsupport.la \
-                      $(DUMMY_LIBM) \
-                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
-
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT) \
+                      $(LIBM)
 endif

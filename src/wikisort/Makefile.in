@@ -175,7 +175,7 @@ am__DEPENDENCIES_1 =
 @ENABLED_BENCHMARK_WIKISORT_TRUE@	$(top_builddir)/support/libsupport.la \
 @ENABLED_BENCHMARK_WIKISORT_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_WIKISORT_TRUE@	$(am__DEPENDENCIES_1) \
-@ENABLED_BENCHMARK_WIKISORT_TRUE@	$(am__DEPENDENCIES_1)
+@ENABLED_BENCHMARK_WIKISORT_TRUE@	$(am__DEPENDENCIES_1) $(LIBM)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -385,7 +385,12 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_WIKISORT_TRUE@              @CPPFLAGS@
 
 @ENABLED_BENCHMARK_WIKISORT_TRUE@AM_CFLAGS = @CFLAGS@
-@ENABLED_BENCHMARK_WIKISORT_TRUE@AM_LDFLAGS = @LDFLAGS@ "-lm"
+@ENABLED_BENCHMARK_WIKISORT_TRUE@AM_LDFLAGS = @LDFLAGS@
+
+# Setup a $(LIBM) variable that we can use instead of either
+# $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in
+# parts of the real libm if we want to use $(DUMMY_LIBM).
+@ENABLED_BENCHMARK_WIKISORT_TRUE@LIBM = $(if $(DUMMY_LIBM),$(DUMMY_LIBM),-lm)
 @ENABLED_BENCHMARK_WIKISORT_TRUE@noinst_LTLIBRARIES = libwikisort.la
 @ENABLED_BENCHMARK_WIKISORT_TRUE@wikisort_SOURCES = 
 @ENABLED_BENCHMARK_WIKISORT_TRUE@libwikisort_la_SOURCES = libwikisort.c
@@ -393,7 +398,8 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_WIKISORT_TRUE@                         $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_WIKISORT_TRUE@                         libwikisort.la \
 @ENABLED_BENCHMARK_WIKISORT_TRUE@                         $(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_WIKISORT_TRUE@                         $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+@ENABLED_BENCHMARK_WIKISORT_TRUE@                         $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT) \
+@ENABLED_BENCHMARK_WIKISORT_TRUE@                         $(LIBM)
 
 all: all-am
 

@@ -36,7 +36,6 @@ matmult_float_LDADD          = $(DUMMY_CRT0) \
                                $(top_builddir)/support/libmain.la \
                                libmatmult-float.la \
                                $(top_builddir)/support/libsupport.la \
-                               $(DUMMY_LIBM) \
                                $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 libmatmult_float_la_CPPFLAGS = -DMATMULT_FLOAT ${AM_CPPFLAGS}
