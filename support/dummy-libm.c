@@ -47,6 +47,13 @@ cos (double x __attribute__ ((unused)) )
 
 
 double
+sin (double x __attribute__ ((unused)) )
+{
+  return 0.0;
+}
+
+
+double
 pow (double x __attribute__ ((unused)),
      double y __attribute__ ((unused)) )
 {
