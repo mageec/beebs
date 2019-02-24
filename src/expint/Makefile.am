@@ -31,11 +31,11 @@ noinst_LTLIBRARIES   = libexpint.la
 expint_SOURCES       =
 libexpint_la_SOURCES = libexpint.c
 
-expint_LDADD         = @DUMMY_CRT0@ \
+expint_LDADD         = $(DUMMY_CRT0) \
                        $(top_builddir)/support/libmain.la \
                        libexpint.la \
                        $(top_builddir)/support/libsupport.la \
-                       @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                       $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

@@ -31,11 +31,11 @@ noinst_LTLIBRARIES      = libhuffbench.la
 huffbench_SOURCES       =
 libhuffbench_la_SOURCES = libhuffbench.c
 
-huffbench_LDADD         = @DUMMY_CRT0@ \
+huffbench_LDADD         = $(DUMMY_CRT0) \
                           $(top_builddir)/support/libmain.la \
                           libhuffbench.la \
                           $(top_builddir)/support/libsupport.la \
-                          @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                          $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

@@ -32,10 +32,10 @@ bubblesort_SOURCES       =
 
 libbubblesort_la_SOURCES = libbubblesort.c
 
-bubblesort_LDADD         = @DUMMY_CRT0@ \
+bubblesort_LDADD         = $(DUMMY_CRT0) \
                            $(top_builddir)/support/libmain.la \
                            libbubblesort.la \
                            $(top_builddir)/support/libsupport.la \
-                           @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

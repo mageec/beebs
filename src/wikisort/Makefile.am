@@ -31,11 +31,11 @@ noinst_LTLIBRARIES     = libwikisort.la
 wikisort_SOURCES       =
 libwikisort_la_SOURCES = libwikisort.c
 
-wikisort_LDADD         = @DUMMY_CRT0@ \
+wikisort_LDADD         = $(DUMMY_CRT0) \
                          $(top_builddir)/support/libmain.la \
                          libwikisort.la \
                          $(top_builddir)/support/libsupport.la \
-                         @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                         $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

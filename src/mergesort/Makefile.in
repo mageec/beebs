@@ -167,9 +167,15 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_mergesort_OBJECTS =
 mergesort_OBJECTS = $(am_mergesort_OBJECTS)
-@ENABLED_BENCHMARK_MERGESORT_TRUE@mergesort_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+am__DEPENDENCIES_1 =
+@ENABLED_BENCHMARK_MERGESORT_TRUE@mergesort_DEPENDENCIES =  \
+@ENABLED_BENCHMARK_MERGESORT_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_MERGESORT_TRUE@	$(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_MERGESORT_TRUE@	libmergesort.la \
-@ENABLED_BENCHMARK_MERGESORT_TRUE@	$(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_MERGESORT_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_MERGESORT_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_MERGESORT_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_MERGESORT_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -384,11 +390,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_MERGESORT_TRUE@noinst_LTLIBRARIES = libmergesort.la
 @ENABLED_BENCHMARK_MERGESORT_TRUE@mergesort_SOURCES = 
 @ENABLED_BENCHMARK_MERGESORT_TRUE@libmergesort_la_SOURCES = libmergesort.c
-@ENABLED_BENCHMARK_MERGESORT_TRUE@mergesort_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_MERGESORT_TRUE@mergesort_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_MERGESORT_TRUE@                          $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_MERGESORT_TRUE@                          libmergesort.la \
 @ENABLED_BENCHMARK_MERGESORT_TRUE@                          $(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_MERGESORT_TRUE@                          @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+@ENABLED_BENCHMARK_MERGESORT_TRUE@                          $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am
 

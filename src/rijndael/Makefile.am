@@ -32,11 +32,11 @@ rijndael_SOURCES       =
 
 librijndael_la_SOURCES = aes.c aes.h aestab.h aesxam.c
 
-rijndael_LDADD         = @DUMMY_CRT0@ \
+rijndael_LDADD         = $(DUMMY_CRT0) \
                          $(top_builddir)/support/libmain.la \
                          librijndael.la \
                          $(top_builddir)/support/libsupport.la \
-                         @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                         $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 rijndael_CFLAGS  = -fno-strict-aliasing ${AM_CFLAGS}
 
 endif

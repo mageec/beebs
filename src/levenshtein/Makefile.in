@@ -168,9 +168,15 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_levenshtein_OBJECTS =
 levenshtein_OBJECTS = $(am_levenshtein_OBJECTS)
-@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@levenshtein_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+am__DEPENDENCIES_1 =
+@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@levenshtein_DEPENDENCIES =  \
+@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@	$(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@	liblevenshtein.la \
-@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@	$(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -385,11 +391,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@noinst_LTLIBRARIES = liblevenshtein.la
 @ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@levenshtein_SOURCES = 
 @ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@liblevenshtein_la_SOURCES = liblevenshtein.c
-@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@levenshtein_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@levenshtein_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@                            $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@                            liblevenshtein.la \
 @ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@                            $(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@                            @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+@ENABLED_BENCHMARK_LEVENSHTEIN_TRUE@                            $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am
 

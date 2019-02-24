@@ -31,11 +31,11 @@ noinst_LTLIBRARIES      = libmergesort.la
 mergesort_SOURCES       =
 libmergesort_la_SOURCES = libmergesort.c
 
-mergesort_LDADD         = @DUMMY_CRT0@ \
+mergesort_LDADD         = $(DUMMY_CRT0) \
                           $(top_builddir)/support/libmain.la \
                           libmergesort.la \
                           $(top_builddir)/support/libsupport.la \
-                          @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                          $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

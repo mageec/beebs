@@ -31,11 +31,11 @@ noinst_LTLIBRARIES = libedn.la
 edn_SOURCES        =
 libedn_la_SOURCES = libedn.c
 
-edn_LDADD          = @DUMMY_CRT0@ \
+edn_LDADD          = $(DUMMY_CRT0) \
                      $(top_builddir)/support/libmain.la \
                      libedn.la \
                      $(top_builddir)/support/libsupport.la \
-                     @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

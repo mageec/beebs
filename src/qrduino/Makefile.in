@@ -168,9 +168,15 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_qrduino_OBJECTS =
 qrduino_OBJECTS = $(am_qrduino_OBJECTS)
-@ENABLED_BENCHMARK_QRDUINO_TRUE@qrduino_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+am__DEPENDENCIES_1 =
+@ENABLED_BENCHMARK_QRDUINO_TRUE@qrduino_DEPENDENCIES =  \
+@ENABLED_BENCHMARK_QRDUINO_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_QRDUINO_TRUE@	$(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_QRDUINO_TRUE@	libqrduino.la \
-@ENABLED_BENCHMARK_QRDUINO_TRUE@	$(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_QRDUINO_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_QRDUINO_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_QRDUINO_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_QRDUINO_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -384,11 +390,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_QRDUINO_TRUE@noinst_LTLIBRARIES = libqrduino.la
 @ENABLED_BENCHMARK_QRDUINO_TRUE@qrduino_SOURCES = 
 @ENABLED_BENCHMARK_QRDUINO_TRUE@libqrduino_la_SOURCES = qrtest.c qrencode.c qrencode.h qrframe.c ecctable.h qrbits.h
-@ENABLED_BENCHMARK_QRDUINO_TRUE@qrduino_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_QRDUINO_TRUE@qrduino_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_QRDUINO_TRUE@                        $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_QRDUINO_TRUE@                        libqrduino.la \
 @ENABLED_BENCHMARK_QRDUINO_TRUE@                        $(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_QRDUINO_TRUE@                        @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+@ENABLED_BENCHMARK_QRDUINO_TRUE@                        $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am
 

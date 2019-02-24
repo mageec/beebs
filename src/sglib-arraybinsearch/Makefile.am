@@ -31,10 +31,10 @@ noinst_LTLIBRARIES                 = libsglib-arraybinsearch.la
 sglib_arraybinsearch_SOURCES       =
 libsglib_arraybinsearch_la_SOURCES = arraybinsearch.c sglib.h
 
-sglib_arraybinsearch_LDADD         = @DUMMY_CRT0@ \
+sglib_arraybinsearch_LDADD         = $(DUMMY_CRT0) \
                                      $(top_builddir)/support/libmain.la \
                                      libsglib-arraybinsearch.la \
                                      $(top_builddir)/support/libsupport.la \
-                                     @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

@@ -31,11 +31,11 @@ noinst_LTLIBRARIES  = libqsort.la
 qsort_SOURCES       =
 libqsort_la_SOURCES = libqsort.c
 
-qsort_LDADD         = @DUMMY_CRT0@ \
+qsort_LDADD         = $(DUMMY_CRT0) \
                       $(top_builddir)/support/libmain.la \
                       libqsort.la \
                       $(top_builddir)/support/libsupport.la \
-                      @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

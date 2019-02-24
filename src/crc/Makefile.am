@@ -31,11 +31,11 @@ noinst_LTLIBRARIES = libcrc.la
 crc_SOURCES        =
 libcrc_la_SOURCES = libcrc.c
 
-crc_LDADD          = @DUMMY_CRT0@ \
+crc_LDADD          = $(DUMMY_CRT0) \
                      $(top_builddir)/support/libmain.la \
                      libcrc.la \
                      $(top_builddir)/support/libsupport.la \
-                     @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

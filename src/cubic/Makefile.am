@@ -32,11 +32,11 @@ cubic_SOURCES       =
 
 libcubic_la_SOURCES = libcubic.c basicmath_small.c pi.h snipmath.h sniptype.h
 
-cubic_LDADD         = @DUMMY_CRT0@ \
+cubic_LDADD         = $(DUMMY_CRT0) \
                       $(top_builddir)/support/libmain.la \
                       libcubic.la \
                       $(top_builddir)/support/libsupport.la \
-                      @DUMMY_LIBM@ \
-                      @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                      $(DUMMY_LIBM) \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

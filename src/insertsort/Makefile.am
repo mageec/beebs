@@ -31,11 +31,11 @@ noinst_LTLIBRARIES       = libinsertsort.la
 insertsort_SOURCES       =
 libinsertsort_la_SOURCES = libinsertsort.c
 
-insertsort_LDADD         = @DUMMY_CRT0@ \
+insertsort_LDADD         = $(DUMMY_CRT0) \
                            $(top_builddir)/support/libmain.la \
                            libinsertsort.la \
                            $(top_builddir)/support/libsupport.la \
-                           @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

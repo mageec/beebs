@@ -31,10 +31,10 @@ noinst_LTLIBRARIES   = libselect.la
 select_SOURCES       =
 libselect_la_SOURCES = libselect.c
 
-select_LDADD         = @DUMMY_CRT0@ \
+select_LDADD         = $(DUMMY_CRT0) \
                        $(top_builddir)/support/libmain.la \
                        libselect.la \
                        $(top_builddir)/support/libsupport.la \
-                       @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                       $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

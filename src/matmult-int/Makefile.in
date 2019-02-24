@@ -167,9 +167,15 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_matmult_int_OBJECTS =
 matmult_int_OBJECTS = $(am_matmult_int_OBJECTS)
-@ENABLED_BENCHMARK_MATMULT_INT_TRUE@matmult_int_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+am__DEPENDENCIES_1 =
+@ENABLED_BENCHMARK_MATMULT_INT_TRUE@matmult_int_DEPENDENCIES =  \
+@ENABLED_BENCHMARK_MATMULT_INT_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_MATMULT_INT_TRUE@	$(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_MATMULT_INT_TRUE@	libmatmult-int.la \
-@ENABLED_BENCHMARK_MATMULT_INT_TRUE@	$(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_MATMULT_INT_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_MATMULT_INT_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_MATMULT_INT_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_MATMULT_INT_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -384,11 +390,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_MATMULT_INT_TRUE@noinst_LTLIBRARIES = libmatmult-int.la
 @ENABLED_BENCHMARK_MATMULT_INT_TRUE@matmult_int_SOURCES = 
 @ENABLED_BENCHMARK_MATMULT_INT_TRUE@libmatmult_int_la_SOURCES = matmult.c
-@ENABLED_BENCHMARK_MATMULT_INT_TRUE@matmult_int_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_MATMULT_INT_TRUE@matmult_int_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_MATMULT_INT_TRUE@                             $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_MATMULT_INT_TRUE@                             libmatmult-int.la \
 @ENABLED_BENCHMARK_MATMULT_INT_TRUE@                             $(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_MATMULT_INT_TRUE@                             @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+@ENABLED_BENCHMARK_MATMULT_INT_TRUE@                             $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 @ENABLED_BENCHMARK_MATMULT_INT_TRUE@libmatmult_int_la_CPPFLAGS = -DMATMULT_INT ${AM_CPPFLAGS}
 all: all-am

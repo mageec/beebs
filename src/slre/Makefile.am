@@ -31,11 +31,11 @@ noinst_LTLIBRARIES = libslre.la
 slre_SOURCES       =
 libslre_la_SOURCES = libslre.c slre.h
 
-slre_LDADD         = @DUMMY_CRT0@ \
+slre_LDADD         = $(DUMMY_CRT0) \
                      $(top_builddir)/support/libmain.la \
                      libslre.la \
                      $(top_builddir)/support/libsupport.la \
-                     @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

@@ -32,10 +32,10 @@ miniz_SOURCES       =
 libminiz_la_SOURCES = miniz.c miniz_b.c miniz.h
 libminiz_la_CFLAGS  = -fno-strict-aliasing ${AM_CFLAGS}
 
-miniz_LDADD         = @DUMMY_CRT0@ \
+miniz_LDADD         = $(DUMMY_CRT0) \
                       $(top_builddir)/support/libmain.la \
                       libminiz.la \
                       $(top_builddir)/support/libsupport.la \
-                      @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

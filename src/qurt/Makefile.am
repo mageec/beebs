@@ -31,11 +31,11 @@ noinst_LTLIBRARIES = libqurt.la
 qurt_SOURCES       =
 libqurt_la_SOURCES = libqurt.c
 
-qurt_LDADD         = @DUMMY_CRT0@ \
+qurt_LDADD         = $(DUMMY_CRT0) \
                      $(top_builddir)/support/libmain.la \
                      libqurt.la \
                      $(top_builddir)/support/libsupport.la \
-                     @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

@@ -168,9 +168,15 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_sglib_rbtree_OBJECTS =
 sglib_rbtree_OBJECTS = $(am_sglib_rbtree_OBJECTS)
-@ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@sglib_rbtree_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+am__DEPENDENCIES_1 =
+@ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@sglib_rbtree_DEPENDENCIES =  \
+@ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@	$(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@	libsglib-rbtree.la \
-@ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@	$(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -385,11 +391,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@noinst_LTLIBRARIES = libsglib-rbtree.la
 @ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@sglib_rbtree_SOURCES = 
 @ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@libsglib_rbtree_la_SOURCES = rbtree.c sglib.h
-@ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@sglib_rbtree_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@sglib_rbtree_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@                             $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@                             libsglib-rbtree.la \
 @ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@                             $(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@                             @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+@ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE@                             $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am
 

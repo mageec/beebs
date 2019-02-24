@@ -31,11 +31,11 @@ noinst_LTLIBRARIES  = libfasta.la
 fasta_SOURCES       =
 libfasta_la_SOURCES = libfasta.c
 
-fasta_LDADD         = @DUMMY_CRT0@ \
+fasta_LDADD         = $(DUMMY_CRT0) \
                       $(top_builddir)/support/libmain.la \
                       libfasta.la \
                       $(top_builddir)/support/libsupport.la \
-                      @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

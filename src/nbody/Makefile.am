@@ -31,11 +31,11 @@ noinst_LTLIBRARIES  = libnbody.la
 nbody_SOURCES       =
 libnbody_la_SOURCES = nbody.c
 
-nbody_LDADD         = @DUMMY_CRT0@ \
+nbody_LDADD         = $(DUMMY_CRT0) \
                       $(top_builddir)/support/libmain.la \
                       libnbody.la \
                       $(top_builddir)/support/libsupport.la \
-                      @DUMMY_LIBM@ \
-                      @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                      $(DUMMY_LIBM) \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

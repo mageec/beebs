@@ -167,9 +167,15 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_recursion_OBJECTS =
 recursion_OBJECTS = $(am_recursion_OBJECTS)
-@ENABLED_BENCHMARK_RECURSION_TRUE@recursion_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+am__DEPENDENCIES_1 =
+@ENABLED_BENCHMARK_RECURSION_TRUE@recursion_DEPENDENCIES =  \
+@ENABLED_BENCHMARK_RECURSION_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_RECURSION_TRUE@	$(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_RECURSION_TRUE@	librecursion.la \
-@ENABLED_BENCHMARK_RECURSION_TRUE@	$(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_RECURSION_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_RECURSION_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_RECURSION_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_RECURSION_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -384,11 +390,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_RECURSION_TRUE@noinst_LTLIBRARIES = librecursion.la
 @ENABLED_BENCHMARK_RECURSION_TRUE@recursion_SOURCES = 
 @ENABLED_BENCHMARK_RECURSION_TRUE@librecursion_la_SOURCES = librecursion.c
-@ENABLED_BENCHMARK_RECURSION_TRUE@recursion_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_RECURSION_TRUE@recursion_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_RECURSION_TRUE@                          $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_RECURSION_TRUE@                          librecursion.la \
 @ENABLED_BENCHMARK_RECURSION_TRUE@                          $(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_RECURSION_TRUE@                          @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+@ENABLED_BENCHMARK_RECURSION_TRUE@                          $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am
 

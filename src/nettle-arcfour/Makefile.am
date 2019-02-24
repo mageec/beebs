@@ -31,11 +31,11 @@ noinst_LTLIBRARIES           = libnettle-arcfour.la
 nettle_arcfour_SOURCES       =
 libnettle_arcfour_la_SOURCES = arcfour.c
 
-nettle_arcfour_LDADD         = @DUMMY_CRT0@ \
+nettle_arcfour_LDADD         = $(DUMMY_CRT0) \
                                $(top_builddir)/support/libmain.la \
                                libnettle-arcfour.la \
                                $(top_builddir)/support/libsupport.la \
-                               @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                               $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

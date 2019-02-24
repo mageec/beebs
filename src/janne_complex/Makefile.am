@@ -31,11 +31,11 @@ noinst_LTLIBRARIES          = libjanne_complex.la
 janne_complex_SOURCES       =
 libjanne_complex_la_SOURCES = libjanne_complex.c
 
-janne_complex_LDADD         = @DUMMY_CRT0@ \
+janne_complex_LDADD         = $(DUMMY_CRT0) \
                               $(top_builddir)/support/libmain.la \
                               libjanne_complex.la \
                               $(top_builddir)/support/libsupport.la \
-                              @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                              $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

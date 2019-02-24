@@ -31,11 +31,11 @@ noinst_LTLIBRARIES     = libpicojpeg.la
 picojpeg_SOURCES       =
 libpicojpeg_la_SOURCES = libpicojpeg.c picojpeg_test.c picojpeg.h
 
-picojpeg_LDADD         = @DUMMY_CRT0@ \
+picojpeg_LDADD         = $(DUMMY_CRT0) \
                          $(top_builddir)/support/libmain.la \
                          libpicojpeg.la \
                          $(top_builddir)/support/libsupport.la \
-                         @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                         $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

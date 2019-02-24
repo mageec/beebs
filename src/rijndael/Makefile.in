@@ -167,9 +167,15 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_rijndael_OBJECTS =
 rijndael_OBJECTS = $(am_rijndael_OBJECTS)
-@ENABLED_BENCHMARK_RIJNDAEL_TRUE@rijndael_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+am__DEPENDENCIES_1 =
+@ENABLED_BENCHMARK_RIJNDAEL_TRUE@rijndael_DEPENDENCIES =  \
+@ENABLED_BENCHMARK_RIJNDAEL_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_RIJNDAEL_TRUE@	$(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_RIJNDAEL_TRUE@	librijndael.la \
-@ENABLED_BENCHMARK_RIJNDAEL_TRUE@	$(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_RIJNDAEL_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_RIJNDAEL_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_RIJNDAEL_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_RIJNDAEL_TRUE@	$(am__DEPENDENCIES_1)
 rijndael_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(rijndael_CFLAGS) \
 	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
@@ -386,11 +392,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_RIJNDAEL_TRUE@noinst_LTLIBRARIES = librijndael.la
 @ENABLED_BENCHMARK_RIJNDAEL_TRUE@rijndael_SOURCES = 
 @ENABLED_BENCHMARK_RIJNDAEL_TRUE@librijndael_la_SOURCES = aes.c aes.h aestab.h aesxam.c
-@ENABLED_BENCHMARK_RIJNDAEL_TRUE@rijndael_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_RIJNDAEL_TRUE@rijndael_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_RIJNDAEL_TRUE@                         $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_RIJNDAEL_TRUE@                         librijndael.la \
 @ENABLED_BENCHMARK_RIJNDAEL_TRUE@                         $(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_RIJNDAEL_TRUE@                         @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+@ENABLED_BENCHMARK_RIJNDAEL_TRUE@                         $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 @ENABLED_BENCHMARK_RIJNDAEL_TRUE@rijndael_CFLAGS = -fno-strict-aliasing ${AM_CFLAGS}
 all: all-am

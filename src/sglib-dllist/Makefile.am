@@ -31,11 +31,11 @@ noinst_LTLIBRARIES         = libsglib-dllist.la
 sglib_dllist_SOURCES       =
 libsglib_dllist_la_SOURCES = dllist.c sglib.h
 
-sglib_dllist_LDADD         = @DUMMY_CRT0@ \
+sglib_dllist_LDADD         = $(DUMMY_CRT0) \
                              $(top_builddir)/support/libmain.la \
                              libsglib-dllist.la \
                              $(top_builddir)/support/libsupport.la \
-                             @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                             $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

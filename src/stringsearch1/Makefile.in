@@ -171,9 +171,15 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_stringsearch1_OBJECTS =
 stringsearch1_OBJECTS = $(am_stringsearch1_OBJECTS)
-@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@stringsearch1_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+am__DEPENDENCIES_1 =
+@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@stringsearch1_DEPENDENCIES =  \
+@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@	$(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@	libstringsearch1.la \
-@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@	$(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -388,11 +394,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@noinst_LTLIBRARIES = libstringsearch1.la
 @ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@stringsearch1_SOURCES = 
 @ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@libstringsearch1_la_SOURCES = stringsearch1.c fast.fwd.inc.c fast.rev.d12.c
-@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@stringsearch1_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@stringsearch1_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@                              $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@                              libstringsearch1.la \
 @ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@                              $(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@                              @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+@ENABLED_BENCHMARK_STRINGSEARCH1_TRUE@                              $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am
 

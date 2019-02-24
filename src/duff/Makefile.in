@@ -166,9 +166,15 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_duff_OBJECTS =
 duff_OBJECTS = $(am_duff_OBJECTS)
-@ENABLED_BENCHMARK_DUFF_TRUE@duff_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+am__DEPENDENCIES_1 =
+@ENABLED_BENCHMARK_DUFF_TRUE@duff_DEPENDENCIES =  \
+@ENABLED_BENCHMARK_DUFF_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_DUFF_TRUE@	$(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_DUFF_TRUE@	libduff.la \
-@ENABLED_BENCHMARK_DUFF_TRUE@	$(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_DUFF_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_DUFF_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_DUFF_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_DUFF_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -382,11 +388,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_DUFF_TRUE@noinst_LTLIBRARIES = libduff.la
 @ENABLED_BENCHMARK_DUFF_TRUE@duff_SOURCES = 
 @ENABLED_BENCHMARK_DUFF_TRUE@libduff_la_SOURCES = libduff.c
-@ENABLED_BENCHMARK_DUFF_TRUE@duff_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_DUFF_TRUE@duff_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_DUFF_TRUE@                     $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_DUFF_TRUE@                     libduff.la \
 @ENABLED_BENCHMARK_DUFF_TRUE@                     $(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_DUFF_TRUE@                     @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+@ENABLED_BENCHMARK_DUFF_TRUE@                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am
 

@@ -31,11 +31,11 @@ noinst_LTLIBRARIES     = libjfdctint.la
 jfdctint_SOURCES       =
 libjfdctint_la_SOURCES = libjfdctint.c
 
-jfdctint_LDADD         = @DUMMY_CRT0@ \
+jfdctint_LDADD         = $(DUMMY_CRT0) \
                          $(top_builddir)/support/libmain.la \
                          libjfdctint.la \
                          $(top_builddir)/support/libsupport.la \
-                         @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                         $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

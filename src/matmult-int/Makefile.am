@@ -32,11 +32,11 @@ matmult_int_SOURCES        =
 
 libmatmult_int_la_SOURCES  = matmult.c
 
-matmult_int_LDADD          = @DUMMY_CRT0@ \
+matmult_int_LDADD          = $(DUMMY_CRT0) \
                              $(top_builddir)/support/libmain.la \
                              libmatmult-int.la \
                              $(top_builddir)/support/libsupport.la \
-                             @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                             $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 libmatmult_int_la_CPPFLAGS = -DMATMULT_INT ${AM_CPPFLAGS}
 

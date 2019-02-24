@@ -33,10 +33,10 @@ sglib_arrayquicksort_SOURCES        =
 libsglib_arrayquicksort_la_SOURCES  = arraysort.c sglib.h
 libsglib_arrayquicksort_la_CPPFLAGS = -DQUICK_SORT ${AM_CPPFLAGS}
 
-sglib_arrayquicksort_LDADD          = @DUMMY_CRT0@ \
+sglib_arrayquicksort_LDADD          = $(DUMMY_CRT0) \
                                       $(top_builddir)/support/libmain.la \
                                       libsglib-arrayquicksort.la \
                                       $(top_builddir)/support/libsupport.la \
-                                      @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

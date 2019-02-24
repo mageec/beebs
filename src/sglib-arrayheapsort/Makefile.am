@@ -33,10 +33,10 @@ sglib_arrayheapsort_SOURCES        =
 libsglib_arrayheapsort_la_SOURCES  = arraysort.c sglib.h
 libsglib_arrayheapsort_la_CPPFLAGS = -DHEAP_SORT ${AM_CPPFLAGS}
 
-sglib_arrayheapsort_LDADD          = @DUMMY_CRT0@ \
+sglib_arrayheapsort_LDADD          = $(DUMMY_CRT0) \
                                      $(top_builddir)/support/libmain.la \
                                      libsglib-arrayheapsort.la \
                                      $(top_builddir)/support/libsupport.la \
-                                     @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

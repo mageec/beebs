@@ -31,11 +31,11 @@ noinst_LTLIBRARIES     = libnsichneu.la
 nsichneu_SOURCES       =
 libnsichneu_la_SOURCES = libnsichneu.c
 
-nsichneu_LDADD         = @DUMMY_CRT0@ \
+nsichneu_LDADD         = $(DUMMY_CRT0) \
                          $(top_builddir)/support/libmain.la \
                          libnsichneu.la \
                          $(top_builddir)/support/libsupport.la \
-                         @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                         $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

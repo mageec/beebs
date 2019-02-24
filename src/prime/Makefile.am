@@ -31,11 +31,11 @@ noinst_LTLIBRARIES  = libprime.la
 prime_SOURCES       =
 libprime_la_SOURCES = libprime.c
 
-prime_LDADD         = @DUMMY_CRT0@ \
+prime_LDADD         = $(DUMMY_CRT0) \
                       $(top_builddir)/support/libmain.la \
                       libprime.la \
                       $(top_builddir)/support/libsupport.la \
-                      @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

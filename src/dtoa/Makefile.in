@@ -166,9 +166,15 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_dtoa_OBJECTS =
 dtoa_OBJECTS = $(am_dtoa_OBJECTS)
-@ENABLED_BENCHMARK_DTOA_TRUE@dtoa_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+am__DEPENDENCIES_1 =
+@ENABLED_BENCHMARK_DTOA_TRUE@dtoa_DEPENDENCIES =  \
+@ENABLED_BENCHMARK_DTOA_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_DTOA_TRUE@	$(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_DTOA_TRUE@	libdtoa.la \
-@ENABLED_BENCHMARK_DTOA_TRUE@	$(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_DTOA_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_DTOA_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_DTOA_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_DTOA_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -382,11 +388,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_DTOA_TRUE@noinst_LTLIBRARIES = libdtoa.la
 @ENABLED_BENCHMARK_DTOA_TRUE@dtoa_SOURCES = 
 @ENABLED_BENCHMARK_DTOA_TRUE@libdtoa_la_SOURCES = libdtoa.c
-@ENABLED_BENCHMARK_DTOA_TRUE@dtoa_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_DTOA_TRUE@dtoa_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_DTOA_TRUE@                     $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_DTOA_TRUE@                     libdtoa.la \
 @ENABLED_BENCHMARK_DTOA_TRUE@                     $(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_DTOA_TRUE@                     @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+@ENABLED_BENCHMARK_DTOA_TRUE@                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am
 

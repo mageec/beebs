@@ -30,10 +30,10 @@ aha_compress_SOURCES       =
 
 libaha_compress_la_SOURCES = compress_test.c
 
-aha_compress_LDADD         = @DUMMY_CRT0@ \
+aha_compress_LDADD         = $(DUMMY_CRT0) \
                              $(top_builddir)/support/libmain.la \
                              libaha-compress.la \
                              $(top_builddir)/support/libsupport.la \
-                             @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                             $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

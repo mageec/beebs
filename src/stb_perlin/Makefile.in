@@ -167,9 +167,15 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_stb_perlin_OBJECTS =
 stb_perlin_OBJECTS = $(am_stb_perlin_OBJECTS)
-@ENABLED_BENCHMARK_STB_PERLIN_TRUE@stb_perlin_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+am__DEPENDENCIES_1 =
+@ENABLED_BENCHMARK_STB_PERLIN_TRUE@stb_perlin_DEPENDENCIES =  \
+@ENABLED_BENCHMARK_STB_PERLIN_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_STB_PERLIN_TRUE@	$(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_STB_PERLIN_TRUE@	libstb_perlin.la \
-@ENABLED_BENCHMARK_STB_PERLIN_TRUE@	$(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_STB_PERLIN_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_STB_PERLIN_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_STB_PERLIN_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_STB_PERLIN_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -384,11 +390,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_STB_PERLIN_TRUE@noinst_LTLIBRARIES = libstb_perlin.la
 @ENABLED_BENCHMARK_STB_PERLIN_TRUE@stb_perlin_SOURCES = 
 @ENABLED_BENCHMARK_STB_PERLIN_TRUE@libstb_perlin_la_SOURCES = libstb_perlin.c
-@ENABLED_BENCHMARK_STB_PERLIN_TRUE@stb_perlin_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_STB_PERLIN_TRUE@stb_perlin_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_STB_PERLIN_TRUE@                           $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_STB_PERLIN_TRUE@                           libstb_perlin.la \
 @ENABLED_BENCHMARK_STB_PERLIN_TRUE@                           $(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_STB_PERLIN_TRUE@                           @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+@ENABLED_BENCHMARK_STB_PERLIN_TRUE@                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am
 

@@ -31,11 +31,11 @@ noinst_LTLIBRARIES       = libnewlib-exp.la
 newlib_exp_SOURCES       =
 libnewlib_exp_la_SOURCES = ef_exp.c
 
-newlib_exp_LDADD         = @DUMMY_CRT0@ \
+newlib_exp_LDADD         = $(DUMMY_CRT0) \
                            $(top_builddir)/support/libmain.la \
                            libnewlib-exp.la \
                            $(top_builddir)/support/libsupport.la \
-                           @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

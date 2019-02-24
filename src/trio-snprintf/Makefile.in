@@ -170,9 +170,15 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_trio_snprintf_OBJECTS =
 trio_snprintf_OBJECTS = $(am_trio_snprintf_OBJECTS)
-@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@trio_snprintf_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+am__DEPENDENCIES_1 =
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@trio_snprintf_DEPENDENCIES =  \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	$(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	libtrio-snprintf.la \
-@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	$(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -389,11 +395,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@libtrio_snprintf_la_SOURCES = trio.c trio.h trio_test.c triostr.c triostr.h \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                               triodef.h triop.h
 
-@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@trio_snprintf_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@trio_snprintf_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                               $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                               libtrio-snprintf.la \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                               $(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                               @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                               $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@libtrio_snprintf_la_CPPFLAGS = -DTRIO_EXTENSION=0 -DTRIO_DEPRECATED=0 \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                               -DTRIO_MICROSOFT=0 -DTRIO_ERRORS=0     \

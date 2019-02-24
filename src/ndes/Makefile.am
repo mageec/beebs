@@ -31,11 +31,11 @@ noinst_LTLIBRARIES = libndes.la
 ndes_SOURCES       =
 libndes_la_SOURCES = libndes.c
 
-ndes_LDADD         = @DUMMY_CRT0@ \
+ndes_LDADD         = $(DUMMY_CRT0) \
                      $(top_builddir)/support/libmain.la \
                      libndes.la \
                      $(top_builddir)/support/libsupport.la \
-                     @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

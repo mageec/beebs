@@ -31,11 +31,11 @@ noinst_LTLIBRARIES      = libwhetstone.la
 whetstone_SOURCES       =
 libwhetstone_la_SOURCES = libwhetstone.c
 
-whetstone_LDADD         = @DUMMY_CRT0@ \
+whetstone_LDADD         = $(DUMMY_CRT0) \
                           $(top_builddir)/support/libmain.la \
                           libwhetstone.la \
                           $(top_builddir)/support/libsupport.la \
-                          @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                          $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

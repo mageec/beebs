@@ -43,11 +43,11 @@ noinst_LTLIBRARIES     = libtemplate.la
 template_SOURCES       =
 libtemplate_la_SOURCES = libtemplate.c
 
-template_LDADD         = @DUMMY_CRT0@ \
+template_LDADD         = $(DUMMY_CRT0) \
                          $(top_builddir)/support/libmain.la \
                          libtemplate.la \
                          $(top_builddir)/support/libsupport.la \
-                         @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                         $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

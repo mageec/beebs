@@ -1,3 +1,164 @@
+2019-02-24  Andrew Burgess  <andrew.burgess@embecosm.com>
+
+	* src/aha-compress/Makefile.am: Change variable syntax.
+	* src/aha-compress/Makefile.in: Regenerate.
+	* src/aha-mont64/Makefile.am: Change variable syntax.
+	* src/aha-mont64/Makefile.in: Regenerate.
+	* src/bs/Makefile.am: Change variable syntax.
+	* src/bs/Makefile.in: Regenerate.
+	* src/bubblesort/Makefile.am: Change variable syntax.
+	* src/bubblesort/Makefile.in: Regenerate.
+	* src/cnt/Makefile.am: Change variable syntax.
+	* src/cnt/Makefile.in: Regenerate.
+	* src/compress/Makefile.am: Change variable syntax.
+	* src/compress/Makefile.in: Regenerate.
+	* src/cover/Makefile.am: Change variable syntax.
+	* src/cover/Makefile.in: Regenerate.
+	* src/crc/Makefile.am: Change variable syntax.
+	* src/crc/Makefile.in: Regenerate.
+	* src/crc32/Makefile.am: Change variable syntax.
+	* src/crc32/Makefile.in: Regenerate.
+	* src/ctl-stack/Makefile.am: Change variable syntax.
+	* src/ctl-stack/Makefile.in: Regenerate.
+	* src/ctl-string/Makefile.am: Change variable syntax.
+	* src/ctl-string/Makefile.in: Regenerate.
+	* src/ctl-vector/Makefile.am: Change variable syntax.
+	* src/ctl-vector/Makefile.in: Regenerate.
+	* src/cubic/Makefile.am: Change variable syntax.
+	* src/cubic/Makefile.in: Regenerate.
+	* src/dijkstra/Makefile.am: Change variable syntax.
+	* src/dijkstra/Makefile.in: Regenerate.
+	* src/dtoa/Makefile.am: Change variable syntax.
+	* src/dtoa/Makefile.in: Regenerate.
+	* src/duff/Makefile.am: Change variable syntax.
+	* src/duff/Makefile.in: Regenerate.
+	* src/edn/Makefile.am: Change variable syntax.
+	* src/edn/Makefile.in: Regenerate.
+	* src/expint/Makefile.am: Change variable syntax.
+	* src/expint/Makefile.in: Regenerate.
+	* src/fac/Makefile.am: Change variable syntax.
+	* src/fac/Makefile.in: Regenerate.
+	* src/fasta/Makefile.am: Change variable syntax.
+	* src/fasta/Makefile.in: Regenerate.
+	* src/fdct/Makefile.am: Change variable syntax.
+	* src/fdct/Makefile.in: Regenerate.
+	* src/fibcall/Makefile.am: Change variable syntax.
+	* src/fibcall/Makefile.in: Regenerate.
+	* src/fir/Makefile.am: Change variable syntax.
+	* src/fir/Makefile.in: Regenerate.
+	* src/frac/Makefile.am: Change variable syntax.
+	* src/frac/Makefile.in: Regenerate.
+	* src/huffbench/Makefile.am: Change variable syntax.
+	* src/huffbench/Makefile.in: Regenerate.
+	* src/insertsort/Makefile.am: Change variable syntax.
+	* src/insertsort/Makefile.in: Regenerate.
+	* src/janne_complex/Makefile.am: Change variable syntax.
+	* src/janne_complex/Makefile.in: Regenerate.
+	* src/jfdctint/Makefile.am: Change variable syntax.
+	* src/jfdctint/Makefile.in: Regenerate.
+	* src/lcdnum/Makefile.am: Change variable syntax.
+	* src/lcdnum/Makefile.in: Regenerate.
+	* src/levenshtein/Makefile.am: Change variable syntax.
+	* src/levenshtein/Makefile.in: Regenerate.
+	* src/ludcmp/Makefile.am: Change variable syntax.
+	* src/ludcmp/Makefile.in: Regenerate.
+	* src/matmult-float/Makefile.am: Change variable syntax.
+	* src/matmult-float/Makefile.in: Regenerate.
+	* src/matmult-int/Makefile.am: Change variable syntax.
+	* src/matmult-int/Makefile.in: Regenerate.
+	* src/mergesort/Makefile.am: Change variable syntax.
+	* src/mergesort/Makefile.in: Regenerate.
+	* src/miniz/Makefile.am: Change variable syntax.
+	* src/miniz/Makefile.in: Regenerate.
+	* src/minver/Makefile.am: Change variable syntax.
+	* src/minver/Makefile.in: Regenerate.
+	* src/nbody/Makefile.am: Change variable syntax.
+	* src/nbody/Makefile.in: Regenerate.
+	* src/ndes/Makefile.am: Change variable syntax.
+	* src/ndes/Makefile.in: Regenerate.
+	* src/nettle-arcfour/Makefile.am: Change variable syntax.
+	* src/nettle-arcfour/Makefile.in: Regenerate.
+	* src/nettle-cast128/Makefile.am: Change variable syntax.
+	* src/nettle-cast128/Makefile.in: Regenerate.
+	* src/nettle-des/Makefile.am: Change variable syntax.
+	* src/nettle-des/Makefile.in: Regenerate.
+	* src/nettle-md5/Makefile.am: Change variable syntax.
+	* src/nettle-md5/Makefile.in: Regenerate.
+	* src/newlib-exp/Makefile.am: Change variable syntax.
+	* src/newlib-exp/Makefile.in: Regenerate.
+	* src/newlib-log/Makefile.am: Change variable syntax.
+	* src/newlib-log/Makefile.in: Regenerate.
+	* src/newlib-mod/Makefile.am: Change variable syntax.
+	* src/newlib-mod/Makefile.in: Regenerate.
+	* src/newlib-sqrt/Makefile.am: Change variable syntax.
+	* src/newlib-sqrt/Makefile.in: Regenerate.
+	* src/ns/Makefile.am: Change variable syntax.
+	* src/ns/Makefile.in: Regenerate.
+	* src/nsichneu/Makefile.am: Change variable syntax.
+	* src/nsichneu/Makefile.in: Regenerate.
+	* src/picojpeg/Makefile.am: Change variable syntax.
+	* src/picojpeg/Makefile.in: Regenerate.
+	* src/prime/Makefile.am: Change variable syntax.
+	* src/prime/Makefile.in: Regenerate.
+	* src/qrduino/Makefile.am: Change variable syntax.
+	* src/qrduino/Makefile.in: Regenerate.
+	* src/qsort/Makefile.am: Change variable syntax.
+	* src/qsort/Makefile.in: Regenerate.
+	* src/qurt/Makefile.am: Change variable syntax.
+	* src/qurt/Makefile.in: Regenerate.
+	* src/recursion/Makefile.am: Change variable syntax.
+	* src/recursion/Makefile.in: Regenerate.
+	* src/rijndael/Makefile.am: Change variable syntax.
+	* src/rijndael/Makefile.in: Regenerate.
+	* src/select/Makefile.am: Change variable syntax.
+	* src/select/Makefile.in: Regenerate.
+	* src/sglib-arraybinsearch/Makefile.am: Change variable syntax.
+	* src/sglib-arraybinsearch/Makefile.in: Regenerate.
+	* src/sglib-arrayheapsort/Makefile.am: Change variable syntax.
+	* src/sglib-arrayheapsort/Makefile.in: Regenerate.
+	* src/sglib-arrayquicksort/Makefile.am: Change variable syntax.
+	* src/sglib-arrayquicksort/Makefile.in: Regenerate.
+	* src/sglib-dllist/Makefile.am: Change variable syntax.
+	* src/sglib-dllist/Makefile.in: Regenerate.
+	* src/sglib-hashtable/Makefile.am: Change variable syntax.
+	* src/sglib-hashtable/Makefile.in: Regenerate.
+	* src/sglib-listinsertsort/Makefile.am: Change variable syntax.
+	* src/sglib-listinsertsort/Makefile.in: Regenerate.
+	* src/sglib-listsort/Makefile.am: Change variable syntax.
+	* src/sglib-listsort/Makefile.in: Regenerate.
+	* src/sglib-queue/Makefile.am: Change variable syntax.
+	* src/sglib-queue/Makefile.in: Regenerate.
+	* src/sglib-rbtree/Makefile.am: Change variable syntax.
+	* src/sglib-rbtree/Makefile.in: Regenerate.
+	* src/slre/Makefile.am: Change variable syntax.
+	* src/slre/Makefile.in: Regenerate.
+	* src/sqrt/Makefile.am: Change variable syntax.
+	* src/sqrt/Makefile.in: Regenerate.
+	* src/st/Makefile.am: Change variable syntax.
+	* src/st/Makefile.in: Regenerate.
+	* src/statemate/Makefile.am: Change variable syntax.
+	* src/statemate/Makefile.in: Regenerate.
+	* src/stb_perlin/Makefile.am: Change variable syntax.
+	* src/stb_perlin/Makefile.in: Regenerate.
+	* src/stringsearch1/Makefile.am: Change variable syntax.
+	* src/stringsearch1/Makefile.in: Regenerate.
+	* src/strstr/Makefile.am: Change variable syntax.
+	* src/strstr/Makefile.in: Regenerate.
+	* src/tarai/Makefile.am: Change variable syntax.
+	* src/tarai/Makefile.in: Regenerate.
+	* src/template/Makefile.am: Change variable syntax.
+	* src/template/Makefile.in: Regenerate.
+	* src/trio-snprintf/Makefile.am: Change variable syntax.
+	* src/trio-snprintf/Makefile.in: Regenerate.
+	* src/trio-sscanf/Makefile.am: Change variable syntax.
+	* src/trio-sscanf/Makefile.in: Regenerate.
+	* src/ud/Makefile.am: Change variable syntax.
+	* src/ud/Makefile.in: Regenerate.
+	* src/whetstone/Makefile.am: Change variable syntax.
+	* src/whetstone/Makefile.in: Regenerate.
+	* src/wikisort/Makefile.am: Change variable syntax.
+	* src/wikisort/Makefile.in: Regenerate.
+
 2019-02-11  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* configure: Regenerate.

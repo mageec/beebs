@@ -166,9 +166,15 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_prime_OBJECTS =
 prime_OBJECTS = $(am_prime_OBJECTS)
-@ENABLED_BENCHMARK_PRIME_TRUE@prime_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+am__DEPENDENCIES_1 =
+@ENABLED_BENCHMARK_PRIME_TRUE@prime_DEPENDENCIES =  \
+@ENABLED_BENCHMARK_PRIME_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_PRIME_TRUE@	$(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_PRIME_TRUE@	libprime.la \
-@ENABLED_BENCHMARK_PRIME_TRUE@	$(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_PRIME_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_PRIME_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_PRIME_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_PRIME_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -382,11 +388,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_PRIME_TRUE@noinst_LTLIBRARIES = libprime.la
 @ENABLED_BENCHMARK_PRIME_TRUE@prime_SOURCES = 
 @ENABLED_BENCHMARK_PRIME_TRUE@libprime_la_SOURCES = libprime.c
-@ENABLED_BENCHMARK_PRIME_TRUE@prime_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_PRIME_TRUE@prime_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_PRIME_TRUE@                      $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_PRIME_TRUE@                      libprime.la \
 @ENABLED_BENCHMARK_PRIME_TRUE@                      $(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_PRIME_TRUE@                      @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+@ENABLED_BENCHMARK_PRIME_TRUE@                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am
 

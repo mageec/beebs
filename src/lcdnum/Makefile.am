@@ -31,11 +31,11 @@ noinst_LTLIBRARIES   = liblcdnum.la
 lcdnum_SOURCES       =
 liblcdnum_la_SOURCES = liblcdnum.c
 
-lcdnum_LDADD         = @DUMMY_CRT0@ \
+lcdnum_LDADD         = $(DUMMY_CRT0) \
                        $(top_builddir)/support/libmain.la \
                        liblcdnum.la \
                        $(top_builddir)/support/libsupport.la \
-                       @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                       $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

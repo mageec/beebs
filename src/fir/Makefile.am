@@ -31,11 +31,11 @@ noinst_LTLIBRARIES = libfir.la
 fir_SOURCES        =
 libfir_la_SOURCES = libfir.c
 
-fir_LDADD          = @DUMMY_CRT0@ \
+fir_LDADD          = $(DUMMY_CRT0) \
                      $(top_builddir)/support/libmain.la \
                      libfir.la \
                      $(top_builddir)/support/libsupport.la \
-                     @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

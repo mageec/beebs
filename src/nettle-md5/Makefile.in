@@ -167,9 +167,15 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_nettle_md5_OBJECTS =
 nettle_md5_OBJECTS = $(am_nettle_md5_OBJECTS)
-@ENABLED_BENCHMARK_NETTLE_MD5_TRUE@nettle_md5_DEPENDENCIES = $(top_builddir)/support/libmain.la \
+am__DEPENDENCIES_1 =
+@ENABLED_BENCHMARK_NETTLE_MD5_TRUE@nettle_md5_DEPENDENCIES =  \
+@ENABLED_BENCHMARK_NETTLE_MD5_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_NETTLE_MD5_TRUE@	$(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_NETTLE_MD5_TRUE@	libnettle-md5.la \
-@ENABLED_BENCHMARK_NETTLE_MD5_TRUE@	$(top_builddir)/support/libsupport.la
+@ENABLED_BENCHMARK_NETTLE_MD5_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_NETTLE_MD5_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_NETTLE_MD5_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_NETTLE_MD5_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -384,11 +390,11 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_NETTLE_MD5_TRUE@noinst_LTLIBRARIES = libnettle-md5.la
 @ENABLED_BENCHMARK_NETTLE_MD5_TRUE@nettle_md5_SOURCES = 
 @ENABLED_BENCHMARK_NETTLE_MD5_TRUE@libnettle_md5_la_SOURCES = md5.c
-@ENABLED_BENCHMARK_NETTLE_MD5_TRUE@nettle_md5_LDADD = @DUMMY_CRT0@ \
+@ENABLED_BENCHMARK_NETTLE_MD5_TRUE@nettle_md5_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_NETTLE_MD5_TRUE@                           $(top_builddir)/support/libmain.la \
 @ENABLED_BENCHMARK_NETTLE_MD5_TRUE@                           libnettle-md5.la \
 @ENABLED_BENCHMARK_NETTLE_MD5_TRUE@                           $(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_NETTLE_MD5_TRUE@                           @DUMMY_LIBC@ @DUMMY_LIBGCC@ @DUMMY_COMPILERRT@
+@ENABLED_BENCHMARK_NETTLE_MD5_TRUE@                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am
 
