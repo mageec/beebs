@@ -59,6 +59,23 @@ double sqrt (double x __attribute__ ((unused)) )
   return  0.0;
 }
 
+double
+floor (double x __attribute__ ((unused)) )
+{
+  return 0.0;
+}
+
+double
+exp (double x __attribute__ ((unused)) )
+{
+  return 0.0;
+}
+
+double
+log (double x __attribute__ ((unused)) )
+{
+  return 0.0;
+}
 
 /*
    Local Variables:

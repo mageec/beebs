@@ -1,5 +1,11 @@
 2019-02-24  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* support/dummy-libm.c (floor): New function.
+	(exp): New function.
+	(log): New function.
+
+2019-02-24  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* src/aha-compress/Makefile.am: Change variable syntax.
 	* src/aha-compress/Makefile.in: Regenerate.
 	* src/aha-mont64/Makefile.am: Change variable syntax.
