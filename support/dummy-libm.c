@@ -66,11 +66,27 @@ double sqrt (double x __attribute__ ((unused)) )
   return  0.0;
 }
 
+
+float
+sqrtf (float x __attribute__ ((unused)) )
+{
+  return 0.0;
+}
+
+
 double
 floor (double x __attribute__ ((unused)) )
 {
   return 0.0;
 }
+
+
+float
+floorf (float x __attribute__ ((unused)) )
+{
+  return 0.0;
+}
+
 
 double
 exp (double x __attribute__ ((unused)) )

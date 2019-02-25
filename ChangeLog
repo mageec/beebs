@@ -1,5 +1,10 @@
 2019-02-25  Andrew Burgess  <andrew.burgess@embecosm.com>
 
+	* support/dummy-libm.c (sqrtf): New function.
+	(floorf): New function.
+
+2019-02-25  Andrew Burgess  <andrew.burgess@embecosm.com>
+
 	* support/dummy-libm.c (sin): New function.
 
 2019-02-24  Andrew Burgess  <andrew.burgess@embecosm.com>
