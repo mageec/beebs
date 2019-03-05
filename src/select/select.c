@@ -27,7 +27,12 @@
    benchmarks. */
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
-#define SWAP(a,b) temp=(a);(a)=(b);(b)=temp;
+#define SWAP(a,b) \
+do{               \
+    temp=(a);     \
+    (a)=(b);      \
+    (b)=temp;     \
+}while(0);        \
 
 float arr[20] = {
   5, 4, 10.3, 1.1, 5.7, 100, 231, 111, 49.5, 99,
