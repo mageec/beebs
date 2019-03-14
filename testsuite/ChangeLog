@@ -1,3 +1,10 @@
+2019-03-14  Graham Markall  <graham.markall@embecosm.com>
+
+	* beebs.test/execute.exp: Call beebs_run_all_benchmarks.
+	* config/ri5cyverilator.exp (beebs_load): New function.
+	* lib/beebs.exp (beebs_run_all_benchmarks): Set cycle count using
+	value returned by beebs_load. Print execution time table.
+
 2018-06-27  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* Makefile.in: Regenerated.

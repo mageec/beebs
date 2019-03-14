@@ -64,15 +64,18 @@ proc default_beebs_run_benchmark { benchmark filename } {
 }
 
 # Main loop to run all benchmarks.
-proc beebs_run_all_benchmarks { } {
+proc beebs_run_all_benchmarks { board objdir } {
     global beebs_run_benchmark_result
-    global benchmarks
-    global objdir
-    global srcdir
 
     # Perform any setup required before running any benchmarks.
     if { [catch {beebs_setup_before_all_benchmarks} msg] } {
         error "Failed to setup before all benchmarks\n$msg"
+    }
+
+    if {[board_info ${board} exists beebs,benchmarks]} {
+       set benchmarks [board_info ${board} beebs,benchmarks]
+    } else {
+       return 0
     }
 
     # First, need to find all of the benchmark files.  The BENCHMARKS
@@ -82,7 +85,7 @@ proc beebs_run_all_benchmarks { } {
     foreach benchmark $benchmarks {
 
         # Now find all the executable files to run.
-        set benchmark_dir "$objdir/src/$benchmark"
+        set benchmark_dir "$objdir/$benchmark"
         set benchmark_file "${benchmark_dir}/${benchmark}"
 
         if { [file isfile ${benchmark_file}] && [file executable ${benchmark_file}]} {
@@ -107,10 +110,21 @@ proc beebs_run_all_benchmarks { } {
                 error "Failed to run benchmark '$benchmark' ($benchmark_file)\n$msg"
             } {
                 if { [lindex $beebs_run_benchmark_result 0 ] == "pass" } {
-                    pass "$benchmark"
+                    pass "$benchmark: execute"
                 } {
                     verbose -log "Fail $benchmark: $beebs_run_benchmark_result"
-                    fail "$benchmark"
+                    fail "$benchmark: execute"
+                }
+                # if beebs_run_benchmark returned an execution time as well as
+                # pass/fail, the value is saved for printing at the end of this
+                # proc
+                set exec_time [lindex $beebs_run_benchmark_result 1 ]
+                if { $exec_time != "" } {
+                    set results($benchmark) $exec_time
+                    pass "$benchmark: measure execution time"
+                } {
+                    verbose -log "Fail $benchmark: no execution time returned by beebs_run_benchmark"
+                    fail "$benchmark: measure execution time"
                 }
             }
 
@@ -123,6 +137,26 @@ proc beebs_run_all_benchmarks { } {
             unresolved "$benchmark"
         }
     }
+
+    send_user "\n"
+    send_user "\t\t=== Execution time table ===\n"
+    send_user "\n"
+    send_user    [format "%-24s  %9s\n" "Benchmark" "Time"]
+    send_user -- [format "%-24s  %9s\n" "---------" "----"]
+
+    set exec_time_tot [expr {0}]
+
+    foreach r [lsort [array names results]] {
+       set l $results($r)
+       set exec_time_val [lindex $l 0]
+
+       set exec_time_tot [expr {$exec_time_tot + $exec_time_val}]
+
+       send_user [format "%-24s  %9d\n" $r $exec_time_val]
+    }
+
+    send_user -- [format "%-24s  %9s\n" "---------" "----"]
+    send_user [format "%-24s  %9d\n" "Total" $exec_time_tot]
 
     # Now cleanup after we've finished running all the benchmarks.
     if { [catch {beebs_cleanup_after_all_benchmarks} msg] } {

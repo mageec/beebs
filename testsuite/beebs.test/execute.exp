@@ -19,4 +19,6 @@
 
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# beebs_run_all_benchmarks
+foreach target $target_list {
+    beebs_run_all_benchmarks $target ${objdir}/../src
+}
