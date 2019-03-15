@@ -22,34 +22,34 @@
 # Called for each binary within each benchmark.  Return true
 # (non-zero) if we should run this benchmark, otherwise, return false
 # (zero).
-proc default_beebs_filter_benchmark { benchmark filename } {
+proc beebs_filter_benchmark { benchmark filename } {
     return 1
 }
 
 # Called once before we run any benchmark tests.
-proc default_beebs_setup_before_all_benchmarks { } {
+proc beebs_setup_before_all_benchmarks { } {
     return 1;
 }
 
 # Called once after we've finished all the benchmark tests.
-proc default_beebs_cleanup_after_all_benchmarks { } {
+proc beebs_cleanup_after_all_benchmarks { } {
     return 1
 }
 
 # Called once for every benchmark directory before any tests in that
 # directory are run.
-proc default_beebs_setup_before_benchmark { benchmark filename } {
+proc beebs_setup_before_benchmark { benchmark filename } {
     return 1;
 }
 
 # Called once for every benchmark directory after all the tests in
 # that directory are run.
-proc default_beebs_cleanup_after_benchmark { benchmark filename } {
+proc beebs_cleanup_after_benchmark { benchmark filename } {
     return 1
 }
 
 # Give an announcement before running a benchmark.
-proc default_beebs_announce { benchmark filename } {
+proc beebs_announce { benchmark filename } {
     verbose -log "\n - - - - -     $benchmark     - - - - -\n"
 }
 
@@ -57,7 +57,7 @@ proc default_beebs_announce { benchmark filename } {
 # directory DIR, the benchmark name BENCHMARK, and the binary to
 # execute FILE.  The parameter FILE will not include the directory
 # suffix, while the path DIR does already include the benchmark name.
-proc default_beebs_run_benchmark { benchmark filename } {
+proc beebs_run_benchmark { benchmark filename } {
     global beebs_run_benchmark_result
     set beebs_run_benchmark_result [beebs_load "${filename}"]
     return 1
@@ -87,6 +87,9 @@ proc beebs_run_all_benchmarks { board objdir } {
         # Now find all the executable files to run.
         set benchmark_dir "$objdir/$benchmark"
         set benchmark_file "${benchmark_dir}/${benchmark}"
+
+        # Now find the executable and check it is valid. It is OK not to find
+        # the file - that just implies it was not one of the ones built.
 
         if { [file isfile ${benchmark_file}] && [file executable ${benchmark_file}]} {
 
@@ -132,9 +135,6 @@ proc beebs_run_all_benchmarks { board objdir } {
             if { [catch {beebs_cleanup_after_benchmark $benchmark $benchmark_file} msg] } {
                 error "Failed to cleanup after benchmark '$benchmark' ($benchmark_file)\n$msg"
             }
-        } else {
-            verbose -log "Missing executable for benchmark '$benchmark' looked at '$benchmark_file'"
-            unresolved "$benchmark"
         }
     }
 
@@ -178,34 +178,8 @@ proc beebs_results_directory { benchmark file } {
     return ${dir}
 }
 
-proc beebs_restore_default_procs {} {
-    uplevel #0 {
-        proc beebs_setup_before_all_benchmarks { } {
-            return [default_beebs_setup_before_all_benchmarks]
-        }
-        proc beebs_filter_benchmark { b f } {
-            return [default_beebs_filter_benchmark $b $f]
-        }
-        proc beebs_announce { b f } {
-            return [default_beebs_announce $b $f]
-        }
-        proc beebs_setup_before_benchmark { b f } {
-            return [default_beebs_setup_before_benchmark $b $f]
-        }
-        proc beebs_run_benchmark { b f } {
-            return [default_beebs_run_benchmark $b $f]
-        }
-        proc beebs_cleanup_after_benchmark { b f } {
-            return [default_beebs_cleanup_after_benchmark $b $f]
-        }
-        proc beebs_cleanup_after_all_benchmarks { } {
-            return [default_beebs_cleanup_after_all_benchmarks]
-        }
-    }
-}
-
 proc beebs_init { test_file_name } {
-    beebs_restore_default_procs
+    # ... nothing yet ...
 }
 
 proc beebs_finish {} {

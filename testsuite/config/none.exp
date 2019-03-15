@@ -20,3 +20,15 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 set_board_info beebs,benchmarks "$env(BENCHMARKS)"
+
+proc none_filter_benchmark { b f } {
+  return 0
+}
+
+proc none_init { test_file_name } {
+  uplevel #0 {
+    proc beebs_filter_benchmark { b f } {
+      return [none_filter_benchmark $b $f]
+    }
+  }
+}

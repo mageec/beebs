@@ -1,3 +1,11 @@
+2019-03-15  Graham Markall  <graham.markall@embecosm.com>
+
+	* config/none.exp (non_filter_benchmark, none_init): New functions.
+	* lib/beebs.exp: Rename default_beebs_* to beebs_*.
+	(beebs_run_benchmark): Make it OK not to find an executable.
+	(beebs_restore_default_procs): Delete.
+	(beebs_init): Don't call beebs_restore_default_procs.
+
 2019-03-14  Graham Markall  <graham.markall@embecosm.com>
 
 	* beebs.test/execute.exp: Call beebs_run_all_benchmarks.
