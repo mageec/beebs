@@ -1,5 +1,10 @@
 2019-03-15  Graham Markall  <graham.markall@embecosm.com>
 
+	* config/generic.exp (generic_filter_benchmark, generic_init): New
+	functions.
+
+2019-03-15  Graham Markall  <graham.markall@embecosm.com>
+
 	* config/none.exp (non_filter_benchmark, none_init): New functions.
 	* lib/beebs.exp: Rename default_beebs_* to beebs_*.
 	(beebs_run_benchmark): Make it OK not to find an executable.
