@@ -19,24 +19,32 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=trio-sscanf
+# SPDX-License-Identifier: GPL-3.0-or-later
 
-SRC=../trio/trio.c ../trio/trio.h ../trio/trio_test.c \
-    ../trio/triostr.c ../trio/triostr.h ../trio/triodef.h \
-    ../trio/triop.h
-
-trio_sscanf_SOURCES=${SRC}
+if ENABLED_BENCHMARK_TRIO_SSCANF
 
 include $(top_srcdir)/src/common.mk.am
 
-AM_CFLAGS+=-DTRIO_EXTENSION=0 -DTRIO_DEPRECATED=0 -DTRIO_MICROSOFT=0 \
-           -DTRIO_ERRORS=0 -DTRIO_FEATURE_FLOAT=0
+bin_PROGRAMS               = trio-sscanf
+noinst_LTLIBRARIES         = libtrio-sscanf.la
 
-trio_sscanf_CFLAGS=-DTRIO_SSCANF ${AM_CFLAGS} \
-                   -DTRIO_FEATURE_FILE=0 -DTRIO_FEATURE_STDIO=0 \
-                   -DTRIO_FEATURE_FD=0 -DTRIO_FEATURE_DYNAMICSTRING=0 \
-                   -DTRIO_FEATURE_CLOSURE=0 -DTRIO_FEATURE_STRERR=0 \
-                   -DTRIO_FEATURE_LOCALE=0 -DTRIO_EMBED_NAN=1 \
-                   -DTRIO_EMBED_STRING=1
+trio_sscanf_SOURCES        =
 
-trio_sscanf_SOURCES += ${platform_src}
+libtrio_sscanf_la_SOURCES  = trio.c trio.h trio_test.c triostr.c triostr.h \
+                             triodef.h triop.h
+
+trio_sscanf_LDADD          = $(DUMMY_CRT0) \
+                             $(top_builddir)/support/libmain.la \
+                             libtrio-sscanf.la \
+                             $(top_builddir)/support/libsupport.la \
+                             $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+libtrio_sscanf_la_CPPFLAGS = -DTRIO_SSCANF -DTRIO_EXTENSION=0 \
+                             -DTRIO_DEPRECATED=0 -DTRIO_MICROSOFT=0 \
+                             -DTRIO_ERRORS=0 -DTRIO_FEATURE_FLOAT=0 \
+                             -DTRIO_FEATURE_FILE=0 -DTRIO_FEATURE_STDIO=0 \
+                             -DTRIO_FEATURE_FD=0 -DTRIO_FEATURE_DYNAMICSTRING=0 \
+                             -DTRIO_FEATURE_CLOSURE=0 -DTRIO_FEATURE_STRERR=0 \
+                             -DTRIO_FEATURE_LOCALE=0 -DTRIO_EMBED_NAN=1 \
+                             -DTRIO_EMBED_STRING=1 ${AM_CPPFLAGS}
+
+endif

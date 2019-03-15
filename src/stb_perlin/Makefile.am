@@ -19,11 +19,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=stb_perlin
-stb_perlin_SOURCES=stb_perlin.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_STB_PERLIN
 
 include $(top_srcdir)/src/common.mk.am
 
-AM_LDFLAGS += "-lm"
+bin_PROGRAMS             = stb_perlin
+noinst_LTLIBRARIES       = libstb_perlin.la
 
-stb_perlin_SOURCES += ${platform_src}
+stb_perlin_SOURCES       =
+libstb_perlin_la_SOURCES = libstb_perlin.c
+
+stb_perlin_LDADD         = $(DUMMY_CRT0) \
+                           $(top_builddir)/support/libmain.la \
+                           libstb_perlin.la \
+                           $(top_builddir)/support/libsupport.la \
+                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT) \
+                           $(LIBM)
+
+endif

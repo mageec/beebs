@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=strstr
-strstr_SOURCES=strstr.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_STRSTR
 
 include $(top_srcdir)/src/common.mk.am
 
-strstr_SOURCES += ${platform_src}
+bin_PROGRAMS         = strstr
+noinst_LTLIBRARIES   = libstrstr.la
+
+strstr_SOURCES       =
+libstrstr_la_SOURCES = libstrstr.c
+
+strstr_LDADD         = $(DUMMY_CRT0) \
+                       $(top_builddir)/support/libmain.la \
+                       libstrstr.la \
+                       $(top_builddir)/support/libsupport.la \
+                       $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

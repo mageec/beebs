@@ -1,3 +1,5 @@
+
+
 /* BEEBS newlib ef_exp implementation
 
    ====================================================
@@ -135,6 +137,23 @@ P5   =  4.1381369442e-08; /* 0x3331bb4c */
 
 /* Tell the compiler not to optimize out calls in BENCHMARK. */
 volatile float result = 0;
+
+
+
+/* This benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
+}
+
+
+void
+initialise_benchmark (void)
+{
+}
+
 
 int
 benchmark (void)

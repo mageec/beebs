@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=fdct
-fdct_SOURCES=fdct.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_FDCT
 
 include $(top_srcdir)/src/common.mk.am
 
-fdct_SOURCES += ${platform_src}
+bin_PROGRAMS       = fdct
+noinst_LTLIBRARIES = libfdct.la
+
+fdct_SOURCES       =
+libfdct_la_SOURCES = libfdct.c
+
+fdct_LDADD         = $(DUMMY_CRT0) \
+                     $(top_builddir)/support/libmain.la \
+                     libfdct.la \
+                     $(top_builddir)/support/libsupport.la \
+                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

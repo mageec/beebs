@@ -19,13 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS = rijndael
-rijndael_SOURCES = aes.c \
-		   aes.h \
-		   aestab.h \
-		   aesxam.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_RIJNDAEL
 
 include $(top_srcdir)/src/common.mk.am
 
-AM_CFLAGS+=-fno-strict-aliasing
-rijndael_SOURCES += ${platform_src}
+bin_PROGRAMS           = rijndael
+noinst_LTLIBRARIES     = librijndael.la
+
+rijndael_SOURCES       =
+
+librijndael_la_SOURCES = aes.c aes.h aestab.h aesxam.c
+
+rijndael_LDADD         = $(DUMMY_CRT0) \
+                         $(top_builddir)/support/libmain.la \
+                         librijndael.la \
+                         $(top_builddir)/support/libsupport.la \
+                         $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+rijndael_CFLAGS  = -fno-strict-aliasing ${AM_CFLAGS}
+
+endif

@@ -19,9 +19,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=nettle-cast128
-nettle_cast128_SOURCES=cast128.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_NETTLE_CAST128
 
 include $(top_srcdir)/src/common.mk.am
 
-nettle_cast128_SOURCES += ${platform_src}
+bin_PROGRAMS                 = nettle-cast128
+noinst_LTLIBRARIES           = libnettle-cast128.la
+
+nettle_cast128_SOURCES       =
+libnettle_cast128_la_SOURCES = cast128.c
+
+nettle_cast128_LDADD         = $(DUMMY_CRT0) \
+                               $(top_builddir)/support/libmain.la \
+                               libnettle-cast128.la \
+                               $(top_builddir)/support/libsupport.la \
+                               $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+endif

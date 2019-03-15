@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=jfdctint
-jfdctint_SOURCES=jfdctint.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_JFDCTINT
 
 include $(top_srcdir)/src/common.mk.am
 
-jfdctint_SOURCES += ${platform_src}
+bin_PROGRAMS           = jfdctint
+noinst_LTLIBRARIES     = libjfdctint.la
+
+jfdctint_SOURCES       =
+libjfdctint_la_SOURCES = libjfdctint.c
+
+jfdctint_LDADD         = $(DUMMY_CRT0) \
+                         $(top_builddir)/support/libmain.la \
+                         libjfdctint.la \
+                         $(top_builddir)/support/libsupport.la \
+                         $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

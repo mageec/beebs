@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=sqrt
-sqrt_SOURCES=sqrt.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_SQRT
 
 include $(top_srcdir)/src/common.mk.am
 
-sqrt_SOURCES += ${platform_src}
+bin_PROGRAMS       = sqrt
+noinst_LTLIBRARIES = libsqrt.la
+
+sqrt_SOURCES       =
+libsqrt_la_SOURCES = libsqrt.c
+
+sqrt_LDADD         = $(DUMMY_CRT0) \
+                     $(top_builddir)/support/libmain.la \
+                     libsqrt.la \
+                     $(top_builddir)/support/libsupport.la \
+                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

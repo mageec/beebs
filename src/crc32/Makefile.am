@@ -19,9 +19,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS = crc32
-crc32_SOURCES = crc_32.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_CRC32
 
 include $(top_srcdir)/src/common.mk.am
 
-crc32_SOURCES += ${platform_src}
+bin_PROGRAMS        = crc32
+noinst_LTLIBRARIES  = libcrc32.la
+
+crc32_SOURCES       =
+
+libcrc32_la_SOURCES = crc_32.c
+
+crc32_LDADD         = $(DUMMY_CRT0) \
+                      $(top_builddir)/support/libmain.la \
+                      libcrc32.la \
+                      $(top_builddir)/support/libsupport.la \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+endif

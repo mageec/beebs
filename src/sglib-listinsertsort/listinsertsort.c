@@ -1,3 +1,4 @@
+
 /* BEEBS listinsertsort1 benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -45,6 +46,13 @@ typedef struct ilist {
 
 SGLIB_DEFINE_SORTED_LIST_PROTOTYPES(iListType, ILIST_COMPARATOR, next_ptr)
 SGLIB_DEFINE_SORTED_LIST_FUNCTIONS(iListType, ILIST_COMPARATOR, next_ptr)
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark()
 {

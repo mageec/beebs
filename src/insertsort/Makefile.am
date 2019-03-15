@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=insertsort
-insertsort_SOURCES=insertsort.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_INSERTSORT
 
 include $(top_srcdir)/src/common.mk.am
 
-insertsort_SOURCES += ${platform_src}
+bin_PROGRAMS             = insertsort
+noinst_LTLIBRARIES       = libinsertsort.la
+
+insertsort_SOURCES       =
+libinsertsort_la_SOURCES = libinsertsort.c
+
+insertsort_LDADD         = $(DUMMY_CRT0) \
+                           $(top_builddir)/support/libmain.la \
+                           libinsertsort.la \
+                           $(top_builddir)/support/libsupport.la \
+                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

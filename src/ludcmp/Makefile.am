@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=ludcmp
-ludcmp_SOURCES=ludcmp.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_LUDCMP
 
 include $(top_srcdir)/src/common.mk.am
 
-ludcmp_SOURCES += ${platform_src}
+bin_PROGRAMS         = ludcmp
+noinst_LTLIBRARIES   = libludcmp.la
+
+ludcmp_SOURCES       =
+libludcmp_la_SOURCES = libludcmp.c
+
+ludcmp_LDADD         = $(DUMMY_CRT0) \
+                       $(top_builddir)/support/libmain.la \
+                       libludcmp.la \
+                       $(top_builddir)/support/libsupport.la \
+                       $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

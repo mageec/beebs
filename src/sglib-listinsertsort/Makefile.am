@@ -19,14 +19,29 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 
 # Make sure your sources include the headers as well as the C/C++ source
 # files, so they go into the distribution. If there are other files that are
 # needed, they should go in EXTRA_SOURCES.
 
-bin_PROGRAMS=sglib-listinsertsort
-sglib_listinsertsort_SOURCES=listinsertsort.c sglib.h
+if ENABLED_BENCHMARK_SGLIB_LISTINSERTSORT
 
 include $(top_srcdir)/src/common.mk.am
 
-sglib_listinsertsort_SOURCES += ${platform_src}
+bin_PROGRAMS                       = sglib-listinsertsort
+noinst_LTLIBRARIES                 = libsglib-listinsertsort.la
+
+sglib_listinsertsort_SOURCES       =
+libsglib_listinsertsort_la_SOURCES = listinsertsort.c sglib.h
+
+sglib_listinsertsort_LDADD         = $(DUMMY_CRT0) \
+                                     $(top_builddir)/support/libmain.la \
+                                     libsglib-listinsertsort.la \
+                                     $(top_builddir)/support/libsupport.la \
+                                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

@@ -19,9 +19,22 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=ctl-string
-ctl_string_SOURCES=string.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_CTL_STRING
 
 include $(top_srcdir)/src/common.mk.am
 
-ctl_string_SOURCES += ${platform_src}
+bin_PROGRAMS             = ctl-string
+noinst_LTLIBRARIES       = libctl-string.la
+
+ctl_string_SOURCES       =
+libctl_string_la_SOURCES = string.c
+
+ctl_string_LDADD         = $(DUMMY_CRT0) \
+                           $(top_builddir)/support/libmain.la \
+                           libctl-string.la \
+                           $(top_builddir)/support/libsupport.la \
+                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+endif

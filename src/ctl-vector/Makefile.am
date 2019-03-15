@@ -19,12 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=ctl-vector
+# SPDX-License-Identifier: GPL-3.0-or-later
 
-ctl_vector_SOURCES=../ctl/ctl.c ../ctl/ctl.h ../ctl/vector.h
+if ENABLED_BENCHMARK_CTL_VECTOR
 
 include $(top_srcdir)/src/common.mk.am
 
-ctl_vector_CFLAGS=-DCTL_VECTOR ${AM_CFLAGS}
+bin_PROGRAMS              = ctl-vector
+noinst_LTLIBRARIES        = libctl-vector.la
 
-ctl_vector_SOURCES += ${platform_src}
+ctl_vector_SOURCES        =
+
+libctl_vector_la_SOURCES  = ctl.c ctl.h vector.h
+
+ctl_vector_LDADD          = $(DUMMY_CRT0) \
+                            $(top_builddir)/support/libmain.la \
+                            libctl-vector.la \
+                            $(top_builddir)/support/libsupport.la \
+                            $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+libctl_vector_la_CPPFLAGS = -DCTL_VECTOR ${AM_CPPFLAGS}
+
+endif

@@ -1,3 +1,5 @@
+
+
 /* BEEBS rijndael benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -164,6 +166,23 @@ int decfile(aes *ctx, byte *outbuf)
 }
 
 char *presetkey="ABCDEF1234567890ABCDEF1234567890";
+
+
+/* This benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
+}
+
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark()
 {

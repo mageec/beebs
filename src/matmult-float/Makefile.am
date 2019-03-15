@@ -19,13 +19,25 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=matmult-float
-matmult_float_SOURCES=../matmult/matmult.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_MATMULT_FLOAT
 
 include $(top_srcdir)/src/common.mk.am
 
-matmult_float_CFLAGS=-DMATMULT_FLOAT ${AM_CFLAGS}
+bin_PROGRAMS                 = matmult-float
+noinst_LTLIBRARIES           = libmatmult-float.la
 
-matmult_float_LDFLAGS=-lm ${AM_LDFLAGS}
+matmult_float_SOURCES        =
 
-matmult_float_SOURCES += ${platform_src}
+libmatmult_float_la_SOURCES  = matmult.c
+
+matmult_float_LDADD          = $(DUMMY_CRT0) \
+                               $(top_builddir)/support/libmain.la \
+                               libmatmult-float.la \
+                               $(top_builddir)/support/libsupport.la \
+                               $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+libmatmult_float_la_CPPFLAGS = -DMATMULT_FLOAT ${AM_CPPFLAGS}
+
+endif

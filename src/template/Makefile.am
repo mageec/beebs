@@ -19,6 +19,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 # Change every instance of template to the name of your benchmark
 
 # To get automake to use this file, add the following to toplevel configure.ac
@@ -31,9 +33,22 @@
 # files, so they go into the distribution. If there are other files that are
 # needed, they should go in EXTRA_SOURCES.
 
-bin_PROGRAMS=template
-template_SOURCES=template.c
+if ENABLED_BENCHMARK_TEMPLATE
 
 include $(top_srcdir)/src/common.mk.am
 
-template_SOURCES += ${platform_src}
+bin_PROGRAMS           = template
+noinst_LTLIBRARIES     = libtemplate.la
+
+template_SOURCES       =
+libtemplate_la_SOURCES = libtemplate.c
+
+template_LDADD         = $(DUMMY_CRT0) \
+                         $(top_builddir)/support/libmain.la \
+                         libtemplate.la \
+                         $(top_builddir)/support/libsupport.la \
+                         $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

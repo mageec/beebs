@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=newlib-sqrt
-newlib_sqrt_SOURCES=ef_sqrt.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_NEWLIB_SQRT
 
 include $(top_srcdir)/src/common.mk.am
 
-newlib_sqrt_SOURCES += ${platform_src}
+bin_PROGRAMS              = newlib-sqrt
+noinst_LTLIBRARIES        = libnewlib-sqrt.la
+
+newlib_sqrt_SOURCES       =
+libnewlib_sqrt_la_SOURCES = ef_sqrt.c
+
+newlib_sqrt_LDADD         = $(DUMMY_CRT0) \
+                            $(top_builddir)/support/libmain.la \
+                            libnewlib-sqrt.la \
+                            $(top_builddir)/support/libsupport.la \
+                            $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

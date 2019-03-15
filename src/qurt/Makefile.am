@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=qurt
-qurt_SOURCES=qurt.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_QURT
 
 include $(top_srcdir)/src/common.mk.am
 
-qurt_SOURCES += ${platform_src}
+bin_PROGRAMS       = qurt
+noinst_LTLIBRARIES = libqurt.la
+
+qurt_SOURCES       =
+libqurt_la_SOURCES = libqurt.c
+
+qurt_LDADD         = $(DUMMY_CRT0) \
+                     $(top_builddir)/support/libmain.la \
+                     libqurt.la \
+                     $(top_builddir)/support/libsupport.la \
+                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif
