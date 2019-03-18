@@ -80,6 +80,7 @@ bmlist="aha-compress          \
         minver                \
         nbody                 \
         ndes                  \
+        nettle-aes            \
         nettle-arcfour        \
         nettle-cast128        \
         nettle-des            \
@@ -165,6 +166,7 @@ benchmark_miniz=true
 benchmark_minver=true
 benchmark_nbody=true
 benchmark_ndes=true
+benchmark_nettle_aes=true
 benchmark_nettle_arcfour=true
 benchmark_nettle_cast128=true
 benchmark_nettle_des=true
@@ -727,6 +729,18 @@ AC_ARG_ENABLE([benchmark-ndes],
   [])
 AM_CONDITIONAL([ENABLED_BENCHMARK_NDES],
                [test x$benchmark_ndes = xtrue])
+
+AC_ARG_ENABLE([benchmark-nettle-aes],
+  [AS_HELP_STRING([--enable-benchmark-nettle-aes],
+     [Enable benchmark nettle-aes])],
+  [case "${enableval}" in
+      yes) benchmark_nettle_aes=true ;;
+      no)  benchmark_nettle_aes=false ;;
+      *)   AC_MSG_ERROR([bad value ${enableval} for --enable-benchmark-nettle-aes]) ;;
+   esac],
+  [])
+AM_CONDITIONAL([ENABLED_BENCHMARK_NETTLE_AES],
+               [test x$benchmark_nettle_aes = xtrue])
 
 AC_ARG_ENABLE([benchmark-nettle-arcfour],
   [AS_HELP_STRING([--enable-benchmark-nettle-arcfour],
@@ -1390,6 +1404,7 @@ AC_CONFIG_FILES([Makefile                          \
                  src/minver/Makefile               \
                  src/nbody/Makefile                \
                  src/ndes/Makefile                 \
+                 src/nettle-aes/Makefile           \
                  src/nettle-arcfour/Makefile       \
                  src/nettle-cast128/Makefile       \
                  src/nettle-des/Makefile           \

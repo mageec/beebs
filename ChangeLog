@@ -1,3 +1,14 @@
+2019-03-18  Graham Markall  <graham.markall@embecosm.com>
+
+	* configure: Regenerate.
+	* configure.ac: Configure nettle-aes.
+	* src/Makefile.am: Add nettle-aes.
+	* src/Makefile.in: Regenerate.
+	* src/nettle-aes/.gitignore: New file.
+	* src/nettle-aes/Makefile.am: New file.
+	* src/nettle-aes/Makefile.in: New file.
+	* src/nettle-aes/nettle-aes.c: New file.
+
 2019-03-25  Graham Markall  <graham.markall@embecosm.com>
 
 	* configure: Regenerate.
