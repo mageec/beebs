@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=qrduino
-qrduino_SOURCES=qrtest.c qrencode.c qrencode.h qrframe.c ecctable.h qrbits.h
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_QRDUINO
 
 include $(top_srcdir)/src/common.mk.am
 
-qrduino_SOURCES += ${platform_src}
+bin_PROGRAMS          = qrduino
+noinst_LTLIBRARIES    = libqrduino.la
+
+qrduino_SOURCES       =
+libqrduino_la_SOURCES = qrtest.c qrencode.c qrencode.h qrframe.c ecctable.h qrbits.h
+
+qrduino_LDADD         = $(DUMMY_CRT0) \
+                        $(top_builddir)/support/libmain.la \
+                        libqrduino.la \
+                        $(top_builddir)/support/libsupport.la \
+                        $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

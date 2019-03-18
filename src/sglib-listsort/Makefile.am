@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=sglib-listsort
-sglib_listsort_SOURCES=listsort.c sglib.h
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_SGLIB_LISTSORT
 
 include $(top_srcdir)/src/common.mk.am
 
-sglib_listsort_SOURCES += ${platform_src}
+bin_PROGRAMS                 = sglib-listsort
+noinst_LTLIBRARIES           = libsglib-listsort.la
+
+sglib_listsort_SOURCES       =
+libsglib_listsort_la_SOURCES = listsort.c sglib.h
+
+sglib_listsort_LDADD         = $(DUMMY_CRT0) \
+                               $(top_builddir)/support/libmain.la \
+                               libsglib-listsort.la \
+                               $(top_builddir)/support/libsupport.la \
+                               $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

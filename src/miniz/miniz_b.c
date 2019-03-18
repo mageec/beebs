@@ -39,6 +39,23 @@ const char *text="Since the ancients (as we are told by Pappas), made great acco
 unsigned char tocompress[1200];
 unsigned char compressed[1200];
 
+
+/* This benchmark does not support verification */
+
+int
+verify_benchmark (int res __attribute ((unused)) )
+{
+  return -1;
+}
+
+
+void
+initialise_benchmark (void)
+{
+}
+
+
+
 int benchmark()
 {
 	volatile int cnt=0;

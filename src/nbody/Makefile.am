@@ -19,11 +19,22 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=nbody
-nbody_SOURCES=nbody.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_NBODY
 
 include $(top_srcdir)/src/common.mk.am
 
-AM_LDFLAGS += "-lm"
+bin_PROGRAMS        = nbody
+noinst_LTLIBRARIES  = libnbody.la
 
-nbody_SOURCES += ${platform_src}
+nbody_SOURCES       =
+libnbody_la_SOURCES = nbody.c
+
+nbody_LDADD         = $(DUMMY_CRT0) \
+                      $(top_builddir)/support/libmain.la \
+                      libnbody.la \
+                      $(top_builddir)/support/libsupport.la \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT) \
+                      $(LIBM)
+endif

@@ -19,13 +19,25 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=matmult-int
-matmult_int_SOURCES=../matmult/matmult.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_MATMULT_INT
 
 include $(top_srcdir)/src/common.mk.am
 
-matmult_int_CFLAGS=-DMATMULT_INT ${AM_CFLAGS}
+bin_PROGRAMS               = matmult-int
+noinst_LTLIBRARIES         = libmatmult-int.la
 
-matmult_int_LDFLAGS=${AM_LDFLAGS}
+matmult_int_SOURCES        =
 
-matmult_int_SOURCES += ${platform_src}
+libmatmult_int_la_SOURCES  = matmult.c
+
+matmult_int_LDADD          = $(DUMMY_CRT0) \
+                             $(top_builddir)/support/libmain.la \
+                             libmatmult-int.la \
+                             $(top_builddir)/support/libsupport.la \
+                             $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+libmatmult_int_la_CPPFLAGS = -DMATMULT_INT ${AM_CPPFLAGS}
+
+endif

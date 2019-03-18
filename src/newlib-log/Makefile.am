@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=newlib-log
-newlib_log_SOURCES=ef_log.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_NEWLIB_LOG
 
 include $(top_srcdir)/src/common.mk.am
 
-newlib_log_SOURCES += ${platform_src}
+bin_PROGRAMS             = newlib-log
+noinst_LTLIBRARIES       = libnewlib-log.la
+
+newlib_log_SOURCES       =
+libnewlib_log_la_SOURCES = ef_log.c
+
+newlib_log_LDADD         = $(DUMMY_CRT0) \
+                           $(top_builddir)/support/libmain.la \
+                           libnewlib-log.la \
+                           $(top_builddir)/support/libsupport.la \
+                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

@@ -1,3 +1,4 @@
+
 /* -*- mode: C++; c-file-style: "gnu-mode" -*- */
 /* BEEBS aha-compress benchmark
 
@@ -148,6 +149,13 @@ const unsigned long test[] = {
     0x12345678, 0xF0035555, 0x000004ec,
     0x80000000, 0xF0035555, 0x00002000,
 };
+
+
+void
+initialise_benchmark (void)
+{
+}
+
 
 int
 benchmark (void)

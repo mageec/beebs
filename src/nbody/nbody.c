@@ -1,3 +1,4 @@
+
 /* BEEBS nbody benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -159,6 +160,13 @@ double bodies_energy(struct body *bodies, unsigned int nbodies) {
    }
    return e;
 }
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark()
 {

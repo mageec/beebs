@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=slre
-slre_SOURCES=slre.c slre.h
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_SLRE
 
 include $(top_srcdir)/src/common.mk.am
 
-slre_SOURCES += ${platform_src}
+bin_PROGRAMS       = slre
+noinst_LTLIBRARIES = libslre.la
+
+slre_SOURCES       =
+libslre_la_SOURCES = libslre.c slre.h
+
+slre_LDADD         = $(DUMMY_CRT0) \
+                     $(top_builddir)/support/libmain.la \
+                     libslre.la \
+                     $(top_builddir)/support/libsupport.la \
+                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

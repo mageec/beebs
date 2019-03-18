@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=janne_complex
-janne_complex_SOURCES=janne_complex.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_JANNE_COMPLEX
 
 include $(top_srcdir)/src/common.mk.am
 
-janne_complex_SOURCES += ${platform_src}
+bin_PROGRAMS                = janne_complex
+noinst_LTLIBRARIES          = libjanne_complex.la
+
+janne_complex_SOURCES       =
+libjanne_complex_la_SOURCES = libjanne_complex.c
+
+janne_complex_LDADD         = $(DUMMY_CRT0) \
+                              $(top_builddir)/support/libmain.la \
+                              libjanne_complex.la \
+                              $(top_builddir)/support/libsupport.la \
+                              $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

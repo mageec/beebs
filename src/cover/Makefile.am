@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=cover
-cover_SOURCES=cover.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_COVER
 
 include $(top_srcdir)/src/common.mk.am
 
-cover_SOURCES += ${platform_src}
+bin_PROGRAMS        = cover
+noinst_LTLIBRARIES  = libcover.la
+
+cover_SOURCES       =
+libcover_la_SOURCES = libcover.c
+
+cover_LDADD         = $(DUMMY_CRT0) \
+                      $(top_builddir)/support/libmain.la \
+                      libcover.la \
+                      $(top_builddir)/support/libsupport.la \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

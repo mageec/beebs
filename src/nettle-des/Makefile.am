@@ -19,14 +19,28 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=nettle-des
-nettle_des_SOURCES=des.c \
-	    rotors.h \
-	    keymap.h \
-	    desCode.h
+# SPDX-License-Identifier: GPL-3.0-or-later
 
-EXTRA_DIST = descore.README
+if ENABLED_BENCHMARK_NETTLE_DES
 
 include $(top_srcdir)/src/common.mk.am
 
-nettle_des_SOURCES += ${platform_src}
+bin_PROGRAMS             = nettle-des
+noinst_LTLIBRARIES       = libnettle-des.la
+
+nettle_des_SOURCES       =
+libnettle_des_la_SOURCES = des.c \
+	                   rotors.h \
+	                   keymap.h \
+	                   desCode.h
+
+nettle_des_LDADD         = $(DUMMY_CRT0) \
+                           $(top_builddir)/support/libmain.la \
+                           libnettle-des.la \
+                           $(top_builddir)/support/libsupport.la \
+                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+EXTRA_DIST = descore.README
+
+
+endif

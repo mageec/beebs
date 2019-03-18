@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=fir
-fir_SOURCES=fir.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_FIR
 
 include $(top_srcdir)/src/common.mk.am
 
-fir_SOURCES += ${platform_src}
+bin_PROGRAMS       = fir
+noinst_LTLIBRARIES = libfir.la
+
+fir_SOURCES        =
+libfir_la_SOURCES = libfir.c
+
+fir_LDADD          = $(DUMMY_CRT0) \
+                     $(top_builddir)/support/libmain.la \
+                     libfir.la \
+                     $(top_builddir)/support/libsupport.la \
+                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

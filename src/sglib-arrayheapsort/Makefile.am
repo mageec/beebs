@@ -19,13 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=sglib-arrayheapsort
+# SPDX-License-Identifier: GPL-3.0-or-later
 
-sglib_arrayheapsort_SOURCES=../sglib-arraysort/arraysort.c \
-			    ../sglib-arraysort/sglib.h
+if ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT
 
 include $(top_srcdir)/src/common.mk.am
 
-sglib_arrayheapsort_CFLAGS = -DHEAP_SORT ${AM_CFLAGS}
+bin_PROGRAMS                       = sglib-arrayheapsort
+noinst_LTLIBRARIES                 = libsglib-arrayheapsort.la
 
-sglib_arrayheapsort_SOURCES += ${platform_src}
+sglib_arrayheapsort_SOURCES        =
+
+libsglib_arrayheapsort_la_SOURCES  = arraysort.c sglib.h
+libsglib_arrayheapsort_la_CPPFLAGS = -DHEAP_SORT ${AM_CPPFLAGS}
+
+sglib_arrayheapsort_LDADD          = $(DUMMY_CRT0) \
+                                     $(top_builddir)/support/libmain.la \
+                                     libsglib-arrayheapsort.la \
+                                     $(top_builddir)/support/libsupport.la \
+                                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+endif

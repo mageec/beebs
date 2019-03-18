@@ -19,9 +19,22 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=stringsearch1
-stringsearch1_SOURCES=stringsearch1.c fast.fwd.inc.c fast.rev.d12.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_STRINGSEARCH1
 
 include $(top_srcdir)/src/common.mk.am
 
-stringsearch1_SOURCES += ${platform_src}
+bin_PROGRAMS                = stringsearch1
+noinst_LTLIBRARIES          = libstringsearch1.la
+
+stringsearch1_SOURCES       =
+libstringsearch1_la_SOURCES = stringsearch1.c fast.fwd.inc.c fast.rev.d12.c
+
+stringsearch1_LDADD         = $(DUMMY_CRT0) \
+                              $(top_builddir)/support/libmain.la \
+                              libstringsearch1.la \
+                              $(top_builddir)/support/libsupport.la \
+                              $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+endif

@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=nettle-arcfour
-nettle_arcfour_SOURCES=arcfour.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_NETTLE_ARCFOUR
 
 include $(top_srcdir)/src/common.mk.am
 
-nettle_arcfour_SOURCES += ${platform_src}
+bin_PROGRAMS                 = nettle-arcfour
+noinst_LTLIBRARIES           = libnettle-arcfour.la
+
+nettle_arcfour_SOURCES       =
+libnettle_arcfour_la_SOURCES = arcfour.c
+
+nettle_arcfour_LDADD         = $(DUMMY_CRT0) \
+                               $(top_builddir)/support/libmain.la \
+                               libnettle-arcfour.la \
+                               $(top_builddir)/support/libsupport.la \
+                               $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

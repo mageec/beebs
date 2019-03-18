@@ -19,17 +19,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-platform_src = $(top_srcdir)/config/@ARCH@/boards/@BOARD@/boardsupport.c \
-               $(top_srcdir)/include/support.h \
-               $(top_srcdir)/src/main.c
-
-if CHIPSUPPORT_C
-platform_src += $(top_srcdir)/config/@ARCH@/chips/@CHIP@/chipsupport.c
-endif
-
 # If there is a benchmark calibration file, this specifies the shifting
 # of the repeat factor. If grep doesn't find the program, then we specify
 # 0 as the default. This is the default if a calibration file is not found
+
 if CALIBRATION
 calib = (egrep "^\b$(bin_PROGRAMS)\b" \
 	        $(top_srcdir)/config/@ARCH@/boards/@BOARD@/calibration \
@@ -38,11 +31,15 @@ else
 calib = echo 0
 endif
 
-AM_CFLAGS=$(WERROR_CFLAGS) $(WARN_CFLAGS) \
-		  -I $(top_srcdir)/include \
-		  -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@/ \
-		  -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@/ \
-		  "-DCALIB_SCALE=$(shell $(calib))" \
-		  @CONFIG_CFLAGS@
+AM_CPPFLAGS = "-DCALIB_SCALE=$(shell $(calib))" \
+              -I $(top_srcdir)/support \
+              -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@ \
+              -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ \
+              @CPPFLAGS@
+AM_CFLAGS   = @CFLAGS@
+AM_LDFLAGS  = @LDFLAGS@
 
-AM_LDFLAGS= @CONFIG_LDFLAGS@
+# Setup a $(LIBM) variable that we can use instead of either
+# $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in
+# parts of the real libm if we want to use $(DUMMY_LIBM).
+LIBM=$(if $(DUMMY_LIBM),$(DUMMY_LIBM),-lm)

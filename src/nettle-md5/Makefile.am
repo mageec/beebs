@@ -19,9 +19,22 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=nettle-md5
-nettle_md5_SOURCES=md5.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_NETTLE_MD5
 
 include $(top_srcdir)/src/common.mk.am
 
-nettle_md5_SOURCES += ${platform_src}
+bin_PROGRAMS             = nettle-md5
+noinst_LTLIBRARIES       = libnettle-md5.la
+
+nettle_md5_SOURCES       =
+libnettle_md5_la_SOURCES = md5.c
+
+nettle_md5_LDADD         = $(DUMMY_CRT0) \
+                           $(top_builddir)/support/libmain.la \
+                           libnettle-md5.la \
+                           $(top_builddir)/support/libsupport.la \
+                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+endif

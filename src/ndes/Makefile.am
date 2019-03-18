@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=ndes
-ndes_SOURCES=ndes.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_NDES
 
 include $(top_srcdir)/src/common.mk.am
 
-ndes_SOURCES += ${platform_src}
+bin_PROGRAMS       = ndes
+noinst_LTLIBRARIES = libndes.la
+
+ndes_SOURCES       =
+libndes_la_SOURCES = libndes.c
+
+ndes_LDADD         = $(DUMMY_CRT0) \
+                     $(top_builddir)/support/libmain.la \
+                     libndes.la \
+                     $(top_builddir)/support/libsupport.la \
+                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

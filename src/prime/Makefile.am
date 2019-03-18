@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=prime
-prime_SOURCES=prime.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_PRIME
 
 include $(top_srcdir)/src/common.mk.am
 
-prime_SOURCES += ${platform_src}
+bin_PROGRAMS        = prime
+noinst_LTLIBRARIES  = libprime.la
+
+prime_SOURCES       =
+libprime_la_SOURCES = libprime.c
+
+prime_LDADD         = $(DUMMY_CRT0) \
+                      $(top_builddir)/support/libmain.la \
+                      libprime.la \
+                      $(top_builddir)/support/libsupport.la \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

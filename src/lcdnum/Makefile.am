@@ -19,9 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS=lcdnum
-lcdnum_SOURCES=lcdnum.c
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if ENABLED_BENCHMARK_LCDNUM
 
 include $(top_srcdir)/src/common.mk.am
 
-lcdnum_SOURCES += ${platform_src}
+bin_PROGRAMS         = lcdnum
+noinst_LTLIBRARIES   = liblcdnum.la
+
+lcdnum_SOURCES       =
+liblcdnum_la_SOURCES = liblcdnum.c
+
+lcdnum_LDADD         = $(DUMMY_CRT0) \
+                       $(top_builddir)/support/libmain.la \
+                       liblcdnum.la \
+                       $(top_builddir)/support/libsupport.la \
+                       $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+
+
+
+endif

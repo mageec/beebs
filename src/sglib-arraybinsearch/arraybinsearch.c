@@ -1,3 +1,4 @@
+
 /* BEEBS arraybinsearch benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -42,6 +43,13 @@ int array[100] = {14, 66, 12, 41, 86, 69, 19, 77, 68, 38, 26, 42, 37, 23, 17, 29
 
 /* Use within BENCHMARK to avoid calls being optimised out.  */
 volatile int found = 0;
+
+void
+initialise_benchmark (void)
+{
+}
+
+
 
 int benchmark()
 {
