@@ -87,6 +87,7 @@ bmlist="aha-compress          \
         nettle-cast128        \
         nettle-des            \
         nettle-md5            \
+        nettle-sha256         \
         newlib-exp            \
         newlib-log            \
         newlib-mod            \
@@ -171,6 +172,7 @@ benchmark_nettle_arcfour=true
 benchmark_nettle_cast128=true
 benchmark_nettle_des=true
 benchmark_nettle_md5=true
+benchmark_nettle_sha256=true
 benchmark_newlib_exp=true
 benchmark_newlib_log=true
 benchmark_newlib_mod=true
@@ -776,6 +778,19 @@ AC_ARG_ENABLE([benchmark-nettle-md5],
   [])
 AM_CONDITIONAL([ENABLED_BENCHMARK_NETTLE_MD5],
                [test x$benchmark_nettle_md5 = xtrue])
+
+AC_ARG_ENABLE([benchmark-nettle-sha256],
+  [AS_HELP_STRING([--enable-benchmark-nettle-sha256],
+     [Enable benchmark nettle-sha256])],
+  [case "${enableval}" in
+      yes) benchmark_nettle_sha256=true ;;
+      no)  benchmark_nettle_sha256=false ;;
+      *)   AC_MSG_ERROR([bad value ${enableval} for --enable-benchmark-nettle-sha256]) ;;
+   esac],
+  [])
+AM_CONDITIONAL([ENABLED_BENCHMARK_NETTLE_SHA256],
+               [test x$benchmark_nettle_sha256 = xtrue])
+
 
 AC_ARG_ENABLE([benchmark-newlib-exp],
   [AS_HELP_STRING([--enable-benchmark-newlib-exp],
@@ -1392,6 +1407,7 @@ AC_CONFIG_FILES([Makefile                          \
                  src/nettle-cast128/Makefile       \
                  src/nettle-des/Makefile           \
                  src/nettle-md5/Makefile           \
+                 src/nettle-sha256/Makefile        \
                  src/newlib-exp/Makefile           \
                  src/newlib-log/Makefile           \
                  src/newlib-mod/Makefile           \

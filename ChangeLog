@@ -1,3 +1,14 @@
+2019-03-19  Graham Markall  <graham.markall@embecosm.com>
+
+	* configure: Regenerate.
+	* configure.ac: Add nettle-sha256.
+	* src/Makefile.am: Add nettle-sha256.
+	* src/Makefile.in: Regenerate.
+	* src/nettle-sha256/.gitignore: New file.
+	* src/nettle-sha256/Makefile.am: New file.
+	* src/nettle-sha256/Makefile.in: New file.
+	* src/nettle-sha256/nettle-sha256.c: New file.
+
 2019-02-25  Andrew Burgess  <andrew.burgess@embecosm.com>
 
 	* support/dummy-libm.c (sqrtf): New function.
