@@ -69,6 +69,7 @@ SUBDIRS = aha-compress          \
           nettle-cast128        \
           nettle-des            \
           nettle-md5            \
+          nettle-sha256         \
           newlib-exp            \
           newlib-log            \
           newlib-mod            \
