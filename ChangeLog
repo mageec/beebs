@@ -1,3 +1,7 @@
+2019-03-22  Graham Markall  <graham.markall@embecosm.com>
+
+	* support/dummy-libc.c: Undef ferror if it is defined.
+
 2019-03-19  Graham Markall  <graham.markall@embecosm.com>
 
 	* configure: Regenerate.
