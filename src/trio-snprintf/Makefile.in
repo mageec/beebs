@@ -173,9 +173,8 @@ trio_snprintf_OBJECTS = $(am_trio_snprintf_OBJECTS)
 am__DEPENDENCIES_1 =
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@trio_snprintf_DEPENDENCIES =  \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	$(am__DEPENDENCIES_1) \
-@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	$(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	libtrio-snprintf.la \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	libtrio-snprintf.la \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@	$(am__DEPENDENCIES_1)
@@ -388,8 +387,6 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@              -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@              @CPPFLAGS@
 
-@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@AM_CFLAGS = @CFLAGS@
-@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@AM_LDFLAGS = @LDFLAGS@
 
 # Setup a $(LIBM) variable that we can use instead of either
 # $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in
@@ -401,9 +398,8 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                               triodef.h triop.h
 
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@trio_snprintf_LDADD = $(DUMMY_CRT0) \
-@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                               $(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                               libtrio-snprintf.la \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                               $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                               libtrio-snprintf.la \
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@                               $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 @ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE@libtrio_snprintf_la_CPPFLAGS = -DTRIO_EXTENSION=0 -DTRIO_DEPRECATED=0 \

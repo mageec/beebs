@@ -32,9 +32,8 @@ tarai_SOURCES       =
 libtarai_la_SOURCES = libtarai.c
 
 tarai_LDADD         = $(DUMMY_CRT0) \
-                      $(top_builddir)/support/libmain.la \
-                      libtarai.la \
                       $(top_builddir)/support/libsupport.la \
+                      libtarai.la \
                       $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

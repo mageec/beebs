@@ -145,13 +145,11 @@ libdummygcc_la_OBJECTS = $(am_libdummygcc_la_OBJECTS)
 libdummym_la_LIBADD =
 am_libdummym_la_OBJECTS = dummy-libm.lo
 libdummym_la_OBJECTS = $(am_libdummym_la_OBJECTS)
-libmain_la_LIBADD =
-am_libmain_la_OBJECTS = libmain_la-main.lo
-libmain_la_OBJECTS = $(am_libmain_la_OBJECTS)
 libsupport_la_LIBADD =
-am__libsupport_la_SOURCES_DIST = board.c support.h chip.c
+am__libsupport_la_SOURCES_DIST = main.c board.c support.h chip.c
 @CHIPSUPPORT_C_TRUE@am__objects_2 = libsupport_la-chip.lo
-am_libsupport_la_OBJECTS = libsupport_la-board.lo $(am__objects_2)
+am_libsupport_la_OBJECTS = libsupport_la-main.lo \
+	libsupport_la-board.lo $(am__objects_2)
 libsupport_la_OBJECTS = $(am_libsupport_la_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -199,10 +197,10 @@ am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(libdummyc_la_SOURCES) $(libdummycrt0_la_SOURCES) \
 	$(libdummygcc_la_SOURCES) $(libdummym_la_SOURCES) \
-	$(libmain_la_SOURCES) $(libsupport_la_SOURCES)
+	$(libsupport_la_SOURCES)
 DIST_SOURCES = $(libdummyc_la_SOURCES) $(libdummycrt0_la_SOURCES) \
 	$(am__libdummygcc_la_SOURCES_DIST) $(libdummym_la_SOURCES) \
-	$(libmain_la_SOURCES) $(am__libsupport_la_SOURCES_DIST)
+	$(am__libsupport_la_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -364,7 +362,6 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 noinst_LTLIBRARIES = libdummycrt0.la \
-                     libmain.la      \
                      libsupport.la   \
                      libdummygcc.la  \
                      libdummyc.la    \
@@ -372,14 +369,10 @@ noinst_LTLIBRARIES = libdummycrt0.la \
 
 @ARC_TRUE@MAYBE_ARC_MILLICODE = arc-millicode.S
 libdummycrt0_la_SOURCES = dummy-crt0.c
-libmain_la_SOURCES = main.c
-libsupport_la_SOURCES = board.c support.h $(am__append_1)
+libsupport_la_SOURCES = main.c board.c support.h $(am__append_1)
 libdummygcc_la_SOURCES = dummy-libgcc.c $(MAYBE_ARC_MILLICODE)
 libdummyc_la_SOURCES = dummy-libc.c
 libdummym_la_SOURCES = dummy-libm.c
-libmain_la_CPPFLAGS = -I$(top_srcdir)/config/@ARCH@/boards/@BOARD@ \
-                         -I$(top_srcdir)/config/@ARCH@/chips/@CHIP@
-
 libsupport_la_CPPFLAGS = -I$(top_srcdir)/config/@ARCH@/boards/@BOARD@ \
                          -I$(top_srcdir)/config/@ARCH@/chips/@CHIP@
 
@@ -440,9 +433,6 @@ libdummygcc.la: $(libdummygcc_la_OBJECTS) $(libdummygcc_la_DEPENDENCIES) $(EXTRA
 libdummym.la: $(libdummym_la_OBJECTS) $(libdummym_la_DEPENDENCIES) $(EXTRA_libdummym_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(LINK)  $(libdummym_la_OBJECTS) $(libdummym_la_LIBADD) $(LIBS)
 
-libmain.la: $(libmain_la_OBJECTS) $(libmain_la_DEPENDENCIES) $(EXTRA_libmain_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(LINK)  $(libmain_la_OBJECTS) $(libmain_la_LIBADD) $(LIBS)
-
 libsupport.la: $(libsupport_la_OBJECTS) $(libsupport_la_DEPENDENCIES) $(EXTRA_libsupport_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(LINK)  $(libsupport_la_OBJECTS) $(libsupport_la_LIBADD) $(LIBS)
 
@@ -457,9 +447,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dummy-libc.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dummy-libgcc.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dummy-libm.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmain_la-main.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libsupport_la-board.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libsupport_la-chip.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libsupport_la-main.Plo@am__quote@
 
 .S.o:
 @am__fastdepCCAS_TRUE@	$(AM_V_CPPAS)$(CPPASCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -503,12 +493,12 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
 
-libmain_la-main.lo: main.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmain_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libmain_la-main.lo -MD -MP -MF $(DEPDIR)/libmain_la-main.Tpo -c -o libmain_la-main.lo `test -f 'main.c' || echo '$(srcdir)/'`main.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libmain_la-main.Tpo $(DEPDIR)/libmain_la-main.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='main.c' object='libmain_la-main.lo' libtool=yes @AMDEPBACKSLASH@
+libsupport_la-main.lo: main.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libsupport_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libsupport_la-main.lo -MD -MP -MF $(DEPDIR)/libsupport_la-main.Tpo -c -o libsupport_la-main.lo `test -f 'main.c' || echo '$(srcdir)/'`main.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libsupport_la-main.Tpo $(DEPDIR)/libsupport_la-main.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='main.c' object='libsupport_la-main.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmain_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libmain_la-main.lo `test -f 'main.c' || echo '$(srcdir)/'`main.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libsupport_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libsupport_la-main.lo `test -f 'main.c' || echo '$(srcdir)/'`main.c
 
 libsupport_la-board.lo: board.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libsupport_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libsupport_la-board.lo -MD -MP -MF $(DEPDIR)/libsupport_la-board.Tpo -c -o libsupport_la-board.lo `test -f 'board.c' || echo '$(srcdir)/'`board.c

@@ -169,10 +169,8 @@ sqrt_OBJECTS = $(am_sqrt_OBJECTS)
 am__DEPENDENCIES_1 =
 @ENABLED_BENCHMARK_SQRT_TRUE@sqrt_DEPENDENCIES =  \
 @ENABLED_BENCHMARK_SQRT_TRUE@	$(am__DEPENDENCIES_1) \
-@ENABLED_BENCHMARK_SQRT_TRUE@	$(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_SQRT_TRUE@	libsqrt.la \
 @ENABLED_BENCHMARK_SQRT_TRUE@	$(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_SQRT_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_SQRT_TRUE@	libsqrt.la $(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_SQRT_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_SQRT_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -383,8 +381,6 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_SQRT_TRUE@              -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ \
 @ENABLED_BENCHMARK_SQRT_TRUE@              @CPPFLAGS@
 
-@ENABLED_BENCHMARK_SQRT_TRUE@AM_CFLAGS = @CFLAGS@
-@ENABLED_BENCHMARK_SQRT_TRUE@AM_LDFLAGS = @LDFLAGS@
 
 # Setup a $(LIBM) variable that we can use instead of either
 # $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in
@@ -394,9 +390,8 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_SQRT_TRUE@sqrt_SOURCES = 
 @ENABLED_BENCHMARK_SQRT_TRUE@libsqrt_la_SOURCES = libsqrt.c
 @ENABLED_BENCHMARK_SQRT_TRUE@sqrt_LDADD = $(DUMMY_CRT0) \
-@ENABLED_BENCHMARK_SQRT_TRUE@                     $(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_SQRT_TRUE@                     libsqrt.la \
 @ENABLED_BENCHMARK_SQRT_TRUE@                     $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_SQRT_TRUE@                     libsqrt.la \
 @ENABLED_BENCHMARK_SQRT_TRUE@                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am

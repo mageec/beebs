@@ -32,9 +32,8 @@ ctl_string_SOURCES       =
 libctl_string_la_SOURCES = string.c
 
 ctl_string_LDADD         = $(DUMMY_CRT0) \
-                           $(top_builddir)/support/libmain.la \
-                           libctl-string.la \
                            $(top_builddir)/support/libsupport.la \
+                           libctl-string.la \
                            $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

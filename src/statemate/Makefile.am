@@ -32,9 +32,8 @@ statemate_SOURCES       =
 libstatemate_la_SOURCES = libstatemate.c
 
 statemate_LDADD         = $(DUMMY_CRT0) \
-                          $(top_builddir)/support/libmain.la \
-                          libstatemate.la \
                           $(top_builddir)/support/libsupport.la \
+                          libstatemate.la \
                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

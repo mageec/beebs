@@ -32,9 +32,8 @@ qurt_SOURCES       =
 libqurt_la_SOURCES = libqurt.c
 
 qurt_LDADD         = $(DUMMY_CRT0) \
-                     $(top_builddir)/support/libmain.la \
-                     libqurt.la \
                      $(top_builddir)/support/libsupport.la \
+                     libqurt.la \
                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

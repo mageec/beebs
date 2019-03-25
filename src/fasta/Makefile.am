@@ -32,9 +32,8 @@ fasta_SOURCES       =
 libfasta_la_SOURCES = libfasta.c
 
 fasta_LDADD         = $(DUMMY_CRT0) \
-                      $(top_builddir)/support/libmain.la \
-                      libfasta.la \
                       $(top_builddir)/support/libsupport.la \
+                      libfasta.la \
                       $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

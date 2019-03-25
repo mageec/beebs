@@ -32,9 +32,8 @@ newlib_mod_SOURCES       =
 libnewlib_mod_la_SOURCES = ef_mod.c
 
 newlib_mod_LDADD         = $(DUMMY_CRT0) \
-                           $(top_builddir)/support/libmain.la \
-                           libnewlib-mod.la \
                            $(top_builddir)/support/libsupport.la \
+                           libnewlib-mod.la \
                            $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

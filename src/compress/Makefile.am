@@ -40,9 +40,8 @@ compress_SOURCES       =
 libcompress_la_SOURCES = libcompress.c
 
 compress_LDADD         = $(DUMMY_CRT0) \
-                         $(top_builddir)/support/libmain.la \
-                         libcompress.la \
                          $(top_builddir)/support/libsupport.la \
+                         libcompress.la \
                          $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

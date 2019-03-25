@@ -32,9 +32,8 @@ qrduino_SOURCES       =
 libqrduino_la_SOURCES = qrtest.c qrencode.c qrencode.h qrframe.c ecctable.h qrbits.h
 
 qrduino_LDADD         = $(DUMMY_CRT0) \
-                        $(top_builddir)/support/libmain.la \
-                        libqrduino.la \
                         $(top_builddir)/support/libsupport.la \
+                        libqrduino.la \
                         $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

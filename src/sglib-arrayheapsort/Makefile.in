@@ -169,9 +169,8 @@ am_sglib_arrayheapsort_OBJECTS =
 sglib_arrayheapsort_OBJECTS = $(am_sglib_arrayheapsort_OBJECTS)
 am__DEPENDENCIES_1 =
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@sglib_arrayheapsort_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@	$(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@	libsglib-arrayheapsort.la \
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@	libsglib-arrayheapsort.la \
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@	$(am__DEPENDENCIES_1)
@@ -385,8 +384,6 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@              -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ \
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@              @CPPFLAGS@
 
-@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@AM_CFLAGS = @CFLAGS@
-@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@AM_LDFLAGS = @LDFLAGS@
 
 # Setup a $(LIBM) variable that we can use instead of either
 # $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in
@@ -397,9 +394,8 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@libsglib_arrayheapsort_la_SOURCES = arraysort.c sglib.h
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@libsglib_arrayheapsort_la_CPPFLAGS = -DHEAP_SORT ${AM_CPPFLAGS}
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@sglib_arrayheapsort_LDADD = $(DUMMY_CRT0) \
-@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@                                     $(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@                                     libsglib-arrayheapsort.la \
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@                                     $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@                                     libsglib-arrayheapsort.la \
 @ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE@                                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am

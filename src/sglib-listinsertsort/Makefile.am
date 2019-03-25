@@ -37,9 +37,8 @@ sglib_listinsertsort_SOURCES       =
 libsglib_listinsertsort_la_SOURCES = listinsertsort.c sglib.h
 
 sglib_listinsertsort_LDADD         = $(DUMMY_CRT0) \
-                                     $(top_builddir)/support/libmain.la \
-                                     libsglib-listinsertsort.la \
                                      $(top_builddir)/support/libsupport.la \
+                                     libsglib-listinsertsort.la \
                                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

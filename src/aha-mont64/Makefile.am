@@ -33,9 +33,8 @@ aha_mont64_SOURCES       =
 libaha_mont64_la_SOURCES = mont64.c
 
 aha_mont64_LDADD         = $(DUMMY_CRT0) \
-                           $(top_builddir)/support/libmain.la \
-                           libaha-mont64.la \
                            $(top_builddir)/support/libsupport.la \
+                           libaha-mont64.la \
                            $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif
