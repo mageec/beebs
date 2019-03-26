@@ -28,6 +28,13 @@
 #include <time.h>
 #include <stdio.h>
 
+/* Avoid conflict with ferror defined as a macro, which is the case on some
+   systems.  */
+#ifdef ferror
+#undef ferror
+#endif
+
+
 void * __locale_ctype_ptr;
 
 int __errno;
