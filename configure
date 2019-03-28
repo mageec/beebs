@@ -782,6 +782,8 @@ ENABLED_BENCHMARK_NETTLE_CAST128_FALSE
 ENABLED_BENCHMARK_NETTLE_CAST128_TRUE
 ENABLED_BENCHMARK_NETTLE_ARCFOUR_FALSE
 ENABLED_BENCHMARK_NETTLE_ARCFOUR_TRUE
+ENABLED_BENCHMARK_NETTLE_AES_FALSE
+ENABLED_BENCHMARK_NETTLE_AES_TRUE
 ENABLED_BENCHMARK_NDES_FALSE
 ENABLED_BENCHMARK_NDES_TRUE
 ENABLED_BENCHMARK_NBODY_FALSE
@@ -983,6 +985,7 @@ enable_benchmark_miniz
 enable_benchmark_minver
 enable_benchmark_nbody
 enable_benchmark_ndes
+enable_benchmark_nettle_aes
 enable_benchmark_nettle_arcfour
 enable_benchmark_nettle_cast128
 enable_benchmark_nettle_des
@@ -1736,6 +1739,8 @@ Optional Features:
   --enable-benchmark-nbody
                           Enable benchmark nbody
   --enable-benchmark-ndes Enable benchmark ndes
+  --enable-benchmark-nettle-aes
+                          Enable benchmark nettle-aes
   --enable-benchmark-nettle-arcfour
                           Enable benchmark nettle-arcfour
   --enable-benchmark-nettle-cast128
@@ -3370,6 +3375,7 @@ bmlist="aha-compress          \
         minver                \
         nbody                 \
         ndes                  \
+        nettle-aes            \
         nettle-arcfour        \
         nettle-cast128        \
         nettle-des            \
@@ -3455,6 +3461,7 @@ benchmark_miniz=true
 benchmark_minver=true
 benchmark_nbody=true
 benchmark_ndes=true
+benchmark_nettle_aes=true
 benchmark_nettle_arcfour=true
 benchmark_nettle_cast128=true
 benchmark_nettle_des=true
@@ -4260,6 +4267,24 @@ fi
 else
   ENABLED_BENCHMARK_NDES_TRUE='#'
   ENABLED_BENCHMARK_NDES_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-nettle-aes was given.
+if test "${enable_benchmark_nettle_aes+set}" = set; then :
+  enableval=$enable_benchmark_nettle_aes; case "${enableval}" in
+      yes) benchmark_nettle_aes=true ;;
+      no)  benchmark_nettle_aes=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-nettle-aes" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_nettle_aes = xtrue; then
+  ENABLED_BENCHMARK_NETTLE_AES_TRUE=
+  ENABLED_BENCHMARK_NETTLE_AES_FALSE='#'
+else
+  ENABLED_BENCHMARK_NETTLE_AES_TRUE='#'
+  ENABLED_BENCHMARK_NETTLE_AES_FALSE=
 fi
 
 
@@ -15237,7 +15262,7 @@ ac_config_headers="$ac_config_headers config.h"
 
 # Generate makefiles
 
-ac_config_files="$ac_config_files Makefile doc/Makefile src/Makefile src/aha-compress/Makefile src/aha-mont64/Makefile src/bs/Makefile src/bubblesort/Makefile src/cnt/Makefile src/compress/Makefile src/cover/Makefile src/crc/Makefile src/crc32/Makefile src/ctl/Makefile src/ctl-stack/Makefile src/ctl-string/Makefile src/ctl-vector/Makefile src/cubic/Makefile src/dijkstra/Makefile src/dtoa/Makefile src/duff/Makefile src/edn/Makefile src/expint/Makefile src/fac/Makefile src/fasta/Makefile src/fdct/Makefile src/fibcall/Makefile src/fir/Makefile src/frac/Makefile src/huffbench/Makefile src/insertsort/Makefile src/janne_complex/Makefile src/jfdctint/Makefile src/lcdnum/Makefile src/levenshtein/Makefile src/ludcmp/Makefile src/matmult/Makefile src/matmult-float/Makefile src/matmult-int/Makefile src/mergesort/Makefile src/miniz/Makefile src/minver/Makefile src/nbody/Makefile src/ndes/Makefile src/nettle-arcfour/Makefile src/nettle-cast128/Makefile src/nettle-des/Makefile src/nettle-md5/Makefile src/nettle-sha256/Makefile src/newlib-exp/Makefile src/newlib-log/Makefile src/newlib-mod/Makefile src/newlib-sqrt/Makefile src/ns/Makefile src/nsichneu/Makefile src/picojpeg/Makefile src/prime/Makefile src/qrduino/Makefile src/qsort/Makefile src/qurt/Makefile src/recursion/Makefile src/rijndael/Makefile src/select/Makefile src/sglib-arraybinsearch/Makefile src/sglib-arrayheapsort/Makefile src/sglib-arrayquicksort/Makefile src/sglib-arraysort/Makefile src/sglib-dllist/Makefile src/sglib-hashtable/Makefile src/sglib-listinsertsort/Makefile src/sglib-listsort/Makefile src/sglib-queue/Makefile src/sglib-rbtree/Makefile src/slre/Makefile src/sqrt/Makefile src/st/Makefile src/statemate/Makefile src/stb_perlin/Makefile src/stringsearch1/Makefile src/strstr/Makefile src/tarai/Makefile src/template/Makefile src/trio/Makefile src/trio-snprintf/Makefile src/trio-sscanf/Makefile src/ud/Makefile src/whetstone/Makefile src/wikisort/Makefile support/Makefile testsuite/Makefile testsuite/beebs.test/Makefile testsuite/config/Makefile testsuite/lib/Makefile"
+ac_config_files="$ac_config_files Makefile doc/Makefile src/Makefile src/aha-compress/Makefile src/aha-mont64/Makefile src/bs/Makefile src/bubblesort/Makefile src/cnt/Makefile src/compress/Makefile src/cover/Makefile src/crc/Makefile src/crc32/Makefile src/ctl/Makefile src/ctl-stack/Makefile src/ctl-string/Makefile src/ctl-vector/Makefile src/cubic/Makefile src/dijkstra/Makefile src/dtoa/Makefile src/duff/Makefile src/edn/Makefile src/expint/Makefile src/fac/Makefile src/fasta/Makefile src/fdct/Makefile src/fibcall/Makefile src/fir/Makefile src/frac/Makefile src/huffbench/Makefile src/insertsort/Makefile src/janne_complex/Makefile src/jfdctint/Makefile src/lcdnum/Makefile src/levenshtein/Makefile src/ludcmp/Makefile src/matmult/Makefile src/matmult-float/Makefile src/matmult-int/Makefile src/mergesort/Makefile src/miniz/Makefile src/minver/Makefile src/nbody/Makefile src/ndes/Makefile src/nettle-aes/Makefile src/nettle-arcfour/Makefile src/nettle-cast128/Makefile src/nettle-des/Makefile src/nettle-md5/Makefile src/nettle-sha256/Makefile src/newlib-exp/Makefile src/newlib-log/Makefile src/newlib-mod/Makefile src/newlib-sqrt/Makefile src/ns/Makefile src/nsichneu/Makefile src/picojpeg/Makefile src/prime/Makefile src/qrduino/Makefile src/qsort/Makefile src/qurt/Makefile src/recursion/Makefile src/rijndael/Makefile src/select/Makefile src/sglib-arraybinsearch/Makefile src/sglib-arrayheapsort/Makefile src/sglib-arrayquicksort/Makefile src/sglib-arraysort/Makefile src/sglib-dllist/Makefile src/sglib-hashtable/Makefile src/sglib-listinsertsort/Makefile src/sglib-listsort/Makefile src/sglib-queue/Makefile src/sglib-rbtree/Makefile src/slre/Makefile src/sqrt/Makefile src/st/Makefile src/statemate/Makefile src/stb_perlin/Makefile src/stringsearch1/Makefile src/strstr/Makefile src/tarai/Makefile src/template/Makefile src/trio/Makefile src/trio-snprintf/Makefile src/trio-sscanf/Makefile src/ud/Makefile src/whetstone/Makefile src/wikisort/Makefile support/Makefile testsuite/Makefile testsuite/beebs.test/Makefile testsuite/config/Makefile testsuite/lib/Makefile"
 
 
 # And spit it all out
@@ -15521,6 +15546,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ENABLED_BENCHMARK_NDES_TRUE}" && test -z "${ENABLED_BENCHMARK_NDES_FALSE}"; then
   as_fn_error $? "conditional \"ENABLED_BENCHMARK_NDES\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLED_BENCHMARK_NETTLE_AES_TRUE}" && test -z "${ENABLED_BENCHMARK_NETTLE_AES_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLED_BENCHMARK_NETTLE_AES\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ENABLED_BENCHMARK_NETTLE_ARCFOUR_TRUE}" && test -z "${ENABLED_BENCHMARK_NETTLE_ARCFOUR_FALSE}"; then
@@ -16640,6 +16669,7 @@ do
     "src/minver/Makefile") CONFIG_FILES="$CONFIG_FILES src/minver/Makefile" ;;
     "src/nbody/Makefile") CONFIG_FILES="$CONFIG_FILES src/nbody/Makefile" ;;
     "src/ndes/Makefile") CONFIG_FILES="$CONFIG_FILES src/ndes/Makefile" ;;
+    "src/nettle-aes/Makefile") CONFIG_FILES="$CONFIG_FILES src/nettle-aes/Makefile" ;;
     "src/nettle-arcfour/Makefile") CONFIG_FILES="$CONFIG_FILES src/nettle-arcfour/Makefile" ;;
     "src/nettle-cast128/Makefile") CONFIG_FILES="$CONFIG_FILES src/nettle-cast128/Makefile" ;;
     "src/nettle-des/Makefile") CONFIG_FILES="$CONFIG_FILES src/nettle-des/Makefile" ;;

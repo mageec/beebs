@@ -65,6 +65,7 @@ SUBDIRS = aha-compress          \
           minver                \
           nbody                 \
           ndes                  \
+          nettle-aes            \
           nettle-arcfour        \
           nettle-cast128        \
           nettle-des            \
