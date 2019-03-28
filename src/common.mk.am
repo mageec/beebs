@@ -36,8 +36,6 @@ AM_CPPFLAGS = "-DCALIB_SCALE=$(shell $(calib))" \
               -I $(top_srcdir)/config/@ARCH@/boards/@BOARD@ \
               -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ \
               @CPPFLAGS@
-AM_CFLAGS   = @CFLAGS@
-AM_LDFLAGS  = @LDFLAGS@
 
 # Setup a $(LIBM) variable that we can use instead of either
 # $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in

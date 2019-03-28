@@ -168,10 +168,8 @@ am_edn_OBJECTS =
 edn_OBJECTS = $(am_edn_OBJECTS)
 am__DEPENDENCIES_1 =
 @ENABLED_BENCHMARK_EDN_TRUE@edn_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-@ENABLED_BENCHMARK_EDN_TRUE@	$(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_EDN_TRUE@	libedn.la \
 @ENABLED_BENCHMARK_EDN_TRUE@	$(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_EDN_TRUE@	$(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_EDN_TRUE@	libedn.la $(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_EDN_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_EDN_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -382,8 +380,6 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_EDN_TRUE@              -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ \
 @ENABLED_BENCHMARK_EDN_TRUE@              @CPPFLAGS@
 
-@ENABLED_BENCHMARK_EDN_TRUE@AM_CFLAGS = @CFLAGS@
-@ENABLED_BENCHMARK_EDN_TRUE@AM_LDFLAGS = @LDFLAGS@
 
 # Setup a $(LIBM) variable that we can use instead of either
 # $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in
@@ -393,9 +389,8 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_EDN_TRUE@edn_SOURCES = 
 @ENABLED_BENCHMARK_EDN_TRUE@libedn_la_SOURCES = libedn.c
 @ENABLED_BENCHMARK_EDN_TRUE@edn_LDADD = $(DUMMY_CRT0) \
-@ENABLED_BENCHMARK_EDN_TRUE@                     $(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_EDN_TRUE@                     libedn.la \
 @ENABLED_BENCHMARK_EDN_TRUE@                     $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_EDN_TRUE@                     libedn.la \
 @ENABLED_BENCHMARK_EDN_TRUE@                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am

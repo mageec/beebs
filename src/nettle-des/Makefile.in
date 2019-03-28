@@ -170,9 +170,8 @@ nettle_des_OBJECTS = $(am_nettle_des_OBJECTS)
 am__DEPENDENCIES_1 =
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@nettle_des_DEPENDENCIES =  \
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@	$(am__DEPENDENCIES_1) \
-@ENABLED_BENCHMARK_NETTLE_DES_TRUE@	$(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_NETTLE_DES_TRUE@	libnettle-des.la \
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_NETTLE_DES_TRUE@	libnettle-des.la \
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@	$(am__DEPENDENCIES_1)
@@ -385,8 +384,6 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@              -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ \
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@              @CPPFLAGS@
 
-@ENABLED_BENCHMARK_NETTLE_DES_TRUE@AM_CFLAGS = @CFLAGS@
-@ENABLED_BENCHMARK_NETTLE_DES_TRUE@AM_LDFLAGS = @LDFLAGS@
 
 # Setup a $(LIBM) variable that we can use instead of either
 # $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in
@@ -400,9 +397,8 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@	                   desCode.h
 
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@nettle_des_LDADD = $(DUMMY_CRT0) \
-@ENABLED_BENCHMARK_NETTLE_DES_TRUE@                           $(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_NETTLE_DES_TRUE@                           libnettle-des.la \
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@                           $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_NETTLE_DES_TRUE@                           libnettle-des.la \
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@EXTRA_DIST = descore.README

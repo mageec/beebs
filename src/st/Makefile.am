@@ -32,9 +32,8 @@ st_SOURCES         =
 libst_la_SOURCES = libst.c
 
 st_LDADD           = $(DUMMY_CRT0) \
-                     $(top_builddir)/support/libmain.la \
-                     libst.la \
                      $(top_builddir)/support/libsupport.la \
+                     libst.la \
                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT) \
                      $(LIBM)
 

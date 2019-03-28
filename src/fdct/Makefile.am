@@ -32,9 +32,8 @@ fdct_SOURCES       =
 libfdct_la_SOURCES = libfdct.c
 
 fdct_LDADD         = $(DUMMY_CRT0) \
-                     $(top_builddir)/support/libmain.la \
-                     libfdct.la \
                      $(top_builddir)/support/libsupport.la \
+                     libfdct.la \
                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

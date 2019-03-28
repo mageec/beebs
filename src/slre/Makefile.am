@@ -32,9 +32,8 @@ slre_SOURCES       =
 libslre_la_SOURCES = libslre.c slre.h
 
 slre_LDADD         = $(DUMMY_CRT0) \
-                     $(top_builddir)/support/libmain.la \
-                     libslre.la \
                      $(top_builddir)/support/libsupport.la \
+                     libslre.la \
                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

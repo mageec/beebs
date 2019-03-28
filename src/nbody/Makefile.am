@@ -32,9 +32,8 @@ nbody_SOURCES       =
 libnbody_la_SOURCES = nbody.c
 
 nbody_LDADD         = $(DUMMY_CRT0) \
-                      $(top_builddir)/support/libmain.la \
-                      libnbody.la \
                       $(top_builddir)/support/libsupport.la \
+                      libnbody.la \
                       $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT) \
                       $(LIBM)
 endif

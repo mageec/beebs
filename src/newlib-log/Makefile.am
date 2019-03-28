@@ -32,9 +32,8 @@ newlib_log_SOURCES       =
 libnewlib_log_la_SOURCES = ef_log.c
 
 newlib_log_LDADD         = $(DUMMY_CRT0) \
-                           $(top_builddir)/support/libmain.la \
-                           libnewlib-log.la \
                            $(top_builddir)/support/libsupport.la \
+                           libnewlib-log.la \
                            $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

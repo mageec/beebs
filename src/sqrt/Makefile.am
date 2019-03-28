@@ -32,9 +32,8 @@ sqrt_SOURCES       =
 libsqrt_la_SOURCES = libsqrt.c
 
 sqrt_LDADD         = $(DUMMY_CRT0) \
-                     $(top_builddir)/support/libmain.la \
-                     libsqrt.la \
                      $(top_builddir)/support/libsupport.la \
+                     libsqrt.la \
                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

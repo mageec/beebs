@@ -170,9 +170,8 @@ ctl_vector_OBJECTS = $(am_ctl_vector_OBJECTS)
 am__DEPENDENCIES_1 =
 @ENABLED_BENCHMARK_CTL_VECTOR_TRUE@ctl_vector_DEPENDENCIES =  \
 @ENABLED_BENCHMARK_CTL_VECTOR_TRUE@	$(am__DEPENDENCIES_1) \
-@ENABLED_BENCHMARK_CTL_VECTOR_TRUE@	$(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_CTL_VECTOR_TRUE@	libctl-vector.la \
 @ENABLED_BENCHMARK_CTL_VECTOR_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_CTL_VECTOR_TRUE@	libctl-vector.la \
 @ENABLED_BENCHMARK_CTL_VECTOR_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_CTL_VECTOR_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_CTL_VECTOR_TRUE@	$(am__DEPENDENCIES_1)
@@ -385,8 +384,6 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_CTL_VECTOR_TRUE@              -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ \
 @ENABLED_BENCHMARK_CTL_VECTOR_TRUE@              @CPPFLAGS@
 
-@ENABLED_BENCHMARK_CTL_VECTOR_TRUE@AM_CFLAGS = @CFLAGS@
-@ENABLED_BENCHMARK_CTL_VECTOR_TRUE@AM_LDFLAGS = @LDFLAGS@
 
 # Setup a $(LIBM) variable that we can use instead of either
 # $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in
@@ -396,9 +393,8 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_CTL_VECTOR_TRUE@ctl_vector_SOURCES = 
 @ENABLED_BENCHMARK_CTL_VECTOR_TRUE@libctl_vector_la_SOURCES = ctl.c ctl.h vector.h
 @ENABLED_BENCHMARK_CTL_VECTOR_TRUE@ctl_vector_LDADD = $(DUMMY_CRT0) \
-@ENABLED_BENCHMARK_CTL_VECTOR_TRUE@                            $(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_CTL_VECTOR_TRUE@                            libctl-vector.la \
 @ENABLED_BENCHMARK_CTL_VECTOR_TRUE@                            $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_CTL_VECTOR_TRUE@                            libctl-vector.la \
 @ENABLED_BENCHMARK_CTL_VECTOR_TRUE@                            $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 @ENABLED_BENCHMARK_CTL_VECTOR_TRUE@libctl_vector_la_CPPFLAGS = -DCTL_VECTOR ${AM_CPPFLAGS}

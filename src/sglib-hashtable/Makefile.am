@@ -32,9 +32,8 @@ sglib_hashtable_SOURCES       =
 libsglib_hashtable_la_SOURCES = hashtable.c sglib.h
 
 sglib_hashtable_LDADD         = $(DUMMY_CRT0) \
-                                $(top_builddir)/support/libmain.la \
-                                libsglib-hashtable.la \
                                 $(top_builddir)/support/libsupport.la \
+                                libsglib-hashtable.la \
                                 $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

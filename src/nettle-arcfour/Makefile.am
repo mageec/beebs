@@ -32,9 +32,8 @@ nettle_arcfour_SOURCES       =
 libnettle_arcfour_la_SOURCES = arcfour.c
 
 nettle_arcfour_LDADD         = $(DUMMY_CRT0) \
-                               $(top_builddir)/support/libmain.la \
-                               libnettle-arcfour.la \
                                $(top_builddir)/support/libsupport.la \
+                               libnettle-arcfour.la \
                                $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

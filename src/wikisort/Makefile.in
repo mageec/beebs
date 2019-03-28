@@ -170,9 +170,8 @@ wikisort_OBJECTS = $(am_wikisort_OBJECTS)
 am__DEPENDENCIES_1 =
 @ENABLED_BENCHMARK_WIKISORT_TRUE@wikisort_DEPENDENCIES =  \
 @ENABLED_BENCHMARK_WIKISORT_TRUE@	$(am__DEPENDENCIES_1) \
-@ENABLED_BENCHMARK_WIKISORT_TRUE@	$(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_WIKISORT_TRUE@	libwikisort.la \
 @ENABLED_BENCHMARK_WIKISORT_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_WIKISORT_TRUE@	libwikisort.la \
 @ENABLED_BENCHMARK_WIKISORT_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_WIKISORT_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_WIKISORT_TRUE@	$(am__DEPENDENCIES_1) $(LIBM)
@@ -384,8 +383,6 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_WIKISORT_TRUE@              -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ \
 @ENABLED_BENCHMARK_WIKISORT_TRUE@              @CPPFLAGS@
 
-@ENABLED_BENCHMARK_WIKISORT_TRUE@AM_CFLAGS = @CFLAGS@
-@ENABLED_BENCHMARK_WIKISORT_TRUE@AM_LDFLAGS = @LDFLAGS@
 
 # Setup a $(LIBM) variable that we can use instead of either
 # $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in
@@ -395,9 +392,8 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_WIKISORT_TRUE@wikisort_SOURCES = 
 @ENABLED_BENCHMARK_WIKISORT_TRUE@libwikisort_la_SOURCES = libwikisort.c
 @ENABLED_BENCHMARK_WIKISORT_TRUE@wikisort_LDADD = $(DUMMY_CRT0) \
-@ENABLED_BENCHMARK_WIKISORT_TRUE@                         $(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_WIKISORT_TRUE@                         libwikisort.la \
 @ENABLED_BENCHMARK_WIKISORT_TRUE@                         $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_WIKISORT_TRUE@                         libwikisort.la \
 @ENABLED_BENCHMARK_WIKISORT_TRUE@                         $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT) \
 @ENABLED_BENCHMARK_WIKISORT_TRUE@                         $(LIBM)
 

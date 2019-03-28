@@ -23,6 +23,7 @@
 
 /* This is just a wrapper for the chip specific support file if there is one. */
 
+#include "config.h"
 
 #ifdef HAVE_CHIPSUPPORT_H
 #include "chipsupport.c"

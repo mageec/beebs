@@ -32,9 +32,8 @@ ud_SOURCES         =
 libud_la_SOURCES = libud.c
 
 ud_LDADD           = $(DUMMY_CRT0) \
-                     $(top_builddir)/support/libmain.la \
-                     libud.la \
                      $(top_builddir)/support/libsupport.la \
+                     libud.la \
                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

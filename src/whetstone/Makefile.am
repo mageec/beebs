@@ -32,9 +32,8 @@ whetstone_SOURCES       =
 libwhetstone_la_SOURCES = libwhetstone.c
 
 whetstone_LDADD         = $(DUMMY_CRT0) \
-                          $(top_builddir)/support/libmain.la \
-                          libwhetstone.la \
                           $(top_builddir)/support/libsupport.la \
+                          libwhetstone.la \
                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT) \
                           $(LIBM)
 

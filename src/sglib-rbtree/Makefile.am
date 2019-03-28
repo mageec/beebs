@@ -32,9 +32,8 @@ sglib_rbtree_SOURCES       =
 libsglib_rbtree_la_SOURCES = rbtree.c sglib.h
 
 sglib_rbtree_LDADD         = $(DUMMY_CRT0) \
-                             $(top_builddir)/support/libmain.la \
-                             libsglib-rbtree.la \
                              $(top_builddir)/support/libsupport.la \
+                             libsglib-rbtree.la \
                              $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
