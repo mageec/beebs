@@ -70,6 +70,7 @@ SUBDIRS = aha-compress          \
           nettle-des            \
           nettle-md5            \
           nettle-sha256         \
+          nettle-yarrow         \
           newlib-exp            \
           newlib-log            \
           newlib-mod            \
