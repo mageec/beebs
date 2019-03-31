@@ -23,6 +23,13 @@
 * Modified by lbogdanov@tu-sofia.bg to support heap
 */
 
+/* The entry point is not strictly the beginning of the vector table, but
+ * setting it as the entry point at least forces it and all relocations present
+ * in it to be included. The entry point is not used by the board/loader so it
+ * doesn't cause execution to start at the wrong address.
+ */
+ENTRY(vector_table)
+
 MEMORY
 {
     FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 256K /* FLASH size 256KB */
