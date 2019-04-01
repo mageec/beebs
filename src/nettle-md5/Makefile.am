@@ -32,9 +32,8 @@ nettle_md5_SOURCES       =
 libnettle_md5_la_SOURCES = md5.c
 
 nettle_md5_LDADD         = $(DUMMY_CRT0) \
-                           $(top_builddir)/support/libmain.la \
-                           libnettle-md5.la \
                            $(top_builddir)/support/libsupport.la \
+                           libnettle-md5.la \
                            $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

@@ -22,7 +22,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 noinst_LTLIBRARIES = libdummycrt0.la \
-                     libmain.la      \
                      libsupport.la   \
                      libdummygcc.la  \
                      libdummyc.la    \
@@ -33,8 +32,8 @@ if ARC
 endif
 
 libdummycrt0_la_SOURCES = dummy-crt0.c
-libmain_la_SOURCES      = main.c
-libsupport_la_SOURCES   = board.c   \
+libsupport_la_SOURCES   = main.c    \
+                          board.c   \
                           support.h
 libdummygcc_la_SOURCES  = dummy-libgcc.c $(MAYBE_ARC_MILLICODE)
 libdummyc_la_SOURCES    = dummy-libc.c
@@ -44,7 +43,5 @@ if CHIPSUPPORT_C
 libsupport_la_SOURCES += chip.c
 endif
 
-libmain_la_CPPFLAGS    = -I$(top_srcdir)/config/@ARCH@/boards/@BOARD@ \
-                         -I$(top_srcdir)/config/@ARCH@/chips/@CHIP@
 libsupport_la_CPPFLAGS = -I$(top_srcdir)/config/@ARCH@/boards/@BOARD@ \
                          -I$(top_srcdir)/config/@ARCH@/chips/@CHIP@

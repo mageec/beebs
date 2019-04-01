@@ -170,9 +170,8 @@ recursion_OBJECTS = $(am_recursion_OBJECTS)
 am__DEPENDENCIES_1 =
 @ENABLED_BENCHMARK_RECURSION_TRUE@recursion_DEPENDENCIES =  \
 @ENABLED_BENCHMARK_RECURSION_TRUE@	$(am__DEPENDENCIES_1) \
-@ENABLED_BENCHMARK_RECURSION_TRUE@	$(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_RECURSION_TRUE@	librecursion.la \
 @ENABLED_BENCHMARK_RECURSION_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_RECURSION_TRUE@	librecursion.la \
 @ENABLED_BENCHMARK_RECURSION_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_RECURSION_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_RECURSION_TRUE@	$(am__DEPENDENCIES_1)
@@ -385,8 +384,6 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_RECURSION_TRUE@              -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ \
 @ENABLED_BENCHMARK_RECURSION_TRUE@              @CPPFLAGS@
 
-@ENABLED_BENCHMARK_RECURSION_TRUE@AM_CFLAGS = @CFLAGS@
-@ENABLED_BENCHMARK_RECURSION_TRUE@AM_LDFLAGS = @LDFLAGS@
 
 # Setup a $(LIBM) variable that we can use instead of either
 # $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in
@@ -396,9 +393,8 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_RECURSION_TRUE@recursion_SOURCES = 
 @ENABLED_BENCHMARK_RECURSION_TRUE@librecursion_la_SOURCES = librecursion.c
 @ENABLED_BENCHMARK_RECURSION_TRUE@recursion_LDADD = $(DUMMY_CRT0) \
-@ENABLED_BENCHMARK_RECURSION_TRUE@                          $(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_RECURSION_TRUE@                          librecursion.la \
 @ENABLED_BENCHMARK_RECURSION_TRUE@                          $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_RECURSION_TRUE@                          librecursion.la \
 @ENABLED_BENCHMARK_RECURSION_TRUE@                          $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am

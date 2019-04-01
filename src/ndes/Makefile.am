@@ -32,9 +32,8 @@ ndes_SOURCES       =
 libndes_la_SOURCES = libndes.c
 
 ndes_LDADD         = $(DUMMY_CRT0) \
-                     $(top_builddir)/support/libmain.la \
-                     libndes.la \
                      $(top_builddir)/support/libsupport.la \
+                     libndes.la \
                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

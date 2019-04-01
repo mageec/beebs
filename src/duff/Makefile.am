@@ -32,9 +32,8 @@ duff_SOURCES       =
 libduff_la_SOURCES = libduff.c
 
 duff_LDADD         = $(DUMMY_CRT0) \
-                     $(top_builddir)/support/libmain.la \
-                     libduff.la \
                      $(top_builddir)/support/libsupport.la \
+                     libduff.la \
                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

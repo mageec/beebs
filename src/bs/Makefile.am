@@ -33,9 +33,8 @@ bs_SOURCES         =
 libbs_la_SOURCES = libbs.c
 
 bs_LDADD           = $(DUMMY_CRT0) \
-                     $(top_builddir)/support/libmain.la \
-                     libbs.la \
                      $(top_builddir)/support/libsupport.la \
+                     libbs.la \
                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

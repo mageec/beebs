@@ -32,9 +32,8 @@ edn_SOURCES        =
 libedn_la_SOURCES = libedn.c
 
 edn_LDADD          = $(DUMMY_CRT0) \
-                     $(top_builddir)/support/libmain.la \
-                     libedn.la \
                      $(top_builddir)/support/libsupport.la \
+                     libedn.la \
                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

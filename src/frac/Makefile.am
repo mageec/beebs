@@ -32,9 +32,8 @@ frac_SOURCES       =
 libfrac_la_SOURCES = libfrac.c
 
 frac_LDADD         = $(DUMMY_CRT0) \
-                     $(top_builddir)/support/libmain.la \
-                     libfrac.la \
                      $(top_builddir)/support/libsupport.la \
+                     libfrac.la \
                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

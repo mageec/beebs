@@ -38,9 +38,6 @@ AM_INIT_AUTOMAKE([-Wno-portability])
 AM_MAINTAINER_MODE([disable])
 AM_SILENT_RULES([yes])
 
-LT_INIT
-AC_SUBST([LIBTOOL_DEPS])
-
 # List of all benchmarks
 
 bmlist="aha-compress          \
@@ -83,6 +80,7 @@ bmlist="aha-compress          \
         minver                \
         nbody                 \
         ndes                  \
+        nettle-aes            \
         nettle-arcfour        \
         nettle-cast128        \
         nettle-des            \
@@ -168,6 +166,7 @@ benchmark_miniz=true
 benchmark_minver=true
 benchmark_nbody=true
 benchmark_ndes=true
+benchmark_nettle_aes=true
 benchmark_nettle_arcfour=true
 benchmark_nettle_cast128=true
 benchmark_nettle_des=true
@@ -730,6 +729,18 @@ AC_ARG_ENABLE([benchmark-ndes],
   [])
 AM_CONDITIONAL([ENABLED_BENCHMARK_NDES],
                [test x$benchmark_ndes = xtrue])
+
+AC_ARG_ENABLE([benchmark-nettle-aes],
+  [AS_HELP_STRING([--enable-benchmark-nettle-aes],
+     [Enable benchmark nettle-aes])],
+  [case "${enableval}" in
+      yes) benchmark_nettle_aes=true ;;
+      no)  benchmark_nettle_aes=false ;;
+      *)   AC_MSG_ERROR([bad value ${enableval} for --enable-benchmark-nettle-aes]) ;;
+   esac],
+  [])
+AM_CONDITIONAL([ENABLED_BENCHMARK_NETTLE_AES],
+               [test x$benchmark_nettle_aes = xtrue])
 
 AC_ARG_ENABLE([benchmark-nettle-arcfour],
   [AS_HELP_STRING([--enable-benchmark-nettle-arcfour],
@@ -1299,19 +1310,15 @@ test -f $srcdir/config/$arch/boards/$board/calibration && \
 AM_CONDITIONAL([CALIBRATION], [test x$HAVE_CALIBRATION == xyes])
 
 # Architecture, board and chip specific CFLAGS and LDFLAGS
+CFLAGS="$CFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
+LDFLAGS="$LDFLAGS $ARCH_LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"
 
-# If we pass the --host option, then AC_PROG_CC will select the correct
-# cross-compiler for us.
+LT_INIT
+AC_SUBST([LIBTOOL_DEPS])
 
 AC_PROG_CC()
 AM_PROG_AS
 AC_PROG_CC_C99
-
-# Add in the architecture, board and chip specific CPPFLAGS, CFLAGS and LDFLAGS
-
-CPPFLAGS="$CPPFLAGS $ARCH_CPPFLAGS $CHIP_CPPFLAGS $BOARD_CPPFLAGS"
-CFLAGS="$CFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
-LDFLAGS="$LDFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
 
 # Set up testing
 
@@ -1335,12 +1342,6 @@ AC_SUBST(BOARD, $board)
 AC_SUBST(CHIP, $chip)
 
 AM_CONDITIONAL([ARC], [test x$arch = xarc])
-
-# Substitute flags
-
-AC_SUBST([CPPFLAGS])
-AC_SUBST([CFLAGS])
-AC_SUBST([LDFLAGS])
 
 # Substitute DejaGnu variable
 
@@ -1403,6 +1404,7 @@ AC_CONFIG_FILES([Makefile                          \
                  src/minver/Makefile               \
                  src/nbody/Makefile                \
                  src/ndes/Makefile                 \
+                 src/nettle-aes/Makefile           \
                  src/nettle-arcfour/Makefile       \
                  src/nettle-cast128/Makefile       \
                  src/nettle-des/Makefile           \

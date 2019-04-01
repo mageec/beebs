@@ -33,9 +33,8 @@ ctl_vector_SOURCES        =
 libctl_vector_la_SOURCES  = ctl.c ctl.h vector.h
 
 ctl_vector_LDADD          = $(DUMMY_CRT0) \
-                            $(top_builddir)/support/libmain.la \
-                            libctl-vector.la \
                             $(top_builddir)/support/libsupport.la \
+                            libctl-vector.la \
                             $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 libctl_vector_la_CPPFLAGS = -DCTL_VECTOR ${AM_CPPFLAGS}
 

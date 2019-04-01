@@ -653,6 +653,47 @@ am__fastdepCCAS_TRUE
 CCASDEPMODE
 CCASFLAGS
 CCAS
+LIBTOOL_DEPS
+CPP
+LT_SYS_LIBRARY_PATH
+OTOOL64
+OTOOL
+LIPO
+NMEDIT
+DSYMUTIL
+MANIFEST_TOOL
+RANLIB
+ac_ct_AR
+AR
+DLLTOOL
+OBJDUMP
+LN_S
+NM
+ac_ct_DUMPBIN
+DUMPBIN
+LD
+FGREP
+EGREP
+GREP
+SED
+am__fastdepCC_FALSE
+am__fastdepCC_TRUE
+CCDEPMODE
+am__nodep
+AMDEPBACKSLASH
+AMDEP_FALSE
+AMDEP_TRUE
+am__quote
+am__include
+DEPDIR
+OBJEXT
+EXEEXT
+ac_ct_CC
+CPPFLAGS
+LDFLAGS
+CFLAGS
+CC
+LIBTOOL
 CALIBRATION_FALSE
 CALIBRATION_TRUE
 CHIPSUPPORT_C_FALSE
@@ -741,6 +782,8 @@ ENABLED_BENCHMARK_NETTLE_CAST128_FALSE
 ENABLED_BENCHMARK_NETTLE_CAST128_TRUE
 ENABLED_BENCHMARK_NETTLE_ARCFOUR_FALSE
 ENABLED_BENCHMARK_NETTLE_ARCFOUR_TRUE
+ENABLED_BENCHMARK_NETTLE_AES_FALSE
+ENABLED_BENCHMARK_NETTLE_AES_TRUE
 ENABLED_BENCHMARK_NDES_FALSE
 ENABLED_BENCHMARK_NDES_TRUE
 ENABLED_BENCHMARK_NBODY_FALSE
@@ -817,47 +860,6 @@ ENABLED_BENCHMARK_AHA_MONT64_FALSE
 ENABLED_BENCHMARK_AHA_MONT64_TRUE
 ENABLED_BENCHMARK_AHA_COMPRESS_FALSE
 ENABLED_BENCHMARK_AHA_COMPRESS_TRUE
-LIBTOOL_DEPS
-CPP
-LT_SYS_LIBRARY_PATH
-OTOOL64
-OTOOL
-LIPO
-NMEDIT
-DSYMUTIL
-MANIFEST_TOOL
-RANLIB
-ac_ct_AR
-AR
-DLLTOOL
-OBJDUMP
-LN_S
-NM
-ac_ct_DUMPBIN
-DUMPBIN
-LD
-FGREP
-EGREP
-GREP
-SED
-am__fastdepCC_FALSE
-am__fastdepCC_TRUE
-CCDEPMODE
-am__nodep
-AMDEPBACKSLASH
-AMDEP_FALSE
-AMDEP_TRUE
-am__quote
-am__include
-DEPDIR
-OBJEXT
-EXEEXT
-ac_ct_CC
-CPPFLAGS
-LDFLAGS
-CFLAGS
-CC
-LIBTOOL
 MAINT
 MAINTAINER_MODE_FALSE
 MAINTAINER_MODE_TRUE
@@ -943,15 +945,6 @@ ac_user_opts='
 enable_option_checking
 enable_silent_rules
 enable_maintainer_mode
-enable_shared
-enable_static
-with_pic
-enable_fast_install
-with_aix_soname
-enable_dependency_tracking
-with_gnu_ld
-with_sysroot
-enable_libtool_lock
 with_board
 with_chip
 enable_benchmark_aha_compress
@@ -992,6 +985,7 @@ enable_benchmark_miniz
 enable_benchmark_minver
 enable_benchmark_nbody
 enable_benchmark_ndes
+enable_benchmark_nettle_aes
 enable_benchmark_nettle_arcfour
 enable_benchmark_nettle_cast128
 enable_benchmark_nettle_des
@@ -1034,6 +1028,15 @@ enable_benchmark_trio_sscanf
 enable_benchmark_ud
 enable_benchmark_whetstone
 enable_benchmark_wikisort
+enable_shared
+enable_static
+with_pic
+enable_fast_install
+with_aix_soname
+enable_dependency_tracking
+with_gnu_ld
+with_sysroot
+enable_libtool_lock
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1671,15 +1674,6 @@ Optional Features:
   --enable-maintainer-mode
                           enable make rules and dependencies not useful (and
                           sometimes confusing) to the casual installer
-  --enable-shared[=PKGS]  build shared libraries [default=yes]
-  --enable-static[=PKGS]  build static libraries [default=yes]
-  --enable-fast-install[=PKGS]
-                          optimize for fast installation [default=yes]
-  --enable-dependency-tracking
-                          do not reject slow dependency extractors
-  --disable-dependency-tracking
-                          speeds up one-time build
-  --disable-libtool-lock  avoid locking (might break parallel builds)
   --enable-benchmark-aha-compress
                           Enable benchmark aha-compress
   --enable-benchmark-aha-mont64
@@ -1745,6 +1739,8 @@ Optional Features:
   --enable-benchmark-nbody
                           Enable benchmark nbody
   --enable-benchmark-ndes Enable benchmark ndes
+  --enable-benchmark-nettle-aes
+                          Enable benchmark nettle-aes
   --enable-benchmark-nettle-arcfour
                           Enable benchmark nettle-arcfour
   --enable-benchmark-nettle-cast128
@@ -1823,10 +1819,21 @@ Optional Features:
                           Enable benchmark whetstone
   --enable-benchmark-wikisort
                           Enable benchmark wikisort
+  --enable-shared[=PKGS]  build shared libraries [default=yes]
+  --enable-static[=PKGS]  build static libraries [default=yes]
+  --enable-fast-install[=PKGS]
+                          optimize for fast installation [default=yes]
+  --enable-dependency-tracking
+                          do not reject slow dependency extractors
+  --disable-dependency-tracking
+                          speeds up one-time build
+  --disable-libtool-lock  avoid locking (might break parallel builds)
 
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-board            Select the board to target
+  --with-chip             Select the chip to target
   --with-pic[=PKGS]       try to use only PIC/non-PIC objects [default=use
                           both]
   --with-aix-soname=aix|svr4|both
@@ -1835,8 +1842,6 @@ Optional Packages:
   --with-gnu-ld           assume the C compiler uses GNU ld [default=no]
   --with-sysroot[=DIR]    Search for dependent libraries within DIR (or the
                           compiler's sysroot if not specified).
-  --with-board            Select the board to target
-  --with-chip             Select the chip to target
 
 Some influential environment variables:
   CC          C compiler command
@@ -3327,6 +3332,1803 @@ else
 fi
 AM_BACKSLASH='\'
 
+
+# List of all benchmarks
+
+bmlist="aha-compress          \
+        aha-mont64            \
+        bs                    \
+        bubblesort            \
+        cnt                   \
+        compress              \
+        cover                 \
+        crc                   \
+        crc32                 \
+        ctl                   \
+        ctl-stack             \
+        ctl-string            \
+        ctl-vector            \
+        cubic                 \
+        dijkstra              \
+        dtoa                  \
+        duff                  \
+        edn                   \
+        expint                \
+        fac                   \
+        fasta                 \
+        fdct                  \
+        fibcall               \
+        fir                   \
+        frac                  \
+        huffbench             \
+        insertsort            \
+        janne_complex         \
+        jfdctint              \
+        lcdnum                \
+        levenshtein           \
+        ludcmp                \
+        matmult               \
+        matmult-float         \
+        matmult-int           \
+        mergesort             \
+        miniz                 \
+        minver                \
+        nbody                 \
+        ndes                  \
+        nettle-aes            \
+        nettle-arcfour        \
+        nettle-cast128        \
+        nettle-des            \
+        nettle-md5            \
+        nettle-sha256         \
+        newlib-exp            \
+        newlib-log            \
+        newlib-mod            \
+        newlib-sqrt           \
+        ns                    \
+        nsichneu              \
+        picojpeg              \
+        prime                 \
+        qrduino               \
+        qsort                 \
+        qurt                  \
+        recursion             \
+        rijndael              \
+        select                \
+        sglib-arraybinsearch  \
+        sglib-arrayheapsort   \
+        sglib-arrayquicksort  \
+        sglib-arraysort       \
+        sglib-dllist          \
+        sglib-hashtable       \
+        sglib-listinsertsort  \
+        sglib-listsort        \
+        sglib-queue           \
+        sglib-rbtree          \
+        slre                  \
+        sqrt                  \
+        st                    \
+        statemate             \
+        stb_perlin            \
+        stringsearch1         \
+        strstr                \
+        tarai                 \
+        template              \
+        trio                  \
+        trio-snprintf         \
+        trio-sscanf           \
+        ud                    \
+        whetstone             \
+        wikisort"
+
+# Set default values enabling all architectures
+
+benchmark_aha_compress=true
+benchmark_aha_mont64=true
+benchmark_bs=true
+benchmark_bubblesort=true
+benchmark_cnt=true
+benchmark_compress=true
+benchmark_cover=true
+benchmark_crc=true
+benchmark_crc32=true
+benchmark_ctl_stack=true
+benchmark_ctl_string=true
+benchmark_ctl_vector=true
+benchmark_cubic=true
+benchmark_dijkstra=true
+benchmark_dtoa=true
+benchmark_duff=true
+benchmark_edn=true
+benchmark_expint=true
+benchmark_fac=true
+benchmark_fasta=true
+benchmark_fdct=true
+benchmark_fibcall=true
+benchmark_fir=true
+benchmark_frac=true
+benchmark_huffbench=true
+benchmark_insertsort=true
+benchmark_janne_complex=true
+benchmark_jfdctint=true
+benchmark_lcdnum=true
+benchmark_levenshtein=true
+benchmark_ludcmp=true
+benchmark_matmult_float=true
+benchmark_matmult_int=true
+benchmark_mergesort=true
+benchmark_miniz=true
+benchmark_minver=true
+benchmark_nbody=true
+benchmark_ndes=true
+benchmark_nettle_aes=true
+benchmark_nettle_arcfour=true
+benchmark_nettle_cast128=true
+benchmark_nettle_des=true
+benchmark_nettle_md5=true
+benchmark_nettle_sha256=true
+benchmark_newlib_exp=true
+benchmark_newlib_log=true
+benchmark_newlib_mod=true
+benchmark_newlib_sqrt=true
+benchmark_ns=true
+benchmark_nsichneu=true
+benchmark_picojpeg=true
+benchmark_prime=true
+benchmark_qrduino=true
+benchmark_qsort=true
+benchmark_qurt=true
+benchmark_recursion=true
+benchmark_rijndael=true
+benchmark_select=true
+benchmark_sglib_arraybinsearch=true
+benchmark_sglib_arrayheapsort=true
+benchmark_sglib_arrayquicksort=true
+benchmark_sglib_dllist=true
+benchmark_sglib_hashtable=true
+benchmark_sglib_listinsertsort=true
+benchmark_sglib_listsort=true
+benchmark_sglib_queue=true
+benchmark_sglib_rbtree=true
+benchmark_slre=true
+benchmark_sqrt=true
+benchmark_st=true
+benchmark_statemate=true
+benchmark_stb_perlin=true
+benchmark_stringsearch1=true
+benchmark_strstr=true
+benchmark_tarai=true
+benchmark_template=true
+benchmark_trio_snprintf=true
+benchmark_trio_sscanf=true
+benchmark_ud=true
+benchmark_whetstone=true
+benchmark_wikisort=true
+
+# Work out which architecture we are targeting
+# Also pass this through to be substituted
+
+arch=$host_cpu
+
+# Option for selecting the target board
+
+
+# Check whether --with-board was given.
+if test "${with_board+set}" = set; then :
+  withval=$with_board; board=$with_board
+else
+  board=none
+fi
+
+
+# Option for selecting the target chip
+
+
+# Check whether --with-chip was given.
+if test "${with_chip+set}" = set; then :
+  withval=$with_chip; chip=$with_chip
+else
+  chip=generic
+fi
+
+
+# Default settings for dummy libraries. These can be overridden by the
+# chip configuration or configure flags. We default to having them all
+# off because we expect the default setup to produce compiled code that
+# can actually be executed - however, the dummy libraries are helpful
+# for analysing code size without library code inclusion confounding
+# things.
+
+USE_DUMMY_CRT0=no
+USE_DUMMY_LIBGCC=no
+USE_DUMMY_COMPILERRT=no
+USE_DUMMY_LIBC=no
+USE_DUMMY_LIBM=no
+
+# Execute any architecture, board or chip specific configuration. These can
+# set architecture, chip and board CPPFLAGS, CFLAGS and LDFLAGS and exclude
+# individual tests by setting benchmark_<bm> to false.
+
+# We can't use AC_CHECK_FILE, because we are cross-compiling, and that
+# prohibits use of AC_CHECK_FILE.
+
+if test -f $srcdir/config/$arch/arch.cfg; then :
+  source $srcdir/config/$arch/arch.cfg
+fi
+
+if test -d $srcdir/config/$arch/chips/$chip; then :
+
+else
+  as_fn_error $? "Chip config directory \"$chip\" does not exist" "$LINENO" 5
+fi
+
+if test -f $srcdir/config/$arch/chips/$chip/chip.cfg; then :
+  source $srcdir/config/$arch/chips/$chip/chip.cfg
+fi
+
+if test -d $srcdir/config/$arch/boards/$board; then :
+
+else
+  as_fn_error $? "Board config directory \"$board\" does not exist" "$LINENO" 5
+fi
+
+if test -f $srcdir/config/$arch/boards/$board/board.cfg ; then :
+  source $srcdir/config/$arch/boards/$board/board.cfg
+fi
+
+# Options for enabling/disabling each test in alphabetical order (see
+# genmacros.sh for a script to generate all of this). To add one new test just
+# insert the same pattern at the correct place in the list.
+
+# Remember that ctl, matmult, sglib-arraysort and trio are not benchmarks
+# themselves, but the frameworks from which others are created.
+
+# NOTE. There is the m4_foreach macro, but getting it to work for this seems to
+# be impossible
+
+# Check whether --enable-benchmark-aha-compress was given.
+if test "${enable_benchmark_aha_compress+set}" = set; then :
+  enableval=$enable_benchmark_aha_compress; case "${enableval}" in
+      yes) benchmark_aha_compress=true ;;
+      no)  benchmark_aha_compress=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-aha-compress" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_aha_compress = xtrue; then
+  ENABLED_BENCHMARK_AHA_COMPRESS_TRUE=
+  ENABLED_BENCHMARK_AHA_COMPRESS_FALSE='#'
+else
+  ENABLED_BENCHMARK_AHA_COMPRESS_TRUE='#'
+  ENABLED_BENCHMARK_AHA_COMPRESS_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-aha-mont64 was given.
+if test "${enable_benchmark_aha_mont64+set}" = set; then :
+  enableval=$enable_benchmark_aha_mont64; case "${enableval}" in
+      yes) benchmark_aha_mont64=true ;;
+      no)  benchmark_aha_mont64=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-aha-mont64" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_aha_mont64 = xtrue; then
+  ENABLED_BENCHMARK_AHA_MONT64_TRUE=
+  ENABLED_BENCHMARK_AHA_MONT64_FALSE='#'
+else
+  ENABLED_BENCHMARK_AHA_MONT64_TRUE='#'
+  ENABLED_BENCHMARK_AHA_MONT64_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-bs was given.
+if test "${enable_benchmark_bs+set}" = set; then :
+  enableval=$enable_benchmark_bs; case "${enableval}" in
+      yes) benchmark_bs=true ;;
+      no)  benchmark_bs=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-bs" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_bs = xtrue; then
+  ENABLED_BENCHMARK_BS_TRUE=
+  ENABLED_BENCHMARK_BS_FALSE='#'
+else
+  ENABLED_BENCHMARK_BS_TRUE='#'
+  ENABLED_BENCHMARK_BS_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-bubblesort was given.
+if test "${enable_benchmark_bubblesort+set}" = set; then :
+  enableval=$enable_benchmark_bubblesort; case "${enableval}" in
+      yes) benchmark_bubblesort=true ;;
+      no)  benchmark_bubblesort=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-bubblesort" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_bubblesort = xtrue; then
+  ENABLED_BENCHMARK_BUBBLESORT_TRUE=
+  ENABLED_BENCHMARK_BUBBLESORT_FALSE='#'
+else
+  ENABLED_BENCHMARK_BUBBLESORT_TRUE='#'
+  ENABLED_BENCHMARK_BUBBLESORT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-cnt was given.
+if test "${enable_benchmark_cnt+set}" = set; then :
+  enableval=$enable_benchmark_cnt; case "${enableval}" in
+      yes) benchmark_cnt=true ;;
+      no)  benchmark_cnt=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-cnt" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_cnt = xtrue; then
+  ENABLED_BENCHMARK_CNT_TRUE=
+  ENABLED_BENCHMARK_CNT_FALSE='#'
+else
+  ENABLED_BENCHMARK_CNT_TRUE='#'
+  ENABLED_BENCHMARK_CNT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-compress was given.
+if test "${enable_benchmark_compress+set}" = set; then :
+  enableval=$enable_benchmark_compress; case "${enableval}" in
+      yes) benchmark_compress=true ;;
+      no)  benchmark_compress=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-compress" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_compress = xtrue; then
+  ENABLED_BENCHMARK_COMPRESS_TRUE=
+  ENABLED_BENCHMARK_COMPRESS_FALSE='#'
+else
+  ENABLED_BENCHMARK_COMPRESS_TRUE='#'
+  ENABLED_BENCHMARK_COMPRESS_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-cover was given.
+if test "${enable_benchmark_cover+set}" = set; then :
+  enableval=$enable_benchmark_cover; case "${enableval}" in
+      yes) benchmark_cover=true ;;
+      no)  benchmark_cover=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-cover" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_cover = xtrue; then
+  ENABLED_BENCHMARK_COVER_TRUE=
+  ENABLED_BENCHMARK_COVER_FALSE='#'
+else
+  ENABLED_BENCHMARK_COVER_TRUE='#'
+  ENABLED_BENCHMARK_COVER_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-crc was given.
+if test "${enable_benchmark_crc+set}" = set; then :
+  enableval=$enable_benchmark_crc; case "${enableval}" in
+      yes) benchmark_crc=true ;;
+      no)  benchmark_crc=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-crc" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_crc = xtrue; then
+  ENABLED_BENCHMARK_CRC_TRUE=
+  ENABLED_BENCHMARK_CRC_FALSE='#'
+else
+  ENABLED_BENCHMARK_CRC_TRUE='#'
+  ENABLED_BENCHMARK_CRC_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-crc32 was given.
+if test "${enable_benchmark_crc32+set}" = set; then :
+  enableval=$enable_benchmark_crc32; case "${enableval}" in
+      yes) benchmark_crc32=true ;;
+      no)  benchmark_crc32=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-crc32" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_crc32 = xtrue; then
+  ENABLED_BENCHMARK_CRC32_TRUE=
+  ENABLED_BENCHMARK_CRC32_FALSE='#'
+else
+  ENABLED_BENCHMARK_CRC32_TRUE='#'
+  ENABLED_BENCHMARK_CRC32_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-ctl-stack was given.
+if test "${enable_benchmark_ctl_stack+set}" = set; then :
+  enableval=$enable_benchmark_ctl_stack; case "${enableval}" in
+      yes) benchmark_ctl_stack=true ;;
+      no)  benchmark_ctl_stack=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-ctl-stack" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_ctl_stack = xtrue; then
+  ENABLED_BENCHMARK_CTL_STACK_TRUE=
+  ENABLED_BENCHMARK_CTL_STACK_FALSE='#'
+else
+  ENABLED_BENCHMARK_CTL_STACK_TRUE='#'
+  ENABLED_BENCHMARK_CTL_STACK_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-ctl-string was given.
+if test "${enable_benchmark_ctl_string+set}" = set; then :
+  enableval=$enable_benchmark_ctl_string; case "${enableval}" in
+      yes) benchmark_ctl_string=true ;;
+      no)  benchmark_ctl_string=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-ctl-string" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_ctl_string = xtrue; then
+  ENABLED_BENCHMARK_CTL_STRING_TRUE=
+  ENABLED_BENCHMARK_CTL_STRING_FALSE='#'
+else
+  ENABLED_BENCHMARK_CTL_STRING_TRUE='#'
+  ENABLED_BENCHMARK_CTL_STRING_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-ctl-vector was given.
+if test "${enable_benchmark_ctl_vector+set}" = set; then :
+  enableval=$enable_benchmark_ctl_vector; case "${enableval}" in
+      yes) benchmark_ctl_vector=true ;;
+      no)  benchmark_ctl_vector=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-ctl-vector" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_ctl_vector = xtrue; then
+  ENABLED_BENCHMARK_CTL_VECTOR_TRUE=
+  ENABLED_BENCHMARK_CTL_VECTOR_FALSE='#'
+else
+  ENABLED_BENCHMARK_CTL_VECTOR_TRUE='#'
+  ENABLED_BENCHMARK_CTL_VECTOR_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-cubic was given.
+if test "${enable_benchmark_cubic+set}" = set; then :
+  enableval=$enable_benchmark_cubic; case "${enableval}" in
+      yes) benchmark_cubic=true ;;
+      no)  benchmark_cubic=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-cubic" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_cubic = xtrue; then
+  ENABLED_BENCHMARK_CUBIC_TRUE=
+  ENABLED_BENCHMARK_CUBIC_FALSE='#'
+else
+  ENABLED_BENCHMARK_CUBIC_TRUE='#'
+  ENABLED_BENCHMARK_CUBIC_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-dijkstra was given.
+if test "${enable_benchmark_dijkstra+set}" = set; then :
+  enableval=$enable_benchmark_dijkstra; case "${enableval}" in
+      yes) benchmark_dijkstra=true ;;
+      no)  benchmark_dijkstra=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-dijkstra" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_dijkstra = xtrue; then
+  ENABLED_BENCHMARK_DIJKSTRA_TRUE=
+  ENABLED_BENCHMARK_DIJKSTRA_FALSE='#'
+else
+  ENABLED_BENCHMARK_DIJKSTRA_TRUE='#'
+  ENABLED_BENCHMARK_DIJKSTRA_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-dtoa was given.
+if test "${enable_benchmark_dtoa+set}" = set; then :
+  enableval=$enable_benchmark_dtoa; case "${enableval}" in
+      yes) benchmark_dtoa=true ;;
+      no)  benchmark_dtoa=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-dtoa" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_dtoa = xtrue; then
+  ENABLED_BENCHMARK_DTOA_TRUE=
+  ENABLED_BENCHMARK_DTOA_FALSE='#'
+else
+  ENABLED_BENCHMARK_DTOA_TRUE='#'
+  ENABLED_BENCHMARK_DTOA_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-duff was given.
+if test "${enable_benchmark_duff+set}" = set; then :
+  enableval=$enable_benchmark_duff; case "${enableval}" in
+      yes) benchmark_duff=true ;;
+      no)  benchmark_duff=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-duff" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_duff = xtrue; then
+  ENABLED_BENCHMARK_DUFF_TRUE=
+  ENABLED_BENCHMARK_DUFF_FALSE='#'
+else
+  ENABLED_BENCHMARK_DUFF_TRUE='#'
+  ENABLED_BENCHMARK_DUFF_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-edn was given.
+if test "${enable_benchmark_edn+set}" = set; then :
+  enableval=$enable_benchmark_edn; case "${enableval}" in
+      yes) benchmark_edn=true ;;
+      no)  benchmark_edn=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-edn" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_edn = xtrue; then
+  ENABLED_BENCHMARK_EDN_TRUE=
+  ENABLED_BENCHMARK_EDN_FALSE='#'
+else
+  ENABLED_BENCHMARK_EDN_TRUE='#'
+  ENABLED_BENCHMARK_EDN_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-expint was given.
+if test "${enable_benchmark_expint+set}" = set; then :
+  enableval=$enable_benchmark_expint; case "${enableval}" in
+      yes) benchmark_expint=true ;;
+      no)  benchmark_expint=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-expint" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_expint = xtrue; then
+  ENABLED_BENCHMARK_EXPINT_TRUE=
+  ENABLED_BENCHMARK_EXPINT_FALSE='#'
+else
+  ENABLED_BENCHMARK_EXPINT_TRUE='#'
+  ENABLED_BENCHMARK_EXPINT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-fac was given.
+if test "${enable_benchmark_fac+set}" = set; then :
+  enableval=$enable_benchmark_fac; case "${enableval}" in
+      yes) benchmark_fac=true ;;
+      no)  benchmark_fac=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-fac" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_fac = xtrue; then
+  ENABLED_BENCHMARK_FAC_TRUE=
+  ENABLED_BENCHMARK_FAC_FALSE='#'
+else
+  ENABLED_BENCHMARK_FAC_TRUE='#'
+  ENABLED_BENCHMARK_FAC_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-fasta was given.
+if test "${enable_benchmark_fasta+set}" = set; then :
+  enableval=$enable_benchmark_fasta; case "${enableval}" in
+      yes) benchmark_fasta=true ;;
+      no)  benchmark_fasta=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-fasta" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_fasta = xtrue; then
+  ENABLED_BENCHMARK_FASTA_TRUE=
+  ENABLED_BENCHMARK_FASTA_FALSE='#'
+else
+  ENABLED_BENCHMARK_FASTA_TRUE='#'
+  ENABLED_BENCHMARK_FASTA_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-fdct was given.
+if test "${enable_benchmark_fdct+set}" = set; then :
+  enableval=$enable_benchmark_fdct; case "${enableval}" in
+      yes) benchmark_fdct=true ;;
+      no)  benchmark_fdct=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-fdct" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_fdct = xtrue; then
+  ENABLED_BENCHMARK_FDCT_TRUE=
+  ENABLED_BENCHMARK_FDCT_FALSE='#'
+else
+  ENABLED_BENCHMARK_FDCT_TRUE='#'
+  ENABLED_BENCHMARK_FDCT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-fibcall was given.
+if test "${enable_benchmark_fibcall+set}" = set; then :
+  enableval=$enable_benchmark_fibcall; case "${enableval}" in
+      yes) benchmark_fibcall=true ;;
+      no)  benchmark_fibcall=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-fibcall" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_fibcall = xtrue; then
+  ENABLED_BENCHMARK_FIBCALL_TRUE=
+  ENABLED_BENCHMARK_FIBCALL_FALSE='#'
+else
+  ENABLED_BENCHMARK_FIBCALL_TRUE='#'
+  ENABLED_BENCHMARK_FIBCALL_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-fir was given.
+if test "${enable_benchmark_fir+set}" = set; then :
+  enableval=$enable_benchmark_fir; case "${enableval}" in
+      yes) benchmark_fir=true ;;
+      no)  benchmark_fir=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-fir" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_fir = xtrue; then
+  ENABLED_BENCHMARK_FIR_TRUE=
+  ENABLED_BENCHMARK_FIR_FALSE='#'
+else
+  ENABLED_BENCHMARK_FIR_TRUE='#'
+  ENABLED_BENCHMARK_FIR_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-frac was given.
+if test "${enable_benchmark_frac+set}" = set; then :
+  enableval=$enable_benchmark_frac; case "${enableval}" in
+      yes) benchmark_frac=true ;;
+      no)  benchmark_frac=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-frac" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_frac = xtrue; then
+  ENABLED_BENCHMARK_FRAC_TRUE=
+  ENABLED_BENCHMARK_FRAC_FALSE='#'
+else
+  ENABLED_BENCHMARK_FRAC_TRUE='#'
+  ENABLED_BENCHMARK_FRAC_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-huffbench was given.
+if test "${enable_benchmark_huffbench+set}" = set; then :
+  enableval=$enable_benchmark_huffbench; case "${enableval}" in
+      yes) benchmark_huffbench=true ;;
+      no)  benchmark_huffbench=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-huffbench" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_huffbench = xtrue; then
+  ENABLED_BENCHMARK_HUFFBENCH_TRUE=
+  ENABLED_BENCHMARK_HUFFBENCH_FALSE='#'
+else
+  ENABLED_BENCHMARK_HUFFBENCH_TRUE='#'
+  ENABLED_BENCHMARK_HUFFBENCH_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-insertsort was given.
+if test "${enable_benchmark_insertsort+set}" = set; then :
+  enableval=$enable_benchmark_insertsort; case "${enableval}" in
+      yes) benchmark_insertsort=true ;;
+      no)  benchmark_insertsort=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-insertsort" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_insertsort = xtrue; then
+  ENABLED_BENCHMARK_INSERTSORT_TRUE=
+  ENABLED_BENCHMARK_INSERTSORT_FALSE='#'
+else
+  ENABLED_BENCHMARK_INSERTSORT_TRUE='#'
+  ENABLED_BENCHMARK_INSERTSORT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-janne_complex was given.
+if test "${enable_benchmark_janne_complex+set}" = set; then :
+  enableval=$enable_benchmark_janne_complex; case "${enableval}" in
+      yes) benchmark_janne_complex=true ;;
+      no)  benchmark_janne_complex=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-janne_complex" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_janne_complex = xtrue; then
+  ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE=
+  ENABLED_BENCHMARK_JANNE_COMPLEX_FALSE='#'
+else
+  ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE='#'
+  ENABLED_BENCHMARK_JANNE_COMPLEX_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-jfdctint was given.
+if test "${enable_benchmark_jfdctint+set}" = set; then :
+  enableval=$enable_benchmark_jfdctint; case "${enableval}" in
+      yes) benchmark_jfdctint=true ;;
+      no)  benchmark_jfdctint=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-jfdctint" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_jfdctint = xtrue; then
+  ENABLED_BENCHMARK_JFDCTINT_TRUE=
+  ENABLED_BENCHMARK_JFDCTINT_FALSE='#'
+else
+  ENABLED_BENCHMARK_JFDCTINT_TRUE='#'
+  ENABLED_BENCHMARK_JFDCTINT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-lcdnum was given.
+if test "${enable_benchmark_lcdnum+set}" = set; then :
+  enableval=$enable_benchmark_lcdnum; case "${enableval}" in
+      yes) benchmark_lcdnum=true ;;
+      no)  benchmark_lcdnum=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-lcdnum" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_lcdnum = xtrue; then
+  ENABLED_BENCHMARK_LCDNUM_TRUE=
+  ENABLED_BENCHMARK_LCDNUM_FALSE='#'
+else
+  ENABLED_BENCHMARK_LCDNUM_TRUE='#'
+  ENABLED_BENCHMARK_LCDNUM_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-levenshtein was given.
+if test "${enable_benchmark_levenshtein+set}" = set; then :
+  enableval=$enable_benchmark_levenshtein; case "${enableval}" in
+      yes) benchmark_levenshtein=true ;;
+      no)  benchmark_levenshtein=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-levenshtein" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_levenshtein = xtrue; then
+  ENABLED_BENCHMARK_LEVENSHTEIN_TRUE=
+  ENABLED_BENCHMARK_LEVENSHTEIN_FALSE='#'
+else
+  ENABLED_BENCHMARK_LEVENSHTEIN_TRUE='#'
+  ENABLED_BENCHMARK_LEVENSHTEIN_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-ludcmp was given.
+if test "${enable_benchmark_ludcmp+set}" = set; then :
+  enableval=$enable_benchmark_ludcmp; case "${enableval}" in
+      yes) benchmark_ludcmp=true ;;
+      no)  benchmark_ludcmp=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-ludcmp" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_ludcmp = xtrue; then
+  ENABLED_BENCHMARK_LUDCMP_TRUE=
+  ENABLED_BENCHMARK_LUDCMP_FALSE='#'
+else
+  ENABLED_BENCHMARK_LUDCMP_TRUE='#'
+  ENABLED_BENCHMARK_LUDCMP_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-matmult-float was given.
+if test "${enable_benchmark_matmult_float+set}" = set; then :
+  enableval=$enable_benchmark_matmult_float; case "${enableval}" in
+      yes) benchmark_matmult_float=true ;;
+      no)  benchmark_matmult_float=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-matmult-float" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_matmult_float = xtrue; then
+  ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE=
+  ENABLED_BENCHMARK_MATMULT_FLOAT_FALSE='#'
+else
+  ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE='#'
+  ENABLED_BENCHMARK_MATMULT_FLOAT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-matmult-int was given.
+if test "${enable_benchmark_matmult_int+set}" = set; then :
+  enableval=$enable_benchmark_matmult_int; case "${enableval}" in
+      yes) benchmark_matmult_int=true ;;
+      no)  benchmark_matmult_int=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-matmult-int" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_matmult_int = xtrue; then
+  ENABLED_BENCHMARK_MATMULT_INT_TRUE=
+  ENABLED_BENCHMARK_MATMULT_INT_FALSE='#'
+else
+  ENABLED_BENCHMARK_MATMULT_INT_TRUE='#'
+  ENABLED_BENCHMARK_MATMULT_INT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-mergesort was given.
+if test "${enable_benchmark_mergesort+set}" = set; then :
+  enableval=$enable_benchmark_mergesort; case "${enableval}" in
+      yes) benchmark_mergesort=true ;;
+      no)  benchmark_mergesort=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-mergesort" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_mergesort = xtrue; then
+  ENABLED_BENCHMARK_MERGESORT_TRUE=
+  ENABLED_BENCHMARK_MERGESORT_FALSE='#'
+else
+  ENABLED_BENCHMARK_MERGESORT_TRUE='#'
+  ENABLED_BENCHMARK_MERGESORT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-miniz was given.
+if test "${enable_benchmark_miniz+set}" = set; then :
+  enableval=$enable_benchmark_miniz; case "${enableval}" in
+      yes) benchmark_miniz=true ;;
+      no)  benchmark_miniz=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-miniz" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_miniz = xtrue; then
+  ENABLED_BENCHMARK_MINIZ_TRUE=
+  ENABLED_BENCHMARK_MINIZ_FALSE='#'
+else
+  ENABLED_BENCHMARK_MINIZ_TRUE='#'
+  ENABLED_BENCHMARK_MINIZ_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-minver was given.
+if test "${enable_benchmark_minver+set}" = set; then :
+  enableval=$enable_benchmark_minver; case "${enableval}" in
+      yes) benchmark_minver=true ;;
+      no)  benchmark_minver=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-minver" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_minver = xtrue; then
+  ENABLED_BENCHMARK_MINVER_TRUE=
+  ENABLED_BENCHMARK_MINVER_FALSE='#'
+else
+  ENABLED_BENCHMARK_MINVER_TRUE='#'
+  ENABLED_BENCHMARK_MINVER_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-nbody was given.
+if test "${enable_benchmark_nbody+set}" = set; then :
+  enableval=$enable_benchmark_nbody; case "${enableval}" in
+      yes) benchmark_nbody=true ;;
+      no)  benchmark_nbody=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-nbody" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_nbody = xtrue; then
+  ENABLED_BENCHMARK_NBODY_TRUE=
+  ENABLED_BENCHMARK_NBODY_FALSE='#'
+else
+  ENABLED_BENCHMARK_NBODY_TRUE='#'
+  ENABLED_BENCHMARK_NBODY_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-ndes was given.
+if test "${enable_benchmark_ndes+set}" = set; then :
+  enableval=$enable_benchmark_ndes; case "${enableval}" in
+      yes) benchmark_ndes=true ;;
+      no)  benchmark_ndes=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-ndes" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_ndes = xtrue; then
+  ENABLED_BENCHMARK_NDES_TRUE=
+  ENABLED_BENCHMARK_NDES_FALSE='#'
+else
+  ENABLED_BENCHMARK_NDES_TRUE='#'
+  ENABLED_BENCHMARK_NDES_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-nettle-aes was given.
+if test "${enable_benchmark_nettle_aes+set}" = set; then :
+  enableval=$enable_benchmark_nettle_aes; case "${enableval}" in
+      yes) benchmark_nettle_aes=true ;;
+      no)  benchmark_nettle_aes=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-nettle-aes" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_nettle_aes = xtrue; then
+  ENABLED_BENCHMARK_NETTLE_AES_TRUE=
+  ENABLED_BENCHMARK_NETTLE_AES_FALSE='#'
+else
+  ENABLED_BENCHMARK_NETTLE_AES_TRUE='#'
+  ENABLED_BENCHMARK_NETTLE_AES_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-nettle-arcfour was given.
+if test "${enable_benchmark_nettle_arcfour+set}" = set; then :
+  enableval=$enable_benchmark_nettle_arcfour; case "${enableval}" in
+      yes) benchmark_nettle_arcfour=true ;;
+      no)  benchmark_nettle_arcfour=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-nettle-arcfour" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_nettle_arcfour = xtrue; then
+  ENABLED_BENCHMARK_NETTLE_ARCFOUR_TRUE=
+  ENABLED_BENCHMARK_NETTLE_ARCFOUR_FALSE='#'
+else
+  ENABLED_BENCHMARK_NETTLE_ARCFOUR_TRUE='#'
+  ENABLED_BENCHMARK_NETTLE_ARCFOUR_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-nettle-cast128 was given.
+if test "${enable_benchmark_nettle_cast128+set}" = set; then :
+  enableval=$enable_benchmark_nettle_cast128; case "${enableval}" in
+      yes) benchmark_nettle_cast128=true ;;
+      no)  benchmark_nettle_cast128=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-nettle-cast128" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_nettle_cast128 = xtrue; then
+  ENABLED_BENCHMARK_NETTLE_CAST128_TRUE=
+  ENABLED_BENCHMARK_NETTLE_CAST128_FALSE='#'
+else
+  ENABLED_BENCHMARK_NETTLE_CAST128_TRUE='#'
+  ENABLED_BENCHMARK_NETTLE_CAST128_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-nettle-des was given.
+if test "${enable_benchmark_nettle_des+set}" = set; then :
+  enableval=$enable_benchmark_nettle_des; case "${enableval}" in
+      yes) benchmark_nettle_des=true ;;
+      no)  benchmark_nettle_des=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-nettle-des" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_nettle_des = xtrue; then
+  ENABLED_BENCHMARK_NETTLE_DES_TRUE=
+  ENABLED_BENCHMARK_NETTLE_DES_FALSE='#'
+else
+  ENABLED_BENCHMARK_NETTLE_DES_TRUE='#'
+  ENABLED_BENCHMARK_NETTLE_DES_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-nettle-md5 was given.
+if test "${enable_benchmark_nettle_md5+set}" = set; then :
+  enableval=$enable_benchmark_nettle_md5; case "${enableval}" in
+      yes) benchmark_nettle_md5=true ;;
+      no)  benchmark_nettle_md5=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-nettle-md5" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_nettle_md5 = xtrue; then
+  ENABLED_BENCHMARK_NETTLE_MD5_TRUE=
+  ENABLED_BENCHMARK_NETTLE_MD5_FALSE='#'
+else
+  ENABLED_BENCHMARK_NETTLE_MD5_TRUE='#'
+  ENABLED_BENCHMARK_NETTLE_MD5_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-nettle-sha256 was given.
+if test "${enable_benchmark_nettle_sha256+set}" = set; then :
+  enableval=$enable_benchmark_nettle_sha256; case "${enableval}" in
+      yes) benchmark_nettle_sha256=true ;;
+      no)  benchmark_nettle_sha256=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-nettle-sha256" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_nettle_sha256 = xtrue; then
+  ENABLED_BENCHMARK_NETTLE_SHA256_TRUE=
+  ENABLED_BENCHMARK_NETTLE_SHA256_FALSE='#'
+else
+  ENABLED_BENCHMARK_NETTLE_SHA256_TRUE='#'
+  ENABLED_BENCHMARK_NETTLE_SHA256_FALSE=
+fi
+
+
+
+# Check whether --enable-benchmark-newlib-exp was given.
+if test "${enable_benchmark_newlib_exp+set}" = set; then :
+  enableval=$enable_benchmark_newlib_exp; case "${enableval}" in
+      yes) benchmark_newlib_exp=true ;;
+      no)  benchmark_newlib_exp=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-newlib-exp" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_newlib_exp = xtrue; then
+  ENABLED_BENCHMARK_NEWLIB_EXP_TRUE=
+  ENABLED_BENCHMARK_NEWLIB_EXP_FALSE='#'
+else
+  ENABLED_BENCHMARK_NEWLIB_EXP_TRUE='#'
+  ENABLED_BENCHMARK_NEWLIB_EXP_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-newlib-log was given.
+if test "${enable_benchmark_newlib_log+set}" = set; then :
+  enableval=$enable_benchmark_newlib_log; case "${enableval}" in
+      yes) benchmark_newlib_log=true ;;
+      no)  benchmark_newlib_log=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-newlib-log" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_newlib_log = xtrue; then
+  ENABLED_BENCHMARK_NEWLIB_LOG_TRUE=
+  ENABLED_BENCHMARK_NEWLIB_LOG_FALSE='#'
+else
+  ENABLED_BENCHMARK_NEWLIB_LOG_TRUE='#'
+  ENABLED_BENCHMARK_NEWLIB_LOG_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-newlib-mod was given.
+if test "${enable_benchmark_newlib_mod+set}" = set; then :
+  enableval=$enable_benchmark_newlib_mod; case "${enableval}" in
+      yes) benchmark_newlib_mod=true ;;
+      no)  benchmark_newlib_mod=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-newlib-mod" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_newlib_mod = xtrue; then
+  ENABLED_BENCHMARK_NEWLIB_MOD_TRUE=
+  ENABLED_BENCHMARK_NEWLIB_MOD_FALSE='#'
+else
+  ENABLED_BENCHMARK_NEWLIB_MOD_TRUE='#'
+  ENABLED_BENCHMARK_NEWLIB_MOD_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-newlib-sqrt was given.
+if test "${enable_benchmark_newlib_sqrt+set}" = set; then :
+  enableval=$enable_benchmark_newlib_sqrt; case "${enableval}" in
+      yes) benchmark_newlib_sqrt=true ;;
+      no)  benchmark_newlib_sqrt=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-newlib-sqrt" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_newlib_sqrt = xtrue; then
+  ENABLED_BENCHMARK_NEWLIB_SQRT_TRUE=
+  ENABLED_BENCHMARK_NEWLIB_SQRT_FALSE='#'
+else
+  ENABLED_BENCHMARK_NEWLIB_SQRT_TRUE='#'
+  ENABLED_BENCHMARK_NEWLIB_SQRT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-ns was given.
+if test "${enable_benchmark_ns+set}" = set; then :
+  enableval=$enable_benchmark_ns; case "${enableval}" in
+      yes) benchmark_ns=true ;;
+      no)  benchmark_ns=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-ns" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_ns = xtrue; then
+  ENABLED_BENCHMARK_NS_TRUE=
+  ENABLED_BENCHMARK_NS_FALSE='#'
+else
+  ENABLED_BENCHMARK_NS_TRUE='#'
+  ENABLED_BENCHMARK_NS_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-nsichneu was given.
+if test "${enable_benchmark_nsichneu+set}" = set; then :
+  enableval=$enable_benchmark_nsichneu; case "${enableval}" in
+      yes) benchmark_nsichneu=true ;;
+      no)  benchmark_nsichneu=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-nsichneu" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_nsichneu = xtrue; then
+  ENABLED_BENCHMARK_NSICHNEU_TRUE=
+  ENABLED_BENCHMARK_NSICHNEU_FALSE='#'
+else
+  ENABLED_BENCHMARK_NSICHNEU_TRUE='#'
+  ENABLED_BENCHMARK_NSICHNEU_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-picojpeg was given.
+if test "${enable_benchmark_picojpeg+set}" = set; then :
+  enableval=$enable_benchmark_picojpeg; case "${enableval}" in
+      yes) benchmark_picojpeg=true ;;
+      no)  benchmark_picojpeg=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-picojpeg" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_picojpeg = xtrue; then
+  ENABLED_BENCHMARK_PICOJPEG_TRUE=
+  ENABLED_BENCHMARK_PICOJPEG_FALSE='#'
+else
+  ENABLED_BENCHMARK_PICOJPEG_TRUE='#'
+  ENABLED_BENCHMARK_PICOJPEG_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-prime was given.
+if test "${enable_benchmark_prime+set}" = set; then :
+  enableval=$enable_benchmark_prime; case "${enableval}" in
+      yes) benchmark_prime=true ;;
+      no)  benchmark_prime=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-prime" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_prime = xtrue; then
+  ENABLED_BENCHMARK_PRIME_TRUE=
+  ENABLED_BENCHMARK_PRIME_FALSE='#'
+else
+  ENABLED_BENCHMARK_PRIME_TRUE='#'
+  ENABLED_BENCHMARK_PRIME_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-qrduino was given.
+if test "${enable_benchmark_qrduino+set}" = set; then :
+  enableval=$enable_benchmark_qrduino; case "${enableval}" in
+      yes) benchmark_qrduino=true ;;
+      no)  benchmark_qrduino=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-qrduino" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_qrduino = xtrue; then
+  ENABLED_BENCHMARK_QRDUINO_TRUE=
+  ENABLED_BENCHMARK_QRDUINO_FALSE='#'
+else
+  ENABLED_BENCHMARK_QRDUINO_TRUE='#'
+  ENABLED_BENCHMARK_QRDUINO_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-qsort was given.
+if test "${enable_benchmark_qsort+set}" = set; then :
+  enableval=$enable_benchmark_qsort; case "${enableval}" in
+      yes) benchmark_qsort=true ;;
+      no)  benchmark_qsort=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-qsort" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_qsort = xtrue; then
+  ENABLED_BENCHMARK_QSORT_TRUE=
+  ENABLED_BENCHMARK_QSORT_FALSE='#'
+else
+  ENABLED_BENCHMARK_QSORT_TRUE='#'
+  ENABLED_BENCHMARK_QSORT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-qurt was given.
+if test "${enable_benchmark_qurt+set}" = set; then :
+  enableval=$enable_benchmark_qurt; case "${enableval}" in
+      yes) benchmark_qurt=true ;;
+      no)  benchmark_qurt=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-qurt" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_qurt = xtrue; then
+  ENABLED_BENCHMARK_QURT_TRUE=
+  ENABLED_BENCHMARK_QURT_FALSE='#'
+else
+  ENABLED_BENCHMARK_QURT_TRUE='#'
+  ENABLED_BENCHMARK_QURT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-recursion was given.
+if test "${enable_benchmark_recursion+set}" = set; then :
+  enableval=$enable_benchmark_recursion; case "${enableval}" in
+      yes) benchmark_recursion=true ;;
+      no)  benchmark_recursion=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-recursion" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_recursion = xtrue; then
+  ENABLED_BENCHMARK_RECURSION_TRUE=
+  ENABLED_BENCHMARK_RECURSION_FALSE='#'
+else
+  ENABLED_BENCHMARK_RECURSION_TRUE='#'
+  ENABLED_BENCHMARK_RECURSION_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-rijndael was given.
+if test "${enable_benchmark_rijndael+set}" = set; then :
+  enableval=$enable_benchmark_rijndael; case "${enableval}" in
+      yes) benchmark_rijndael=true ;;
+      no)  benchmark_rijndael=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-rijndael" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_rijndael = xtrue; then
+  ENABLED_BENCHMARK_RIJNDAEL_TRUE=
+  ENABLED_BENCHMARK_RIJNDAEL_FALSE='#'
+else
+  ENABLED_BENCHMARK_RIJNDAEL_TRUE='#'
+  ENABLED_BENCHMARK_RIJNDAEL_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-select was given.
+if test "${enable_benchmark_select+set}" = set; then :
+  enableval=$enable_benchmark_select; case "${enableval}" in
+      yes) benchmark_select=true ;;
+      no)  benchmark_select=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-select" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_select = xtrue; then
+  ENABLED_BENCHMARK_SELECT_TRUE=
+  ENABLED_BENCHMARK_SELECT_FALSE='#'
+else
+  ENABLED_BENCHMARK_SELECT_TRUE='#'
+  ENABLED_BENCHMARK_SELECT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-sglib-arraybinsearch was given.
+if test "${enable_benchmark_sglib_arraybinsearch+set}" = set; then :
+  enableval=$enable_benchmark_sglib_arraybinsearch; case "${enableval}" in
+      yes) benchmark_sglib_arraybinsearch=true ;;
+      no)  benchmark_sglib_arraybinsearch=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-arraybinsearch" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_sglib_arraybinsearch = xtrue; then
+  ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE=
+  ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_FALSE='#'
+else
+  ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE='#'
+  ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-sglib-arrayheapsort was given.
+if test "${enable_benchmark_sglib_arrayheapsort+set}" = set; then :
+  enableval=$enable_benchmark_sglib_arrayheapsort; case "${enableval}" in
+      yes) benchmark_sglib_arrayheapsort=true ;;
+      no)  benchmark_sglib_arrayheapsort=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-arrayheapsort" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_sglib_arrayheapsort = xtrue; then
+  ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE=
+  ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_FALSE='#'
+else
+  ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE='#'
+  ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-sglib-arrayquicksort was given.
+if test "${enable_benchmark_sglib_arrayquicksort+set}" = set; then :
+  enableval=$enable_benchmark_sglib_arrayquicksort; case "${enableval}" in
+      yes) benchmark_sglib_arrayquicksort=true ;;
+      no)  benchmark_sglib_arrayquicksort=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-arrayquicksort" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_sglib_arrayquicksort = xtrue; then
+  ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT_TRUE=
+  ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT_FALSE='#'
+else
+  ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT_TRUE='#'
+  ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-sglib-dllist was given.
+if test "${enable_benchmark_sglib_dllist+set}" = set; then :
+  enableval=$enable_benchmark_sglib_dllist; case "${enableval}" in
+      yes) benchmark_sglib_dllist=true ;;
+      no)  benchmark_sglib_dllist=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-dllist" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_sglib_dllist = xtrue; then
+  ENABLED_BENCHMARK_SGLIB_DLLIST_TRUE=
+  ENABLED_BENCHMARK_SGLIB_DLLIST_FALSE='#'
+else
+  ENABLED_BENCHMARK_SGLIB_DLLIST_TRUE='#'
+  ENABLED_BENCHMARK_SGLIB_DLLIST_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-sglib-hashtable was given.
+if test "${enable_benchmark_sglib_hashtable+set}" = set; then :
+  enableval=$enable_benchmark_sglib_hashtable; case "${enableval}" in
+      yes) benchmark_sglib_hashtable=true ;;
+      no)  benchmark_sglib_hashtable=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-hashtable" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_sglib_hashtable = xtrue; then
+  ENABLED_BENCHMARK_SGLIB_HASHTABLE_TRUE=
+  ENABLED_BENCHMARK_SGLIB_HASHTABLE_FALSE='#'
+else
+  ENABLED_BENCHMARK_SGLIB_HASHTABLE_TRUE='#'
+  ENABLED_BENCHMARK_SGLIB_HASHTABLE_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-sglib-listinsertsort was given.
+if test "${enable_benchmark_sglib_listinsertsort+set}" = set; then :
+  enableval=$enable_benchmark_sglib_listinsertsort; case "${enableval}" in
+      yes) benchmark_sglib_listinsertsort=true ;;
+      no)  benchmark_sglib_listinsertsort=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-listinsertsort" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_sglib_listinsertsort = xtrue; then
+  ENABLED_BENCHMARK_SGLIB_LISTINSERTSORT_TRUE=
+  ENABLED_BENCHMARK_SGLIB_LISTINSERTSORT_FALSE='#'
+else
+  ENABLED_BENCHMARK_SGLIB_LISTINSERTSORT_TRUE='#'
+  ENABLED_BENCHMARK_SGLIB_LISTINSERTSORT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-sglib-listsort was given.
+if test "${enable_benchmark_sglib_listsort+set}" = set; then :
+  enableval=$enable_benchmark_sglib_listsort; case "${enableval}" in
+      yes) benchmark_sglib_listsort=true ;;
+      no)  benchmark_sglib_listsort=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-listsort" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_sglib_listsort = xtrue; then
+  ENABLED_BENCHMARK_SGLIB_LISTSORT_TRUE=
+  ENABLED_BENCHMARK_SGLIB_LISTSORT_FALSE='#'
+else
+  ENABLED_BENCHMARK_SGLIB_LISTSORT_TRUE='#'
+  ENABLED_BENCHMARK_SGLIB_LISTSORT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-sglib-queue was given.
+if test "${enable_benchmark_sglib_queue+set}" = set; then :
+  enableval=$enable_benchmark_sglib_queue; case "${enableval}" in
+      yes) benchmark_sglib_queue=true ;;
+      no)  benchmark_sglib_queue=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-queue" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_sglib_queue = xtrue; then
+  ENABLED_BENCHMARK_SGLIB_QUEUE_TRUE=
+  ENABLED_BENCHMARK_SGLIB_QUEUE_FALSE='#'
+else
+  ENABLED_BENCHMARK_SGLIB_QUEUE_TRUE='#'
+  ENABLED_BENCHMARK_SGLIB_QUEUE_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-sglib-rbtree was given.
+if test "${enable_benchmark_sglib_rbtree+set}" = set; then :
+  enableval=$enable_benchmark_sglib_rbtree; case "${enableval}" in
+      yes) benchmark_sglib_rbtree=true ;;
+      no)  benchmark_sglib_rbtree=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-rbtree" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_sglib_rbtree = xtrue; then
+  ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE=
+  ENABLED_BENCHMARK_SGLIB_RBTREE_FALSE='#'
+else
+  ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE='#'
+  ENABLED_BENCHMARK_SGLIB_RBTREE_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-slre was given.
+if test "${enable_benchmark_slre+set}" = set; then :
+  enableval=$enable_benchmark_slre; case "${enableval}" in
+      yes) benchmark_slre=true ;;
+      no)  benchmark_slre=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-slre" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_slre = xtrue; then
+  ENABLED_BENCHMARK_SLRE_TRUE=
+  ENABLED_BENCHMARK_SLRE_FALSE='#'
+else
+  ENABLED_BENCHMARK_SLRE_TRUE='#'
+  ENABLED_BENCHMARK_SLRE_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-sqrt was given.
+if test "${enable_benchmark_sqrt+set}" = set; then :
+  enableval=$enable_benchmark_sqrt; case "${enableval}" in
+      yes) benchmark_sqrt=true ;;
+      no)  benchmark_sqrt=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sqrt" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_sqrt = xtrue; then
+  ENABLED_BENCHMARK_SQRT_TRUE=
+  ENABLED_BENCHMARK_SQRT_FALSE='#'
+else
+  ENABLED_BENCHMARK_SQRT_TRUE='#'
+  ENABLED_BENCHMARK_SQRT_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-st was given.
+if test "${enable_benchmark_st+set}" = set; then :
+  enableval=$enable_benchmark_st; case "${enableval}" in
+      yes) benchmark_st=true ;;
+      no)  benchmark_st=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-st" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_st = xtrue; then
+  ENABLED_BENCHMARK_ST_TRUE=
+  ENABLED_BENCHMARK_ST_FALSE='#'
+else
+  ENABLED_BENCHMARK_ST_TRUE='#'
+  ENABLED_BENCHMARK_ST_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-statemate was given.
+if test "${enable_benchmark_statemate+set}" = set; then :
+  enableval=$enable_benchmark_statemate; case "${enableval}" in
+      yes) benchmark_statemate=true ;;
+      no)  benchmark_statemate=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-statemate" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_statemate = xtrue; then
+  ENABLED_BENCHMARK_STATEMATE_TRUE=
+  ENABLED_BENCHMARK_STATEMATE_FALSE='#'
+else
+  ENABLED_BENCHMARK_STATEMATE_TRUE='#'
+  ENABLED_BENCHMARK_STATEMATE_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-stb_perlin was given.
+if test "${enable_benchmark_stb_perlin+set}" = set; then :
+  enableval=$enable_benchmark_stb_perlin; case "${enableval}" in
+      yes) benchmark_stb_perlin=true ;;
+      no)  benchmark_stb_perlin=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-stb_perlin" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_stb_perlin = xtrue; then
+  ENABLED_BENCHMARK_STB_PERLIN_TRUE=
+  ENABLED_BENCHMARK_STB_PERLIN_FALSE='#'
+else
+  ENABLED_BENCHMARK_STB_PERLIN_TRUE='#'
+  ENABLED_BENCHMARK_STB_PERLIN_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-stringsearch1 was given.
+if test "${enable_benchmark_stringsearch1+set}" = set; then :
+  enableval=$enable_benchmark_stringsearch1; case "${enableval}" in
+      yes) benchmark_stringsearch1=true ;;
+      no)  benchmark_stringsearch1=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-stringsearch1" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_stringsearch1 = xtrue; then
+  ENABLED_BENCHMARK_STRINGSEARCH1_TRUE=
+  ENABLED_BENCHMARK_STRINGSEARCH1_FALSE='#'
+else
+  ENABLED_BENCHMARK_STRINGSEARCH1_TRUE='#'
+  ENABLED_BENCHMARK_STRINGSEARCH1_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-strstr was given.
+if test "${enable_benchmark_strstr+set}" = set; then :
+  enableval=$enable_benchmark_strstr; case "${enableval}" in
+      yes) benchmark_strstr=true ;;
+      no)  benchmark_strstr=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-strstr" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_strstr = xtrue; then
+  ENABLED_BENCHMARK_STRSTR_TRUE=
+  ENABLED_BENCHMARK_STRSTR_FALSE='#'
+else
+  ENABLED_BENCHMARK_STRSTR_TRUE='#'
+  ENABLED_BENCHMARK_STRSTR_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-tarai was given.
+if test "${enable_benchmark_tarai+set}" = set; then :
+  enableval=$enable_benchmark_tarai; case "${enableval}" in
+      yes) benchmark_tarai=true ;;
+      no)  benchmark_tarai=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-tarai" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_tarai = xtrue; then
+  ENABLED_BENCHMARK_TARAI_TRUE=
+  ENABLED_BENCHMARK_TARAI_FALSE='#'
+else
+  ENABLED_BENCHMARK_TARAI_TRUE='#'
+  ENABLED_BENCHMARK_TARAI_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-template was given.
+if test "${enable_benchmark_template+set}" = set; then :
+  enableval=$enable_benchmark_template; case "${enableval}" in
+      yes) benchmark_template=true ;;
+      no)  benchmark_template=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-template" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_template = xtrue; then
+  ENABLED_BENCHMARK_TEMPLATE_TRUE=
+  ENABLED_BENCHMARK_TEMPLATE_FALSE='#'
+else
+  ENABLED_BENCHMARK_TEMPLATE_TRUE='#'
+  ENABLED_BENCHMARK_TEMPLATE_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-trio-snprintf was given.
+if test "${enable_benchmark_trio_snprintf+set}" = set; then :
+  enableval=$enable_benchmark_trio_snprintf; case "${enableval}" in
+      yes) benchmark_trio_snprintf=true ;;
+      no)  benchmark_trio_snprintf=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-trio-snprintf" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_trio_snprintf = xtrue; then
+  ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE=
+  ENABLED_BENCHMARK_TRIO_SNPRINTF_FALSE='#'
+else
+  ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE='#'
+  ENABLED_BENCHMARK_TRIO_SNPRINTF_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-trio-sscanf was given.
+if test "${enable_benchmark_trio_sscanf+set}" = set; then :
+  enableval=$enable_benchmark_trio_sscanf; case "${enableval}" in
+      yes) benchmark_trio_sscanf=true ;;
+      no)  benchmark_trio_sscanf=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-trio-sscanf" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_trio_sscanf = xtrue; then
+  ENABLED_BENCHMARK_TRIO_SSCANF_TRUE=
+  ENABLED_BENCHMARK_TRIO_SSCANF_FALSE='#'
+else
+  ENABLED_BENCHMARK_TRIO_SSCANF_TRUE='#'
+  ENABLED_BENCHMARK_TRIO_SSCANF_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-ud was given.
+if test "${enable_benchmark_ud+set}" = set; then :
+  enableval=$enable_benchmark_ud; case "${enableval}" in
+      yes) benchmark_ud=true ;;
+      no)  benchmark_ud=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-ud" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_ud = xtrue; then
+  ENABLED_BENCHMARK_UD_TRUE=
+  ENABLED_BENCHMARK_UD_FALSE='#'
+else
+  ENABLED_BENCHMARK_UD_TRUE='#'
+  ENABLED_BENCHMARK_UD_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-whetstone was given.
+if test "${enable_benchmark_whetstone+set}" = set; then :
+  enableval=$enable_benchmark_whetstone; case "${enableval}" in
+      yes) benchmark_whetstone=true ;;
+      no)  benchmark_whetstone=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-whetstone" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_whetstone = xtrue; then
+  ENABLED_BENCHMARK_WHETSTONE_TRUE=
+  ENABLED_BENCHMARK_WHETSTONE_FALSE='#'
+else
+  ENABLED_BENCHMARK_WHETSTONE_TRUE='#'
+  ENABLED_BENCHMARK_WHETSTONE_FALSE=
+fi
+
+
+# Check whether --enable-benchmark-wikisort was given.
+if test "${enable_benchmark_wikisort+set}" = set; then :
+  enableval=$enable_benchmark_wikisort; case "${enableval}" in
+      yes) benchmark_wikisort=true ;;
+      no)  benchmark_wikisort=false ;;
+      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-wikisort" "$LINENO" 5 ;;
+   esac
+fi
+
+ if test x$benchmark_wikisort = xtrue; then
+  ENABLED_BENCHMARK_WIKISORT_TRUE=
+  ENABLED_BENCHMARK_WIKISORT_FALSE='#'
+else
+  ENABLED_BENCHMARK_WIKISORT_TRUE='#'
+  ENABLED_BENCHMARK_WIKISORT_FALSE=
+fi
+
+
+
+# What to set DUMMY_* to if the dummy libraries are enabled.
+
+DUMMY_CRT0_YES="\$(top_builddir)/support/libdummycrt0.la"
+DUMMY_LIBGCC_YES="\$(top_builddir)/support/libdummygcc.la"
+DUMMY_COMPILERRT_YES="\$(top_builddir)/support/libdummycompilerrt.la"
+DUMMY_LIBC_YES="-Wl,--start-group \$(top_builddir)/support/libdummyc.la"
+DUMMY_LIBM_YES="\$(top_builddir)/support/libdummym.la"
+
+# Enable dummy libraries
+
+case "${USE_DUMMY_CRT0}" in
+   yes) DUMMY_CRT0=${DUMMY_CRT0_YES} ;;
+   no)  DUMMY_CRT0= ;;
+   *)   DUMMY_CRT0=${USE_DUMMY_CRT0} ;;
+esac
+
+case "${USE_DUMMY_LIBGCC}" in
+   yes) DUMMY_LIBGCC=${DUMMY_LIBGCC_YES} ;;
+   no)  DUMMY_LIBGCC= ;;
+   *)   DUMMY_LIBGCC=${USE_DUMMY_LIBGCC} ;;
+esac
+
+case "${USE_DUMMY_COMPILERRT}" in
+   yes) DUMMY_COMPILERRT=${DUMMY_COMPILERRT_YES} ;;
+   no)  DUMMY_COMPILERRT= ;;
+   *)   DUMMY_COMPILERRT=${USE_DUMMY_COMPILERRT} ;;
+esac
+
+case "${USE_DUMMY_LIBC}" in
+   yes) DUMMY_LIBC=${DUMMY_LIBC_YES} ;;
+   no)  DUMMY_LIBC= ;;
+   *)   DUMMY_LIBC=${USE_DUMMY_LIBC} ;;
+esac
+
+case "${USE_DUMMY_LIBM}" in
+   yes) DUMMY_LIBM=${DUMMY_LIBM_YES} ;;
+   no)  DUMMY_LIBM="-lm" ;;
+   *)   DUMMY_LIBM=${USE_DUMMY_LIBM} ;;
+esac
+
+# Check for support code
+
+ if test -f $srcdir/config/$arch/chips/$chip/chipsupport.c; then
+  CHIPSUPPORT_C_TRUE=
+  CHIPSUPPORT_C_FALSE='#'
+else
+  CHIPSUPPORT_C_TRUE='#'
+  CHIPSUPPORT_C_FALSE=
+fi
+
+
+# Check for support headers
+
+test -f $srcdir/config/$arch/boards/$board/boardsupport.h && \
+
+$as_echo "#define HAVE_BOARDSUPPORT_H 1" >>confdefs.h
+
+
+test -f $srcdir/config/$arch/chips/$chip/chipsupport.h && \
+
+$as_echo "#define HAVE_CHIPSUPPORT_H 1" >>confdefs.h
+
+
+# Test whether we have a calibration file
+
+test -f $srcdir/config/$arch/boards/$board/calibration && \
+    HAVE_CALIBRATION=yes && \
+
+$as_echo "#define HAVE_CALIBRATION 1" >>confdefs.h
+
+
+ if test x$HAVE_CALIBRATION == xyes; then
+  CALIBRATION_TRUE=
+  CALIBRATION_FALSE='#'
+else
+  CALIBRATION_TRUE='#'
+  CALIBRATION_FALSE=
+fi
+
+
+# Architecture, board and chip specific CFLAGS and LDFLAGS
+CFLAGS="$CFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
+LDFLAGS="$LDFLAGS $ARCH_LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"
 
 case `pwd` in
   *\ * | *\	*)
@@ -12370,1784 +14172,6 @@ CC=$lt_save_CC
 
 
 
-# List of all benchmarks
-
-bmlist="aha-compress          \
-        aha-mont64            \
-        bs                    \
-        bubblesort            \
-        cnt                   \
-        compress              \
-        cover                 \
-        crc                   \
-        crc32                 \
-        ctl                   \
-        ctl-stack             \
-        ctl-string            \
-        ctl-vector            \
-        cubic                 \
-        dijkstra              \
-        dtoa                  \
-        duff                  \
-        edn                   \
-        expint                \
-        fac                   \
-        fasta                 \
-        fdct                  \
-        fibcall               \
-        fir                   \
-        frac                  \
-        huffbench             \
-        insertsort            \
-        janne_complex         \
-        jfdctint              \
-        lcdnum                \
-        levenshtein           \
-        ludcmp                \
-        matmult               \
-        matmult-float         \
-        matmult-int           \
-        mergesort             \
-        miniz                 \
-        minver                \
-        nbody                 \
-        ndes                  \
-        nettle-arcfour        \
-        nettle-cast128        \
-        nettle-des            \
-        nettle-md5            \
-        nettle-sha256         \
-        newlib-exp            \
-        newlib-log            \
-        newlib-mod            \
-        newlib-sqrt           \
-        ns                    \
-        nsichneu              \
-        picojpeg              \
-        prime                 \
-        qrduino               \
-        qsort                 \
-        qurt                  \
-        recursion             \
-        rijndael              \
-        select                \
-        sglib-arraybinsearch  \
-        sglib-arrayheapsort   \
-        sglib-arrayquicksort  \
-        sglib-arraysort       \
-        sglib-dllist          \
-        sglib-hashtable       \
-        sglib-listinsertsort  \
-        sglib-listsort        \
-        sglib-queue           \
-        sglib-rbtree          \
-        slre                  \
-        sqrt                  \
-        st                    \
-        statemate             \
-        stb_perlin            \
-        stringsearch1         \
-        strstr                \
-        tarai                 \
-        template              \
-        trio                  \
-        trio-snprintf         \
-        trio-sscanf           \
-        ud                    \
-        whetstone             \
-        wikisort"
-
-# Set default values enabling all architectures
-
-benchmark_aha_compress=true
-benchmark_aha_mont64=true
-benchmark_bs=true
-benchmark_bubblesort=true
-benchmark_cnt=true
-benchmark_compress=true
-benchmark_cover=true
-benchmark_crc=true
-benchmark_crc32=true
-benchmark_ctl_stack=true
-benchmark_ctl_string=true
-benchmark_ctl_vector=true
-benchmark_cubic=true
-benchmark_dijkstra=true
-benchmark_dtoa=true
-benchmark_duff=true
-benchmark_edn=true
-benchmark_expint=true
-benchmark_fac=true
-benchmark_fasta=true
-benchmark_fdct=true
-benchmark_fibcall=true
-benchmark_fir=true
-benchmark_frac=true
-benchmark_huffbench=true
-benchmark_insertsort=true
-benchmark_janne_complex=true
-benchmark_jfdctint=true
-benchmark_lcdnum=true
-benchmark_levenshtein=true
-benchmark_ludcmp=true
-benchmark_matmult_float=true
-benchmark_matmult_int=true
-benchmark_mergesort=true
-benchmark_miniz=true
-benchmark_minver=true
-benchmark_nbody=true
-benchmark_ndes=true
-benchmark_nettle_arcfour=true
-benchmark_nettle_cast128=true
-benchmark_nettle_des=true
-benchmark_nettle_md5=true
-benchmark_nettle_sha256=true
-benchmark_newlib_exp=true
-benchmark_newlib_log=true
-benchmark_newlib_mod=true
-benchmark_newlib_sqrt=true
-benchmark_ns=true
-benchmark_nsichneu=true
-benchmark_picojpeg=true
-benchmark_prime=true
-benchmark_qrduino=true
-benchmark_qsort=true
-benchmark_qurt=true
-benchmark_recursion=true
-benchmark_rijndael=true
-benchmark_select=true
-benchmark_sglib_arraybinsearch=true
-benchmark_sglib_arrayheapsort=true
-benchmark_sglib_arrayquicksort=true
-benchmark_sglib_dllist=true
-benchmark_sglib_hashtable=true
-benchmark_sglib_listinsertsort=true
-benchmark_sglib_listsort=true
-benchmark_sglib_queue=true
-benchmark_sglib_rbtree=true
-benchmark_slre=true
-benchmark_sqrt=true
-benchmark_st=true
-benchmark_statemate=true
-benchmark_stb_perlin=true
-benchmark_stringsearch1=true
-benchmark_strstr=true
-benchmark_tarai=true
-benchmark_template=true
-benchmark_trio_snprintf=true
-benchmark_trio_sscanf=true
-benchmark_ud=true
-benchmark_whetstone=true
-benchmark_wikisort=true
-
-# Work out which architecture we are targeting
-# Also pass this through to be substituted
-
-arch=$host_cpu
-
-# Option for selecting the target board
-
-
-# Check whether --with-board was given.
-if test "${with_board+set}" = set; then :
-  withval=$with_board; board=$with_board
-else
-  board=none
-fi
-
-
-# Option for selecting the target chip
-
-
-# Check whether --with-chip was given.
-if test "${with_chip+set}" = set; then :
-  withval=$with_chip; chip=$with_chip
-else
-  chip=generic
-fi
-
-
-# Default settings for dummy libraries. These can be overridden by the
-# chip configuration or configure flags. We default to having them all
-# off because we expect the default setup to produce compiled code that
-# can actually be executed - however, the dummy libraries are helpful
-# for analysing code size without library code inclusion confounding
-# things.
-
-USE_DUMMY_CRT0=no
-USE_DUMMY_LIBGCC=no
-USE_DUMMY_COMPILERRT=no
-USE_DUMMY_LIBC=no
-USE_DUMMY_LIBM=no
-
-# Execute any architecture, board or chip specific configuration. These can
-# set architecture, chip and board CPPFLAGS, CFLAGS and LDFLAGS and exclude
-# individual tests by setting benchmark_<bm> to false.
-
-# We can't use AC_CHECK_FILE, because we are cross-compiling, and that
-# prohibits use of AC_CHECK_FILE.
-
-if test -f $srcdir/config/$arch/arch.cfg; then :
-  source $srcdir/config/$arch/arch.cfg
-fi
-
-if test -d $srcdir/config/$arch/chips/$chip; then :
-
-else
-  as_fn_error $? "Chip config directory \"$chip\" does not exist" "$LINENO" 5
-fi
-
-if test -f $srcdir/config/$arch/chips/$chip/chip.cfg; then :
-  source $srcdir/config/$arch/chips/$chip/chip.cfg
-fi
-
-if test -d $srcdir/config/$arch/boards/$board; then :
-
-else
-  as_fn_error $? "Board config directory \"$board\" does not exist" "$LINENO" 5
-fi
-
-if test -f $srcdir/config/$arch/boards/$board/board.cfg ; then :
-  source $srcdir/config/$arch/boards/$board/board.cfg
-fi
-
-# Options for enabling/disabling each test in alphabetical order (see
-# genmacros.sh for a script to generate all of this). To add one new test just
-# insert the same pattern at the correct place in the list.
-
-# Remember that ctl, matmult, sglib-arraysort and trio are not benchmarks
-# themselves, but the frameworks from which others are created.
-
-# NOTE. There is the m4_foreach macro, but getting it to work for this seems to
-# be impossible
-
-# Check whether --enable-benchmark-aha-compress was given.
-if test "${enable_benchmark_aha_compress+set}" = set; then :
-  enableval=$enable_benchmark_aha_compress; case "${enableval}" in
-      yes) benchmark_aha_compress=true ;;
-      no)  benchmark_aha_compress=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-aha-compress" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_aha_compress = xtrue; then
-  ENABLED_BENCHMARK_AHA_COMPRESS_TRUE=
-  ENABLED_BENCHMARK_AHA_COMPRESS_FALSE='#'
-else
-  ENABLED_BENCHMARK_AHA_COMPRESS_TRUE='#'
-  ENABLED_BENCHMARK_AHA_COMPRESS_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-aha-mont64 was given.
-if test "${enable_benchmark_aha_mont64+set}" = set; then :
-  enableval=$enable_benchmark_aha_mont64; case "${enableval}" in
-      yes) benchmark_aha_mont64=true ;;
-      no)  benchmark_aha_mont64=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-aha-mont64" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_aha_mont64 = xtrue; then
-  ENABLED_BENCHMARK_AHA_MONT64_TRUE=
-  ENABLED_BENCHMARK_AHA_MONT64_FALSE='#'
-else
-  ENABLED_BENCHMARK_AHA_MONT64_TRUE='#'
-  ENABLED_BENCHMARK_AHA_MONT64_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-bs was given.
-if test "${enable_benchmark_bs+set}" = set; then :
-  enableval=$enable_benchmark_bs; case "${enableval}" in
-      yes) benchmark_bs=true ;;
-      no)  benchmark_bs=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-bs" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_bs = xtrue; then
-  ENABLED_BENCHMARK_BS_TRUE=
-  ENABLED_BENCHMARK_BS_FALSE='#'
-else
-  ENABLED_BENCHMARK_BS_TRUE='#'
-  ENABLED_BENCHMARK_BS_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-bubblesort was given.
-if test "${enable_benchmark_bubblesort+set}" = set; then :
-  enableval=$enable_benchmark_bubblesort; case "${enableval}" in
-      yes) benchmark_bubblesort=true ;;
-      no)  benchmark_bubblesort=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-bubblesort" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_bubblesort = xtrue; then
-  ENABLED_BENCHMARK_BUBBLESORT_TRUE=
-  ENABLED_BENCHMARK_BUBBLESORT_FALSE='#'
-else
-  ENABLED_BENCHMARK_BUBBLESORT_TRUE='#'
-  ENABLED_BENCHMARK_BUBBLESORT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-cnt was given.
-if test "${enable_benchmark_cnt+set}" = set; then :
-  enableval=$enable_benchmark_cnt; case "${enableval}" in
-      yes) benchmark_cnt=true ;;
-      no)  benchmark_cnt=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-cnt" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_cnt = xtrue; then
-  ENABLED_BENCHMARK_CNT_TRUE=
-  ENABLED_BENCHMARK_CNT_FALSE='#'
-else
-  ENABLED_BENCHMARK_CNT_TRUE='#'
-  ENABLED_BENCHMARK_CNT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-compress was given.
-if test "${enable_benchmark_compress+set}" = set; then :
-  enableval=$enable_benchmark_compress; case "${enableval}" in
-      yes) benchmark_compress=true ;;
-      no)  benchmark_compress=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-compress" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_compress = xtrue; then
-  ENABLED_BENCHMARK_COMPRESS_TRUE=
-  ENABLED_BENCHMARK_COMPRESS_FALSE='#'
-else
-  ENABLED_BENCHMARK_COMPRESS_TRUE='#'
-  ENABLED_BENCHMARK_COMPRESS_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-cover was given.
-if test "${enable_benchmark_cover+set}" = set; then :
-  enableval=$enable_benchmark_cover; case "${enableval}" in
-      yes) benchmark_cover=true ;;
-      no)  benchmark_cover=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-cover" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_cover = xtrue; then
-  ENABLED_BENCHMARK_COVER_TRUE=
-  ENABLED_BENCHMARK_COVER_FALSE='#'
-else
-  ENABLED_BENCHMARK_COVER_TRUE='#'
-  ENABLED_BENCHMARK_COVER_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-crc was given.
-if test "${enable_benchmark_crc+set}" = set; then :
-  enableval=$enable_benchmark_crc; case "${enableval}" in
-      yes) benchmark_crc=true ;;
-      no)  benchmark_crc=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-crc" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_crc = xtrue; then
-  ENABLED_BENCHMARK_CRC_TRUE=
-  ENABLED_BENCHMARK_CRC_FALSE='#'
-else
-  ENABLED_BENCHMARK_CRC_TRUE='#'
-  ENABLED_BENCHMARK_CRC_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-crc32 was given.
-if test "${enable_benchmark_crc32+set}" = set; then :
-  enableval=$enable_benchmark_crc32; case "${enableval}" in
-      yes) benchmark_crc32=true ;;
-      no)  benchmark_crc32=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-crc32" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_crc32 = xtrue; then
-  ENABLED_BENCHMARK_CRC32_TRUE=
-  ENABLED_BENCHMARK_CRC32_FALSE='#'
-else
-  ENABLED_BENCHMARK_CRC32_TRUE='#'
-  ENABLED_BENCHMARK_CRC32_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-ctl-stack was given.
-if test "${enable_benchmark_ctl_stack+set}" = set; then :
-  enableval=$enable_benchmark_ctl_stack; case "${enableval}" in
-      yes) benchmark_ctl_stack=true ;;
-      no)  benchmark_ctl_stack=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-ctl-stack" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_ctl_stack = xtrue; then
-  ENABLED_BENCHMARK_CTL_STACK_TRUE=
-  ENABLED_BENCHMARK_CTL_STACK_FALSE='#'
-else
-  ENABLED_BENCHMARK_CTL_STACK_TRUE='#'
-  ENABLED_BENCHMARK_CTL_STACK_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-ctl-string was given.
-if test "${enable_benchmark_ctl_string+set}" = set; then :
-  enableval=$enable_benchmark_ctl_string; case "${enableval}" in
-      yes) benchmark_ctl_string=true ;;
-      no)  benchmark_ctl_string=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-ctl-string" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_ctl_string = xtrue; then
-  ENABLED_BENCHMARK_CTL_STRING_TRUE=
-  ENABLED_BENCHMARK_CTL_STRING_FALSE='#'
-else
-  ENABLED_BENCHMARK_CTL_STRING_TRUE='#'
-  ENABLED_BENCHMARK_CTL_STRING_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-ctl-vector was given.
-if test "${enable_benchmark_ctl_vector+set}" = set; then :
-  enableval=$enable_benchmark_ctl_vector; case "${enableval}" in
-      yes) benchmark_ctl_vector=true ;;
-      no)  benchmark_ctl_vector=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-ctl-vector" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_ctl_vector = xtrue; then
-  ENABLED_BENCHMARK_CTL_VECTOR_TRUE=
-  ENABLED_BENCHMARK_CTL_VECTOR_FALSE='#'
-else
-  ENABLED_BENCHMARK_CTL_VECTOR_TRUE='#'
-  ENABLED_BENCHMARK_CTL_VECTOR_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-cubic was given.
-if test "${enable_benchmark_cubic+set}" = set; then :
-  enableval=$enable_benchmark_cubic; case "${enableval}" in
-      yes) benchmark_cubic=true ;;
-      no)  benchmark_cubic=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-cubic" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_cubic = xtrue; then
-  ENABLED_BENCHMARK_CUBIC_TRUE=
-  ENABLED_BENCHMARK_CUBIC_FALSE='#'
-else
-  ENABLED_BENCHMARK_CUBIC_TRUE='#'
-  ENABLED_BENCHMARK_CUBIC_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-dijkstra was given.
-if test "${enable_benchmark_dijkstra+set}" = set; then :
-  enableval=$enable_benchmark_dijkstra; case "${enableval}" in
-      yes) benchmark_dijkstra=true ;;
-      no)  benchmark_dijkstra=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-dijkstra" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_dijkstra = xtrue; then
-  ENABLED_BENCHMARK_DIJKSTRA_TRUE=
-  ENABLED_BENCHMARK_DIJKSTRA_FALSE='#'
-else
-  ENABLED_BENCHMARK_DIJKSTRA_TRUE='#'
-  ENABLED_BENCHMARK_DIJKSTRA_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-dtoa was given.
-if test "${enable_benchmark_dtoa+set}" = set; then :
-  enableval=$enable_benchmark_dtoa; case "${enableval}" in
-      yes) benchmark_dtoa=true ;;
-      no)  benchmark_dtoa=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-dtoa" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_dtoa = xtrue; then
-  ENABLED_BENCHMARK_DTOA_TRUE=
-  ENABLED_BENCHMARK_DTOA_FALSE='#'
-else
-  ENABLED_BENCHMARK_DTOA_TRUE='#'
-  ENABLED_BENCHMARK_DTOA_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-duff was given.
-if test "${enable_benchmark_duff+set}" = set; then :
-  enableval=$enable_benchmark_duff; case "${enableval}" in
-      yes) benchmark_duff=true ;;
-      no)  benchmark_duff=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-duff" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_duff = xtrue; then
-  ENABLED_BENCHMARK_DUFF_TRUE=
-  ENABLED_BENCHMARK_DUFF_FALSE='#'
-else
-  ENABLED_BENCHMARK_DUFF_TRUE='#'
-  ENABLED_BENCHMARK_DUFF_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-edn was given.
-if test "${enable_benchmark_edn+set}" = set; then :
-  enableval=$enable_benchmark_edn; case "${enableval}" in
-      yes) benchmark_edn=true ;;
-      no)  benchmark_edn=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-edn" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_edn = xtrue; then
-  ENABLED_BENCHMARK_EDN_TRUE=
-  ENABLED_BENCHMARK_EDN_FALSE='#'
-else
-  ENABLED_BENCHMARK_EDN_TRUE='#'
-  ENABLED_BENCHMARK_EDN_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-expint was given.
-if test "${enable_benchmark_expint+set}" = set; then :
-  enableval=$enable_benchmark_expint; case "${enableval}" in
-      yes) benchmark_expint=true ;;
-      no)  benchmark_expint=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-expint" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_expint = xtrue; then
-  ENABLED_BENCHMARK_EXPINT_TRUE=
-  ENABLED_BENCHMARK_EXPINT_FALSE='#'
-else
-  ENABLED_BENCHMARK_EXPINT_TRUE='#'
-  ENABLED_BENCHMARK_EXPINT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-fac was given.
-if test "${enable_benchmark_fac+set}" = set; then :
-  enableval=$enable_benchmark_fac; case "${enableval}" in
-      yes) benchmark_fac=true ;;
-      no)  benchmark_fac=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-fac" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_fac = xtrue; then
-  ENABLED_BENCHMARK_FAC_TRUE=
-  ENABLED_BENCHMARK_FAC_FALSE='#'
-else
-  ENABLED_BENCHMARK_FAC_TRUE='#'
-  ENABLED_BENCHMARK_FAC_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-fasta was given.
-if test "${enable_benchmark_fasta+set}" = set; then :
-  enableval=$enable_benchmark_fasta; case "${enableval}" in
-      yes) benchmark_fasta=true ;;
-      no)  benchmark_fasta=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-fasta" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_fasta = xtrue; then
-  ENABLED_BENCHMARK_FASTA_TRUE=
-  ENABLED_BENCHMARK_FASTA_FALSE='#'
-else
-  ENABLED_BENCHMARK_FASTA_TRUE='#'
-  ENABLED_BENCHMARK_FASTA_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-fdct was given.
-if test "${enable_benchmark_fdct+set}" = set; then :
-  enableval=$enable_benchmark_fdct; case "${enableval}" in
-      yes) benchmark_fdct=true ;;
-      no)  benchmark_fdct=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-fdct" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_fdct = xtrue; then
-  ENABLED_BENCHMARK_FDCT_TRUE=
-  ENABLED_BENCHMARK_FDCT_FALSE='#'
-else
-  ENABLED_BENCHMARK_FDCT_TRUE='#'
-  ENABLED_BENCHMARK_FDCT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-fibcall was given.
-if test "${enable_benchmark_fibcall+set}" = set; then :
-  enableval=$enable_benchmark_fibcall; case "${enableval}" in
-      yes) benchmark_fibcall=true ;;
-      no)  benchmark_fibcall=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-fibcall" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_fibcall = xtrue; then
-  ENABLED_BENCHMARK_FIBCALL_TRUE=
-  ENABLED_BENCHMARK_FIBCALL_FALSE='#'
-else
-  ENABLED_BENCHMARK_FIBCALL_TRUE='#'
-  ENABLED_BENCHMARK_FIBCALL_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-fir was given.
-if test "${enable_benchmark_fir+set}" = set; then :
-  enableval=$enable_benchmark_fir; case "${enableval}" in
-      yes) benchmark_fir=true ;;
-      no)  benchmark_fir=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-fir" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_fir = xtrue; then
-  ENABLED_BENCHMARK_FIR_TRUE=
-  ENABLED_BENCHMARK_FIR_FALSE='#'
-else
-  ENABLED_BENCHMARK_FIR_TRUE='#'
-  ENABLED_BENCHMARK_FIR_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-frac was given.
-if test "${enable_benchmark_frac+set}" = set; then :
-  enableval=$enable_benchmark_frac; case "${enableval}" in
-      yes) benchmark_frac=true ;;
-      no)  benchmark_frac=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-frac" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_frac = xtrue; then
-  ENABLED_BENCHMARK_FRAC_TRUE=
-  ENABLED_BENCHMARK_FRAC_FALSE='#'
-else
-  ENABLED_BENCHMARK_FRAC_TRUE='#'
-  ENABLED_BENCHMARK_FRAC_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-huffbench was given.
-if test "${enable_benchmark_huffbench+set}" = set; then :
-  enableval=$enable_benchmark_huffbench; case "${enableval}" in
-      yes) benchmark_huffbench=true ;;
-      no)  benchmark_huffbench=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-huffbench" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_huffbench = xtrue; then
-  ENABLED_BENCHMARK_HUFFBENCH_TRUE=
-  ENABLED_BENCHMARK_HUFFBENCH_FALSE='#'
-else
-  ENABLED_BENCHMARK_HUFFBENCH_TRUE='#'
-  ENABLED_BENCHMARK_HUFFBENCH_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-insertsort was given.
-if test "${enable_benchmark_insertsort+set}" = set; then :
-  enableval=$enable_benchmark_insertsort; case "${enableval}" in
-      yes) benchmark_insertsort=true ;;
-      no)  benchmark_insertsort=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-insertsort" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_insertsort = xtrue; then
-  ENABLED_BENCHMARK_INSERTSORT_TRUE=
-  ENABLED_BENCHMARK_INSERTSORT_FALSE='#'
-else
-  ENABLED_BENCHMARK_INSERTSORT_TRUE='#'
-  ENABLED_BENCHMARK_INSERTSORT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-janne_complex was given.
-if test "${enable_benchmark_janne_complex+set}" = set; then :
-  enableval=$enable_benchmark_janne_complex; case "${enableval}" in
-      yes) benchmark_janne_complex=true ;;
-      no)  benchmark_janne_complex=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-janne_complex" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_janne_complex = xtrue; then
-  ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE=
-  ENABLED_BENCHMARK_JANNE_COMPLEX_FALSE='#'
-else
-  ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE='#'
-  ENABLED_BENCHMARK_JANNE_COMPLEX_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-jfdctint was given.
-if test "${enable_benchmark_jfdctint+set}" = set; then :
-  enableval=$enable_benchmark_jfdctint; case "${enableval}" in
-      yes) benchmark_jfdctint=true ;;
-      no)  benchmark_jfdctint=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-jfdctint" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_jfdctint = xtrue; then
-  ENABLED_BENCHMARK_JFDCTINT_TRUE=
-  ENABLED_BENCHMARK_JFDCTINT_FALSE='#'
-else
-  ENABLED_BENCHMARK_JFDCTINT_TRUE='#'
-  ENABLED_BENCHMARK_JFDCTINT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-lcdnum was given.
-if test "${enable_benchmark_lcdnum+set}" = set; then :
-  enableval=$enable_benchmark_lcdnum; case "${enableval}" in
-      yes) benchmark_lcdnum=true ;;
-      no)  benchmark_lcdnum=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-lcdnum" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_lcdnum = xtrue; then
-  ENABLED_BENCHMARK_LCDNUM_TRUE=
-  ENABLED_BENCHMARK_LCDNUM_FALSE='#'
-else
-  ENABLED_BENCHMARK_LCDNUM_TRUE='#'
-  ENABLED_BENCHMARK_LCDNUM_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-levenshtein was given.
-if test "${enable_benchmark_levenshtein+set}" = set; then :
-  enableval=$enable_benchmark_levenshtein; case "${enableval}" in
-      yes) benchmark_levenshtein=true ;;
-      no)  benchmark_levenshtein=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-levenshtein" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_levenshtein = xtrue; then
-  ENABLED_BENCHMARK_LEVENSHTEIN_TRUE=
-  ENABLED_BENCHMARK_LEVENSHTEIN_FALSE='#'
-else
-  ENABLED_BENCHMARK_LEVENSHTEIN_TRUE='#'
-  ENABLED_BENCHMARK_LEVENSHTEIN_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-ludcmp was given.
-if test "${enable_benchmark_ludcmp+set}" = set; then :
-  enableval=$enable_benchmark_ludcmp; case "${enableval}" in
-      yes) benchmark_ludcmp=true ;;
-      no)  benchmark_ludcmp=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-ludcmp" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_ludcmp = xtrue; then
-  ENABLED_BENCHMARK_LUDCMP_TRUE=
-  ENABLED_BENCHMARK_LUDCMP_FALSE='#'
-else
-  ENABLED_BENCHMARK_LUDCMP_TRUE='#'
-  ENABLED_BENCHMARK_LUDCMP_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-matmult-float was given.
-if test "${enable_benchmark_matmult_float+set}" = set; then :
-  enableval=$enable_benchmark_matmult_float; case "${enableval}" in
-      yes) benchmark_matmult_float=true ;;
-      no)  benchmark_matmult_float=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-matmult-float" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_matmult_float = xtrue; then
-  ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE=
-  ENABLED_BENCHMARK_MATMULT_FLOAT_FALSE='#'
-else
-  ENABLED_BENCHMARK_MATMULT_FLOAT_TRUE='#'
-  ENABLED_BENCHMARK_MATMULT_FLOAT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-matmult-int was given.
-if test "${enable_benchmark_matmult_int+set}" = set; then :
-  enableval=$enable_benchmark_matmult_int; case "${enableval}" in
-      yes) benchmark_matmult_int=true ;;
-      no)  benchmark_matmult_int=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-matmult-int" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_matmult_int = xtrue; then
-  ENABLED_BENCHMARK_MATMULT_INT_TRUE=
-  ENABLED_BENCHMARK_MATMULT_INT_FALSE='#'
-else
-  ENABLED_BENCHMARK_MATMULT_INT_TRUE='#'
-  ENABLED_BENCHMARK_MATMULT_INT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-mergesort was given.
-if test "${enable_benchmark_mergesort+set}" = set; then :
-  enableval=$enable_benchmark_mergesort; case "${enableval}" in
-      yes) benchmark_mergesort=true ;;
-      no)  benchmark_mergesort=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-mergesort" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_mergesort = xtrue; then
-  ENABLED_BENCHMARK_MERGESORT_TRUE=
-  ENABLED_BENCHMARK_MERGESORT_FALSE='#'
-else
-  ENABLED_BENCHMARK_MERGESORT_TRUE='#'
-  ENABLED_BENCHMARK_MERGESORT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-miniz was given.
-if test "${enable_benchmark_miniz+set}" = set; then :
-  enableval=$enable_benchmark_miniz; case "${enableval}" in
-      yes) benchmark_miniz=true ;;
-      no)  benchmark_miniz=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-miniz" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_miniz = xtrue; then
-  ENABLED_BENCHMARK_MINIZ_TRUE=
-  ENABLED_BENCHMARK_MINIZ_FALSE='#'
-else
-  ENABLED_BENCHMARK_MINIZ_TRUE='#'
-  ENABLED_BENCHMARK_MINIZ_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-minver was given.
-if test "${enable_benchmark_minver+set}" = set; then :
-  enableval=$enable_benchmark_minver; case "${enableval}" in
-      yes) benchmark_minver=true ;;
-      no)  benchmark_minver=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-minver" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_minver = xtrue; then
-  ENABLED_BENCHMARK_MINVER_TRUE=
-  ENABLED_BENCHMARK_MINVER_FALSE='#'
-else
-  ENABLED_BENCHMARK_MINVER_TRUE='#'
-  ENABLED_BENCHMARK_MINVER_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-nbody was given.
-if test "${enable_benchmark_nbody+set}" = set; then :
-  enableval=$enable_benchmark_nbody; case "${enableval}" in
-      yes) benchmark_nbody=true ;;
-      no)  benchmark_nbody=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-nbody" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_nbody = xtrue; then
-  ENABLED_BENCHMARK_NBODY_TRUE=
-  ENABLED_BENCHMARK_NBODY_FALSE='#'
-else
-  ENABLED_BENCHMARK_NBODY_TRUE='#'
-  ENABLED_BENCHMARK_NBODY_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-ndes was given.
-if test "${enable_benchmark_ndes+set}" = set; then :
-  enableval=$enable_benchmark_ndes; case "${enableval}" in
-      yes) benchmark_ndes=true ;;
-      no)  benchmark_ndes=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-ndes" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_ndes = xtrue; then
-  ENABLED_BENCHMARK_NDES_TRUE=
-  ENABLED_BENCHMARK_NDES_FALSE='#'
-else
-  ENABLED_BENCHMARK_NDES_TRUE='#'
-  ENABLED_BENCHMARK_NDES_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-nettle-arcfour was given.
-if test "${enable_benchmark_nettle_arcfour+set}" = set; then :
-  enableval=$enable_benchmark_nettle_arcfour; case "${enableval}" in
-      yes) benchmark_nettle_arcfour=true ;;
-      no)  benchmark_nettle_arcfour=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-nettle-arcfour" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_nettle_arcfour = xtrue; then
-  ENABLED_BENCHMARK_NETTLE_ARCFOUR_TRUE=
-  ENABLED_BENCHMARK_NETTLE_ARCFOUR_FALSE='#'
-else
-  ENABLED_BENCHMARK_NETTLE_ARCFOUR_TRUE='#'
-  ENABLED_BENCHMARK_NETTLE_ARCFOUR_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-nettle-cast128 was given.
-if test "${enable_benchmark_nettle_cast128+set}" = set; then :
-  enableval=$enable_benchmark_nettle_cast128; case "${enableval}" in
-      yes) benchmark_nettle_cast128=true ;;
-      no)  benchmark_nettle_cast128=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-nettle-cast128" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_nettle_cast128 = xtrue; then
-  ENABLED_BENCHMARK_NETTLE_CAST128_TRUE=
-  ENABLED_BENCHMARK_NETTLE_CAST128_FALSE='#'
-else
-  ENABLED_BENCHMARK_NETTLE_CAST128_TRUE='#'
-  ENABLED_BENCHMARK_NETTLE_CAST128_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-nettle-des was given.
-if test "${enable_benchmark_nettle_des+set}" = set; then :
-  enableval=$enable_benchmark_nettle_des; case "${enableval}" in
-      yes) benchmark_nettle_des=true ;;
-      no)  benchmark_nettle_des=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-nettle-des" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_nettle_des = xtrue; then
-  ENABLED_BENCHMARK_NETTLE_DES_TRUE=
-  ENABLED_BENCHMARK_NETTLE_DES_FALSE='#'
-else
-  ENABLED_BENCHMARK_NETTLE_DES_TRUE='#'
-  ENABLED_BENCHMARK_NETTLE_DES_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-nettle-md5 was given.
-if test "${enable_benchmark_nettle_md5+set}" = set; then :
-  enableval=$enable_benchmark_nettle_md5; case "${enableval}" in
-      yes) benchmark_nettle_md5=true ;;
-      no)  benchmark_nettle_md5=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-nettle-md5" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_nettle_md5 = xtrue; then
-  ENABLED_BENCHMARK_NETTLE_MD5_TRUE=
-  ENABLED_BENCHMARK_NETTLE_MD5_FALSE='#'
-else
-  ENABLED_BENCHMARK_NETTLE_MD5_TRUE='#'
-  ENABLED_BENCHMARK_NETTLE_MD5_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-nettle-sha256 was given.
-if test "${enable_benchmark_nettle_sha256+set}" = set; then :
-  enableval=$enable_benchmark_nettle_sha256; case "${enableval}" in
-      yes) benchmark_nettle_sha256=true ;;
-      no)  benchmark_nettle_sha256=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-nettle-sha256" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_nettle_sha256 = xtrue; then
-  ENABLED_BENCHMARK_NETTLE_SHA256_TRUE=
-  ENABLED_BENCHMARK_NETTLE_SHA256_FALSE='#'
-else
-  ENABLED_BENCHMARK_NETTLE_SHA256_TRUE='#'
-  ENABLED_BENCHMARK_NETTLE_SHA256_FALSE=
-fi
-
-
-
-# Check whether --enable-benchmark-newlib-exp was given.
-if test "${enable_benchmark_newlib_exp+set}" = set; then :
-  enableval=$enable_benchmark_newlib_exp; case "${enableval}" in
-      yes) benchmark_newlib_exp=true ;;
-      no)  benchmark_newlib_exp=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-newlib-exp" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_newlib_exp = xtrue; then
-  ENABLED_BENCHMARK_NEWLIB_EXP_TRUE=
-  ENABLED_BENCHMARK_NEWLIB_EXP_FALSE='#'
-else
-  ENABLED_BENCHMARK_NEWLIB_EXP_TRUE='#'
-  ENABLED_BENCHMARK_NEWLIB_EXP_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-newlib-log was given.
-if test "${enable_benchmark_newlib_log+set}" = set; then :
-  enableval=$enable_benchmark_newlib_log; case "${enableval}" in
-      yes) benchmark_newlib_log=true ;;
-      no)  benchmark_newlib_log=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-newlib-log" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_newlib_log = xtrue; then
-  ENABLED_BENCHMARK_NEWLIB_LOG_TRUE=
-  ENABLED_BENCHMARK_NEWLIB_LOG_FALSE='#'
-else
-  ENABLED_BENCHMARK_NEWLIB_LOG_TRUE='#'
-  ENABLED_BENCHMARK_NEWLIB_LOG_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-newlib-mod was given.
-if test "${enable_benchmark_newlib_mod+set}" = set; then :
-  enableval=$enable_benchmark_newlib_mod; case "${enableval}" in
-      yes) benchmark_newlib_mod=true ;;
-      no)  benchmark_newlib_mod=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-newlib-mod" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_newlib_mod = xtrue; then
-  ENABLED_BENCHMARK_NEWLIB_MOD_TRUE=
-  ENABLED_BENCHMARK_NEWLIB_MOD_FALSE='#'
-else
-  ENABLED_BENCHMARK_NEWLIB_MOD_TRUE='#'
-  ENABLED_BENCHMARK_NEWLIB_MOD_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-newlib-sqrt was given.
-if test "${enable_benchmark_newlib_sqrt+set}" = set; then :
-  enableval=$enable_benchmark_newlib_sqrt; case "${enableval}" in
-      yes) benchmark_newlib_sqrt=true ;;
-      no)  benchmark_newlib_sqrt=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-newlib-sqrt" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_newlib_sqrt = xtrue; then
-  ENABLED_BENCHMARK_NEWLIB_SQRT_TRUE=
-  ENABLED_BENCHMARK_NEWLIB_SQRT_FALSE='#'
-else
-  ENABLED_BENCHMARK_NEWLIB_SQRT_TRUE='#'
-  ENABLED_BENCHMARK_NEWLIB_SQRT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-ns was given.
-if test "${enable_benchmark_ns+set}" = set; then :
-  enableval=$enable_benchmark_ns; case "${enableval}" in
-      yes) benchmark_ns=true ;;
-      no)  benchmark_ns=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-ns" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_ns = xtrue; then
-  ENABLED_BENCHMARK_NS_TRUE=
-  ENABLED_BENCHMARK_NS_FALSE='#'
-else
-  ENABLED_BENCHMARK_NS_TRUE='#'
-  ENABLED_BENCHMARK_NS_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-nsichneu was given.
-if test "${enable_benchmark_nsichneu+set}" = set; then :
-  enableval=$enable_benchmark_nsichneu; case "${enableval}" in
-      yes) benchmark_nsichneu=true ;;
-      no)  benchmark_nsichneu=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-nsichneu" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_nsichneu = xtrue; then
-  ENABLED_BENCHMARK_NSICHNEU_TRUE=
-  ENABLED_BENCHMARK_NSICHNEU_FALSE='#'
-else
-  ENABLED_BENCHMARK_NSICHNEU_TRUE='#'
-  ENABLED_BENCHMARK_NSICHNEU_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-picojpeg was given.
-if test "${enable_benchmark_picojpeg+set}" = set; then :
-  enableval=$enable_benchmark_picojpeg; case "${enableval}" in
-      yes) benchmark_picojpeg=true ;;
-      no)  benchmark_picojpeg=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-picojpeg" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_picojpeg = xtrue; then
-  ENABLED_BENCHMARK_PICOJPEG_TRUE=
-  ENABLED_BENCHMARK_PICOJPEG_FALSE='#'
-else
-  ENABLED_BENCHMARK_PICOJPEG_TRUE='#'
-  ENABLED_BENCHMARK_PICOJPEG_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-prime was given.
-if test "${enable_benchmark_prime+set}" = set; then :
-  enableval=$enable_benchmark_prime; case "${enableval}" in
-      yes) benchmark_prime=true ;;
-      no)  benchmark_prime=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-prime" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_prime = xtrue; then
-  ENABLED_BENCHMARK_PRIME_TRUE=
-  ENABLED_BENCHMARK_PRIME_FALSE='#'
-else
-  ENABLED_BENCHMARK_PRIME_TRUE='#'
-  ENABLED_BENCHMARK_PRIME_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-qrduino was given.
-if test "${enable_benchmark_qrduino+set}" = set; then :
-  enableval=$enable_benchmark_qrduino; case "${enableval}" in
-      yes) benchmark_qrduino=true ;;
-      no)  benchmark_qrduino=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-qrduino" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_qrduino = xtrue; then
-  ENABLED_BENCHMARK_QRDUINO_TRUE=
-  ENABLED_BENCHMARK_QRDUINO_FALSE='#'
-else
-  ENABLED_BENCHMARK_QRDUINO_TRUE='#'
-  ENABLED_BENCHMARK_QRDUINO_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-qsort was given.
-if test "${enable_benchmark_qsort+set}" = set; then :
-  enableval=$enable_benchmark_qsort; case "${enableval}" in
-      yes) benchmark_qsort=true ;;
-      no)  benchmark_qsort=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-qsort" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_qsort = xtrue; then
-  ENABLED_BENCHMARK_QSORT_TRUE=
-  ENABLED_BENCHMARK_QSORT_FALSE='#'
-else
-  ENABLED_BENCHMARK_QSORT_TRUE='#'
-  ENABLED_BENCHMARK_QSORT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-qurt was given.
-if test "${enable_benchmark_qurt+set}" = set; then :
-  enableval=$enable_benchmark_qurt; case "${enableval}" in
-      yes) benchmark_qurt=true ;;
-      no)  benchmark_qurt=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-qurt" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_qurt = xtrue; then
-  ENABLED_BENCHMARK_QURT_TRUE=
-  ENABLED_BENCHMARK_QURT_FALSE='#'
-else
-  ENABLED_BENCHMARK_QURT_TRUE='#'
-  ENABLED_BENCHMARK_QURT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-recursion was given.
-if test "${enable_benchmark_recursion+set}" = set; then :
-  enableval=$enable_benchmark_recursion; case "${enableval}" in
-      yes) benchmark_recursion=true ;;
-      no)  benchmark_recursion=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-recursion" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_recursion = xtrue; then
-  ENABLED_BENCHMARK_RECURSION_TRUE=
-  ENABLED_BENCHMARK_RECURSION_FALSE='#'
-else
-  ENABLED_BENCHMARK_RECURSION_TRUE='#'
-  ENABLED_BENCHMARK_RECURSION_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-rijndael was given.
-if test "${enable_benchmark_rijndael+set}" = set; then :
-  enableval=$enable_benchmark_rijndael; case "${enableval}" in
-      yes) benchmark_rijndael=true ;;
-      no)  benchmark_rijndael=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-rijndael" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_rijndael = xtrue; then
-  ENABLED_BENCHMARK_RIJNDAEL_TRUE=
-  ENABLED_BENCHMARK_RIJNDAEL_FALSE='#'
-else
-  ENABLED_BENCHMARK_RIJNDAEL_TRUE='#'
-  ENABLED_BENCHMARK_RIJNDAEL_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-select was given.
-if test "${enable_benchmark_select+set}" = set; then :
-  enableval=$enable_benchmark_select; case "${enableval}" in
-      yes) benchmark_select=true ;;
-      no)  benchmark_select=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-select" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_select = xtrue; then
-  ENABLED_BENCHMARK_SELECT_TRUE=
-  ENABLED_BENCHMARK_SELECT_FALSE='#'
-else
-  ENABLED_BENCHMARK_SELECT_TRUE='#'
-  ENABLED_BENCHMARK_SELECT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-sglib-arraybinsearch was given.
-if test "${enable_benchmark_sglib_arraybinsearch+set}" = set; then :
-  enableval=$enable_benchmark_sglib_arraybinsearch; case "${enableval}" in
-      yes) benchmark_sglib_arraybinsearch=true ;;
-      no)  benchmark_sglib_arraybinsearch=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-arraybinsearch" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_sglib_arraybinsearch = xtrue; then
-  ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE=
-  ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_FALSE='#'
-else
-  ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_TRUE='#'
-  ENABLED_BENCHMARK_SGLIB_ARRAYBINSEARCH_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-sglib-arrayheapsort was given.
-if test "${enable_benchmark_sglib_arrayheapsort+set}" = set; then :
-  enableval=$enable_benchmark_sglib_arrayheapsort; case "${enableval}" in
-      yes) benchmark_sglib_arrayheapsort=true ;;
-      no)  benchmark_sglib_arrayheapsort=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-arrayheapsort" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_sglib_arrayheapsort = xtrue; then
-  ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE=
-  ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_FALSE='#'
-else
-  ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_TRUE='#'
-  ENABLED_BENCHMARK_SGLIB_ARRAYHEAPSORT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-sglib-arrayquicksort was given.
-if test "${enable_benchmark_sglib_arrayquicksort+set}" = set; then :
-  enableval=$enable_benchmark_sglib_arrayquicksort; case "${enableval}" in
-      yes) benchmark_sglib_arrayquicksort=true ;;
-      no)  benchmark_sglib_arrayquicksort=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-arrayquicksort" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_sglib_arrayquicksort = xtrue; then
-  ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT_TRUE=
-  ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT_FALSE='#'
-else
-  ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT_TRUE='#'
-  ENABLED_BENCHMARK_SGLIB_ARRAYQUICKSORT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-sglib-dllist was given.
-if test "${enable_benchmark_sglib_dllist+set}" = set; then :
-  enableval=$enable_benchmark_sglib_dllist; case "${enableval}" in
-      yes) benchmark_sglib_dllist=true ;;
-      no)  benchmark_sglib_dllist=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-dllist" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_sglib_dllist = xtrue; then
-  ENABLED_BENCHMARK_SGLIB_DLLIST_TRUE=
-  ENABLED_BENCHMARK_SGLIB_DLLIST_FALSE='#'
-else
-  ENABLED_BENCHMARK_SGLIB_DLLIST_TRUE='#'
-  ENABLED_BENCHMARK_SGLIB_DLLIST_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-sglib-hashtable was given.
-if test "${enable_benchmark_sglib_hashtable+set}" = set; then :
-  enableval=$enable_benchmark_sglib_hashtable; case "${enableval}" in
-      yes) benchmark_sglib_hashtable=true ;;
-      no)  benchmark_sglib_hashtable=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-hashtable" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_sglib_hashtable = xtrue; then
-  ENABLED_BENCHMARK_SGLIB_HASHTABLE_TRUE=
-  ENABLED_BENCHMARK_SGLIB_HASHTABLE_FALSE='#'
-else
-  ENABLED_BENCHMARK_SGLIB_HASHTABLE_TRUE='#'
-  ENABLED_BENCHMARK_SGLIB_HASHTABLE_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-sglib-listinsertsort was given.
-if test "${enable_benchmark_sglib_listinsertsort+set}" = set; then :
-  enableval=$enable_benchmark_sglib_listinsertsort; case "${enableval}" in
-      yes) benchmark_sglib_listinsertsort=true ;;
-      no)  benchmark_sglib_listinsertsort=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-listinsertsort" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_sglib_listinsertsort = xtrue; then
-  ENABLED_BENCHMARK_SGLIB_LISTINSERTSORT_TRUE=
-  ENABLED_BENCHMARK_SGLIB_LISTINSERTSORT_FALSE='#'
-else
-  ENABLED_BENCHMARK_SGLIB_LISTINSERTSORT_TRUE='#'
-  ENABLED_BENCHMARK_SGLIB_LISTINSERTSORT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-sglib-listsort was given.
-if test "${enable_benchmark_sglib_listsort+set}" = set; then :
-  enableval=$enable_benchmark_sglib_listsort; case "${enableval}" in
-      yes) benchmark_sglib_listsort=true ;;
-      no)  benchmark_sglib_listsort=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-listsort" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_sglib_listsort = xtrue; then
-  ENABLED_BENCHMARK_SGLIB_LISTSORT_TRUE=
-  ENABLED_BENCHMARK_SGLIB_LISTSORT_FALSE='#'
-else
-  ENABLED_BENCHMARK_SGLIB_LISTSORT_TRUE='#'
-  ENABLED_BENCHMARK_SGLIB_LISTSORT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-sglib-queue was given.
-if test "${enable_benchmark_sglib_queue+set}" = set; then :
-  enableval=$enable_benchmark_sglib_queue; case "${enableval}" in
-      yes) benchmark_sglib_queue=true ;;
-      no)  benchmark_sglib_queue=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-queue" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_sglib_queue = xtrue; then
-  ENABLED_BENCHMARK_SGLIB_QUEUE_TRUE=
-  ENABLED_BENCHMARK_SGLIB_QUEUE_FALSE='#'
-else
-  ENABLED_BENCHMARK_SGLIB_QUEUE_TRUE='#'
-  ENABLED_BENCHMARK_SGLIB_QUEUE_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-sglib-rbtree was given.
-if test "${enable_benchmark_sglib_rbtree+set}" = set; then :
-  enableval=$enable_benchmark_sglib_rbtree; case "${enableval}" in
-      yes) benchmark_sglib_rbtree=true ;;
-      no)  benchmark_sglib_rbtree=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sglib-rbtree" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_sglib_rbtree = xtrue; then
-  ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE=
-  ENABLED_BENCHMARK_SGLIB_RBTREE_FALSE='#'
-else
-  ENABLED_BENCHMARK_SGLIB_RBTREE_TRUE='#'
-  ENABLED_BENCHMARK_SGLIB_RBTREE_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-slre was given.
-if test "${enable_benchmark_slre+set}" = set; then :
-  enableval=$enable_benchmark_slre; case "${enableval}" in
-      yes) benchmark_slre=true ;;
-      no)  benchmark_slre=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-slre" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_slre = xtrue; then
-  ENABLED_BENCHMARK_SLRE_TRUE=
-  ENABLED_BENCHMARK_SLRE_FALSE='#'
-else
-  ENABLED_BENCHMARK_SLRE_TRUE='#'
-  ENABLED_BENCHMARK_SLRE_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-sqrt was given.
-if test "${enable_benchmark_sqrt+set}" = set; then :
-  enableval=$enable_benchmark_sqrt; case "${enableval}" in
-      yes) benchmark_sqrt=true ;;
-      no)  benchmark_sqrt=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-sqrt" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_sqrt = xtrue; then
-  ENABLED_BENCHMARK_SQRT_TRUE=
-  ENABLED_BENCHMARK_SQRT_FALSE='#'
-else
-  ENABLED_BENCHMARK_SQRT_TRUE='#'
-  ENABLED_BENCHMARK_SQRT_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-st was given.
-if test "${enable_benchmark_st+set}" = set; then :
-  enableval=$enable_benchmark_st; case "${enableval}" in
-      yes) benchmark_st=true ;;
-      no)  benchmark_st=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-st" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_st = xtrue; then
-  ENABLED_BENCHMARK_ST_TRUE=
-  ENABLED_BENCHMARK_ST_FALSE='#'
-else
-  ENABLED_BENCHMARK_ST_TRUE='#'
-  ENABLED_BENCHMARK_ST_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-statemate was given.
-if test "${enable_benchmark_statemate+set}" = set; then :
-  enableval=$enable_benchmark_statemate; case "${enableval}" in
-      yes) benchmark_statemate=true ;;
-      no)  benchmark_statemate=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-statemate" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_statemate = xtrue; then
-  ENABLED_BENCHMARK_STATEMATE_TRUE=
-  ENABLED_BENCHMARK_STATEMATE_FALSE='#'
-else
-  ENABLED_BENCHMARK_STATEMATE_TRUE='#'
-  ENABLED_BENCHMARK_STATEMATE_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-stb_perlin was given.
-if test "${enable_benchmark_stb_perlin+set}" = set; then :
-  enableval=$enable_benchmark_stb_perlin; case "${enableval}" in
-      yes) benchmark_stb_perlin=true ;;
-      no)  benchmark_stb_perlin=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-stb_perlin" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_stb_perlin = xtrue; then
-  ENABLED_BENCHMARK_STB_PERLIN_TRUE=
-  ENABLED_BENCHMARK_STB_PERLIN_FALSE='#'
-else
-  ENABLED_BENCHMARK_STB_PERLIN_TRUE='#'
-  ENABLED_BENCHMARK_STB_PERLIN_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-stringsearch1 was given.
-if test "${enable_benchmark_stringsearch1+set}" = set; then :
-  enableval=$enable_benchmark_stringsearch1; case "${enableval}" in
-      yes) benchmark_stringsearch1=true ;;
-      no)  benchmark_stringsearch1=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-stringsearch1" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_stringsearch1 = xtrue; then
-  ENABLED_BENCHMARK_STRINGSEARCH1_TRUE=
-  ENABLED_BENCHMARK_STRINGSEARCH1_FALSE='#'
-else
-  ENABLED_BENCHMARK_STRINGSEARCH1_TRUE='#'
-  ENABLED_BENCHMARK_STRINGSEARCH1_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-strstr was given.
-if test "${enable_benchmark_strstr+set}" = set; then :
-  enableval=$enable_benchmark_strstr; case "${enableval}" in
-      yes) benchmark_strstr=true ;;
-      no)  benchmark_strstr=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-strstr" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_strstr = xtrue; then
-  ENABLED_BENCHMARK_STRSTR_TRUE=
-  ENABLED_BENCHMARK_STRSTR_FALSE='#'
-else
-  ENABLED_BENCHMARK_STRSTR_TRUE='#'
-  ENABLED_BENCHMARK_STRSTR_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-tarai was given.
-if test "${enable_benchmark_tarai+set}" = set; then :
-  enableval=$enable_benchmark_tarai; case "${enableval}" in
-      yes) benchmark_tarai=true ;;
-      no)  benchmark_tarai=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-tarai" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_tarai = xtrue; then
-  ENABLED_BENCHMARK_TARAI_TRUE=
-  ENABLED_BENCHMARK_TARAI_FALSE='#'
-else
-  ENABLED_BENCHMARK_TARAI_TRUE='#'
-  ENABLED_BENCHMARK_TARAI_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-template was given.
-if test "${enable_benchmark_template+set}" = set; then :
-  enableval=$enable_benchmark_template; case "${enableval}" in
-      yes) benchmark_template=true ;;
-      no)  benchmark_template=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-template" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_template = xtrue; then
-  ENABLED_BENCHMARK_TEMPLATE_TRUE=
-  ENABLED_BENCHMARK_TEMPLATE_FALSE='#'
-else
-  ENABLED_BENCHMARK_TEMPLATE_TRUE='#'
-  ENABLED_BENCHMARK_TEMPLATE_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-trio-snprintf was given.
-if test "${enable_benchmark_trio_snprintf+set}" = set; then :
-  enableval=$enable_benchmark_trio_snprintf; case "${enableval}" in
-      yes) benchmark_trio_snprintf=true ;;
-      no)  benchmark_trio_snprintf=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-trio-snprintf" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_trio_snprintf = xtrue; then
-  ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE=
-  ENABLED_BENCHMARK_TRIO_SNPRINTF_FALSE='#'
-else
-  ENABLED_BENCHMARK_TRIO_SNPRINTF_TRUE='#'
-  ENABLED_BENCHMARK_TRIO_SNPRINTF_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-trio-sscanf was given.
-if test "${enable_benchmark_trio_sscanf+set}" = set; then :
-  enableval=$enable_benchmark_trio_sscanf; case "${enableval}" in
-      yes) benchmark_trio_sscanf=true ;;
-      no)  benchmark_trio_sscanf=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-trio-sscanf" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_trio_sscanf = xtrue; then
-  ENABLED_BENCHMARK_TRIO_SSCANF_TRUE=
-  ENABLED_BENCHMARK_TRIO_SSCANF_FALSE='#'
-else
-  ENABLED_BENCHMARK_TRIO_SSCANF_TRUE='#'
-  ENABLED_BENCHMARK_TRIO_SSCANF_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-ud was given.
-if test "${enable_benchmark_ud+set}" = set; then :
-  enableval=$enable_benchmark_ud; case "${enableval}" in
-      yes) benchmark_ud=true ;;
-      no)  benchmark_ud=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-ud" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_ud = xtrue; then
-  ENABLED_BENCHMARK_UD_TRUE=
-  ENABLED_BENCHMARK_UD_FALSE='#'
-else
-  ENABLED_BENCHMARK_UD_TRUE='#'
-  ENABLED_BENCHMARK_UD_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-whetstone was given.
-if test "${enable_benchmark_whetstone+set}" = set; then :
-  enableval=$enable_benchmark_whetstone; case "${enableval}" in
-      yes) benchmark_whetstone=true ;;
-      no)  benchmark_whetstone=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-whetstone" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_whetstone = xtrue; then
-  ENABLED_BENCHMARK_WHETSTONE_TRUE=
-  ENABLED_BENCHMARK_WHETSTONE_FALSE='#'
-else
-  ENABLED_BENCHMARK_WHETSTONE_TRUE='#'
-  ENABLED_BENCHMARK_WHETSTONE_FALSE=
-fi
-
-
-# Check whether --enable-benchmark-wikisort was given.
-if test "${enable_benchmark_wikisort+set}" = set; then :
-  enableval=$enable_benchmark_wikisort; case "${enableval}" in
-      yes) benchmark_wikisort=true ;;
-      no)  benchmark_wikisort=false ;;
-      *)   as_fn_error $? "bad value ${enableval} for --enable-benchmark-wikisort" "$LINENO" 5 ;;
-   esac
-fi
-
- if test x$benchmark_wikisort = xtrue; then
-  ENABLED_BENCHMARK_WIKISORT_TRUE=
-  ENABLED_BENCHMARK_WIKISORT_FALSE='#'
-else
-  ENABLED_BENCHMARK_WIKISORT_TRUE='#'
-  ENABLED_BENCHMARK_WIKISORT_FALSE=
-fi
-
-
-
-# What to set DUMMY_* to if the dummy libraries are enabled.
-
-DUMMY_CRT0_YES="\$(top_builddir)/support/libdummycrt0.la"
-DUMMY_LIBGCC_YES="\$(top_builddir)/support/libdummygcc.la"
-DUMMY_COMPILERRT_YES="\$(top_builddir)/support/libdummycompilerrt.la"
-DUMMY_LIBC_YES="-Wl,--start-group \$(top_builddir)/support/libdummyc.la"
-DUMMY_LIBM_YES="\$(top_builddir)/support/libdummym.la"
-
-# Enable dummy libraries
-
-case "${USE_DUMMY_CRT0}" in
-   yes) DUMMY_CRT0=${DUMMY_CRT0_YES} ;;
-   no)  DUMMY_CRT0= ;;
-   *)   DUMMY_CRT0=${USE_DUMMY_CRT0} ;;
-esac
-
-case "${USE_DUMMY_LIBGCC}" in
-   yes) DUMMY_LIBGCC=${DUMMY_LIBGCC_YES} ;;
-   no)  DUMMY_LIBGCC= ;;
-   *)   DUMMY_LIBGCC=${USE_DUMMY_LIBGCC} ;;
-esac
-
-case "${USE_DUMMY_COMPILERRT}" in
-   yes) DUMMY_COMPILERRT=${DUMMY_COMPILERRT_YES} ;;
-   no)  DUMMY_COMPILERRT= ;;
-   *)   DUMMY_COMPILERRT=${USE_DUMMY_COMPILERRT} ;;
-esac
-
-case "${USE_DUMMY_LIBC}" in
-   yes) DUMMY_LIBC=${DUMMY_LIBC_YES} ;;
-   no)  DUMMY_LIBC= ;;
-   *)   DUMMY_LIBC=${USE_DUMMY_LIBC} ;;
-esac
-
-case "${USE_DUMMY_LIBM}" in
-   yes) DUMMY_LIBM=${DUMMY_LIBM_YES} ;;
-   no)  DUMMY_LIBM="-lm" ;;
-   *)   DUMMY_LIBM=${USE_DUMMY_LIBM} ;;
-esac
-
-# Check for support code
-
- if test -f $srcdir/config/$arch/chips/$chip/chipsupport.c; then
-  CHIPSUPPORT_C_TRUE=
-  CHIPSUPPORT_C_FALSE='#'
-else
-  CHIPSUPPORT_C_TRUE='#'
-  CHIPSUPPORT_C_FALSE=
-fi
-
-
-# Check for support headers
-
-test -f $srcdir/config/$arch/boards/$board/boardsupport.h && \
-
-$as_echo "#define HAVE_BOARDSUPPORT_H 1" >>confdefs.h
-
-
-test -f $srcdir/config/$arch/chips/$chip/chipsupport.h && \
-
-$as_echo "#define HAVE_CHIPSUPPORT_H 1" >>confdefs.h
-
-
-# Test whether we have a calibration file
-
-test -f $srcdir/config/$arch/boards/$board/calibration && \
-    HAVE_CALIBRATION=yes && \
-
-$as_echo "#define HAVE_CALIBRATION 1" >>confdefs.h
-
-
- if test x$HAVE_CALIBRATION == xyes; then
-  CALIBRATION_TRUE=
-  CALIBRATION_FALSE='#'
-else
-  CALIBRATION_TRUE='#'
-  CALIBRATION_FALSE=
-fi
-
-
-# Architecture, board and chip specific CFLAGS and LDFLAGS
-
-# If we pass the --host option, then AC_PROG_CC will select the correct
-# cross-compiler for us.
-
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
@@ -15185,12 +15209,6 @@ fi
 
 
 
-# Add in the architecture, board and chip specific CPPFLAGS, CFLAGS and LDFLAGS
-
-CPPFLAGS="$CPPFLAGS $ARCH_CPPFLAGS $CHIP_CPPFLAGS $BOARD_CPPFLAGS"
-CFLAGS="$CFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
-LDFLAGS="$LDFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
-
 # Set up testing
 
 if test x"$DEJAGNU" = x
@@ -15224,12 +15242,6 @@ else
 fi
 
 
-# Substitute flags
-
-
-
-
-
 # Substitute DejaGnu variable
 
 
@@ -15250,7 +15262,7 @@ ac_config_headers="$ac_config_headers config.h"
 
 # Generate makefiles
 
-ac_config_files="$ac_config_files Makefile doc/Makefile src/Makefile src/aha-compress/Makefile src/aha-mont64/Makefile src/bs/Makefile src/bubblesort/Makefile src/cnt/Makefile src/compress/Makefile src/cover/Makefile src/crc/Makefile src/crc32/Makefile src/ctl/Makefile src/ctl-stack/Makefile src/ctl-string/Makefile src/ctl-vector/Makefile src/cubic/Makefile src/dijkstra/Makefile src/dtoa/Makefile src/duff/Makefile src/edn/Makefile src/expint/Makefile src/fac/Makefile src/fasta/Makefile src/fdct/Makefile src/fibcall/Makefile src/fir/Makefile src/frac/Makefile src/huffbench/Makefile src/insertsort/Makefile src/janne_complex/Makefile src/jfdctint/Makefile src/lcdnum/Makefile src/levenshtein/Makefile src/ludcmp/Makefile src/matmult/Makefile src/matmult-float/Makefile src/matmult-int/Makefile src/mergesort/Makefile src/miniz/Makefile src/minver/Makefile src/nbody/Makefile src/ndes/Makefile src/nettle-arcfour/Makefile src/nettle-cast128/Makefile src/nettle-des/Makefile src/nettle-md5/Makefile src/nettle-sha256/Makefile src/newlib-exp/Makefile src/newlib-log/Makefile src/newlib-mod/Makefile src/newlib-sqrt/Makefile src/ns/Makefile src/nsichneu/Makefile src/picojpeg/Makefile src/prime/Makefile src/qrduino/Makefile src/qsort/Makefile src/qurt/Makefile src/recursion/Makefile src/rijndael/Makefile src/select/Makefile src/sglib-arraybinsearch/Makefile src/sglib-arrayheapsort/Makefile src/sglib-arrayquicksort/Makefile src/sglib-arraysort/Makefile src/sglib-dllist/Makefile src/sglib-hashtable/Makefile src/sglib-listinsertsort/Makefile src/sglib-listsort/Makefile src/sglib-queue/Makefile src/sglib-rbtree/Makefile src/slre/Makefile src/sqrt/Makefile src/st/Makefile src/statemate/Makefile src/stb_perlin/Makefile src/stringsearch1/Makefile src/strstr/Makefile src/tarai/Makefile src/template/Makefile src/trio/Makefile src/trio-snprintf/Makefile src/trio-sscanf/Makefile src/ud/Makefile src/whetstone/Makefile src/wikisort/Makefile support/Makefile testsuite/Makefile testsuite/beebs.test/Makefile testsuite/config/Makefile testsuite/lib/Makefile"
+ac_config_files="$ac_config_files Makefile doc/Makefile src/Makefile src/aha-compress/Makefile src/aha-mont64/Makefile src/bs/Makefile src/bubblesort/Makefile src/cnt/Makefile src/compress/Makefile src/cover/Makefile src/crc/Makefile src/crc32/Makefile src/ctl/Makefile src/ctl-stack/Makefile src/ctl-string/Makefile src/ctl-vector/Makefile src/cubic/Makefile src/dijkstra/Makefile src/dtoa/Makefile src/duff/Makefile src/edn/Makefile src/expint/Makefile src/fac/Makefile src/fasta/Makefile src/fdct/Makefile src/fibcall/Makefile src/fir/Makefile src/frac/Makefile src/huffbench/Makefile src/insertsort/Makefile src/janne_complex/Makefile src/jfdctint/Makefile src/lcdnum/Makefile src/levenshtein/Makefile src/ludcmp/Makefile src/matmult/Makefile src/matmult-float/Makefile src/matmult-int/Makefile src/mergesort/Makefile src/miniz/Makefile src/minver/Makefile src/nbody/Makefile src/ndes/Makefile src/nettle-aes/Makefile src/nettle-arcfour/Makefile src/nettle-cast128/Makefile src/nettle-des/Makefile src/nettle-md5/Makefile src/nettle-sha256/Makefile src/newlib-exp/Makefile src/newlib-log/Makefile src/newlib-mod/Makefile src/newlib-sqrt/Makefile src/ns/Makefile src/nsichneu/Makefile src/picojpeg/Makefile src/prime/Makefile src/qrduino/Makefile src/qsort/Makefile src/qurt/Makefile src/recursion/Makefile src/rijndael/Makefile src/select/Makefile src/sglib-arraybinsearch/Makefile src/sglib-arrayheapsort/Makefile src/sglib-arrayquicksort/Makefile src/sglib-arraysort/Makefile src/sglib-dllist/Makefile src/sglib-hashtable/Makefile src/sglib-listinsertsort/Makefile src/sglib-listsort/Makefile src/sglib-queue/Makefile src/sglib-rbtree/Makefile src/slre/Makefile src/sqrt/Makefile src/st/Makefile src/statemate/Makefile src/stb_perlin/Makefile src/stringsearch1/Makefile src/strstr/Makefile src/tarai/Makefile src/template/Makefile src/trio/Makefile src/trio-snprintf/Makefile src/trio-sscanf/Makefile src/ud/Makefile src/whetstone/Makefile src/wikisort/Makefile support/Makefile testsuite/Makefile testsuite/beebs.test/Makefile testsuite/config/Makefile testsuite/lib/Makefile"
 
 
 # And spit it all out
@@ -15382,14 +15394,6 @@ fi
 
 if test -z "${MAINTAINER_MODE_TRUE}" && test -z "${MAINTAINER_MODE_FALSE}"; then
   as_fn_error $? "conditional \"MAINTAINER_MODE\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${AMDEP_TRUE}" && test -z "${AMDEP_FALSE}"; then
-  as_fn_error $? "conditional \"AMDEP\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${am__fastdepCC_TRUE}" && test -z "${am__fastdepCC_FALSE}"; then
-  as_fn_error $? "conditional \"am__fastdepCC\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ENABLED_BENCHMARK_AHA_COMPRESS_TRUE}" && test -z "${ENABLED_BENCHMARK_AHA_COMPRESS_FALSE}"; then
@@ -15542,6 +15546,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ENABLED_BENCHMARK_NDES_TRUE}" && test -z "${ENABLED_BENCHMARK_NDES_FALSE}"; then
   as_fn_error $? "conditional \"ENABLED_BENCHMARK_NDES\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLED_BENCHMARK_NETTLE_AES_TRUE}" && test -z "${ENABLED_BENCHMARK_NETTLE_AES_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLED_BENCHMARK_NETTLE_AES\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ENABLED_BENCHMARK_NETTLE_ARCFOUR_TRUE}" && test -z "${ENABLED_BENCHMARK_NETTLE_ARCFOUR_FALSE}"; then
@@ -15718,6 +15726,14 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${CALIBRATION_TRUE}" && test -z "${CALIBRATION_FALSE}"; then
   as_fn_error $? "conditional \"CALIBRATION\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${AMDEP_TRUE}" && test -z "${AMDEP_FALSE}"; then
+  as_fn_error $? "conditional \"AMDEP\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${am__fastdepCC_TRUE}" && test -z "${am__fastdepCC_FALSE}"; then
+  as_fn_error $? "conditional \"am__fastdepCC\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${am__fastdepCC_TRUE}" && test -z "${am__fastdepCC_FALSE}"; then
@@ -16653,6 +16669,7 @@ do
     "src/minver/Makefile") CONFIG_FILES="$CONFIG_FILES src/minver/Makefile" ;;
     "src/nbody/Makefile") CONFIG_FILES="$CONFIG_FILES src/nbody/Makefile" ;;
     "src/ndes/Makefile") CONFIG_FILES="$CONFIG_FILES src/ndes/Makefile" ;;
+    "src/nettle-aes/Makefile") CONFIG_FILES="$CONFIG_FILES src/nettle-aes/Makefile" ;;
     "src/nettle-arcfour/Makefile") CONFIG_FILES="$CONFIG_FILES src/nettle-arcfour/Makefile" ;;
     "src/nettle-cast128/Makefile") CONFIG_FILES="$CONFIG_FILES src/nettle-cast128/Makefile" ;;
     "src/nettle-des/Makefile") CONFIG_FILES="$CONFIG_FILES src/nettle-des/Makefile" ;;

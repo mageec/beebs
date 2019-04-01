@@ -171,9 +171,8 @@ janne_complex_OBJECTS = $(am_janne_complex_OBJECTS)
 am__DEPENDENCIES_1 =
 @ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@janne_complex_DEPENDENCIES =  \
 @ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@	$(am__DEPENDENCIES_1) \
-@ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@	$(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@	libjanne_complex.la \
 @ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@	$(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@	libjanne_complex.la \
 @ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@	$(am__DEPENDENCIES_1)
@@ -386,8 +385,6 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@              -I $(top_srcdir)/config/@ARCH@/chips/@CHIP@ \
 @ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@              @CPPFLAGS@
 
-@ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@AM_CFLAGS = @CFLAGS@
-@ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@AM_LDFLAGS = @LDFLAGS@
 
 # Setup a $(LIBM) variable that we can use instead of either
 # $(DUMMY_LIBM) or -lm.  This way we don't risk pulling in
@@ -397,9 +394,8 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@janne_complex_SOURCES = 
 @ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@libjanne_complex_la_SOURCES = libjanne_complex.c
 @ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@janne_complex_LDADD = $(DUMMY_CRT0) \
-@ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@                              $(top_builddir)/support/libmain.la \
-@ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@                              libjanne_complex.la \
 @ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@                              $(top_builddir)/support/libsupport.la \
+@ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@                              libjanne_complex.la \
 @ENABLED_BENCHMARK_JANNE_COMPLEX_TRUE@                              $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am

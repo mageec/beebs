@@ -33,9 +33,8 @@ crc32_SOURCES       =
 libcrc32_la_SOURCES = crc_32.c
 
 crc32_LDADD         = $(DUMMY_CRT0) \
-                      $(top_builddir)/support/libmain.la \
-                      libcrc32.la \
                       $(top_builddir)/support/libsupport.la \
+                      libcrc32.la \
                       $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

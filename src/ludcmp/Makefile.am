@@ -32,9 +32,8 @@ ludcmp_SOURCES       =
 libludcmp_la_SOURCES = libludcmp.c
 
 ludcmp_LDADD         = $(DUMMY_CRT0) \
-                       $(top_builddir)/support/libmain.la \
-                       libludcmp.la \
                        $(top_builddir)/support/libsupport.la \
+                       libludcmp.la \
                        $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
