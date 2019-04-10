@@ -1,3 +1,21 @@
+2019-04-10  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	This gives greater flexibility when testing with BEEBS.  The
+	timeout to be used for execution tests can be set through the
+	BEEBS_TIMEOUT variable, for example:
+
+	BEEBS_TIMEOUT=300 make check
+
+	The tests to be executed can be specified on the command line
+	using the RUNTESTFLAGS option, for example:
+
+	make check RUNTESTFLAGS="execute.exp=sglib-mergesort,sglib-listsort"
+
+	* beebs.test/execute.exp: Pick up BEEBS_TIMEOUT environment
+	variable if set.
+	* lib/beebs.exp: Allow set of benchmarks to run to be specified
+	via RUNTESTFLAGS.
+
 2019-03-25  Graham Markall  <graham.markall@embecosm.com>
 
 	* config/ty_eysgjn.exp: New file.
