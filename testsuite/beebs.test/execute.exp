@@ -19,6 +19,13 @@
 
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+# Set timeout based on optional environment variable.
+
+if { [llength [array names env BEEBS_TIMEOUT]] > 0 } {
+    set timeout $env(BEEBS_TIMEOUT)
+    verbose "BEEBS_TIMEOUT set to $timeout"
+}
+
 foreach target $target_list {
     beebs_run_all_benchmarks $target ${objdir}/../src
 }

@@ -65,6 +65,7 @@ proc beebs_run_benchmark { benchmark filename } {
 
 # Main loop to run all benchmarks.
 proc beebs_run_all_benchmarks { board objdir } {
+    global runtests
     global beebs_run_benchmark_result
 
     # Perform any setup required before running any benchmarks.
@@ -82,6 +83,17 @@ proc beebs_run_all_benchmarks { board objdir } {
     # variable contains all the directories that can contain
     # benchmarks, the benchmarks themselves are the executable files
     # within those directories.
+
+    # This can be overridden from the command line (for example by "make check
+    # RUNTESTFLAGS=execute.exp=mergesort"), in which case the args to
+    # RUNTESTFLAGS will appear in the gloval variable "runtests", with the
+    # first argument being the ".exp" file, which we must discard.
+
+    set tests_to_run [lindex $runtests 1]
+    if { [llength $tests_to_run] > 0 } {
+	set benchmarks [split $tests_to_run ","]
+    }
+
     foreach benchmark $benchmarks {
 
         # Now find all the executable files to run.
