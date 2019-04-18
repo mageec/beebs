@@ -91,7 +91,7 @@ rand_beebs ()
 {
   static long int seed = 0;
 
-  seed = (seed * 1103515245L + 12345) & ((1U << 31) - 1);
+  seed = (seed * 1103515245L + 12345) & ((1UL << 31) - 1);
   return (int) (seed >> 16);
 
 }

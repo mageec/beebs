@@ -1,5 +1,15 @@
 2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	The mask used in rand_beebs needs to be long unsigned, to ensure
+	correct behavior where int is 16-bits long.
+
+	* src/crc32/crc_32.c (rand_beebs): Make mask constant long unsigned.
+	* src/mergesort/libmergesort.c (rand_beebs): Likewise.
+	* src/rijndael/aesxam.c (rand_beebs): Likewise.
+	* src/wikisort/libwikisort.c (rand_beebs): Likewise.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	BEEBS uses its own random number generator which works on all
 	architectures, even where int is 16 bits long. To go with this, it
 	provides its own definition of the constant RAND_MAX as 2^15-1,
