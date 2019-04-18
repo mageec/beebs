@@ -2,6 +2,19 @@
 
 	This replaces all calls to rand () by rand_beebs, a standard
 	source implementation, independent of RAND_MAX and choice of
+	multiplier and offset. It also eliminates an unused macro.
+
+	* src/wikisort/libwikisort.c: Comment out Allocate macro, which is
+	never used.
+	(rand_beebs): Created.
+	(TestingRandom, TestingMostlyDescending, TestingMostlyAscending)
+	(TestingJittered, TestingMostlyEqual): Replace rand by rand_beebs.
+	(benchmark): Comment out use of srand.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	This replaces all calls to rand () by rand_beebs, a standard
+	source implementation, independent of RAND_MAX and choice of
 	multiplier and offset.
 
 	* src/rijndael/aesxam.c (rand_beebs): Created.

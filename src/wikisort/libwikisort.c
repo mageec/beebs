@@ -1,5 +1,3 @@
-
-
 /* BEEBS wikisort benchmark
 
    Originally from https://github.com/BonzaiThePenguin/WikiSort
@@ -46,7 +44,28 @@
 #endif
 
 #define Var(name, value)				__typeof__(value) name = value
+/* Copied from libmergesort, but Allocate never used here, so commented out for clarity.
 #define Allocate(type, count)				(type *)malloc((count) * sizeof(type))
+*/
+
+/* Yield a sequence of random numbers in the range [0, 2^15-1].
+
+   The seed is always initialized to zero.  long int is guaranteed to be at
+   least 32 bits. The seed only ever uses 31 bits (so is positive).
+
+   For BEEBS this gets round different operating systems using different
+   multipliers and offsets and RAND_MAX variations. */
+
+static int
+rand_beebs ()
+{
+  static long int seed = 0;
+
+  seed = (seed * 1103515245L + 12345) & ((1U << 31) - 1);
+  return (int) (seed >> 16);
+
+}
+
 
 long Min(const long a, const long b) {
 	if (a < b) return a;
@@ -653,15 +672,15 @@ long TestingPathological(long index, long total) {
 }
 
 long TestingRandom(long index, long total) {
-	return rand();
+	return rand_beebs();
 }
 
 long TestingMostlyDescending(long index, long total) {
-	return total - index + rand() * 1.0/RAND_MAX * 5 - 2.5;
+	return total - index + rand_beebs() * 1.0/RAND_MAX * 5 - 2.5;
 }
 
 long TestingMostlyAscending(long index, long total) {
-	return index + rand() * 1.0/RAND_MAX * 5 - 2.5;
+	return index + rand_beebs() * 1.0/RAND_MAX * 5 - 2.5;
 }
 
 long TestingAscending(long index, long total) {
@@ -677,11 +696,11 @@ long TestingEqual(long index, long total) {
 }
 
 long TestingJittered(long index, long total) {
-	return (rand() * 1.0/RAND_MAX <= 0.9) ? index : (index - 2);
+	return (rand_beebs() * 1.0/RAND_MAX <= 0.9) ? index : (index - 2);
 }
 
 long TestingMostlyEqual(long index, long total) {
-	return 1000 + rand() * 1.0/RAND_MAX * 4;
+	return 1000 + rand_beebs() * 1.0/RAND_MAX * 4;
 }
 
 
@@ -722,7 +741,10 @@ int benchmark() {
 	};
 
 	/* initialize the random-number generator */
+	/* The original code used srand here, but not needed since we are
+	   using a fixed random number generator for reproducibility.
 	srand(0);
+	*/
 	/*srand(10141985);*/ /* in case you want the same random numbers */
 
 
