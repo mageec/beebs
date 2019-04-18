@@ -100,6 +100,9 @@ typedef DWORD UNS_32_BITS;
 /*     hardware you could probably optimize the shift in assembler by  */
 /*     using byte-swap instructions.                                   */
 
+/* The BEEBS version of this code uses its own version of rand, to
+   avoid library/architecture variation. */
+
 const static UNS_32_BITS crc_32_tab[] = { /* CRC polynomial 0xedb88320 */
    0x00000000, 0x77073096, 0xee0e612c, 0x990951ba, 0x076dc419, 0x706af48f,
    0xe963a535, 0x9e6495a3, 0x0edb8832, 0x79dcb8a4, 0xe0d5e91e, 0x97d2d988,
@@ -146,6 +149,26 @@ const static UNS_32_BITS crc_32_tab[] = { /* CRC polynomial 0xedb88320 */
    0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d
 };
 
+
+/* Yield a sequence of random numbers in the range [0, 2^15-1].
+
+   The seed is always initialized to zero.  long int is guaranteed to be at
+   least 32 bits. The seed only ever uses 31 bits (so is positive).
+
+   For BEEBS this gets round different operating systems using different
+   multipliers and offsets and RAND_MAX variations. */
+
+static int
+rand_beebs ()
+{
+  static long int seed = 0;
+
+  seed = (seed * 1103515245L + 12345) & ((1U << 31) - 1);
+  return (int) (seed >> 16);
+
+}
+
+
 DWORD crc32pseudo()
 {
    int i;
@@ -155,7 +178,7 @@ DWORD crc32pseudo()
 
    for (i = 0 ; i < 1024; ++i)
    {
-      oldcrc32 = UPDC32(rand(), oldcrc32);
+      oldcrc32 = UPDC32(rand_beebs(), oldcrc32);
    }
 
    return ~oldcrc32;
@@ -177,11 +200,8 @@ int benchmark()
 
 int verify_benchmark(int r)
 {
-#if defined(__i386__) || defined(__x86_64__)
-  int expected = 134629500;
-#else
-  int expected = 1425391793;
-#endif
+  int expected = 1207487004;
+
   if (r != expected)
     return 0;
   return 1;

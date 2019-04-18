@@ -1,3 +1,14 @@
+2019-04-04  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	This replaces all calls to rand () by rand_beebs, a standard
+	source implementation, independent of RAND_MAX and choice of
+	multiplier and offset.
+
+	* src/crc32/crc_32.c (rand_beebs): Created.
+	(DWORD crc32pseudo): Use rand_beebs () instead of rand ().
+	(int verify_benchmark): Set value to be consistent with use of
+	rand_beebs.
+
 2019-03-18  Graham Markall  <graham.markall@embecosm.com>
 
 	* configure: Regenerate.
