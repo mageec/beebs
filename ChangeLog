@@ -1,5 +1,13 @@
 2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	In two places the declaration of init_heap followed K&R, rather
+	than ANSI syntax.  Now corrected.
+
+	* src/dtoa/libdtoa.c (init_heap): Correct prototype of the function.
+	* src/huffbench/libhuffbench.c (init_heap): Likewise.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	Modify one more sglib benchmarks to use its own version of malloc
 	and free to reduce library and OS dependency.
 

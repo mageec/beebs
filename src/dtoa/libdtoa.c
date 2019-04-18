@@ -557,7 +557,7 @@ static void *heap_end;
 /* Initialize the BEEBS heap pointers */
 
 static void
-init_heap ()
+init_heap (void)
 {
     heap_ptr = (void *) heap;
     heap_end = heap_ptr + HEAP_SIZE;
