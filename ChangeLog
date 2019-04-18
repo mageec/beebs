@@ -1,5 +1,15 @@
 2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	BEEBS uses its own random number generator which works on all
+	architectures, even where int is 16 bits long. To go with this, it
+	provides its own definition of the constant RAND_MAX as 2^15-1,
+	its smallest permitted value.
+
+	* src/mergesort/libmergesort.c: Provide custom definition of RAND_MAX.
+	* src/wikisort/libwikisort.c: Likewise.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	This replaces all calls to rand () by rand_beebs, a standard
 	source implementation, independent of RAND_MAX and choice of
 	multiplier and offset. It also eliminates an unused macro.
