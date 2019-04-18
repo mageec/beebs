@@ -2,6 +2,15 @@
 
 	This replaces all calls to rand () by rand_beebs, a standard
 	source implementation, independent of RAND_MAX and choice of
+	multiplier and offset.
+
+	* src/rijndael/aesxam.c (rand_beebs): Created.
+	(fillrand, encfile, decfile): Use rand_beebs () instead of rand ().
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	This replaces all calls to rand () by rand_beebs, a standard
+	source implementation, independent of RAND_MAX and choice of
 	multiplier and offset. It also uses alloca instead of malloc/free
 	to reduce library dependency.
 
