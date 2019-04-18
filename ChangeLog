@@ -1,5 +1,19 @@
 2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	Modify the huffbench benchmark to use its own version of malloc
+	and free to reduce library and OS dependency.
+
+	* src/huffbench/libhuffbench.c (init_heap, malloc_beebs)
+	(free_beebs): Created.
+	(generate_test_data): Replace call to malloc by call to
+	malloc_beebs.
+	(compdecomp): Replace call to malloc by call to malloc_beebs and
+	free by call to malloc_free.
+	(benchmark): Replace call to free by call to malloc_free.
+	(initialise_benchmark): Add call to init_heap.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	Modify the fasta benchmark to use alloca rather than malloc to
 	reduce library and OS dependency.
 
