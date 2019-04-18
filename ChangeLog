@@ -1,5 +1,17 @@
 2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* src/qrduino/qrframe.c (init_heap, malloc_beebs, calloc_beebs)
+	(free_beebs): Created.
+	(initframe): Replace calloc and malloc by calloc_beebs and
+	malloc-beebs respectively.
+	(freeframe): Replace free by free_beebs.
+	(initecc): Replace malloc by malloc_beebs.
+	(freeecc): Replace free by free_beebs.
+	* src/qrduino/qrtest.c (initialise_benchmark): Add call to
+	init_heap.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	Modify the miniz benchmark to use its own version of malloc, free
 	and realloc to reduce library and OS dependency.
 

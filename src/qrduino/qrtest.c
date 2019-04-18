@@ -47,10 +47,13 @@ benchmark (void)
   return 0;
 }
 
+extern void init_heap (void);
+
 void initialise_benchmark() {
   static const char *in_encode = "http://www.mageec.com";
   encode = in_encode;
   size = 22;
+  init_heap ();
 }
 
 int verify_benchmark(int unused) {
