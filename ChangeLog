@@ -1,5 +1,16 @@
 2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	Modify the dijkstra test to use its own version of malloc and
+	free to reduce library and OS dependency.
+
+	* src/dijkstra/dijkstra_small.c (qinit_heap, qmalloc_beebs)
+	(qfree_beebs): Created.
+	(void enqueue): Replace malloc by qmalloc_beebs.
+	(int dijkstra): Replace free by qfree_beebs.
+	(initialise_benchmark): Add call to qinit_heap.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	The use of malloc/free in embedded applications is
 	problematic. For a benchmark it also places heavy dependence on a
 	library impementation.  This commit replaces library malloc/free by
