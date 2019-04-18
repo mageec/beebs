@@ -1,5 +1,15 @@
 2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	Modify the miniz benchmark to use its own version of malloc, free
+	and realloc to reduce library and OS dependency.
+
+	* src/miniz/miniz.c: Define MINIZ_NO_MALLOC and MZ_MALLOC, MZ_FREE
+	and MZ_REALLOC invoking BEEBS variants.
+	(init_heap, malloc_beebs, realloc_beebs, free_beebs): Created.
+	* src/miniz/miniz_b.c (initialise_benchmark): Add call to init_heap.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	Modify the huffbench benchmark to use its own version of malloc
 	and free to reduce library and OS dependency.
 
