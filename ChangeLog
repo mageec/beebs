@@ -1,5 +1,16 @@
 2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	Modify the dtoa benchmark to use its own version of malloc and
+	free to reduce library and OS dependency.  For this benchmark,
+	hooks are provided to facilitate this.
+
+	* src/dtoa/libdtoa.c (MALLOC, FREE): Define these to be
+	malloc_beebs and free_beebs respectively.
+	(init_heap, malloc_beebs, free_beebs): Created.
+	(initialise_benchmark): Add call to init_heap.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	Modify the dijkstra test to use its own version of malloc and
 	free to reduce library and OS dependency.
 
