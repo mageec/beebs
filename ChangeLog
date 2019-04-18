@@ -1,5 +1,18 @@
 2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	Modify both trio benchmarks to use there own version of malloc,
+	free and calloc to reduce library and OS dependency.
+
+	* src/trio/trio.c (init_heap, malloc_beebs, realloc_beebs)
+	(free_beebs): Created.
+	* src/trio/trio.h: Add declarations for init_heap, malloc_beebs,
+	realloc_beebs, and free_beebs.
+	* src/trio/trio_test.c (initialise_benchmark): add call to init_heap.
+	* src/trio/triop.h: Point macros to malloc_beebs, realloc_beebs,
+	and free_beebs.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	Modify all the sglib benchmarks to use there own version of malloc
 	and free to reduce library and OS dependency.
 

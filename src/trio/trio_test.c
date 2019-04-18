@@ -41,6 +41,7 @@ verify_benchmark (int res __attribute ((unused)) )
 void
 initialise_benchmark (void)
 {
+  init_heap ();			/* BEEBS memory allocator */
 }
 
 
