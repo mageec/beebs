@@ -1,3 +1,70 @@
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	The mask used in rand_beebs needs to be long unsigned, to ensure
+	correct behavior where int is 16-bits long.
+
+	* src/crc32/crc_32.c (rand_beebs): Make mask constant long unsigned.
+	* src/mergesort/libmergesort.c (rand_beebs): Likewise.
+	* src/rijndael/aesxam.c (rand_beebs): Likewise.
+	* src/wikisort/libwikisort.c (rand_beebs): Likewise.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	BEEBS uses its own random number generator which works on all
+	architectures, even where int is 16 bits long. To go with this, it
+	provides its own definition of the constant RAND_MAX as 2^15-1,
+	its smallest permitted value.
+
+	* src/mergesort/libmergesort.c: Provide custom definition of RAND_MAX.
+	* src/wikisort/libwikisort.c: Likewise.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	This replaces all calls to rand () by rand_beebs, a standard
+	source implementation, independent of RAND_MAX and choice of
+	multiplier and offset. It also eliminates an unused macro.
+
+	* src/wikisort/libwikisort.c: Comment out Allocate macro, which is
+	never used.
+	(rand_beebs): Created.
+	(TestingRandom, TestingMostlyDescending, TestingMostlyAscending)
+	(TestingJittered, TestingMostlyEqual): Replace rand by rand_beebs.
+	(benchmark): Comment out use of srand.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	This replaces all calls to rand () by rand_beebs, a standard
+	source implementation, independent of RAND_MAX and choice of
+	multiplier and offset.
+
+	* src/rijndael/aesxam.c (rand_beebs): Created.
+	(fillrand, encfile, decfile): Use rand_beebs () instead of rand ().
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	This replaces all calls to rand () by rand_beebs, a standard
+	source implementation, independent of RAND_MAX and choice of
+	multiplier and offset. It also uses alloca instead of malloc/free
+	to reduce library dependency.
+
+	* src/mergesort/libmergesort.c: Comment out Var andd Allocate macros.
+	(rand_beebs): Created.
+	(MergeSort): Replace macros by alloca and comment out call to free.
+	(TestingRandom, TestingMostlyDescending, TestingMostlyAscending)
+	(TestingJittered, TestingMostlyEqual): Replace rand by rand_beebs.
+	(benchmark): Comment out use of srand.
+
+2019-04-04  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	This replaces all calls to rand () by rand_beebs, a standard
+	source implementation, independent of RAND_MAX and choice of
+	multiplier and offset.
+
+	* src/crc32/crc_32.c (rand_beebs): Created.
+	(crc32pseudo): Use rand_beebs () instead of rand ().
+	(verify_benchmark): Set value to be consistent with use of
+	rand_beebs.
+
 2019-03-18  Graham Markall  <graham.markall@embecosm.com>
 
 	* configure: Regenerate.

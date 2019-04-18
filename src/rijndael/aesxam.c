@@ -1,5 +1,3 @@
-
-
 /* BEEBS rijndael benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -58,6 +56,9 @@
 /*                                                              */
 /* which should return a file 'file2.c' identical to 'file.c'   */
 
+/* The BEEBS version of this code uses its own version of rand, to
+   avoid library/architecture variation. */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -76,6 +77,25 @@
 #define FLEN flen
 
 #define RAND(a,b) (((a = 36969 * (a & 65535) + (a >> 16)) << 16) + (b = 18000 * (b & 65535) + (b >> 16))  )
+
+/* Yield a sequence of random numbers in the range [0, 2^15-1].
+
+   The seed is always initialized to zero.  long int is guaranteed to be at
+   least 32 bits. The seed only ever uses 31 bits (so is positive).
+
+   For BEEBS this gets round different operating systems using different
+   multipliers and offsets and RAND_MAX variations. */
+
+static int
+rand_beebs ()
+{
+  static long int seed = 0;
+
+  seed = (seed * 1103515245L + 12345) & ((1UL << 31) - 1);
+  return (int) (seed >> 16);
+
+}
+
 
 void fillrand(byte *buf, int len)
 {
@@ -117,7 +137,7 @@ int encfile(aes *ctx, byte *outbuf)
    for(j = 0; j <256; j++)
    {                               /* input 1st 16 bytes to buf[1..16] */
       for(k = 0; k < 16; ++k)
-         inbuf[k] = rand();
+         inbuf[k] = rand_beebs();
 
       for(i = 0; i < 16; ++i)         /* xor in previous cipher text  */
          inbuf[i] ^= outbuf[i];
@@ -137,7 +157,7 @@ int decfile(aes *ctx, byte *outbuf)
    fillrand(inbuf1, 16);           /* set an IV for CBC mode           */
 
    for(k = 0; k < 16; ++k)
-      inbuf2[k] = rand();
+      inbuf2[k] = rand_beebs();
 
    decrypt(inbuf2, outbuf, ctx);   /* decrypt it                       */
 
@@ -150,7 +170,7 @@ int decfile(aes *ctx, byte *outbuf)
    for(j = 0; j < 256; ++j)
    {
       for(k = 0; k < 16; ++k)
-         bp1[k] = rand();
+         bp1[k] = rand_beebs();
 
       decrypt(bp1, outbuf, ctx);  /* decrypt the new input block and  */
 
