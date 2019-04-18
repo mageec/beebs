@@ -38,13 +38,13 @@ typedef struct CTL_##type##VECTOR ctl_##type##Vector;		\
 															\
 ctl_##type##Vector* ctl_##type##VectorInitSize(int BlockSize)\
 {															\
-	ctl_##type##Vector* s=malloc(sizeof(ctl_##type##Vector));\
+	ctl_##type##Vector* s=malloc_beebs(sizeof(ctl_##type##Vector));\
 	if(!s)													\
 	{														\
 		return NULL;										\
 	}														\
 	s->BlockSize	= BlockSize;							\
-	s->value		= malloc(s->BlockSize*sizeof(type));	\
+	s->value		= malloc_beebs(s->BlockSize*sizeof(type));	\
 	if(!s->value)											\
 	{														\
 		ctl_errno	= CTL_OUT_OF_MEMORY;					\
@@ -64,13 +64,13 @@ ctl_##type##Vector* ctl_##type##VectorInit(void)			\
 															\
 ctl_##type##Vector* ctl_##type##VectorInitCopy(ctl_##type##Vector* vector)\
 {															\
-	ctl_##type##Vector* s=malloc(sizeof(ctl_##type##Vector));\
+	ctl_##type##Vector* s=malloc_beebs(sizeof(ctl_##type##Vector));\
 	if(!s)													\
 	{														\
 		return NULL;										\
 	}														\
 	s->BlockSize	= vector->BlockSize;					\
-	s->value		= malloc(vector->alloc*sizeof(type));	\
+	s->value		= malloc_beebs(vector->alloc*sizeof(type));	\
 	if(!s->value)											\
 	{														\
 		ctl_errno	= CTL_OUT_OF_MEMORY;					\
@@ -86,8 +86,8 @@ ctl_##type##Vector* ctl_##type##VectorInitCopy(ctl_##type##Vector* vector)\
 															\
 void ctl_##type##VectorFree(ctl_##type##Vector* s)			\
 {															\
-	free(s->value);											\
-	free(s);												\
+	free_beebs(s->value);											\
+	free_beebs(s);												\
 }															\
 															\
 int ctl_##type##VectorPush_Back(ctl_##type##Vector* s, type push)\
@@ -96,7 +96,7 @@ int ctl_##type##VectorPush_Back(ctl_##type##Vector* s, type push)\
 	{														\
 		type* secure;										\
 		s->alloc+=s->BlockSize;								\
-		secure=malloc(s->alloc*sizeof(type));				\
+		secure=malloc_beebs(s->alloc*sizeof(type));				\
 		if(!secure)											\
 		{													\
 			ctl_errno	= CTL_OUT_OF_MEMORY;				\
@@ -134,7 +134,7 @@ int ctl_##type##VectorSet(ctl_##type##Vector* s, type* vector, size_t size)\
 	{														\
 		size_t alloc=(size/s->BlockSize+1)*s->BlockSize;	\
 		type* secure;										\
-		secure=malloc(alloc*sizeof(type));					\
+		secure=malloc_beebs(alloc*sizeof(type));					\
 		if(!secure)											\
 		{													\
 			ctl_errno	= CTL_OUT_OF_MEMORY;				\
@@ -157,7 +157,7 @@ int ctl_##type##VectorSetVector(ctl_##type##Vector* s, ctl_##type##Vector* vecto
 	{														\
 		size_t alloc=(vector->size/s->BlockSize+1)*s->BlockSize;\
 		type* secure;										\
-		secure=malloc(alloc*sizeof(type));					\
+		secure=malloc_beebs(alloc*sizeof(type));					\
 		if(!secure)											\
 		{													\
 			ctl_errno	= CTL_OUT_OF_MEMORY;				\
@@ -194,7 +194,7 @@ int ctl_##type##VectorInsert(ctl_##type##Vector* s, size_t pos, type value)\
 	{														\
 		type* secure;										\
 		s->alloc+=s->BlockSize;								\
-		secure=malloc(s->alloc*sizeof(type));				\
+		secure=malloc_beebs(s->alloc*sizeof(type));				\
 		if(!secure)											\
 		{													\
 			s->alloc-=s->BlockSize;							\
@@ -227,7 +227,7 @@ int ctl_##type##VectorDelete(ctl_##type##Vector* s, size_t begin, size_t end)\
 int ctl_##type##VectorShrink(ctl_##type##Vector* s)			\
 {															\
 	type* secure;											\
-	secure=malloc(s->size*sizeof(type));					\
+	secure=malloc_beebs(s->size*sizeof(type));					\
 	if(!secure)												\
 	{														\
 		ctl_errno=CTL_OUT_OF_MEMORY;						\
