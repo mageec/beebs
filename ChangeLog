@@ -1,5 +1,16 @@
 2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	Modify one more sglib benchmarks to use its own version of malloc
+	and free to reduce library and OS dependency.
+
+	* src/sglib-listsort/listsort.c (init_heap, malloc_beebs, free_beebs):
+	Created.
+	(initialise_benchmark): Add call to init_heap
+	(benchmark): Replace call to malloc by malloc_beebs and call to
+	free by free_beebs.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	Modify both trio benchmarks to use there own version of malloc,
 	free and calloc to reduce library and OS dependency.
 
