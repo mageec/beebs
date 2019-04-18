@@ -1,5 +1,34 @@
 2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	Modify all the sglib benchmarks to use there own version of malloc
+	and free to reduce library and OS dependency.
+
+	* src/sglib-dllist/dllist.c (init_heap, malloc_beebs, free_beebs):
+	Created.
+	(initialise_benchmark): Add call to init_heap
+	(benchmark): Replace call to malloc by malloc_beebs and call to
+	free by free_beebs.
+	* src/sglib-hashtable/hashtable.c (init_heap, malloc_beebs)
+	(free_beebs): Created.
+	(initialise_benchmark): Add call to init_heap
+	(benchmark): Replace call to malloc by malloc_beebs and call to
+	free by free_beebs.
+	* src/sglib-listinsertsort/listinsertsort.c (init_heap)
+	(malloc_beebs, free_beebs): Created.
+	(initialise_benchmark): Add call to init_heap
+	(benchmark): Replace call to malloc by malloc_beebs and call to
+	free by free_beebs.
+	* src/sglib-rbtree/rbtree.c (init_heap, malloc_beebs, free_beebs):
+	Created.
+	(initialise_benchmark): Add call to init_heap
+	(benchmark): Replace call to malloc by malloc_beebs and call to
+	free by free_beebs.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Modify the qrduino benchmark to use its own version of malloc, free
+	and calloc to reduce library and OS dependency.
+
 	* src/qrduino/qrframe.c (init_heap, malloc_beebs, calloc_beebs)
 	(free_beebs): Created.
 	(initframe): Replace calloc and malloc by calloc_beebs and
