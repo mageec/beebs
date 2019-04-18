@@ -1,5 +1,13 @@
 2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	Modify the fasta benchmark to use alloca rather than malloc to
+	reduce library and OS dependency.
+
+	* src/fasta/libfasta.c (repeat_fasta): Replace use of malloc by
+	alloca, and comment out associated call to free.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	Modify the dtoa benchmark to use its own version of malloc and
 	free to reduce library and OS dependency.  For this benchmark,
 	hooks are provided to facilitate this.
