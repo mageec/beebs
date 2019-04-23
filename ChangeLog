@@ -1,5 +1,28 @@
 2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	The use of malloc/free in embedded applications is
+	problematic. For a benchmark it also places heavy dependence on a
+	library impementation.  This commit replaces library malloc/free by
+	simple in program allocation from a block of global memory.
+
+	* src/ctl-string/string.c (init_heap, malloc_beebs, free_beebs):
+	Created.
+	(ctl_StringInitSize, ctl_StringInitCopy): Replace malloc by
+	malloc_beebs.
+	(ctl_StringFree): Replace free by malloc_free.
+	(ctl_StringSet, ctl_StringSetString, ctl_StringAppend)
+	(ctl_StringInsertAt, ctl_StringSetSubStr): Replace malloc by
+	malloc_beebs.
+	(initialise_benchmark): Add call to init_heap.
+	* src/ctl/ctl.c (init_heap, malloc_beebs, free_beebs):
+	Created.
+	(initialise_benchmark): Add call to init_heap.
+	* src/ctl/stack.h: Replace calls to malloc by calls to
+	malloc_beebs and calls to free by calls to malloc_free throughout.
+	* src/ctl/vector.h: Likewise.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	The mask used in rand_beebs needs to be long unsigned, to ensure
 	correct behavior where int is 16-bits long.
 

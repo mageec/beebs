@@ -37,13 +37,13 @@ typedef struct CTL_##type##STACK ctl_##type##Stack;	\
 													\
 ctl_##type##Stack* ctl_##type##StackInitSize(int BlockSize)\
 {													\
-	ctl_##type##Stack* s=malloc(sizeof(ctl_##type##Stack));\
+	ctl_##type##Stack* s=malloc_beebs(sizeof(ctl_##type##Stack));\
 	if(!s)											\
 	{												\
 		return NULL;								\
 	}												\
 	s->alloc		= BlockSize;					\
-	s->value		= malloc(BlockSize*sizeof(type));\
+	s->value		= malloc_beebs(BlockSize*sizeof(type));\
 	if(!s->value)									\
 	{												\
 		return NULL;								\
@@ -60,13 +60,13 @@ ctl_##type##Stack* ctl_##type##StackInit(void)		\
 													\
 ctl_##type##Stack* ctl_##type##StackInitCopy(ctl_##type##Stack* stack)\
 {													\
-	ctl_##type##Stack* s=malloc(sizeof(ctl_##type##Stack));\
+	ctl_##type##Stack* s=malloc_beebs(sizeof(ctl_##type##Stack));\
 	if(!s)											\
 	{												\
 		return NULL;								\
 	}												\
 	s->alloc		= stack->alloc;					\
-	s->value		= malloc(stack->alloc*sizeof(type));\
+	s->value		= malloc_beebs(stack->alloc*sizeof(type));\
 	if(!s->value)									\
 	{												\
 		return NULL;								\
@@ -78,8 +78,8 @@ ctl_##type##Stack* ctl_##type##StackInitCopy(ctl_##type##Stack* stack)\
 													\
 void ctl_##type##StackFree(ctl_##type##Stack* s)	\
 {													\
-	free(s->value);									\
-	free(s);										\
+	free_beebs(s->value);									\
+	free_beebs(s);										\
 }													\
 													\
 int ctl_##type##StackPush(ctl_##type##Stack* s, type value)\

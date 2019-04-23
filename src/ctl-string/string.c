@@ -58,6 +58,54 @@ typedef struct CTL_STRUCT ctl_struct;
 unsigned int ctl_errno;
 unsigned int ctl_warning;
 
+/* BEEBS heap is just an array */
+
+#include <stddef.h>
+
+#define HEAP_SIZE 8192
+static char heap[HEAP_SIZE];
+static void *heap_ptr;
+static void *heap_end;
+
+/* Initialize the BEEBS heap pointers */
+
+static void
+init_heap ()
+{
+    heap_ptr = (void *) heap;
+    heap_end = heap_ptr + HEAP_SIZE;
+}
+
+/* BEEBS version of malloc.
+
+   This is primarily to reduce library and OS dependencies. Malloc is
+   generally not used in embedded code, or if it is, only in well defined
+   contexts to pre-allocate a fixed amount of memory. So this simplistic
+   implementation is just fine. */
+
+static void *
+malloc_beebs (size_t size)
+{
+    void *new_ptr = heap_ptr;
+
+    if (((heap_ptr + size) > heap_end) || (0 == size))
+	return NULL;
+    else
+	{
+	    heap_ptr += size;
+	    return new_ptr;
+	}
+}
+
+/* BEEBS version of free.
+
+   For our simplified version of memory handling, free can just do nothing. */
+
+static void
+free_beebs (void *ptr)
+{
+}
+
 int ctl_SetBlockSize(ctl_struct* its, size_t BlockSize)
 {
   if(BlockSize<1)
@@ -83,13 +131,13 @@ typedef struct CTL_STRING ctl_string;
 
 ctl_string* ctl_StringInitSize(int BlockSize)
 {
-  ctl_string* s=malloc(sizeof(ctl_string));
+  ctl_string* s=malloc_beebs(sizeof(ctl_string));
   if(!s)
   {
     return NULL;
   }
   s->BlockSize  = BlockSize;
-  s->string   = malloc(s->BlockSize);
+  s->string   = malloc_beebs(s->BlockSize);
   if(!s->string)
   {
     ctl_errno = CTL_OUT_OF_MEMORY;
@@ -110,12 +158,12 @@ ctl_string* ctl_StringInit(void)
 
 ctl_string* ctl_StringInitCopy(ctl_string* str)
 {
-  ctl_string* s=malloc(sizeof(ctl_string));
+  ctl_string* s=malloc_beebs(sizeof(ctl_string));
   if(!s)
   {
     return NULL;
   }
-  s->string=malloc(str->alloc);
+  s->string=malloc_beebs(str->alloc);
   if(!s->string)
   {
     ctl_errno = CTL_OUT_OF_MEMORY;
@@ -132,8 +180,8 @@ ctl_string* ctl_StringInitCopy(ctl_string* str)
 
 void ctl_StringFree(ctl_string* s)
 {
-  free(s->string);
-  free(s);
+  free_beebs(s->string);
+  free_beebs(s);
 }
 
 int ctl_StringSet(ctl_string* s, const char* string)
@@ -145,7 +193,7 @@ int ctl_StringSet(ctl_string* s, const char* string)
   {
     alloc = (len/s->BlockSize+1)*s->BlockSize;
 
-    secure=malloc(alloc);
+    secure=malloc_beebs(alloc);
     if(!secure)
     {
       ctl_errno=CTL_OUT_OF_MEMORY;
@@ -168,7 +216,7 @@ int ctl_StringSetString(ctl_string* s, ctl_string* string)
   {
     len = (string->size/s->BlockSize+1)*s->BlockSize;
 
-    secure=malloc(len);
+    secure=malloc_beebs(len);
     if(!secure)
     {
       ctl_errno=CTL_OUT_OF_MEMORY;
@@ -192,7 +240,7 @@ int ctl_StringAppend(ctl_string* s, const char* string)
     size_t alloc;
     char* secure;
     alloc = (size/s->BlockSize+1)*s->BlockSize;
-    secure=malloc(alloc);
+    secure=malloc_beebs(alloc);
     if(!secure)
     {
       ctl_errno=CTL_OUT_OF_MEMORY;
@@ -242,7 +290,7 @@ int ctl_StringInsertAt(ctl_string* s, size_t pos, char value)
   {
     char* secure;
     int alloc = s->alloc + s->BlockSize;
-    secure=malloc(alloc);
+    secure=malloc_beebs(alloc);
 
     if(!secure)
     {
@@ -298,7 +346,7 @@ int ctl_StringSetSubStr(ctl_string* s, size_t begin, size_t end, char* string)
   {
     char* secure;
     alloc = ((s->size+diff)/s->BlockSize+1)*s->BlockSize;
-    secure=malloc(alloc);
+    secure=malloc_beebs(alloc);
     if(!secure)
     {
       ctl_errno=CTL_OUT_OF_MEMORY;
@@ -436,6 +484,7 @@ void initialise_benchmark() {
   in3 = c;
   in4 = d;
   in5 = e;
+  init_heap ();
 }
 
 int verify_benchmark(int r)
