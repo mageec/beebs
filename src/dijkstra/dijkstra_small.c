@@ -1,4 +1,3 @@
-
 /* This file is part of the Bristol/Embecosm Embedded Benchmark Suite.
 
    This program is free software: you can redistribute it and/or modify
@@ -71,9 +70,74 @@ int ch;
 int iPrev, iNode;
 int i, iCost, iDist;
 
+
+/* BEEBS heap is just an array */
+
+#include <stddef.h>
+
+#define QHEAP_SIZE (8192 / sizeof (QITEM))
+static QITEM qheap[QHEAP_SIZE];
+static QITEM *qfree_list;
+
+/* Initialize the BEEBS heap.
+
+   Because we know the size of objects is always the same, we have a
+   specially hacked version of malloc */
+
+static void
+qinit_heap (void)
+{
+  qfree_list = NULL;
+  int  i;
+
+  for (i = 0; i < QHEAP_SIZE; i++)
+    {
+      qheap[i].qNext = qfree_list;
+      qfree_list = &(qheap[i]);
+    }
+}
+
+/* BEEBS version of malloc.
+
+   This is primarily to reduce library and OS dependencies. This is unusual
+   for an embedded program in its dynamic use of malloc and free.  However we
+   know that malloc is always used with the same sized object, so we cheat. */
+
+static void *
+qmalloc_beebs (size_t size)
+{
+  if ((size != sizeof(QITEM)) || (0 == size))
+    return NULL;
+
+  QITEM *new_ptr = qfree_list;
+
+  if (new_ptr != NULL)
+    {
+      qfree_list = new_ptr->qNext;
+    }
+
+  return (void *) new_ptr;
+}
+
+/* BEEBS version of free.
+
+   Even our simplified version has to work correctly, or we'll run out of
+   memory. Assume we are given a valid pointer to a QITEM - there is no way
+   to check. */
+
+static void
+qfree_beebs (void *ptr)
+{
+  QITEM *qptr = (QITEM *) ptr;
+
+  qptr->qNext = qfree_list;
+  qfree_list = qptr;
+}
+
+
 void enqueue (int iNode, int iDist, int iPrev)
 {
-   QITEM *qNew = (QITEM *) malloc(sizeof(QITEM));
+   QITEM *qNew = (QITEM *) qmalloc_beebs(sizeof(QITEM));
    QITEM *qLast = qHead;
 
    qNew->iNode = iNode;
@@ -139,7 +203,7 @@ int dijkstra(int chStart, int chEnd)
       {
          QITEM *tmp = dequeue (&iNode, &iDist, &iPrev);
          if(tmp != 0)
-            free(tmp);
+            qfree_beebs(tmp);
          for (i = 0; i < NUM_NODES; i++)
          {
             iCost = AdjMatrix[iNode][i];
@@ -166,6 +230,7 @@ int output_count = 0;
 void
 initialise_benchmark (void)
 {
+  qinit_heap ();		/* Set up the BEEBS QITEM heap */
 }
 
 

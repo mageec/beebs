@@ -403,13 +403,13 @@ extern "C" {
  * Memory handling
  */
 #ifndef TRIO_MALLOC
-# define TRIO_MALLOC(n) malloc(n)
+# define TRIO_MALLOC(n) malloc_beebs(n)
 #endif
 #ifndef TRIO_REALLOC
-# define TRIO_REALLOC(x,n) realloc((x),(n))
+# define TRIO_REALLOC(x,n) realloc_beebs((x),(n))
 #endif
 #ifndef TRIO_FREE
-# define TRIO_FREE(x) free(x)
+# define TRIO_FREE(x) free_beebs(x)
 #endif
 
 

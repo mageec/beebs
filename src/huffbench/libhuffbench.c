@@ -1,5 +1,3 @@
-
-
 /* BEEBS cover benchmark
 
     huffbench
@@ -63,6 +61,54 @@
 #define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
 
 
+/* BEEBS heap is just an array */
+
+#include <stddef.h>
+
+#define HEAP_SIZE 8192
+static char heap[HEAP_SIZE];
+static void *heap_ptr;
+static void *heap_end;
+
+/* Initialize the BEEBS heap pointers */
+
+static void
+init_heap (void)
+{
+    heap_ptr = (void *) heap;
+    heap_end = heap_ptr + HEAP_SIZE;
+}
+
+/* BEEBS version of malloc.
+
+   This is primarily to reduce library and OS dependencies. Malloc is
+   generally not used in embedded code, or if it is, only in well defined
+   contexts to pre-allocate a fixed amount of memory. So this simplistic
+   implementation is just fine. */
+
+static void *
+malloc_beebs (size_t size)
+{
+    void *new_ptr = heap_ptr;
+
+    if (((heap_ptr + size) > heap_end) || (0 == size))
+	return NULL;
+    else
+	{
+	    heap_ptr += size;
+	    return new_ptr;
+	}
+}
+
+/* BEEBS version of free.
+
+   For our simplified version of memory handling, free can just do nothing. */
+
+static void
+free_beebs (void *ptr)
+{
+}
+
 // embedded random number generator; ala Park and Miller
 static       long seed = 1325;
 static const long IA   = 16807;
@@ -102,7 +148,7 @@ byte * generate_test_data(size_t n)
 {
     char * codes = "ABCDEFGHIJKLMNOPQRSTUVWXYZ012345";
 
-    byte * result = (byte *)malloc(n);
+    byte * result = (byte *)malloc_beebs(n);
     byte * ptr = result;
 
     int i;
@@ -159,7 +205,7 @@ void compdecomp(byte * data, size_t data_len)
     */
 
     // allocate data space
-    byte * comp = (byte *)malloc(data_len + 1);
+    byte * comp = (byte *)malloc_beebs(data_len + 1);
 
     size_t freq[512];   // allocate frequency table
     size_t heap[256];   // allocate heap
@@ -438,7 +484,7 @@ void compdecomp(byte * data, size_t data_len)
     }
 
     // remove work areas
-    free(comp);
+    free_beebs(comp);
 }
 
 
@@ -454,6 +500,7 @@ verify_benchmark (int res __attribute ((unused)) )
 void
 initialise_benchmark (void)
 {
+  init_heap ();
 }
 
 
@@ -467,9 +514,8 @@ int benchmark()
     compdecomp(test_data,TEST_SIZE);
 
     // release resources
-    free(test_data);
+    free_beebs(test_data);
 
     // done
     return 0;
 }
-

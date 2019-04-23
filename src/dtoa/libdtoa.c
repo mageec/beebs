@@ -234,6 +234,11 @@ typedef unsigned Long ULong;
 #include "locale.h"
 #endif
 
+/* BEEBS uses its own malloc and free */
+
+#define MALLOC malloc_beebs
+#define FREE free_beebs
+
 #ifdef Honor_FLT_ROUNDS
 #ifndef Trust_FLT_ROUNDS
 #include <fenv.h>
@@ -543,6 +548,50 @@ extern "C" double strtod(const char *s00, char **se);
 extern "C" char *dtoa(double d, int mode, int ndigits,
 			int *decpt, int *sign, char **rve);
 #endif
+
+#define HEAP_SIZE 8192
+static char heap[HEAP_SIZE];
+static void *heap_ptr;
+static void *heap_end;
+
+/* Initialize the BEEBS heap pointers */
+
+static void
+init_heap (void)
+{
+    heap_ptr = (void *) heap;
+    heap_end = heap_ptr + HEAP_SIZE;
+}
+
+/* BEEBS version of malloc.
+
+   This is primarily to reduce library and OS dependencies. Malloc is
+   generally not used in embedded code, or if it is, only in well defined
+   contexts to pre-allocate a fixed amount of memory. So this simplistic
+   implementation is just fine. */
+
+void *
+malloc_beebs (size_t size)
+{
+    void *new_ptr = heap_ptr;
+
+    if (((heap_ptr + size) > heap_end) || (0 == size))
+	return NULL;
+    else
+	{
+	    heap_ptr += size;
+	    return new_ptr;
+	}
+}
+
+/* BEEBS version of free.
+
+   For our simplified version of memory handling, free can just do nothing. */
+
+void
+free_beebs (void *ptr)
+{
+}
 
  struct
 Bigint {
@@ -4243,6 +4292,7 @@ char *nums[] = {"238434.3459823", "23955.0", "0.01000000023123", "1.0", "5555.55
 void
 initialise_benchmark (void)
 {
+  init_heap ();
 }
 
 

@@ -1,5 +1,132 @@
 2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	In two places the declaration of init_heap followed K&R, rather
+	than ANSI syntax.  Now corrected.
+
+	* src/dtoa/libdtoa.c (init_heap): Correct prototype of the function.
+	* src/huffbench/libhuffbench.c (init_heap): Likewise.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Modify one more sglib benchmarks to use its own version of malloc
+	and free to reduce library and OS dependency.
+
+	* src/sglib-listsort/listsort.c (init_heap, malloc_beebs, free_beebs):
+	Created.
+	(initialise_benchmark): Add call to init_heap
+	(benchmark): Replace call to malloc by malloc_beebs and call to
+	free by free_beebs.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Modify both trio benchmarks to use there own version of malloc,
+	free and calloc to reduce library and OS dependency.
+
+	* src/trio/trio.c (init_heap, malloc_beebs, realloc_beebs)
+	(free_beebs): Created.
+	* src/trio/trio.h: Add declarations for init_heap, malloc_beebs,
+	realloc_beebs, and free_beebs.
+	* src/trio/trio_test.c (initialise_benchmark): add call to init_heap.
+	* src/trio/triop.h: Point macros to malloc_beebs, realloc_beebs,
+	and free_beebs.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Modify all the sglib benchmarks to use there own version of malloc
+	and free to reduce library and OS dependency.
+
+	* src/sglib-dllist/dllist.c (init_heap, malloc_beebs, free_beebs):
+	Created.
+	(initialise_benchmark): Add call to init_heap
+	(benchmark): Replace call to malloc by malloc_beebs and call to
+	free by free_beebs.
+	* src/sglib-hashtable/hashtable.c (init_heap, malloc_beebs)
+	(free_beebs): Created.
+	(initialise_benchmark): Add call to init_heap
+	(benchmark): Replace call to malloc by malloc_beebs and call to
+	free by free_beebs.
+	* src/sglib-listinsertsort/listinsertsort.c (init_heap)
+	(malloc_beebs, free_beebs): Created.
+	(initialise_benchmark): Add call to init_heap
+	(benchmark): Replace call to malloc by malloc_beebs and call to
+	free by free_beebs.
+	* src/sglib-rbtree/rbtree.c (init_heap, malloc_beebs, free_beebs):
+	Created.
+	(initialise_benchmark): Add call to init_heap
+	(benchmark): Replace call to malloc by malloc_beebs and call to
+	free by free_beebs.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Modify the qrduino benchmark to use its own version of malloc, free
+	and calloc to reduce library and OS dependency.
+
+	* src/qrduino/qrframe.c (init_heap, malloc_beebs, calloc_beebs)
+	(free_beebs): Created.
+	(initframe): Replace calloc and malloc by calloc_beebs and
+	malloc-beebs respectively.
+	(freeframe): Replace free by free_beebs.
+	(initecc): Replace malloc by malloc_beebs.
+	(freeecc): Replace free by free_beebs.
+	* src/qrduino/qrtest.c (initialise_benchmark): Add call to
+	init_heap.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Modify the miniz benchmark to use its own version of malloc, free
+	and realloc to reduce library and OS dependency.
+
+	* src/miniz/miniz.c: Define MINIZ_NO_MALLOC and MZ_MALLOC, MZ_FREE
+	and MZ_REALLOC invoking BEEBS variants.
+	(init_heap, malloc_beebs, realloc_beebs, free_beebs): Created.
+	* src/miniz/miniz_b.c (initialise_benchmark): Add call to init_heap.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Modify the huffbench benchmark to use its own version of malloc
+	and free to reduce library and OS dependency.
+
+	* src/huffbench/libhuffbench.c (init_heap, malloc_beebs)
+	(free_beebs): Created.
+	(generate_test_data): Replace call to malloc by call to
+	malloc_beebs.
+	(compdecomp): Replace call to malloc by call to malloc_beebs and
+	free by call to malloc_free.
+	(benchmark): Replace call to free by call to malloc_free.
+	(initialise_benchmark): Add call to init_heap.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Modify the fasta benchmark to use alloca rather than malloc to
+	reduce library and OS dependency.
+
+	* src/fasta/libfasta.c (repeat_fasta): Replace use of malloc by
+	alloca, and comment out associated call to free.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Modify the dtoa benchmark to use its own version of malloc and
+	free to reduce library and OS dependency.  For this benchmark,
+	hooks are provided to facilitate this.
+
+	* src/dtoa/libdtoa.c (MALLOC, FREE): Define these to be
+	malloc_beebs and free_beebs respectively.
+	(init_heap, malloc_beebs, free_beebs): Created.
+	(initialise_benchmark): Add call to init_heap.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	Modify the dijkstra test to use its own version of malloc and
+	free to reduce library and OS dependency.
+
+	* src/dijkstra/dijkstra_small.c (qinit_heap, qmalloc_beebs)
+	(qfree_beebs): Created.
+	(void enqueue): Replace malloc by qmalloc_beebs.
+	(int dijkstra): Replace free by qfree_beebs.
+	(initialise_benchmark): Add call to qinit_heap.
+
+2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	The use of malloc/free in embedded applications is
 	problematic. For a benchmark it also places heavy dependence on a
 	library impementation.  This commit replaces library malloc/free by

@@ -1,5 +1,3 @@
-
-
 /* BEEBS hash benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -59,6 +57,54 @@ int array[100] = {14, 66, 12, 41, 86, 69, 19, 77, 68, 38, 26, 42, 37, 23, 17, 29
   27, 47, 34, 35, 62, 97, 2, 79, 98, 25, 22, 65, 71, 0};
 
 
+/* BEEBS heap is just an array */
+
+#include <stddef.h>
+
+#define HEAP_SIZE 8192
+static char heap[HEAP_SIZE];
+static void *heap_ptr;
+static void *heap_end;
+
+/* Initialize the BEEBS heap pointers */
+
+static void
+init_heap (void)
+{
+    heap_ptr = (void *) heap;
+    heap_end = heap_ptr + HEAP_SIZE;
+}
+
+/* BEEBS version of malloc.
+
+   This is primarily to reduce library and OS dependencies. Malloc is
+   generally not used in embedded code, or if it is, only in well defined
+   contexts to pre-allocate a fixed amount of memory. So this simplistic
+   implementation is just fine. */
+
+static void *
+malloc_beebs (size_t size)
+{
+    void *new_ptr = heap_ptr;
+
+    if (((heap_ptr + size) > heap_end) || (0 == size))
+	return NULL;
+    else
+	{
+	    heap_ptr += size;
+	    return new_ptr;
+	}
+}
+
+/* BEEBS version of free.
+
+   For our simplified version of memory handling, free can just do nothing. */
+
+static void
+free_beebs (void *ptr)
+{
+}
+
 /* This benchmark does not support verification */
 
 int
@@ -71,6 +117,7 @@ verify_benchmark (int res __attribute ((unused)) )
 void
 initialise_benchmark (void)
 {
+  init_heap ();
 }
 
 
@@ -87,7 +134,7 @@ int benchmark()
   for (i=0; i<100; i++) {
     ii.i = array[i];
     if (sglib_hashed_ilist_find_member(htab, &ii) == NULL) {
-      nn = malloc(sizeof(struct ilist));
+      nn = malloc_beebs(sizeof(struct ilist));
       nn->i = array[i];
       sglib_hashed_ilist_add(htab, nn);
     }
@@ -101,7 +148,7 @@ int benchmark()
 
   for(ll=sglib_hashed_ilist_it_init(&it,htab); ll!=NULL; ll=sglib_hashed_ilist_it_next(&it)) {
       cnt += ll->i;
-      free(ll);
+      free_beebs(ll);
   }
 
   return cnt;

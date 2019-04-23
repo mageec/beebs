@@ -206,7 +206,7 @@
 // Note if MINIZ_NO_MALLOC is defined then the user must always provide custom user alloc/free/realloc
 // callbacks to the zlib and archive API's, and a few stand-alone helper API's which don't provide custom user
 // functions (such as tdefl_compress_mem_to_heap() and tinfl_decompress_mem_to_heap()) won't work.
-//#define MINIZ_NO_MALLOC
+#define MINIZ_NO_MALLOC
 
 #define MINIZ_NO_STDIO
 #define MINIZ_NO_TIME
@@ -500,6 +500,87 @@ typedef int mz_bool;
 #else
    #define MZ_MACRO_END while (0)
 #endif
+
+/* BEEBS heap is just an array */
+
+#include <stddef.h>
+
+#define HEAP_SIZE 8192
+static char heap[HEAP_SIZE];
+static void *heap_ptr;
+static void *heap_end;
+
+/* Initialize the BEEBS heap pointers */
+
+void
+init_heap (void)
+{
+    heap_ptr = (void *) heap;
+    heap_end = heap_ptr + HEAP_SIZE;
+}
+
+/* BEEBS version of malloc.
+
+   This is primarily to reduce library and OS dependencies. Malloc is
+   generally not used in embedded code, or if it is, only in well defined
+   contexts to pre-allocate a fixed amount of memory. So this simplistic
+   implementation is just fine. */
+
+static void *
+malloc_beebs (size_t size)
+{
+    void *new_ptr = heap_ptr;
+
+    if (((heap_ptr + size) > heap_end) || (0 == size))
+	return NULL;
+    else
+	{
+	    heap_ptr += size;
+	    return new_ptr;
+	}
+}
+
+/* BEEBS version of realloc.
+
+   This is primarily to reduce library and OS dependencies. We just have to
+   allocate new memory and copy stuff across. */
+
+static void *
+realloc_beebs (void *ptr, size_t size)
+{
+    void *new_ptr = heap_ptr;
+
+    if (((heap_ptr + size) > heap_end) || (0 == size))
+	return NULL;
+    else
+	{
+	    heap_ptr += size;
+
+	    /* This is clunky, since we don't know the size of the original
+	       pointer. However it is a read only action and we know it must
+	       be big enough if we right off the end, or we couldn't have
+	       allocated here. If the size is smaller, it doesn't matter. */
+
+	    if (NULL != ptr)
+	      {
+		int  i;
+
+		for (i = 0; i < size; i++)
+		  ((char *) new_ptr)[i] = ((char *)ptr)[i];
+	      }
+
+	    return new_ptr;
+	}
+}
+
+/* BEEBS version of free.
+
+   For our simplified version of memory handling, free can just do nothing. */
+
+static void
+free_beebs (void *ptr)
+{
+}
 
 // ------------------- ZIP archive reading/writing
 
@@ -955,9 +1036,9 @@ typedef unsigned char mz_validate_uint64[sizeof(mz_uint64)==8 ? 1 : -1];
 #define MZ_ASSERT(x) assert(x)
 
 #ifdef MINIZ_NO_MALLOC
-  #define MZ_MALLOC(x) NULL
-  #define MZ_FREE(x) (void)x, ((void)0)
-  #define MZ_REALLOC(p, x) NULL
+  #define MZ_MALLOC(x) malloc_beebs (x)
+  #define MZ_FREE(x) free_beebs (x)
+  #define MZ_REALLOC(p, x) realloc_beebs (p, x)
 #else
   #define MZ_MALLOC(x) malloc(x)
   #define MZ_FREE(x) free(x)

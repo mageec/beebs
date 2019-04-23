@@ -1,5 +1,3 @@
-
-
 /* BEEBS fasta benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -108,7 +106,9 @@ static inline void accumulate_probabilities (aminoacid_t *genelist, size_t len) 
 static void repeat_fasta (char const *s, size_t count) {
     size_t pos = 0;
     size_t len = strlen (s);
-    char *s2 = malloc (len + WIDTH);
+    /* BEEBS uses alloca, to avoid library and OS dependencies
+       char *s2 = malloc (len + WIDTH); */
+    char *s2 = alloca (len + WIDTH);
     memcpy (s2, s, len);
     memcpy (s2 + len, s, WIDTH);
     do {
@@ -119,7 +119,8 @@ static void repeat_fasta (char const *s, size_t count) {
      	if (pos >= len) pos -= len;
      	count -= line;
     } while (count);
-    free (s2);
+    /* Since BEEBS uses alloca don't try to free!
+       free (s2);*/
 }
 
 /* This function takes a pointer to the first element of an array */

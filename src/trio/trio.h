@@ -251,4 +251,9 @@ void trio_locale_set_grouping TRIO_PROTO((char *grouping));
 
 #endif /* WITHOUT_TRIO */
 
+void init_heap (void);
+void *malloc_beebs (size_t size);
+void *realloc_beebs (void *ptr, size_t size);
+void free_beebs (void *ptr);
+
 #endif /* TRIO_TRIO_H */
