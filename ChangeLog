@@ -1,3 +1,8 @@
+2019-04-24  Edward Jones  <ed.jones@embecosm.com>
+
+	* config/riscv32/chips/ri5cy/chip.cfg: Change CHIP_CFLAGS to
+	match architecture of ri5cy (-march=rv32imc -mabi=ilp32)
+
 2019-04-24  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	The initial data for FDCT was in a global block, overwritten by
