@@ -1,3 +1,8 @@
+2019-04-24  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* lib/beebs.exp (beebs_size_all_benchmarks): Use the program in
+	the SIZE_PROG environment variable to measure size if specified.
+
 2019-04-10  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	This gives greater flexibility when testing with BEEBS.  The
