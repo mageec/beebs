@@ -1,5 +1,12 @@
 2019-04-24  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* Makefile.in: Regenerated.
+	* configure: Regenerated.
+	* configure.ac: Add USER_CFLAGS and USER_LDFLAGS to CFLAGS and
+	LDFLAGS respectively, AC_SUBST CFLAGS and LDFLAGS.
+
+2019-04-24  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* src/nettle-md5/md5.c: Include string.h, define digest_ref, a copy of
 	the digest array for initialization.
 	(benchmark): Initialize the digest array every time we are called.

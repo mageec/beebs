@@ -1309,9 +1309,9 @@ test -f $srcdir/config/$arch/boards/$board/calibration && \
 
 AM_CONDITIONAL([CALIBRATION], [test x$HAVE_CALIBRATION == xyes])
 
-# Architecture, board and chip specific CFLAGS and LDFLAGS
-CFLAGS="$CFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
-LDFLAGS="$LDFLAGS $ARCH_LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"
+# Architecture, board and chip specific and user CFLAGS and LDFLAGS
+CFLAGS="$CFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS $USER_CFLAGS"
+LDFLAGS="$LDFLAGS $ARCH_LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS $USER_LDFLAGS"
 
 LT_INIT
 AC_SUBST([LIBTOOL_DEPS])
@@ -1326,6 +1326,11 @@ if test x"$DEJAGNU" = x
 then
     DEJAGNU="\$(top_srcdir)/testsuite/beebs-conf.exp"
 fi
+
+# Substitute flags
+
+AC_SUBST([CFLAGS])
+AC_SUBST([LDFLAGS])
 
 # Substitute dummy libraries
 
