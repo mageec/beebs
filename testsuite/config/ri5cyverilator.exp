@@ -23,7 +23,13 @@ set_board_info beebs,benchmarks "$env(BENCHMARKS)"
 
 proc beebs_load { file } {
     set GDB riscv32-unknown-elf-gdb
-    set GDB_SERVER riscv32-gdbserver
+    set GDBSERVER_CMD "riscv32-gdbserver -c ri5cy --stdin"
+
+    # Maybe override the gdbserver command with an environment variable
+    if { [llength [array names ::env GDBSERVER_CMD]] > 0 } {
+      set GDBSERVER_CMD $::env(GDBSERVER_CMD)
+      verbose "GDBSERVER_CMD set to $GDBSERVER_CMD"
+    }
 
     # Launch GDB, the target, and start running.
     #
@@ -37,7 +43,7 @@ proc beebs_load { file } {
     # We set all required breakpoints here then begin execution.
     spawn $GDB --interpreter=mi -ex "set height 0" \
       -ex "file $file" \
-      -ex "target remote | $GDB_SERVER -c ri5cy --stdin" \
+      -ex "target remote | $GDBSERVER_CMD" \
       -ex "stepi" \
       -ex "stepi" \
       -ex "load" \

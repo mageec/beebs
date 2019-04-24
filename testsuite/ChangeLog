@@ -1,3 +1,8 @@
+2019-04-24  Edward Jones  <ed.jones@embecosm.com>
+
+	* config/ri5cyverilator.exp (beebs_load): Pick up
+	GDBSERVER_CMD environment variable if set.
+
 2019-04-23  Edward Jones  <ed.jones@embecosm.com>
 
 	* config/ri5cyverilator.exp (beebs_load): Check for
