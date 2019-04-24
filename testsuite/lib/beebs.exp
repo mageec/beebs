@@ -229,10 +229,20 @@ proc beebs_size_all_benchmarks { board objdir } {
     # and beebs could get different results if they have a different
     # version of size installed.  That's a risk, but for now, allowing
     # accurate results seems worth it.
+
+    global env
+    if { [llength [array names env SIZE_PROG]] > 0 } {
+	set size_prog $env(SIZE_PROG)
+    } else {
+	set size_prog "size"
+    }
+
+    verbose -log "size_prog set to $size_prog"
+
     set use_size_gnu_format 0
     set size_args ""
     verbose -log "Check if 'size --format=GNU' is supported"
-    spawn size --format=GNU
+    spawn ${size_prog} --format=GNU
     expect {
         -re {: invalid argument to --format:} {
             verbose -log "GNU format not supported"
@@ -257,7 +267,7 @@ proc beebs_size_all_benchmarks { board objdir } {
         if { [file isfile ${benchmark_file}] &&
 	     [file executable ${benchmark_file}]} {
 	    set timeout 1
-	    spawn size ${size_args} ${benchmark_file}
+	    spawn ${size_prog} ${size_args} ${benchmark_file}
 
 	    expect {
 		-re {\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+\s+[[:xdigit:]]+\s+)?[[:alnum:]_/.-]+} {
