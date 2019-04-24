@@ -5126,9 +5126,9 @@ else
 fi
 
 
-# Architecture, board and chip specific CFLAGS and LDFLAGS
-CFLAGS="$CFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS"
-LDFLAGS="$LDFLAGS $ARCH_LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS"
+# Architecture, board and chip specific and user CFLAGS and LDFLAGS
+CFLAGS="$CFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS $USER_CFLAGS"
+LDFLAGS="$LDFLAGS $ARCH_LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS $USER_LDFLAGS"
 
 case `pwd` in
   *\ * | *\	*)
@@ -15215,6 +15215,11 @@ if test x"$DEJAGNU" = x
 then
     DEJAGNU="\$(top_srcdir)/testsuite/beebs-conf.exp"
 fi
+
+# Substitute flags
+
+
+
 
 # Substitute dummy libraries
 
