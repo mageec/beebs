@@ -95,7 +95,7 @@ proc beebs_load { file } {
     # _exit and check its argument instead).
     send "cont\n"
     expect {
-      -re ".*__internal_syscall.*n=93.*" {
+      -re ".*stopped.*_exit.*" {
         send "print \$a0\n"
       }
       timeout {
