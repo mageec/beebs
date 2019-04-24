@@ -1,5 +1,13 @@
 2019-04-24  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* src/nettle-md5/md5.c: Include string.h, define digest_ref, a copy of
+	the digest array for initialization.
+	(benchmark): Initialize the digest array every time we are called.
+	(verify_benchmark): Correct the expected array and use memcmp for
+	efficient testing.
+
+2019-04-24  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	The initial data for FDCT was in a global block, overwritten by
 	the transformation. Calling the benchmark multiple times used the
 	result of the previous call as input, so the result depended on

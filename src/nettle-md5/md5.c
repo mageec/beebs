@@ -1,4 +1,3 @@
-
 /* BEEBS nettle-md5 benchmark
 
    Copyright (C) 2001, 2005 Niels Möller
@@ -21,8 +20,9 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
-#include "support.h"
 #include <stdint.h>
+#include <string.h>
+#include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
@@ -152,13 +152,18 @@ _nettle_md5_compress(uint32_t *digest, const uint8_t *input)
   digest[3] += d;
 }
 
-uint32_t digest[_MD5_DIGEST_LENGTH] =
+/* Reference starting digest which is not overwritten */
+
+static const uint32_t digest_ref[_MD5_DIGEST_LENGTH] =
 {
   0x67452301,
   0xefcdab89,
   0x98badcfe,
-  0x10325476,
+  0x10325476
 };
+
+
+uint32_t digest[_MD5_DIGEST_LENGTH];
 
 
 void
@@ -170,19 +175,17 @@ initialise_benchmark (void)
 int
 benchmark (void)
 {
+  memcpy (digest, digest_ref, _MD5_DIGEST_LENGTH * sizeof (digest[0]));
   _nettle_md5_compress(digest, input);
   return 0;
 }
 
 int verify_benchmark(int unused) {
-  int i;
   // #include <stdio.h>
   // for (i=0; i<_MD5_DIGEST_LENGTH; i++)
   //   printf("%x, ", digest[i]);
   uint32_t expected[_MD5_DIGEST_LENGTH] =
-    {0x4d54e9fe, 0x2b838af9, 0xeed5c36, 0xa7d79fed};
-  for (i=0; i<_MD5_DIGEST_LENGTH; i++)
-    if (digest[i] != expected[i])
-      return 0;
-  return 1;
+    {0xddaf8815, 0x2149cb8f, 0x9cdd75fd, 0x14a43e27};
+
+  return ! memcmp (digest, expected, _MD5_DIGEST_LENGTH * sizeof (digest[0]));
 }
