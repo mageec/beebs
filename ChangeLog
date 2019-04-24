@@ -1,3 +1,15 @@
+2019-04-24  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	The initial data for FDCT was in a global block, overwritten by
+	the transformation. Calling the benchmark multiple times used the
+	result of the previous call as input, so the result depended on
+	the number of calls, which varies between platforms.
+
+	* src/fdct/libfdct.c: Declare block_ref as reference input and
+	exp_res as expected resut.
+	(int benchmark): Initialize block from block_ref each time.
+	(int verify_benchmark): Single definitive test for validity.
+
 2019-04-18  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	In two places the declaration of init_heap followed K&R, rather
