@@ -1,4 +1,3 @@
-
 /* Forward discrete cosine transform
 
    Copyright (C) 2014 Embecosm Limited
@@ -59,6 +58,7 @@
 
 #define NULL 0
 
+#include <string.h>
 #include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
@@ -87,7 +87,8 @@
 int out;
 
 /* Image block to be transformed: */
-short int block[64] =
+
+static const short int block_ref[64] =
   {  99, 104, 109, 113, 115, 115,  55,  55,
     104, 111, 113, 116, 119,  56,  56,  56,
     110, 115, 120, 119, 118,  56,  56,  56,
@@ -96,6 +97,22 @@ short int block[64] =
     121, 121, 121, 121,  60,  57,  57,  57,
     122, 122,  61,  63,  62,  57,  57,  57,
      62,  62,  61,  61,  63,  58,  58,  58 };
+
+/* Working copy of the block */
+
+static short int block[64];
+
+/* Expected Result */
+
+static short int exp_res[64] =
+  { 699, 164, -51, -16,  31, -15, -19,   8,
+     71,  14, -61,  -2,  11, -12,   7,  12,
+    -58, -55,  13,  28, -20,  -7,  14, -18,
+     29,  22,   3,   3, -11,   7,  11, -22,
+     -1, -28, -27,  10,   0,  -7,  11,   6,
+      7,   6,  21,  21, -10,  -8,   2, -14,
+      1,  -7, -15, -15, -10,  15,  16, -10,
+      0,  -1,   0,  15,   4, -13,  -5,   4 };
 
 /* Fast Discrete Cosine Transform */
 
@@ -275,23 +292,17 @@ initialise_benchmark (void)
 #include <stdio.h>
 int benchmark()
 {
+  /* Need to reinitialize the input data each time */
+
+  memcpy (block, block_ref, 64 * sizeof (block[0]));
   fdct(block, 8);
   return 0;
 }
 
 int verify_benchmark(int unused)
 {
-  int i;
-#if defined(__i386__) || defined(__x86_64__)
-  short int exp[] = {-2480, -665, -689, 44, -350, 26, -272, -535, -628, -2044, -544, 141, 300, -147, -1, 89, -676, -551, -1820, 224, 267, -154, -281, -290, 52, 149, 262, -1508, -228, -102, 58, 100, -425, 342, 148, -185, -2485, 802, 227, -750, 34, -62, -225, -84, 829, -1495, -172, 319, -171, -14, -367, 67, 323, -127, -1400, 28, -546, 38, -355, 159, -750, 316, -4, -1849};
-#else
-  short int exp[] =
-  {-898,-479,-451,161,79,-129,-95,-239,-548,-962,-285,-26,72,104,5,25,-410,-278,-917,76,217,58,-162,-167,210,2,61,-668,2,-151,55,78,-37,109,137,4,-1326,199,160,-363,-70,101,77,-76,206,-771,-87,151,-37,-8,-185,34,164,-101,-660,1,-191,-15,-174,80,-369,153,6,-959};
-#endif
-  for (i=0; i<64; i++)
-    if (block[i] != exp[i])
-      return 0;
-  return 1;
+  return !memcmp (block, exp_res, 64 * sizeof (block[0]));
+
 }
 
 
