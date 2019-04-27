@@ -24,7 +24,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 4333
 
 int swi120(int c)
 {
@@ -260,22 +260,21 @@ initialise_benchmark (void)
 
 int benchmark()
 {
-	volatile int cnt=0;
+  volatile int cnt;
+  int  i;
 
-	cnt=swi10(cnt);
-	cnt=swi50(cnt);
-	cnt=swi120(cnt);
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      cnt = 0;
+      cnt=swi10(cnt);
+      cnt=swi50(cnt);
+      cnt=swi120(cnt);
+    }
 
-	/* printf("cnt: %d\n", cnt); */
-
-	return cnt;
-
+  return cnt;
 }
 
 int verify_benchmark(int r)
 {
-	int expected = 180;
-	if (r != expected)
-		return 0;
-	return 1;
+  return 180 == r;
 }

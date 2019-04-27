@@ -31,7 +31,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 451
 
 // From nettle/nettle-types.h
 
@@ -442,17 +442,21 @@ verify_benchmark (int res __attribute ((unused)) )
 void
 initialise_benchmark (void)
 {
-  memset (buffer, 0, sizeof(buffer));
 }
 
 int
 benchmark (void)
 {
-  struct sha256_ctx ctx;
-  nettle_sha256.init (&ctx);
-  nettle_sha256.update (&ctx, sizeof (msg), msg);
-  nettle_sha256.digest (&ctx, nettle_sha256.digest_size, buffer);
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+	memset (buffer, 0, sizeof(buffer));
+	struct sha256_ctx ctx;
+	nettle_sha256.init (&ctx);
+	nettle_sha256.update (&ctx, sizeof (msg), msg);
+	nettle_sha256.digest (&ctx, nettle_sha256.digest_size, buffer);
+    }
+
   return 0;
 }
-
-

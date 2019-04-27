@@ -34,7 +34,8 @@ libdtoa_la_SOURCES = libdtoa.c
 dtoa_LDADD         = $(DUMMY_CRT0) \
                      $(top_builddir)/support/libsupport.la \
                      libdtoa.la \
-                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+                     $(top_builddir)/support/libbeebsc.la \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

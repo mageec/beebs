@@ -26,7 +26,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 10)
+#define LOCAL_SCALE_FACTOR 10
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -49,32 +49,6 @@
 #define Allocate(type, count)				(type *)malloc((count) * sizeof(type))
 
 */
-
-/* BEEBS fixes RAND_MAX to its lowest permitted value, 2^15-1 */
-
-#ifdef RAND_MAX
-#undef RAND_MAX
-#endif
-#define RAND_MAX ((1U << 15) - 1)
-
-/* Yield a sequence of random numbers in the range [0, 2^15-1].
-
-   The seed is always initialized to zero.  long int is guaranteed to be at
-   least 32 bits. The seed only ever uses 31 bits (so is positive).
-
-   For BEEBS this gets round different operating systems using different
-   multipliers and offsets and RAND_MAX variations. */
-
-static int
-rand_beebs ()
-{
-  static long int seed = 0;
-
-  seed = (seed * 1103515245L + 12345) & ((1UL << 31) - 1);
-  return (int) (seed >> 16);
-
-}
-
 
 long Min(const long a, const long b) {
 	if (a < b) return a;
@@ -222,7 +196,7 @@ long TestingJittered(long index, long total) {
 }
 
 long TestingMostlyEqual(long index, long total) {
-	return 1000 + rand_beebs() * 1.0/RAND_MAX * 4;
+  return 1000L + (long) (rand_beebs() % 4);
 }
 
 
@@ -236,66 +210,77 @@ initialise_benchmark (void)
 
 
 
-int benchmark() {
-	long total, index, test_case;
-	Comparison compare = TestCompare;
+int benchmark()
+{
+  long total, index, test_case;
+  Comparison compare = TestCompare;
 
-	__typeof__(&TestingPathological) test_cases[] = {
-		TestingPathological,
-		TestingRandom,
-		TestingMostlyDescending,
-		TestingMostlyAscending,
-		TestingAscending,
-		TestingDescending,
-		TestingEqual,
-		TestingJittered,
-		TestingMostlyEqual
-	};
+  __typeof__(&TestingPathological) test_cases[9] =
+    {
+      &TestingPathological,
+      &TestingRandom,
+      &TestingMostlyDescending,
+      &TestingMostlyAscending,
+      &TestingAscending,
+      &TestingDescending,
+      &TestingEqual,
+      &TestingJittered,
+      &TestingMostlyEqual
+    };
 
-	/* initialize the random-number generator. */
-	/* The original code used srand here, but not needed since we are
-	   using a fixed random number generator for reproducibility.
-	srand(0);
-	*/
-	/*srand(10141985);*/ /* in case you want the same random numbers */
+  int  i;
 
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      /* initialize the random-number generator. */
+      /* The original code used srand here, we use a value that will fit in
+	 a 16-bit unsigned int. */
+      srand_beebs (0);
+      /*srand(10141985);*/ /* in case you want the same random numbers */
 
-	total = max_size;
-	for (test_case = 0; test_case < sizeof(test_cases)/sizeof(test_cases[0]); test_case++) {
+      total = max_size;
+      for (test_case = 0; test_case < 9; test_case++) {
 
-		for (index = 0; index < total; index++) {
-			Test item;
+	for (index = 0; index < total; index++) {
+	  Test item;
 
-			item.value = test_cases[test_case](index, total);
-			item.index = index;
+	  item.value = test_cases[test_case](index, total);
+	  item.index = index;
 
-			array1[index] = item;
-		}
-
-		MergeSort(array1, total, compare);
+	  array1[index] = item;
 	}
 
-	return 0;
+	MergeSort(array1, total, compare);
+      }
+    }
+
+  return 0;
 }
 
 int verify_benchmark(int unused)
 {
-	int i;
-	// x86
-	// int exp_val[] = {1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003};
-	// int exp_index[] = {0, 9, 14, 16, 17, 19, 21, 29, 35, 36, 38, 42, 46, 49, 51, 65, 76, 77, 78, 80, 84, 85, 90, 97, 98, 5, 6, 8, 20, 23, 24, 26, 30, 34, 43, 44, 45, 47, 52, 53, 54, 56, 63, 71, 72, 86, 87, 91, 95, 1, 2, 3, 4, 10, 11, 12, 13, 28, 32, 37, 39, 41, 48, 50, 55, 57, 58, 60, 62, 64, 66, 68, 69, 70, 73, 75, 79, 81, 82, 83, 88, 92, 94, 99, 7, 15, 18, 22, 25, 27, 31, 33, 40, 59, 61, 67, 74, 89, 93, 96};
-	// stm32
-	int exp_val[] = {1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003};
-	int exp_index[] = {0, 9, 14, 16, 17, 19, 21, 29, 35, 36, 38, 42, 46, 49, 51, 65, 76, 77, 78, 80, 84, 85, 90, 97, 98, 5, 6, 8, 20, 23, 24, 26, 30, 34, 43, 44, 45, 47, 52, 53, 54, 56, 63, 71, 72, 86, 87, 91, 95, 1, 2, 3, 4, 10, 11, 12, 13, 28, 32, 37, 39, 41, 48, 50, 55, 57, 58, 60, 62, 64, 66, 68, 69, 70, 73, 75, 79, 81, 82, 83, 88, 92, 94, 99, 7, 15, 18, 22, 25, 27, 31, 33, 40, 59, 61, 67, 74, 89, 93, 96};
-	for (i=0; i<max_size; i++)
-		if (array1[i].value != exp_val[i])
-			return i;
-//			return array1[i].value;
-	for (i=0; i<max_size; i++)
-		if (array1[i].index != exp_index[i])
-			return 3;
-	// for (i=0; i<max_size; i++)
-	// 	if (array1[i].index != exp[i].index)
-	// 		return 0;
-	return 1;
+  Test exp[] = {
+    { 1000,  0 }, { 1000,  8 }, { 1000, 11 }, { 1000, 16 }, { 1000, 33 },
+    { 1000, 34 }, { 1000, 37 }, { 1000, 39 }, { 1000, 41 }, { 1000, 44 },
+    { 1000, 51 }, { 1000, 54 }, { 1000, 56 }, { 1000, 59 }, { 1000, 70 },
+    { 1000, 73 }, { 1000, 74 }, { 1000, 75 }, { 1000, 76 }, { 1000, 77 },
+    { 1000, 93 }, { 1000, 97 }, { 1000, 98 }, { 1001,  1 }, { 1001,  4 },
+    { 1001,  9 }, { 1001, 19 }, { 1001, 24 }, { 1001, 25 }, { 1001, 29 },
+    { 1001, 30 }, { 1001, 36 }, { 1001, 38 }, { 1001, 40 }, { 1001, 42 },
+    { 1001, 47 }, { 1001, 50 }, { 1001, 55 }, { 1001, 57 }, { 1001, 61 },
+    { 1001, 63 }, { 1001, 65 }, { 1001, 66 }, { 1001, 68 }, { 1001, 69 },
+    { 1001, 71 }, { 1001, 72 }, { 1001, 78 }, { 1001, 80 }, { 1001, 83 },
+    { 1001, 84 }, { 1001, 91 }, { 1001, 92 }, { 1001, 94 }, { 1002,  2 },
+    { 1002, 10 }, { 1002, 12 }, { 1002, 13 }, { 1002, 14 }, { 1002, 17 },
+    { 1002, 21 }, { 1002, 26 }, { 1002, 31 }, { 1002, 35 }, { 1002, 43 },
+    { 1002, 46 }, { 1002, 48 }, { 1002, 52 }, { 1002, 53 }, { 1002, 79 },
+    { 1002, 81 }, { 1002, 82 }, { 1002, 88 }, { 1002, 89 }, { 1002, 90 },
+    { 1002, 99 }, { 1003,  3 }, { 1003,  5 }, { 1003,  6 }, { 1003,  7 },
+    { 1003, 15 }, { 1003, 18 }, { 1003, 20 }, { 1003, 22 }, { 1003, 23 },
+    { 1003, 27 }, { 1003, 28 }, { 1003, 32 }, { 1003, 45 }, { 1003, 49 },
+    { 1003, 58 }, { 1003, 60 }, { 1003, 62 }, { 1003, 64 }, { 1003, 67 },
+    { 1003, 85 }, { 1003, 86 }, { 1003, 87 }, { 1003, 95 }, { 1003, 96}
+  };
+
+  return 0 == memcmp (array1, exp, max_size * sizeof (array1[0]));
 }

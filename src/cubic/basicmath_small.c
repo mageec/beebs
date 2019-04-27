@@ -1,5 +1,3 @@
-
-
 /* BEEBS cubic benchmark
 
    Contributor: James Pallister <james.pallister@bristol.ac.uk>
@@ -19,20 +17,30 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
+#include <string.h>
 #include "support.h"
 #include "snipmath.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 13)
+#define LOCAL_SCALE_FACTOR 5
 
 
-/* This benchmark does not support verification */
+
+
+static int soln_cnt0;
+static int soln_cnt1;
+static double res0[3];
+static double res1;
+
 
 int
 verify_benchmark (int res __attribute ((unused)) )
 {
-  return -1;
+  static double exp_res0[3] = {2.0, 6.0, 2.5};
+  return (3 == soln_cnt0) && (fabs (2.0 - res0[0]) < 1.0e-10)
+    && (fabs (6.0 - res0[1]) < 1.0e-10) && (fabs (2.5 - res0[2]) < 1.0e-10)
+    && (1 == soln_cnt1) && (fabs (2.5 - res1) < 1.0e-10);
 }
 
 
@@ -42,35 +50,43 @@ initialise_benchmark (void)
 }
 
 
-
 int benchmark(void)
 {
-   double  a1 = 1.0, b1 = -10.5, c1 = 32.0, d1 = -30.0;
-   double  a2 = 1.0, b2 = -4.5, c2 = 17.0, d2 = -30.0;
-   double  a3 = 1.0, b3 = -3.5, c3 = 22.0, d3 = -31.0;
-   double  a4 = 1.0, b4 = -13.7, c4 = 1.0, d4 = -35.0;
-   int     solutions;
+  int  i;
 
-   double output[48] = {0};
-   double *output_pos = &(output[0]);
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      double  a1 = 1.0, b1 = -10.5, c1 = 32.0, d1 = -30.0;
+      double  a2 = 1.0, b2 = -4.5, c2 = 17.0, d2 = -30.0;
+      double  a3 = 1.0, b3 = -3.5, c3 = 22.0, d3 = -31.0;
+      double  a4 = 1.0, b4 = -13.7, c4 = 1.0, d4 = -35.0;
+      int     solutions;
 
-   /* solve some cubic functions */
-   /* should get 3 solutions: 2, 6 & 2.5   */
-   SolveCubic(a1, b1, c1, d1, &solutions, output);
-   /* should get 1 solution: 2.5           */
-   SolveCubic(a2, b2, c2, d2, &solutions, output);
-   SolveCubic(a3, b3, c3, d3, &solutions, output);
-   SolveCubic(a4, b4, c4, d4, &solutions, output);
-   /* Now solve some random equations */
-   for(a1=1;a1<3;a1++) {
-      for(b1=10;b1>8;b1--) {
-         for(c1=5;c1<6;c1+=0.5) {
+      double output[48] = {0};
+      double *output_pos = &(output[0]);
+
+      /* solve some cubic functions */
+      /* should get 3 solutions: 2, 6 & 2.5   */
+      SolveCubic(a1, b1, c1, d1, &solutions, output);
+      soln_cnt0 = solutions;
+      memcpy(res0,output,3*sizeof(res0[0]));
+      /* should get 1 solution: 2.5           */
+      SolveCubic(a2, b2, c2, d2, &solutions, output);
+      soln_cnt1 = solutions;
+      res1 = output[0];
+      SolveCubic(a3, b3, c3, d3, &solutions, output);
+      SolveCubic(a4, b4, c4, d4, &solutions, output);
+      /* Now solve some random equations */
+      for(a1=1;a1<3;a1++) {
+	for(b1=10;b1>8;b1--) {
+	  for(c1=5;c1<6;c1+=0.5) {
             for(d1=-1;d1>-3;d1--) {
-               SolveCubic(a1, b1, c1, d1, &solutions, output_pos);
+	      SolveCubic(a1, b1, c1, d1, &solutions, output_pos);
             }
-         }
+	  }
+	}
       }
-   }
+    }
 
    return 0;
 }

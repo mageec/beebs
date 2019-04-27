@@ -34,6 +34,7 @@ libstringsearch1_la_SOURCES = stringsearch1.c fast.fwd.inc.c fast.rev.d12.c
 stringsearch1_LDADD         = $(DUMMY_CRT0) \
                               $(top_builddir)/support/libsupport.la \
                               libstringsearch1.la \
-                              $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+                              $(top_builddir)/support/libbeebsc.la \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

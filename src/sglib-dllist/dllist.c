@@ -1,5 +1,3 @@
-
-
 /* BEEBS dllist benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -31,7 +29,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 225
 
 typedef struct dllist {
     int i;
@@ -53,105 +51,62 @@ int array[100] = {14, 66, 12, 41, 86, 69, 19, 77, 68, 38, 26, 42, 37, 23, 17, 29
 
 /* BEEBS heap is just an array */
 
-#include <stddef.h>
-
 #define HEAP_SIZE 8192
 static char heap[HEAP_SIZE];
-static void *heap_ptr;
-static void *heap_end;
 
-/* Initialize the BEEBS heap pointers */
-
-static void
-init_heap (void)
-{
-    heap_ptr = (void *) heap;
-    heap_end = heap_ptr + HEAP_SIZE;
-}
-
-/* BEEBS version of malloc.
-
-   This is primarily to reduce library and OS dependencies. Malloc is
-   generally not used in embedded code, or if it is, only in well defined
-   contexts to pre-allocate a fixed amount of memory. So this simplistic
-   implementation is just fine. */
-
-static void *
-malloc_beebs (size_t size)
-{
-    void *new_ptr = heap_ptr;
-
-    if (((heap_ptr + size) > heap_end) || (0 == size))
-	return NULL;
-    else
-	{
-	    heap_ptr += size;
-	    return new_ptr;
-	}
-}
-
-/* BEEBS version of free.
-
-   For our simplified version of memory handling, free can just do nothing. */
-
-static void
-free_beebs (void *ptr)
-{
-}
-
-/* This benchmark does not support verification */
+dllist *the_list;
 
 int
-verify_benchmark (int res __attribute ((unused)) )
+verify_benchmark (int res)
 {
-  return -1;
+  dllist *l;
+  int i = 0;
+
+  for(l=sglib_dllist_get_first(the_list); l!=NULL; l=l->ptr_to_next)
+  {
+    if (l->i != i)
+      return 0;
+    i++;
+  }
+
+  return (100 == res) && check_heap_beebs ((void *) heap);
 }
 
 
 void
 initialise_benchmark (void)
 {
-  init_heap ();
 }
 
 
 
 int benchmark()
 {
-  volatile int cnt=0;
-  dllist *l, *last, *the_list;
-  struct sglib_dllist_iterator  it;
-  int i;
+  volatile int cnt;
+  int  i;
 
-  the_list = NULL;
-  for(i = 0 ;i<100; ++i)
-  {
-    l = malloc_beebs(sizeof(dllist));
-    l->i = array[i];
-    sglib_dllist_add(&the_list, l);
-  }
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      dllist *l;
+      int i;
 
-  sglib_dllist_sort(&the_list);
+      init_heap_beebs ((void *) heap, HEAP_SIZE);
+      the_list = NULL;
 
-  last = sglib_dllist_get_first(the_list);
-  for(l=sglib_dllist_get_first(the_list); l!=NULL; l=l->ptr_to_next)
-  {
-    l->i = last->i;
-    last = l;
-  }
+      for(i = 0 ;i<100; ++i)
+	{
+	  l = malloc_beebs(sizeof(dllist));
+	  l->i = array[i];
+	  sglib_dllist_add(&the_list, l);
+	}
 
-  for(l=sglib_dllist_get_last(the_list); l!=NULL; l=l->ptr_to_previous)
-  {
-    l->i = last->i;
-    last = l;
-  }
+      sglib_dllist_sort(&the_list);
 
-  for(l=sglib_dllist_it_init(&it,the_list); l!=NULL; l=sglib_dllist_it_next(&it))
-  {
-    cnt += l->i;
-    free_beebs(l);
-  }
+      cnt = 0;
+
+      for(l=sglib_dllist_get_first(the_list); l!=NULL; l=l->ptr_to_next)
+	cnt++;
+    }
 
   return cnt;
 }
-

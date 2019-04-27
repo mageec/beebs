@@ -1,5 +1,3 @@
-
-
 /* BEEBS qurt benchmark
 
    *************************************************************************
@@ -70,11 +68,12 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
+#include <math.h>
 #include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 215
 
 float *a, x1[2], x2[2];
 int flag;
@@ -170,7 +169,10 @@ static float in3[] = {1.0, -4.0, 8.0};
 int
 verify_benchmark (int res __attribute ((unused)) )
 {
-  return -1;
+  return (fabs (x1[0] - 2.0) < 1.0e-6)
+    && (fabs (x1[1] - 2.0) < 1.0e-6)
+    && (fabs (x2[0] - 2.0) < 1.0e-6)
+    && (fabs (x2[1] + 2.0) < 1.0e-6);
 }
 
 
@@ -183,13 +185,17 @@ initialise_benchmark (void)
 int
 benchmark (void)
 {
-  a = in1;
-  result = qurt();
-  a = in2;
-  result = qurt();
-  a = in3;
-  result = qurt();
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      a = in1;
+      result = qurt();
+      a = in2;
+      result = qurt();
+      a = in3;
+      result = qurt();
+    }
+
   return 0;
 }
-
-

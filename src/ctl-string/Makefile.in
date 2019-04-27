@@ -172,6 +172,7 @@ am__DEPENDENCIES_1 =
 @ENABLED_BENCHMARK_CTL_STRING_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_CTL_STRING_TRUE@	$(top_builddir)/support/libsupport.la \
 @ENABLED_BENCHMARK_CTL_STRING_TRUE@	libctl-string.la \
+@ENABLED_BENCHMARK_CTL_STRING_TRUE@	$(top_builddir)/support/libbeebsc.la \
 @ENABLED_BENCHMARK_CTL_STRING_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_CTL_STRING_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_CTL_STRING_TRUE@	$(am__DEPENDENCIES_1)
@@ -395,7 +396,8 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_CTL_STRING_TRUE@ctl_string_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_CTL_STRING_TRUE@                           $(top_builddir)/support/libsupport.la \
 @ENABLED_BENCHMARK_CTL_STRING_TRUE@                           libctl-string.la \
-@ENABLED_BENCHMARK_CTL_STRING_TRUE@                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+@ENABLED_BENCHMARK_CTL_STRING_TRUE@                           $(top_builddir)/support/libbeebsc.la \
+@ENABLED_BENCHMARK_CTL_STRING_TRUE@                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am
 

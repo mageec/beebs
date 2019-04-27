@@ -34,6 +34,7 @@ libctl_string_la_SOURCES = string.c
 ctl_string_LDADD         = $(DUMMY_CRT0) \
                            $(top_builddir)/support/libsupport.la \
                            libctl-string.la \
-                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+                           $(top_builddir)/support/libbeebsc.la \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

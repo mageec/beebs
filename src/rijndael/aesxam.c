@@ -61,6 +61,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <ctype.h>
 
 #include "aes.h"
@@ -68,7 +69,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 9)
+#define LOCAL_SCALE_FACTOR 4
 
 #ifndef fpos_t
    #define fpos_t size_t
@@ -78,47 +79,38 @@
 
 #define RAND(a,b) (((a = 36969 * (a & 65535) + (a >> 16)) << 16) + (b = 18000 * (b & 65535) + (b >> 16))  )
 
-/* Yield a sequence of random numbers in the range [0, 2^15-1].
+static unsigned long fr_a[2], fr_mt, fr_count;
+static char          fr_r[4];
 
-   The seed is always initialized to zero.  long int is guaranteed to be at
-   least 32 bits. The seed only ever uses 31 bits (so is positive).
-
-   For BEEBS this gets round different operating systems using different
-   multipliers and offsets and RAND_MAX variations. */
-
-static int
-rand_beebs ()
+void
+initrand (void)
 {
-  static long int seed = 0;
-
-  seed = (seed * 1103515245L + 12345) & ((1UL << 31) - 1);
-  return (int) (seed >> 16);
-
+  memset (fr_a, 0, 2 * sizeof (fr_a[0]));
+  memset (fr_r, 0, 4 * sizeof (fr_r[0]));
+  fr_mt = 0L;
+  fr_count = 0L;
 }
-
 
 void fillrand(byte *buf, int len)
 {
-   static unsigned long a[2], mt = 1, count = 4;
-   static char          r[4];
    int                  i;
 
-   if(mt) {
-      mt = 0;
-      /*cycles(a);*/
-      a[0]=0xeaf3;
-      a[1]=0x35fe;
+   if(fr_mt) {
+      fr_mt = 0;
+      /*cycles(fr_a);*/
+      fr_a[0]=0xeaf3;
+      fr_a[1]=0x35fe;
    }
 
    for(i = 0; i < len; ++i)
    {
-      if(count == 4)
+      if(fr_count == 4)
       {
-         *(unsigned long*)r = RAND(a[0], a[1]);
-         count = 0;
+         *(unsigned long*)fr_r = RAND(fr_a[0], fr_a[1]);
+         fr_count = 0;
       }
 
-      buf[i] = r[count++];
+      buf[i] = fr_r[fr_count++];
    }
 }
 
@@ -187,13 +179,23 @@ int decfile(aes *ctx, byte *outbuf)
 
 char *presetkey="ABCDEF1234567890ABCDEF1234567890";
 
-
-/* This benchmark does not support verification */
+byte    encoutbuf[16], decoutbuf[16];
 
 int
-verify_benchmark (int res __attribute ((unused)) )
+verify_benchmark (int res)
 {
-  return -1;
+  static const byte enc_exp[16] = {
+    0x8d, 0xc4, 0x5d, 0x44, 0x9b, 0x2d, 0x53, 0xec,
+    0xf6, 0x65, 0x64, 0x1a, 0x3f, 0xc8, 0x52, 0x69
+  };
+  static const byte dec_exp[16] = {
+    0x2a, 0xe1, 0x24, 0x42, 0x91, 0x4b, 0xd6, 0x4a,
+    0xf5, 0x45, 0xaf, 0xc2, 0x84, 0xa9, 0x02, 0x55
+  };
+
+  return (0 == res)
+    && (0 == memcmp (enc_exp, encoutbuf, 16 * sizeof (enc_exp[0])))
+    && (0 == memcmp (dec_exp, decoutbuf, 16 * sizeof (dec_exp[0])));
 }
 
 
@@ -206,58 +208,57 @@ initialise_benchmark (void)
 
 int benchmark()
 {
-   char    *cp=0, ch=0;
-   byte key[32]={0};
-   int     i=0, by=0, key_len=0, err=0;
-   byte    encoutbuf[16], decoutbuf[16];
+  static const aes ctx_ref = {0};
+  int  err;
+  int  i;
 
-   {
-      aes     ctx = {0};
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      aes     ctx;
+      char    *cp=0, ch=0;
+      byte key[32]={0};
+      int     i=0, by=0, key_len=0;
+
+      srand_beebs (0);
+      initrand ();
+      memset (encoutbuf, 0, 16 * sizeof (encoutbuf[0]));
+      memset (decoutbuf, 0, 16 * sizeof (decoutbuf[0]));
+
+      err = 0;
+      ctx = ctx_ref;
       by=0; key_len=0; err = 0;
       cp = presetkey;   /* this is a pointer to the hexadecimal key digits  */
       i = 0;          /* this is a count for the input digits processed   */
 
       while(i < 64 && *cp)    /* the maximum key length is 32 bytes and   */
-      {                       /* hence at most 64 hexadecimal digits      */
-         ch = *cp++;            /* process a hexadecimal digit  */
-         if(ch >= '0' && ch <= '9')
-            by = (by << 4) + ch - '0';
-         else if(ch >= 'A' && ch <= 'F')
-            by = (by << 4) + ch - 'A' + 10;
-         else                            /* error if not hexadecimal     */
-         {
-            err = -2; goto exit;
-         }
+	{                       /* hence at most 64 hexadecimal digits      */
+	  ch = *cp++;            /* process a hexadecimal digit  */
+	  if(ch >= '0' && ch <= '9')
+	    by = (by << 4) + ch - '0';
+	  else if(ch >= 'A' && ch <= 'F')
+	    by = (by << 4) + ch - 'A' + 10;
+	  else                            /* error if not hexadecimal     */
+	    return -2;
 
-         /* store a key byte for each pair of hexadecimal digits         */
-         if(i++ & 1)
-            key[i / 2 - 1] = by & 0xff;
-      }
+	  /* store a key byte for each pair of hexadecimal digits         */
+	  if(i++ & 1)
+	    key[i / 2 - 1] = by & 0xff;
+	}
 
       if(*cp)
-      {
-         err = -3; goto exit;
-      }
+	return -3;
       else if(i < 32 || (i & 15))
-      {
-         err = -4; goto exit;
-      }
+	return -4;
 
       key_len = i / 2;
 
       set_key(key, key_len, enc, &ctx);
-
       err = encfile(&ctx, encoutbuf);
-
       set_key(key, key_len, dec, &ctx);
-
       err = decfile(&ctx, decoutbuf);
+    }
 
-   }
-
-exit:
-
-   return err;
+  return err;
 }
 
 

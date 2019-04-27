@@ -1,5 +1,3 @@
-
-
 /* BEEBS newlib ef_fmod implementation
 
    ====================================================
@@ -30,6 +28,7 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
+#include "math.h"
 #include "support.h"
 #include <stdint.h>
 
@@ -148,19 +147,16 @@ static const float one = 1.0, Zero[] = {0.0, -0.0,};
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 10335
 
 /* Tell the compiler not to optimize out calls in BENCHMARK. */
 volatile float result = 0;
 
 
-
-/* This benchmark does not support verification */
-
 int
 verify_benchmark (int res __attribute ((unused)) )
 {
-  return -1;
+  return fabs (21.8908005 - result) < 1.0e-5;
 }
 
 
@@ -173,12 +169,18 @@ initialise_benchmark (void)
 int
 benchmark (void)
 {
-  result = __ieee754_fmodf(2.2353, 1234.5);
-  result = __ieee754_fmodf(3.2515, 2345.6);
-  result = __ieee754_fmodf(4.9346, 3456.7);
-  result = __ieee754_fmodf(5.2342, 4567.8);
-  result = __ieee754_fmodf(6.2352, 5678.9);
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      result = 0.0;
+
+      result += __ieee754_fmodf(2.2353, 1234.5);
+      result += __ieee754_fmodf(3.2515, 2345.6);
+      result += __ieee754_fmodf(4.9346, 3456.7);
+      result += __ieee754_fmodf(5.2342, 4567.8);
+      result += __ieee754_fmodf(6.2352, 5678.9);
+    }
+
   return 0;
 }
-
-

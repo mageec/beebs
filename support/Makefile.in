@@ -127,13 +127,16 @@ CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
-libdummyc_la_LIBADD =
-am_libdummyc_la_OBJECTS = dummy-libc.lo
-libdummyc_la_OBJECTS = $(am_libdummyc_la_OBJECTS)
+libbeebsc_la_LIBADD =
+am_libbeebsc_la_OBJECTS = beebsc.lo
+libbeebsc_la_OBJECTS = $(am_libbeebsc_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
+libdummyc_la_LIBADD =
+am_libdummyc_la_OBJECTS = dummy-libc.lo
+libdummyc_la_OBJECTS = $(am_libdummyc_la_OBJECTS)
 libdummycrt0_la_LIBADD =
 am_libdummycrt0_la_OBJECTS = dummy-crt0.lo
 libdummycrt0_la_OBJECTS = $(am_libdummycrt0_la_OBJECTS)
@@ -195,12 +198,12 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(libdummyc_la_SOURCES) $(libdummycrt0_la_SOURCES) \
-	$(libdummygcc_la_SOURCES) $(libdummym_la_SOURCES) \
-	$(libsupport_la_SOURCES)
-DIST_SOURCES = $(libdummyc_la_SOURCES) $(libdummycrt0_la_SOURCES) \
-	$(am__libdummygcc_la_SOURCES_DIST) $(libdummym_la_SOURCES) \
-	$(am__libsupport_la_SOURCES_DIST)
+SOURCES = $(libbeebsc_la_SOURCES) $(libdummyc_la_SOURCES) \
+	$(libdummycrt0_la_SOURCES) $(libdummygcc_la_SOURCES) \
+	$(libdummym_la_SOURCES) $(libsupport_la_SOURCES)
+DIST_SOURCES = $(libbeebsc_la_SOURCES) $(libdummyc_la_SOURCES) \
+	$(libdummycrt0_la_SOURCES) $(am__libdummygcc_la_SOURCES_DIST) \
+	$(libdummym_la_SOURCES) $(am__libsupport_la_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -361,18 +364,22 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-noinst_LTLIBRARIES = libdummycrt0.la \
-                     libsupport.la   \
+noinst_LTLIBRARIES = libbeebsc.la    \
+		     libdummycrt0.la \
                      libdummygcc.la  \
                      libdummyc.la    \
-                     libdummym.la
+                     libdummym.la    \
+		     libsupport.la
 
 @ARC_TRUE@MAYBE_ARC_MILLICODE = arc-millicode.S
+libbeebsc_la_SOURCES = beebsc.c \
+			  beebsc.h
+
 libdummycrt0_la_SOURCES = dummy-crt0.c
-libsupport_la_SOURCES = main.c board.c support.h $(am__append_1)
 libdummygcc_la_SOURCES = dummy-libgcc.c $(MAYBE_ARC_MILLICODE)
 libdummyc_la_SOURCES = dummy-libc.c
 libdummym_la_SOURCES = dummy-libm.c
+libsupport_la_SOURCES = main.c board.c support.h $(am__append_1)
 libsupport_la_CPPFLAGS = -I$(top_srcdir)/config/@ARCH@/boards/@BOARD@ \
                          -I$(top_srcdir)/config/@ARCH@/chips/@CHIP@
 
@@ -421,6 +428,9 @@ clean-noinstLTLIBRARIES:
 	  rm -f $${locs}; \
 	}
 
+libbeebsc.la: $(libbeebsc_la_OBJECTS) $(libbeebsc_la_DEPENDENCIES) $(EXTRA_libbeebsc_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(LINK)  $(libbeebsc_la_OBJECTS) $(libbeebsc_la_LIBADD) $(LIBS)
+
 libdummyc.la: $(libdummyc_la_OBJECTS) $(libdummyc_la_DEPENDENCIES) $(EXTRA_libdummyc_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(LINK)  $(libdummyc_la_OBJECTS) $(libdummyc_la_LIBADD) $(LIBS)
 
@@ -443,6 +453,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/arc-millicode.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/beebsc.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dummy-crt0.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dummy-libc.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dummy-libgcc.Plo@am__quote@

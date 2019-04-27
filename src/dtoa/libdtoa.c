@@ -212,7 +212,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 458
 
 
 #ifndef Long
@@ -551,47 +551,6 @@ extern "C" char *dtoa(double d, int mode, int ndigits,
 
 #define HEAP_SIZE 8192
 static char heap[HEAP_SIZE];
-static void *heap_ptr;
-static void *heap_end;
-
-/* Initialize the BEEBS heap pointers */
-
-static void
-init_heap (void)
-{
-    heap_ptr = (void *) heap;
-    heap_end = heap_ptr + HEAP_SIZE;
-}
-
-/* BEEBS version of malloc.
-
-   This is primarily to reduce library and OS dependencies. Malloc is
-   generally not used in embedded code, or if it is, only in well defined
-   contexts to pre-allocate a fixed amount of memory. So this simplistic
-   implementation is just fine. */
-
-void *
-malloc_beebs (size_t size)
-{
-    void *new_ptr = heap_ptr;
-
-    if (((heap_ptr + size) > heap_end) || (0 == size))
-	return NULL;
-    else
-	{
-	    heap_ptr += size;
-	    return new_ptr;
-	}
-}
-
-/* BEEBS version of free.
-
-   For our simplified version of memory handling, free can just do nothing. */
-
-void
-free_beebs (void *ptr)
-{
-}
 
  struct
 Bigint {
@@ -4292,29 +4251,30 @@ char *nums[] = {"238434.3459823", "23955.0", "0.01000000023123", "1.0", "5555.55
 void
 initialise_benchmark (void)
 {
-  init_heap ();
 }
 
 
 
 int benchmark()
 {
-    volatile double sum=0;
-    int i;
+  int  j;
+  volatile double sum;
 
-    for(i = 0; i < 5; ++i)
+  for (j = 0; j < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); j++)
+    {
+      int i;
+      sum=0;
+
+      init_heap_beebs ((void *) heap, HEAP_SIZE);
+
+      for(i = 0; i < 5; ++i)
         sum += strtod(nums[i], NULL);
+    }
 
-    return (int)sum;
-
+  return (int)sum;
 }
 
 int verify_benchmark(int r)
 {
-  int expected = 267945;
-  if (r != expected)
-    return 0;
-  else {
-    return 1;
-  }
+  return (267945 == r) && check_heap_beebs ((void *) heap);
 }

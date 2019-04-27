@@ -34,7 +34,6 @@ SUBDIRS = aha-compress          \
           cover                 \
           crc                   \
           crc32                 \
-          ctl                   \
           ctl-stack             \
           ctl-string            \
           ctl-vector            \
@@ -57,7 +56,6 @@ SUBDIRS = aha-compress          \
           lcdnum                \
           levenshtein           \
           ludcmp                \
-          matmult               \
           matmult-float         \
           matmult-int           \
           mergesort             \
@@ -88,7 +86,6 @@ SUBDIRS = aha-compress          \
           sglib-arraybinsearch  \
           sglib-arrayheapsort   \
           sglib-arrayquicksort  \
-          sglib-arraysort       \
           sglib-dllist          \
           sglib-hashtable       \
           sglib-listinsertsort  \
@@ -103,8 +100,6 @@ SUBDIRS = aha-compress          \
           stringsearch1         \
           strstr                \
           tarai                 \
-          template              \
-          trio                  \
           trio-snprintf         \
           trio-sscanf           \
           ud                    \

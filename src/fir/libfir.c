@@ -1,5 +1,3 @@
-
-
 /* BEEBS fir benchmark
 
    MDH WCET BENCHMARK SUITE.
@@ -22,11 +20,13 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
+#include <string.h>
+
 #include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 5
 
 #define LOOPS 1
 
@@ -113,7 +113,10 @@ const long in_data[701]={
 0x77, 0x6c, 0x75, 0x41, 0x49, 0x4f, 0x3b, 0xb, 0x54, 0x37,
 0 };
 
-long out_data[720]={
+// To match size of input
+#define OUTSIZE 720
+
+long out_ref[OUTSIZE]={
 0x3, 0xfffffffa, 0xfffffffd, 0x1d, 0x58, 0x89, 0x87, 0x56, 0x20, 0x7,
 0x7, 0x4, 0xfffffff9, 0x0, 0x28, 0x5b, 0x6b, 0x4f, 0x2b, 0x21,
 0x2d, 0x30, 0x27, 0x27, 0x37, 0x47, 0x42, 0x27, 0x8, 0xfffffff4,
@@ -186,10 +189,7 @@ long out_data[720]={
 0x6f, 0x6a, 0x66, 0x5c, 0x4b, 0x3a, 0x33, 0x36, 0x38, 0x2c,
 0 };
 
-// To match size of input
-#define OUTSIZE 720
-
-
+static  long  output[OUTSIZE];
 
 /*--------------------------------------------------
  *--- Prototypes
@@ -273,12 +273,10 @@ void fir_filter_int(const long* in,long* out,long in_len,
 
 
 
-/* This benchmark does not support verification */
-
 int
 verify_benchmark (int res __attribute ((unused)) )
 {
-  return -1;
+  return 0 == memcmp (out_ref, output, OUTSIZE);
 }
 
 
@@ -291,10 +289,10 @@ initialise_benchmark (void)
 int
 benchmark (void)
 {
-  long  output[OUTSIZE];
+  int  i;
 
-  fir_filter_int(in_data,output,700,fir_int,35,285);
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+      fir_filter_int(in_data,output,700,fir_int,35,285);
+
   return 0;
 }
-
-

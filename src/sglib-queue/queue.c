@@ -1,4 +1,3 @@
-
 /* BEEBS queue benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -28,7 +27,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 133
 
 #define MAX_PARAMS 101
 
@@ -50,39 +49,41 @@ initialise_benchmark (void)
 
 int benchmark()
 {
-  int i, ai,aj, n;
-  int a[MAX_PARAMS];
-  int cnt = 0;
+  volatile int cnt;
+  int  j;
 
-  // echo parameters using a queue
-  SGLIB_QUEUE_INIT(int, a, ai, aj);
-  for (i=0; i<100; i++) {
-    n = array[i];
-    SGLIB_QUEUE_ADD(int, a, n, ai, aj, MAX_PARAMS);
-  }
-  while(! SGLIB_QUEUE_IS_EMPTY(int, a, ai, aj)) {
-  cnt += SGLIB_QUEUE_FIRST_ELEMENT(int, a, ai, aj);
-  SGLIB_QUEUE_DELETE(int, a, ai, aj, MAX_PARAMS);
-  }
+  for (j = 0; j < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); j++)
+    {
+      int i, ai,aj, n;
+      int a[MAX_PARAMS];
+      cnt = 0;
 
-  // print parameters in descending order
-  SGLIB_HEAP_INIT(int, a, ai);
-  for (i=0; i<100; i++) {
-    n = array[i];
-    SGLIB_HEAP_ADD(int, a, n, ai, MAX_PARAMS, SGLIB_NUMERIC_COMPARATOR);
-  }
-  while(! SGLIB_HEAP_IS_EMPTY(int, a, ai)) {
-    cnt += SGLIB_HEAP_FIRST_ELEMENT(int, a, ai);
-    SGLIB_HEAP_DELETE(int, a, ai, MAX_PARAMS, SGLIB_NUMERIC_COMPARATOR);
-  }
+      // echo parameters using a queue
+      SGLIB_QUEUE_INIT(int, a, ai, aj);
+      for (i=0; i<100; i++) {
+	n = array[i];
+	SGLIB_QUEUE_ADD(int, a, n, ai, aj, MAX_PARAMS);
+      }
+      while(! SGLIB_QUEUE_IS_EMPTY(int, a, ai, aj)) {
+	cnt += SGLIB_QUEUE_FIRST_ELEMENT(int, a, ai, aj);
+	SGLIB_QUEUE_DELETE(int, a, ai, aj, MAX_PARAMS);
+      }
 
+      // print parameters in descending order
+      SGLIB_HEAP_INIT(int, a, ai);
+      for (i=0; i<100; i++) {
+	n = array[i];
+	SGLIB_HEAP_ADD(int, a, n, ai, MAX_PARAMS, SGLIB_NUMERIC_COMPARATOR);
+      }
+      while(! SGLIB_HEAP_IS_EMPTY(int, a, ai)) {
+	cnt += SGLIB_HEAP_FIRST_ELEMENT(int, a, ai);
+	SGLIB_HEAP_DELETE(int, a, ai, MAX_PARAMS, SGLIB_NUMERIC_COMPARATOR);
+      }
+    }
 
   return cnt;
 }
 
 int verify_benchmark(int r) {
-  int expected = 9900;
-  if (r != expected)
-    return 0;
-  return 1;
+  return 9900 == r;
 }

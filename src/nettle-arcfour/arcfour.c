@@ -1,4 +1,3 @@
-
 /* BEEBS nettle-arcfour benchmark
 
    Copyright (C) 2001, 2004 Niels Möller
@@ -26,7 +25,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 321
 
 static const uint8_t key[16] = {
   0xf,0xe,0xd,0xc,0xb,0xa,0x9,0x8,0x7,0x6,0x5,0x4,0x3,0x2,0x1,0x0
@@ -99,12 +98,18 @@ initialise_benchmark (void)
 int
 benchmark (void)
 {
-  /* Encryption */
-  arcfour_set_key(&arcfour_ctx, 16, key);
-  arcfour_crypt(&arcfour_ctx, 16, result, data);
-  /* Decryption */
-  arcfour_set_key(&arcfour_ctx, 16, key);
-  arcfour_crypt(&arcfour_ctx, 16, result, result);
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      /* Encryption */
+      arcfour_set_key(&arcfour_ctx, 16, key);
+      arcfour_crypt(&arcfour_ctx, 16, result, data);
+      /* Decryption */
+      arcfour_set_key(&arcfour_ctx, 16, key);
+      arcfour_crypt(&arcfour_ctx, 16, result, result);
+    }
+
   return 0;
 }
 

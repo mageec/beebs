@@ -34,7 +34,8 @@ libsglib_queue_la_SOURCES = queue.c sglib.h
 sglib_queue_LDADD         = $(DUMMY_CRT0) \
                             $(top_builddir)/support/libsupport.la \
                             libsglib-queue.la \
-                            $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+                            $(top_builddir)/support/libbeebsc.la \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

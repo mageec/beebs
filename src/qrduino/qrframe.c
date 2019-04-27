@@ -24,71 +24,9 @@
 #include <string.h>
 #include <stdlib.h>
 
-/* BEEBS heap is just an array */
+/* Header for BEEBS library calls */
 
-#include <stddef.h>
-
-#define HEAP_SIZE 8192
-static char heap[HEAP_SIZE];
-static void *heap_ptr;
-static void *heap_end;
-
-/* Initialize the BEEBS heap pointers */
-
-void
-init_heap (void)
-{
-    heap_ptr = (void *) heap;
-    heap_end = heap_ptr + HEAP_SIZE;
-}
-
-/* BEEBS version of malloc.
-
-   This is primarily to reduce library and OS dependencies. Malloc is
-   generally not used in embedded code, or if it is, only in well defined
-   contexts to pre-allocate a fixed amount of memory. So this simplistic
-   implementation is just fine. */
-
-static void *
-malloc_beebs (size_t size)
-{
-    void *new_ptr = heap_ptr;
-
-    if (((heap_ptr + size) > heap_end) || (0 == size))
-	return NULL;
-    else
-	{
-	    heap_ptr += size;
-	    return new_ptr;
-	}
-}
-
-/* BEEBS version of calloc.
-
-   Implement as wrapper for malloc */
-
-static void *
-calloc_beebs (size_t nmemb, size_t size)
-{
-  void *new_ptr = malloc_beebs (nmemb * size);
-
-  /* Calloc is defined to zero the memory. OK to use a function here, because
-     it will be handled specially by the compiler anyway. */
-
-  if (NULL != new_ptr)
-    memset (new_ptr, 0, nmemb * size);
-
-  return new_ptr;
-}
-
-/* BEEBS version of free.
-
-   For our simplified version of memory handling, free can just do nothing. */
-
-static void
-free_beebs (void *ptr)
-{
-}
+#include "beebsc.h"
 
 #ifndef __AVR__
 #define PROGMEM

@@ -84,7 +84,7 @@ C**********************************************************************
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 10)
+#define LOCAL_SCALE_FACTOR 4
 
 
 /* map the FORTRAN math functions, etc. to the C versions */
@@ -111,12 +111,17 @@ int J,K,L;
 
 
 
-/* This benchmark does not support verification */
-
 int
 verify_benchmark (int res __attribute ((unused)) )
 {
-  return -1;
+  int i;
+  double E1_exp[5] = { 0.0, 3.0, 2.0, 3.0, -1.1302716215293103 };
+
+  for (i = 0; i < 5; i++)
+    if (fabs(E1[i] - E1_exp[i]) > 1.0e-16)
+      return 0;
+
+  return 1;
 }
 
 
@@ -129,6 +134,10 @@ initialise_benchmark (void)
 int
 benchmark()
 {
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
 	/* used in the FORTRAN version */
 	long I;
 	long N1, N2, N3, N4, N6, N7, N8, N9, N10, N11;
@@ -387,7 +396,9 @@ C
 C      where TIME is in seconds.
 C--------------------------------------------------------------------
 */
-	return(0);
+    }
+
+  return(0);
 }
 
 void

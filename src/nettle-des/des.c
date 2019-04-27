@@ -1,4 +1,3 @@
-
 /* BEEBS nettle-des benchmark
 
    Copyright (C) 1992  Dana L. How
@@ -27,7 +26,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 1139
 
 static const uint8_t data[16] = {
   0x0,0x1,0x2,0x3,0x4,0x5,0x6,0x7,0x8,0x9,0xa,0xb,0xc,0xd,0xe,0xf
@@ -282,8 +281,14 @@ initialise_benchmark (void)
 int
 benchmark (void)
 {
-  des_encrypt(&des_ctx, 16, result, data);
-  des_decrypt(&des_ctx, 16, result, result);
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      des_encrypt(&des_ctx, 16, result, data);
+      des_decrypt(&des_ctx, 16, result, result);
+    }
+
   return 0;
 }
 

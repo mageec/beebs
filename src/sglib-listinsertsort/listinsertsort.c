@@ -28,7 +28,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 135
 
 
 int array[100] = {14, 66, 12, 41, 86, 69, 19, 77, 68, 38, 26, 42, 37, 23, 17, 29, 55, 13,
@@ -49,90 +49,67 @@ SGLIB_DEFINE_SORTED_LIST_FUNCTIONS(iListType, ILIST_COMPARATOR, next_ptr)
 
 /* BEEBS heap is just an array */
 
-#include <stddef.h>
-
 #define HEAP_SIZE 8192
 static char heap[HEAP_SIZE];
-static void *heap_ptr;
-static void *heap_end;
 
-/* Initialize the BEEBS heap pointers */
-
-static void
-init_heap (void)
-{
-    heap_ptr = (void *) heap;
-    heap_end = heap_ptr + HEAP_SIZE;
-}
-
-/* BEEBS version of malloc.
-
-   This is primarily to reduce library and OS dependencies. Malloc is
-   generally not used in embedded code, or if it is, only in well defined
-   contexts to pre-allocate a fixed amount of memory. So this simplistic
-   implementation is just fine. */
-
-static void *
-malloc_beebs (size_t size)
-{
-    void *new_ptr = heap_ptr;
-
-    if (((heap_ptr + size) > heap_end) || (0 == size))
-	return NULL;
-    else
-	{
-	    heap_ptr += size;
-	    return new_ptr;
-	}
-}
-
-/* BEEBS version of free.
-
-   For our simplified version of memory handling, free can just do nothing. */
-
-static void
-free_beebs (void *ptr)
-{
-}
 
 void
 initialise_benchmark (void)
 {
-  init_heap ();
 }
 
 
+struct ilist *the_list;
 
 int benchmark()
 {
-  int i;
-  struct ilist *l, *the_list;
-  struct sglib_iListType_iterator   it;
-  int cnt = 0;
+  volatile int cnt;
+  int  j;
 
-  the_list = NULL;
-  for (i = 1; i < 100; i++) {
-    l = malloc_beebs (sizeof (struct ilist));
-    l->i = array [i];
+  for (j = 0; j < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); j++)
+    {
+      int i;
+      struct ilist *l;
+      struct sglib_iListType_iterator   it;
 
-    /* Insert the new element into the list while keeping it sorted.  */
-    sglib_iListType_add (&the_list, l);
-  }
+      init_heap_beebs ((void *) heap, HEAP_SIZE);
+      the_list = NULL;
+      for (i = 0; i < 100; i++) {
+	l = malloc_beebs (sizeof (struct ilist));
+	l->i = array [i];
 
-  for (l = sglib_iListType_it_init (&it, the_list); l != NULL; l = sglib_iListType_it_next (&it)) {
-    cnt += l->i;
-  }
+	/* Insert the new element into the list while keeping it sorted.  */
+	sglib_iListType_add (&the_list, l);
+      }
 
-  for(l = sglib_iListType_it_init (&it, the_list); l != NULL; l = sglib_iListType_it_next (&it)) {
-    free_beebs (l);
-  }
+      cnt = 0;
+
+      for (l = sglib_iListType_it_init (&it, the_list);
+	   l != NULL;
+	   l = sglib_iListType_it_next (&it))
+	{
+	  cnt++;
+	}
+    }
 
   return cnt;
 }
 
+
 int verify_benchmark(int r) {
-  int expected = 4936;
-  if (r != expected)
-    return 0;
-  return 1;
+  struct ilist *l;
+  struct sglib_iListType_iterator   it;
+  int i = 0;
+
+  for (l = sglib_iListType_it_init (&it, the_list);
+       l != NULL;
+       l = sglib_iListType_it_next (&it))
+    {
+      if (l->i != i)
+	return 0;
+
+      i++;
+    }
+
+  return (100 == r) && check_heap_beebs ((void *) heap);
 }

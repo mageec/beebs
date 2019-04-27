@@ -34,7 +34,8 @@ libfac_la_SOURCES = libfac.c
 fac_LDADD          = $(DUMMY_CRT0) \
                      $(top_builddir)/support/libsupport.la \
                      libfac.la \
-                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+                     $(top_builddir)/support/libbeebsc.la \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

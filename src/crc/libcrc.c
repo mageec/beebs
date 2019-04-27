@@ -1,5 +1,3 @@
-
-
 /* BEEBS crc benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -25,7 +23,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 2229
 
 /* $Id: crc.c,v 1.2 2005/04/04 11:34:58 csg Exp $ */
 
@@ -145,9 +143,9 @@ unsigned short icrc(unsigned short crc, unsigned long len,
 /* This benchmark does not support verification */
 
 int
-verify_benchmark (int res __attribute ((unused)) )
+verify_benchmark (int res)
 {
-  return -1;
+  return 61727 == res;
 }
 
 
@@ -162,16 +160,14 @@ int benchmark(void)
 {
   unsigned short i1,i2;
   unsigned long n;
+  int  i;
 
-  n=40;
-  i1=icrc(0,n,(short)0,1);
-  i2=icrc(i1,n+2,(short)0,1);
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      n=40;
+      i1=icrc(0,n,(short)0,1);
+      i2=icrc(i1,n+2,(short)0,1);
+    }
 
-  /* Silence compiler warning about unused variables.  */
-  (void) i2;
-
-  return 0;
+  return i2;
 }
-
-
-

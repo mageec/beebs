@@ -1,5 +1,3 @@
-
-
 /* BEEBS qsort-exam benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -21,11 +19,12 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
+#include <string.h>
 #include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 965
 
 /*************************************************************************/
 /*                                                                       */
@@ -75,16 +74,21 @@
 #define M 7
 #define NSTACK 50
 
-float arr[20] = {
-  5, 4, 10.3, 1.1, 5.7, 100, 231, 111, 49.5, 99,
-  10, 150, 222.22, 101, 77, 44, 35, 20.54, 99.99, 88.88
+static const float arr_ref[20] = {
+   5.0,   4.0,  10.3,    1.1,  5.7, 100.0, 231.0, 111.0,   49.5,  99.0,
+  10.0, 150.0, 222.22, 101.0, 77.0,  44.0,  35.0,  20.54,  99.99, 88.88
 };
+
+static float arr[20];
 
 int istack[100];
 
+/* Fix for C. The original program assumed the values were in arr[1] to
+   arr[n]. This version assumes arr[0] to arr[n-1]. */
+
 void sort(unsigned long n)
 {
-	unsigned long i,ir=n,j,k,l=1;
+	unsigned long i,ir=n-1,j,k,l=0;
 	int jstack=0;
 	float a,temp;
 
@@ -140,13 +144,17 @@ void sort(unsigned long n)
 }
 
 
-
-/* This benchmark does not support verification */
-
 int
 verify_benchmark (int res __attribute ((unused)) )
 {
-  return -1;
+  static const float arr_exp[20] = {
+      1.10,   4.0,    5.0,    5.70,  10.0,
+    10.30,  20.54,  35.0,   44.0,   49.50,
+    77.0,   88.88,  99.0,   99.99, 100.0,
+   101.0,  111.0,  150.0,  222.22, 231.00
+  };
+
+  return 0 == memcmp (arr, arr_exp, 20 * sizeof (arr[0]));
 }
 
 
@@ -159,7 +167,14 @@ initialise_benchmark (void)
 int
 benchmark()
 {
-  sort(20);
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      memcpy (arr, arr_ref, 20 * sizeof (arr[0]));
+      sort(20);
+    }
+
   return 0;
 }
 

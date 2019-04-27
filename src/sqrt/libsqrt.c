@@ -1,4 +1,3 @@
-
 /* BEEBS sqrt benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -24,7 +23,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 10)
+#define LOCAL_SCALE_FACTOR 3
 
 /* MDH WCET BENCHMARK SUITE. */
 
@@ -126,17 +125,21 @@ initialise_benchmark (void)
 int
 benchmark()
 {
-  float i = 0.0;
-  volatile float accum = 0.0;
+  volatile float accum;
+  int  j;
 
-  for(i = 0.0; i < 10000.; i += 100.)
-    accum += sqrtfcn(i);
-  return (int)(accum*100000);
+  for (j = 0; j < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); j++)
+    {
+      float i = 0.0;
+      accum = 0.0;
+
+      for(i = 0.0; i < 10000.0; i += 100.0)
+	accum += sqrtfcn(i);
+    }
+
+  return (int) accum;
 }
 
 int verify_benchmark(int r) {
-  int expected = 661462912;
-  if (r != expected)
-    return 0;
-  return 1;
+  return 6614 == r;
 }

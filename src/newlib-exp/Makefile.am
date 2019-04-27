@@ -34,8 +34,8 @@ libnewlib_exp_la_SOURCES = ef_exp.c
 newlib_exp_LDADD         = $(DUMMY_CRT0) \
                            $(top_builddir)/support/libsupport.la \
                            libnewlib-exp.la \
-                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
-
-
+                           $(top_builddir)/support/libbeebsc.la \
+                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT) \
+			   $(LIBM)
 
 endif

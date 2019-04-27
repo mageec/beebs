@@ -1,5 +1,3 @@
-
-
 /* BEEBS newlib ef_exp implementation
 
    ====================================================
@@ -30,6 +28,7 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
+#include "math.h"
 #include "support.h"
 #include <stdint.h>
 
@@ -133,7 +132,7 @@ P5   =  4.1381369442e-08; /* 0x3331bb4c */
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 9445
 
 /* Tell the compiler not to optimize out calls in BENCHMARK. */
 volatile float result = 0;
@@ -145,7 +144,7 @@ volatile float result = 0;
 int
 verify_benchmark (int res __attribute ((unused)) )
 {
-  return -1;
+  return fabs (233.204193 - result) < 1.0e-5;
 }
 
 
@@ -158,12 +157,18 @@ initialise_benchmark (void)
 int
 benchmark (void)
 {
-  result = __ieee754_expf(1);
-  result = __ieee754_expf(2);
-  result = __ieee754_expf(3);
-  result = __ieee754_expf(4);
-  result = __ieee754_expf(5);
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      result = 0.0;
+
+      result += __ieee754_expf(1);
+      result += __ieee754_expf(2);
+      result += __ieee754_expf(3);
+      result += __ieee754_expf(4);
+      result += __ieee754_expf(5);
+    }
+
   return 0;
 }
-
-

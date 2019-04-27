@@ -27,7 +27,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 251
 
 /* Code from GLS.  Nine insns in the loop, giving 9*32 + 3 = 291 insns
 worst case (mask = all 1's, not counting subroutine linkage). */
@@ -160,34 +160,42 @@ initialise_benchmark (void)
 int
 benchmark (void)
 {
-   int errors = 0,  n, i;
-   unsigned int r;
+  int  i;
+  int errors;
 
-   n = sizeof(test)/sizeof(test[0]);
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      int  n, i;
+      unsigned int r;
 
-   for (i = 0; i < n; i += 3) {
-      r = compress1(test[i], test[i+1]);
-      if (r != test[i+2])
-         errors = 1;
-   }
+      errors = 0;
 
-   for (i = 0; i < n; i += 3) {
-      r = compress2(test[i], test[i+1]);
-      if (r != test[i+2])
-         errors = 1;
-   }
+      n = sizeof(test)/sizeof(test[0]);
 
-   for (i = 0; i < n; i += 3) {
-      r = compress3(test[i], test[i+1]);
-      if (r != test[i+2])
-         errors = 1;
-   }
+      for (i = 0; i < n; i += 3) {
+	r = compress1(test[i], test[i+1]);
+	if (r != test[i+2])
+	  errors = 1;
+      }
 
-   for (i = 0; i < n; i += 3) {
-      r = compress4(test[i], test[i+1]);
-      if (r != test[i+2])
-         errors = 1;
-   }
+      for (i = 0; i < n; i += 3) {
+	r = compress2(test[i], test[i+1]);
+	if (r != test[i+2])
+	  errors = 1;
+      }
+
+      for (i = 0; i < n; i += 3) {
+	r = compress3(test[i], test[i+1]);
+	if (r != test[i+2])
+	  errors = 1;
+      }
+
+      for (i = 0; i < n; i += 3) {
+	r = compress4(test[i], test[i+1]);
+	if (r != test[i+2])
+	  errors = 1;
+      }
+    }
 
    return errors;
 }

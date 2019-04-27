@@ -1,4 +1,3 @@
-
 /* BEEBS slre benchmark
 
    Copyright (c) 2004-2013 Sergey Lyubka <valenok@gmail.com>
@@ -27,7 +26,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 131
 
 #include <stdio.h>
 #include <ctype.h>
@@ -462,25 +461,28 @@ initialise_benchmark (void)
 }
 
 
-
 int benchmark()
 {
-  int i;
-  int len = strlen(text);
-  struct slre_cap captures;
-  volatile int ret=0;
+  volatile int ret;
+  int  j;
 
-  for(i = 0; i < 4; ++i)
-  {
-    ret += slre_match(regexes[i], text, len, &captures, 1);
-  }
+  for (j = 0; j < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); j++)
+    {
+      int i;
+      int len = strlen(text);
+      struct slre_cap captures;
+      ret=0;
+
+      for(i = 0; i < 4; ++i)
+	{
+	  ret += slre_match(regexes[i], text, len, &captures, 1);
+	}
+    }
 
   return ret;
 }
 
+
 int verify_benchmark(int r) {
-  int expected = 102;
-  if (r != expected)
-    return 0;
-  return 1;
+  return 102 == r;
 }

@@ -74,6 +74,10 @@ void stop_trigger (void);
 
 int benchmark (void) __attribute__ ((noinline));
 
+/* Local simplified versions of library functions */
+
+#include "beebsc.h"
+
 #endif	/* SUPPORT_H */
 
 /*

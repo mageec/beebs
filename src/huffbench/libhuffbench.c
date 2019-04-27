@@ -58,56 +58,13 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 13
 
 
 /* BEEBS heap is just an array */
 
-#include <stddef.h>
-
 #define HEAP_SIZE 8192
 static char heap[HEAP_SIZE];
-static void *heap_ptr;
-static void *heap_end;
-
-/* Initialize the BEEBS heap pointers */
-
-static void
-init_heap (void)
-{
-    heap_ptr = (void *) heap;
-    heap_end = heap_ptr + HEAP_SIZE;
-}
-
-/* BEEBS version of malloc.
-
-   This is primarily to reduce library and OS dependencies. Malloc is
-   generally not used in embedded code, or if it is, only in well defined
-   contexts to pre-allocate a fixed amount of memory. So this simplistic
-   implementation is just fine. */
-
-static void *
-malloc_beebs (size_t size)
-{
-    void *new_ptr = heap_ptr;
-
-    if (((heap_ptr + size) > heap_end) || (0 == size))
-	return NULL;
-    else
-	{
-	    heap_ptr += size;
-	    return new_ptr;
-	}
-}
-
-/* BEEBS version of free.
-
-   For our simplified version of memory handling, free can just do nothing. */
-
-static void
-free_beebs (void *ptr)
-{
-}
 
 // embedded random number generator; ala Park and Miller
 static       long seed = 1325;
@@ -137,7 +94,7 @@ static size_t random4()
 }
 
 
-static const int TEST_SIZE =  500;
+#define TEST_SIZE 500
 
 typedef unsigned long bits32;
 typedef unsigned char byte;
@@ -488,34 +445,57 @@ void compdecomp(byte * data, size_t data_len)
 }
 
 
-/* This benchmark does not support verification */
+static byte res_data[TEST_SIZE];
 
 int
 verify_benchmark (int res __attribute ((unused)) )
 {
-  return -1;
+  static const byte *ref_data = "\
+FRMGNMVOMWDGSYBXUPUTK5QUWE32ZOECYJVJGOCW\
+MI1YK2I04CPLGAYLECL243JLEXWDLPAHFG3G2PFV\
+3ERJTVNIJD1VIRP1OXSD3APUEFDJZXFPZ4SUSIFS\
+5TGNW2UR4NEM3LAOX1VBD0DM302CQRLJASXFCUJN\
+1GEVHENYUCDYQPTLQMERDCFTXDFF1CRYEINYGJHI\
+EZKISDYOVAZLNELHBCPALQBDO5HIMPQ5PU53W45H\
+CMR00C0LPHMP3PIUSVJAT04T5OXPRFJOU0VBFJ1R\
+HYLHXWW0YKJFQ1TMKIM1UPN355LWPOOFJCZ2NXHR\
+J0WDOZ3040LNYAXJSX1MNVQIS2ZMKAJPL1W24YIB\
+3UTUMMQI3WOE4MZYN4GLE2NX45W4TRRWKYS53CIL\
+ZRLEVCPJLLEPYGGE4ZUQXNB4O0FVCTABJGSL40VW\
+J1YPXG2ZNSQZXLCGSZ1QUK1YBWB41EN5WEZFR3HQ\
+JQICXCYIBUTSJBN11CVN";
+
+  return (0 == memcmp (res_data, ref_data, sizeof (ref_data)))
+    && check_heap_beebs ((void *) heap);
 }
 
 
 void
 initialise_benchmark (void)
 {
-  init_heap ();
 }
 
 
 
 int benchmark()
 {
-    // initialization
-    byte * test_data = generate_test_data(TEST_SIZE);
+  byte * test_data;
+  int  i;
 
-    // what we're timing
-    compdecomp(test_data,TEST_SIZE);
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      // initialization
+      seed = 1325;
+      init_heap_beebs ((void *) heap, HEAP_SIZE);
+      test_data = generate_test_data(TEST_SIZE);
 
-    // release resources
-    free_beebs(test_data);
+      // what we're timing
+      compdecomp(test_data,TEST_SIZE);
+    }
 
-    // done
-    return 0;
+  // Copy for validation
+  memcpy (res_data, test_data, TEST_SIZE);
+
+  // done
+  return 0;
 }

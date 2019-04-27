@@ -29,7 +29,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 422
 
 #ifndef CTL_SIZE
 #define CTL_SIZE      100
@@ -60,51 +60,9 @@ unsigned int ctl_warning;
 
 /* BEEBS heap is just an array */
 
-#include <stddef.h>
-
 #define HEAP_SIZE 8192
 static char heap[HEAP_SIZE];
-static void *heap_ptr;
-static void *heap_end;
 
-/* Initialize the BEEBS heap pointers */
-
-static void
-init_heap ()
-{
-    heap_ptr = (void *) heap;
-    heap_end = heap_ptr + HEAP_SIZE;
-}
-
-/* BEEBS version of malloc.
-
-   This is primarily to reduce library and OS dependencies. Malloc is
-   generally not used in embedded code, or if it is, only in well defined
-   contexts to pre-allocate a fixed amount of memory. So this simplistic
-   implementation is just fine. */
-
-static void *
-malloc_beebs (size_t size)
-{
-    void *new_ptr = heap_ptr;
-
-    if (((heap_ptr + size) > heap_end) || (0 == size))
-	return NULL;
-    else
-	{
-	    heap_ptr += size;
-	    return new_ptr;
-	}
-}
-
-/* BEEBS version of free.
-
-   For our simplified version of memory handling, free can just do nothing. */
-
-static void
-free_beebs (void *ptr)
-{
-}
 
 int ctl_SetBlockSize(ctl_struct* its, size_t BlockSize)
 {
@@ -449,48 +407,53 @@ static const char *in5;
 int
 benchmark (void)
 {
-  ctl_string *s;
-  ctl_string *s2;
-  int cnt = 0;
+  volatile int cnt = 0;
+  int  i;
 
-  s = ctl_StringInit();
-  s2 = ctl_StringInit();
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+	static const char a[] = "This is a string";
+	static const char b[] = "This is a str2";
+	static const char c[] = "aaa";
+	static const char d[] = "AaaAaAaaaaaAAaaaAAaaAaA";
+	static const char e[] = "a";
 
-  ctl_StringSet(s, in1);
-  ctl_StringAppend(s, in2);
-  ctl_StringSet(s2, in3);
-  ctl_StringSetString(s, s2);
+	ctl_string *s;
+	ctl_string *s2;
+	cnt = 0;
 
-  while(ctl_StringCmpNoCase(s, in4))
-  {
-    ctl_StringAppend(s, in5);
-    cnt++;
-  }
+	in1 = a;
+	in2 = b;
+	in3 = c;
+	in4 = d;
+	in5 = e;
+	init_heap_beebs ((void *) heap, HEAP_SIZE);
 
-  ctl_StringFree(s);
-  ctl_StringFree(s2);
+	s = ctl_StringInit();
+	s2 = ctl_StringInit();
+
+	ctl_StringSet(s, in1);
+	ctl_StringAppend(s, in2);
+	ctl_StringSet(s2, in3);
+	ctl_StringSetString(s, s2);
+
+	while(ctl_StringCmpNoCase(s, in4))
+	    {
+		ctl_StringAppend(s, in5);
+		cnt++;
+	    }
+
+	ctl_StringFree(s);
+	ctl_StringFree(s2);
+    }
 
   return cnt;
 }
 
 void initialise_benchmark() {
-  static const char a[] = "This is a string";
-  static const char b[] = "This is a str2";
-  static const char c[] = "aaa";
-  static const char d[] = "AaaAaAaaaaaAAaaaAAaaAaA";
-  static const char e[] = "a";
-  in1 = a;
-  in2 = b;
-  in3 = c;
-  in4 = d;
-  in5 = e;
-  init_heap ();
 }
 
 int verify_benchmark(int r)
 {
-  int expected = 21;
-  if (r != expected)
-    return 0;
-  return 1;
+    return (21 == r) && check_heap_beebs ((void *) heap);
 }

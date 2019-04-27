@@ -19,11 +19,12 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
+#include <string.h>
 #include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 5347
 
 /* MDH WCET BENCHMARK SUITE. File version $Id: statemate.c,v 1.3 2005/11/11 10:32:32 ael01 Exp $ */
 
@@ -1294,23 +1295,30 @@ void FH_DU(void)
 
 int benchmark(void)
 {
-  interface();
-  FH_DU();
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      memset (Bitlist, 0, 64 * sizeof (Bitlist[0]));
+      init();
+
+      interface();
+      FH_DU();
+    }
 
   return 0;
 }
 
 void initialise_benchmark() {
-   int i;
-   for (i=0; i<64; i++) {
-      Bitlist[i] = 0;
-   }
-   init();
 }
 
 int verify_benchmark(int unused) {
-   char expected[64] = {0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+   char expected[64] = {
+     0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+   };
    int i;
+
    for (i=0; i<64; i++) {
       if (Bitlist[i] != expected[i])
          return 0;

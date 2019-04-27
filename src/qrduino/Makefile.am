@@ -29,12 +29,18 @@ bin_PROGRAMS          = qrduino
 noinst_LTLIBRARIES    = libqrduino.la
 
 qrduino_SOURCES       =
-libqrduino_la_SOURCES = qrtest.c qrencode.c qrencode.h qrframe.c ecctable.h qrbits.h
+libqrduino_la_SOURCES = qrtest.c   \
+                        qrencode.c \
+                        qrencode.h \
+                        qrframe.c  \
+                        ecctable.h \
+                        qrbits.h
 
 qrduino_LDADD         = $(DUMMY_CRT0) \
                         $(top_builddir)/support/libsupport.la \
                         libqrduino.la \
-                        $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+                        $(top_builddir)/support/libbeebsc.la \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

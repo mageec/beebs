@@ -30,7 +30,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 9)
+#define LOCAL_SCALE_FACTOR 6
 
 #define NUM_NODES                          10
 #define NONE                               9999
@@ -236,17 +236,22 @@ initialise_benchmark (void)
 
 
 int benchmark() {
-   int i,j;
+  int  l;
 
-   output_count = 0;
+  for (l = 0; l < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); l++)
+    {
+      int i,j;
 
-   /* finds 10 shortest paths between nodes */
-   for(j = 0; j < NUM_NODES; j++) {
-      for (i=0; i < NUM_NODES; i++) {
-         output[output_count] = dijkstra(i,j);
-         output_count++;
+      output_count = 0;
+
+      /* finds 10 shortest paths between nodes */
+      for(j = 0; j < NUM_NODES; j++) {
+	for (i=0; i < NUM_NODES; i++) {
+	  output[output_count] = dijkstra(i,j);
+	  output_count++;
+	}
       }
-   }
+    }
 
    return 0;
 }

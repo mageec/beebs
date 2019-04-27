@@ -30,12 +30,13 @@ noinst_LTLIBRARIES                 = libsglib-arrayheapsort.la
 
 sglib_arrayheapsort_SOURCES        =
 
-libsglib_arrayheapsort_la_SOURCES  = arraysort.c sglib.h
+libsglib_arrayheapsort_la_SOURCES  = arrayheapsort.c sglib.h
 libsglib_arrayheapsort_la_CPPFLAGS = -DHEAP_SORT ${AM_CPPFLAGS}
 
 sglib_arrayheapsort_LDADD          = $(DUMMY_CRT0) \
                                      $(top_builddir)/support/libsupport.la \
                                      libsglib-arrayheapsort.la \
-                                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+                                     $(top_builddir)/support/libbeebsc.la \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

@@ -31,7 +31,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 66
 
 // From nettle/macros.h
 
@@ -1156,11 +1156,16 @@ initialise_benchmark (void)
 int
 benchmark (void)
 {
-  aes_set_encrypt_key(&encctx, 32, key);
-  aes_encrypt(&encctx, LEN, encrypted, plaintext);
+  int  i;
 
-  aes_set_decrypt_key(&decctx, 32, key);
-  aes_decrypt(&decctx, LEN, decrypted, encrypted);
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+	aes_set_encrypt_key(&encctx, 32, key);
+	aes_encrypt(&encctx, LEN, encrypted, plaintext);
+
+	aes_set_decrypt_key(&decctx, 32, key);
+	aes_decrypt(&decctx, LEN, decrypted, encrypted);
+    }
 
   return 0;
 }

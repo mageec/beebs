@@ -34,6 +34,7 @@ libnettle_sha256_la_SOURCES = nettle-sha256.c
 nettle_sha256_LDADD         = $(DUMMY_CRT0) \
                               $(top_builddir)/support/libsupport.la \
                               libnettle-sha256.la \
-                              $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+                              $(top_builddir)/support/libbeebsc.la \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

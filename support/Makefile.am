@@ -21,23 +21,28 @@
 
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-noinst_LTLIBRARIES = libdummycrt0.la \
-                     libsupport.la   \
+noinst_LTLIBRARIES = libbeebsc.la    \
+		     libdummycrt0.la \
                      libdummygcc.la  \
                      libdummyc.la    \
-                     libdummym.la
+                     libdummym.la    \
+		     libsupport.la
 
 if ARC
   MAYBE_ARC_MILLICODE=arc-millicode.S
 endif
 
+libbeebsc_la_SOURCES    = beebsc.c \
+			  beebsc.h
+
 libdummycrt0_la_SOURCES = dummy-crt0.c
-libsupport_la_SOURCES   = main.c    \
-                          board.c   \
-                          support.h
 libdummygcc_la_SOURCES  = dummy-libgcc.c $(MAYBE_ARC_MILLICODE)
 libdummyc_la_SOURCES    = dummy-libc.c
 libdummym_la_SOURCES    = dummy-libm.c
+
+libsupport_la_SOURCES   = main.c    \
+                          board.c   \
+                          support.h
 
 if CHIPSUPPORT_C
 libsupport_la_SOURCES += chip.c

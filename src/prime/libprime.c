@@ -25,7 +25,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 283
 
 typedef  unsigned char  bool;
 typedef  unsigned long  ulong;
@@ -68,19 +68,23 @@ ulong y;
 int
 benchmark (void)
 {
-  swap (&x, &y);
-  result = (!(prime(x) && prime(y)));
-  return 0;
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      x =  21649L;
+      y = 513239L;
+
+      swap (&x, &y);
+      result = (!(prime(x) && prime(y)));
+    }
+
+  return result;
 }
 
 void initialise_benchmark() {
-  x =  21649L;
-  y = 513239L;
 }
 
 int verify_benchmark(int unused) {
-  int expected = 0;
-  if (result != expected)
-    return 0;
-  return 1;
+  return 0 == result;
 }

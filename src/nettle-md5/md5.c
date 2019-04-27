@@ -26,7 +26,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 3666
 
 static uint8_t input[64] = {
   0x0,0x1,0x2,0x3,0x4,0x5,0x6,0x7,0x8,0x9,0xa,0xb,0xc,0xd,0xe,0xf,
@@ -175,8 +175,14 @@ initialise_benchmark (void)
 int
 benchmark (void)
 {
-  memcpy (digest, digest_ref, _MD5_DIGEST_LENGTH * sizeof (digest[0]));
-  _nettle_md5_compress(digest, input);
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      memcpy (digest, digest_ref, _MD5_DIGEST_LENGTH * sizeof (digest[0]));
+      _nettle_md5_compress(digest, input);
+    }
+
   return 0;
 }
 

@@ -68,7 +68,7 @@
 
 #include "support.h"
 
-#define SCALE_FACTOR   (REPEAT_FACTOR >> 6)
+#define LOCAL_SCALE_FACTOR 1
 
 #define WIDTH 60
 #define MIN(a,b) ((a) <= (b) ? (a) : (b))
@@ -78,6 +78,9 @@ typedef struct {
     float p;
     char c;
 } aminoacid_t;
+
+static char repeat_res[WIDTH];
+static char random_res[WIDTH + 1];
 
 static inline float myrandom (float max) {
     unsigned long const IM = 139968;
@@ -89,12 +92,15 @@ static inline float myrandom (float max) {
     return max * (long) last / IM;
 }
 
-static inline void accumulate_probabilities (aminoacid_t *genelist, size_t len) {
+static inline void accumulate_probabilities (const aminoacid_t *genelist_in,
+					     aminoacid_t *genelist_out,
+					     size_t len) {
     float cp = 0.0;
     size_t i;
     for (i = 0; i < len; i++) {
-        cp += genelist[i].p;
-        genelist[i].p = cp;
+        cp += genelist_in[i].p;
+        genelist_out[i].p = cp;
+	genelist_out[i].c = genelist_in[i].c;
     }
 }
 
@@ -119,6 +125,7 @@ static void repeat_fasta (char const *s, size_t count) {
      	if (pos >= len) pos -= len;
      	count -= line;
     } while (count);
+    memcpy (repeat_res, s2, WIDTH);
     /* Since BEEBS uses alloca don't try to free!
        free (s2);*/
 }
@@ -133,31 +140,35 @@ static void repeat_fasta (char const *s, size_t count) {
 /* This is done count times. */
 /* Between each WIDTH consecutive characters, the function prints a newline */
 static void random_fasta (aminoacid_t const *genelist, size_t count) {
+  char buf[WIDTH + 1];
+  do {
+    size_t line = MIN(WIDTH, count);
+    size_t pos = 0;
     do {
-	size_t line = MIN(WIDTH, count);
-	size_t pos = 0;
-	char buf[WIDTH + 1];
-	do {
-	    float r = myrandom (1.0);
-	    size_t i = 0;
-	    while (genelist[i].p < r)
-		++i; /* Linear search */
-	    buf[pos++] = genelist[i].c;
-	} while (pos < line);
-	buf[line] = '\n';
-	/*fwrite_unlocked (buf, 1, line + 1, stdout);    */
-	(void) buf; /* Silence compiler warning about unused 'buf'.  */
-	count -= line;
-    } while (count);
+      float r = myrandom (1.0);
+      size_t i = 0;
+      while (genelist[i].p < r)
+	++i; /* Linear search */
+      buf[pos++] = genelist[i].c;
+    } while (pos < line);
+    buf[line] = '\n';
+    count -= line;
+  } while (count);
+
+  memcpy (random_res, buf, WIDTH+1);
 }
 
-
-/* This benchmark does not support verification */
 
 int
 verify_benchmark (int res __attribute ((unused)) )
 {
-  return -1;
+  static const char *repeat_ref =
+    "GGCCGGGCGCGGTGGCTCACGCCTGTAATCCCAGCACTTTGGGAGGCCGAGGCGGGCGGA";
+  static const char *random_ref =
+    "ggaagtgaaaagataaatat\naaatgacgccacgtgtcgaataatggtctgaccaatgta\n";
+
+  return (0 == strncmp (repeat_res, repeat_ref, WIDTH))
+    && (0 == strncmp (random_res, random_ref, WIDTH+1));
 }
 
 
@@ -169,9 +180,13 @@ initialise_benchmark (void)
 
 
 int benchmark () {
-  const int n = 1000;
+  int  i;
 
-    static aminoacid_t iub[] = {
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      const int n = 1000;
+
+      static const aminoacid_t iub_ref[15] = {
 	{ 0.27, 'a' },
 	{ 0.12, 'c' },
 	{ 0.12, 'g' },
@@ -188,16 +203,20 @@ int benchmark () {
 	{ 0.02, 'W' },
 	{ 0.02, 'Y' }};
 
-    static aminoacid_t homosapiens[] = {
+      aminoacid_t iub[15];
+
+      static const aminoacid_t homsap_ref[4] = {
 	{ 0.3029549426680, 'a' },
 	{ 0.1979883004921, 'c' },
 	{ 0.1975473066391, 'g' },
 	{ 0.3015094502008, 't' }};
 
-    accumulate_probabilities (iub, NELEMENTS(iub));
-    accumulate_probabilities (homosapiens, NELEMENTS(homosapiens));
+      aminoacid_t homsap[4];
 
-    static char const *const alu ="\
+      accumulate_probabilities (iub_ref, iub, NELEMENTS(iub));
+      accumulate_probabilities (homsap_ref, homsap, NELEMENTS(homsap));
+
+      static char const *const alu ="\
 GGCCGGGCGCGGTGGCTCACGCCTGTAATCCCAGCACTTTGG\
 GAGGCCGAGGCGGGCGGATCACCTGAGGTCAGGAGTTCGAGA\
 CCAGCCTGGCCAACATGGTGAAACCCCGTCTCTACTAAAAAT\
@@ -206,12 +225,14 @@ GCTACTCGGGAGGCTGAGGCAGGAGAATCGCTTGAACCCGGG\
 AGGCGGAGGTTGCAGTGAGCCGAGATCGCGCCACTGCACTCC\
 AGCCTGGGCGACAGAGCGAGACTCCGTCTCAAAAA";
 
-    /*fputs_unlocked (">ONE Homo sapiens alu\n", stdout);*/
-    repeat_fasta (alu, 2 * n);
-    /*fputs_unlocked (">TWO IUB ambiguity codes\n", stdout);*/
-    random_fasta (iub, 3 * n);
-    /*fputs_unlocked (">THREE Homo sapiens frequency\n", stdout);*/
-    random_fasta (homosapiens, 5 * n);
-    return 0;
+      /*fputs_unlocked (">ONE Homo sapiens alu\n", stdout);*/
+      repeat_fasta (alu, 2 * n);
+      /*fputs_unlocked (">TWO IUB ambiguity codes\n", stdout);*/
+      random_fasta (iub, 3 * n);
+      /*fputs_unlocked (">THREE Homo sapiens frequency\n", stdout);*/
+      random_fasta (homsap, 5 * n);
+    }
+
+  return 0;
 }
 

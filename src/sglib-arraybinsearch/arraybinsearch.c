@@ -1,4 +1,3 @@
-
 /* BEEBS arraybinsearch benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -25,7 +24,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 489
 
 
 #include <stdio.h>
@@ -53,22 +52,26 @@ initialise_benchmark (void)
 
 int benchmark()
 {
-  volatile int cnt=0;
-  int tmp, index, i;
+  volatile int cnt;
+  int  i;
 
-  index = 0;
-  for(i=0; i< 100; i++) {
-    tmp = array[i];
-    SGLIB_ARRAY_BINARY_SEARCH(int, array, 0, i, tmp, SGLIB_NUMERIC_COMPARATOR, found, index);
-    cnt += index;
-  }
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      int tmp, index, i;
+      cnt = 0;
 
+      index = 0;
+      for(i=0; i< 100; i++) {
+	tmp = array[i];
+	SGLIB_ARRAY_BINARY_SEARCH(int, array, 0, i, tmp,
+				  SGLIB_NUMERIC_COMPARATOR, found, index);
+	cnt += index;
+      }
+    }
+  
   return cnt;
 }
 
 int verify_benchmark(int r) {
-  int expected = 2455;
-  if (r != expected)
-    return 0;
-  return 1;
+  return 2455 == r;
 }

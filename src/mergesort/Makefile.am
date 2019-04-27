@@ -34,7 +34,8 @@ libmergesort_la_SOURCES = libmergesort.c
 mergesort_LDADD         = $(DUMMY_CRT0) \
                           $(top_builddir)/support/libsupport.la \
                           libmergesort.la \
-                          $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+                          $(top_builddir)/support/libbeebsc.la \
+		          $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

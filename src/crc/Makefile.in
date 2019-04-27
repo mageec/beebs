@@ -169,7 +169,9 @@ crc_OBJECTS = $(am_crc_OBJECTS)
 am__DEPENDENCIES_1 =
 @ENABLED_BENCHMARK_CRC_TRUE@crc_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_CRC_TRUE@	$(top_builddir)/support/libsupport.la \
-@ENABLED_BENCHMARK_CRC_TRUE@	libcrc.la $(am__DEPENDENCIES_1) \
+@ENABLED_BENCHMARK_CRC_TRUE@	libcrc.la \
+@ENABLED_BENCHMARK_CRC_TRUE@	$(top_builddir)/support/libbeebsc.la \
+@ENABLED_BENCHMARK_CRC_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_CRC_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_CRC_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -391,7 +393,8 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_CRC_TRUE@crc_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_CRC_TRUE@                     $(top_builddir)/support/libsupport.la \
 @ENABLED_BENCHMARK_CRC_TRUE@                     libcrc.la \
-@ENABLED_BENCHMARK_CRC_TRUE@                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+@ENABLED_BENCHMARK_CRC_TRUE@                     $(top_builddir)/support/libbeebsc.la \
+@ENABLED_BENCHMARK_CRC_TRUE@                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am
 

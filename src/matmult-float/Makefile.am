@@ -30,11 +30,12 @@ noinst_LTLIBRARIES           = libmatmult-float.la
 
 matmult_float_SOURCES        =
 
-libmatmult_float_la_SOURCES  = matmult.c
+libmatmult_float_la_SOURCES  = matmult-float.c
 
 matmult_float_LDADD          = $(DUMMY_CRT0) \
                                $(top_builddir)/support/libsupport.la \
                                libmatmult-float.la \
+                               $(top_builddir)/support/libbeebsc.la \
                                $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 libmatmult_float_la_CPPFLAGS = -DMATMULT_FLOAT ${AM_CPPFLAGS}

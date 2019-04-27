@@ -36,7 +36,8 @@ libtrio_sscanf_la_SOURCES  = trio.c trio.h trio_test.c triostr.c triostr.h \
 trio_sscanf_LDADD          = $(DUMMY_CRT0) \
                              $(top_builddir)/support/libsupport.la \
                              libtrio-sscanf.la \
-                             $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+                             $(top_builddir)/support/libbeebsc.la \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 libtrio_sscanf_la_CPPFLAGS = -DTRIO_SSCANF -DTRIO_EXTENSION=0 \
                              -DTRIO_DEPRECATED=0 -DTRIO_MICROSOFT=0 \
                              -DTRIO_ERRORS=0 -DTRIO_FEATURE_FLOAT=0 \

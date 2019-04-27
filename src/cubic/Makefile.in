@@ -173,6 +173,7 @@ am__DEPENDENCIES_1 =
 @ENABLED_BENCHMARK_CUBIC_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_CUBIC_TRUE@	$(top_builddir)/support/libsupport.la \
 @ENABLED_BENCHMARK_CUBIC_TRUE@	libcubic.la \
+@ENABLED_BENCHMARK_CUBIC_TRUE@	$(top_builddir)/support/libbeebsc.la \
 @ENABLED_BENCHMARK_CUBIC_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_CUBIC_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_CUBIC_TRUE@	$(am__DEPENDENCIES_1) $(LIBM)
@@ -395,6 +396,7 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_CUBIC_TRUE@cubic_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_CUBIC_TRUE@                      $(top_builddir)/support/libsupport.la \
 @ENABLED_BENCHMARK_CUBIC_TRUE@                      libcubic.la \
+@ENABLED_BENCHMARK_CUBIC_TRUE@                      $(top_builddir)/support/libbeebsc.la \
 @ENABLED_BENCHMARK_CUBIC_TRUE@                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT) \
 @ENABLED_BENCHMARK_CUBIC_TRUE@                      $(LIBM)
 
