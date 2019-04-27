@@ -27,7 +27,12 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 8)
+#define LOCAL_SCALE_FACTOR 6
+
+/* BEEBS heap is just an array */
+
+#define HEAP_SIZE 8192
+static char heap[HEAP_SIZE];
 
 static const char *encode;
 static int size;
@@ -35,39 +40,37 @@ static int size;
 int
 benchmark (void)
 {
+  static const char *in_encode = "http://www.mageec.com";
+  int  i;
 
-  initeccsize(1, size);
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+      {
+	  encode = in_encode;
+	  size = 22;
+	  init_heap_beebs ((void *) heap, HEAP_SIZE);
 
-  memcpy(strinbuf, encode, size);
+	  initeccsize(1, size);
 
-  initframe();
-  qrencode();
-  freeframe();
-  freeecc();
+	  memcpy(strinbuf, encode, size);
+
+	  initframe();
+	  qrencode();
+	  freeframe();
+	  freeecc();
+      }
+
   return 0;
 }
 
-extern void init_heap (void);
-
 void initialise_benchmark() {
-  static const char *in_encode = "http://www.mageec.com";
-  encode = in_encode;
-  size = 22;
-  init_heap ();
 }
 
 int verify_benchmark(int unused) {
-  int i;
-  // #include <stdio.h>
-  // for (i=0; i<22; i++)
-  //   printf("%d,", strinbuf[i]);
-  // maybe should be a char
-  int expected[22] =
-    {254,101,63,128,130,110,160,128,186,65,46,
-     128,186,38,46,128,186,9,174,128,130,20};
-  for (i=0; i<22; i++)
-    if (strinbuf[i] != expected[i])
-      return 0;
-  return 1;
-}
+  unsigned char expected[22] = {
+      254, 101,  63, 128, 130, 110, 160, 128, 186,  65,  46,
+      128, 186,  38,  46, 128, 186,   9, 174, 128, 130,  20
+  };
 
+  return (0 == memcmp (strinbuf, expected, 22 * sizeof (strinbuf[0])))
+      && check_heap_beebs ((void *) heap);
+}

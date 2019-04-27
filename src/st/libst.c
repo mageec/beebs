@@ -1,4 +1,3 @@
-
 /* BEEBS st benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -24,7 +23,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 8)
+#define LOCAL_SCALE_FACTOR 11
 
 /* stats.c */
 
@@ -76,41 +75,28 @@ initialise_benchmark (void)
 int
 benchmark()
 {
-#ifdef POUT
-   long StartTime, StopTime;
-   float TotalTime;
-#endif
+  int  i;
 
-   double MeanA, MeanB, VarA, VarB, StddevA, StddevB /*, Coef*/;
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      double MeanA, MeanB, VarA, VarB, StddevA, StddevB /*, Coef*/;
 
-   InitSeed ();
-#ifdef POUT
-   printf ("\n   *** Statictics TEST ***\n\n");
-   StartTime = ttime();
-#endif
+      InitSeed ();
 
-   Initialize(ArrayA);
-   Calc_Sum_Mean(ArrayA, &SumA, &MeanA);
-   Calc_Var_Stddev(ArrayA, MeanA, &VarA, &StddevA);
+      Initialize(ArrayA);
+      Calc_Sum_Mean(ArrayA, &SumA, &MeanA);
+      Calc_Var_Stddev(ArrayA, MeanA, &VarA, &StddevA);
 
-   Initialize(ArrayB);
-   Calc_Sum_Mean(ArrayB, &SumB, &MeanB);
-   Calc_Var_Stddev(ArrayB, MeanB, &VarB, &StddevB);
+      Initialize(ArrayB);
+      Calc_Sum_Mean(ArrayB, &SumB, &MeanB);
+      Calc_Var_Stddev(ArrayB, MeanB, &VarB, &StddevB);
 
-   /* Coef will have to be used globally in Calc_LinCorrCoef since it would
-      be beyond the 6 registers used for passing parameters
-   */
-   Calc_LinCorrCoef(ArrayA, ArrayB, MeanA, MeanB /*, &Coef*/);
+      /* Coef will have to be used globally in Calc_LinCorrCoef since it would
+	 be beyond the 6 registers used for passing parameters
+      */
+      Calc_LinCorrCoef(ArrayA, ArrayB, MeanA, MeanB /*, &Coef*/);
+    }
 
-#ifdef POUT
-   StopTime = ttime();
-   TotalTime = (StopTime - StartTime) / 1000.0;
-   printf("     Sum A = %12.4f,      Sum B = %12.4f\n", SumA, SumB);
-   printf("    Mean A = %12.4f,     Mean B = %12.4f\n", MeanA, MeanB);
-   printf("Variance A = %12.4f, Variance B = %12.4f\n", VarA, VarB);
-   printf(" Std Dev A = %12.4f, Variance B = %12.4f\n", StddevA, StddevB);
-   printf("\nLinear Correlation Coefficient = %f\n", Coef);
-#endif
    return 0;
 }
 
@@ -195,21 +181,11 @@ int RandomInteger()
 }
 
 int verify_benchmark(int unused) {
-  double expSumA = 4999.002470660901963128708302974700927734375;
-  double expSumB = 4996.843113032735345768742263317108154296875;
-  double expCoef = 0.99990005485361932446863875156850554049015045166016;
-  if (expSumA != SumA) {
-    //printf("%.50f\n, %.50f\n\n", SumA, expSumA);
-    return 0;
-  }
-  if(expSumB != SumB) {
-    //printf("%.50f\n, %.50f\n\n", SumB, expSumB);
-    return 0;
-  }
-  if(expCoef != Coef) {
-    //printf("%.50f\n, %.50f\n\n", Coef, expCoef);
-    return 0;
-  }
+  double expSumA = 4999.00247066090196;
+  double expSumB = 4996.84311303273534;
+  double expCoef =    0.999900054853619324;
 
-  return 1;
+  return (fabs (expSumA - SumA) < 1.0e13)
+    && (fabs (expSumB - SumB) < 1.0e-13)
+    && (fabs (expCoef - Coef) < 1.0e-17);
 }

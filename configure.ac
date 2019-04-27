@@ -1309,8 +1309,10 @@ test -f $srcdir/config/$arch/boards/$board/calibration && \
 
 AM_CONDITIONAL([CALIBRATION], [test x$HAVE_CALIBRATION == xyes])
 
-# Architecture, board and chip specific and user CFLAGS and LDFLAGS
-CFLAGS="$CFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS $USER_CFLAGS"
+# Architecture, board and chip specific and user CFLAGS and LDFLAGS. Note that
+# we always compile with debug info, although this can be overridden by
+# USER_CFLAGS
+CFLAGS="$CFLAGS $ARCH_CFLAGS $CHIP_CFLAGS $BOARD_CFLAGS -g3 $USER_CFLAGS"
 LDFLAGS="$LDFLAGS $ARCH_LDFLAGS $CHIP_LDFLAGS $BOARD_LDFLAGS $USER_LDFLAGS"
 
 LT_INIT
@@ -1378,7 +1380,6 @@ AC_CONFIG_FILES([Makefile                          \
                  src/cover/Makefile                \
                  src/crc/Makefile                  \
                  src/crc32/Makefile                \
-                 src/ctl/Makefile                  \
                  src/ctl-stack/Makefile            \
                  src/ctl-string/Makefile           \
                  src/ctl-vector/Makefile           \
@@ -1401,7 +1402,6 @@ AC_CONFIG_FILES([Makefile                          \
                  src/lcdnum/Makefile               \
                  src/levenshtein/Makefile          \
                  src/ludcmp/Makefile               \
-                 src/matmult/Makefile              \
                  src/matmult-float/Makefile        \
                  src/matmult-int/Makefile          \
                  src/mergesort/Makefile            \
@@ -1432,7 +1432,6 @@ AC_CONFIG_FILES([Makefile                          \
                  src/sglib-arraybinsearch/Makefile \
                  src/sglib-arrayheapsort/Makefile  \
                  src/sglib-arrayquicksort/Makefile \
-                 src/sglib-arraysort/Makefile      \
                  src/sglib-dllist/Makefile         \
                  src/sglib-hashtable/Makefile      \
                  src/sglib-listinsertsort/Makefile \
@@ -1447,8 +1446,6 @@ AC_CONFIG_FILES([Makefile                          \
                  src/stringsearch1/Makefile        \
                  src/strstr/Makefile               \
                  src/tarai/Makefile                \
-                 src/template/Makefile             \
-                 src/trio/Makefile                 \
                  src/trio-snprintf/Makefile        \
                  src/trio-sscanf/Makefile          \
                  src/ud/Makefile                   \

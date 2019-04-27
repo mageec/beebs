@@ -172,6 +172,7 @@ am__DEPENDENCIES_1 =
 @ENABLED_BENCHMARK_CTL_STACK_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_CTL_STACK_TRUE@	$(top_builddir)/support/libsupport.la \
 @ENABLED_BENCHMARK_CTL_STACK_TRUE@	libctl-stack.la \
+@ENABLED_BENCHMARK_CTL_STACK_TRUE@	$(top_builddir)/support/libbeebsc.la \
 @ENABLED_BENCHMARK_CTL_STACK_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_CTL_STACK_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_CTL_STACK_TRUE@	$(am__DEPENDENCIES_1)
@@ -395,7 +396,8 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_CTL_STACK_TRUE@ctl_stack_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_CTL_STACK_TRUE@                          $(top_builddir)/support/libsupport.la \
 @ENABLED_BENCHMARK_CTL_STACK_TRUE@                          libctl-stack.la \
-@ENABLED_BENCHMARK_CTL_STACK_TRUE@                          $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+@ENABLED_BENCHMARK_CTL_STACK_TRUE@                          $(top_builddir)/support/libbeebsc.la \
+@ENABLED_BENCHMARK_CTL_STACK_TRUE@                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 @ENABLED_BENCHMARK_CTL_STACK_TRUE@libctl_stack_la_CPPFLAGS = -DCTL_STACK ${AM_CPPFLAGS}
 all: all-am

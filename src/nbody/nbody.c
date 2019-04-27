@@ -1,4 +1,3 @@
-
 /* BEEBS nbody benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -69,7 +68,7 @@
 
 #include "support.h"
 
-#define SCALE_FACTOR (REPEAT_FACTOR >> 8)
+#define LOCAL_SCALE_FACTOR 1
 
 #define PI 3.141592653589793
 #define SOLAR_MASS ( 4 * PI * PI )
@@ -170,13 +169,18 @@ initialise_benchmark (void)
 
 int benchmark()
 {
-   int i;
-   offset_momentum(solar_bodies, BODIES_SIZE);
-   /*printf("%.9f\n", bodies_energy(solar_bodies, BODIES_SIZE));*/
-   for (i = 0; i < 100; ++i)
-       bodies_energy(solar_bodies, BODIES_SIZE);
-   /*printf("%.9f\n", bodies_energy(solar_bodies, BODIES_SIZE));*/
-   return 0;
+  int  j;
+
+  for (j = 0; j < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); j++)
+    {
+      int i;
+      offset_momentum(solar_bodies, BODIES_SIZE);
+      /*printf("%.9f\n", bodies_energy(solar_bodies, BODIES_SIZE));*/
+      for (i = 0; i < 100; ++i)
+	bodies_energy(solar_bodies, BODIES_SIZE);
+      /*printf("%.9f\n", bodies_energy(solar_bodies, BODIES_SIZE));*/
+    }
+  return 0;
 }
 
 int verify_benchmark(int unused) {

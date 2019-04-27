@@ -28,7 +28,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 944
 
 
 /* $Id: cnt.c,v 1.3 2005/04/04 11:34:58 csg Exp $ */
@@ -77,7 +77,7 @@ int RandomInteger(void);
 
 // Globals
 
-int Seed;
+long int Seed;			/* Must be at least 32-bit */
 
 matrix Array;
 
@@ -90,13 +90,21 @@ int Postotal, Negtotal, Poscnt, Negcnt;
 int benchmark (void)
 
 {
+  int  res;
+  int  i;
 
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      InitSeed();
+      Initialize(Array);
+      res = Test(Array);
+    }
 
    //printf("\n   *** MATRIX SUM AND COUNT BENCHMARK TEST ***\n\n");
 
    //printf("RESULTS OF THE TEST:\n");
 
-   return Test(Array);
+  return res;
 
 }
 
@@ -145,7 +153,7 @@ int InitSeed (void)
 
 {
 
-   Seed = 0;
+   Seed = 0L;
 
    return 0;
 
@@ -245,30 +253,15 @@ int RandomInteger(void)
 
 {
 
-   Seed = ((Seed * 133) + 81) % 8095;
+   Seed = ((Seed * 133L) + 81L) % 8095L;
 
-   return Seed;
+   return (int) Seed;
 
 }
 
 void initialise_benchmark() {
-   InitSeed();
-   Initialize(Array);
 }
 
 int verify_benchmark(int nt) {
-  int expected_negtotal = 396675;
-  if (expected_negtotal != nt)
-    return 0;
-  return 1;
-
+  return 396675 == nt;
 }
-
-
-
-
-
-
-
-
-

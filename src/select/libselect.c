@@ -1,4 +1,3 @@
-
 /* BEEBS select benchmark
 
    SOURCE : Numerical Recipes in C - The Second Edition
@@ -22,94 +21,127 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
+#include "math.h"
+#include "string.h"
 #include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 1749
 
-#define SWAP(a,b) \
-do{               \
-    temp=(a);     \
-    (a)=(b);      \
-    (b)=temp;     \
-}while(0);        \
-
-float arr[20] = {
-  5, 4, 10.3, 1.1, 5.7, 100, 231, 111, 49.5, 99,
-  10, 150, 222.22, 101, 77, 44, 35, 20.54, 99.99, 888.88
+static const float arr_ref[20] = {
+    5.00,   4.00,  10.30,   1.10,   5.70,
+  100.00, 231.00, 111.00,  49.50,  99.00,
+   10.00, 150.00, 222.22, 101.00,  77.00,
+   44.00,  35.00,  20.54,  99.99, 888.88
 };
 
+float arr[20];
 
-float select(unsigned long k, unsigned long n)
+static void
+swap (unsigned long a,
+      unsigned long b)
 {
-	unsigned long i,ir,j,l,mid;
-	float a,temp;
-	int flag, flag2;
+  float t = arr[a];
 
-	l=1;
-	ir=n;
-	flag = flag2 = 0;
-	while (!flag) {
-		if (ir <= l+1) {
-			if (ir == l+1)
-			  if (arr[ir] < arr[l]) {
-			    SWAP(arr[l],arr[ir])
-			      }
-			flag = 1;
-		} else if (!flag) {
-			mid=(l+ir) >> 1;
-			SWAP(arr[mid],arr[l+1])
-			if (arr[l+1] > arr[ir]) {
-				SWAP(arr[l+1],arr[ir])
-			}
-			if (arr[l] > arr[ir]) {
-				SWAP(arr[l],arr[ir])
-			}
-			if (arr[l+1]> arr[l]) {
-				SWAP(arr[l+1],arr[l])
-			}
-			i=l+1;
-			j=ir;
-			a=arr[l];
-			while (!flag2) {
-				i++;
-				while (arr[i] < a) i++;
-				j--;
-				while (arr[j] > a) j--;
-				if (j < i) flag2 = 1;
-				if (!flag2) SWAP(arr[i],arr[j]);
+  arr[a] = arr[b];
+  arr[b] = t;
+}
 
-			}
-			arr[l]=arr[j];
-			arr[j]=a;
-			if (j >= k) ir=j-1;
-			if (j <= k) l=i;
-		}
+/* Fix for C. The original program assumed the values were in arr[1] to
+   arr[n]. This version assumes arr[0] to arr[n-1]. */
 
+float
+      select(unsigned long k,		/* Element wanted */
+	     unsigned long n)		/* Size of arr */
+{
+  unsigned long i,ir,j,l,mid;
+  float a,temp;
+  int flag, flag2;
+
+  l=0;
+  ir=n-1;
+
+  while (1)
+    {
+      if (ir <= (l + 1))
+	{
+	  if (ir == (l + 1) && (arr[ir] < arr[l]))
+	      swap (l, ir);
+
+	  return arr[k - 1];
 	}
-	return arr[k];
+      else
+	{
+	  mid = (l + ir) >> 1;
+	  swap (mid, l + 1);
+
+	  if (arr[l] > arr[ir])
+	    swap (l, ir);
+
+	  if (arr[l + 1] > arr[ir])
+	    swap (l + 1, ir);
+
+	  if (arr[l] > arr[l + 1])
+	    swap (l, l + 1);
+
+	  i = l + 1;
+	  j = ir;
+	  a = arr[l + 1];
+
+	  while (1)
+	    {
+	      do
+		i++;
+	      while (arr[i] < a);
+
+	      do
+		j--;
+	      while (arr[j] > a);
+
+	      if (j < i)
+		break;
+
+	      swap (i, j);
+	    }
+
+	  arr[l + 1] = arr[j];
+	  arr[j] = a;
+
+	  if (j >= (k - 1))
+	    ir = j - 1;
+
+	  if (j <= (k - 1))
+	    l = i;
+	}
+    }
 }
 
 static int x, y;
+volatile float result;
 
 int
 benchmark (void)
 {
-  select(x, y);
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      memcpy  (arr, arr_ref, 20 * sizeof (arr[0]));
+      x = 10;
+      y = 20;
+      result = select(x, y);
+    }
+
   return 0;
 }
 
 void initialise_benchmark() {
-  x = 10;
-  y = 20;
 }
 
 
-/* This benchmark does not support verification */
-
 int
-verify_benchmark (int res __attribute ((unused)) )
+verify_benchmark (int res)
 {
-  return -1;
+  return fabs (result - 49.50) < 1.0e-6;
 }

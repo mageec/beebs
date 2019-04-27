@@ -1,5 +1,3 @@
-
-
 /* BEEBS lcdnum benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -21,11 +19,12 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
+#include <string.h>
 #include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 13650
 
 /* MDH WCET BENCHMARK SUITE. */
 
@@ -76,16 +75,16 @@ unsigned char num_to_lcd(unsigned char a)
   return 0;
 }
 
-volatile unsigned char IN;
-volatile unsigned char OUT;
-
-
-/* This benchmark does not support verification */
+unsigned char out_vals[16];
 
 int
 verify_benchmark (int res __attribute ((unused)) )
 {
-  return -1;
+  static const unsigned char out_ref[16] =
+    { 0x00, 0x24, 0x5d, 0x6d, 0x2e, 0x5d, 0x7b, 0x25,
+      0x7f, 0x6f, 0x3f, 0x7a, 0x53, 0x7c, 0x5b, 0x1b };
+
+  return 0 == memcmp (out_vals, out_ref, 16);
 }
 
 
@@ -98,21 +97,21 @@ initialise_benchmark (void)
 
 int benchmark(void)
 {
-  int           i;
-  unsigned char a;
-  /*volatile*/ int  n; /* JG */
+  int  j;
 
-  n = 10;
-  for(i=0; i< n; i++)
+  for (j = 0; j < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); j++)
     {
-      a = IN;                   /* scan port */
-      if(i<5)
-        {
-          a = a &0x0F;
-          OUT = num_to_lcd(a);
-        }
+      int i;
+
+      for (i = 0; i < 16; i++)
+	{
+	  volatile unsigned char  in = (unsigned char) i;
+	  volatile unsigned char  out;
+
+	  out = num_to_lcd (in);
+	  out_vals[i] = out;
+	}
     }
+
   return 0;
 }
-
-

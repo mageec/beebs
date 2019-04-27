@@ -1,4 +1,3 @@
-
 /* BEEBS frac benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -24,7 +23,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 28
 #include <math.h>
 
 
@@ -39,7 +38,7 @@
 #define MIN 3.0e-10
 
 double
-frac(double v, int *n, int *d, double error)
+frac(double v, long int *n, long int *d, double error)
 {
     /*
       given a number, v, this function outputs two integers,
@@ -127,21 +126,23 @@ initialise_benchmark (void)
 
 int benchmark()
 {
-  double error = 1.0e-10;
-  int n,d,i;
+  long int  n,d,i;
+  int  j;
 
-  n = 0;
-  for(i = 0; i < 10; ++i)
-    frac(nums[i], &n, &d, error);
+  for (j = 0; j < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); j++)
+    {
+      double error = 1.0e-10;
 
-  return d;
+      n = 0;
+      for(i = 0; i < 10; ++i)
+	frac(nums[i], &n, &d, error);
+    }
+
+  return (int) (d % 32768L);
 }
 
 int verify_benchmark(int r)
 {
-  int expected = 1000000;
-  if (r != expected)
-    return 0;
-  return 1;
+  return 16960 == r;
 }
 

@@ -37,7 +37,8 @@ libnettle_des_la_SOURCES = des.c \
 nettle_des_LDADD         = $(DUMMY_CRT0) \
                            $(top_builddir)/support/libsupport.la \
                            libnettle-des.la \
-                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+                           $(top_builddir)/support/libbeebsc.la \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 EXTRA_DIST = descore.README
 

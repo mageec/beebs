@@ -33,7 +33,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 571
 
 long int expint(int n, long int x);
 
@@ -111,19 +111,27 @@ static int n, x;
 int
 benchmark (void)
 {
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR) - 1; i++)
+    {
+      int v = i % 100;
+      n = 50 - (v / 2);
+      x = v % 2;
+      benchmark_result = expint(n,x);
+    }
+
+  n = 50;
+  x = 1;
   benchmark_result = expint(n,x);
+
   return benchmark_result;
 }
 
 void initialise_benchmark() {
-  n = 50;
-  x = 1;
 }
 
 int verify_benchmark(int r)
 {
-  int expected = 3883;
-  if (r != expected)
-    return 0;
-  return 1;
+  return 3883 == r;
 }

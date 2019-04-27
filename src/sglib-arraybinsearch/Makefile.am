@@ -34,6 +34,7 @@ libsglib_arraybinsearch_la_SOURCES = arraybinsearch.c sglib.h
 sglib_arraybinsearch_LDADD         = $(DUMMY_CRT0) \
                                      $(top_builddir)/support/libsupport.la \
                                      libsglib-arraybinsearch.la \
-                                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+                                     $(top_builddir)/support/libbeebsc.la \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 endif

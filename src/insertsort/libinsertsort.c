@@ -62,52 +62,51 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
+#include <string.h>
 #include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 10443
 
 unsigned int a[11];    /* assume all data is positive */
 
 int
 benchmark (void)
 {
-  int i,j, temp;
-  i = 2;
-  while(i <= 10){
-      j = i;
-      while (a[j] < a[j-1])
-      {
-	temp = a[j];
-	a[j] = a[j-1];
-	a[j-1] = temp;
-	j--;
+  static const unsigned int a_ref[11] = {
+    0, 11, 10, 9, 8 ,7, 6, 5, 4, 3, 2
+  };
+
+  int  k;
+
+  for (k = 0; k < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); k++)
+    {
+      int i,j, temp;
+
+      memcpy (a, a_ref, 11 * sizeof (a[0]));
+      i = 2;
+
+      while(i <= 10){
+	j = i;
+	while (a[j] < a[j-1])
+	  {
+	    temp = a[j];
+	    a[j] = a[j-1];
+	    a[j-1] = temp;
+	    j--;
+	  }
+	i++;
       }
-      i++;
     }
+
   return 0;
 }
 
 void initialise_benchmark() {
-  a[0] = 0;
-  a[1] = 11;
-  a[2] = 10;
-  a[3] = 9;
-  a[4] = 8;
-  a[5] = 7;
-  a[6] = 6;
-  a[7] = 5;
-  a[8] = 4;
-  a[9] = 3;
-  a[10]= 2;
 }
 
 int verify_benchmark(int unused) {
-  int i;
   int expected[] = {0,2,3,4,5,6,7,8,9,10,11};
-  for (i=0; i<11; i++)
-    if (a[i] != expected[i])
-      return 0;
-  return 1;
+  return 0 == memcmp (a, expected, 11 * sizeof (a[0]));
 }

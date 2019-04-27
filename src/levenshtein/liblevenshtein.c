@@ -1,4 +1,3 @@
-
 /* BEEBS levenshtein benchmark
 
    c: levenhstein.c
@@ -42,7 +41,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 86
 
 
 #include <string.h>
@@ -87,25 +86,27 @@ initialise_benchmark (void)
 }
 
 
-
 int benchmark()
 {
-  int i, j;
-  volatile unsigned sum = 0;
+  int  k;
+  volatile unsigned sum;
 
-  for(i = 0; i < 5; ++i)
-    for(j = 0; j < 5; ++j)
-      sum += levenshtein_distance(strings[i], strings[j]);
+  for (k = 0; k < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); k++)
+    {
+      int i, j;
+      sum = 0;
+
+      for(i = 0; i < 5; ++i)
+	for(j = 0; j < 5; ++j)
+	  sum += levenshtein_distance(strings[i], strings[j]);
+    }
 
   return sum;
-
 }
+
 
 int verify_benchmark(int r)
 {
-  int exp = 122;
-  if (r != exp)
-    return 0;
-  return 1;
+  return 122 == r;
 }
 

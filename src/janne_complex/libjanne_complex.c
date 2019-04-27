@@ -23,7 +23,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 23119
 
 
 /*----------------------------------------------------------------------
@@ -78,27 +78,31 @@ static int a, b;
 
 int benchmark()
 {
-  /* a = [1..30] b = [1..30] */
-  int answer = 0;
-  /* if(answer)
-     {a = 1; b = 1;}
-     else
-     {a = 30; b = 30;} */
-  answer = complex(a, b);
+  volatile int answer = 0;
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      /* a = [1..30] b = [1..30] */
+      answer = 0;
+      a = 1;
+      b = 1;
+      /* if(answer)
+	 {a = 1; b = 1;}
+	 else
+	 {a = 30; b = 30;} */
+      answer = complex(a, b);
+    }
+
   return answer;
 }
 
 void initialise_benchmark() {
-  a = 1;
-  b = 1;
 }
 
 int verify_benchmark(int r)
 {
-  int exp = 1;
-  if (r != exp)
-    return 0;
-  return 1;
+  return  1 == r;
 }
 
 

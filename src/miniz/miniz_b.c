@@ -26,7 +26,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 402275
 
 // Like compress() but with more control, level may range from 0 (storing) to 9 (max. compression)
 int mz_compress2(unsigned char *pDest, unsigned long *pDest_len, const unsigned char *pSource, unsigned long source_len, int level);
@@ -39,24 +39,25 @@ const char *text="Since the ancients (as we are told by Pappas), made great acco
 unsigned char tocompress[1200];
 unsigned char compressed[1200];
 
+/* Array for use by BEEBS malloc */
 
-/* This benchmark does not support verification */
+#define HEAP_SIZE 8192
+static char heap[HEAP_SIZE];
+
+/* This benchmark does not support verification, other than of malloc */
 
 int
 verify_benchmark (int res __attribute ((unused)) )
 {
-  return -1;
+  return check_heap_beebs ((void *) heap);
 }
 
-
-extern void  init_heap (void);
 
 void
 initialise_benchmark (void)
 {
-  init_heap ();			/* Set up BEEBS heap */
+  init_heap_beebs ((void *) heap, HEAP_SIZE);		/* Set up BEEBS heap */
 }
-
 
 
 int benchmark()

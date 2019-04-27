@@ -19,13 +19,14 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
+#include <string.h>
+
 #include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 4)
+#define LOCAL_SCALE_FACTOR 64
 
-#define WORSTCASE 1
 #define FALSE 0
 #define TRUE 1
 #define NUMELEMS 100
@@ -48,27 +49,24 @@ void BubbleSort(int Array[]);
 
 int benchmark()
 {
-   BubbleSort(Array);
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      int  Index;
+
+      for (Index = 0; Index < NUMELEMS; Index ++)
+	Array[Index] = -Index;
+
+      BubbleSort(Array);
+    }
+
    return 0;
 }
 
 
 void initialise_benchmark()
-/*
- * Initializes given array with randomly generated integers.
- */
 {
-   int  Index, fact;
-
-#ifdef WORSTCASE
-   factor = -1;
-#else
-   factor = 1;
-#endif
-
-fact = factor;
-for (Index = 0; Index < NUMELEMS; Index ++)
-    Array[Index] = Index*fact;
 }
 
 
@@ -102,21 +100,19 @@ void BubbleSort(int Array[])
 }
 
 int verify_benchmark(int result) {
-   int expected[NUMELEMS] = {-99, -98, -97, -96, -95, -94, -93, -92,
-                             -91, -90, -89, -88, -87, -86, -85, -84, -83, -82,
-                             -81, -80, -79, -78, -77, -76, -75, -74, -73, -72,
-                             -71, -70, -69, -68, -67, -66, -65, -64, -63, -62,
-                             -61, -60, -59, -58, -57, -56, -55, -54, -53, -52,
-                             -51, -50, -49, -48, -47, -46, -45, -44, -43, -42,
-                             -41, -40, -39, -38, -37, -36, -35, -34, -33, -32,
-                             -31, -30, -29, -28, -27, -26, -25, -24, -23, -22,
-                             -21, -20, -19, -18, -17, -16, -15, -14, -13, -12,
-                             -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0};
-   int i;
-   for (i=0; i<NUMELEMS; i++) {
-      if (Array[i] != expected[i])
-         return 0;
-   }
-   return 1;
+   static int expected[NUMELEMS] =
+     { -99, -98, -97, -96, -95, -94, -93, -92, -91, -90,
+       -89, -88, -87, -86, -85, -84, -83, -82, -81, -80,
+       -79, -78, -77, -76, -75, -74, -73, -72, -71, -70,
+       -69, -68, -67, -66, -65, -64, -63, -62, -61, -60,
+       -59, -58, -57, -56, -55, -54, -53, -52, -51, -50,
+       -49, -48, -47, -46, -45, -44, -43, -42, -41, -40,
+       -39, -38, -37, -36, -35, -34, -33, -32, -31, -30,
+       -29, -28, -27, -26, -25, -24, -23, -22, -21, -20,
+       -19, -18, -17, -16, -15, -14, -13, -12, -11, -10,
+        -9,  -8,  -7,  -6,  -5,  -4,  -3,  -2,  -1,   0
+     };
+
+   return 0 == memcmp (Array, expected, NUMELEMS * sizeof (Array[0]));
 }
 

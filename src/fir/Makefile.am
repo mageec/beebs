@@ -34,7 +34,8 @@ libfir_la_SOURCES = libfir.c
 fir_LDADD          = $(DUMMY_CRT0) \
                      $(top_builddir)/support/libsupport.la \
                      libfir.la \
-                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+                     $(top_builddir)/support/libbeebsc.la \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

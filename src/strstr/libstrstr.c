@@ -1,4 +1,3 @@
-
 /* BEEBS strstr benchmark
 
    Copyright (C) 1994,1996,1997,2000,2001,2003 Free Software Foundation, Inc.
@@ -36,7 +35,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 4705
 
 typedef unsigned chartype;
 
@@ -137,17 +136,22 @@ initialise_benchmark (void)
 char *substr = "abba";
 int benchmark()
 {
-  char *f = text;
-  int n=0;
+  int  n;
+  int  i;
 
-  do
-  {
-    f = strstr(f+1, substr);
-    n++;
-  } while(f);
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      char *f = text;
+      n=0;
+
+      do
+	{
+	  f = strstr(f+1, substr);
+	  n++;
+	} while(f);
+    }
 
   return n;
-
 }
 
 int verify_benchmark(int r) {

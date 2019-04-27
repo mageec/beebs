@@ -119,21 +119,27 @@ static	const float	one	= 1.0, tiny=1.0e-30;
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 1828
 
 /* Tell the compiler not to optimize out calls in BENCHMARK. */
 volatile float result[6];
-static int a, b, c, d, e, f;
+volatile int a, b, c, d, e, f;
 
 int
 benchmark (void)
 {
-  result[0] = __ieee754_sqrtf(a);
-  result[1] = __ieee754_sqrtf(b);
-  result[2] = __ieee754_sqrtf(c);
-  result[3] = __ieee754_sqrtf(d);
-  result[4] = __ieee754_sqrtf(e);
-  result[5] = __ieee754_sqrtf(f);
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      result[0] = __ieee754_sqrtf(a);
+      result[1] = __ieee754_sqrtf(b);
+      result[2] = __ieee754_sqrtf(c);
+      result[3] = __ieee754_sqrtf(d);
+      result[4] = __ieee754_sqrtf(e);
+      result[5] = __ieee754_sqrtf(f);
+    }
+
   return 0;
 }
 
@@ -154,7 +160,6 @@ int verify_benchmark(int unused)
                 2.4494898319244384765625,
                 2.6457512378692626953125,
                 2.8284270763397216796875};
-  //printf("{%f, %f, %f, %f, %f, %f};", result[0], result[1], result[2], result[3], result[4], result[5]);
   int i;
   for (i=0; i<6; i++)
     if (result[i] != exp[i])

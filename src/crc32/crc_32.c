@@ -1,4 +1,3 @@
-
 /* This file is part of the Bristol/Embecosm Embedded Benchmark Suite.
 
    This program is free software: you can redistribute it and/or modify
@@ -23,7 +22,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 5)
+#define LOCAL_SCALE_FACTOR 145
 
 #include <stdlib.h>
 
@@ -150,25 +149,6 @@ const static UNS_32_BITS crc_32_tab[] = { /* CRC polynomial 0xedb88320 */
 };
 
 
-/* Yield a sequence of random numbers in the range [0, 2^15-1].
-
-   The seed is always initialized to zero.  long int is guaranteed to be at
-   least 32 bits. The seed only ever uses 31 bits (so is positive).
-
-   For BEEBS this gets round different operating systems using different
-   multipliers and offsets and RAND_MAX variations. */
-
-static int
-rand_beebs ()
-{
-  static long int seed = 0;
-
-  seed = (seed * 1103515245L + 12345) & ((1UL << 31) - 1);
-  return (int) (seed >> 16);
-
-}
-
-
 DWORD crc32pseudo()
 {
    int i;
@@ -190,21 +170,24 @@ initialise_benchmark (void)
 }
 
 
-
 int benchmark()
 {
+  int  i;
   DWORD r;
-  r = crc32pseudo();
-  return (int)r;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      srand_beebs (0);
+      r = crc32pseudo();
+    }
+
+  return (int) (r % 32768);
 }
+
 
 int verify_benchmark(int r)
 {
-  int expected = 1207487004;
-
-  if (r != expected)
-    return 0;
-  return 1;
+  return 11433 == r;
 }
 
 

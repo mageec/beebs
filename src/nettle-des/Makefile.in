@@ -172,6 +172,7 @@ am__DEPENDENCIES_1 =
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@	$(top_builddir)/support/libsupport.la \
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@	libnettle-des.la \
+@ENABLED_BENCHMARK_NETTLE_DES_TRUE@	$(top_builddir)/support/libbeebsc.la \
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@	$(am__DEPENDENCIES_1)
@@ -399,7 +400,8 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@nettle_des_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@                           $(top_builddir)/support/libsupport.la \
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@                           libnettle-des.la \
-@ENABLED_BENCHMARK_NETTLE_DES_TRUE@                           $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+@ENABLED_BENCHMARK_NETTLE_DES_TRUE@                           $(top_builddir)/support/libbeebsc.la \
+@ENABLED_BENCHMARK_NETTLE_DES_TRUE@                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 @ENABLED_BENCHMARK_NETTLE_DES_TRUE@EXTRA_DIST = descore.README
 all: all-am

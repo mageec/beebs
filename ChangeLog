@@ -1,3 +1,732 @@
+2019-04-27  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	This is a huge rewrite to get scaling pushed correctly into every
+	benchmark.  In the process we have also done the following:
+
+	- Removed symbolic links to shared code.  These just cause issues
+	  on other platforms.
+
+	- Remove the src/template directory.  It appears in the benchmark
+	  results and adds nothing useful for the user.
+
+	- Added working verify_benchmark code to all benchmarks.
+
+	- Corrected assorted bugs, particularly where it is assumed that
+	  int is 32-bits long.
+
+	- Moved BEEBS versions of malloc, rand etc into a library in the
+	  main support directory.
+
+	All benchmarks are now scaled, so that on a RI5CY processor with
+	-O2 GCC, they all take around 4 million cycles with a board
+	REPEAT_FACTOR of 1.
+
+	* config/riscv32/boards/ri5cyverilator/boardsupport.h: Change
+	BOARD_REPEAT_FACTOR to 1.
+	* configure: Regenerated.
+	* configure.ac: Allow USER_CFLAGS and USER_LDFLAGS to be
+	configured, remote Makefiles for src/ctl, src/matmult,
+	src/sglib-arraysort, src/template and src/trio directories.
+	* src/Makefile.am: Remove ctl, matmul, sglib-arraysort, template
+	and trio SUBDIRS
+	* src/Makefile.in:
+	Regenerated.
+	* src/aha-compress/Makefile.am: LDADD libbeebs.
+	* src/aha-compress/Makefile.in: Regenerated.
+	* src/aha-compress/compress_test.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/aha-mont64/Makefile.am: LDADD libbeebs.
+	* src/aha-mont64/Makefile.in: Regenerated.
+	* src/aha-mont64/mont64.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Clean up return calculation.
+	* src/bs/Makefile.am: LDADD libbeebs.
+	* src/bs/Makefile.in: Regenerated.
+	* src/bs/libbs.c: Include string.h, change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value, define NUMVALS.
+	(DATA): Increase size of dataset
+	(binary_search): Parameterize range.
+	(verify_benchmark): Verify all result values using memcmp.
+	(benchmark): Rewrite to make 5 calls to search, repeat according
+	to LOCAL_SCALE_FACTOR and REPEAT_FACTOR.
+	* src/bubblesort/Makefile.am: LDADD libbeebs.
+	* src/bubblesort/Makefile.in: Regenerated.
+	* src/bubblesort/libbubblesort.c: Include string.h, change
+	SCALE_FACTOR to LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, incorporate array initialization into the loop.
+	(initialise_benchmark): Move initialization into main benchmark
+	loop.
+	(verify_benchmark): Clean up array and test result using memcmp.
+	* src/cnt/Makefile.am: LDADD libbeebs.
+	* src/cnt/Makefile.in: Regenerated.
+	* src/cnt/cnt.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR and
+	update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, add initialization into the loop and remove
+	verification from this function.
+	(InitSeed, RandomInteger): Make Seed long int, and update
+	constants with L suffix.
+	(initialize_benchmark): Move initialization into main benchmark
+	loop.
+	(verify_benchmark): Tidy up code.
+	* src/compress/Makefile.am: LDADD libbeebs.
+	* src/compress/Makefile.in: Regenerated.
+	* src/compress/libcompress.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/cover/Makefile.am: LDADD libbeebs.
+	* src/cover/Makefile.in: Regenerated.
+	* src/cover/libcover.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Tidy up.
+	* src/crc/Makefile.am: LDADD libbeebs.
+	* src/crc/Makefile.in: Regenerated.
+	* src/crc/libcrc.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR and
+	update value.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, return result for verification.
+	* src/crc32/Makefile.am: LDADD libbeebs.
+	* src/crc32/Makefile.in: Regenerated.
+	* src/crc32/crc_32.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(rand_beebs): Deleted.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, return a result which fits in a 16-bit int.
+	(verify_benchmark): Simplify and use 16-bit value.
+	* src/ctl-stack/Makefile.am: LDADD libbeebs.
+	* src/ctl-stack/Makefile.in: Regenerated.
+	* src/ctl-stack/ctl.c: Change to actual file instead of symbolic
+	link.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify-benchmark): Tidy up and check memory not blown up.
+	* src/ctl-stack/ctl.h: Change to actual file instead of symbolic
+	link.
+	* src/ctl-stack/stack.h: Change to actual file instead of symbolic
+	link.
+	* src/ctl-string/Makefile.am: LDADD libbeebs.
+	* src/ctl-string/Makefile.in: Regenerated.
+	* src/ctl-string/string.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(init_heap, malloc_beebs, free_beebs): Deleted.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, include initialization code in the loop.
+	(initialize_benchmark): Move in to main benchmark function.
+	(verify_benchmark): Simplify and check memory usage.
+	* src/ctl-vector/Makefile.am: LDADD libbeebs.
+	* src/ctl-vector/Makefile.in: Regenerated.
+	* src/ctl-vector/ctl.c:: Change to actual file instead of symbolic
+	link.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(initialize_benchmark): Move in to main benchmark function.
+	(verify_benchmark): Simplify and check memory usage.
+	* src/ctl-vector/ctl.h:: Change to actual file instead of symbolic
+	link.
+	* src/ctl-vector/vector.h: Change to actual file instead of
+	symbolic link.
+	* src/ctl/.gitignore: Deleted.
+	* src/ctl/Makefile.am: Deleted.
+	* src/ctl/Makefile.in: Deleted.
+	* src/ctl/ctl.c: Deleted.
+	* src/ctl/ctl.h: Deleted.
+	* src/ctl/stack.h: Deleted.
+	* src/ctl/vector.h: Deleted.
+	* src/cubic/Makefile.am: LDADD libbeebs.
+	* src/cubic/Makefile.in: Regenerated.
+	* src/cubic/basicmath_small.c: Include string.h, change
+	SCALE_FACTOR to LOCAL_SCALE_FACTOR and update value, add static
+	variables at top level to capture results for verification.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, capture results for verification.
+	* src/cubic/libcubic.c (void SolveCubic): Correct type casting
+	throughout.
+	* src/dijkstra/Makefile.am: LDADD libbeebs.
+	* src/dijkstra/Makefile.in: Regenerated.
+	* src/dijkstra/dijkstra_small.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/dtoa/Makefile.am: LDADD libbeebs.
+	* src/dtoa/Makefile.in: Regenerated.
+	* src/dtoa/libdtoa.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(init_heap, malloc_beebs, free_beebs): Deleted.
+	(initialise_benchmark): Contents moved into main benchmark
+	function.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Simplify and check memory usage.
+	* src/duff/Makefile.am: LDADD libbeebs.
+	* src/duff/Makefile.in: Regenerated.
+	* src/duff/libduff.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value, get rid of superfluous blank lines throughout.
+	(initialise_benchmark): Contents moved into main benchmark
+	function.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/edn/Makefile.am: LDADD libbeebs.
+	* src/edn/Makefile.in: Regenerated.
+	* src/edn/libedn.c: Include string.h, change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, move initialization into loop.
+	(verify_benchmark): Tidy up and use memcmp to test vector.
+	* src/expint/Makefile.am: LDADD libbeebs.
+	* src/expint/Makefile.in: Regenerated.
+	* src/expint/libexpint.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, move initialization code into loop.
+	(initialise_benchmark): Contents moved into main benchmark
+	function.
+	(verify_benchmark): Simplify.
+	* src/fac/Makefile.am: LDADD libbeebs.
+	* src/fac/Makefile.in: Regenerated.
+	* src/fac/libfac.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR and
+	update value.
+	(fac): Make return type long int, so works for 16-bit int.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Simplify.
+	* src/fasta/Makefile.am: LDADD libbeebs.
+	* src/fasta/Makefile.in: Regenerated.
+	* src/fasta/libfasta.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(accumulate_probabilities): Change to write from input genelist to
+	output genelist, copying content as well as probability.
+	(repeat_fasta): Record result in repeat_res;
+	(random_fasta): Clean up code.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, reworking so result can be verified.
+	* src/fdct/Makefile.am: LDADD libbeebs.
+	* src/fdct/Makefile.in: Regenerated.
+	* src/fdct/libfdct.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/fibcall/Makefile.am: LDADD libbeebs.
+	* src/fibcall/Makefile.in: Regenerated.
+	* src/fibcall/libfibcall.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Simplify.
+	* src/fir/Makefile.am: LDADD libbeebs.
+	* src/fir/Makefile.in: Regenerated.
+	* src/fir/libfir.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR and
+	update value.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/frac/Makefile.am: LDADD libbeebs.
+	* src/frac/Makefile.in: Regenerated.
+	* src/frac/libfrac.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(frac): Change to use long int args, so works for 16-bit ints.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, return result which works for 16-bit ints.
+	(verify_benchmark): Change to work for 16-bit ints.
+	* src/huffbench/Makefile.am: LDADD libbeebs.
+	* src/huffbench/Makefile.in: Regenerated.
+	* src/huffbench/libhuffbench.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(init_heap, malloc_beebs, free_beebs): Deleted.
+	(TEST_SiZE): Change to #define, so can be used to size arrays.
+	(verify_benchmark): Create version which actually verifies.
+	(initialise_benchmark): Contents moved into main benchmark
+	function.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, do initialization in loop, capture data for
+	verification.
+	* src/insertsort/Makefile.am: LDADD libbeebs.
+	* src/insertsort/Makefile.in: Regenerated.
+	* src/insertsort/libinsertsort.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, move initialization into loop and simplify using
+	memcpy.
+	(initialise_benchmark): Contents moved into main benchmark
+	function.
+	(verify_benchmark): Simplify using memcpy.
+	* src/janne_complex/Makefile.am: LDADD libbeebs.
+	* src/janne_complex/Makefile.in: Regenerated.
+	* src/janne_complex/libjanne_complex.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, move initialization into loop and simplify using
+	memcpy.
+	(initialise_benchmark): Contents moved into main benchmark
+	function.
+	(verify_benchmark): Simplify.
+	* src/jfdctint/Makefile.am: LDADD libbeebs.
+	* src/jfdctint/Makefile.in: Regenerated.
+	* src/jfdctint/libjfdctint.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value, include string.h and
+	stdint.h, correctly define type for DCTELEM and INT32, so both are
+	always 32-bits.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, move initialization into loop and simplify using
+	memcpy.
+	(initialise_benchmark): Contents moved into main benchmark
+	function.
+	(verify_benchmark): Simplify using memcpy.
+	* src/lcdnum/Makefile.am: LDADD libbeebs.
+	* src/lcdnum/Makefile.in: Regenerated.
+	* src/lcdnum/liblcdnum.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(out_vals): Created to capture results.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR and capture results for verification.
+	* src/levenshtein/Makefile.am: LDADD libbeebs.
+	* src/levenshtein/Makefile.in: Regenerated.
+	* src/levenshtein/liblevenshtein.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Simplify.
+	* src/ludcmp/Makefile.am: LDADD libbeebs.
+	* src/ludcmp/Makefile.in: Regenerated.
+	* src/ludcmp/libludcmp.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Tidy up.
+	* src/matmult-float/Makefile.am: LDADD libbeebs.
+	* src/matmult-float/Makefile.in: Regenerated.
+	* src/matmult-float/matmult-float.c: Replace symbolic link to
+	matmult.c and rename, change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Simplify using memcpy.
+	* src/matmult-float/matmult.c: Symbolic link deleted.
+	* src/matmult-int/Makefile.am: LDADD libbeebs.
+	* src/matmult-int/Makefile.in: Regenerated.
+	* src/matmult-int/matmult-int.c: Replace symbolic link to
+	matmult.c and rename, change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Simplify using memcpy.
+	* src/matmult/.gitignore: Deleted.
+	* src/matmult/Makefile.am: Deleted.
+	* src/matmult/Makefile.in: Deleted.
+	* src/matmult/matmult.c: Deleted.
+	* src/mergesort/Makefile.am: LDADD libbeebs.
+	* src/mergesort/Makefile.in: Regenerated.
+	* src/mergesort/libmergesort.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(rand_beebs): Deleted.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, correct function table to use addresses.
+	(verify_benchmark): Simplify using memcpy.
+	* src/miniz/Makefile.am: LDADD libbeebs.
+	* src/miniz/Makefile.in: Regenerated.
+	* src/miniz/miniz.c: Include beebsc.h
+	(init_heap, malloc_beebs, realloc_beebs, free_beebs): Deleted.
+	* src/miniz/miniz_b.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(verify_benchmark): Create version which at least checks for heap
+	overflow.
+	(benchmark): Repeat set to 1, since this benchmark fails.
+	* src/minver/Makefile.am: LDADD libbeebs.
+	* src/minver/Makefile.in: Regenerated.
+	* src/minver/libminver.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value, include math.h and string.h
+	(a_ref): Array created and initialized.
+	(b): Array initialized.
+	(minver_fabs): Make function static.
+	(mmul, minver): Clean up layout.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, record results for verifying.
+	* src/nbody/Makefile.am: LDADD libbeebs.
+	* src/nbody/Makefile.in: Regenerated.
+	* src/nbody/nbody.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR and
+	update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/ndes/Makefile.am: LDADD libbeebs.
+	* src/ndes/Makefile.in: Regenerated.
+	* src/ndes/libndes.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, initialize values in loop.
+	(initialise_benchmark): Contents moved into main benchmark
+	function.
+	* src/nettle-aes/Makefile.am: LDADD libbeebs.
+	* src/nettle-aes/Makefile.in: Regenerated.
+	* src/nettle-aes/nettle-aes.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/nettle-arcfour/Makefile.am: LDADD libbeebs.
+	* src/nettle-arcfour/Makefile.in: Regenerated.
+	* src/nettle-arcfour/arcfour.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/nettle-cast128/Makefile.am: LDADD libbeebs.
+	* src/nettle-cast128/Makefile.in: Regenerated.
+	* src/nettle-cast128/cast128.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/nettle-des/Makefile.am: LDADD libbeebs.
+	* src/nettle-des/Makefile.in: Regenerated.
+	* src/nettle-des/des.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/nettle-md5/Makefile.am: LDADD libbeebs.
+	* src/nettle-md5/Makefile.in: Regenerated.
+	* src/nettle-md5/md5.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/nettle-sha256/Makefile.am: LDADD libbeebs.
+	* src/nettle-sha256/Makefile.in: Regenerated.
+	* src/nettle-sha256/nettle-sha256.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/newlib-exp/Makefile.am: LDADD libbeebs.
+	* src/newlib-exp/Makefile.in: Regenerated.
+	* src/newlib-exp/ef_exp.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/newlib-log/Makefile.am: LDADD libbeebs.
+	* src/newlib-log/Makefile.in: Regenerated.
+	* src/newlib-log/ef_log.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/newlib-mod/Makefile.am: LDADD libbeebs.
+	* src/newlib-mod/Makefile.in: Regenerated.
+	* src/newlib-mod/ef_mod.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/newlib-sqrt/Makefile.am: LDADD libbeebs.
+	* src/newlib-sqrt/Makefile.in: Regenerated.
+	* src/newlib-sqrt/ef_sqrt.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/ns/Makefile.am: LDADD libbeebs.
+	* src/ns/Makefile.in: Regenerated.
+	* src/ns/libns.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR and
+	update value, remove superfluous blank lines throughout.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Create version which actually verifies.
+	* src/nsichneu/Makefile.am: LDADD libbeebs.
+	* src/nsichneu/Makefile.in: Regenerated.
+	* src/nsichneu/libnsichneu.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/picojpeg/Makefile.am: LDADD libbeebs.
+	* src/picojpeg/Makefile.in: Regenerated.
+	* src/picojpeg/libpicojpeg.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value, remove trailing whitespace
+	throughout.
+	* src/picojpeg/picojpeg.h: Remove trailing whitespace throughout.
+	* src/picojpeg/picojpeg_test.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Create version which actually verifies.
+	* src/prime/Makefile.am: LDADD libbeebs.
+	* src/prime/Makefile.in: Regenerated.
+	* src/prime/libprime.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Simplify.
+	* src/qrduino/Makefile.am: LDADD libbeebs.
+	* src/qrduino/Makefile.in: Regenerated.
+	* src/qrduino/qrframe.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(init_heap, malloc_beebs, calloc_beebs, free_beebs): Deleted.
+	* src/qrduino/qrtest.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Simplify using memcpy.
+	* src/qsort/Makefile.am: LDADD libbeebs.
+	* src/qsort/Makefile.in: Regenerated.
+	* src/qsort/libqsort.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(arr_ref): Created and initialized.
+	(void sort): Fixed to work for 0 based arrays.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/qurt/Makefile.am: LDADD libbeebs.
+	* src/qurt/Makefile.in: Regenerated.
+	* src/qurt/libqurt.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/recursion/Makefile.am: LDADD libbeebs.
+	* src/recursion/Makefile.in: Regenerated.
+	* src/recursion/librecursion.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Simplify.
+	* src/rijndael/Makefile.am: LDADD libbeebs.
+	* src/rijndael/Makefile.in: Regenerated.
+	* src/rijndael/aesxam.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(rand_beebs): Deleted.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/select/Makefile.am: LDADD libbeebs.
+	* src/select/Makefile.in: Regenerated.
+	* src/select/libselect.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value, include math.h and string.h.
+	(arr_ref): Array created and initialized.
+	(SWAP): Macro deleted.
+	(swap): Created.
+	(select): Rewritten to match text book, for zero based vectors and
+	using the swap function.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, initialize data in loop.
+	(initialise_benchmark): Move contents into main benchmark
+	function.
+	(verify_benchmark): Create version which actually verifies.
+	* src/sglib-arraybinsearch/Makefile.am: LDADD libbeebs.
+	* src/sglib-arraybinsearch/Makefile.in: Regenerated.
+	* src/sglib-arraybinsearch/arraybinsearch.c: Change SCALE_FACTOR
+	to LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Simplify.
+	* src/sglib-arrayheapsort/Makefile.am: LDADD libbeebs.
+	* src/sglib-arrayheapsort/Makefile.in: Regenerated.
+	* src/sglib-arrayheapsort/arrayheapsort.c: Convert from symbolic
+	link to arraysort and rename.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/sglib-arrayheapsort/arraysort.c: Symbolic link deleted.
+	* src/sglib-arrayheapsort/sglib.h: Convert from symbolic link.
+	* src/sglib-arrayquicksort/Makefile.am: LDADD libbeebs.
+	* src/sglib-arrayquicksort/Makefile.in: Regenerated.
+	* src/sglib-arrayquicksort/arrayquicksort.c: Convert from symbolic
+	link to arraysort and rename.
+	* src/sglib-arrayquicksort/arraysort.c: Symbolic link deleted.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/sglib-arrayquicksort/sglib.h: Convert from symbolic link.
+	* src/sglib-arraysort/.gitignore: Deleted.
+	* src/sglib-arraysort/Makefile.am: Deleted.
+	* src/sglib-arraysort/Makefile.in: Deleted.
+	* src/sglib-arraysort/sglib.h: Deleted.
+	* src/sglib-dllist/Makefile.am: LDADD libbeebs.
+	* src/sglib-dllist/Makefile.in: Regenerated.
+	* src/sglib-dllist/dllist.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(init_heap, malloc_beebs, free_beebs): Deleted.
+	(verify_benchmark): Create version which actually verifies.
+	(initialise_benchmark): Move contents into main benchmark
+	function.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, initialize heap each time rount the loop.
+	* src/sglib-hashtable/Makefile.am: LDADD libbeebs.
+	* src/sglib-hashtable/Makefile.in: Regenerated.
+	* src/sglib-hashtable/hashtable.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(init_heap, malloc_beebs, free_beebs): Deleted.
+	(verify_benchmark): Create version which actually verifies.
+	(initialise_benchmark): Move contents into main benchmark
+	function.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, initialize heap each time rount the loop.
+	* src/sglib-listinsertsort/Makefile.am: LDADD libbeebs.
+	* src/sglib-listinsertsort/Makefile.in: Regenerated.
+	* src/sglib-listinsertsort/listinsertsort.c: Change SCALE_FACTOR
+	to LOCAL_SCALE_FACTOR and update value.
+	(init_heap, malloc_beebs, free_beebs): Deleted.
+	(verify_benchmark): Simplify and also check for heap overrun.
+	(benchmark): Simplify and repeat according to LOCAL_SCALE_FACTOR
+	and REPEAT_FACTOR.
+	* src/sglib-listsort/Makefile.am: LDADD libbeebs.
+	* src/sglib-listsort/Makefile.in: Regenerated.
+	* src/sglib-listsort/listsort.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(init_heap, malloc_beebs, free_beebs): Deleted.
+	(verify_benchmark): Simplify and also check for heap overrun.
+	(benchmark): Simplify and repeat according to LOCAL_SCALE_FACTOR
+	and REPEAT_FACTOR.
+	* src/sglib-queue/Makefile.am: LDADD libbeebs.
+	* src/sglib-queue/Makefile.in: Regenerated.
+	* src/sglib-queue/queue.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(verify_benchmark): Simplify.
+	(benchmark): Simplify and repeat according to LOCAL_SCALE_FACTOR
+	and REPEAT_FACTOR.
+	* src/sglib-rbtree/Makefile.am: LDADD libbeebs.
+	* src/sglib-rbtree/Makefile.in: Regenerated.
+	* src/sglib-rbtree/rbtree.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(init_heap, malloc_beebs, free_beebs): Deleted.
+	(verify_benchmark): Simplify and also check for heap overrun.
+	(benchmark): Simplify and repeat according to LOCAL_SCALE_FACTOR
+	and REPEAT_FACTOR.
+	* src/slre/Makefile.am: LDADD libbeebs.
+	* src/slre/Makefile.in: Regenerated.
+	* src/slre/libslre.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Simplify.
+	* src/sqrt/Makefile.am: LDADD libbeebs.
+	* src/sqrt/Makefile.in: Regenerated.
+	* src/sqrt/libsqrt.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, return 16-bit result.
+	(verify_benchmark): Simplify to work with 16-bit integers.
+	* src/st/Makefile.am: LDADD libbeebs.
+	* src/st/Makefile.in: Regenerated.
+	* src/st/libst.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR and
+	update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Simplify and make more reliable.
+	* src/statemate/Makefile.am: LDADD libbeebs.
+	* src/statemate/Makefile.in: Regenerated.
+	* src/statemate/libstatemate.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, initialize in loop.
+	(initialise_benchmark): Move contents into main benchmark
+	function.
+	(verify-benchmark): Tidy up.
+	* src/stb_perlin/Makefile.am: LDADD libbeebs.
+	* src/stb_perlin/Makefile.in: Regenerated.
+	* src/stb_perlin/libstb_perlin.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/stringsearch1/Makefile.am: LDADD libbeebs.
+	* src/stringsearch1/Makefile.in: Regenerated.
+	* src/stringsearch1/stringsearch1.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Simplify.
+	* src/strstr/Makefile.am: LDADD libbeebs.
+	* src/strstr/Makefile.in: Regenerated.
+	* src/strstr/libstrstr.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/tarai/Makefile.am: LDADD libbeebs.
+	* src/tarai/Makefile.in: Regenerated.
+	* src/tarai/libtarai.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR
+	and update value.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	(verify_benchmark): Simplify.
+	* src/template/.gitignore: Deleted.
+	* src/template/Makefile.am: Deleted.
+	* src/template/Makefile.in: Deleted.
+	* src/template/libtemplate.c: Deleted.
+	* src/trio-snprintf/Makefile.am: LDADD libbeebs.
+	* src/trio-snprintf/Makefile.in: Regenerated.
+	* src/trio-snprintf/trio.c: Convert from symbolic link.
+	* src/trio-snprintf/trio.h: Convert from symbolic link
+	* src/trio-snprintf/trio_test.c: Convert from symbolic link,
+	change SCALE_FACTOR to LOCAL_SCALE_FACTOR and update value.q
+	(verify_benchmark): Improved.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, capture all outputs.
+	* src/trio-snprintf/triodef.h: Convert from symbolic link
+	* src/trio-snprintf/triop.h: Convert from symbolic link
+	* src/trio-snprintf/triostr.c: Convert from symbolic link.
+	(struct _trio_string_t):
+	(internal_string_alloc):
+	* src/trio-snprintf/triostr.h: Convert from symbolic link
+	* src/trio-sscanf/Makefile.am: LDADD libbeebs.
+	* src/trio-sscanf/Makefile.in: Regenerated.
+	* src/trio-sscanf/trio.c: Convert from symbolic link.
+	* src/trio-sscanf/trio.h: Convert from symbolic link.
+	* src/trio-sscanf/trio_test.c: Convert from symbolic link, change
+	SCALE_FACTOR to LOCAL_SCALE_FACTOR and update value.q
+	(verify_benchmark): Improved.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, capture all inputs.
+	* src/trio-sscanf/triodef.h: Convert from symbolic link.
+	* src/trio-sscanf/triop.h: Convert from symbolic link.
+	* src/trio-sscanf/triostr.c: Convert from symbolic link.
+	* src/trio-sscanf/triostr.h: Convert from symbolic link.
+	* src/trio/.gitignore: Deleted.
+	* src/trio/Makefile.am: Deleted.
+	* src/trio/Makefile.in: Deleted.
+	* src/trio/trio.c: Deleted.
+	* src/trio/trio.h: Deleted.
+	* src/trio/trio_test.c: Deleted.
+	* src/trio/triodef.h: Deleted.
+	* src/trio/triop.h: Deleted.
+	* src/trio/triostr.c: Deleted.
+	* src/trio/triostr.h: Deleted.
+	* src/ud/Makefile.am: LDADD libbeebs.
+	* src/ud/Makefile.in: Regenerated.
+	* src/ud/libud.c: Change SCALE_FACTOR to LOCAL_SCALE_FACTOR and
+	update value.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/whetstone/Makefile.am: LDADD libbeebs.
+	* src/whetstone/Makefile.in: Regenerated.
+	* src/whetstone/libwhetstone.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR.
+	* src/wikisort/Makefile.am: LDADD libbeebs.
+	* src/wikisort/Makefile.in: Regenerated.
+	* src/wikisort/libwikisort.c: Change SCALE_FACTOR to
+	LOCAL_SCALE_FACTOR and update value.
+	(rand_beebs): Deleted.
+	(verify_benchmark): Create version which actually verifies.
+	(benchmark): Repeat according to LOCAL_SCALE_FACTOR and
+	REPEAT_FACTOR, correct use of addresses in function table.
+	* support/Makefile.am: Created libbeebs.la, with associated source
+	files.
+	* support/Makefile.in: Regenerated.
+	* support/beebsc.c: Created.
+	* support/beebsc.h: Created.
+	* support/main.c (main): Remove loop for calling benchmark, all
+	scaling now in individual benchmarks.
+	* support/support.h: Include beebsc.h
+
 2019-04-24  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* Makefile.in: Regenerated.

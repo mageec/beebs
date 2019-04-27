@@ -26,9 +26,9 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 9195
 
-int fac (int n)
+long int fac (int n)
 {
   if (n == 0)
      return 1;
@@ -46,20 +46,24 @@ initialise_benchmark (void)
 int
 benchmark (void)
 {
-  int i;
-  volatile int s = 0;
-  volatile int n;
+  int  j;
+  volatile long int s;
 
-  n = 10;
-  for (i = 0;  i <= n; i++)
-      s += fac (i);
-  return s;
+  for (j = 0; j < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); j++)
+    {
+      int i;
+      volatile int n;
+
+      s = 0;
+      n = 10;
+      for (i = 0;  i <= n; i++)
+	s += fac (i);
+    }
+
+  return s % 65536L;
 }
 
 int verify_benchmark(int r)
 {
-  int expected = 4037914;
-  if (r != expected)
-    return 0;
-  return 1;
+  return (4037914L  % 65536L) == r;
 }

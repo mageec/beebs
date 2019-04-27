@@ -25,7 +25,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 2051
 
 static const uint8_t key[16] = {
   0xf,0xe,0xd,0xc,0xb,0xa,0x9,0x8,0x7,0x6,0x5,0x4,0x3,0x2,0x1,0x0
@@ -858,8 +858,13 @@ int initialise_benchmark()
 int
 benchmark (void)
 {
-  cast128_encrypt(&cast128_ctx, CAST128_KEY_SIZE, result, data);
-  cast128_decrypt(&cast128_ctx, CAST128_KEY_SIZE, result, result);
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      cast128_encrypt(&cast128_ctx, CAST128_KEY_SIZE, result, data);
+      cast128_decrypt(&cast128_ctx, CAST128_KEY_SIZE, result, result);
+    }
   return 0;
 }
 

@@ -22,11 +22,12 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
+#include <string.h>
 #include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 10)
+#define LOCAL_SCALE_FACTOR 2
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -47,32 +48,6 @@
 /* Copied from libmergesort, but Allocate never used here, so commented out for clarity.
 #define Allocate(type, count)				(type *)malloc((count) * sizeof(type))
 */
-
-/* BEEBS fixes RAND_MAX to its lowest permitted value, 2^15-1 */
-
-#ifdef RAND_MAX
-#undef RAND_MAX
-#endif
-#define RAND_MAX ((1U << 15) - 1)
-
-/* Yield a sequence of random numbers in the range [0, 2^15-1].
-
-   The seed is always initialized to zero.  long int is guaranteed to be at
-   least 32 bits. The seed only ever uses 31 bits (so is positive).
-
-   For BEEBS this gets round different operating systems using different
-   multipliers and offsets and RAND_MAX variations. */
-
-static int
-rand_beebs ()
-{
-  static long int seed = 0;
-
-  seed = (seed * 1103515245L + 12345) & ((1UL << 31) - 1);
-  return (int) (seed >> 16);
-
-}
-
 
 long Min(const long a, const long b) {
 	if (a < b) return a;
@@ -707,7 +682,7 @@ long TestingJittered(long index, long total) {
 }
 
 long TestingMostlyEqual(long index, long total) {
-	return 1000 + rand_beebs() * 1.0/RAND_MAX * 4;
+  return 1000L + (long) (rand_beebs() % 4);
 }
 
 
@@ -720,7 +695,90 @@ Test array1[400];
 int
 verify_benchmark (int res __attribute ((unused)) )
 {
-  return -1;
+  Test exp[] = {
+    { 1000,   1 }, { 1000,   2 }, { 1000,  13 }, { 1000,  18 }, { 1000,  19 },
+    { 1000,  26 }, { 1000,  31 }, { 1000,  32 }, { 1000,  35 }, { 1000,  36 },
+    { 1000,  37 }, { 1000,  46 }, { 1000,  49 }, { 1000,  55 }, { 1000,  61 },
+    { 1000,  62 }, { 1000,  66 }, { 1000,  72 }, { 1000,  73 }, { 1000,  74 },
+    { 1000,  75 }, { 1000,  76 }, { 1000,  77 }, { 1000,  81 }, { 1000,  82 },
+    { 1000,  83 }, { 1000,  87 }, { 1000,  89 }, { 1000,  91 }, { 1000,  92 },
+    { 1000,  95 }, { 1000,  99 }, { 1000, 101 }, { 1000, 105 }, { 1000, 108 },
+    { 1000, 109 }, { 1000, 114 }, { 1000, 119 }, { 1000, 120 }, { 1000, 128 },
+    { 1000, 137 }, { 1000, 143 }, { 1000, 144 }, { 1000, 151 }, { 1000, 158 },
+    { 1000, 161 }, { 1000, 162 }, { 1000, 165 }, { 1000, 169 }, { 1000, 181 },
+    { 1000, 182 }, { 1000, 187 }, { 1000, 188 }, { 1000, 190 }, { 1000, 195 },
+    { 1000, 196 }, { 1000, 198 }, { 1000, 200 }, { 1000, 201 }, { 1000, 205 },
+    { 1000, 206 }, { 1000, 211 }, { 1000, 212 }, { 1000, 213 }, { 1000, 214 },
+    { 1000, 215 }, { 1000, 217 }, { 1000, 221 }, { 1000, 223 }, { 1000, 225 },
+    { 1000, 226 }, { 1000, 227 }, { 1000, 233 }, { 1000, 242 }, { 1000, 245 },
+    { 1000, 249 }, { 1000, 250 }, { 1000, 266 }, { 1000, 270 }, { 1000, 271 },
+    { 1000, 273 }, { 1000, 274 }, { 1000, 280 }, { 1000, 287 }, { 1000, 291 },
+    { 1000, 295 }, { 1000, 299 }, { 1000, 303 }, { 1000, 304 }, { 1000, 312 },
+    { 1000, 328 }, { 1000, 330 }, { 1000, 333 }, { 1000, 339 }, { 1000, 342 },
+    { 1000, 346 }, { 1000, 350 }, { 1000, 361 }, { 1000, 371 }, { 1000, 376 },
+    { 1000, 378 }, { 1000, 382 }, { 1000, 384 }, { 1000, 385 }, { 1000, 390 },
+    { 1000, 396 }, { 1001,   5 }, { 1001,   7 }, { 1001,   8 }, { 1001,  11 },
+    { 1001,  16 }, { 1001,  20 }, { 1001,  21 }, { 1001,  22 }, { 1001,  29 },
+    { 1001,  34 }, { 1001,  39 }, { 1001,  40 }, { 1001,  41 }, { 1001,  42 },
+    { 1001,  47 }, { 1001,  54 }, { 1001,  63 }, { 1001,  68 }, { 1001,  71 },
+    { 1001,  78 }, { 1001,  84 }, { 1001,  85 }, { 1001,  93 }, { 1001,  96 },
+    { 1001,  97 }, { 1001, 103 }, { 1001, 104 }, { 1001, 107 }, { 1001, 117 },
+    { 1001, 129 }, { 1001, 139 }, { 1001, 140 }, { 1001, 148 }, { 1001, 156 },
+    { 1001, 160 }, { 1001, 167 }, { 1001, 172 }, { 1001, 174 }, { 1001, 175 },
+    { 1001, 179 }, { 1001, 185 }, { 1001, 186 }, { 1001, 193 }, { 1001, 194 },
+    { 1001, 207 }, { 1001, 208 }, { 1001, 216 }, { 1001, 219 }, { 1001, 224 },
+    { 1001, 228 }, { 1001, 229 }, { 1001, 235 }, { 1001, 237 }, { 1001, 240 },
+    { 1001, 246 }, { 1001, 252 }, { 1001, 255 }, { 1001, 256 }, { 1001, 257 },
+    { 1001, 259 }, { 1001, 260 }, { 1001, 261 }, { 1001, 265 }, { 1001, 267 },
+    { 1001, 269 }, { 1001, 275 }, { 1001, 286 }, { 1001, 288 }, { 1001, 289 },
+    { 1001, 294 }, { 1001, 301 }, { 1001, 302 }, { 1001, 308 }, { 1001, 309 },
+    { 1001, 314 }, { 1001, 322 }, { 1001, 323 }, { 1001, 325 }, { 1001, 326 },
+    { 1001, 327 }, { 1001, 334 }, { 1001, 337 }, { 1001, 341 }, { 1001, 347 },
+    { 1001, 352 }, { 1001, 357 }, { 1001, 360 }, { 1001, 363 }, { 1001, 365 },
+    { 1001, 366 }, { 1001, 369 }, { 1001, 375 }, { 1001, 379 }, { 1001, 381 },
+    { 1001, 393 }, { 1001, 394 }, { 1001, 398 }, { 1002,   9 }, { 1002,  17 },
+    { 1002,  23 }, { 1002,  24 }, { 1002,  30 }, { 1002,  33 }, { 1002,  38 },
+    { 1002,  43 }, { 1002,  45 }, { 1002,  53 }, { 1002,  57 }, { 1002,  59 },
+    { 1002,  60 }, { 1002,  64 }, { 1002,  69 }, { 1002,  70 }, { 1002,  79 },
+    { 1002,  88 }, { 1002,  94 }, { 1002,  98 }, { 1002, 100 }, { 1002, 110 },
+    { 1002, 111 }, { 1002, 115 }, { 1002, 118 }, { 1002, 123 }, { 1002, 125 },
+    { 1002, 127 }, { 1002, 130 }, { 1002, 131 }, { 1002, 134 }, { 1002, 136 },
+    { 1002, 138 }, { 1002, 142 }, { 1002, 146 }, { 1002, 149 }, { 1002, 150 },
+    { 1002, 152 }, { 1002, 153 }, { 1002, 157 }, { 1002, 163 }, { 1002, 166 },
+    { 1002, 168 }, { 1002, 170 }, { 1002, 171 }, { 1002, 173 }, { 1002, 176 },
+    { 1002, 177 }, { 1002, 180 }, { 1002, 183 }, { 1002, 184 }, { 1002, 189 },
+    { 1002, 191 }, { 1002, 197 }, { 1002, 202 }, { 1002, 203 }, { 1002, 204 },
+    { 1002, 210 }, { 1002, 218 }, { 1002, 220 }, { 1002, 232 }, { 1002, 236 },
+    { 1002, 238 }, { 1002, 241 }, { 1002, 243 }, { 1002, 244 }, { 1002, 251 },
+    { 1002, 253 }, { 1002, 254 }, { 1002, 258 }, { 1002, 264 }, { 1002, 272 },
+    { 1002, 277 }, { 1002, 279 }, { 1002, 282 }, { 1002, 283 }, { 1002, 284 },
+    { 1002, 290 }, { 1002, 292 }, { 1002, 296 }, { 1002, 297 }, { 1002, 298 },
+    { 1002, 300 }, { 1002, 306 }, { 1002, 307 }, { 1002, 310 }, { 1002, 311 },
+    { 1002, 315 }, { 1002, 316 }, { 1002, 319 }, { 1002, 321 }, { 1002, 324 },
+    { 1002, 331 }, { 1002, 335 }, { 1002, 340 }, { 1002, 344 }, { 1002, 349 },
+    { 1002, 353 }, { 1002, 354 }, { 1002, 358 }, { 1002, 362 }, { 1002, 364 },
+    { 1002, 370 }, { 1002, 374 }, { 1002, 380 }, { 1002, 383 }, { 1002, 386 },
+    { 1002, 389 }, { 1002, 391 }, { 1002, 392 }, { 1002, 397 }, { 1003,   0 },
+    { 1003,   3 }, { 1003,   4 }, { 1003,   6 }, { 1003,  10 }, { 1003,  12 },
+    { 1003,  14 }, { 1003,  15 }, { 1003,  25 }, { 1003,  27 }, { 1003,  28 },
+    { 1003,  44 }, { 1003,  48 }, { 1003,  50 }, { 1003,  51 }, { 1003,  52 },
+    { 1003,  56 }, { 1003,  58 }, { 1003,  65 }, { 1003,  67 }, { 1003,  80 },
+    { 1003,  86 }, { 1003,  90 }, { 1003, 102 }, { 1003, 106 }, { 1003, 112 },
+    { 1003, 113 }, { 1003, 116 }, { 1003, 121 }, { 1003, 122 }, { 1003, 124 },
+    { 1003, 126 }, { 1003, 132 }, { 1003, 133 }, { 1003, 135 }, { 1003, 141 },
+    { 1003, 145 }, { 1003, 147 }, { 1003, 154 }, { 1003, 155 }, { 1003, 159 },
+    { 1003, 164 }, { 1003, 178 }, { 1003, 192 }, { 1003, 199 }, { 1003, 209 },
+    { 1003, 222 }, { 1003, 230 }, { 1003, 231 }, { 1003, 234 }, { 1003, 239 },
+    { 1003, 247 }, { 1003, 248 }, { 1003, 262 }, { 1003, 263 }, { 1003, 268 },
+    { 1003, 276 }, { 1003, 278 }, { 1003, 281 }, { 1003, 285 }, { 1003, 293 },
+    { 1003, 305 }, { 1003, 313 }, { 1003, 317 }, { 1003, 318 }, { 1003, 320 },
+    { 1003, 329 }, { 1003, 332 }, { 1003, 336 }, { 1003, 338 }, { 1003, 343 },
+    { 1003, 345 }, { 1003, 348 }, { 1003, 351 }, { 1003, 355 }, { 1003, 356 },
+    { 1003, 359 }, { 1003, 367 }, { 1003, 368 }, { 1003, 372 }, { 1003, 373 },
+    { 1003, 377 }, { 1003, 387 }, { 1003, 388 }, { 1003, 395 }, { 1003, 399 }
+  };
+
+  return 0 == memcmp (array1, exp, max_size * sizeof (array1[0]));
 }
 
 
@@ -731,46 +789,49 @@ initialise_benchmark (void)
 
 
 
-int benchmark() {
-	long total, index, test_case;
-	Comparison compare = TestCompare;
+int benchmark()
+{
+  long total, index, test_case;
+  Comparison compare = TestCompare;
 
-	__typeof__(&TestingPathological) test_cases[] = {
-		TestingPathological,
-		TestingRandom,
-		TestingMostlyDescending,
-		TestingMostlyAscending,
-		TestingAscending,
-		TestingDescending,
-		TestingEqual,
-		TestingJittered,
-		TestingMostlyEqual
-	};
+  __typeof__(&TestingPathological) test_cases[9] =
+    {
+      &TestingPathological,
+      &TestingRandom,
+      &TestingMostlyDescending,
+      &TestingMostlyAscending,
+      &TestingAscending,
+      &TestingDescending,
+      &TestingEqual,
+      &TestingJittered,
+      &TestingMostlyEqual
+    };
 
-	/* initialize the random-number generator */
-	/* The original code used srand here, but not needed since we are
-	   using a fixed random number generator for reproducibility.
-	srand(0);
-	*/
-	/*srand(10141985);*/ /* in case you want the same random numbers */
+  int  i;
 
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      /* initialize the random-number generator. */
+      /* The original code used srand here, we use a value that will fit in
+	 a 16-bit unsigned int. */
+      srand_beebs (0);
+      /*srand(10141985);*/ /* in case you want the same random numbers */
 
-	total = max_size;
-	for (test_case = 0; test_case < sizeof(test_cases)/sizeof(test_cases[0]); test_case++) {
+      total = max_size;
+      for (test_case = 0; test_case < 9; test_case++) {
 
-		for (index = 0; index < total; index++) {
-			Test item;
+	for (index = 0; index < total; index++) {
+	  Test item;
 
-			item.value = test_cases[test_case](index, total);
-			item.index = index;
+	  item.value = test_cases[test_case](index, total);
+	  item.index = index;
 
-			array1[index] = item;
-		}
-
-		WikiSort(array1, total, compare);
-
+	  array1[index] = item;
 	}
 
-	return 0;
-}
+	WikiSort(array1, total, compare);
+      }
+    }
 
+  return 0;
+}

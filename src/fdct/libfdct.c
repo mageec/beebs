@@ -63,7 +63,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 2538
 
 #ifdef IO
 #include "libp.c"
@@ -292,10 +292,14 @@ initialise_benchmark (void)
 #include <stdio.h>
 int benchmark()
 {
-  /* Need to reinitialize the input data each time */
+  int  i;
 
-  memcpy (block, block_ref, 64 * sizeof (block[0]));
-  fdct(block, 8);
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      memcpy (block, block_ref, 64 * sizeof (block[0]));
+      fdct(block, 8);
+    }
+
   return 0;
 }
 

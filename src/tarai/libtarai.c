@@ -23,7 +23,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 6655
 
 int tarai(int x, int y, int z)
 {
@@ -51,12 +51,13 @@ int x, y, z;
 
 int benchmark()
 {
-    volatile int cnt=0;
+  volatile int cnt;
+  int  i;
 
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
     cnt = tarai(x, y, z);
 
-    return cnt;
-
+  return cnt;
 }
 
 void initialise_benchmark() {
@@ -66,8 +67,5 @@ void initialise_benchmark() {
 }
 
 int verify_benchmark(int r) {
-  int expected = 9;
-  if (r != expected)
-    return 0;
-  return 1;
+  return 9 == r;
 }

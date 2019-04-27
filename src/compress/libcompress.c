@@ -1,5 +1,3 @@
-
-
 /* BEEBS compress benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -51,7 +49,7 @@
 
 // This scale factor will be changed to equalise the runtime of the
 // benchmarks
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 1278
 
 
 /* #define DO_TRACING */
@@ -224,40 +222,6 @@ void putbyte( char c );
 void cl_block (void);
 void output( code_int code );
 void writebytes( char *buf, int n );
-
-
-/* This benchmark does not support verification */
-
-int
-verify_benchmark (int res __attribute ((unused)) )
-{
-  return -1;
-}
-
-
-void
-initialise_benchmark (void)
-{
-}
-
-
-
-int benchmark()
-{
-   int count = IN_COUNT;
-
-   maxbits = BITS;
-   maxmaxcode = 1 << maxbits;
-
-   InCnt = count;
-   apsim_InCnt = IN_COUNT + 3;
-   InBuff = (unsigned char *)orig_text_buffer;
-   OutBuff = (unsigned char *)comp_text_buffer;
-
-   compress();
-   return 0;
-}
-
 
 
 static int offset;
@@ -538,4 +502,41 @@ void output( code_int code )
       bytes_out += (offset + 7) / 8;
       offset = 0;
    }
+}
+
+
+int
+verify_benchmark (int res)
+{
+  return (0 == exit_stat) && (3 == res);
+}
+
+
+void
+initialise_benchmark (void)
+{
+}
+
+
+
+int benchmark()
+{
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      int count = IN_COUNT;
+
+      maxbits = BITS;
+      maxmaxcode = 1 << maxbits;
+
+      InCnt = IN_COUNT;
+      apsim_InCnt = IN_COUNT + 3;
+      InBuff = (unsigned char *)orig_text_buffer;
+      OutBuff = (unsigned char *)comp_text_buffer;
+
+      compress();
+    }
+
+  return bytes_out;
 }

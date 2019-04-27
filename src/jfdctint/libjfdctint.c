@@ -21,11 +21,13 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
+#include <stdint.h>
+#include <string.h>
 #include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 1199
 
 /**********************************************************************
     Functions to be timed
@@ -38,8 +40,8 @@
 #define DCTSIZE 8
 #define BITS_IN_JSAMPLE 8
 #define MULTIPLY16C16(var,const)  ((var) * (const))
-#define DCTELEM int
-#define INT32   int
+#define DCTELEM int32_t
+#define INT32   int32_t
 #define GLOBAL
 #define RIGHT_SHIFT(x,shft)	((x) >> (shft))
 #define ONE	((INT32) 1)
@@ -332,29 +334,52 @@ jpeg_fdct_islow ()
 int
 benchmark (void)
 {
-  jpeg_fdct_islow();
+  int  j;
+
+  for (j = 0; j < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); j++)
+    {
+      int i;
+      long int  seed;
+
+      /* Worst case settings */
+      /* Set array to random values */
+      seed = 1L;
+
+      for (i = 0; i < 64; i++) {
+	seed = ((seed * 133L) + 81L) % 65535l;
+	data[i] = (int) seed;
+      }
+
+      jpeg_fdct_islow();
+    }
+
   return 0;
 }
 
 void initialise_benchmark() {
-  int i, seed;
-
-  /* Worst case settings */
-  /* Set array to random values */
-  seed = 1;
-  for (i = 0; i < 64; i++) {
-    seed = ((seed * 133) + 81) % 65535;
-    data[i] = seed;
-  }
 }
 
 int verify_benchmark(int unused)
 {
-  DCTELEM exp[] = {1956823, 184557, -39350, -94393, -77163, 5995, 162871, -3428, 31856, 57575, -49784, 43664, 63854, -9784, 11398, -23444, 13102, 59509, 63748, -34407, -57064, 11667, 37414, 41934, 20234, 25212, -44504, 25562, -46366, -4562, -40816, -64820, -203745, -15884, -134082, -126104, 66045, 23372, -87152, -147968, 41739, -20979, -36653, 23706, 613, 41593, 34760, -60639, 30493, -10396, 13944, -13980, 52343, -40116, -55093, 37532, 61998, -22500, 25991, -57098, -18228, 47265, -48356, 38613};
-  int i;
-  for (i=0; i<64; ++i)
-    if (data[i] != exp[i])
-      return 0;
-  return 1;
+  DCTELEM exp[64] = {
+    1956823,  184557,  -39350,  -94393,
+     -77163,    5995,  162871,   -3428,
+      31856,   57575,  -49784,   43664,
+      63854,   -9784,   11398,  -23444,
+      13102,   59509,   63748,  -34407,
+     -57064,   11667,   37414,   41934,
+      20234,   25212,  -44504,   25562,
+     -46366,   -4562,  -40816,  -64820,
+    -203745,  -15884, -134082, -126104,
+      66045,   23372,  -87152, -147968,
+      41739,  -20979,  -36653,   23706,
+        613,   41593,   34760,  -60639,
+      30493,  -10396,   13944,  -13980,
+      52343,  -40116,  -55093,   37532,
+      61998,  -22500,   25991,  -57098,
+     -18228,   47265,  -48356,   38613 };
+
+  return 0 == memcmp (data, exp, 64 * sizeof (data[0]));
+
 }
 

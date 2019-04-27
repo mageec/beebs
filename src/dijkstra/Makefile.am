@@ -34,7 +34,8 @@ libdijkstra_la_SOURCES = dijkstra_small.c
 dijkstra_LDADD         = $(DUMMY_CRT0) \
                          $(top_builddir)/support/libsupport.la \
                          libdijkstra.la \
-                         $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+                         $(top_builddir)/support/libbeebsc.la \
+                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 
 

@@ -39,14 +39,9 @@ main (int   argc __attribute__ ((unused)),
 
   initialise_board ();
   initialise_benchmark ();
+
   start_trigger ();
-
-  for (i = 0; i < REPEAT_FACTOR; i++)
-    {
-      initialise_benchmark ();
-      result = benchmark ();
-    }
-
+  result = benchmark ();
   stop_trigger ();
 
   /* bmarks that use arrays will check a global array rather than int result */

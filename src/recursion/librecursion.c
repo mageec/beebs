@@ -23,7 +23,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 2005
 
 /* $Id: recursion.c,v 1.2 2005/04/04 11:34:58 csg Exp $ */
 
@@ -100,20 +100,21 @@ static int n;
 int
 benchmark(void)
 {
-  In = fib(n);
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      n = 10;
+      In = fib(n);
+    }
+
   return In;
 }
 
 void initialise_benchmark() {
-  n = 10;
 }
 
 int verify_benchmark(int r)
 {
-  int expected = 89;
-  if (r != expected)
-    return 0;
-  return 1;
+  return 89 == r;
 }
-
-

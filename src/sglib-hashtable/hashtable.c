@@ -27,7 +27,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 289
 
 
 #define HASH_TAB_SIZE  20
@@ -59,97 +59,66 @@ int array[100] = {14, 66, 12, 41, 86, 69, 19, 77, 68, 38, 26, 42, 37, 23, 17, 29
 
 /* BEEBS heap is just an array */
 
-#include <stddef.h>
-
 #define HEAP_SIZE 8192
 static char heap[HEAP_SIZE];
-static void *heap_ptr;
-static void *heap_end;
 
-/* Initialize the BEEBS heap pointers */
-
-static void
-init_heap (void)
-{
-    heap_ptr = (void *) heap;
-    heap_end = heap_ptr + HEAP_SIZE;
-}
-
-/* BEEBS version of malloc.
-
-   This is primarily to reduce library and OS dependencies. Malloc is
-   generally not used in embedded code, or if it is, only in well defined
-   contexts to pre-allocate a fixed amount of memory. So this simplistic
-   implementation is just fine. */
-
-static void *
-malloc_beebs (size_t size)
-{
-    void *new_ptr = heap_ptr;
-
-    if (((heap_ptr + size) > heap_end) || (0 == size))
-	return NULL;
-    else
-	{
-	    heap_ptr += size;
-	    return new_ptr;
-	}
-}
-
-/* BEEBS version of free.
-
-   For our simplified version of memory handling, free can just do nothing. */
-
-static void
-free_beebs (void *ptr)
-{
-}
-
-/* This benchmark does not support verification */
 
 int
-verify_benchmark (int res __attribute ((unused)) )
+verify_benchmark (int res)
 {
-  return -1;
+  int  i;
+  struct ilist ii, *nn;
+
+  for (i=0; i<100; i++) {
+    ii.i = array[i];
+    nn = sglib_hashed_ilist_find_member(htab, &ii);
+
+    if ((nn == NULL) || (nn->i != array[i]))
+      return 0;
+  }
+
+  return (100 == res) && check_heap_beebs ((void *) heap);
 }
 
 
 void
 initialise_benchmark (void)
 {
-  init_heap ();
 }
 
 
 
 int benchmark()
 {
-  int                                   i;
-  struct ilist                          ii, *nn, *ll, *last;
-  struct sglib_hashed_ilist_iterator    it;
-  volatile int cnt = 0;
+  volatile int cnt;
+  int  j;
 
-  sglib_hashed_ilist_init(htab);
+  for (j = 0; j < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); j++)
+    {
+      int                                   i;
+      struct ilist                          ii, *nn, *ll;
+      struct sglib_hashed_ilist_iterator    it;
 
-  for (i=0; i<100; i++) {
-    ii.i = array[i];
-    if (sglib_hashed_ilist_find_member(htab, &ii) == NULL) {
-      nn = malloc_beebs(sizeof(struct ilist));
-      nn->i = array[i];
-      sglib_hashed_ilist_add(htab, nn);
+      init_heap_beebs ((void *) heap, HEAP_SIZE);
+      sglib_hashed_ilist_init(htab);
+
+      for (i=0; i<100; i++) {
+	ii.i = array[i];
+	if (sglib_hashed_ilist_find_member(htab, &ii) == NULL) {
+	  nn = malloc_beebs(sizeof(struct ilist));
+	  nn->i = array[i];
+	  sglib_hashed_ilist_add(htab, nn);
+	}
+      }
+
+      cnt = 0;
+
+      for(ll=sglib_hashed_ilist_it_init(&it,htab);
+	  ll!=NULL;
+	  ll=sglib_hashed_ilist_it_next(&it)) {
+	cnt++;
+      }
     }
-  }
-
-  last=sglib_hashed_ilist_it_init(&it,htab);
-  for(ll=sglib_hashed_ilist_it_init(&it,htab); ll!=NULL; ll=sglib_hashed_ilist_it_next(&it)) {
-      ll->i = last->i;
-      last = ll;
-  }
-
-  for(ll=sglib_hashed_ilist_it_init(&it,htab); ll!=NULL; ll=sglib_hashed_ilist_it_next(&it)) {
-      cnt += ll->i;
-      free_beebs(ll);
-  }
 
   return cnt;
 }

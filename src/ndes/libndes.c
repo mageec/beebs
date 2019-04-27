@@ -25,7 +25,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 115
 
 /* A read from this address will result in an known value of 1 */
 /* #define KNOWN_VALUE (int)(*((char *)0x80200001)) Changed JG/Ebbe */
@@ -241,17 +241,22 @@ static int newkey, isw;
 int
 benchmark (void)
 {
-   des(inp, key, &newkey, isw, &out);
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      inp.l = KNOWN_VALUE * 35;
+      inp.r = KNOWN_VALUE * 26;
+      key.l = KNOWN_VALUE * 2;
+      key.r = KNOWN_VALUE * 16;
+      newkey = value;
+      isw = value;
+      des(inp, key, &newkey, isw, &out);
+    }
    return 0;
 }
 
 void initialise_benchmark() {
-   inp.l = KNOWN_VALUE * 35;
-   inp.r = KNOWN_VALUE * 26;
-   key.l = KNOWN_VALUE * 2;
-   key.r = KNOWN_VALUE * 16;
-   newkey = value;
-   isw = value;
 }
 
 int verify_benchmark(int unused) {

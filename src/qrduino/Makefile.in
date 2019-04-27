@@ -173,6 +173,7 @@ am__DEPENDENCIES_1 =
 @ENABLED_BENCHMARK_QRDUINO_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_QRDUINO_TRUE@	$(top_builddir)/support/libsupport.la \
 @ENABLED_BENCHMARK_QRDUINO_TRUE@	libqrduino.la \
+@ENABLED_BENCHMARK_QRDUINO_TRUE@	$(top_builddir)/support/libbeebsc.la \
 @ENABLED_BENCHMARK_QRDUINO_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_QRDUINO_TRUE@	$(am__DEPENDENCIES_1) \
 @ENABLED_BENCHMARK_QRDUINO_TRUE@	$(am__DEPENDENCIES_1)
@@ -391,11 +392,18 @@ top_srcdir = @top_srcdir@
 @ENABLED_BENCHMARK_QRDUINO_TRUE@LIBM = $(if $(DUMMY_LIBM),$(DUMMY_LIBM),-lm)
 @ENABLED_BENCHMARK_QRDUINO_TRUE@noinst_LTLIBRARIES = libqrduino.la
 @ENABLED_BENCHMARK_QRDUINO_TRUE@qrduino_SOURCES = 
-@ENABLED_BENCHMARK_QRDUINO_TRUE@libqrduino_la_SOURCES = qrtest.c qrencode.c qrencode.h qrframe.c ecctable.h qrbits.h
+@ENABLED_BENCHMARK_QRDUINO_TRUE@libqrduino_la_SOURCES = qrtest.c   \
+@ENABLED_BENCHMARK_QRDUINO_TRUE@                        qrencode.c \
+@ENABLED_BENCHMARK_QRDUINO_TRUE@                        qrencode.h \
+@ENABLED_BENCHMARK_QRDUINO_TRUE@                        qrframe.c  \
+@ENABLED_BENCHMARK_QRDUINO_TRUE@                        ecctable.h \
+@ENABLED_BENCHMARK_QRDUINO_TRUE@                        qrbits.h
+
 @ENABLED_BENCHMARK_QRDUINO_TRUE@qrduino_LDADD = $(DUMMY_CRT0) \
 @ENABLED_BENCHMARK_QRDUINO_TRUE@                        $(top_builddir)/support/libsupport.la \
 @ENABLED_BENCHMARK_QRDUINO_TRUE@                        libqrduino.la \
-@ENABLED_BENCHMARK_QRDUINO_TRUE@                        $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+@ENABLED_BENCHMARK_QRDUINO_TRUE@                        $(top_builddir)/support/libbeebsc.la \
+@ENABLED_BENCHMARK_QRDUINO_TRUE@                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 all: all-am
 

@@ -34,6 +34,7 @@ libprime_la_SOURCES = libprime.c
 prime_LDADD         = $(DUMMY_CRT0) \
                       $(top_builddir)/support/libsupport.la \
                       libprime.la \
+                      $(top_builddir)/support/libbeebsc.la \
                       $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
 

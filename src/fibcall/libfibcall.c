@@ -1,4 +1,3 @@
-
 /* BEEBS fibcall benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -24,7 +23,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR << 5))
+#define LOCAL_SCALE_FACTOR 19137
 
 /* $Id: fibcall.c,v 1.2 2005/04/04 11:34:58 csg Exp $ */
 
@@ -99,19 +98,18 @@ int benchmark()
 {
   int a;
   int r;
+  int  i;
 
-  a = 30;
-  r = fib(a);
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+      a = 30;
+      r = fib(a);
+    }
+
   return r;
 }
 
 int verify_benchmark(int r)
 {
-  int exp = 832040;
-  if (r != exp)
-    return 0;
-  return 1;
+  return 832040 == r;
 }
-
-
-

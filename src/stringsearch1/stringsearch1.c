@@ -26,7 +26,7 @@
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 0)
+#define LOCAL_SCALE_FACTOR 568
 
 #ifndef	CHARTYPE
 #define	CHARTYPE	unsigned char
@@ -44,11 +44,18 @@ static int size;
 int
 benchmark (void)
 {
-  int r;
-  prep1((CHARTYPE *) search, size);
-  r = exec1((CHARTYPE *) buf, strlen(buf));
-  prep2((CHARTYPE *) search, size);
-  return exec2((CHARTYPE *) buf, strlen(buf)) * r;
+  volatile int r;
+  int  i;
+
+  for (i = 0; i < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); i++)
+    {
+	prep1((CHARTYPE *) search, size);
+	r = exec1((CHARTYPE *) buf, strlen(buf));
+	prep2((CHARTYPE *) search, size);
+	r *= exec2((CHARTYPE *) buf, strlen(buf));
+    }
+
+  return r;
 }
 
 void initialise_benchmark() {
@@ -56,8 +63,5 @@ void initialise_benchmark() {
 }
 
 int verify_benchmark(int r) {
-  int expected = 36;
-  if (r != expected)
-    return 0;
-  return 1;
+  return 36 == r;
 }

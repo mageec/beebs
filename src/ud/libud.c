@@ -1,5 +1,3 @@
-
-
 /* BEEBS ud benchmark
 
    Copyright (C) 2014 Embecosm Limited and University of Bristol
@@ -21,11 +19,12 @@
    You should have received a copy of the GNU General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
+#include <string.h>
 #include "support.h"
 
 /* This scale factor will be changed to equalise the runtime of the
    benchmarks. */
-#define SCALE_FACTOR    (REPEAT_FACTOR >> 3)
+#define LOCAL_SCALE_FACTOR 1181
 
 /* MDH WCET BENCHMARK SUITE. File version $Id: ud.c,v 1.4 2005/11/11 10:32:53 ael01 Exp $ */
 
@@ -118,17 +117,18 @@ int ludcmp(int nmax, int n);
 /*  } */
 
 /* Write to CHKERR from BENCHMARK to ensure calls are not optimised away.  */
-volatile int chkerr = 0;
+volatile int chkerr;
 
-
-
-
-/* This benchmark does not support verification */
 
 int
-verify_benchmark (int res __attribute ((unused)) )
+verify_benchmark (int res)
 {
-  return -1;
+  long int x_ref[20] =
+    { 0L, 0L, 1L, 1L, 1L, 2L, 0L, 0L, 0L, 0L,
+      0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L
+    };
+
+  return (0 == memcmp (x, x_ref, 20 * sizeof (x[0]))) && (0 == res);
 }
 
 
@@ -141,28 +141,34 @@ initialise_benchmark (void)
 int
 benchmark()
 {
-  int      i, j, nmax = 20, n = 5;
-  long int /* eps, */ w;
+  int  k;
 
-  /* eps = 1.0e-6; */
-
-  /* Init loop */
-  for(i = 0; i <= n; i++)
+  for (k = 0; k < (LOCAL_SCALE_FACTOR * REPEAT_FACTOR); k++)
     {
-      w = 0.0;              /* data to fill in cells */
-      for(j = 0; j <= n; j++)
-        {
-          a[i][j] = (i + 1) + (j + 1);
-          if(i == j)            /* only once per loop pass */
-            a[i][j] *= 2.0;
-          w += a[i][j];
-        }
-      b[i] = w;
+      int      i, j, nmax = 20, n = 5;
+      long int /* eps, */ w;
+
+      /* eps = 1.0e-6; */
+
+      /* Init loop */
+      for(i = 0; i <= n; i++)
+	{
+	  w = 0.0;              /* data to fill in cells */
+	  for(j = 0; j <= n; j++)
+	    {
+	      a[i][j] = (i + 1) + (j + 1);
+	      if(i == j)            /* only once per loop pass */
+		a[i][j] *= 2.0;
+	      w += a[i][j];
+	    }
+	  b[i] = w;
+	}
+
+      /*  chkerr = ludcmp(nmax, n, eps); */
+      chkerr = ludcmp(nmax,n);
     }
 
-  /*  chkerr = ludcmp(nmax, n, eps); */
-  chkerr = ludcmp(nmax,n);
-  return 0;
+  return chkerr;
 }
 
 int ludcmp(int nmax, int n)
