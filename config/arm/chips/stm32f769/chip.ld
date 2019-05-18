@@ -32,9 +32,8 @@ ENTRY(vector_table)
 
 MEMORY
 {
-    FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 256K /* FLASH size 256KB */
-    RAM (rwx) : ORIGIN = 0x20000000, LENGTH = 32K/* RAM size 32KB */
-
+    FLASH (rx) : ORIGIN = 0x8000000, LENGTH = 2048K /* FLASH size 2MB */
+    RAM (rwx) : ORIGIN = 0x20000000, LENGTH = 512K /* RAM size 256KB */
 }
 
 SECTIONS

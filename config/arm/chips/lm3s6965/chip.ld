@@ -33,7 +33,7 @@ ENTRY(vector_table)
 MEMORY
 {
     FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 256K /* FLASH size 256KB */
-    RAM (rwx) : ORIGIN = 0x20000000, LENGTH = 32K/* RAM size 32KB */
+    RAM (rwx) : ORIGIN = 0x20000000, LENGTH = 64K /* RAM size 64KB */
 
 }
 
@@ -81,7 +81,7 @@ SECTIONS
         _heap = .;       /* beginning of .heap segment */
         end = _heap;     /* for the _sbrk function */
         *(.heap*)        /* .heap content goes here */       
-        _eheap = .;      /* end of .bss segment */
+        _eheap = .;      /* end of .heap segment */
     } > RAM
 
 
