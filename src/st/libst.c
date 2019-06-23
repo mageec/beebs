@@ -195,18 +195,20 @@ int RandomInteger()
 }
 
 int verify_benchmark(int unused) {
+  double epsilon = 0.00000000001;
   double expSumA = 4999.002470660901963128708302974700927734375;
   double expSumB = 4996.843113032735345768742263317108154296875;
   double expCoef = 0.99990005485361932446863875156850554049015045166016;
-  if (expSumA != SumA) {
+
+  if (fabs(expSumA-SumA) > epsilon) {
     //printf("%.50f\n, %.50f\n\n", SumA, expSumA);
     return 0;
   }
-  if(expSumB != SumB) {
+  if(fabs(expSumB-SumB) > epsilon) {
     //printf("%.50f\n, %.50f\n\n", SumB, expSumB);
     return 0;
   }
-  if(expCoef != Coef) {
+  if(fabs(expCoef-Coef) > epsilon) {
     //printf("%.50f\n, %.50f\n\n", Coef, expCoef);
     return 0;
   }
