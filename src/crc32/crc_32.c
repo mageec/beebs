@@ -200,7 +200,7 @@ int benchmark()
 
 int verify_benchmark(int r)
 {
-  int expected = 1207487004;
+  int expected = 171698305;
 
   if (r != expected)
     return 0;
