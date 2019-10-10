@@ -1075,9 +1075,13 @@ int foo(int x)
 /* This benchmark does not support verification */
 
 int
-verify_benchmark (int res __attribute ((unused)) )
+verify_benchmark (int res)
 {
-  return -1;
+#ifdef FIND_TARGET
+  return res == 400 + 1111 ? 1 : 0;
+#else
+  return res == -1 ? 1 : 0;
+#endif
 }
 
 
@@ -1090,18 +1094,15 @@ initialise_benchmark (void)
 int
 benchmark(void)
 {
+  int result = foo(400);
 
 #ifdef TEST
 
-  printf("result=%d\n",foo(400));
-
-#else
-
-  foo(400);
+  printf("result=%d\n", result);
 
 #endif
 
-  return 0;
+  return result;
 }
 
 
