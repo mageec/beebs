@@ -35,7 +35,7 @@ typedef struct {
 #include <stddef.h>
 
 #define HEAP_SIZE 8192
-static char heap[HEAP_SIZE];
+static char heap[HEAP_SIZE] __attribute__((aligned(8)));
 static void *heap_ptr;
 static void *heap_end;
 
