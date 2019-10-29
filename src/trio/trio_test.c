@@ -58,7 +58,7 @@ benchmark (void)
 
   return 0;
 }
-#elif TRIO_SSCANF
+#elif defined(TRIO_SSCANF)
 
 /* Global variables, so calls in BENCHMARK are not optimised away.  */
 volatile int int_dest;
