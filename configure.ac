@@ -2,9 +2,11 @@
 
 # Copyright (C) 2013-2014 Embecosm Limited and the University of Bristol
 # Copyright (C) 2018 Embecosm Limited
+# Copyright (C) 2020 AdaCore
 
 # Contributor James Pallister <james.pallister@embecosm.com>
 # Contributor Jeremy Bennett <jeremy.bennett@embecosm.com>
+# Contributor Kyriakos Georgiou <georgiou@adacore.com>
 
 # This file is part of BEEBS
 
