@@ -1,6 +1,7 @@
 # Makefile.am for building a BEEBS benchmark
 #
 # Copyright (C) 2014 Embecosm Limited and University of Bristol
+# Copyright (C) 2020 Adacore
 #
 # This file is part of the Bristol/Embecosm Embedded Benchmark Suite.
 #
