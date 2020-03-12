@@ -53,7 +53,7 @@ if ADA
 
 AM_LDFLAGS = -L. -ladaStatic -lgnat
 
-EXTRA_fac_DEPENDENCIES = build_ada
+EXTRA_fibcall_DEPENDENCIES = build_ada
 
 .PHONY: build_ada
 
