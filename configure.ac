@@ -1247,6 +1247,14 @@ AC_ARG_ENABLE([benchmark-wikisort],
 AM_CONDITIONAL([ENABLED_BENCHMARK_WIKISORT],
                [test x$benchmark_wikisort = xtrue])
 
+AC_ARG_ENABLE([ada],
+[  --enable-ada    Build Ada/SPARK benchmarks],
+[case "${enableval}" in
+  yes) ada=true ;;
+  no)  ada=false ;;
+  *) AC_MSG_ERROR([bad value ${enableval} for --enable-ada]) ;;
+esac],[debug=false])
+AM_CONDITIONAL([ADA], [test x$ada = xtrue])
 
 # What to set DUMMY_* to if the dummy libraries are enabled.
 
