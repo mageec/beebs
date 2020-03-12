@@ -5,6 +5,7 @@
 # This file is part of the Bristol/Embecosm Embedded Benchmark Suite.
 #
 # Contributor: Pierre Langlois <pierre.langlois@embecosm.com>
+# Contributor: Kyriakos Georgiou <georgiou@adacore.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,16 +27,42 @@ if ENABLED_BENCHMARK_FAC
 include $(top_srcdir)/src/common.mk.am
 
 bin_PROGRAMS       = fac
+
+if ADA
+noinst_LTLIBRARIES = libfac_ada.la
+else
 noinst_LTLIBRARIES = libfac.la
+endif
 
 fac_SOURCES        =
+
+if ADA
+libfac_la_SOURCES = libfac_ada.c
+else
 libfac_la_SOURCES = libfac.c
+endif 
 
 fac_LDADD          = $(DUMMY_CRT0) \
                      $(top_builddir)/support/libsupport.la \
                      libfac.la \
                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
+if ADA
 
+AM_LDFLAGS = -L. -ladaStatic -lgnat
+
+EXTRA_fac_DEPENDENCIES = build_ada
+
+.PHONY: build_ada
+
+build_ada: libadaStatic.a
+
+libadaStatic.a: 
+	./ada_library_build.sh $(top_builddir)
+
+clean-local:
+	-rm -rf libadaStatic.a
+
+endif
 
 endif
