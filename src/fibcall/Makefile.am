@@ -40,14 +40,19 @@ fibcall_SOURCES       =
 
 if ADA
 libfibcall_la_SOURCES = libfibcall_ada.c
+fibcall_LDADD         = $(DUMMY_CRT0) \
+                        $(top_builddir)/support/libsupport.la \
+                        libfibcall_ada.la \
+                        $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 else
 libfibcall_la_SOURCES = libfibcall.c
-endif
-
 fibcall_LDADD         = $(DUMMY_CRT0) \
                         $(top_builddir)/support/libsupport.la \
                         libfibcall.la \
                         $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+endif
+
+
 
 if ADA
 
