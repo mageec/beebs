@@ -39,14 +39,17 @@ fac_SOURCES        =
 
 if ADA
 libfac_la_SOURCES = libfac_ada.c
+fac_LDADD          = $(DUMMY_CRT0) \
+                     $(top_builddir)/support/libsupport.la \
+                     libfac_ada.la \
+                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 else
 libfac_la_SOURCES = libfac.c
-endif 
-
 fac_LDADD          = $(DUMMY_CRT0) \
                      $(top_builddir)/support/libsupport.la \
                      libfac.la \
                      $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
+endif 
 
 if ADA
 
@@ -61,9 +64,9 @@ build_ada: libadaStatic.a
 libadaStatic.a: 
 	./ada_library_build.sh $(top_builddir)
 
-clean-local:
-	-rm -rf libadaStatic.a
-
 endif
+
+clean-local:
+	-rm -rf libadaStatic.a libfac_ada.la
 
 endif

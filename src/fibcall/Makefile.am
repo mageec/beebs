@@ -67,9 +67,10 @@ build_ada: libadaStatic.a
 libadaStatic.a: 
 	./ada_library_build.sh $(top_builddir)
 
-clean-local:
-	-rm -rf libadaStatic.a
-
 endif
+
+clean-local:
+	-rm -rf libadaStatic.a libfibcall_ada.la
+
 
 endif
