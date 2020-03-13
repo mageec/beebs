@@ -72,6 +72,7 @@
 /*                                                                       */
 /*************************************************************************/
 
+extern void elaborateinit(void);
 extern void elaboratefinal(void);
 extern int fib (int);
 
@@ -89,7 +90,9 @@ int benchmark()
   int r;
 
   a = 30;
+  elaborateinit();
   r = fib(a);
+  elaboratefinal();
   return r;
 }
 
