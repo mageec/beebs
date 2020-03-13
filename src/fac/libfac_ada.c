@@ -58,12 +58,8 @@ benchmark()
 
   n = 10;
 
-  elaborateinit();
-
   for (i = 0;  i <= n; i++)
       s += fac (i);
-  
-  elaboratefinal();
 
    return s;
 }

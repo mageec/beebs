@@ -422,7 +422,7 @@ top_srcdir = @top_srcdir@
 @ADA_TRUE@@ENABLED_BENCHMARK_FAC_TRUE@                     libfac_ada.la \
 @ADA_TRUE@@ENABLED_BENCHMARK_FAC_TRUE@                     $(DUMMY_LIBC) $(DUMMY_LIBGCC) $(DUMMY_COMPILERRT)
 
-@ADA_TRUE@@ENABLED_BENCHMARK_FAC_TRUE@AM_LDFLAGS = -L. -ladaStatic -lgnat
+@ADA_TRUE@@ENABLED_BENCHMARK_FAC_TRUE@AM_LDFLAGS = -L./lib -L. -ladaStatic -lgnat
 @ADA_TRUE@@ENABLED_BENCHMARK_FAC_TRUE@EXTRA_fac_DEPENDENCIES = build_ada
 all: all-am
 
@@ -789,13 +789,14 @@ uninstall-am: uninstall-binPROGRAMS
 
 @ADA_TRUE@@ENABLED_BENCHMARK_FAC_TRUE@.PHONY: build_ada
 
-@ADA_TRUE@@ENABLED_BENCHMARK_FAC_TRUE@build_ada: libadaStatic.a
+@ADA_TRUE@@ENABLED_BENCHMARK_FAC_TRUE@build_ada: lib/libadaStatic.a
 
-@ADA_TRUE@@ENABLED_BENCHMARK_FAC_TRUE@libadaStatic.a: 
-@ADA_TRUE@@ENABLED_BENCHMARK_FAC_TRUE@	./ada_library_build.sh $(top_builddir)
+@ADA_TRUE@@ENABLED_BENCHMARK_FAC_TRUE@lib/libadaStatic.a:
+@ADA_TRUE@@ENABLED_BENCHMARK_FAC_TRUE@	gprbuild -p -Pada_project
 
 @ENABLED_BENCHMARK_FAC_TRUE@clean-local:
-@ENABLED_BENCHMARK_FAC_TRUE@	-rm -rf libadaStatic.a libfac_ada.la
+@ENABLED_BENCHMARK_FAC_TRUE@	-rm -rf libfac_ada.la
+@ENABLED_BENCHMARK_FAC_TRUE@	-gprclean -Pada_project
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

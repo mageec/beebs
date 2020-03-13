@@ -53,20 +53,21 @@ endif
 
 if ADA
 
-AM_LDFLAGS = -L. -ladaStatic -lgnat
+AM_LDFLAGS = -L./lib -L. -ladaStatic -lgnat
 
 EXTRA_fac_DEPENDENCIES = build_ada
 
 .PHONY: build_ada
 
-build_ada: libadaStatic.a
+build_ada: lib/libadaStatic.a
 
-libadaStatic.a: 
-	./ada_library_build.sh $(top_builddir)
+lib/libadaStatic.a:
+	gprbuild -p -Pada_project
 
 endif
 
 clean-local:
-	-rm -rf libadaStatic.a libfac_ada.la
+	-rm -rf libfac_ada.la
+	-gprclean -Pada_project
 
 endif
