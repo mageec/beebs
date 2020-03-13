@@ -24,8 +24,9 @@ is
 --     pragma Annotate (GNATprove, Terminating, Fib);
 
 
-   function Fibonacci (N : Fibonacci_Argument_Type) return Natural with
+   function Fibonacci (N : Fibonacci_Argument_Type) return Fibonacci_Argument_Type with
 --       Global => null,
      Post => Fibonacci'Result = Fib(N);
+   pragma Export (C, Fibonacci, "fib");
 
 end fibcall;

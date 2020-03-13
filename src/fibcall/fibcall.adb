@@ -23,7 +23,7 @@
 package body fibcall
 with SPARK_Mode => on
 is
-   function Fibonacci (N : Fibonacci_Argument_Type) return Natural is
+   function Fibonacci (N : Fibonacci_Argument_Type) return Fibonacci_Argument_Type is
       Fold : Natural := 0;
       Fnew : Natural := 1;
       Tmp  : Positive;
