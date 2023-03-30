@@ -47,8 +47,8 @@ float select(unsigned long k, unsigned long n)
 	float a,temp;
 	int flag, flag2;
 
-	l=1;
-	ir=n;
+	l=0;
+	ir=n-1;
 	flag = flag2 = 0;
 	while (!flag) {
 		if (ir <= l+1) {
